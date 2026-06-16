@@ -20,6 +20,8 @@
   var FIX_CSS =
     'html.embedded .hero{min-height:680px}' +
     'html.embedded .scroll-cue{display:none}' +
+    /* garante que o conteudo role dentro do iframe, com a barra escondida */
+    'html{height:100%!important;overflow-y:auto!important;overflow-x:hidden!important}' +
     'html,body{scrollbar-width:none!important;-ms-overflow-style:none!important}' +
     'html::-webkit-scrollbar,body::-webkit-scrollbar{width:0!important;height:0!important;display:none!important}' +
     /* rodape: logo (Santa Angela / Capital / Mac Lucer) sem corte */
