@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal dos Lagos — Loteamento Residencial em Jundiaí | Imobiliária Japi</title>
+<meta name="description" content="Portal dos Lagos — loteamento residencial em Jundiaí. Realização Santa Angela, Capital e Mac Lucer. Conheça com a Imobiliária Japi.">
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; background: #0d2930; }
+  #frame { display: block; border: 0; width: 100%; height: 100%; }
+  /* Esconde a barra de rolagem deste wrapper quando incorporado (iframe Wix) */
+  html.embedded, body.embedded { scrollbar-width: none; -ms-overflow-style: none; overflow: hidden; }
+  html.embedded::-webkit-scrollbar, body.embedded::-webkit-scrollbar { width: 0; height: 0; display: none; }
+</style>
+</head>
+<body>
+<iframe id="frame" src="Portal%20dos%20Lagos%20-%20Wix.html" title="Portal dos Lagos" scrolling="yes"></iframe>
+<script>
+(function () {
+  var EMBEDDED = window.self !== window.top;
+  if (EMBEDDED) {
+    document.documentElement.classList.add('embedded');
+    document.body.classList.add('embedded');
+  }
+
+  // CSS aplicado DENTRO do bundle (mesmos ajustes do Allegrato).
+  var FIX_CSS =
+    'html.embedded .hero{min-height:680px}' +
+    'html.embedded .scroll-cue{display:none}' +
+    'html.embedded{scrollbar-width:none;-ms-overflow-style:none}' +
+    'html.embedded::-webkit-scrollbar{width:0;height:0;display:none}' +
+    'body::-webkit-scrollbar{width:0;height:0;display:none}' +
+    /* rodape: logo Santa Angela sem corte, alinhado a esquerda */
+    '.foot .sa{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:14px}' +
+    '.foot .sa img{height:110px;width:auto;max-width:100%;object-fit:contain;display:block;margin-left:-10px}' +
+    /* mobile harmonioso */
+    '@media (max-width:620px){.foot .sa img{height:88px}}';
+
+  var f = document.getElementById('frame');
+
+  function apply() {
+    var d;
+    try { d = f.contentDocument || (f.contentWindow && f.contentWindow.document); }
+    catch (e) { return; }            // cross-origin (so acontece em file://) — ignora
+    if (!d || !d.documentElement) return;
+    if (EMBEDDED) d.documentElement.classList.add('embedded');
+    if (!d.getElementById('__embed_fix')) {
+      var s = d.createElement('style');
+      s.id = '__embed_fix';
+      s.textContent = FIX_CSS;
+      (d.head || d.documentElement).appendChild(s);
+    }
+  }
+
+  f.addEventListener('load', apply);
+  // O bundle troca o documentElement de forma assincrona apos extrair os assets;
+  // reaplicamos por alguns segundos ate o conteudo final aparecer.
+  var n = 0, iv = setInterval(function () { apply(); if (++n > 60) clearInterval(iv); }, 200);
+})();
+</script>
+</body>
+</html>
