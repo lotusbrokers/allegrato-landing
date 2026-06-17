@@ -23,8 +23,8 @@
   }
 
   var FIX_CSS =
-    /* trava dura do hero (evita runaway de svh) */
-    'html.embedded .hero{min-height:680px!important;max-height:680px!important}' +
+    /* hero (#topo): altura fixa e conteudo centralizado no topo (evita svh/texto no rodape) */
+    'html.embedded #topo,html.embedded .hero{min-height:680px!important;max-height:760px!important;align-items:center!important}' +
     'html.embedded .scroll-cue{display:none}' +
     'html.embedded{overflow-x:hidden!important}' +
     /* aberto direto (github): rola por dentro */
