@@ -6,14 +6,10 @@
 <title>Portal dos Lagos — Loteamento Residencial em Jundiaí | Imobiliária Japi</title>
 <meta name="description" content="Portal dos Lagos — loteamento residencial em Jundiaí. Realização Santa Angela, Capital e Mac Lucer. Conheça com a Imobiliária Japi.">
 <style>
-  html, body { margin: 0; padding: 0; background: #0d2930; }
-  #frame { display: block; border: 0; width: 100%; }
-  /* incorporado no Wix: o conteudo cresce e quem rola e a pagina do Wix */
+  html, body { margin: 0; padding: 0; height: 100%; background: #0d2930; }
+  #frame { display: block; border: 0; width: 100%; height: 100%; }
   html.embedded, body.embedded { overflow: hidden; scrollbar-width: none; -ms-overflow-style: none; }
   html.embedded::-webkit-scrollbar, body.embedded::-webkit-scrollbar { width: 0; height: 0; display: none; }
-  /* aberto direto (github): preenche a viewport e rola por dentro */
-  html:not(.embedded), body:not(.embedded) { height: 100%; }
-  html:not(.embedded) #frame { height: 100vh; }
 </style>
 </head>
 <body>
@@ -27,17 +23,17 @@
   }
 
   var FIX_CSS =
-    'html.embedded .hero{min-height:680px}' +
+    /* trava dura do hero (evita runaway de svh) */
+    'html.embedded .hero{min-height:680px!important;max-height:680px!important}' +
     'html.embedded .scroll-cue{display:none}' +
     'html.embedded{overflow-x:hidden!important}' +
-    /* aberto direto: rola por dentro com a barra escondida */
+    /* aberto direto (github): rola por dentro */
     'html:not(.embedded){height:100%!important;overflow-y:auto!important;overflow-x:hidden!important}' +
     'html,body{scrollbar-width:none!important;-ms-overflow-style:none!important}' +
     'html::-webkit-scrollbar,body::-webkit-scrollbar{width:0!important;height:0!important;display:none!important}' +
     /* rodape: logo (Santa Angela / Capital / Mac Lucer) sem corte */
     '.foot .sa{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:14px}' +
     '.foot .sa img{height:110px;width:auto;max-width:100%;object-fit:contain;display:block;margin-left:-10px}' +
-    /* mobile harmonioso */
     '@media (max-width:620px){.foot .sa img{height:88px}}';
 
   var f = document.getElementById('frame');
@@ -46,8 +42,9 @@
   function apply() {
     var d;
     try { d = f.contentDocument || (f.contentWindow && f.contentWindow.document); }
-    catch (e) { return; }              // cross-origin (so em file://) — ignora
+    catch (e) { return; }
     if (!d || !d.documentElement) return;
+    // o bundle troca o documentElement ao extrair; re-garantimos classe + estilo a cada tick
     if (EMBEDDED) d.documentElement.classList.add('embedded');
     if (!d.getElementById('__embed_fix')) {
       var s = d.createElement('style');
@@ -56,17 +53,14 @@
       (d.head || d.documentElement).appendChild(s);
     }
 
-    if (EMBEDDED) {
-      // mede a altura real da landing e propaga (iframe + pagina pai/Wix)
+    if (EMBEDDED && d.querySelector('.hero')) {   // só mede com a landing renderizada
       var h = Math.max(
         d.body ? d.body.scrollHeight : 0,
         d.documentElement ? d.documentElement.scrollHeight : 0
       );
-      if (h > 300 && Math.abs(h - lastH) > 2) {
+      h = Math.min(h, 20000);                      // trava anti-runaway
+      if (h > 1000 && Math.abs(h - lastH) > 3) {
         lastH = h;
-        f.style.height = h + 'px';
-        document.documentElement.style.height = h + 'px';
-        document.body.style.height = h + 'px';
         try { window.parent.postMessage({ ptl: 1, height: h }, '*'); } catch (e) {}
       }
     }
@@ -74,7 +68,7 @@
 
   f.addEventListener('load', apply);
   setInterval(apply, 400);
-  window.addEventListener('resize', apply);
+  window.addEventListener('resize', function () { lastH = 0; apply(); });
 })();
 </script>
 </body>
