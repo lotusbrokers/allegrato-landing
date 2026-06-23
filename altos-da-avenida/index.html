@@ -1193,28 +1193,27 @@ class Component extends DCLogic {
 
   renderVals(){
     const PLANTAS = [
-      { m:'58', dorms:'2 dormitórios', desc:'Planta inteligente e funcional, com estar integrado à cozinha e varanda — perfeita para quem busca o primeiro lar com a qualidade Santa Angela.', features:['2 dormitórios','Varanda','Estar integrado'], img:'assets/planta_58.png' },
-      { m:'68', dorms:'2 dormitórios, sendo 1 suíte', desc:'Mais espaço e conforto, com suíte, varanda e ambientes amplos e bem distribuídos para o dia a dia da família.', features:['1 suíte','Varanda','Lavabo'], img:'assets/planta_68.png' },
-      { m:'96', dorms:'3 dormitórios, sendo 1 suíte', desc:'Três dormitórios, lavabo e varanda gourmet integrada ao living — espaço de sobra para receber e viver bem.', features:['1 suíte','Varanda gourmet','Lavabo'], img:'assets/planta_96.png' },
-      { m:'105', dorms:'3 dormitórios + home office', desc:'A planta mais completa: suíte com closet, home office e varanda gourmet. Pensada para quem não abre mão de espaço e sofisticação.', features:['Suíte c/ closet','Home office','Varanda gourmet'], img:'assets/planta_105.png' },
+      { m:'58', dorms:'2 dormitórios', desc:'Planta inteligente e funcional, com estar integrado à cozinha e varanda — perfeita para quem busca o primeiro lar com a qualidade Santa Angela.', features:['2 dormitórios','Varanda','Estar integrado'], img:'assets/planta_58.jpg' },
+      { m:'68', dorms:'2 dormitórios, sendo 1 suíte', desc:'Mais espaço e conforto, com suíte, varanda e ambientes amplos e bem distribuídos para o dia a dia da família.', features:['1 suíte','Varanda','Lavabo'], img:'assets/planta_68.jpg' },
+      { m:'96', dorms:'3 dormitórios, sendo 1 suíte', desc:'Três dormitórios, lavabo e varanda gourmet integrada ao living — espaço de sobra para receber e viver bem.', features:['1 suíte','Varanda gourmet','Lavabo'], img:'assets/planta_96.jpg' },
+      { m:'105', dorms:'3 dormitórios + home office', desc:'A planta mais completa: suíte com closet, home office e varanda gourmet. Pensada para quem não abre mão de espaço e sofisticação.', features:['Suíte c/ closet','Home office','Varanda gourmet'], img:'assets/planta_105.jpg' },
     ];
     const idx = this.state.plantaIdx;
     const lb = (this.state.lbIdx >= 0 && this.state.lbList[this.state.lbIdx]) ? this.state.lbList[this.state.lbIdx] : null;
 
     const GAL = [
-      { img:'assets/piscina.png', title:'Piscina adulto e infantil', tag:'Lazer', alt:'Piscina do Altos da Avenida', colSpan:6, rowSpan:2 },
-      { img:'assets/churrasqueira.png', title:'Churrasqueiras', tag:'Convivência', alt:'Espaço churrasqueira', colSpan:3, rowSpan:1 },
-      { img:'assets/coworking_office.png', title:'Coworking', tag:'Trabalho', alt:'Espaço coworking', colSpan:3, rowSpan:1 },
-      { img:'assets/salao_festas.png', title:'Salão de festas', tag:'Convivência', alt:'Salão de festas decorado', colSpan:3, rowSpan:1 },
-      { img:'assets/bem_estar.png', title:'Espaço bem-estar', tag:'Relax', alt:'Espaço bem-estar', colSpan:3, rowSpan:1 },
-      { img:'assets/academia.png', title:'Academia', tag:'Fitness', alt:'Academia equipada', colSpan:4, rowSpan:1 },
-      { img:'assets/salao_jogos.png', title:'Salão de jogos', tag:'Diversão', alt:'Salão de jogos', colSpan:4, rowSpan:1 },
-      { img:'assets/gamer.png', title:'Espaço gamer', tag:'Diversão', alt:'Espaço gamer', colSpan:4, rowSpan:1 },
-      { img:'assets/quadra.png', title:'Quadra poliesportiva', tag:'Esporte', alt:'Quadra poliesportiva', colSpan:4, rowSpan:1 },
-      { img:'assets/playground.png', title:'Playground', tag:'Crianças', alt:'Playground', colSpan:4, rowSpan:1 },
-      { img:'assets/baby.png', title:'Espaço baby', tag:'Crianças', alt:'Espaço baby', colSpan:4, rowSpan:1 },
-      { img:'assets/pet.png', title:'Espaço pet', tag:'Pets', alt:'Espaço pet', colSpan:6, rowSpan:1 },
-      { img:'assets/portaria.png', title:'Portaria & acesso', tag:'Segurança', alt:'Portaria do empreendimento', colSpan:6, rowSpan:1 },
+      { img:'assets/piscina.jpg', title:'Piscina adulto e infantil', tag:'Lazer', alt:'Piscina do Altos da Avenida', colSpan:6, rowSpan:2 },
+      { img:'assets/quadra.jpg', title:'Quadra poliesportiva', tag:'Esporte', alt:'Quadra poliesportiva', colSpan:3, rowSpan:1 },
+      { img:'assets/playground.jpg', title:'Playground', tag:'Crianças', alt:'Playground', colSpan:3, rowSpan:1 },
+      { img:'assets/salao_festas.jpg', title:'Salão de festas', tag:'Convivência', alt:'Salão de festas', colSpan:3, rowSpan:1 },
+      { img:'assets/gourmet.jpg', title:'Espaço gourmet', tag:'Convivência', alt:'Espaço gourmet com vista', colSpan:3, rowSpan:1 },
+      { img:'assets/academia.jpg', title:'Academia', tag:'Fitness', alt:'Academia equipada', colSpan:4, rowSpan:1 },
+      { img:'assets/salao_jogos.jpg', title:'Salão de jogos', tag:'Diversão', alt:'Salão de jogos', colSpan:4, rowSpan:1 },
+      { img:'assets/gamer.jpg', title:'Espaço gamer', tag:'Diversão', alt:'Espaço gamer', colSpan:4, rowSpan:1 },
+      { img:'assets/coworking.jpg', title:'Coworking & estudo', tag:'Trabalho', alt:'Espaço coworking e estudo', colSpan:4, rowSpan:1 },
+      { img:'assets/lounge.jpg', title:'Lounge & convivência', tag:'Relax', alt:'Lounge de convivência', colSpan:4, rowSpan:1 },
+      { img:'assets/brinquedoteca.jpg', title:'Brinquedoteca', tag:'Crianças', alt:'Brinquedoteca', colSpan:4, rowSpan:1 },
+      { img:'assets/cinema.jpg', title:'Cinema', tag:'Lazer', alt:'Sala de cinema', colSpan:12, rowSpan:1 },
     ];
 
     const AMEN = ['Piscina adulto e infantil','Salão de festas','2 churrasqueiras','Academia','Fitness externo','Espaço bem-estar','Coworking','Salão de jogos','Espaço gamer','Quadra poliesportiva','Playground 6 a 10 anos','Espaço baby','Espaço pet','Vestiários','Áreas comuns decoradas','Espaços de convivência'];
