@@ -441,7 +441,7 @@ image-slot{display:block;background:linear-gradient(135deg,#1d3a2c,#3f6249);}
             <span style="display:inline-flex;align-items:center;gap:8px;color:#cdab6e;font-weight:600;font-size:15px;">Ver empreendimentos <span style="font-size:18px;">→</span></span>
           </div>
         </a>
-        <a href="#busca" data-reveal="" style="position:relative;display:block;border-radius:20px;overflow:hidden;min-height:380px;background:#3f6249;box-shadow:0 24px 60px -30px rgba(21,36,28,.45);transition:transform .4s ease, box-shadow .4s ease;" style-hover="transform:translateY(-4px);box-shadow:0 34px 70px -30px rgba(21,36,28,.55)">
+        <a href="https://www.japilancamentos.com.br/lotus-busca" target="_top" data-reveal="" style="position:relative;display:block;border-radius:20px;overflow:hidden;min-height:380px;background:#3f6249;box-shadow:0 24px 60px -30px rgba(21,36,28,.45);transition:transform .4s ease, box-shadow .4s ease;" style-hover="transform:translateY(-4px);box-shadow:0 34px 70px -30px rgba(21,36,28,.55)">
           <image-slot id="lotus-motor-b" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Foto de casa / interior — revenda"></image-slot>
           <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,.1),rgba(21,36,28,.85));"></div>
           <div style="position:absolute;left:0;right:0;bottom:0;padding:36px;">
@@ -463,7 +463,7 @@ image-slot{display:block;background:linear-gradient(135deg,#1d3a2c,#3f6249);}
           <div style="font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b18a4a;margin-bottom:18px;">Lançamentos · Jundiaí e Itupeva</div>
           <h2 style="font-family:'Fraunces',serif;font-weight:300;font-size:clamp(30px,4vw,48px);line-height:1.06;letter-spacing:-.02em;margin:0;color:#15241c;">Os melhores lançamentos da região, com quem conhece cada planta.</h2>
         </div>
-        <a href="#lancamentos" style="display:inline-flex;align-items:center;gap:8px;color:#1d3a2c;font-weight:600;font-size:15px;border-bottom:1.5px solid #b18a4a;padding-bottom:3px;white-space:nowrap;">Ver todos os empreendimentos <span>→</span></a>
+        <a href="#lancamentos" data-reveal-launches="" style="display:inline-flex;align-items:center;gap:8px;color:#1d3a2c;font-weight:600;font-size:15px;border-bottom:1.5px solid #b18a4a;padding-bottom:3px;white-space:nowrap;">Ver todos os empreendimentos <span>→</span></a>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:26px;">
         <sc-for list="{{ developments }}" as="d" hint-placeholder-count="6">
@@ -493,7 +493,7 @@ image-slot{display:block;background:linear-gradient(135deg,#1d3a2c,#3f6249);}
         </sc-for>
       </div>
       <div data-reveal="" style="display:flex;justify-content:center;margin-top:48px;">
-        <a href="#lancamentos" style="display:inline-flex;align-items:center;gap:10px;background:#1d3a2c;color:#f7f2e8;font-weight:600;font-size:16px;padding:15px 32px;border-radius:40px;transition:transform .2s, background .2s;" style-hover="background:#15241c;transform:translateY(-2px)">Ver mais empreendimentos <span style="font-size:18px;">→</span></a>
+        <a id="btn-vermais" data-reveal-launches="" href="#lancamentos" style="display:inline-flex;align-items:center;gap:10px;background:#1d3a2c;color:#f7f2e8;font-weight:600;font-size:16px;padding:15px 32px;border-radius:40px;transition:transform .2s, background .2s;" style-hover="background:#15241c;transform:translateY(-2px)">Ver mais empreendimentos <span style="font-size:18px;">→</span></a>
       </div>
     </div>
   </section>
@@ -516,6 +516,9 @@ image-slot{display:block;background:linear-gradient(135deg,#1d3a2c,#3f6249);}
           </div>
         </sc-for>
       </div>
+      <div data-reveal="" style="margin-top:48px;display:flex;justify-content:center;">
+        <a href="https://www.japilancamentos.com.br/lotus-sobre" target="_top" style="display:inline-flex;align-items:center;gap:10px;background:#cdab6e;color:#15241c;font-weight:700;font-size:16px;padding:15px 32px;border-radius:40px;transition:transform .2s, background .2s;" style-hover="background:#b18a4a;transform:translateY(-2px)">Quem somos &amp; nossa equipe <span style="font-size:18px;">&#8594;</span></a>
+      </div>
     </div>
   </section>
 
@@ -533,7 +536,7 @@ image-slot{display:block;background:linear-gradient(135deg,#1d3a2c,#3f6249);}
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;margin-bottom:56px;">
         <sc-for list="{{ neighborhoodsJundiai }}" as="n" hint-placeholder-count="4">
-          <a href="#" data-reveal="" style="position:relative;display:block;aspect-ratio:3/4;border-radius:16px;overflow:hidden;box-shadow:0 16px 40px -28px rgba(21,36,28,.4);transition:transform .35s ease;" style-hover="transform:translateY(-4px)">
+          <a href="https://www.japilancamentos.com.br/lotus-bairro" target="_top" data-reveal="" style="position:relative;display:block;aspect-ratio:3/4;border-radius:16px;overflow:hidden;box-shadow:0 16px 40px -28px rgba(21,36,28,.4);transition:transform .35s ease;" style-hover="transform:translateY(-4px)">
             <image-slot id="{{ n.slot }}" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="{{ n.name }}"></image-slot>
             <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,0) 40%,rgba(21,36,28,.85));"></div>
             <div style="position:absolute;left:0;right:0;bottom:0;padding:20px;">
@@ -550,7 +553,7 @@ image-slot{display:block;background:linear-gradient(135deg,#1d3a2c,#3f6249);}
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;">
         <sc-for list="{{ neighborhoodsItupeva }}" as="n" hint-placeholder-count="3">
-          <a href="#" data-reveal="" style="position:relative;display:block;aspect-ratio:3/4;border-radius:16px;overflow:hidden;box-shadow:0 16px 40px -28px rgba(21,36,28,.4);transition:transform .35s ease;" style-hover="transform:translateY(-4px)">
+          <a href="https://www.japilancamentos.com.br/lotus-bairro" target="_top" data-reveal="" style="position:relative;display:block;aspect-ratio:3/4;border-radius:16px;overflow:hidden;box-shadow:0 16px 40px -28px rgba(21,36,28,.4);transition:transform .35s ease;" style-hover="transform:translateY(-4px)">
             <image-slot id="{{ n.slot }}" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="{{ n.name }}"></image-slot>
             <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,0) 40%,rgba(21,36,28,.85));"></div>
             <div style="position:absolute;left:0;right:0;bottom:0;padding:20px;">
@@ -604,7 +607,7 @@ image-slot{display:block;background:linear-gradient(135deg,#1d3a2c,#3f6249);}
   </section>
 
   <!-- ============ DEPOIMENTOS ============ -->
-  <section id="depoimentos" style="background:#f7f2e8;padding:110px 40px 96px;">
+  <section id="depoimentos" style="background:#f7f2e8;padding:90px 40px 36px;">
     <div style="max-width:1280px;margin:0 auto;">
       <div data-reveal="" style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px;margin-bottom:48px;">
         <div style="max-width:620px;">
@@ -652,7 +655,7 @@ image-slot{display:block;background:linear-gradient(135deg,#1d3a2c,#3f6249);}
       </div>
 
       <div data-reveal="" style="margin-top:34px;text-align:center;">
-        <a href="#" style="display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid rgba(21,36,28,.14);color:#1d3a2c;font-weight:600;font-size:15px;padding:13px 26px;border-radius:40px;transition:transform .2s, box-shadow .2s;" style-hover="transform:translateY(-2px);box-shadow:0 16px 34px -20px rgba(21,36,28,.4)">
+        <a href="https://www.google.com/search?q=Imobili%C3%A1ria+Japi+Lan%C3%A7amentos+Jundia%C3%AD+avalia%C3%A7%C3%B5es" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid rgba(21,36,28,.14);color:#1d3a2c;font-weight:600;font-size:15px;padding:13px 26px;border-radius:40px;transition:transform .2s, box-shadow .2s;" style-hover="transform:translateY(-2px);box-shadow:0 16px 34px -20px rgba(21,36,28,.4)">
           <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M21.6 12.2c0-.6-.1-1.2-.2-1.8H12v3.4h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.1Z"></path><path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 .9-3.4.9-2.6 0-4.8-1.7-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22Z"></path><path fill="#FBBC05" d="M6.4 13.9a6 6 0 0 1 0-3.8V7.5H3.1a10 10 0 0 0 0 9z"></path><path fill="#EA4335" d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.8 9.4 6.1 12 6.1Z"></path></svg>
           Ver todas as avaliações no Google
         </a>
@@ -661,14 +664,14 @@ image-slot{display:block;background:linear-gradient(135deg,#1d3a2c,#3f6249);}
   </section>
 
   <!-- ============ BLOG ============ -->
-  <section id="blog" style="background:#f7f2e8;padding:120px 40px;">
+  <section id="blog" style="background:#f7f2e8;padding:56px 40px 120px;">
     <div style="max-width:1280px;margin:0 auto;">
       <div data-reveal="" style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:52px;">
         <div style="max-width:620px;">
           <div style="font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b18a4a;margin-bottom:18px;">Blog Lotus</div>
           <h2 style="font-family:'Fraunces',serif;font-weight:300;font-size:clamp(30px,4vw,48px);line-height:1.06;letter-spacing:-.02em;margin:0;color:#15241c;">Notícias da cidade e do mercado, sem enrolação.</h2>
         </div>
-        <a href="#blog" style="display:inline-flex;align-items:center;gap:8px;color:#1d3a2c;font-weight:600;font-size:15px;border-bottom:1.5px solid #b18a4a;padding-bottom:3px;white-space:nowrap;">Ver todos os artigos <span>→</span></a>
+        <a href="#blog" style="display:inline-flex;align-items:center;gap:8px;background:#b18a4a;color:#15241c;font-weight:700;font-size:15px;padding:13px 26px;border-radius:40px;white-space:nowrap;transition:transform .2s, background .2s;" style-hover="background:#cdab6e;transform:translateY(-2px)">Ver todos os artigos <span style="font-size:17px;">→</span></a>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:26px;margin-bottom:64px;">
         <sc-for list="{{ posts }}" as="p" hint-placeholder-count="3">
@@ -750,7 +753,7 @@ image-slot{display:block;background:linear-gradient(135deg,#1d3a2c,#3f6249);}
       <h2 style="font-family:'Fraunces',serif;font-weight:300;font-size:clamp(30px,4.4vw,52px);line-height:1.05;letter-spacing:-.02em;margin:0 0 22px;color:#f7f2e8;">Anuncie seu imóvel com quem leva ele a sério como se fosse o próprio.</h2>
       <p style="font-size:18px;color:rgba(247,242,232,.78);font-weight:300;line-height:1.55;max-width:600px;margin:0 auto 36px;">Avaliação justa, foto certa, processo transparente e um especialista do seu bairro do começo ao fim.</p>
       <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;">
-        <a href="#anunciar" style="display:inline-flex;align-items:center;gap:8px;background:#b18a4a;color:#15241c;font-weight:600;font-size:16px;padding:15px 30px;border-radius:40px;transition:transform .2s, background .2s;" style-hover="background:#cdab6e;transform:translateY(-2px)">Anunciar meu imóvel <span>→</span></a>
+        <a href="https://www.japilancamentos.com.br/lotus-anunciar" target="_top" style="display:inline-flex;align-items:center;gap:8px;background:#b18a4a;color:#15241c;font-weight:600;font-size:16px;padding:15px 30px;border-radius:40px;transition:transform .2s, background .2s;" style-hover="background:#cdab6e;transform:translateY(-2px)">Anunciar meu imóvel <span>→</span></a>
         <a href="{{ waLink }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:transparent;border:1.5px solid rgba(247,242,232,.4);color:#f7f2e8;font-weight:600;font-size:16px;padding:15px 30px;border-radius:40px;transition:background .2s;" style-hover="background:rgba(247,242,232,.1)">Falar no WhatsApp</a>
       </div>
     </div>
@@ -798,7 +801,7 @@ image-slot{display:block;background:linear-gradient(135deg,#1d3a2c,#3f6249);}
         </div>
         <h3 style="font-family:'Fraunces',serif;font-weight:400;font-size:26px;line-height:1.08;color:#15241c;margin:0 0 14px;">Venda ou alugue com a Lotus</h3>
         <p style="font-size:15px;color:#3f6249;font-weight:300;line-height:1.55;margin:0 0 28px;">Avaliação sem custo e processo transparente, do anúncio à chave — com um especialista do seu bairro.</p>
-        <a href="#anunciar" style="margin-top:auto;display:inline-flex;align-items:center;justify-content:space-between;gap:8px;color:#1d3a2c;font-weight:600;font-size:15px;border-bottom:1.5px solid #b18a4a;padding-bottom:6px;">Anunciar meu imóvel <span style="font-size:18px;">→</span></a>
+        <a href="https://www.japilancamentos.com.br/lotus-anunciar" target="_top" style="margin-top:auto;display:inline-flex;align-items:center;justify-content:space-between;gap:8px;color:#1d3a2c;font-weight:600;font-size:15px;border-bottom:1.5px solid #b18a4a;padding-bottom:6px;">Anunciar meu imóvel <span style="font-size:18px;">→</span></a>
       </div>
       <div data-reveal="" style="background:#f7f2e8;border-radius:20px;padding:42px 38px;box-shadow:0 18px 44px -30px rgba(0,0,0,.4);display:flex;flex-direction:column;">
         <div style="width:56px;height:56px;border-radius:14px;background:#ece2cf;display:flex;align-items:center;justify-content:center;margin-bottom:26px;">
@@ -896,7 +899,7 @@ image-slot{display:block;background:linear-gradient(135deg,#1d3a2c,#3f6249);}
           <div style="display:flex;flex-direction:column;gap:12px;font-size:14.5px;color:rgba(247,242,232,.72);">
             <a href="#sobre" style="transition:color .2s;" style-hover="color:#cdab6e">Sobre nós</a>
             <a href="#corretores" style="transition:color .2s;" style-hover="color:#cdab6e">Corretores</a>
-            <a href="#" style="transition:color .2s;" style-hover="color:#cdab6e">Seja um corretor</a>
+            <a href="https://www.japilancamentos.com.br/lotus-sobre" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Seja um corretor</a>
             <a href="{{ waLink }}" target="_blank" rel="noopener" style="transition:color .2s;" style-hover="color:#cdab6e">Contato</a>
           </div>
         </div>
@@ -905,7 +908,7 @@ image-slot{display:block;background:linear-gradient(135deg,#1d3a2c,#3f6249);}
           <div style="display:flex;flex-direction:column;gap:12px;font-size:14.5px;color:rgba(247,242,232,.72);">
             <a href="#lancamentos" style="transition:color .2s;" style-hover="color:#cdab6e">Lançamentos</a>
             <a href="#comprar" style="transition:color .2s;" style-hover="color:#cdab6e">Comprar &amp; alugar</a>
-            <a href="#anunciar" style="transition:color .2s;" style-hover="color:#cdab6e">Anunciar imóvel</a>
+            <a href="https://www.japilancamentos.com.br/lotus-anunciar" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Anunciar imóvel</a>
             <a href="#bairros" style="transition:color .2s;" style-hover="color:#cdab6e">Bairros</a>
             <a href="#blog" style="transition:color .2s;" style-hover="color:#cdab6e">Blog</a>
           </div>
@@ -1265,4 +1268,13 @@ class Component extends DCLogic {
 
 
 <script>setTimeout(function(){document.querySelectorAll('[data-reveal]').forEach(function(e){e.style.opacity='1';e.style.transform='none';});},1200);</script>
+<script>
+(function(){
+  function sec(){return document.getElementById('lancamentos');}
+  function cards(){var s=sec();return s?s.querySelectorAll('a[target="_blank"]'):[];}
+  function collapse(){var c=cards();if(c.length<7)return false;for(var i=6;i<c.length;i++)c[i].style.display='none';return true;}
+  var n=0,iv=setInterval(function(){if(collapse()||n++>60)clearInterval(iv);},100);
+  document.addEventListener('click',function(e){var t=e.target&&e.target.closest?e.target.closest('[data-reveal-launches]'):null;if(!t)return;e.preventDefault();var c=cards();for(var i=0;i<c.length;i++)c[i].style.display='';var b=document.getElementById('btn-vermais');if(b)b.style.display='none';});
+})();
+</script>
 </body></html>
