@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head>
+<html lang="pt-BR"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -8,6 +8,17 @@
 <body>
 <x-dc>
 <helmet>
+<title>Lançamentos imobiliários em Jundiaí e Itupeva | Lotus Brokers</title>
+<meta name="description" content="Lançamentos selecionados em Jundiaí e Itupeva, da planta à chave, acompanhados pelo Squad Lançamentos da Lotus. Curadoria, não catálogo.">
+<meta property="og:site_name" content="Lotus Brokers">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.japilancamentos.com.br/lotus-lancamentos">
+<link rel="canonical" href="https://www.japilancamentos.com.br/lotus-lancamentos">
+<meta property="og:image" content="https://i.postimg.cc/nzx1wvHM/Chat-GPT-Image-25-de-jun-de-2026-14-04-13.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Lançamentos em Jundiaí e Itupeva — Lotus Brokers">
+<meta property="og:description" content="Os melhores lançamentos da região, com quem conhece cada planta e a negociação com a construtora.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <style>/* vietnamese */
@@ -282,7 +293,7 @@
         <a target="_top" href="https://www.japilancamentos.com.br/lotus-home#guias" style="transition:color .2s;" style-hover="color:#cdab6e">Guias</a>
         <a target="_top" href="https://www.japilancamentos.com.br/lotus-home#blog" style="transition:color .2s;" style-hover="color:#cdab6e">Blog</a>
       </nav>
-      <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#b18a4a;color:#15241c;font-weight:600;font-size:14px;padding:9px 17px;border-radius:40px;transition:background .2s;" style-hover="background:#cdab6e">Falar agora</a>
+      <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#b18a4a;color:#15241c;font-weight:600;font-size:14px;padding:9px 17px;border-radius:40px;transition:background .2s;" style-hover="background:#cdab6e">Falar com a LIA</a>
     </div>
   </header>
 
@@ -364,7 +375,7 @@
                 <div style="font-size:13.5px;color:#3f6249;margin-bottom:16px;">{{ e.specs }}</div>
                 <div style="margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;border-top:1px solid rgba(21,36,28,.08);padding-top:16px;">
                   <div><div style="font-size:11.5px;color:#8aa593;">a partir de</div><div style="font-family:'Fraunces',serif;font-size:20px;color:#1d3a2c;">{{ e.price }}</div></div>
-                  <span style="color:#b18a4a;font-weight:600;font-size:14px;">Ver →</span>
+                  <span style="color:#b18a4a;font-weight:600;font-size:14px;">Ver este empreendimento →</span>
                 </div>
               </div>
             </a>
@@ -537,7 +548,7 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script="" data-props="{&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5511999999999&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5511926143393&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { fCity: 'any', fStage: 'any', fType: 'any', fPrice: 'any', sortKey: 'rel', openFaq: 0, leadDone: false, newsDone: false };
   rootRef = React.createRef();
@@ -561,7 +572,7 @@ class Component extends DCLogic {
   }
 
   renderVals() {
-    const wa = 'https://wa.me/' + String(this.props.whatsapp ?? '5511999999999');
+    const wa = 'https://wa.me/' + String(this.props.whatsapp ?? '5511926143393') + '?text=' + encodeURIComponent('Quero ver os lançamentos selecionados pela Lotus.');
     const s = this.state;
 
     let list = this.EMP.filter(e =>
