@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head>
+<html lang="pt-BR"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -8,6 +8,17 @@
 <body>
 <x-dc>
 <helmet>
+<title>Anuncie e avalie seu imóvel em Jundiaí e Itupeva | Lotus Brokers</title>
+<meta name="description" content="Descubra quanto vale o seu imóvel em Jundiaí e Itupeva. Avaliação justa, marketing premium e um especialista do seu bairro do anúncio à chave.">
+<meta property="og:site_name" content="Lotus Brokers">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.japilancamentos.com.br/lotus-anunciar">
+<link rel="canonical" href="https://www.japilancamentos.com.br/lotus-anunciar">
+<meta property="og:image" content="https://i.postimg.cc/nzx1wvHM/Chat-GPT-Image-25-de-jun-de-2026-14-04-13.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Anuncie e avalie seu imóvel com a Lotus">
+<meta property="og:description" content="Avaliação sem custo, processo transparente e um especialista do seu bairro. Saiba quanto vale o seu imóvel.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <style>/* vietnamese */
@@ -282,7 +293,7 @@ html{scrollbar-width:none;-ms-overflow-style:none} html::-webkit-scrollbar{displ
         <a href="https://www.japilancamentos.com.br/lotus-home#guias" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Guias</a>
         <a href="https://www.japilancamentos.com.br/lotus-home#blog" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Blog</a>
       </nav>
-      <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#b18a4a;color:#15241c;font-weight:600;font-size:14px;padding:9px 17px;border-radius:40px;transition:background .2s;" style-hover="background:#cdab6e">Falar agora</a>
+      <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#b18a4a;color:#15241c;font-weight:600;font-size:14px;padding:9px 17px;border-radius:40px;transition:background .2s;" style-hover="background:#cdab6e">Falar com a LIA</a>
     </div>
   </header>
 
@@ -576,7 +587,7 @@ html{scrollbar-width:none;-ms-overflow-style:none} html::-webkit-scrollbar{displ
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script="" data-props="{&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5511999999999&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5511926143393&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { step: 1, done: false, areaError: false, f: { bairro: 'Eloy Chaves', tipo: 'Casa', area: '', dorms: '3', vagas: '2', estado: 'Bom', nome: '', whats: '', email: '' }, openFaq: 0 };
   rootRef = React.createRef();
@@ -606,7 +617,7 @@ class Component extends DCLogic {
   fmt(n) { const v = Math.round(n / 1000) * 1000; return 'R$ ' + v.toLocaleString('pt-BR'); }
 
   renderVals() {
-    const wa = 'https://wa.me/' + String(this.props.whatsapp ?? '5511999999999');
+    const wa = 'https://wa.me/' + String(this.props.whatsapp ?? '5511926143393') + '?text=' + encodeURIComponent('Quero avaliar meu imóvel com a Lotus.');
     const f = this.state.f;
     const step = this.state.step;
     const done = this.state.done;
