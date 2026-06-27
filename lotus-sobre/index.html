@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head>
+<html lang="pt-BR"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -8,6 +8,17 @@
 <body>
 <x-dc>
 <helmet>
+<title>A Lotus — Imobiliária de especialistas em Jundiaí e Itupeva | Lotus Brokers</title>
+<meta name="description" content="Conheça a Lotus Brokers: imobiliária moderna de Jundiaí e Itupeva, com time segmentado por especialidade e corretores que conhecem cada bairro.">
+<meta property="og:site_name" content="Lotus Brokers">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.japilancamentos.com.br/lotus-sobre">
+<link rel="canonical" href="https://www.japilancamentos.com.br/lotus-sobre">
+<meta property="og:image" content="https://i.postimg.cc/nzx1wvHM/Chat-GPT-Image-25-de-jun-de-2026-14-04-13.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="A Lotus — Imobiliária de especialistas em Jundiaí e Itupeva">
+<meta property="og:description" content="Time consolidado, marca nova. Especialistas por bairro que te chamam pelo nome, em Jundiaí e Itupeva.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <style>/* vietnamese */
@@ -277,11 +288,11 @@
         <a href="https://www.japilancamentos.com.br/lotus-busca" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Comprar</a>
         <a href="https://www.japilancamentos.com.br/lotus-bairro" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Bairros</a>
         <a href="https://www.japilancamentos.com.br/lotus-home" target="_top" style="color:#cdab6e;">A Lotus</a>
-        <a href="#corretores" style="transition:color .2s;" style-hover="color:#cdab6e">Corretores</a>
+        <a href="https://www.japilancamentos.com.br/lotus-corretores" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Corretores</a>
         <a href="https://www.japilancamentos.com.br/lotus-home#guias" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Guias</a>
         <a href="https://www.japilancamentos.com.br/lotus-home#blog" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Blog</a>
       </nav>
-      <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#b18a4a;color:#15241c;font-weight:600;font-size:14px;padding:9px 17px;border-radius:40px;transition:background .2s;" style-hover="background:#cdab6e">Falar agora</a>
+      <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#b18a4a;color:#15241c;font-weight:600;font-size:14px;padding:9px 17px;border-radius:40px;transition:background .2s;" style-hover="background:#cdab6e">Falar com a LIA</a>
     </div>
   </header>
 
@@ -524,7 +535,7 @@
           <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#cdab6e;margin-bottom:18px;">A Lotus</div>
           <div style="display:flex;flex-direction:column;gap:12px;font-size:14.5px;color:rgba(247,242,232,.72);">
             <a href="https://www.japilancamentos.com.br/lotus-home" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Sobre nós</a>
-            <a href="#corretores" style="transition:color .2s;" style-hover="color:#cdab6e">Corretores</a>
+            <a href="https://www.japilancamentos.com.br/lotus-corretores" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Corretores</a>
             <a href="https://www.japilancamentos.com.br/lotus-home" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Seja um corretor</a>
             <a href="{{ waLink }}" target="_blank" rel="noopener" style="transition:color .2s;" style-hover="color:#cdab6e">Contato</a>
           </div>
@@ -580,7 +591,7 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script="" data-props="{&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5511999999999&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5511926143393&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { openFaq: 0, lbOpen: false, lbIndex: 0 };
   rootRef = React.createRef();
@@ -620,7 +631,7 @@ class Component extends DCLogic {
   scrollGallery(dir) { const g = this.galleryRef.current; if (g) g.scrollBy({ left: dir * Math.min(g.clientWidth * 0.8, 360), behavior: 'smooth' }); }
 
   renderVals() {
-    const wa = 'https://wa.me/' + String(this.props.whatsapp ?? '5511999999999');
+    const wa = 'https://wa.me/' + String(this.props.whatsapp ?? '5511926143393') + '?text=' + encodeURIComponent('Oi! Vim pela página A Lotus e quero conhecer melhor o time de vocês.');
     const faqData = [
       { q: 'Quem é a Lotus Brokers?', a: 'Uma imobiliária moderna de Jundiaí e Itupeva, com equipe de corretores segmentada por especialidade e por bairro. Atende lançamentos e revenda com atendimento humano e processo transparente.' },
       { q: 'A Lotus é uma imobiliária nova?', a: 'Marca nova, time consolidado. A operação atua há mais de uma década na região e renasceu como Lotus — a mesma gente que já conhece cada bairro.' },
