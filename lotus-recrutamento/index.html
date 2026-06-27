@@ -580,11 +580,11 @@ class Component extends DCLogic {
   ];
 
   renderVals() {
-    const wa = 'https://wa.me/' + String(this.props.whatsapp ?? '5511926143393') + '?text=' + encodeURIComponent('Quero ser corretor especialista na Lotus.');
+    const wa = 'https://wa.me/' + String(this.props.whatsapp ?? '5511926143393');
 
     return {
       rootRef: this.rootRef,
-      waLink: wa,
+      waLink: wa + '?text=' + encodeURIComponent('Quero ser corretor especialista na Lotus.'),
       waWork: wa + '?text=' + encodeURIComponent('Olá! Tenho interesse em outras vagas na Lotus (adm/financeiro/marketing).'),
       formDone: this.state.formDone,
       notDone: !this.state.formDone,
