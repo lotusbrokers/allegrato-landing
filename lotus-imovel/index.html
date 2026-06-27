@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head>
+<html lang="pt-BR"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -8,6 +8,17 @@
 <body>
 <x-dc>
 <helmet>
+<title>Casa de 4 suítes em Eloy Chaves, Jundiaí — à venda | Lotus Brokers</title>
+<meta name="description" content="Casa de 4 suítes em Eloy Chaves, Jundiaí. Conheça os detalhes, agende uma visita e fale com o especialista do bairro na Lotus.">
+<meta property="og:site_name" content="Lotus Brokers">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.japilancamentos.com.br/lotus-imovel">
+<link rel="canonical" href="https://www.japilancamentos.com.br/lotus-imovel">
+<meta property="og:image" content="https://i.postimg.cc/nzx1wvHM/Chat-GPT-Image-25-de-jun-de-2026-14-04-13.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Casa de 4 suítes em Eloy Chaves, Jundiaí">
+<meta property="og:description" content="Espaço para a família inteira em Eloy Chaves. Veja a ficha completa e agende sua visita com a Lotus.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <style>/* vietnamese */
@@ -292,7 +303,7 @@ html{scrollbar-width:none;-ms-overflow-style:none} html::-webkit-scrollbar{displ
           <sc-if value="{{ notSaved }}" hint-placeholder-val="{{ true }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"></path></svg></sc-if>
           {{ saveLabel }}
         </button>
-        <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#b18a4a;color:#15241c;font-weight:600;font-size:14px;padding:9px 17px;border-radius:40px;transition:background .2s;" style-hover="background:#cdab6e">Falar agora</a>
+        <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#b18a4a;color:#15241c;font-weight:600;font-size:14px;padding:9px 17px;border-radius:40px;transition:background .2s;" style-hover="background:#cdab6e">Falar com a LIA</a>
       </div>
     </div>
   </header>
@@ -622,7 +633,7 @@ html{scrollbar-width:none;-ms-overflow-style:none} html::-webkit-scrollbar{displ
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script="" data-props="{&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5511999999999&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5511926143393&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { saved: false, formDone: false, lightboxOpen: false, lightboxIndex: 0, valor: 2450000, entrada: 20, prazo: 30, taxa: 10.5, openFaq: 0 };
   rootRef = React.createRef();
@@ -641,7 +652,7 @@ class Component extends DCLogic {
   fmt(n) { return 'R$ ' + Math.round(n).toLocaleString('pt-BR'); }
 
   renderVals() {
-    const wa = 'https://wa.me/' + String(this.props.whatsapp ?? '5511999999999');
+    const wa = 'https://wa.me/' + String(this.props.whatsapp ?? '5511926143393') + '?text=' + encodeURIComponent('Vim pela página deste imóvel em Eloy Chaves e quero agendar uma visita.');
     const valor = this.state.valor, entrada = this.state.entrada, prazo = this.state.prazo, taxa = this.state.taxa;
     const financed = valor * (1 - entrada / 100);
     const i = (taxa / 100) / 12;
