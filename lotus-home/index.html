@@ -298,10 +298,10 @@ image-slot{display:block;background:linear-gradient(135deg,#1d3a2c,#3f6249);}
         <span style="font-family:'Fraunces',serif;font-weight:400;font-size:23px;letter-spacing:-.01em;color:#f7f2e8;line-height:1;">Lotus<span style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#cdab6e;margin-left:7px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;vertical-align:2px;">Brokers</span></span>
       </a>
       <nav style="display:flex;align-items:center;gap:34px;font-size:15px;font-weight:500;color:rgba(247,242,232,.86);">
-        <a href="https://www.lotusbrokers.com.br/lotus-lancamentos" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Lançamentos</a>
-        <a href="https://www.lotusbrokers.com.br/lotus-busca" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Comprar</a>
-        <a href="https://www.lotusbrokers.com.br/lotus-bairro" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Bairros</a>
-        <a href="https://www.lotusbrokers.com.br/lotus-sobre" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">A Lotus</a>
+        <a href="#lancamentos" style="transition:color .2s;" style-hover="color:#cdab6e">Lançamentos</a>
+        <a href="#comprar" style="transition:color .2s;" style-hover="color:#cdab6e">Comprar</a>
+        <a href="#bairros" style="transition:color .2s;" style-hover="color:#cdab6e">Bairros</a>
+        <a href="#sobre" style="transition:color .2s;" style-hover="color:#cdab6e">A Lotus</a>
         <a href="https://www.lotusbrokers.com.br/lotus-corretores" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Corretores</a>
         <a href="#guias" style="transition:color .2s;" style-hover="color:#cdab6e">Guias</a>
         <a href="#blog" style="transition:color .2s;" style-hover="color:#cdab6e">Blog</a>
@@ -546,7 +546,7 @@ image-slot{display:block;background:linear-gradient(135deg,#1d3a2c,#3f6249);}
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;margin-bottom:56px;">
         <sc-for list="{{ neighborhoodsJundiai }}" as="n" hint-placeholder-count="4">
           <a href="https://www.lotusbrokers.com.br/lotus-bairro" target="_top" data-reveal="" style="position:relative;display:block;aspect-ratio:3/4;border-radius:16px;overflow:hidden;box-shadow:0 16px 40px -28px rgba(21,36,28,.4);transition:transform .35s ease;" style-hover="transform:translateY(-4px)">
-            <image-slot id="{{ n.slot }}" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="{{ n.name }}"></image-slot>
+            <image-slot id="{{ n.slot }}" src="{{ n.img }}" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="{{ n.name }}"></image-slot>
             <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,0) 40%,rgba(21,36,28,.85));"></div>
             <div style="position:absolute;left:0;right:0;bottom:0;padding:20px;">
               <div style="font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#cdab6e;margin-bottom:5px;">{{ n.city }}</div>
@@ -563,7 +563,7 @@ image-slot{display:block;background:linear-gradient(135deg,#1d3a2c,#3f6249);}
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;">
         <sc-for list="{{ neighborhoodsItupeva }}" as="n" hint-placeholder-count="3">
           <a href="https://www.lotusbrokers.com.br/lotus-bairro" target="_top" data-reveal="" style="position:relative;display:block;aspect-ratio:3/4;border-radius:16px;overflow:hidden;box-shadow:0 16px 40px -28px rgba(21,36,28,.4);transition:transform .35s ease;" style-hover="transform:translateY(-4px)">
-            <image-slot id="{{ n.slot }}" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="{{ n.name }}"></image-slot>
+            <image-slot id="{{ n.slot }}" src="{{ n.img }}" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="{{ n.name }}"></image-slot>
             <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,0) 40%,rgba(21,36,28,.85));"></div>
             <div style="position:absolute;left:0;right:0;bottom:0;padding:20px;">
               <div style="font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#cdab6e;margin-bottom:5px;">{{ n.city }}</div>
@@ -897,7 +897,7 @@ image-slot{display:block;background:linear-gradient(135deg,#1d3a2c,#3f6249);}
         <div>
           <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#cdab6e;margin-bottom:18px;">A Lotus</div>
           <div style="display:flex;flex-direction:column;gap:12px;font-size:14.5px;color:rgba(247,242,232,.72);">
-            <a href="https://www.lotusbrokers.com.br/lotus-sobre" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Sobre nós</a>
+            <a href="#sobre" style="transition:color .2s;" style-hover="color:#cdab6e">Sobre nós</a>
             <a href="https://www.lotusbrokers.com.br/lotus-corretores" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Corretores</a>
             <a href="https://www.lotusbrokers.com.br/lotus-sobre" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Seja um corretor</a>
             <a href="{{ waLink }}" target="_blank" rel="noopener" style="transition:color .2s;" style-hover="color:#cdab6e">Contato</a>
@@ -906,10 +906,10 @@ image-slot{display:block;background:linear-gradient(135deg,#1d3a2c,#3f6249);}
         <div>
           <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#cdab6e;margin-bottom:18px;">Serviços</div>
           <div style="display:flex;flex-direction:column;gap:12px;font-size:14.5px;color:rgba(247,242,232,.72);">
-            <a href="https://www.lotusbrokers.com.br/lotus-lancamentos" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Lançamentos</a>
-            <a href="https://www.lotusbrokers.com.br/lotus-busca" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Comprar &amp; alugar</a>
+            <a href="#lancamentos" style="transition:color .2s;" style-hover="color:#cdab6e">Lançamentos</a>
+            <a href="#comprar" style="transition:color .2s;" style-hover="color:#cdab6e">Comprar &amp; alugar</a>
             <a href="https://www.lotusbrokers.com.br/lotus-anunciar" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Anunciar imóvel</a>
-            <a href="https://www.lotusbrokers.com.br/lotus-bairro" target="_top" style="transition:color .2s;" style-hover="color:#cdab6e">Bairros</a>
+            <a href="#bairros" style="transition:color .2s;" style-hover="color:#cdab6e">Bairros</a>
             <a href="#blog" style="transition:color .2s;" style-hover="color:#cdab6e">Blog</a>
           </div>
         </div>
@@ -1233,16 +1233,16 @@ class Component extends DCLogic {
       ],
 
       neighborhoodsJundiai: [
-        { name: 'Eloy Chaves', city: 'Jundiaí', count: '34 imóveis', slot: 'lotus-bairro-eloy' },
-        { name: 'Anhangabaú', city: 'Jundiaí', count: '28 imóveis', slot: 'lotus-bairro-anhangabau' },
-        { name: 'Malota', city: 'Jundiaí', count: '19 imóveis', slot: 'lotus-bairro-malota' },
-        { name: 'Medeiros', city: 'Jundiaí', count: '22 imóveis', slot: 'lotus-bairro-medeiros' },
+        { name: 'Eloy Chaves', city: 'Jundiaí', count: '34 imóveis', slot: 'lotus-bairro-eloy', img:'https://lotusbrokers.github.io/allegrato-landing/gran-ville-santo-angelo/a038.jpg' },
+        { name: 'Anhangabaú', city: 'Jundiaí', count: '28 imóveis', slot: 'lotus-bairro-anhangabau', img:'https://lotusbrokers.github.io/allegrato-landing/auten-jundiai/a023.jpg' },
+        { name: 'Malota', city: 'Jundiaí', count: '19 imóveis', slot: 'lotus-bairro-malota', img:'https://lotusbrokers.github.io/allegrato-landing/forest-houses/a002.jpg' },
+        { name: 'Medeiros', city: 'Jundiaí', count: '22 imóveis', slot: 'lotus-bairro-medeiros', img:'https://lotusbrokers.github.io/allegrato-landing/vivarte/a003.jpg' },
       ],
 
       neighborhoodsItupeva: [
-        { name: 'Centro', city: 'Itupeva', count: '17 imóveis', slot: 'lotus-bairro-itupeva-centro' },
-        { name: 'Reserva da Serra', city: 'Itupeva', count: '12 imóveis', slot: 'lotus-bairro-itupeva-serra' },
-        { name: 'Horto Florestal', city: 'Itupeva', count: '9 imóveis', slot: 'lotus-bairro-itupeva-horto' },
+        { name: 'Centro', city: 'Itupeva', count: '17 imóveis', slot: 'lotus-bairro-itupeva-centro', img:'https://lotusbrokers.github.io/allegrato-landing/jardins-do-horto/a004.jpg' },
+        { name: 'Reserva da Serra', city: 'Itupeva', count: '12 imóveis', slot: 'lotus-bairro-itupeva-serra', img:'https://lotusbrokers.github.io/allegrato-landing/altos-da-avenida/a005.png' },
+        { name: 'Horto Florestal', city: 'Itupeva', count: '9 imóveis', slot: 'lotus-bairro-itupeva-horto', img:'https://lotusbrokers.github.io/allegrato-landing/vistta-castanho/a007.jpg' },
       ],
 
       posts: [
