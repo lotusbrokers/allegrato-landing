@@ -363,7 +363,7 @@
           <sc-for list="{{ view }}" as="e" hint-placeholder-count="6">
             <a href="{{ waLink }}" target="_blank" rel="noopener" style="display:flex;flex-direction:column;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 16px 40px -32px rgba(21,36,28,.34);transition:transform .3s ease, box-shadow .3s ease;" style-hover="transform:translateY(-5px);box-shadow:0 30px 60px -34px rgba(21,36,28,.5)">
               <div style="position:relative;aspect-ratio:4/3;background:#1d3a2c;">
-                <image-slot id="{{ e.slot }}" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="{{ e.name }}"></image-slot>
+                <image-slot id="{{ e.slot }}" src="{{ e.img }}" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="{{ e.name }}"></image-slot>
                 <span style="position:absolute;top:12px;left:12px;background:{{ e.stageBg }};color:{{ e.stageColor }};font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:5px 11px;border-radius:30px;">{{ e.stage }}</span>
                 <sc-if value="{{ e.exclusive }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:12px;right:12px;background:#b18a4a;color:#15241c;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:5px 10px;border-radius:30px;">Lotus Listing</span></sc-if>
               </div>
@@ -585,7 +585,7 @@ class Component extends DCLogic {
     if (s.sortKey === 'priceAsc') list = [...list].sort((a, b) => a.priceNum - b.priceNum);
     else if (s.sortKey === 'priceDesc') list = [...list].sort((a, b) => b.priceNum - a.priceNum);
 
-    const view = list.map(e => { const st = this.stageStyle(e.stage); return { ...e, stageBg: st.bg, stageColor: st.color }; });
+    const IMG = {allegrato:'https://lotusbrokers.github.io/allegrato-landing/assets/a09.jpg',jardins:'https://lotusbrokers.github.io/allegrato-landing/jardins-do-horto/a004.jpg',vigore:'https://lotusbrokers.github.io/allegrato-landing/vigore/a18.jpg',terrace:'https://lotusbrokers.github.io/allegrato-landing/terrace-serra-do-japi/a026.jpg',doppio:'https://lotusbrokers.github.io/allegrato-landing/auten-jundiai/a023.jpg',reserva:'https://lotusbrokers.github.io/allegrato-landing/vistta-castanho/a007.jpg',vivarte:'https://lotusbrokers.github.io/allegrato-landing/vivarte/a003.jpg',forest:'https://lotusbrokers.github.io/allegrato-landing/forest-houses/a002.jpg',gran:'https://lotusbrokers.github.io/allegrato-landing/gran-ville-santo-angelo/a038.jpg'}; const view = list.map(e => { const st = this.stageStyle(e.stage); return { ...e, stageBg: st.bg, stageColor: st.color, img: IMG[e.id] }; });
     const hasFilter = s.fCity !== 'any' || s.fStage !== 'any' || s.fType !== 'any' || s.fPrice !== 'any';
 
     return {
