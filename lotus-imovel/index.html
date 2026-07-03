@@ -330,15 +330,15 @@ html{scrollbar-width:none;-ms-overflow-style:none} html::-webkit-scrollbar{displ
   <section id="galeria" style="max-width:1280px;margin:16px auto 0;padding:0 32px;">
     <div style="position:relative;display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:10px;height:clamp(340px,46vw,520px);border-radius:20px;overflow:hidden;">
       <button onclick="{{ openLightbox0 }}" style="grid-row:span 2;position:relative;border:none;padding:0;cursor:pointer;background:#1d3a2c;">
-        <image-slot id="imovel-foto-1" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Foto principal — fachada"></image-slot>
+        <image-slot id="imovel-foto-1" src="https://lotusbrokers.github.io/allegrato-landing/auten-jundiai/a023.jpg" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Foto principal — fachada"></image-slot>
         <span style="position:absolute;top:16px;left:16px;background:#b18a4a;color:#15241c;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:6px 12px;border-radius:30px;">Lotus Listing</span>
         <span style="position:absolute;bottom:16px;left:16px;background:rgba(29,58,44,.82);color:#f7f2e8;font-size:12px;font-weight:600;padding:6px 12px;border-radius:30px;">Disponível</span>
       </button>
-      <button onclick="{{ openLightbox1 }}" style="position:relative;border:none;padding:0;cursor:pointer;background:#3f6249;"><image-slot id="imovel-foto-2" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Living"></image-slot></button>
-      <button onclick="{{ openLightbox2 }}" style="position:relative;border:none;padding:0;cursor:pointer;background:#3f6249;"><image-slot id="imovel-foto-3" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Cozinha"></image-slot></button>
-      <button onclick="{{ openLightbox3 }}" style="position:relative;border:none;padding:0;cursor:pointer;background:#3f6249;"><image-slot id="imovel-foto-4" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Suíte"></image-slot></button>
+      <button onclick="{{ openLightbox1 }}" style="position:relative;border:none;padding:0;cursor:pointer;background:#3f6249;"><image-slot id="imovel-foto-2" src="https://lotusbrokers.github.io/allegrato-landing/vivarte/a003.jpg" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Living"></image-slot></button>
+      <button onclick="{{ openLightbox2 }}" style="position:relative;border:none;padding:0;cursor:pointer;background:#3f6249;"><image-slot id="imovel-foto-3" src="https://lotusbrokers.github.io/allegrato-landing/altos-da-avenida/a005.png" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Cozinha"></image-slot></button>
+      <button onclick="{{ openLightbox3 }}" style="position:relative;border:none;padding:0;cursor:pointer;background:#3f6249;"><image-slot id="imovel-foto-4" src="https://lotusbrokers.github.io/allegrato-landing/jardins-do-horto/a004.jpg" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Suíte"></image-slot></button>
       <button onclick="{{ openLightbox4 }}" style="position:relative;border:none;padding:0;cursor:pointer;background:#3f6249;">
-        <image-slot id="imovel-foto-5" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Quintal / piscina"></image-slot>
+        <image-slot id="imovel-foto-5" src="https://lotusbrokers.github.io/allegrato-landing/resort-prime/a009.jpg" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Quintal / piscina"></image-slot>
         <span style="position:absolute;inset:0;background:rgba(21,36,28,.55);display:flex;align-items:center;justify-content:center;color:#f7f2e8;font-weight:600;font-size:15px;">+ 18 fotos</span>
       </button>
     </div>
@@ -427,7 +427,7 @@ html{scrollbar-width:none;-ms-overflow-style:none} html::-webkit-scrollbar{displ
       <div style="font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#cdab6e;margin-bottom:16px;">Tour 3D · Vídeo</div>
       <h2 style="font-family:'Fraunces',serif;font-weight:300;font-size:clamp(26px,3vw,38px);color:#f7f2e8;margin:0 0 30px;">Caminhe pela casa sem sair de casa.</h2>
       <div style="position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#1d3a2c;">
-        <image-slot id="imovel-tour" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Tour 3D / vídeo do imóvel"></image-slot>
+        <image-slot id="imovel-tour" src="https://lotusbrokers.github.io/allegrato-landing/terrace-serra-do-japi/a026.jpg" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Tour 3D / vídeo do imóvel"></image-slot>
         <div style="position:absolute;inset:0;background:rgba(21,36,28,.35);display:flex;align-items:center;justify-content:center;">
           <div style="width:74px;height:74px;border-radius:50%;background:rgba(247,242,232,.92);display:flex;align-items:center;justify-content:center;"><svg width="26" height="26" viewBox="0 0 24 24" fill="#1d3a2c"><path d="M8 5v14l11-7z"></path></svg></div>
         </div>
@@ -508,7 +508,7 @@ html{scrollbar-width:none;-ms-overflow-style:none} html::-webkit-scrollbar{displ
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;">
         <sc-for list="{{ similares }}" as="s" hint-placeholder-count="3">
           <a href="https://www.lotusbrokers.com.br/lotus-imovel" target="_top" style="display:flex;flex-direction:column;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 16px 40px -30px rgba(21,36,28,.34);transition:transform .3s ease;" style-hover="transform:translateY(-4px)">
-            <div style="position:relative;aspect-ratio:4/3;background:#1d3a2c;"><image-slot id="{{ s.slot }}" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="{{ s.title }}"></image-slot></div>
+            <div style="position:relative;aspect-ratio:4/3;background:#1d3a2c;"><image-slot id="{{ s.slot }}" src="{{ s.img }}" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="{{ s.title }}"></image-slot></div>
             <div style="padding:18px;">
               <div style="font-family:'Fraunces',serif;font-size:19px;color:#1d3a2c;">{{ s.price }}</div>
               <div style="font-size:13px;font-weight:600;color:#15241c;margin-top:6px;">{{ s.title }}</div>
@@ -717,9 +717,9 @@ class Component extends DCLogic {
       ],
 
       similares: [
-        { slot: 'sim-1', price: 'R$ 1.890.000', title: 'Casa em condomínio · Itupeva', specs: '4 suítes · 280 m² · 4 vagas' },
-        { slot: 'sim-2', price: 'R$ 1.650.000', title: 'Cobertura · Malota', specs: '3 suítes · 210 m² · 3 vagas' },
-        { slot: 'sim-3', price: 'R$ 980.000', title: 'Casa · Medeiros', specs: '3 dorms · 180 m² · 2 vagas' },
+        { slot: 'sim-1', img:'https://lotusbrokers.github.io/allegrato-landing/gran-ville-santo-angelo/a038.jpg', price: 'R$ 1.890.000', title: 'Casa em condomínio · Itupeva', specs: '4 suítes · 280 m² · 4 vagas' },
+        { slot: 'sim-2', img:'https://lotusbrokers.github.io/allegrato-landing/auten-jundiai/a023.jpg', price: 'R$ 1.650.000', title: 'Cobertura · Malota', specs: '3 suítes · 210 m² · 3 vagas' },
+        { slot: 'sim-3', img:'https://lotusbrokers.github.io/allegrato-landing/forest-houses/a002.jpg', price: 'R$ 980.000', title: 'Casa · Medeiros', specs: '3 dorms · 180 m² · 2 vagas' },
       ],
 
       faqs: faqData.map((f, idx) => ({
