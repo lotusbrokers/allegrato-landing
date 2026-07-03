@@ -307,7 +307,7 @@
   <!-- HERO -->
   <section style="max-width:1200px;margin:16px auto 0;padding:0 32px;">
     <div style="position:relative;border-radius:22px;overflow:hidden;height:clamp(320px,42vw,460px);background:#1d3a2c;">
-      <image-slot id="cond-hero" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Foto do condomínio — portaria / áreas comuns / vista"></image-slot>
+      <image-slot id="cond-hero" src="https://lotusbrokers.github.io/allegrato-landing/gran-ville-santo-angelo/a038.jpg" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Foto do condomínio — portaria / áreas comuns / vista"></image-slot>
       <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,.25) 0%,rgba(21,36,28,.2) 40%,rgba(21,36,28,.88) 100%);"></div>
       <div style="position:absolute;left:0;right:0;bottom:0;padding:clamp(28px,4vw,48px);">
         <div style="font-size:12.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#cdab6e;margin-bottom:14px;">Condomínio · Itupeva</div>
@@ -388,11 +388,11 @@
         <h2 style="font-family:'Fraunces',serif;font-weight:300;font-size:clamp(28px,3.6vw,44px);color:#15241c;line-height:1.06;margin:0;">Por dentro do condomínio.</h2>
       </div>
       <div style="display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:12px;height:clamp(320px,42vw,500px);border-radius:20px;overflow:hidden;">
-        <div style="grid-row:span 2;position:relative;background:#1d3a2c;"><image-slot id="cond-g1" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Portaria / entrada"></image-slot></div>
-        <div style="position:relative;background:#3f6249;"><image-slot id="cond-g2" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Piscina"></image-slot></div>
-        <div style="position:relative;background:#3f6249;"><image-slot id="cond-g3" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Quadra"></image-slot></div>
-        <div style="position:relative;background:#3f6249;"><image-slot id="cond-g4" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Área verde"></image-slot></div>
-        <div style="position:relative;background:#3f6249;"><image-slot id="cond-g5" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Casa modelo"></image-slot></div>
+        <div style="grid-row:span 2;position:relative;background:#1d3a2c;"><image-slot id="cond-g1" src="https://lotusbrokers.github.io/allegrato-landing/gran-ville-santo-angelo/a010.jpg" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Portaria / entrada"></image-slot></div>
+        <div style="position:relative;background:#3f6249;"><image-slot id="cond-g2" src="https://lotusbrokers.github.io/allegrato-landing/resort-prime/a009.jpg" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Piscina"></image-slot></div>
+        <div style="position:relative;background:#3f6249;"><image-slot id="cond-g3" src="https://lotusbrokers.github.io/allegrato-landing/manawa/a005.png" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Quadra"></image-slot></div>
+        <div style="position:relative;background:#3f6249;"><image-slot id="cond-g4" src="https://lotusbrokers.github.io/allegrato-landing/vistta-castanho/a007.jpg" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Área verde"></image-slot></div>
+        <div style="position:relative;background:#3f6249;"><image-slot id="cond-g5" src="https://lotusbrokers.github.io/allegrato-landing/forest-houses/a002.jpg" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Casa modelo"></image-slot></div>
       </div>
     </div>
   </section>
@@ -408,7 +408,7 @@
         <sc-for list="{{ imoveis }}" as="m" hint-placeholder-count="4">
           <a target="_top" href="https://www.lotusbrokers.com.br/lotus-imovel" style="display:flex;flex-direction:column;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 16px 40px -30px rgba(21,36,28,.34);transition:transform .3s ease;" style-hover="transform:translateY(-4px)">
             <div style="position:relative;aspect-ratio:4/3;background:#1d3a2c;">
-              <image-slot id="{{ m.slot }}" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="{{ m.title }}"></image-slot>
+              <image-slot id="{{ m.slot }}" src="{{ m.img }}" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="{{ m.title }}"></image-slot>
               <span style="position:absolute;top:12px;left:12px;background:rgba(29,58,44,.82);color:#f7f2e8;font-size:11px;font-weight:600;padding:5px 11px;border-radius:30px;">{{ m.tag }}</span>
             </div>
             <div style="padding:18px;">
@@ -515,7 +515,7 @@
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;">
         <sc-for list="{{ relacionados }}" as="r" hint-placeholder-count="4">
           <a target="_top" href="https://www.lotusbrokers.com.br/lotus-condominio" style="display:flex;flex-direction:column;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 14px 36px -32px rgba(21,36,28,.32);transition:transform .25s ease;" style-hover="transform:translateY(-3px)">
-            <div style="position:relative;aspect-ratio:16/10;background:#1d3a2c;"><image-slot id="{{ r.slot }}" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="{{ r.name }}"></image-slot></div>
+            <div style="position:relative;aspect-ratio:16/10;background:#1d3a2c;"><image-slot id="{{ r.slot }}" src="{{ r.img }}" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="{{ r.name }}"></image-slot></div>
             <div style="padding:16px 18px;">
               <h3 style="font-family:'Fraunces',serif;font-size:18px;color:#15241c;margin:0 0 4px;line-height:1.1;">{{ r.name }}</h3>
               <div style="font-size:12.5px;color:#8aa593;">{{ r.city }}</div>
@@ -622,10 +622,10 @@ class Component extends DCLogic {
         { num: '5', title: 'Acesso e conveniência', text: 'A poucos minutos da Rodovia Anhanguera e do centro de Itupeva, com mercados, escolas e o comércio do dia a dia ao alcance — e Jundiaí logo ali.' },
       ],
       imoveis: [
-        { slot: 'cond-im-1', tag: 'Revenda', price: 'R$ 1.890.000', title: 'Casa · 4 suítes', specs: '280 m² · 4 vagas' },
-        { slot: 'cond-im-2', tag: 'Terreno', price: 'R$ 650.000', title: 'Lote para construir', specs: '1.000 m² · plano' },
-        { slot: 'cond-im-3', tag: 'Revenda', price: 'R$ 2.350.000', title: 'Casa térrea · vista serra', specs: '320 m² · 4 vagas' },
-        { slot: 'cond-im-4', tag: 'Lançamento', price: 'R$ 1.450.000', title: 'Casa em construção', specs: '3 suítes · 240 m²' },
+        { slot: 'cond-im-1', img:'https://lotusbrokers.github.io/allegrato-landing/forest-houses/a002.jpg', tag: 'Revenda', price: 'R$ 1.890.000', title: 'Casa · 4 suítes', specs: '280 m² · 4 vagas' },
+        { slot: 'cond-im-2', img:'https://lotusbrokers.github.io/allegrato-landing/vistta-castanho/a007.jpg', tag: 'Terreno', price: 'R$ 650.000', title: 'Lote para construir', specs: '1.000 m² · plano' },
+        { slot: 'cond-im-3', img:'https://lotusbrokers.github.io/allegrato-landing/gran-ville-santo-angelo/a038.jpg', tag: 'Revenda', price: 'R$ 2.350.000', title: 'Casa térrea · vista serra', specs: '320 m² · 4 vagas' },
+        { slot: 'cond-im-4', img:'https://lotusbrokers.github.io/allegrato-landing/auten-jundiai/a023.jpg', tag: 'Lançamento', price: 'R$ 1.450.000', title: 'Casa em construção', specs: '3 suítes · 240 m²' },
       ],
       distances: [
         { place: 'Portaria → Anhanguera', time: '8 min' },
@@ -635,10 +635,10 @@ class Component extends DCLogic {
         { place: 'Centro de Jundiaí', time: '25 min' },
       ],
       relacionados: [
-        { slot: 'cond-rel-1', name: 'Residencial Phytus', city: 'Itupeva' },
-        { slot: 'cond-rel-2', name: 'Gran Park', city: 'Itupeva' },
-        { slot: 'cond-rel-3', name: 'Reserva Ermida', city: 'Jundiaí' },
-        { slot: 'cond-rel-4', name: 'Terras da Alvorada', city: 'Jundiaí' },
+        { slot: 'cond-rel-1', img:'https://lotusbrokers.github.io/allegrato-landing/gran-ville-santo-angelo/a010.jpg', name: 'Residencial Phytus', city: 'Itupeva' },
+        { slot: 'cond-rel-2', img:'https://lotusbrokers.github.io/allegrato-landing/gran-ville-santo-angelo/a038.jpg', name: 'Gran Park', city: 'Itupeva' },
+        { slot: 'cond-rel-3', img:'https://lotusbrokers.github.io/allegrato-landing/vistta-castanho/a007.jpg', name: 'Reserva Ermida', city: 'Jundiaí' },
+        { slot: 'cond-rel-4', img:'https://lotusbrokers.github.io/allegrato-landing/jardins-do-horto/a004.jpg', name: 'Terras da Alvorada', city: 'Jundiaí' },
       ],
     };
   }
