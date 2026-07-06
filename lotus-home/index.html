@@ -390,10 +390,10 @@ image-slot{display:block;background:linear-gradient(135deg,#1d3a2c,#3f6249);}
                 <div style="font-size:12.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#cdab6e;margin-bottom:14px;">{{ b.eyebrow }}</div>
                 <h3 style="font-family:'Fraunces',serif;font-weight:300;font-size:clamp(24px,3.2vw,38px);line-height:1.08;letter-spacing:-.02em;color:#f7f2e8;margin:0 0 12px;">{{ b.title }}</h3>
                 <p style="font-size:clamp(14px,1.3vw,16.5px);color:rgba(247,242,232,.78);font-weight:300;line-height:1.5;margin:0 0 22px;max-width:380px;">{{ b.text }}</p>
-                <a href="{{ b.href }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:#b18a4a;color:#15241c;font-weight:600;font-size:14.5px;padding:12px 24px;border-radius:40px;transition:transform .2s, background .2s;" style-hover="background:#cdab6e;transform:translateY(-2px)">{{ b.cta }} <span>→</span></a>
+                <a href="{{ b.href }}" target="_top" style="align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:#b18a4a;color:#15241c;font-weight:600;font-size:14.5px;padding:12px 24px;border-radius:40px;transition:transform .2s, background .2s;" style-hover="background:#cdab6e;transform:translateY(-2px)">{{ b.cta }} <span>→</span></a>
               </div>
               <div style="position:relative;background:#15241c;">
-                <image-slot id="{{ b.slot }}" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Imagem da campanha"></image-slot>
+                <image-slot src="{{ b.img }}" id="{{ b.slot }}" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="Imagem da campanha"></image-slot>
                 <div style="position:absolute;inset:0;background:linear-gradient(90deg,#1d3a2c 0%,rgba(29,58,44,.35) 24%,rgba(29,58,44,0) 60%);"></div>
               </div>
             </div>
@@ -599,7 +599,7 @@ image-slot{display:block;background:linear-gradient(135deg,#1d3a2c,#3f6249);}
         <sc-for list="{{ brokers }}" as="b" hint-placeholder-count="2">
           <div data-reveal="" style="background:#f7f2e8;border-radius:20px;overflow:hidden;box-shadow:0 18px 44px -30px rgba(21,36,28,.35);display:flex;flex-direction:column;">
             <div style="position:relative;aspect-ratio:1/1;background:#3f6249;">
-              <image-slot id="{{ b.slot }}" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="{{ b.name }}"></image-slot>
+              <image-slot src="{{ b.img }}" id="{{ b.slot }}" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="{{ b.name }}"></image-slot>
             </div>
             <div style="padding:22px;">
               <div style="font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#b18a4a;margin-bottom:8px;">{{ b.squad }}</div>
@@ -1113,9 +1113,9 @@ class Component extends DCLogic {
     const finOff = finBase + 'background:transparent;color:#3f6249;border-color:rgba(21,36,28,.2);';
 
     const banners = [
-      { slot: 'lotus-banner-1', eyebrow: 'Campanha do mês', title: 'Lançamentos com condições de pré-venda', text: 'Unidades selecionadas com tabela exclusiva por tempo limitado.', cta: 'Ver lançamentos', href: '#lancamentos' },
-      { slot: 'lotus-banner-2', eyebrow: 'Serra do Japi', title: 'Casas em condomínio a partir de R$ 1,2 mi', text: 'Mais verde, mais privacidade — a 10 minutos do centro de Jundiaí.', cta: 'Explorar imóveis', href: '#comprar' },
-      { slot: 'lotus-banner-3', eyebrow: 'Quer vender?', title: 'Avaliação do seu imóvel, sem custo', text: 'Descubra quanto vale com quem realmente conhece o seu bairro.', cta: 'Anunciar agora', href: '#anunciar' },
+      { slot: 'lotus-banner-1', eyebrow: 'Campanha do mês', title: 'Lançamentos com condições de pré-venda', text: 'Unidades selecionadas com tabela exclusiva por tempo limitado.', cta: 'Ver lançamentos', href: 'https://www.lotusbrokers.com.br/lotus-lancamentos', img: 'https://lotusbrokers.github.io/allegrato-landing/assets/doppio-capa.jpg' },
+      { slot: 'lotus-banner-2', eyebrow: 'Serra do Japi', title: 'Casas em condomínio a partir de R$ 1,2 mi', text: 'Mais verde, mais privacidade — a 10 minutos do centro de Jundiaí.', cta: 'Explorar imóveis', href: 'https://www.lotusbrokers.com.br/lotus-busca', img: 'https://lotusbrokers.github.io/allegrato-landing/gran-ville-santo-angelo/a025.jpg' },
+      { slot: 'lotus-banner-3', eyebrow: 'Quer vender?', title: 'Avaliação do seu imóvel, sem custo', text: 'Descubra quanto vale com quem realmente conhece o seu bairro.', cta: 'Anunciar agora', href: 'https://www.lotusbrokers.com.br/lotus-anunciar', img: 'https://i.postimg.cc/nzx1wvHM/Chat-GPT-Image-25-de-jun-de-2026-14-04-13.png' },
     ];
     const bi = this.state.bannerIndex || 0;
     const bannersView = banners.map((b, i) => ({ ...b, style: 'position:absolute;inset:0;opacity:' + (i === bi ? '1' : '0') + ';transition:opacity .8s ease;pointer-events:' + (i === bi ? 'auto' : 'none') + ';' }));
