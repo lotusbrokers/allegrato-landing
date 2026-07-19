@@ -1,0 +1,6 @@
+/* Portal Lotus — estilos globais. Paridade 100% com o site estático atual.
+   NÃO adicionamos reset/box-sizing: o site estático (dc-runtime) não tinha reset,
+   e os style= inline foram calibrados no box-sizing default (content-box). Forçar
+   border-box mudaria larguras/paddings e quebraria o "idêntico". */
+@import url("../styles/fonts.css");
+@import url("../styles/base.css");

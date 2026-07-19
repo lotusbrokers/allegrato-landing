@@ -1,0 +1,21 @@
+# Next.js / Node — NUNCA versionar (a raiz do repo é servida pelo GitHub Pages;
+# node_modules e .next não podem vazar para o deploy estático).
+/node_modules
+/.next
+/out
+/build
+*.tsbuildinfo
+next-env.d.ts
+
+# env locais (a anon key vai em .env.local; NÃO commitar)
+.env*.local
+.env.local
+
+# logs / OS
+npm-debug.log*
+.DS_Store
+
+# Artefatos de dev / documentacao local (nao versionar)
+FINALIZAR.MD
+busca-header.png
+.playwright-mcp/

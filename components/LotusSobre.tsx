@@ -1,0 +1,638 @@
+'use client';
+
+/**
+ * LotusSobre — porte 1:1 de lotus-sobre/index.html (mecanismo dc-runtime) para React.
+ * Visual e comportamento idênticos ao estático. Dados hard-coded (viram fetch numa fase futura).
+ *
+ * Convenções de porte (mesmas de LotusHome):
+ *  - style="css literal"  -> style={parseStyle('css literal')}
+ *  - style-hover="css"    -> <Hoverable baseStyle={...} hoverStyle={parseStyle('css')}>
+ *  - sc-for / sc-if       -> .map() / {cond && ...}
+ *  - image-slot           -> <ImageSlot> (gradiente de fundo + <img> quando há src)
+ *
+ * O fonte NÃO tem data-reveal: componentDidMount só implementa (1) handler de teclado
+ * para o lightbox e (2) contador de estatísticas (rAF + IntersectionObserver .4).
+ */
+
+import Link from 'next/link';
+import LotusHeader from './LotusHeader';
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from 'react';
+
+/* ------------------------------------------------------------------ */
+/* Helpers                                                             */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Converte uma string CSS ("a:b;c:d") em objeto React.CSSProperties.
+ * Split no PRIMEIRO ":" de cada declaração (valores como gradientes e data: URIs
+ * contêm ":" internos). camelCase nas propriedades; -webkit- -> Webkit; --custom mantém.
+ */
+function parseStyle(css: string): CSSProperties {
+  const out: Record<string, string> = {};
+  if (!css) return out as CSSProperties;
+  for (const decl of css.split(';')) {
+    const trimmed = decl.trim();
+    if (!trimmed) continue;
+    const idx = trimmed.indexOf(':');
+    if (idx === -1) continue;
+    const rawProp = trimmed.slice(0, idx).trim();
+    const value = trimmed.slice(idx + 1).trim();
+    if (!rawProp) continue;
+    const prop = rawProp.startsWith('--')
+      ? rawProp // custom property: mantém como está
+      : rawProp.replace(/-([a-z])/g, (_m, c: string) => c.toUpperCase());
+    out[prop] = value;
+  }
+  return out as CSSProperties;
+}
+
+/**
+ * Reproduz style-hover do dc-runtime: hoverStyle vira :hover.
+ * Aplica hoverStyle (merge sobre baseStyle) no mouseenter e remove no mouseleave.
+ */
+type HoverableProps<T extends keyof React.JSX.IntrinsicElements> = {
+  as?: T;
+  baseStyle: CSSProperties;
+  hoverStyle: CSSProperties;
+  children?: ReactNode;
+} & Omit<React.ComponentPropsWithoutRef<T>, 'style' | 'children'>;
+
+function Hoverable<T extends keyof React.JSX.IntrinsicElements = 'div'>({
+  as,
+  baseStyle,
+  hoverStyle,
+  children,
+  ...rest
+}: HoverableProps<T>) {
+  const [hover, setHover] = useState(false);
+  // Rota interna (href "/..." não-âncora) vira <Link> do Next: navegação
+  // client-side instantânea + prefetch, sem full reload/tela branca.
+  const rprops = rest as Record<string, unknown>;
+  const href = typeof rprops.href === 'string' ? rprops.href : undefined;
+  const isInternal =
+    as === 'a' && href?.startsWith('/') && rprops.target !== '_blank';
+  const Tag: React.ElementType = isInternal ? Link : (as || 'div');
+  const { target: _t, ...linkRest } = rprops;
+  const tagProps = isInternal ? linkRest : rest;
+  return (
+    <Tag
+      {...tagProps}
+      style={hover ? { ...baseStyle, ...hoverStyle } : baseStyle}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
+      {children}
+    </Tag>
+  );
+}
+
+/**
+ * image-slot do dc-runtime: bloco com gradiente de fundo (fallback) e, quando há
+ * src, a imagem cobrindo (object-fit:cover). Sem src => só o gradiente.
+ */
+function ImageSlot({
+  src,
+  id,
+  style,
+  alt = '',
+}: {
+  src?: string;
+  id?: string;
+  style?: CSSProperties;
+  alt?: string;
+}) {
+  return (
+    <div
+      id={id}
+      style={{
+        display: 'block',
+        background: 'linear-gradient(135deg,#1d3a2c,#3f6249)',
+        ...style,
+      }}
+    >
+      {src && (
+        <img
+          src={src}
+          alt={alt}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+        />
+      )}
+    </div>
+  );
+}
+
+/* Textura de ruído (SVG) idêntica ao estático — usada como background-image. */
+const NOISE_BG =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")";
+
+/* ------------------------------------------------------------------ */
+/* Dados estáticos (valores exatos do fonte)                          */
+/* ------------------------------------------------------------------ */
+
+const WHATSAPP_DEFAULT = '5511926143393';
+
+// Slots de fotos do escritório (fonte: this.OFFICE)
+const OFFICE = [
+  'escritorio-1',
+  'escritorio-2',
+  'escritorio-3',
+  'escritorio-4',
+  'escritorio-5',
+  'escritorio-6',
+  'escritorio-7',
+  'escritorio-8',
+];
+
+const pilares = [
+  { num: '01', title: 'Especialista do bairro', text: 'Você é atendido por quem conhece a região de verdade — a rua, a escola, o preço justo daquele metro quadrado. Nada de generalista de tudo.' },
+  { num: '02', title: 'Processo transparente', text: 'Método claro, boletim de acompanhamento e avaliação com dado (não com achismo). Você sempre sabe em que pé está a sua negociação.' },
+  { num: '03', title: 'Cuidado que respeita seu tempo', text: 'Sem catálogo jogado no WhatsApp. A gente filtra, organiza e só te apresenta o que faz sentido para o seu momento.' },
+  { num: '04', title: 'Pós-chave de verdade', text: 'A relação não acaba na assinatura. A gente continua por perto — porque cliente bem cuidado vira o próximo capítulo (e a próxima indicação).' },
+];
+
+const squads = [
+  { title: 'Alto Padrão', text: 'Imóveis de R$ 1,5 mi para cima, com a discrição e a imersão que o ticket pede.', broker: 'Marina Tavares', creci: 'CRECI 000001-F', slot: 'sobre-sq-1' },
+  { title: 'Lançamentos', text: 'Quem conhece cada planta e a negociação com a construtora — da escolha à chave.', broker: 'Rafael Nunes', creci: 'CRECI 000002-F', slot: 'sobre-sq-2' },
+  { title: 'Popular', text: 'Primeiro imóvel, financiamento e Minha Casa — atendimento que respeita seu tempo.', broker: 'Juliana Prado', creci: 'CRECI 000003-F', slot: 'sobre-sq-3' },
+  { title: 'Comercial', text: 'Salas, lojas e galpões na região, para quem investe ou expande o negócio.', broker: 'André Salem', creci: 'CRECI 000004-F', slot: 'sobre-sq-4' },
+];
+
+const corretores = [
+  { name: 'Erick Santos', role: 'Fundador · Alto Padrão', creci: 'CRECI 000000-F', slot: 'corr-1' },
+  { name: 'Marina Tavares', role: 'Alto Padrão · Eloy Chaves', creci: 'CRECI 000001-F', slot: 'corr-2' },
+  { name: 'Rafael Nunes', role: 'Lançamentos · Itupeva', creci: 'CRECI 000002-F', slot: 'corr-3' },
+  { name: 'Juliana Prado', role: 'Popular · Jundiaí', creci: 'CRECI 000003-F', slot: 'corr-4' },
+  { name: 'André Salem', role: 'Comercial', creci: 'CRECI 000004-F', slot: 'corr-5' },
+  { name: 'Beatriz Lima', role: 'Lançamentos · Vinhedo', creci: 'CRECI 000005-F', slot: 'corr-6' },
+];
+
+const faqData = [
+  { q: 'Quem é a Lotus Brokers?', a: 'Uma imobiliária moderna de Jundiaí e Itupeva, com equipe de corretores segmentada por especialidade e por bairro. Atende lançamentos e revenda com atendimento humano e processo transparente.' },
+  { q: 'A Lotus é uma imobiliária nova?', a: 'Marca nova, time consolidado. A operação atua há mais de uma década na região e renasceu como Lotus — a mesma gente que já conhece cada bairro.' },
+  { q: 'O que torna o atendimento de vocês diferente?', a: 'Você fala com um especialista do seu bairro, não com um corretor que tenta dar conta de tudo. A estrutura cuida do repetitivo; o corretor cuida de você, do primeiro contato ao pós-chave.' },
+];
+
+/* ------------------------------------------------------------------ */
+/* Componente                                                          */
+/* ------------------------------------------------------------------ */
+
+export default function LotusSobre({
+  whatsapp = WHATSAPP_DEFAULT,
+}: {
+  whatsapp?: string;
+}) {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const galleryRef = useRef<HTMLDivElement>(null);
+
+  // state = { openFaq: 0, lbOpen: false, lbIndex: 0 }
+  const [openFaq, setOpenFaq] = useState(0);
+  const [lbOpen, setLbOpen] = useState(false);
+  const [lbIndex, setLbIndex] = useState(0);
+
+  // waLink — replica exata da lógica do renderVals().
+  const waLink =
+    'https://wa.me/' +
+    String(whatsapp ?? WHATSAPP_DEFAULT) +
+    '?text=' +
+    encodeURIComponent('Oi! Vim pela página A Lotus e quero conhecer melhor o time de vocês.');
+
+  // scrollGallery(dir) — idêntico ao componentDidMount original.
+  const scrollGallery = (dir: number) => {
+    const g = galleryRef.current;
+    if (g) g.scrollBy({ left: dir * Math.min(g.clientWidth * 0.8, 360), behavior: 'smooth' });
+  };
+
+  // --- handler de teclado do lightbox (usa lbOpen mais recente via ref) ---
+  const lbOpenRef = useRef(lbOpen);
+  lbOpenRef.current = lbOpen;
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (!lbOpenRef.current) return;
+      if (e.key === 'Escape') setLbOpen(false);
+      else if (e.key === 'ArrowRight') setLbIndex((i) => (i + 1) % OFFICE.length);
+      else if (e.key === 'ArrowLeft') setLbIndex((i) => (i + OFFICE.length - 1) % OFFICE.length);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
+  // --- contador de estatísticas (rAF + IntersectionObserver threshold .4) ---
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const reduce =
+      typeof window !== 'undefined' &&
+      window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const wrap = root.querySelector<HTMLElement>('[data-stats]');
+    if (!wrap) return;
+
+    const run = () => {
+      wrap.querySelectorAll<HTMLElement>('[data-count]').forEach((el) => {
+        const to = parseFloat(el.getAttribute('data-count') || '0');
+        const pre = el.getAttribute('data-prefix') || '';
+        const suf = el.getAttribute('data-suffix') || '';
+        const sep = !!el.getAttribute('data-sep');
+        const start = performance.now();
+        const fmt = (n: number) =>
+          sep ? Math.round(n).toLocaleString('pt-BR') : String(Math.round(n));
+        const tick = (now: number) => {
+          const p = Math.min(1, (now - start) / 1500);
+          const e = 1 - Math.pow(1 - p, 3);
+          el.textContent = pre + fmt(to * e) + suf;
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+    };
+
+    if (reduce || !('IntersectionObserver' in window)) {
+      run();
+      return;
+    }
+    wrap.querySelectorAll<HTMLElement>('[data-count]').forEach((el) => {
+      el.textContent =
+        (el.getAttribute('data-prefix') || '') + '0' + (el.getAttribute('data-suffix') || '');
+    });
+    let obs: IntersectionObserver | undefined = new IntersectionObserver(
+      (ents) => {
+        ents.forEach((en) => {
+          if (en.isIntersecting) {
+            run();
+            obs!.disconnect();
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    obs.observe(wrap);
+    return () => {
+      if (obs) obs.disconnect();
+    };
+  }, []);
+
+  // Derivados de render (renderVals()).
+  const officePhotos = OFFICE.map((id, i) => ({
+    slot: id,
+    label: 'Foto do escritório ' + (i + 1),
+    open: () => {
+      setLbOpen(true);
+      setLbIndex(i);
+    },
+  }));
+  const lightboxView = OFFICE.map((id, i) => ({
+    slot: id,
+    style:
+      'position:absolute;inset:0;opacity:' +
+      (i === lbIndex ? '1' : '0') +
+      ';transition:opacity .35s ease;pointer-events:' +
+      (i === lbIndex ? 'auto' : 'none') +
+      ';',
+  }));
+  const lbCounter = lbIndex + 1 + ' / ' + OFFICE.length;
+
+  const faqs = faqData.map((f, i) => ({
+    q: f.q,
+    a: f.a,
+    open: openFaq === i,
+    sign: openFaq === i ? '–' : '+',
+    toggle: () => setOpenFaq((cur) => (cur === i ? -1 : i)),
+  }));
+
+  const closeLb = () => setLbOpen(false);
+  const nextLb = () => setLbIndex((i) => (i + 1) % OFFICE.length);
+  const prevLb = () => setLbIndex((i) => (i + OFFICE.length - 1) % OFFICE.length);
+  const scrollPrev = () => scrollGallery(-1);
+  const scrollNext = () => scrollGallery(1);
+  const openFirst = () => {
+    setLbOpen(true);
+    setLbIndex(0);
+  };
+
+  return (
+    <div ref={rootRef}>
+      {/* HEADER */}
+      <LotusHeader active="sobre" maxWidth={1200} whatsapp={whatsapp} />
+
+      {/* HERO */}
+      <section style={parseStyle('background:#1d3a2c;position:relative;overflow:hidden;')}>
+        <ImageSlot id="sobre-hero" src="https://lotusbrokers.github.io/allegrato-landing/gran-ville-santo-angelo/a038.jpg" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;opacity:.4;')} />
+        <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,.7),rgba(21,36,28,.92));')}></div>
+        <div style={parseStyle('position:relative;max-width:1000px;margin:0 auto;padding:120px 32px;text-align:center;')}>
+          <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#cdab6e;margin-bottom:26px;')}>A Lotus</div>
+          <h1 style={parseStyle('font-family:\'Fraunces\',serif;font-weight:300;font-size:clamp(40px,6vw,72px);line-height:1.02;letter-spacing:-.02em;color:#f7f2e8;margin:0 0 28px;')}>Quem é a Lotus.<br /><em style={parseStyle('font-style:italic;color:#cdab6e;')}>Especialistas que te chamam pelo nome.</em></h1>
+          <p style={parseStyle('font-size:clamp(17px,1.8vw,21px);color:rgba(247,242,232,.82);font-weight:300;line-height:1.55;max-width:680px;margin:0 auto;')}>Uma imobiliária de Jundiaí e Itupeva construída em torno de uma ideia simples: devolver ao cliente um corretor inteiro, presente, que conhece o bairro e leva o seu imóvel a sério como se fosse o dele.</p>
+        </div>
+      </section>
+
+      {/* MANIFESTO */}
+      <section style={parseStyle('background:#15241c;padding:110px 32px;position:relative;overflow:hidden;')}>
+        <div style={{ position: 'absolute', inset: 0, opacity: 0.05, mixBlendMode: 'overlay', pointerEvents: 'none', backgroundImage: NOISE_BG }}></div>
+        <div style={parseStyle('max-width:760px;margin:0 auto;position:relative;')}>
+          <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#b18a4a;margin-bottom:28px;text-align:center;')}>Nossa tese</div>
+          <div style={parseStyle('display:flex;flex-direction:column;gap:26px;')}>
+            <p style={parseStyle('font-family:\'Fraunces\',serif;font-weight:300;font-size:clamp(22px,2.6vw,30px);line-height:1.3;color:#f7f2e8;margin:0;text-align:center;')}>A gente cansou do corretor que some depois do "oi", do catálogo jogado no WhatsApp e do "confia em mim que vale".</p>
+            <p style={parseStyle('font-size:17px;color:rgba(247,242,232,.78);font-weight:300;line-height:1.7;margin:0;')}>Então construímos o contrário. Na Lotus você fala com um <strong style={parseStyle('color:#cdab6e;font-weight:600;')}>especialista do seu bairro</strong> — alguém que conhece a rua que pega sol da manhã, a escola que tem vaga e o preço justo daquele metro quadrado. Processo transparente, do primeiro contato ao pós-chave. Sem sumiço, sem foto torta, sem achismo.</p>
+            <p style={parseStyle('font-size:17px;color:rgba(247,242,232,.78);font-weight:300;line-height:1.7;margin:0;')}>A tecnologia está em tudo — mas nos bastidores. Ela cuida do repetitivo para que o corretor cuide do que importa: <strong style={parseStyle('color:#cdab6e;font-weight:600;')}>você</strong>. <em style={parseStyle('font-style:italic;')}>Tecnologia em tudo, corretor onde importa.</em></p>
+            <p style={parseStyle('font-family:\'Fraunces\',serif;font-style:italic;font-weight:300;font-size:clamp(22px,2.8vw,32px);line-height:1.2;color:#cdab6e;margin:14px 0 0;text-align:center;')}>Não vendemos imóvel. Somos cúmplices de capítulos.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* COMO TRABALHAMOS */}
+      <section style={parseStyle('background:#f7f2e8;padding:110px 32px;')}>
+        <div style={parseStyle('max-width:1200px;margin:0 auto;')}>
+          <div style={parseStyle('max-width:640px;margin-bottom:56px;')}>
+            <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b18a4a;margin-bottom:18px;')}>Como a gente trabalha</div>
+            <h2 style={parseStyle('font-family:\'Fraunces\',serif;font-weight:300;font-size:clamp(30px,4vw,48px);color:#15241c;line-height:1.06;letter-spacing:-.02em;margin:0;')}>Quatro promessas que a gente cumpre.</h2>
+          </div>
+          <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;')}>
+            {/* hint-placeholder-count="4" */}
+            {pilares.map((p, i) => (
+              <div key={i} style={parseStyle('background:#fff;border-radius:18px;padding:34px 30px;box-shadow:0 18px 44px -32px rgba(21,36,28,.32);')}>
+                <div style={parseStyle('font-family:\'Fraunces\',serif;font-size:38px;font-weight:300;color:#cdab6e;line-height:1;margin-bottom:18px;')}>{p.num}</div>
+                <h3 style={parseStyle('font-family:\'Fraunces\',serif;font-weight:400;font-size:21px;color:#15241c;margin:0 0 10px;')}>{p.title}</h3>
+                <p style={parseStyle('font-size:14.5px;color:#3f6249;font-weight:300;line-height:1.6;margin:0;')}>{p.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SQUADS + FUNDADOR */}
+      <section style={parseStyle('background:#ece2cf;padding:110px 32px;')}>
+        <div style={parseStyle('max-width:1200px;margin:0 auto;')}>
+          <div style={parseStyle('max-width:640px;margin-bottom:48px;')}>
+            <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b18a4a;margin-bottom:18px;')}>A equipe</div>
+            <h2 style={parseStyle('font-family:\'Fraunces\',serif;font-weight:300;font-size:clamp(30px,4vw,48px);color:#15241c;line-height:1.06;letter-spacing:-.02em;margin:0 0 16px;')}>Especialistas, não generalistas.</h2>
+            <p style={parseStyle('font-size:17px;color:#3f6249;font-weight:300;line-height:1.55;margin:0;')}>A gente organiza o time em squads — cada um domina o seu terreno. Você nunca cai no corretor que tenta dar conta de tudo.</p>
+          </div>
+          {/* fundador */}
+          <div style={parseStyle('display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;background:#1d3a2c;border-radius:22px;padding:36px;margin-bottom:24px;')}>
+            <div style={parseStyle('width:150px;height:150px;border-radius:50%;background:#3f6249;overflow:hidden;position:relative;flex-shrink:0;')}><ImageSlot id="sobre-fundador" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} /></div>
+            <div>
+              <div style={parseStyle('font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#cdab6e;margin-bottom:12px;')}>Fundador</div>
+              <h3 style={parseStyle('font-family:\'Fraunces\',serif;font-weight:400;font-size:clamp(24px,2.6vw,30px);color:#f7f2e8;margin:0 0 10px;')}>Erick Santos</h3>
+              <p style={parseStyle('font-size:15.5px;color:rgba(247,242,232,.8);font-weight:300;line-height:1.6;margin:0;max-width:620px;')}>Operador real do mercado imobiliário da região há mais de uma década. Montou a Lotus para provar uma tese simples: quando o corretor é livre do braçal, ele vira um especialista de verdade — e o cliente sente. CRECI 000000-F.</p>
+            </div>
+          </div>
+          {/* squads grid */}
+          <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:rgba(21,36,28,.12);border-radius:18px;overflow:hidden;')}>
+            {/* hint-placeholder-count="4" */}
+            {squads.map((s, i) => (
+              <div key={i} style={parseStyle('background:#f7f2e8;padding:32px 28px;')}>
+                <div style={parseStyle('font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#b18a4a;margin-bottom:12px;')}>Squad</div>
+                <h3 style={parseStyle('font-family:\'Fraunces\',serif;font-weight:400;font-size:21px;color:#15241c;margin:0 0 8px;')}>{s.title}</h3>
+                <p style={parseStyle('font-size:14px;color:#3f6249;font-weight:300;line-height:1.55;margin:0 0 16px;')}>{s.text}</p>
+                <div style={parseStyle('display:flex;align-items:center;gap:11px;border-top:1px solid rgba(21,36,28,.1);padding-top:14px;')}>
+                  <div style={parseStyle('width:38px;height:38px;border-radius:50%;background:#1d3a2c;overflow:hidden;position:relative;flex-shrink:0;')}><ImageSlot id={s.slot} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={s.broker} /></div>
+                  <div><div style={parseStyle('font-size:13.5px;font-weight:600;color:#15241c;')}>{s.broker}</div><div style={parseStyle('font-size:11.5px;color:#8aa593;')}>{s.creci}</div></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* NOSSA REGIÃO */}
+      <section style={parseStyle('background:#15241c;padding:100px 32px;position:relative;overflow:hidden;')}>
+        <div style={{ position: 'absolute', inset: 0, opacity: 0.05, mixBlendMode: 'overlay', pointerEvents: 'none', backgroundImage: NOISE_BG }}></div>
+        <div style={parseStyle('max-width:1000px;margin:0 auto;position:relative;text-align:center;')}>
+          <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#cdab6e;margin-bottom:20px;')}>Nossa região</div>
+          <h2 style={parseStyle('font-family:\'Fraunces\',serif;font-weight:300;font-size:clamp(28px,3.6vw,46px);color:#f7f2e8;line-height:1.08;letter-spacing:-.02em;margin:0 0 22px;')}>Daqui. De verdade.</h2>
+          <p style={parseStyle('font-size:17px;color:rgba(247,242,232,.78);font-weight:300;line-height:1.7;max-width:680px;margin:0 auto 36px;')}>Jundiaí e Itupeva são o nosso chão — e a gente também atende Vinhedo, Valinhos e Indaiatuba. Serra do Japi, vinhedos, condomínios e ruas arborizadas: a gente conhece a região pelo que ela tem de vivido, não só pelo que cabe num anúncio.</p>
+          <div style={parseStyle('display:flex;flex-wrap:wrap;gap:10px;justify-content:center;')}>
+            <Hoverable as="a" href="/lotus-bairro" target="_top" baseStyle={parseStyle('background:rgba(247,242,232,.1);border:1px solid rgba(247,242,232,.22);color:#f7f2e8;font-size:14px;padding:9px 18px;border-radius:30px;transition:all .2s;')} hoverStyle={parseStyle('background:rgba(247,242,232,.18);border-color:#cdab6e')}>Jundiaí</Hoverable>
+            <Hoverable as="a" href="/lotus-bairro" target="_top" baseStyle={parseStyle('background:rgba(247,242,232,.1);border:1px solid rgba(247,242,232,.22);color:#f7f2e8;font-size:14px;padding:9px 18px;border-radius:30px;transition:all .2s;')} hoverStyle={parseStyle('background:rgba(247,242,232,.18);border-color:#cdab6e')}>Itupeva</Hoverable>
+            <Hoverable as="a" href="/lotus-bairro" target="_top" baseStyle={parseStyle('background:rgba(247,242,232,.1);border:1px solid rgba(247,242,232,.22);color:#f7f2e8;font-size:14px;padding:9px 18px;border-radius:30px;transition:all .2s;')} hoverStyle={parseStyle('background:rgba(247,242,232,.18);border-color:#cdab6e')}>Vinhedo</Hoverable>
+            <Hoverable as="a" href="/lotus-bairro" target="_top" baseStyle={parseStyle('background:rgba(247,242,232,.1);border:1px solid rgba(247,242,232,.22);color:#f7f2e8;font-size:14px;padding:9px 18px;border-radius:30px;transition:all .2s;')} hoverStyle={parseStyle('background:rgba(247,242,232,.18);border-color:#cdab6e')}>Valinhos</Hoverable>
+            <Hoverable as="a" href="/lotus-bairro" target="_top" baseStyle={parseStyle('background:rgba(247,242,232,.1);border:1px solid rgba(247,242,232,.22);color:#f7f2e8;font-size:14px;padding:9px 18px;border-radius:30px;transition:all .2s;')} hoverStyle={parseStyle('background:rgba(247,242,232,.18);border-color:#cdab6e')}>Indaiatuba</Hoverable>
+          </div>
+        </div>
+      </section>
+
+      {/* PROVA / NÚMEROS */}
+      <section style={parseStyle('background:#3f6249;padding:80px 32px;')}>
+        <div data-stats="" style={parseStyle('max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;text-align:center;')}>
+          <div><div data-count="15" data-prefix="+" style={parseStyle('font-family:\'Fraunces\',serif;font-weight:300;font-size:clamp(34px,4vw,50px);color:#f7f2e8;line-height:1;')}>+15</div><div style={parseStyle('font-size:13.5px;color:rgba(247,242,232,.78);margin-top:8px;')}>anos de operação na região</div></div>
+          <div><div data-count="1200" data-prefix="+" data-sep="1" style={parseStyle('font-family:\'Fraunces\',serif;font-weight:300;font-size:clamp(34px,4vw,50px);color:#f7f2e8;line-height:1;')}>+1.200</div><div style={parseStyle('font-size:13.5px;color:rgba(247,242,232,.78);margin-top:8px;')}>famílias atendidas</div></div>
+          <div><div data-count="38" data-suffix="%" style={parseStyle('font-family:\'Fraunces\',serif;font-weight:300;font-size:clamp(34px,4vw,50px);color:#f7f2e8;line-height:1;')}>38%</div><div style={parseStyle('font-size:13.5px;color:rgba(247,242,232,.78);margin-top:8px;')}>mais rápido que a média de venda</div></div>
+          <div><div data-count="72" data-suffix=" NPS" style={parseStyle('font-family:\'Fraunces\',serif;font-weight:300;font-size:clamp(34px,4vw,50px);color:#f7f2e8;line-height:1;')}>72 NPS</div><div style={parseStyle('font-size:13.5px;color:rgba(247,242,232,.78);margin-top:8px;')}>satisfação dos clientes</div></div>
+        </div>
+      </section>
+
+      {/* GEO / FAQ */}
+      <section style={parseStyle('background:#f7f2e8;padding:100px 32px;')}>
+        <div style={parseStyle('max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:start;')}>
+          <div>
+            <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b18a4a;margin-bottom:16px;')}>Perguntas frequentes</div>
+            <h2 style={parseStyle('font-family:\'Fraunces\',serif;font-weight:300;font-size:clamp(26px,3vw,38px);color:#15241c;line-height:1.08;margin:0 0 22px;')}>Quem é a Lotus, em uma resposta.</h2>
+            <div style={parseStyle('background:#1d3a2c;border-radius:16px;padding:26px 28px;')}>
+              <div style={parseStyle('font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#cdab6e;margin-bottom:12px;')}>TL;DR</div>
+              <p style={parseStyle('font-size:15.5px;color:rgba(247,242,232,.85);font-weight:300;line-height:1.65;margin:0;')}>A Lotus Brokers é uma imobiliária moderna de Jundiaí e Itupeva, com equipe de corretores segmentada por especialidade e por bairro. Atende lançamentos e revenda com atendimento humano e processo transparente — de R$ 500 mil a R$ 5 milhões.</p>
+            </div>
+          </div>
+          <div>
+            {/* hint-placeholder-count="3" */}
+            {faqs.map((f, i) => (
+              <div key={i} style={parseStyle('border-bottom:1px solid rgba(21,36,28,.12);')}>
+                <button onClick={f.toggle} style={parseStyle('width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;background:none;border:none;cursor:pointer;padding:22px 0;text-align:left;')}>
+                  <span style={parseStyle('font-size:16.5px;font-weight:500;color:#15241c;')}>{f.q}</span>
+                  <span style={parseStyle('font-size:22px;color:#b18a4a;font-weight:300;')}>{f.sign}</span>
+                </button>
+                {f.open && (
+                  <>
+                    <p style={parseStyle('font-size:15px;color:#3f6249;font-weight:300;line-height:1.6;margin:0;padding:0 0 22px;')}>{f.a}</p>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CORRETORES */}
+      <section id="corretores" style={parseStyle('background:#f7f2e8;padding:110px 32px;')}>
+        <div style={parseStyle('max-width:1200px;margin:0 auto;')}>
+          <div style={parseStyle('display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:48px;')}>
+            <div style={parseStyle('max-width:640px;')}>
+              <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b18a4a;margin-bottom:18px;')}>Nossos corretores</div>
+              <h2 style={parseStyle('font-family:\'Fraunces\',serif;font-weight:300;font-size:clamp(30px,4vw,48px);color:#15241c;line-height:1.06;letter-spacing:-.02em;margin:0;')}>Gente que conhece cada esquina — e te chama pelo nome.</h2>
+            </div>
+            <Link href="/lotus-home#corretores" style={parseStyle('display:inline-flex;align-items:center;gap:8px;color:#1d3a2c;font-weight:600;font-size:15px;border-bottom:1.5px solid #b18a4a;padding-bottom:3px;white-space:nowrap;')}>Ver na página inicial <span>→</span></Link>
+          </div>
+          <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:22px;')}>
+            {/* hint-placeholder-count="6" */}
+            {corretores.map((c, i) => (
+              <div key={i} style={parseStyle('background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 16px 40px -32px rgba(21,36,28,.32);')}>
+                <div style={parseStyle('position:relative;aspect-ratio:1/1;background:#1d3a2c;')}><ImageSlot id={c.slot} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={c.name} /></div>
+                <div style={parseStyle('padding:18px;')}>
+                  <div style={parseStyle('font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#b18a4a;margin-bottom:7px;')}>{c.role}</div>
+                  <h3 style={parseStyle('font-family:\'Fraunces\',serif;font-weight:400;font-size:19px;color:#15241c;margin:0 0 4px;line-height:1.05;')}>{c.name}</h3>
+                  <div style={parseStyle('font-size:12px;color:#8aa593;')}>{c.creci}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* NOSSO ESCRITÓRIO + MAPA */}
+      <section style={parseStyle('background:#ece2cf;padding:110px 32px;')}>
+        <div style={parseStyle('max-width:1200px;margin:0 auto;')}>
+          <div style={parseStyle('max-width:640px;margin-bottom:48px;')}>
+            <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b18a4a;margin-bottom:18px;')}>Venha tomar um café</div>
+            <h2 style={parseStyle('font-family:\'Fraunces\',serif;font-weight:300;font-size:clamp(30px,4vw,48px);color:#15241c;line-height:1.06;letter-spacing:-.02em;margin:0 0 16px;')}>Nosso escritório em Jundiaí.</h2>
+            <p style={parseStyle('font-size:17px;color:#3f6249;font-weight:300;line-height:1.55;margin:0;')}>A porta está aberta. Passe para conhecer o time, conversar sobre o seu momento e tomar um café — sem compromisso.</p>
+          </div>
+          <div style={parseStyle('display:grid;grid-template-columns:1.15fr 1fr;gap:24px;align-items:stretch;')}>
+            {/* office photos: featured + roleta */}
+            <div style={parseStyle('display:flex;flex-direction:column;gap:12px;min-height:420px;')}>
+              <button onClick={openFirst} style={parseStyle('position:relative;flex:1;min-height:280px;border:none;padding:0;cursor:pointer;border-radius:16px;overflow:hidden;background:#1d3a2c;')}>
+                <ImageSlot id="escritorio-1" src="https://lotusbrokers.github.io/allegrato-landing/authoria/a002.jpg" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} />
+                <span style={parseStyle('position:absolute;bottom:14px;right:14px;display:inline-flex;align-items:center;gap:7px;background:rgba(21,36,28,.82);backdrop-filter:blur(4px);color:#f7f2e8;font-size:12.5px;font-weight:600;padding:8px 13px;border-radius:30px;')}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 3h6v6"></path><path d="M9 21H3v-6"></path><path d="M21 3l-7 7"></path><path d="M3 21l7-7"></path></svg>Ampliar</span>
+              </button>
+              <div style={parseStyle('position:relative;')}>
+                <button onClick={scrollPrev} aria-label="Anterior" style={parseStyle('position:absolute;top:50%;left:-6px;transform:translateY(-50%);z-index:3;width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid rgba(21,36,28,.12);color:#1d3a2c;font-size:18px;line-height:1;cursor:pointer;box-shadow:0 8px 20px -12px rgba(21,36,28,.6);')}>‹</button>
+                <div data-roleta="" ref={galleryRef} style={parseStyle('display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px;')}>
+                  {/* hint-placeholder-count="8" */}
+                  {officePhotos.map((p, i) => (
+                    <button key={i} onClick={p.open} aria-label="Ampliar foto" style={parseStyle('flex:0 0 116px;height:84px;scroll-snap-align:start;position:relative;border:none;padding:0;cursor:pointer;border-radius:11px;overflow:hidden;background:#3f6249;')}>
+                      <ImageSlot id={p.slot} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} />
+                    </button>
+                  ))}
+                </div>
+                <button onClick={scrollNext} aria-label="Próxima" style={parseStyle('position:absolute;top:50%;right:-6px;transform:translateY(-50%);z-index:3;width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid rgba(21,36,28,.12);color:#1d3a2c;font-size:18px;line-height:1;cursor:pointer;box-shadow:0 8px 20px -12px rgba(21,36,28,.6);')}>›</button>
+              </div>
+              <p style={parseStyle('font-size:12px;color:#8aa593;margin:2px 0 0;')}>Clique para ampliar · arraste a roleta para ver mais. Cada espaço aceita uma foto sua.</p>
+            </div>
+            {/* map + address */}
+            <div style={parseStyle('display:flex;flex-direction:column;gap:16px;')}>
+              <div style={parseStyle('position:relative;flex:1;min-height:280px;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 16px 40px -32px rgba(21,36,28,.4);')}>
+                <iframe title="Mapa do escritório Lotus Brokers" src="https://www.google.com/maps?q=Jundia%C3%AD,%20SP&output=embed" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;border:0;')} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+              <div style={parseStyle('background:#1d3a2c;border-radius:16px;padding:24px 26px;')}>
+                <div style={parseStyle('display:flex;align-items:flex-start;gap:12px;margin-bottom:16px;')}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#cdab6e" strokeWidth="1.8" style={parseStyle('flex-shrink:0;margin-top:2px;')}><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  <div>
+                    <div style={parseStyle('font-size:15px;font-weight:600;color:#f7f2e8;line-height:1.4;')}>Av. Antônio Frederico Ozanam, 0000</div>
+                    <div style={parseStyle('font-size:13.5px;color:rgba(247,242,232,.7);')}>Jundiaí · SP · 13200-000</div>
+                  </div>
+                </div>
+                <div style={parseStyle('display:flex;flex-wrap:wrap;gap:10px;')}>
+                  <Hoverable as="a" href="https://www.google.com/maps/search/?api=1&query=Jundia%C3%AD%20SP" target="_blank" rel="noopener" baseStyle={parseStyle('display:inline-flex;align-items:center;gap:7px;background:#b18a4a;color:#15241c;font-weight:600;font-size:13.5px;padding:10px 18px;border-radius:30px;transition:background .2s;')} hoverStyle={parseStyle('background:#cdab6e')}>Como chegar <span>→</span></Hoverable>
+                  <Hoverable as="a" href={waLink} target="_blank" rel="noopener" baseStyle={parseStyle('display:inline-flex;align-items:center;gap:7px;background:transparent;border:1px solid rgba(247,242,232,.3);color:#f7f2e8;font-weight:600;font-size:13.5px;padding:10px 18px;border-radius:30px;transition:background .2s;')} hoverStyle={parseStyle('background:rgba(247,242,232,.1)')}>Agendar visita</Hoverable>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA DUPLO */}
+      <section style={parseStyle('background:#ece2cf;padding:80px 32px;')}>
+        <div style={parseStyle('max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:24px;')}>
+          <Hoverable as="a" href="https://wa.me/5511926143393?text=Oi!%20Vim%20pelo%20site%20da%20Lotus%20e%20quero%20falar%20com%20um%20especialista%20do%20meu%20bairro." target="_blank" rel="noopener" baseStyle={parseStyle('background:#1d3a2c;border-radius:20px;padding:44px 40px;display:flex;flex-direction:column;transition:transform .3s ease;')} hoverStyle={parseStyle('transform:translateY(-4px)')}>
+            <h3 style={parseStyle('font-family:\'Fraunces\',serif;font-weight:300;font-size:clamp(24px,2.8vw,32px);color:#f7f2e8;margin:0 0 12px;line-height:1.1;')}>Quer vender com a gente?</h3>
+            <p style={parseStyle('font-size:15px;color:rgba(247,242,232,.75);font-weight:300;line-height:1.55;margin:0 0 22px;')}>Avaliação justa e um especialista do seu bairro do anúncio à chave.</p>
+            <span style={parseStyle('margin-top:auto;color:#cdab6e;font-weight:600;font-size:15px;')}>Anunciar meu imóvel →</span>
+          </Hoverable>
+          <Hoverable as="a" href="/lotus-busca" target="_top" baseStyle={parseStyle('background:#fff;border-radius:20px;padding:44px 40px;display:flex;flex-direction:column;box-shadow:0 18px 44px -32px rgba(21,36,28,.3);transition:transform .3s ease;')} hoverStyle={parseStyle('transform:translateY(-4px)')}>
+            <h3 style={parseStyle('font-family:\'Fraunces\',serif;font-weight:300;font-size:clamp(24px,2.8vw,32px);color:#15241c;margin:0 0 12px;line-height:1.1;')}>Procurando um imóvel?</h3>
+            <p style={parseStyle('font-size:15px;color:#3f6249;font-weight:300;line-height:1.55;margin:0 0 22px;')}>Comece pela conversa: descreva o que procura e a gente encontra.</p>
+            <span style={parseStyle('margin-top:auto;color:#b18a4a;font-weight:600;font-size:15px;')}>Explorar imóveis →</span>
+          </Hoverable>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer style={parseStyle('background:#15241c;padding:72px 32px 36px;position:relative;overflow:hidden;')}>
+        <div style={{ position: 'absolute', inset: 0, opacity: 0.04, mixBlendMode: 'overlay', pointerEvents: 'none', backgroundImage: NOISE_BG }}></div>
+        <div style={parseStyle('max-width:1200px;margin:0 auto;position:relative;')}>
+          <div style={parseStyle('display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;border-bottom:1px solid rgba(247,242,232,.12);')}>
+            <div>
+              <div style={parseStyle('display:flex;align-items:center;gap:12px;margin-bottom:18px;')}>
+                <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2.5C20.5 9 20.5 16 16 22.5 11.5 16 11.5 9 16 2.5Z" fill="#cdab6e"></path><path d="M27.5 8.5C22.5 11 18.2 15 16 22.5 22 21.2 26.3 16.8 27.5 8.5Z" fill="#8aa593"></path><path d="M4.5 8.5C9.5 11 13.8 15 16 22.5 10 21.2 5.7 16.8 4.5 8.5Z" fill="#cdab6e" opacity=".85"></path></svg>
+                <span style={parseStyle('font-family:\'Fraunces\',serif;font-weight:400;font-size:22px;color:#f7f2e8;')}>Lotus<span style={parseStyle('font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#cdab6e;margin-left:7px;font-family:\'Hanken Grotesk\',sans-serif;font-weight:600;vertical-align:2px;')}>Brokers</span></span>
+              </div>
+              <p style={parseStyle('font-family:\'Fraunces\',serif;font-style:italic;font-weight:300;font-size:19px;color:rgba(247,242,232,.85);line-height:1.35;max-width:300px;margin:0 0 18px;')}>O imóvel é só o palco. O cliente é a história.</p>
+              <p style={parseStyle('font-size:13.5px;color:rgba(247,242,232,.55);line-height:1.6;margin:0;')}>Imobiliária moderna de Jundiaí e Itupeva, voltada para um atendimento de excelência — interior de São Paulo.</p>
+            </div>
+            <div>
+              <div style={parseStyle('font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#cdab6e;margin-bottom:18px;')}>A Lotus</div>
+              <div style={parseStyle('display:flex;flex-direction:column;gap:12px;font-size:14.5px;color:rgba(247,242,232,.72);')}>
+                <Hoverable as="a" href="/lotus-sobre" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Sobre nós</Hoverable>
+                <Hoverable as="a" href="/lotus-corretores" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Corretores</Hoverable>
+                <Hoverable as="a" href="/lotus-recrutamento" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Seja um corretor</Hoverable>
+                <Hoverable as="a" href={waLink} target="_blank" rel="noopener" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Contato</Hoverable>
+              </div>
+            </div>
+            <div>
+              <div style={parseStyle('font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#cdab6e;margin-bottom:18px;')}>Serviços</div>
+              <div style={parseStyle('display:flex;flex-direction:column;gap:12px;font-size:14.5px;color:rgba(247,242,232,.72);')}>
+                <Hoverable as="a" href="/lotus-lancamentos" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Lançamentos</Hoverable>
+                <Hoverable as="a" href="/lotus-busca" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Comprar &amp; alugar</Hoverable>
+                <Hoverable as="a" href="/lotus-anunciar" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Anunciar imóvel</Hoverable>
+                <Hoverable as="a" href="/lotus-bairro" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Bairros</Hoverable>
+                <Hoverable as="a" href="/lotus-home#blog" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Blog</Hoverable>
+              </div>
+            </div>
+            <div>
+              <div style={parseStyle('font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#cdab6e;margin-bottom:18px;')}>Políticas</div>
+              <div style={parseStyle('display:flex;flex-direction:column;gap:12px;font-size:14.5px;color:rgba(247,242,232,.72);')}>
+                <Hoverable as="a" href="../lotus-privacidade/" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Privacidade (LGPD)</Hoverable>
+                <Hoverable as="a" href="../lotus-termos/" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Termos de uso</Hoverable>
+                <Hoverable as="a" href="../lotus-cookies/" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Cookies</Hoverable>
+              </div>
+            </div>
+          </div>
+          <div style={parseStyle('display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;padding-top:26px;font-size:13px;color:rgba(247,242,232,.5);')}>
+            <div>© 2026 Lotus Brokers · CRECI PJ 00000-J · CNPJ 00.000.000/0001-00</div>
+            <div style={parseStyle('display:flex;gap:12px;align-items:center;')}>
+              <Hoverable as="a" href="https://www.facebook.com/lotusbrokers" target="_blank" rel="noopener" aria-label="Facebook" baseStyle={parseStyle('width:40px;height:40px;border-radius:50%;border:1px solid rgba(247,242,232,.25);display:flex;align-items:center;justify-content:center;color:rgba(247,242,232,.8);transition:all .2s;')} hoverStyle={parseStyle('color:#15241c;background:#cdab6e;border-color:#cdab6e')}><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H9v3h2v7h3v-7h2.5l.5-3H14V9.5c0-.3.2-.5.5-.5H14z"></path></svg></Hoverable>
+              <Hoverable as="a" href="https://www.youtube.com/@lotusbrokers" target="_blank" rel="noopener" aria-label="YouTube" baseStyle={parseStyle('width:40px;height:40px;border-radius:50%;border:1px solid rgba(247,242,232,.25);display:flex;align-items:center;justify-content:center;color:rgba(247,242,232,.8);transition:all .2s;')} hoverStyle={parseStyle('color:#15241c;background:#cdab6e;border-color:#cdab6e')}><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12s0-3-.4-4.3a2.6 2.6 0 0 0-1.8-1.9C18 5.4 12 5.4 12 5.4s-6 0-7.8.4A2.6 2.6 0 0 0 2.4 7.7C2 9 2 12 2 12s0 3 .4 4.3a2.6 2.6 0 0 0 1.8 1.9c1.8.4 7.8.4 7.8.4s6 0 7.8-.4a2.6 2.6 0 0 0 1.8-1.9C22 15 22 12 22 12zm-12 2.6V9.4l5 2.6-5 2.6z"></path></svg></Hoverable>
+              <Hoverable as="a" href="https://www.instagram.com/lotusbrokers" target="_blank" rel="noopener" aria-label="Instagram" baseStyle={parseStyle('width:40px;height:40px;border-radius:50%;border:1px solid rgba(247,242,232,.25);display:flex;align-items:center;justify-content:center;color:rgba(247,242,232,.8);transition:all .2s;')} hoverStyle={parseStyle('color:#15241c;background:#cdab6e;border-color:#cdab6e')}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"></circle></svg></Hoverable>
+              <Hoverable as="a" href="https://www.tiktok.com/@lotusbrokers" target="_blank" rel="noopener" aria-label="TikTok" baseStyle={parseStyle('width:40px;height:40px;border-radius:50%;border:1px solid rgba(247,242,232,.25);display:flex;align-items:center;justify-content:center;color:rgba(247,242,232,.8);transition:all .2s;')} hoverStyle={parseStyle('color:#15241c;background:#cdab6e;border-color:#cdab6e')}><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 3c.3 2.1 1.5 3.6 3.5 3.9v2.6c-1.3.1-2.5-.3-3.5-1v5.8c0 3.3-2.4 5.7-5.5 5.7A5.4 5.4 0 0 1 5 14.7c0-3 2.3-5.3 5.4-5.1v2.7c-.4-.1-.8-.2-1.2-.1-1.3.2-2.1 1.2-2 2.6.1 1.3 1.1 2.1 2.4 2 .1 0 .2 0 .3-.1 1.1-.3 1.6-1.1 1.6-2.4V3H16z"></path></svg></Hoverable>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {/* LIGHTBOX (fotos do escritório) */}
+      {lbOpen && (
+        <>
+          <div style={parseStyle('position:fixed;inset:0;z-index:100;background:rgba(10,18,14,.94);display:flex;align-items:center;justify-content:center;')}>
+            <button onClick={closeLb} aria-label="Fechar" style={parseStyle('position:absolute;top:22px;right:24px;width:44px;height:44px;border-radius:50%;background:rgba(247,242,232,.14);border:none;color:#f7f2e8;font-size:24px;cursor:pointer;')}>✕</button>
+            <button onClick={prevLb} aria-label="Anterior" style={parseStyle('position:absolute;left:24px;top:50%;transform:translateY(-50%);width:50px;height:50px;border-radius:50%;background:rgba(247,242,232,.14);border:none;color:#f7f2e8;font-size:26px;cursor:pointer;')}>‹</button>
+            <button onClick={nextLb} aria-label="Próxima" style={parseStyle('position:absolute;right:24px;top:50%;transform:translateY(-50%);width:50px;height:50px;border-radius:50%;background:rgba(247,242,232,.14);border:none;color:#f7f2e8;font-size:26px;cursor:pointer;')}>›</button>
+            <div style={parseStyle('width:min(88vw,1100px);aspect-ratio:3/2;position:relative;border-radius:12px;overflow:hidden;')}>
+              {/* hint-placeholder-count="8" */}
+              {lightboxView.map((p, i) => (
+                <div key={i} style={parseStyle(p.style)}><ImageSlot id={p.slot} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} /></div>
+              ))}
+            </div>
+            <div style={parseStyle('position:absolute;bottom:26px;left:50%;transform:translateX(-50%);background:rgba(247,242,232,.14);color:#f7f2e8;font-size:13px;padding:7px 16px;border-radius:30px;')}>{lbCounter}</div>
+          </div>
+        </>
+      )}
+
+      {/* WHATSAPP FLOAT */}
+      <a href={waLink} target="_blank" rel="noopener" aria-label="WhatsApp" style={parseStyle('position:fixed;right:22px;bottom:22px;z-index:75;width:54px;height:54px;border-radius:50%;background:#25543b;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 34px -10px rgba(21,36,28,.6);')}>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="#f7f2e8"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.6-2.7-1.2-4.4-3.9-4.6-4.1-.1-.2-1-1.4-1-2.6 0-1.2.6-1.8.9-2.1.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.3.4c-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.4.1.6-.1l.8-.9c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.6-.1 1.2Z"></path></svg>
+      </a>
+    </div>
+  );
+}
