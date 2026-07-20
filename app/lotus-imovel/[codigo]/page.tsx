@@ -3,22 +3,19 @@ import { notFound } from 'next/navigation';
 import LotusImovel from '@/components/LotusImovel';
 import {
   getImovel,
-  getImovelCodigos,
   getImoveisCards,
   type ImovelRow,
 } from '@/lib/imoveis';
 
 // Rota dinâmica /lotus-imovel/[codigo] — lê cada imóvel do Supabase.
-// ISR: revalida a cada 1h (alinhado ao Data Cache do supabase.ts).
+// ISR sob demanda: a página é renderizada no primeiro acesso (em runtime, onde
+// as env vars do Supabase existem) e cacheada por 1h. Não pré-renderizamos no
+// build (`generateStaticParams`) porque o ambiente de build não recebe as env
+// vars do Supabase, e os dados mudam com frequência — prerender de tudo no build
+// não agrega aqui.
 export const revalidate = 3600;
 
 const SITE = 'https://www.lotusbrokers.com.br';
-
-// Prerender de todos os imóveis publicados no build (SSG + ISR).
-export async function generateStaticParams() {
-  const codigos = await getImovelCodigos();
-  return codigos.map((codigo) => ({ codigo }));
-}
 
 type Params = { params: Promise<{ codigo: string }> };
 
