@@ -7,7 +7,6 @@ const nextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 'octodash-octo-dash.fltgo5.easypanel.host' },
       { protocol: 'https', hostname: 'glbtwvusiaaovllxhiig.supabase.co' },
-      { protocol: 'https', hostname: 'lotusbrokers.github.io' },
       { protocol: 'https', hostname: 'i.postimg.cc' },
       { protocol: 'https', hostname: 'vvcconstrutora.com.br' },
     ],

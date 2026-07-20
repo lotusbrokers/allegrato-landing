@@ -159,7 +159,7 @@ type Post = {
 
 const POSTS: Post[] = [
   {
-    id: 'p1', cat: 'Mercado', date: 'Jun 2026', read: '7 min', img: 'https://lotusbrokers.github.io/allegrato-landing/forest-houses/a000.jpg', slot: 'blog-p1', title: 'Onde morar em Jundiaí em 2026: 5 bairros em ascensão', excerpt: 'A cidade cresce para além do centro. Veja os bairros que combinam infraestrutura, verde e valorização.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'p1', cat: 'Mercado', date: 'Jun 2026', read: '7 min', img: '/forest-houses/a000.jpg', slot: 'blog-p1', title: 'Onde morar em Jundiaí em 2026: 5 bairros em ascensão', excerpt: 'A cidade cresce para além do centro. Veja os bairros que combinam infraestrutura, verde e valorização.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'Eloy Chaves, Medeiros, Malota, Jardim do Lago e a região do Engordadouro combinam infraestrutura consolidada, áreas verdes e procura crescente — e concentram boa parte das buscas por imóveis em Jundiaí em 2026.',
     body: [
       'Jundiaí sempre foi uma cidade de bairros fortes — cada um com identidade própria. Mas nos últimos anos, alguns deles passaram a concentrar a atenção de quem busca qualidade de vida sem abrir mão de estar perto de tudo.',
@@ -170,7 +170,7 @@ const POSTS: Post[] = [
     ],
   },
   {
-    id: 'p2', cat: 'Guia', date: 'Jun 2026', read: '6 min', img: 'https://lotusbrokers.github.io/allegrato-landing/auten-jundiai/a000.jpg', slot: 'blog-p2', title: 'Financiamento em 2026: o que muda e como se preparar', excerpt: 'Taxas, documentação e o passo a passo para chegar ao banco com aprovação quase garantida.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'p2', cat: 'Guia', date: 'Jun 2026', read: '6 min', img: '/auten-jundiai/a000.jpg', slot: 'blog-p2', title: 'Financiamento em 2026: o que muda e como se preparar', excerpt: 'Taxas, documentação e o passo a passo para chegar ao banco com aprovação quase garantida.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'Para financiar bem em 2026: organize a documentação de renda, cuide do score, compare bancos (as taxas variam mais do que parece) e faça a pré-aprovação antes de escolher o imóvel.',
     body: [
       'A pergunta mais comum de quem quer comprar o primeiro imóvel continua sendo a mesma: "será que o banco aprova?". A boa notícia é que a aprovação depende menos de sorte e mais de preparo.',
@@ -181,7 +181,7 @@ const POSTS: Post[] = [
     ],
   },
   {
-    id: 'p3', cat: 'Região', date: 'Mai 2026', read: '5 min', img: 'https://lotusbrokers.github.io/allegrato-landing/terrace-serra-do-japi/a000.jpg', slot: 'blog-p3', title: 'Serra do Japi: o que ter a serra por perto muda no seu dia', excerpt: 'Mais que paisagem: como a reserva influencia clima, lazer e valorização dos bairros vizinhos.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'p3', cat: 'Região', date: 'Mai 2026', read: '5 min', img: '/terrace-serra-do-japi/a000.jpg', slot: 'blog-p3', title: 'Serra do Japi: o que ter a serra por perto muda no seu dia', excerpt: 'Mais que paisagem: como a reserva influencia clima, lazer e valorização dos bairros vizinhos.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'A Serra do Japi é uma das maiores reservas de mata atlântica do interior paulista. Morar perto dela significa clima mais ameno, trilhas e lazer de fim de semana — e bairros vizinhos historicamente mais valorizados.',
     body: [
       'Quem mora em Jundiaí fala da Serra do Japi com a naturalidade de quem fala de um vizinho querido. Mas o impacto dela no dia a dia vai muito além da vista bonita.',
@@ -191,7 +191,7 @@ const POSTS: Post[] = [
     ],
   },
   {
-    id: 'p4', cat: 'Cidade', date: 'Mai 2026', read: '4 min', img: 'https://lotusbrokers.github.io/allegrato-landing/gran-ville-santo-angelo/a000.jpg', slot: 'blog-p4', title: 'Itupeva em crescimento: por que a cidade atrai novas famílias', excerpt: 'Condomínios, indústria e a serra ao lado: o retrato de uma das cidades que mais crescem na região.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'p4', cat: 'Cidade', date: 'Mai 2026', read: '4 min', img: '/gran-ville-santo-angelo/a000.jpg', slot: 'blog-p4', title: 'Itupeva em crescimento: por que a cidade atrai novas famílias', excerpt: 'Condomínios, indústria e a serra ao lado: o retrato de uma das cidades que mais crescem na região.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'Itupeva cresce puxada por condomínios de casas, novos empregos e preço mais acessível que o de Jundiaí, mantendo acesso rápido à Anhanguera — perfil ideal para famílias que querem espaço.',
     body: [
       'Itupeva vive um momento raro: cresce em população, em empregos e em infraestrutura ao mesmo tempo — sem perder o jeito de cidade tranquila.',
@@ -201,7 +201,7 @@ const POSTS: Post[] = [
     ],
   },
   {
-    id: 'p5', cat: 'Guia', date: 'Abr 2026', read: '5 min', img: 'https://lotusbrokers.github.io/allegrato-landing/vistta-castanho/a000.jpg', slot: 'blog-p5', title: 'Vender um imóvel: os 5 erros que mais atrasam a venda', excerpt: 'Do preço errado à foto escura — o que segura um imóvel no mercado e como evitar.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'p5', cat: 'Guia', date: 'Abr 2026', read: '5 min', img: '/vistta-castanho/a000.jpg', slot: 'blog-p5', title: 'Vender um imóvel: os 5 erros que mais atrasam a venda', excerpt: 'Do preço errado à foto escura — o que segura um imóvel no mercado e como evitar.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'Os erros que mais atrasam uma venda: preço fora do mercado, fotos ruins, anúncio genérico, visitas sem filtro e documentação desorganizada. Todos têm solução — e ela começa pela avaliação correta.',
     body: [
       'Um imóvel que demora para vender quase nunca tem um problema — tem um conjunto de pequenos erros que se somam.',
@@ -212,7 +212,7 @@ const POSTS: Post[] = [
     ],
   },
   {
-    id: 'p6', cat: 'Mercado', date: 'Abr 2026', read: '6 min', img: 'https://lotusbrokers.github.io/allegrato-landing/vigore/a00.jpg', slot: 'blog-p6', title: 'Comprar na planta ou pronto: qual faz mais sentido pra você', excerpt: 'Preço, prazo, personalização e risco — a comparação honesta entre os dois caminhos.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'p6', cat: 'Mercado', date: 'Abr 2026', read: '6 min', img: '/vigore/a00.jpg', slot: 'blog-p6', title: 'Comprar na planta ou pronto: qual faz mais sentido pra você', excerpt: 'Preço, prazo, personalização e risco — a comparação honesta entre os dois caminhos.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'Na planta: melhor preço de entrada, pagamento diluído e valorização até a chave — mas exige esperar a obra. Pronto: mudança imediata e o que você vê é o que você leva — mas o preço já embute a valorização. A escolha depende do seu prazo e momento.',
     body: [
       'É uma das dúvidas mais comuns de quem chega até a gente: "compro na planta ou um imóvel pronto?". A resposta certa depende de uma pergunta anterior: quando você precisa morar?',

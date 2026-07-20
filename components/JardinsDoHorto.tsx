@@ -111,7 +111,7 @@ function FocusInput({
 /* ------------------------------------------------------------------ */
 
 // Base das imagens: mesmo repo, servido via GitHub Pages (padrão das landings).
-const IMG = 'https://lotusbrokers.github.io/allegrato-landing/jardins-do-horto/';
+const IMG = '/jardins-do-horto/';
 
 // gallery: no estático, o script resolve g.img via window.__resources (aNNN.jpg),
 // aplicado já no componentDidMount. Aqui usamos os valores já resolvidos.

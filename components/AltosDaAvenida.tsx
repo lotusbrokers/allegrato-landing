@@ -117,7 +117,7 @@ function Focusable<T extends keyof React.JSX.IntrinsicElements = 'input'>({
 /* ------------------------------------------------------------------ */
 
 // Base dos assets: hospedados no GitHub Pages (mesma origem do estático).
-const A = 'https://lotusbrokers.github.io/allegrato-landing/altos-da-avenida/';
+const A = '/altos-da-avenida/';
 
 const WHATSAPP_DEFAULT = '5511926143393';
 const PHONE_DISPLAY_DEFAULT = '(11) 92614-3393';

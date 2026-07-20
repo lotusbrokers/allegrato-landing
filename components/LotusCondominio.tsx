@@ -256,10 +256,10 @@ function buildGuide(data: CondominioRow) {
 // (títulos/preços neutros, sem cravar dados de um imóvel específico).
 // ponytail: vitrine estática; trocar por busca real de imóveis do condomínio quando existir a lib.
 const imoveis = [
-  { slot: 'cond-im-1', img: 'https://lotusbrokers.github.io/allegrato-landing/forest-houses/a002.jpg', tag: 'Revenda', title: 'Casa à venda', specs: 'Consulte metragem e vagas' },
-  { slot: 'cond-im-2', img: 'https://lotusbrokers.github.io/allegrato-landing/vistta-castanho/a007.jpg', tag: 'Revenda', title: 'Apartamento à venda', specs: 'Consulte metragem e vagas' },
-  { slot: 'cond-im-3', img: 'https://lotusbrokers.github.io/allegrato-landing/gran-ville-santo-angelo/a038.jpg', tag: 'Revenda', title: 'Unidade disponível', specs: 'Consulte metragem e vagas' },
-  { slot: 'cond-im-4', img: 'https://lotusbrokers.github.io/allegrato-landing/auten-jundiai/a023.jpg', tag: 'Lançamento', title: 'Unidade disponível', specs: 'Consulte metragem e vagas' },
+  { slot: 'cond-im-1', img: '/forest-houses/a002.jpg', tag: 'Revenda', title: 'Casa à venda', specs: 'Consulte metragem e vagas' },
+  { slot: 'cond-im-2', img: '/vistta-castanho/a007.jpg', tag: 'Revenda', title: 'Apartamento à venda', specs: 'Consulte metragem e vagas' },
+  { slot: 'cond-im-3', img: '/gran-ville-santo-angelo/a038.jpg', tag: 'Revenda', title: 'Unidade disponível', specs: 'Consulte metragem e vagas' },
+  { slot: 'cond-im-4', img: '/auten-jundiai/a023.jpg', tag: 'Lançamento', title: 'Unidade disponível', specs: 'Consulte metragem e vagas' },
 ];
 
 /* ------------------------------------------------------------------ */

@@ -329,7 +329,7 @@ export default function LotusSobre({
 
       {/* HERO */}
       <section style={parseStyle('background:#1d3a2c;position:relative;overflow:hidden;')}>
-        <ImageSlot id="sobre-hero" src="https://lotusbrokers.github.io/allegrato-landing/gran-ville-santo-angelo/a038.jpg" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;opacity:.4;')} />
+        <ImageSlot id="sobre-hero" src="/gran-ville-santo-angelo/a038.jpg" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;opacity:.4;')} />
         <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,.7),rgba(21,36,28,.92));')}></div>
         <div style={parseStyle('position:relative;max-width:1000px;margin:0 auto;padding:120px 32px;text-align:center;')}>
           <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#cdab6e;margin-bottom:26px;')}>A Lotus</div>
@@ -502,7 +502,7 @@ export default function LotusSobre({
             {/* office photos: featured + roleta */}
             <div style={parseStyle('display:flex;flex-direction:column;gap:12px;min-height:420px;')}>
               <button onClick={openFirst} style={parseStyle('position:relative;flex:1;min-height:280px;border:none;padding:0;cursor:pointer;border-radius:16px;overflow:hidden;background:#1d3a2c;')}>
-                <ImageSlot id="escritorio-1" src="https://lotusbrokers.github.io/allegrato-landing/authoria/a002.jpg" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} />
+                <ImageSlot id="escritorio-1" src="/authoria/a002.jpg" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} />
                 <span style={parseStyle('position:absolute;bottom:14px;right:14px;display:inline-flex;align-items:center;gap:7px;background:rgba(21,36,28,.82);backdrop-filter:blur(4px);color:#f7f2e8;font-size:12.5px;font-weight:600;padding:8px 13px;border-radius:30px;')}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 3h6v6"></path><path d="M9 21H3v-6"></path><path d="M21 3l-7 7"></path><path d="M3 21l7-7"></path></svg>Ampliar</span>
               </button>
               <div style={parseStyle('position:relative;')}>

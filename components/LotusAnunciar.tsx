@@ -385,7 +385,7 @@ export default function LotusAnunciar({
 
       {/* HERO + WIDGET */}
       <section id="topo" style={parseStyle('background:#1d3a2c;position:relative;overflow:hidden;scroll-margin-top:70px;')}>
-        <ImageSlot id="anunciar-hero" src="https://lotusbrokers.github.io/allegrato-landing/avela/a007.jpg" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;opacity:.28;')} alt="Foto de casa / proprietário" />
+        <ImageSlot id="anunciar-hero" src="/avela/a007.jpg" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;opacity:.28;')} alt="Foto de casa / proprietário" />
         <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(120deg,rgba(21,36,28,.96) 0%,rgba(21,36,28,.82) 50%,rgba(21,36,28,.7) 100%);')}></div>
         <div style={parseStyle('position:relative;max-width:1200px;margin:0 auto;padding:80px 32px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;')}>
           <div>

@@ -119,7 +119,7 @@ function FocusableInput({ baseStyle, focusStyle, ...rest }: FocusableInputProps)
 /* ------------------------------------------------------------------ */
 
 // Base CDN dos assets locais aNN.* (mesma usada pelas outras landings — padrão avela).
-const IMG = 'https://lotusbrokers.github.io/allegrato-landing/vigore/';
+const IMG = '/vigore/';
 
 const LOGO_WEBP =
   'https://static.wixstatic.com/media/72b66e_7ce953d96f414a579806196cd13fa852~mv2.webp';

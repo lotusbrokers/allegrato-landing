@@ -37,13 +37,13 @@ export const empsFallback: EmpItem[] = [
 // IMG do renderVals estático (id -> imagem). Os itens de fallback resolvem a
 // imagem por este map; itens dinâmicos do Supabase já trazem `img` próprio.
 export const EMP_IMG: Record<string, string> = {
-  allegrato: 'https://lotusbrokers.github.io/allegrato-landing/assets/a09.jpg',
-  jardins: 'https://lotusbrokers.github.io/allegrato-landing/jardins-do-horto/a004.jpg',
-  vigore: 'https://lotusbrokers.github.io/allegrato-landing/vigore/a18.jpg',
-  terrace: 'https://lotusbrokers.github.io/allegrato-landing/terrace-serra-do-japi/a026.jpg',
-  doppio: 'https://lotusbrokers.github.io/allegrato-landing/assets/doppio-capa.jpg',
-  reserva: 'https://lotusbrokers.github.io/allegrato-landing/vistta-castanho/a007.jpg',
-  vivarte: 'https://lotusbrokers.github.io/allegrato-landing/vivarte/a003.jpg',
-  forest: 'https://lotusbrokers.github.io/allegrato-landing/forest-houses/a002.jpg',
-  gran: 'https://lotusbrokers.github.io/allegrato-landing/gran-ville-santo-angelo/a038.jpg',
+  allegrato: '/assets/a09.jpg',
+  jardins: '/jardins-do-horto/a004.jpg',
+  vigore: '/vigore/a18.jpg',
+  terrace: '/terrace-serra-do-japi/a026.jpg',
+  doppio: '/assets/doppio-capa.jpg',
+  reserva: '/vistta-castanho/a007.jpg',
+  vivarte: '/vivarte/a003.jpg',
+  forest: '/forest-houses/a002.jpg',
+  gran: '/gran-ville-santo-angelo/a038.jpg',
 };

@@ -193,10 +193,10 @@ const guide = [
 ];
 
 const imoveis = [
-  { slot: 'b-im-1', img: 'https://lotusbrokers.github.io/allegrato-landing/forest-houses/a002.jpg', tag: 'Revenda', price: 'R$ 2.450.000', title: 'Casa de 4 suítes', specs: '320 m² · 4 vagas' },
-  { slot: 'b-im-2', img: 'https://lotusbrokers.github.io/allegrato-landing/jardins-do-horto/a004.jpg', tag: 'Lançamento', price: 'R$ 1.200.000', title: 'Jardins do Horto', specs: '3 suítes · 105–140 m²' },
-  { slot: 'b-im-3', img: 'https://lotusbrokers.github.io/allegrato-landing/vivarte/a003.jpg', tag: 'Revenda', price: 'R$ 850.000', title: 'Apartamento 3 dorms', specs: '110 m² · 2 vagas' },
-  { slot: 'b-im-4', img: 'https://lotusbrokers.github.io/allegrato-landing/altos-da-avenida/a005.png', tag: 'Revenda', price: 'R$ 1.380.000', title: 'Casa térrea', specs: '210 m² · 3 vagas' },
+  { slot: 'b-im-1', img: '/forest-houses/a002.jpg', tag: 'Revenda', price: 'R$ 2.450.000', title: 'Casa de 4 suítes', specs: '320 m² · 4 vagas' },
+  { slot: 'b-im-2', img: '/jardins-do-horto/a004.jpg', tag: 'Lançamento', price: 'R$ 1.200.000', title: 'Jardins do Horto', specs: '3 suítes · 105–140 m²' },
+  { slot: 'b-im-3', img: '/vivarte/a003.jpg', tag: 'Revenda', price: 'R$ 850.000', title: 'Apartamento 3 dorms', specs: '110 m² · 2 vagas' },
+  { slot: 'b-im-4', img: '/altos-da-avenida/a005.png', tag: 'Revenda', price: 'R$ 1.380.000', title: 'Casa térrea', specs: '210 m² · 3 vagas' },
 ];
 
 const vizinhos = [
@@ -207,9 +207,9 @@ const vizinhos = [
 ];
 
 const posts = [
-  { slot: 'b-post-1', img: 'https://lotusbrokers.github.io/allegrato-landing/vistta-castanho/a007.jpg', cat: 'Cidade', title: 'Onde morar em Jundiaí em 2026: 5 bairros em ascensão' },
-  { slot: 'b-post-2', img: 'https://lotusbrokers.github.io/allegrato-landing/terrace-serra-do-japi/a026.jpg', cat: 'Mercado', title: 'Quanto custa o m² em cada bairro de Jundiaí' },
-  { slot: 'b-post-3', img: 'https://lotusbrokers.github.io/allegrato-landing/gran-ville-santo-angelo/a038.jpg', cat: 'Região', title: 'Serra do Japi: o que ter por perto muda no seu dia' },
+  { slot: 'b-post-1', img: '/vistta-castanho/a007.jpg', cat: 'Cidade', title: 'Onde morar em Jundiaí em 2026: 5 bairros em ascensão' },
+  { slot: 'b-post-2', img: '/terrace-serra-do-japi/a026.jpg', cat: 'Mercado', title: 'Quanto custa o m² em cada bairro de Jundiaí' },
+  { slot: 'b-post-3', img: '/gran-ville-santo-angelo/a038.jpg', cat: 'Região', title: 'Serra do Japi: o que ter por perto muda no seu dia' },
 ];
 
 /* ------------------------------------------------------------------ */
