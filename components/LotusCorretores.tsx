@@ -215,6 +215,11 @@ function formatCreci(creci: string | null): string {
   return /creci/i.test(c) ? c : 'CRECI ' + c;
 }
 
+// "1 imóvel ativo" / "N imóveis ativos".
+function imoveisAtivosLabel(n: number): string {
+  return n === 1 ? '1 imóvel ativo' : `${n} imóveis ativos`;
+}
+
 function realToBroker(b: {
   id: string;
   name: string;
@@ -454,7 +459,7 @@ export default function LotusCorretores({
                         <div style={parseStyle('font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#b18a4a;margin-bottom:7px;')}>{b.squad}</div>
                         <h3 style={parseStyle("font-family:'Fraunces',serif;font-weight:400;font-size:20px;color:#15241c;margin:0 0 4px;line-height:1.05;")}>{b.name}</h3>
                         <div style={parseStyle('font-size:13px;color:#3f6249;')}>Especialista em {b.area}</div>
-                        <div style={parseStyle('font-size:12px;color:#8aa593;margin-top:4px;')}>{b.creci} · {b.active} imóveis ativos</div>
+                        <div style={parseStyle('font-size:12px;color:#8aa593;margin-top:4px;')}>{b.creci} · {imoveisAtivosLabel(b.active)}</div>
                         <div style={parseStyle('display:flex;gap:8px;margin-top:16px;')}>
                           <Hoverable as="button" onClick={() => openBroker(b.id)} baseStyle={parseStyle('flex:1;background:#1d3a2c;color:#f7f2e8;font-weight:600;font-size:13px;padding:10px;border:none;border-radius:9px;cursor:pointer;transition:background .2s;')} hoverStyle={parseStyle('background:#15241c')}>Ver perfil</Hoverable>
                           <a href={wa} target="_blank" rel="noopener" aria-label="WhatsApp" style={parseStyle('flex-shrink:0;width:40px;background:#25543b;border-radius:9px;display:flex;align-items:center;justify-content:center;')}><svg width="18" height="18" viewBox="0 0 24 24" fill="#f7f2e8"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Z"></path></svg></a>
@@ -539,7 +544,7 @@ export default function LotusCorretores({
                 <span style={parseStyle('font-size:14.5px;color:#3f6249;')}>{sel.creci}</span>
                 <span style={parseStyle('display:inline-flex;align-items:center;gap:5px;font-size:14px;font-weight:600;color:#15241c;')}><span style={parseStyle('color:#b18a4a;')}>★</span>{sel.rating} <span style={parseStyle('color:#8aa593;font-weight:400;')}>({sel.reviews} avaliações)</span></span>
               </div>
-              <p style={parseStyle('font-size:15.5px;color:#3f6249;font-weight:300;line-height:1.55;margin:0 0 22px;')}>Especialista em <strong style={parseStyle('color:#15241c;font-weight:600;')}>{sel.area}</strong> · {sel.city} · {sel.active} imóveis ativos.</p>
+              <p style={parseStyle('font-size:15.5px;color:#3f6249;font-weight:300;line-height:1.55;margin:0 0 22px;')}>Especialista em <strong style={parseStyle('color:#15241c;font-weight:600;')}>{sel.area}</strong> · {sel.city} · {imoveisAtivosLabel(sel.active)}.</p>
               <div style={parseStyle('display:flex;flex-wrap:wrap;gap:10px;')}>
                 <a href={sel.wa} target="_blank" rel="noopener" style={parseStyle('display:inline-flex;align-items:center;gap:8px;background:#25543b;color:#f7f2e8;font-weight:600;font-size:14.5px;padding:13px 22px;border-radius:11px;')}><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Z"></path></svg>Falar no WhatsApp</a>
                 <Hoverable as="a" href="#agenda" baseStyle={parseStyle('display:inline-flex;align-items:center;gap:8px;background:#b18a4a;color:#15241c;font-weight:600;font-size:14.5px;padding:13px 22px;border-radius:11px;transition:background .2s;')} hoverStyle={parseStyle('background:#cdab6e')}>Agendar conversa</Hoverable>
