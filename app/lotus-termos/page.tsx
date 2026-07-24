@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { footerLegalLine } from '@/lib/site';
 
 // Metadata portado do <head> do fonte estático (lotus-termos/index.html).
 // TODO go-live: trocar canonical/og:url para o domínio final e remover noindex.
@@ -137,7 +138,7 @@ export default function LotusTermosPage() {
       <footer>
         <div className="fbar">
           <div>
-            © 2026 Lotus Brokers · CRECI PJ 00000-J · CNPJ 00.000.000/0001-00
+            {footerLegalLine()}
           </div>
           <div style={{ display: 'flex', gap: 16 }}>
             <a href="../lotus-privacidade/">Privacidade</a>

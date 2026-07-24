@@ -1,4 +1,5 @@
 'use client';
+import { footerLegalLine } from '@/lib/site';
 
 /**
  * LotusCorretores — porte 1:1 de lotus-corretores/index.html (mecanismo dc-runtime) para React.
@@ -96,17 +97,31 @@ function Hoverable<T extends keyof React.JSX.IntrinsicElements = 'div'>({
  * src, a imagem cobrindo (object-fit:cover). Sem src => só o gradiente.
  * Gradiente idêntico ao do estático: linear-gradient(135deg,#1d3a2c,#3f6249).
  */
+/** Iniciais (até 2) a partir do nome — fallback de avatar quando não há foto. */
+function initialsOf(name?: string): string {
+  if (!name) return '';
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return '';
+  const first = parts[0][0] ?? '';
+  const last = parts.length > 1 ? parts[parts.length - 1][0] ?? '' : '';
+  return (first + last).toUpperCase();
+}
+
 function ImageSlot({
   src,
   id,
   style,
   alt = '',
+  initials,
 }: {
   src?: string;
   id?: string;
   style?: CSSProperties;
   alt?: string;
+  /** Nome para gerar iniciais quando não há `src` (avatar-fallback). */
+  initials?: string;
 }) {
+  const fallbackInitials = !src ? initialsOf(initials) : '';
   return (
     <div
       id={id}
@@ -116,7 +131,7 @@ function ImageSlot({
         ...style,
       }}
     >
-      {src && (
+      {src ? (
         <img
           src={src}
           alt={alt}
@@ -128,6 +143,26 @@ function ImageSlot({
             objectFit: 'cover',
           }}
         />
+      ) : (
+        fallbackInitials && (
+          <span
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'rgba(247,242,232,.9)',
+              fontFamily: "'Fraunces',serif",
+              fontWeight: 400,
+              fontSize: 'clamp(15px, 42%, 40px)',
+              letterSpacing: '.02em',
+            }}
+          >
+            {fallbackInitials}
+          </span>
+        )
       )}
     </div>
   );
@@ -153,9 +188,13 @@ type Broker = {
   active: number;
   founder?: boolean;
   slot: string;
+  /** Foto real (portal_brokers.photo_url). Sem foto => avatar de iniciais. */
+  photoUrl?: string | null;
 };
 
-const BROKERS: Broker[] = [
+// Dados demo — usados só quando a página é renderizada sem brokers do banco
+// (fallback de compat). Em produção os corretores vêm de getBrokers().
+const BROKERS_FALLBACK: Broker[] = [
   { id: 'erick', name: 'Erick Santos', first: 'Erick', squad: 'Alto Padrão', area: 'Jundiaí', city: 'Jundiaí', creci: 'CRECI 000000-F', rating: '5,0', reviews: 64, active: 12, founder: true, slot: 'c-erick' },
   { id: 'marina', name: 'Marina Tavares', first: 'Marina', squad: 'Alto Padrão', area: 'Eloy Chaves', city: 'Jundiaí', creci: 'CRECI 000001-F', rating: '5,0', reviews: 48, active: 9, slot: 'c-marina' },
   { id: 'rafael', name: 'Rafael Nunes', first: 'Rafael', squad: 'Lançamentos', area: 'Itupeva', city: 'Itupeva', creci: 'CRECI 000002-F', rating: '4,9', reviews: 37, active: 15, slot: 'c-rafael' },
@@ -165,6 +204,38 @@ const BROKERS: Broker[] = [
   { id: 'thiago', name: 'Thiago Berto', first: 'Thiago', squad: 'Alto Padrão', area: 'Malota', city: 'Jundiaí', creci: 'CRECI 000006-F', rating: '4,9', reviews: 41, active: 8, slot: 'c-thiago' },
   { id: 'carol', name: 'Carolina Reis', first: 'Carolina', squad: 'Popular', area: 'Anhangabaú', city: 'Jundiaí', creci: 'CRECI 000007-F', rating: '4,8', reviews: 45, active: 16, slot: 'c-carol' },
 ];
+
+// Campos que ainda não existem em tenant_brokers ficam com placeholder até
+// virem do banco (squad/area/creci/rating/reviews/active). Ver decisão de
+// escopo: nome+foto reais, resto placeholder.
+// CRECI real (só o número no banco) -> "CRECI <n>". Sem valor => placeholder.
+function formatCreci(creci: string | null): string {
+  const c = (creci ?? '').trim();
+  if (!c) return 'CRECI —';
+  return /creci/i.test(c) ? c : 'CRECI ' + c;
+}
+
+function realToBroker(b: {
+  id: string;
+  name: string;
+  photoUrl: string | null;
+  creci: string | null;
+}): Broker {
+  return {
+    id: b.id,
+    name: b.name,
+    first: b.name.trim().split(/\s+/)[0] || b.name,
+    squad: 'Especialista',
+    area: 'Jundiaí e Itupeva',
+    city: 'Jundiaí',
+    creci: formatCreci(b.creci),
+    rating: '5,0',
+    reviews: 0,
+    active: 0,
+    slot: 'c-' + b.id,
+    photoUrl: b.photoUrl,
+  };
+}
 
 const galleryData = [
   { slot: 'gal-1', tag: 'Equipe', label: 'Nosso time completo, 2026' },
@@ -190,9 +261,16 @@ function bioFor(b: Broker): string[] {
 
 export default function LotusCorretores({
   whatsapp = WHATSAPP_DEFAULT,
+  brokers,
 }: {
   whatsapp?: string;
+  /** Corretores reais (portal_brokers). Vazio/undefined => fallback demo. */
+  brokers?: { id: string; name: string; photoUrl: string | null; creci: string | null }[];
 } = {}) {
+  // Fonte dos corretores: banco (se veio algum) ou fallback demo.
+  const BROKERS: Broker[] =
+    brokers && brokers.length > 0 ? brokers.map(realToBroker) : BROKERS_FALLBACK;
+
   // state (espelha o `state` do dc-runtime)
   const [view, setView] = useState<'list' | 'profile'>('list');
   const [selId, setSelId] = useState<string | null>(null);
@@ -367,7 +445,7 @@ export default function LotusCorretores({
                   {list.map((b, i) => (
                     <Hoverable key={i} baseStyle={parseStyle('position:relative;display:flex;flex-direction:column;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 16px 40px -32px rgba(21,36,28,.32);transition:transform .3s ease, box-shadow .3s ease;')} hoverStyle={parseStyle('transform:translateY(-4px);box-shadow:0 28px 56px -34px rgba(21,36,28,.46)')}>
                       <div style={parseStyle('position:relative;aspect-ratio:1/1;background:#1d3a2c;')}>
-                        <ImageSlot id={b.slot} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={b.name} />
+                        <ImageSlot id={b.slot} src={b.photoUrl || undefined} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={b.name} initials={b.name} />
                         {b.founder && (<span style={parseStyle('position:absolute;top:12px;left:12px;background:#b18a4a;color:#15241c;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:5px 11px;border-radius:30px;')}>Fundador</span>)}
                         <span style={parseStyle('position:absolute;top:12px;right:12px;background:rgba(247,242,232,.92);color:#1d3a2c;font-size:11.5px;font-weight:700;padding:4px 9px;border-radius:30px;display:flex;align-items:center;gap:3px;')}><span style={parseStyle('color:#b18a4a;')}>★</span>{b.rating}</span>
                       </div>
@@ -450,7 +528,7 @@ export default function LotusCorretores({
           {/* header de perfil */}
           <section style={parseStyle('max-width:1100px;margin:0 auto;padding:24px 32px 0;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;')}>
             <div style={parseStyle('position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#1d3a2c;')}>
-              <ImageSlot id={sel.slot} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={sel.name} />
+              <ImageSlot id={sel.slot} src={sel.photoUrl || undefined} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={sel.name} initials={sel.name} />
               <button style={parseStyle('position:absolute;left:50%;bottom:18px;transform:translateX(-50%);display:inline-flex;align-items:center;gap:8px;background:rgba(247,242,232,.92);border:none;border-radius:40px;padding:10px 18px;font-size:13.5px;font-weight:600;color:#1d3a2c;cursor:pointer;')}><svg width="16" height="16" viewBox="0 0 24 24" fill="#1d3a2c"><path d="M8 5v14l11-7z"></path></svg>Vídeo de apresentação</button>
             </div>
             <div style={parseStyle('position:sticky;top:88px;')}>
@@ -639,7 +717,7 @@ export default function LotusCorretores({
             </div>
           </div>
           <div style={parseStyle('display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;padding-top:26px;font-size:13px;color:rgba(247,242,232,.5);')}>
-            <div>© 2026 Lotus Brokers · CRECI PJ 00000-J · CNPJ 00.000.000/0001-00</div>
+            <div>{footerLegalLine()}</div>
             <div style={parseStyle('display:flex;gap:12px;align-items:center;')}>
               <Hoverable as="a" href="https://www.facebook.com/lotusbrokers" target="_blank" rel="noopener" aria-label="Facebook" baseStyle={parseStyle('width:40px;height:40px;border-radius:50%;border:1px solid rgba(247,242,232,.25);display:flex;align-items:center;justify-content:center;color:rgba(247,242,232,.8);transition:all .2s;')} hoverStyle={parseStyle('color:#15241c;background:#cdab6e;border-color:#cdab6e')}><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H9v3h2v7h3v-7h2.5l.5-3H14V9.5c0-.3.2-.5.5-.5H14z"></path></svg></Hoverable>
               <Hoverable as="a" href="https://www.youtube.com/@lotusbrokers" target="_blank" rel="noopener" aria-label="YouTube" baseStyle={parseStyle('width:40px;height:40px;border-radius:50%;border:1px solid rgba(247,242,232,.25);display:flex;align-items:center;justify-content:center;color:rgba(247,242,232,.8);transition:all .2s;')} hoverStyle={parseStyle('color:#15241c;background:#cdab6e;border-color:#cdab6e')}><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12s0-3-.4-4.3a2.6 2.6 0 0 0-1.8-1.9C18 5.4 12 5.4 12 5.4s-6 0-7.8.4A2.6 2.6 0 0 0 2.4 7.7C2 9 2 12 2 12s0 3 .4 4.3a2.6 2.6 0 0 0 1.8 1.9c1.8.4 7.8.4 7.8.4s6 0 7.8-.4a2.6 2.6 0 0 0 1.8-1.9C22 15 22 12 22 12zm-12 2.6V9.4l5 2.6-5 2.6z"></path></svg></Hoverable>

@@ -1,4 +1,5 @@
 'use client';
+import { footerLegalLine } from '@/lib/site';
 
 /**
  * LotusHome — porte 1:1 de lotus-home/index.html (mecanismo dc-runtime) para React.
@@ -21,6 +22,7 @@ import React, {
 } from 'react';
 import Link from 'next/link';
 import { developmentsFallback, type DevelopmentCard } from '@/lib/developments';
+import MobileMenu from './MobileMenu';
 
 /* ------------------------------------------------------------------ */
 /* Helpers                                                             */
@@ -220,16 +222,16 @@ const squads = [
 ];
 
 const neighborhoodsJundiai = [
-  { name: 'Eloy Chaves', city: 'Jundiaí', count: '34 imóveis', slot: 'lotus-bairro-eloy', img: '/gran-ville-santo-angelo/a038.jpg' },
-  { name: 'Anhangabaú', city: 'Jundiaí', count: '28 imóveis', slot: 'lotus-bairro-anhangabau', img: '/auten-jundiai/a023.jpg' },
-  { name: 'Malota', city: 'Jundiaí', count: '19 imóveis', slot: 'lotus-bairro-malota', img: '/forest-houses/a002.jpg' },
-  { name: 'Medeiros', city: 'Jundiaí', count: '22 imóveis', slot: 'lotus-bairro-medeiros', img: '/vivarte/a003.jpg' },
+  { name: 'Eloy Chaves', city: 'Jundiaí', count: '34 imóveis', bairroSlug: 'eloy-chaves', slot: 'lotus-bairro-eloy', img: '/gran-ville-santo-angelo/a038.jpg' },
+  { name: 'Anhangabaú', city: 'Jundiaí', count: '28 imóveis', bairroSlug: 'anhangabau', slot: 'lotus-bairro-anhangabau', img: '/auten-jundiai/a023.jpg' },
+  { name: 'Malota', city: 'Jundiaí', count: '19 imóveis', bairroSlug: 'malota', slot: 'lotus-bairro-malota', img: '/forest-houses/a002.jpg' },
+  { name: 'Medeiros', city: 'Jundiaí', count: '22 imóveis', bairroSlug: 'medeiros', slot: 'lotus-bairro-medeiros', img: '/vivarte/a003.jpg' },
 ];
 
 const neighborhoodsItupeva = [
-  { name: 'Centro', city: 'Itupeva', count: '17 imóveis', slot: 'lotus-bairro-itupeva-centro', img: '/jardins-do-horto/a004.jpg' },
-  { name: 'Reserva da Serra', city: 'Itupeva', count: '12 imóveis', slot: 'lotus-bairro-itupeva-serra', img: '/altos-da-avenida/a005.png' },
-  { name: 'Horto Florestal', city: 'Itupeva', count: '9 imóveis', slot: 'lotus-bairro-itupeva-horto', img: '/vistta-castanho/a007.jpg' },
+  { name: 'Centro', city: 'Itupeva', count: '17 imóveis', bairroSlug: 'centro-itupeva', slot: 'lotus-bairro-itupeva-centro', img: '/jardins-do-horto/a004.jpg' },
+  { name: 'Reserva da Serra', city: 'Itupeva', count: '12 imóveis', bairroSlug: 'reserva-da-serra', slot: 'lotus-bairro-itupeva-serra', img: '/altos-da-avenida/a005.png' },
+  { name: 'Horto Florestal', city: 'Itupeva', count: '9 imóveis', bairroSlug: 'horto-florestal', slot: 'lotus-bairro-itupeva-horto', img: '/vistta-castanho/a007.jpg' },
 ];
 
 const posts = [
@@ -530,17 +532,20 @@ export default function LotusHome({
             <Hoverable as="a" href="/lotus-faq" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Guias</Hoverable>
             <Hoverable as="a" href="/lotus-blog" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Blog</Hoverable>
           </nav>
-          <Hoverable
-            as="a"
-            href={waLink}
-            target="_blank"
-            rel="noopener"
-            baseStyle={parseStyle('display:inline-flex;align-items:center;gap:8px;background:#b18a4a;color:#15241c;font-weight:600;font-size:14.5px;padding:11px 20px;border-radius:40px;transition:transform .2s ease, background .2s ease;')}
-            hoverStyle={parseStyle('background:#cdab6e;transform:translateY(-1px)')}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.6-2.7-1.2-4.4-3.9-4.6-4.1-.1-.2-1-1.4-1-2.6 0-1.2.6-1.8.9-2.1.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.3.4c-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.4.1.6-.1l.8-.9c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.6-.1 1.2Z"></path></svg>
-            Falar com a LIA
-          </Hoverable>
+          <div style={parseStyle('display:flex;align-items:center;gap:12px;')}>
+            <Hoverable
+              as="a"
+              href={waLink}
+              target="_blank"
+              rel="noopener"
+              baseStyle={parseStyle('display:inline-flex;align-items:center;gap:8px;background:#b18a4a;color:#15241c;font-weight:600;font-size:14.5px;padding:11px 20px;border-radius:40px;transition:transform .2s ease, background .2s ease;')}
+              hoverStyle={parseStyle('background:#cdab6e;transform:translateY(-1px)')}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.6-2.7-1.2-4.4-3.9-4.6-4.1-.1-.2-1-1.4-1-2.6 0-1.2.6-1.8.9-2.1.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.3.4c-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.4.1.6-.1l.8-.9c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.6-.1 1.2Z"></path></svg>
+              Falar com a LIA
+            </Hoverable>
+            <MobileMenu />
+          </div>
         </div>
       </header>
 
@@ -796,7 +801,7 @@ export default function LotusHome({
           <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;margin-bottom:56px;')}>
             {/* hint-placeholder-count: 4 */}
             {neighborhoodsJundiai.map((n, i) => (
-              <Hoverable key={i} as="a" href="/lotus-bairro" target="_top" data-reveal="" baseStyle={parseStyle('position:relative;display:block;aspect-ratio:3/4;border-radius:16px;overflow:hidden;box-shadow:0 16px 40px -28px rgba(21,36,28,.4);transition:transform .35s ease;')} hoverStyle={parseStyle('transform:translateY(-4px)')}>
+              <Hoverable key={i} as="a" href={`/lotus-bairro/${n.bairroSlug}`} target="_top" data-reveal="" baseStyle={parseStyle('position:relative;display:block;aspect-ratio:3/4;border-radius:16px;overflow:hidden;box-shadow:0 16px 40px -28px rgba(21,36,28,.4);transition:transform .35s ease;')} hoverStyle={parseStyle('transform:translateY(-4px)')}>
                 <ImageSlot id={n.slot} src={n.img} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={n.name} />
                 <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,0) 40%,rgba(21,36,28,.85));')}></div>
                 <div style={parseStyle('position:absolute;left:0;right:0;bottom:0;padding:20px;')}>
@@ -814,7 +819,7 @@ export default function LotusHome({
           <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;')}>
             {/* hint-placeholder-count: 3 */}
             {neighborhoodsItupeva.map((n, i) => (
-              <Hoverable key={i} as="a" href="/lotus-bairro" target="_top" data-reveal="" baseStyle={parseStyle('position:relative;display:block;aspect-ratio:3/4;border-radius:16px;overflow:hidden;box-shadow:0 16px 40px -28px rgba(21,36,28,.4);transition:transform .35s ease;')} hoverStyle={parseStyle('transform:translateY(-4px)')}>
+              <Hoverable key={i} as="a" href={`/lotus-bairro/${n.bairroSlug}`} target="_top" data-reveal="" baseStyle={parseStyle('position:relative;display:block;aspect-ratio:3/4;border-radius:16px;overflow:hidden;box-shadow:0 16px 40px -28px rgba(21,36,28,.4);transition:transform .35s ease;')} hoverStyle={parseStyle('transform:translateY(-4px)')}>
                 <ImageSlot id={n.slot} src={n.img} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={n.name} />
                 <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,0) 40%,rgba(21,36,28,.85));')}></div>
                 <div style={parseStyle('position:absolute;left:0;right:0;bottom:0;padding:20px;')}>
@@ -1183,7 +1188,7 @@ export default function LotusHome({
             </div>
           </div>
           <div style={parseStyle('display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;padding-top:28px;font-size:13px;color:rgba(247,242,232,.5);')}>
-            <div>© 2026 Lotus Brokers · CRECI PJ 00000-J · CNPJ 00.000.000/0001-00</div>
+            <div>{footerLegalLine()}</div>
             <div style={parseStyle('display:flex;gap:12px;align-items:center;')}>
               <Hoverable as="a" href="https://www.facebook.com/lotusbrokers" target="_blank" rel="noopener" aria-label="Facebook" baseStyle={parseStyle('width:40px;height:40px;border-radius:50%;border:1px solid rgba(247,242,232,.25);display:flex;align-items:center;justify-content:center;color:rgba(247,242,232,.8);transition:all .2s;')} hoverStyle={parseStyle('color:#15241c;background:#cdab6e;border-color:#cdab6e')}>
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H9v3h2v7h3v-7h2.5l.5-3H14V9.5c0-.3.2-.5.5-.5H14z"></path></svg>

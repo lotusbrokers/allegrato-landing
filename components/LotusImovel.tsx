@@ -1,4 +1,5 @@
 'use client';
+import { footerLegalLine } from '@/lib/site';
 
 /**
  * LotusImovel — porte 1:1 de lotus-imovel/index.html (mecanismo dc-runtime) para React,
@@ -643,7 +644,7 @@ export default function LotusImovel({
             </div>
           </div>
           <div style={parseStyle('display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;padding-top:28px;font-size:13px;color:rgba(247,242,232,.5);')}>
-            <div>© 2026 Lotus Brokers · CRECI PJ 00000-J · CNPJ 00.000.000/0001-00</div>
+            <div>{footerLegalLine()}</div>
             <div style={parseStyle('display:flex;gap:12px;align-items:center;')}>
               <Hoverable as="a" href="https://www.facebook.com/lotusbrokers" target="_blank" rel="noopener" aria-label="Facebook" baseStyle={parseStyle('width:40px;height:40px;border-radius:50%;border:1px solid rgba(247,242,232,.25);display:flex;align-items:center;justify-content:center;color:rgba(247,242,232,.8);transition:all .2s;')} hoverStyle={parseStyle('color:#15241c;background:#cdab6e;border-color:#cdab6e')}>
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H9v3h2v7h3v-7h2.5l.5-3H14V9.5c0-.3.2-.5.5-.5H14z"></path></svg>

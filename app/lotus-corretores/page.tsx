@@ -1,5 +1,10 @@
 import type { Metadata } from 'next';
 import LotusCorretores from '@/components/LotusCorretores';
+import { getBrokers } from '@/lib/brokers';
+
+// ISR: revalida a lista de corretores a cada 1h (dados vêm do Supabase em
+// runtime, não no build). Mesma cadência das demais rotas do portal.
+export const revalidate = 3600;
 
 // Metadata portada do <helmet> de lotus-corretores/index.html (paridade de SEO com o estático).
 // TODO go-live: trocar canonical/og:url para o domínio final, remover noindex e publicar sitemap/robots.
@@ -22,6 +27,7 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image' },
 };
 
-export default function LotusCorretoresPage() {
-  return <LotusCorretores />;
+export default async function LotusCorretoresPage() {
+  const brokers = await getBrokers();
+  return <LotusCorretores brokers={brokers} />;
 }

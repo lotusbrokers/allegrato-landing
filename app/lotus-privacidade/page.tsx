@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { footerLegalLine } from '@/lib/site';
 
 // Metadata portado do <head> do fonte estatico (lotus-privacidade/index.html).
 export const metadata: Metadata = {
@@ -122,7 +123,7 @@ export default function LotusPrivacidadePage() {
       </main>
       <footer>
         <div className="fbar">
-          <div>© 2026 Lotus Brokers · CRECI PJ 00000-J · CNPJ 00.000.000/0001-00</div>
+          <div>{footerLegalLine()}</div>
           <div style={{ display: 'flex', gap: '16px' }}>
             <a href="../lotus-privacidade/">Privacidade</a>
             <a href="../lotus-termos/">Termos</a>

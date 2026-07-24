@@ -1,4 +1,5 @@
 'use client';
+import { footerLegalLine } from '@/lib/site';
 
 /**
  * LotusSobre — porte 1:1 de lotus-sobre/index.html (mecanismo dc-runtime) para React.
@@ -96,17 +97,31 @@ function Hoverable<T extends keyof React.JSX.IntrinsicElements = 'div'>({
  * image-slot do dc-runtime: bloco com gradiente de fundo (fallback) e, quando há
  * src, a imagem cobrindo (object-fit:cover). Sem src => só o gradiente.
  */
+/** Iniciais (até 2) a partir do nome — fallback de avatar quando não há foto. */
+function initialsOf(name?: string): string {
+  if (!name) return '';
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return '';
+  const first = parts[0][0] ?? '';
+  const last = parts.length > 1 ? parts[parts.length - 1][0] ?? '' : '';
+  return (first + last).toUpperCase();
+}
+
 function ImageSlot({
   src,
   id,
   style,
   alt = '',
+  initials,
 }: {
   src?: string;
   id?: string;
   style?: CSSProperties;
   alt?: string;
+  /** Nome para gerar iniciais quando não há `src` (avatar-fallback). */
+  initials?: string;
 }) {
+  const fallbackInitials = !src ? initialsOf(initials) : '';
   return (
     <div
       id={id}
@@ -116,6 +131,23 @@ function ImageSlot({
         ...style,
       }}
     >
+      {!src && fallbackInitials && (
+        <span
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'rgba(247,242,232,.9)',
+            fontFamily: "'Fraunces',serif",
+            fontSize: 'clamp(12px, 40%, 34px)',
+          }}
+        >
+          {fallbackInitials}
+        </span>
+      )}
       {src && (
         <img
           src={src}
@@ -382,7 +414,7 @@ export default function LotusSobre({
           </div>
           {/* fundador */}
           <div style={parseStyle('display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;background:#1d3a2c;border-radius:22px;padding:36px;margin-bottom:24px;')}>
-            <div style={parseStyle('width:150px;height:150px;border-radius:50%;background:#3f6249;overflow:hidden;position:relative;flex-shrink:0;')}><ImageSlot id="sobre-fundador" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} /></div>
+            <div style={parseStyle('width:150px;height:150px;border-radius:50%;background:#3f6249;overflow:hidden;position:relative;flex-shrink:0;')}><ImageSlot id="sobre-fundador" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} initials="Erick Santos" /></div>
             <div>
               <div style={parseStyle('font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#cdab6e;margin-bottom:12px;')}>Fundador</div>
               <h3 style={parseStyle('font-family:\'Fraunces\',serif;font-weight:400;font-size:clamp(24px,2.6vw,30px);color:#f7f2e8;margin:0 0 10px;')}>Erick Santos</h3>
@@ -398,7 +430,7 @@ export default function LotusSobre({
                 <h3 style={parseStyle('font-family:\'Fraunces\',serif;font-weight:400;font-size:21px;color:#15241c;margin:0 0 8px;')}>{s.title}</h3>
                 <p style={parseStyle('font-size:14px;color:#3f6249;font-weight:300;line-height:1.55;margin:0 0 16px;')}>{s.text}</p>
                 <div style={parseStyle('display:flex;align-items:center;gap:11px;border-top:1px solid rgba(21,36,28,.1);padding-top:14px;')}>
-                  <div style={parseStyle('width:38px;height:38px;border-radius:50%;background:#1d3a2c;overflow:hidden;position:relative;flex-shrink:0;')}><ImageSlot id={s.slot} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={s.broker} /></div>
+                  <div style={parseStyle('width:38px;height:38px;border-radius:50%;background:#1d3a2c;overflow:hidden;position:relative;flex-shrink:0;')}><ImageSlot id={s.slot} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={s.broker} initials={s.broker} /></div>
                   <div><div style={parseStyle('font-size:13.5px;font-weight:600;color:#15241c;')}>{s.broker}</div><div style={parseStyle('font-size:11.5px;color:#8aa593;')}>{s.creci}</div></div>
                 </div>
               </div>
@@ -600,7 +632,7 @@ export default function LotusSobre({
             </div>
           </div>
           <div style={parseStyle('display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;padding-top:26px;font-size:13px;color:rgba(247,242,232,.5);')}>
-            <div>© 2026 Lotus Brokers · CRECI PJ 00000-J · CNPJ 00.000.000/0001-00</div>
+            <div>{footerLegalLine()}</div>
             <div style={parseStyle('display:flex;gap:12px;align-items:center;')}>
               <Hoverable as="a" href="https://www.facebook.com/lotusbrokers" target="_blank" rel="noopener" aria-label="Facebook" baseStyle={parseStyle('width:40px;height:40px;border-radius:50%;border:1px solid rgba(247,242,232,.25);display:flex;align-items:center;justify-content:center;color:rgba(247,242,232,.8);transition:all .2s;')} hoverStyle={parseStyle('color:#15241c;background:#cdab6e;border-color:#cdab6e')}><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H9v3h2v7h3v-7h2.5l.5-3H14V9.5c0-.3.2-.5.5-.5H14z"></path></svg></Hoverable>
               <Hoverable as="a" href="https://www.youtube.com/@lotusbrokers" target="_blank" rel="noopener" aria-label="YouTube" baseStyle={parseStyle('width:40px;height:40px;border-radius:50%;border:1px solid rgba(247,242,232,.25);display:flex;align-items:center;justify-content:center;color:rgba(247,242,232,.8);transition:all .2s;')} hoverStyle={parseStyle('color:#15241c;background:#cdab6e;border-color:#cdab6e')}><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12s0-3-.4-4.3a2.6 2.6 0 0 0-1.8-1.9C18 5.4 12 5.4 12 5.4s-6 0-7.8.4A2.6 2.6 0 0 0 2.4 7.7C2 9 2 12 2 12s0 3 .4 4.3a2.6 2.6 0 0 0 1.8 1.9c1.8.4 7.8.4 7.8.4s6 0 7.8-.4a2.6 2.6 0 0 0 1.8-1.9C22 15 22 12 22 12zm-12 2.6V9.4l5 2.6-5 2.6z"></path></svg></Hoverable>

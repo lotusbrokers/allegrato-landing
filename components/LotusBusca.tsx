@@ -1,8 +1,12 @@
 'use client';
+import { footerLegalLine } from '@/lib/site';
 
 /**
  * LotusBusca — porte 1:1 de lotus-busca (mecanismo dc-runtime) para React.
- * Visual e comportamento idênticos ao estático. Dados hard-coded (ALL) exatos do fonte.
+ * Visual e comportamento idênticos ao estático. Os imóveis vêm do banco
+ * (prop `imoveis`, buscada no servidor em app/lotus-busca/page.tsx via
+ * getImoveisBusca) — só imóveis reais aprovados. A filtragem/ordenação/mapa
+ * continuam no cliente sobre esses dados.
  *
  * Convenções de porte:
  *  - style="css literal"  -> style={parseStyle('css literal')}
@@ -21,6 +25,7 @@ import React, {
   type ReactNode,
 } from 'react';
 import LotusHeader from './LotusHeader';
+import type { ImovelBusca } from '@/lib/imoveis';
 
 /* ------------------------------------------------------------------ */
 /* Helpers                                                             */
@@ -124,41 +129,9 @@ function ImageSlot({
 
 const WHATSAPP_DEFAULT = '5511926143393';
 
-type Property = {
-  id: string;
-  fin: 'comprar' | 'alugar';
-  type: string;
-  neighborhood: string;
-  city: string;
-  beds: number;
-  area: number;
-  vagas: number;
-  priceNum: number;
-  price: string;
-  pinLabel: string;
-  badge: string;
-  desc: string;
-  img: string;
-  slot: string;
-  x: string;
-  y: string;
-  recent: number;
-};
-
-const ALL: Property[] = [
-  { id: 'a1', fin: 'comprar', type: 'Casa', neighborhood: 'Eloy Chaves', city: 'Jundiaí', beds: 4, area: 320, vagas: 4, priceNum: 2450000, price: 'R$ 2.450.000', pinLabel: 'R$ 2,45 mi', badge: 'Lotus Listing', desc: 'A 7 min da Pádua Diniz, padaria a 2 quadras, escola a 9 min. Quintal com piscina.', img: '/forest-houses/a000.jpg', slot: 'busca-a1', x: '62%', y: '30%', recent: 9 },
-  { id: 'a2', fin: 'comprar', type: 'Apartamento', neighborhood: 'Anhangabaú', city: 'Jundiaí', beds: 3, area: 98, vagas: 2, priceNum: 720000, price: 'R$ 720.000', pinLabel: 'R$ 720k', badge: '', desc: 'Andar alto, sol da manhã na sala, a 3 min do Maxi Shopping.', img: '/auten-jundiai/a000.jpg', slot: 'busca-a2', x: '40%', y: '46%', recent: 8 },
-  { id: 'a3', fin: 'comprar', type: 'Casa', neighborhood: 'Reserva da Serra', city: 'Itupeva', beds: 4, area: 280, vagas: 4, priceNum: 1890000, price: 'R$ 1.890.000', pinLabel: 'R$ 1,89 mi', badge: 'Lotus Listing', desc: 'Condomínio fechado na Serra, 4 suítes, varanda voltada pro verde.', img: '/vistta-castanho/a000.jpg', slot: 'busca-a3', x: '74%', y: '58%', recent: 7 },
-  { id: 'a4', fin: 'comprar', type: 'Apartamento', neighborhood: 'Centro', city: 'Jundiaí', beds: 2, area: 68, vagas: 1, priceNum: 480000, price: 'R$ 480.000', pinLabel: 'R$ 480k', badge: '', desc: 'Pertinho da estação e da Rua do Rosário. Primeiro imóvel ideal.', img: '/vigore/a00.jpg', slot: 'busca-a4', x: '30%', y: '40%', recent: 6 },
-  { id: 'a5', fin: 'comprar', type: 'Casa', neighborhood: 'Medeiros', city: 'Jundiaí', beds: 3, area: 180, vagas: 2, priceNum: 980000, price: 'R$ 980.000', pinLabel: 'R$ 980k', badge: '', desc: 'Rua tranquila, escola a 5 min, padaria na esquina. Espaço gourmet.', img: '/avela/a000.jpg', slot: 'busca-a5', x: '52%', y: '66%', recent: 5 },
-  { id: 'a6', fin: 'comprar', type: 'Cobertura', neighborhood: 'Malota', city: 'Jundiaí', beds: 3, area: 210, vagas: 3, priceNum: 1650000, price: 'R$ 1.650.000', pinLabel: 'R$ 1,65 mi', badge: 'Lotus Listing', desc: 'Cobertura duplex com terraço e vista aberta pra Serra do Japi.', img: '/terrace-serra-do-japi/a000.jpg', slot: 'busca-a6', x: '46%', y: '24%', recent: 9 },
-  { id: 'a7', fin: 'comprar', type: 'Terreno', neighborhood: 'Caxambu', city: 'Itupeva', beds: 0, area: 1000, vagas: 0, priceNum: 650000, price: 'R$ 650.000', pinLabel: 'R$ 650k', badge: '', desc: '1.000 m² em condomínio, pronto pra construir, topografia plana.', img: '/gran-ville-santo-angelo/a000.jpg', slot: 'busca-a7', x: '68%', y: '74%', recent: 4 },
-  { id: 'a8', fin: 'comprar', type: 'Casa', neighborhood: 'Centro', city: 'Vinhedo', beds: 4, area: 350, vagas: 4, priceNum: 2900000, price: 'R$ 2.900.000', pinLabel: 'R$ 2,9 mi', badge: '', desc: 'Alto padrão entre vinhedos, 4 dormitórios, área de lazer completa.', img: '/authoria/a000.jpg', slot: 'busca-a8', x: '20%', y: '64%', recent: 7 },
-  { id: 'a9', fin: 'comprar', type: 'Apartamento', neighborhood: 'Eloy Chaves', city: 'Jundiaí', beds: 3, area: 110, vagas: 2, priceNum: 850000, price: 'R$ 850.000', pinLabel: 'R$ 850k', badge: '', desc: 'Reformado, 3 dorms, lazer no prédio e a 4 min da Av. Antônio Frederico.', img: '/jardins-do-horto/a003.jpg', slot: 'busca-a9', x: '58%', y: '40%', recent: 8 },
-  { id: 'r1', fin: 'alugar', type: 'Apartamento', neighborhood: 'Centro', city: 'Jundiaí', beds: 2, area: 70, vagas: 1, priceNum: 2800, price: 'R$ 2.800/mês', pinLabel: 'R$ 2,8k', badge: '', desc: 'Mobiliado, pronto pra morar, a 5 min da estação.', img: '/vivarte/a000.jpg', slot: 'busca-r1', x: '34%', y: '44%', recent: 9 },
-  { id: 'r2', fin: 'alugar', type: 'Casa', neighborhood: 'Medeiros', city: 'Jundiaí', beds: 3, area: 160, vagas: 2, priceNum: 4500, price: 'R$ 4.500/mês', pinLabel: 'R$ 4,5k', badge: '', desc: 'Casa térrea com quintal, ótima pra família com pet.', img: '/avela/a002.jpg', slot: 'busca-r2', x: '50%', y: '62%', recent: 7 },
-  { id: 'r3', fin: 'alugar', type: 'Comercial', neighborhood: 'Centro', city: 'Jundiaí', beds: 0, area: 90, vagas: 1, priceNum: 3200, price: 'R$ 3.200/mês', pinLabel: 'R$ 3,2k', badge: '', desc: 'Sala comercial de esquina, vitrine pra rua, alto fluxo.', img: '/altos-da-avenida/a000.jpg', slot: 'busca-r3', x: '28%', y: '52%', recent: 5 },
-];
+// Imóveis reais do banco (aprovados). O shape vem de lib/imoveis (ImovelBusca);
+// aliás `Property` mantido para não renomear todos os usos internos.
+type Property = ImovelBusca;
 
 type Chip = { id: string; kind: string; val: any; label: string };
 
@@ -172,8 +145,11 @@ const segOff = 'border:none;border-radius:30px;padding:8px 18px;font-size:13.5px
 
 export default function LotusBusca({
   whatsapp = WHATSAPP_DEFAULT,
+  imoveis = [],
 }: {
   whatsapp?: string;
+  /** Imóveis reais aprovados (vêm do servidor em app/lotus-busca/page.tsx). */
+  imoveis?: ImovelBusca[];
 } = {}) {
   // state (espelha o `state` do dc-runtime)
   const [finalidade, setFinalidade] = useState<'comprar' | 'alugar'>('comprar');
@@ -261,7 +237,7 @@ export default function LotusBusca({
     return c ? c.val : 'any';
   };
 
-  let list = ALL.filter((r) => r.fin === finalidade);
+  let list = imoveis.filter((r) => r.fin === finalidade);
   chips.forEach((c) => {
     if (c.kind === 'beds') list = list.filter((r) => r.beds >= c.val);
     else if (c.kind === 'priceMax') list = list.filter((r) => r.priceNum <= c.val);
@@ -281,19 +257,24 @@ export default function LotusBusca({
 
   const resultsView = list.map((r) => ({
     ...r,
+    href: '/lotus-imovel/' + r.codigo,
     specs: mkSpecs(r),
     fav: !!favs[r.id],
     notFav: !favs[r.id],
     onEnter: () => highlight(r.id, true),
     onLeave: () => highlight(r.id, false),
     toggleFav: (e: React.MouseEvent) => {
-      if (e && e.stopPropagation) e.stopPropagation();
+      // Card virou <a>: impede que favoritar dispare a navegação.
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
       setFavs((s) => ({ ...s, [r.id]: !s[r.id] }));
     },
     selectPin: () => setSelectedId(r.id),
   }));
 
-  const selRaw = ALL.find((r) => r.id === selectedId);
+  const selRaw = imoveis.find((r) => r.id === selectedId);
   const selected = selRaw ? { ...selRaw, specs: mkSpecs(selRaw) } : null;
   const favCount = Object.values(favs).filter(Boolean).length;
 
@@ -455,6 +436,10 @@ export default function LotusBusca({
               {resultsView.map((r) => (
                 <Hoverable
                   key={r.id}
+                  as="a"
+                  href={r.href}
+                  target="_top"
+                  aria-label={'Ver ' + r.type + ' em ' + r.neighborhood + ', ' + r.city + ' — ' + r.price}
                   id={'card-' + r.id}
                   onMouseEnter={r.onEnter}
                   onMouseLeave={r.onLeave}
@@ -466,7 +451,7 @@ export default function LotusBusca({
                     {r.badge && (
                       <span style={parseStyle('position:absolute;top:12px;left:12px;background:#b18a4a;color:#15241c;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:5px 10px;border-radius:30px;')}>{r.badge}</span>
                     )}
-                    <button onClick={r.toggleFav} aria-label="Favoritar" style={parseStyle('position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;background:rgba(247,242,232,.92);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;')}>
+                    <button type="button" onClick={r.toggleFav} aria-label="Favoritar" style={parseStyle('position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;background:rgba(247,242,232,.92);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;')}>
                       {r.fav && (
                         <svg width="17" height="17" viewBox="0 0 24 24" fill="#b18a4a" stroke="#b18a4a" strokeWidth="1.5"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"></path></svg>
                       )}
@@ -561,7 +546,7 @@ export default function LotusBusca({
             <svg width="24" height="24" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2.5C20.5 9 20.5 16 16 22.5 11.5 16 11.5 9 16 2.5Z" fill="#cdab6e"></path><path d="M27.5 8.5C22.5 11 18.2 15 16 22.5 22 21.2 26.3 16.8 27.5 8.5Z" fill="#8aa593"></path><path d="M4.5 8.5C9.5 11 13.8 15 16 22.5 10 21.2 5.7 16.8 4.5 8.5Z" fill="#cdab6e" opacity=".85"></path></svg>
             <span style={parseStyle("font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:rgba(247,242,232,.8);")}>O imóvel é só o palco. O cliente é a história.</span>
           </div>
-          <div style={parseStyle('font-size:12.5px;color:rgba(247,242,232,.5);')}>© 2026 Lotus Brokers · CRECI PJ 00000-J · Jundiaí · Itupeva — SP</div>
+          <div style={parseStyle('font-size:12.5px;color:rgba(247,242,232,.5);')}>{footerLegalLine()}</div>
         </div>
       </footer>
 

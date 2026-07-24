@@ -1,5 +1,12 @@
 import type { Metadata } from 'next';
 import LotusBusca from '@/components/LotusBusca';
+import { getImoveisBusca } from '@/lib/imoveis';
+
+const SITE = 'https://www.lotusbrokers.com.br';
+
+// ISR: revalida o catálogo da busca a cada 1h (mesma cadência das rotas de
+// imóvel). Os dados vêm do Supabase em runtime, não no build.
+export const revalidate = 3600;
 
 // Metadata portada do <helmet> de lotus-busca (paridade de SEO com o estático).
 // TODO go-live: trocar canonical/og:url para o domínio final, remover noindex e publicar sitemap/robots.
@@ -35,29 +42,20 @@ const websiteLd = {
   },
 };
 
-const itemListLd = {
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  itemListElement: [
-    {
-      '@type': 'ListItem',
-      position: 1,
-      url: 'https://www.lotusbrokers.com.br/imovel/jundiai/casa-eloy-chaves',
-    },
-    {
-      '@type': 'ListItem',
-      position: 2,
-      url: 'https://www.lotusbrokers.com.br/imovel/jundiai/apto-anhangabau',
-    },
-    {
-      '@type': 'ListItem',
-      position: 3,
-      url: 'https://www.lotusbrokers.com.br/imovel/itupeva/casa-reserva-serra',
-    },
-  ],
-};
+export default async function LotusBuscaPage() {
+  const imoveis = await getImoveisBusca();
 
-export default function LotusBuscaPage() {
+  // ItemList JSON-LD montado a partir dos imóveis reais (antes eram URLs fixas).
+  const itemListLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: imoveis.map((im, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `${SITE}/lotus-imovel/${im.codigo}`,
+    })),
+  };
+
   return (
     <>
       <script
@@ -68,7 +66,7 @@ export default function LotusBuscaPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}
       />
-      <LotusBusca />
+      <LotusBusca imoveis={imoveis} />
     </>
   );
 }

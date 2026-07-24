@@ -824,4 +824,8 @@ footer{background:#241a0e;color:rgba(255,255,255,.7);padding:70px 0 30px}
   .builder-stats{gap:28px}
   .local-info,.plan-cta{padding:40px 28px}
   .wa-float .lbl{display:none}
+  /* fix overflow horizontal no mobile (auditoria C4) */
+  .foot-top{grid-template-columns:1fr 1fr;gap:32px}
+  .plan-cta-actions{flex-direction:column;align-self:stretch;width:100%}
+  .plan-cta-actions .btn{width:100%;text-align:center}
 }

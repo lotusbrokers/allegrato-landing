@@ -19,6 +19,7 @@
 
 import Link from 'next/link';
 import React, { useState, type CSSProperties, type ReactNode } from 'react';
+import MobileMenu from './MobileMenu';
 
 const WHATSAPP_DEFAULT = '5511926143393';
 
@@ -33,8 +34,8 @@ export type LotusNavKey =
   | 'blog'
   | null;
 
-/** Ordem canônica da navegação — mudar aqui reflete em todas as páginas. */
-const NAV_ITEMS: { key: Exclude<LotusNavKey, null>; label: string; href: string }[] = [
+/** Ordem canônica da navegação — mudar aqui reflete em todas as páginas (inclui o menu mobile). */
+export const NAV_ITEMS: { key: Exclude<LotusNavKey, null>; label: string; href: string }[] = [
   { key: 'lancamentos', label: 'Lançamentos', href: '/lotus-lancamentos' },
   { key: 'comprar', label: 'Comprar', href: '/lotus-busca' },
   { key: 'bairros', label: 'Bairros', href: '/lotus-bairro' },
@@ -188,7 +189,10 @@ export default function LotusHeader({
           )}
         </nav>
 
-        {rightSlot ?? <CtaButton href={waLink} label={cta} />}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          {rightSlot ?? <CtaButton href={waLink} label={cta} />}
+          <MobileMenu whatsapp={whatsapp} cta={cta} ctaHref={ctaHref} />
+        </div>
       </div>
     </header>
   );

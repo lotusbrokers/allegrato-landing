@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { footerLegalLine } from '@/lib/site';
 
 // Metadata portada de lotus-cookies/index.html (paridade de SEO com o estático).
 // TODO go-live: trocar canonical/og:url para o domínio final e remover noindex.
@@ -113,7 +114,7 @@ export default function LotusCookiesPage() {
       <footer>
         <div className="fbar">
           <div>
-            © 2026 Lotus Brokers · CRECI PJ 00000-J · CNPJ 00.000.000/0001-00
+            {footerLegalLine()}
           </div>
           <div style={{ display: 'flex', gap: 16 }}>
             <a href="/lotus-privacidade">Privacidade</a>
