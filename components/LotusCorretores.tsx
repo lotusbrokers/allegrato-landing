@@ -220,6 +220,7 @@ function realToBroker(b: {
   name: string;
   photoUrl: string | null;
   creci: string | null;
+  imoveisAtivos: number;
 }): Broker {
   return {
     id: b.id,
@@ -231,7 +232,7 @@ function realToBroker(b: {
     creci: formatCreci(b.creci),
     rating: '5,0',
     reviews: 0,
-    active: 0,
+    active: b.imoveisAtivos,
     slot: 'c-' + b.id,
     photoUrl: b.photoUrl,
   };
@@ -265,7 +266,7 @@ export default function LotusCorretores({
 }: {
   whatsapp?: string;
   /** Corretores reais (portal_brokers). Vazio/undefined => fallback demo. */
-  brokers?: { id: string; name: string; photoUrl: string | null; creci: string | null }[];
+  brokers?: { id: string; name: string; photoUrl: string | null; creci: string | null; imoveisAtivos: number }[];
 } = {}) {
   // Fonte dos corretores: banco (se veio algum) ou fallback demo.
   const BROKERS: Broker[] =

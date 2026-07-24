@@ -11,6 +11,7 @@ export type Broker = {
   name: string;
   photoUrl: string | null;
   creci: string | null;
+  imoveisAtivos: number;
 };
 
 type BrokerRow = {
@@ -18,6 +19,7 @@ type BrokerRow = {
   name: string;
   photo_url: string | null;
   creci: string | null;
+  imoveis_ativos: number;
 };
 
 /** Corretores do tenant Lotus (para /lotus-corretores).
@@ -26,7 +28,7 @@ type BrokerRow = {
 export async function getBrokers(): Promise<Broker[]> {
   const { data, error } = await supabase
     .from('portal_brokers')
-    .select('id, name, photo_url, creci')
+    .select('id, name, photo_url, creci, imoveis_ativos')
     .eq('tenant_id', TENANT_ID)
     .order('name');
 
@@ -39,5 +41,6 @@ export async function getBrokers(): Promise<Broker[]> {
     name: r.name,
     photoUrl: r.photo_url,
     creci: r.creci,
+    imoveisAtivos: r.imoveis_ativos ?? 0,
   }));
 }
