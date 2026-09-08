@@ -59,7 +59,13 @@ const S = {
     borderRadius: 20,
     overflow: 'hidden',
     background: '#1d3a2c',
-    marginBottom: 34,
+    // Menor que a largura da seção (1280) de propósito. Em 16:9 ocupando tudo,
+    // a vitrine ficava com 720px de altura — quase uma tela inteira, e mais
+    // pesada que o resto da página. Reduzir pela LARGURA, e não achatando a
+    // caixa, é o que mantém a proporção das fotos: achatar traria de volta o
+    // recorte que decepava os prédios da Auten.
+    maxWidth: 1000,
+    margin: '0 auto 34px',
     boxShadow: '0 20px 50px -38px rgba(21,36,28,.5)',
   } as CSSProperties,
   /* 16:9 porque é a proporção em que as imagens chegam: a da Santa Ângela
