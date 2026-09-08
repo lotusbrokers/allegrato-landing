@@ -167,6 +167,21 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
                 </div>
               )}
 
+              {sobre.lista && sobre.lista.itens.length > 0 && (
+                <div style={{ margin: '30px 0 34px' }}>
+                  <div style={{ fontSize: 13, fontWeight: 600, letterSpacing: '.16em', textTransform: 'uppercase', color: '#b18a4a', marginBottom: 16 }}>
+                    {sobre.lista.titulo}
+                  </div>
+                  <ul style={{ margin: 0, paddingLeft: 20, display: 'flex', flexDirection: 'column', gap: 9, listStyle: 'disc', maxWidth: 760 }}>
+                    {sobre.lista.itens.map((item) => (
+                      <li key={item} style={{ fontSize: 16.5, color: '#3f6249', fontWeight: 300, lineHeight: 1.65 }}>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               {sobre.paragrafosFinais?.map((t, i) => (
                 <p key={i} style={{ fontSize: 16.5, color: '#3f6249', fontWeight: 300, lineHeight: 1.65, margin: '0 0 16px', maxWidth: 760 }}>
                   {t}

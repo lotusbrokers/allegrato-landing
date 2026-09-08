@@ -34,7 +34,16 @@ export type ConteudoConstrutora = {
    * empreendimentos" é do ano ou da história inteira.
    */
   numerosTitulo?: string;
-  /** Fecho, depois dos números. */
+  /**
+   * Lista com rótulo — "Principais diferenciais", "Valores", o que a Lotus
+   * enviar. Entra depois dos números e antes do fecho.
+   *
+   * Campo genérico e não "diferenciais" porque a próxima construtora pode
+   * mandar a lista com outro nome, e um campo por rótulo viraria um por
+   * empresa.
+   */
+  lista?: { titulo: string; itens: string[] };
+  /** Fecho, depois dos números e da lista. */
   paragrafosFinais?: string[];
 };
 
@@ -94,6 +103,32 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
     // quando há o que mostrar.
     paragrafosFinais: [
       'Em essência: a Auten representa exclusividade, sofisticação, inovação e valorização, transformando cada empreendimento em uma experiência diferenciada.',
+    ],
+  },
+
+  // Texto e logo enviados pela Lotus em 08/09/2026.
+  inkkorp: {
+    logo: '/construtoras/inkkorp.png',
+    paragrafos: [
+      'A INKKORP surge da união de quatro trajetórias com mais de 40 anos de experiência no mercado imobiliário e na construção civil, combinando visão empreendedora, excelência técnica, gestão e expertise comercial.',
+      'A incorporadora desenvolve projetos com foco em qualidade, inovação, transparência, governança e geração de valor, buscando equilibrar as necessidades de moradores e investidores.',
+      'Seu principal propósito é “mudar vidas sem mudar localizações”, levando tecnologia, conforto e infraestrutura para bairros já consolidados, preservando o sentimento de pertencimento e contribuindo para o desenvolvimento responsável das cidades.',
+      'A INKKORP se diferencia pela união entre estratégia, sensibilidade e excelência técnica, criando empreendimentos a partir de análises de mercado e pensando tanto na experiência de quem mora quanto na segurança e valorização de quem investe.',
+    ],
+    lista: {
+      titulo: 'Principais diferenciais',
+      itens: [
+        'Localizações estratégicas e inteligentes',
+        'Qualidade construtiva superior',
+        'Tecnologia e inovação',
+        'Design funcional',
+        'Relacionamento próximo e personalizado',
+        'Transparência e gestão responsável',
+        'Foco em valorização sustentável',
+      ],
+    },
+    paragrafosFinais: [
+      'Em essência: a INKKORP busca transformar experiência e inteligência de mercado em empreendimentos que unem qualidade de vida, segurança para investidores e desenvolvimento responsável, criando espaços com propósito e valor para o futuro.',
     ],
   },
 };
