@@ -58,6 +58,13 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
   const cidades = [...new Set(c.lancamentos.map((l) => l.city).filter(Boolean))];
   const sobre = conteudoDaConstrutora(c.slug);
 
+  // O banner enviado pela Lotus vence a capa emprestada de um empreendimento.
+  const fundoDoHero = sobre?.banner ?? c.capa?.img ?? null;
+  // No hero, que é escuro, só entra logo de arte clara: o negativo declarado,
+  // ou o próprio logo quando ele já é negativo. Sem um dos dois, fica o nome
+  // escrito, que é o que sempre esteve ali.
+  const logoDoHero = sobre?.logoNegativo ?? (sobre?.logoEmFundoEscuro ? sobre.logo : null);
+
   const SITE = 'https://www.lotusbrokers.com.br';
   const ld = {
     '@context': 'https://schema.org',
@@ -85,15 +92,20 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
 
       <main style={{ background: '#f7f2e8' }}>
         {/* ---------------- Hero ---------------- */}
-        <section style={{ position: 'relative', background: '#15241c', overflow: 'hidden' }}>
-          {c.capa && (
+        {/* O padding lateral fica na <section>, e não na caixa de 1280 — que é
+            como as seções de baixo fazem. Com ele dentro da caixa, o conteúdo do
+            hero começava 32px à direita do "Sobre" e dos cards, e a página
+            inteira parecia torta. */}
+        <section style={{ position: 'relative', background: '#15241c', overflow: 'hidden', padding: '0 32px' }}>
+          {fundoDoHero && (
             <img
-              src={c.capa.img}
-              alt={`${c.capa.empreendimento}, empreendimento da ${c.nome}`}
+              src={fundoDoHero}
+              alt=""
+              aria-hidden="true"
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.28 }}
             />
           )}
-          <div style={{ position: 'relative', maxWidth: 1280, margin: '0 auto', padding: '86px 32px 74px' }}>
+          <div style={{ position: 'relative', maxWidth: 1280, margin: '0 auto', padding: '86px 0 74px' }}>
             <Link
               href="/construtoras"
               target="_top"
@@ -101,8 +113,20 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
             >
               ← Construtoras
             </Link>
+            {/* O logo ocupa o lugar do nome, mas dentro do <h1>: o alt carrega o
+                nome, então o buscador e o leitor de tela continuam recebendo o
+                título da página. Construtora sem versão clara do logo mantém o
+                nome escrito. */}
             <h1 style={{ fontFamily: "'Fraunces',serif", fontWeight: 300, fontSize: 'clamp(32px,4.6vw,56px)', color: '#f7f2e8', lineHeight: 1.05, margin: '18px 0 16px' }}>
-              {c.nome}
+              {logoDoHero ? (
+                <img
+                  src={logoDoHero}
+                  alt={c.nome}
+                  style={{ maxHeight: 104, maxWidth: 320, width: 'auto', height: 'auto', display: 'block' }}
+                />
+              ) : (
+                c.nome
+              )}
             </h1>
             <p style={{ fontSize: 17, color: 'rgba(247,242,232,.8)', fontWeight: 300, lineHeight: 1.55, margin: 0, maxWidth: 680 }}>
               {c.lancamentos.length > 0 ? (
@@ -114,7 +138,10 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
                 'Construtora parceira da Lotus Brokers em Jundiaí e região.'
               )}
             </p>
-            {c.capa && (
+            {/* Só creditamos a foto quando ela é a capa emprestada de um
+                empreendimento. O banner enviado pela construtora não precisa —
+                e dizer "Foto: Allegrato" sobre o banner dela seria errado. */}
+            {!sobre?.banner && c.capa && (
               <div style={{ fontSize: 12, color: 'rgba(247,242,232,.5)', marginTop: 14 }}>
                 Foto: {c.capa.empreendimento}
               </div>
@@ -128,7 +155,11 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
             nem preencher com texto genérico. */}
         {sobre && (
           <section style={{ padding: '74px 32px 10px' }}>
-            <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+            {/* 1280 como o hero e a grade de lançamentos. Com 1000 o texto
+                começava 140px à direita dos dois, e a página parecia
+                desalinhada. A medida de leitura continua curta pelo maxWidth
+                dos parágrafos, não pelo do container. */}
+            <div style={{ maxWidth: 1280, margin: '0 auto' }}>
               {sobre.logo && (
                 // Fundo claro: o logo entra nas cores da marca, sem tratamento.
                 // Limitado por altura E largura: os logos chegam em formatos

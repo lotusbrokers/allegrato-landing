@@ -34,6 +34,21 @@ export type ConteudoConstrutora = {
   /** Caminho em public/. A imagem precisa existir lá. */
   logo?: string;
   /**
+   * Versão clara do logo, para o hero, que tem fundo escuro.
+   *
+   * Só é necessária quando `logo` é colorido: um wordmark escuro sobre o navy
+   * do hero fica ilegível. Quando o próprio `logo` já é negativo
+   * (logoEmFundoEscuro), ele serve nos dois lugares e este campo fica de fora.
+   */
+  logoNegativo?: string;
+  /**
+   * Imagem de fundo do hero, escolhida pela Lotus.
+   *
+   * Sem ela o hero empresta a capa de um empreendimento — que é imagem real,
+   * mas nem sempre a que a construtora usaria para se apresentar.
+   */
+  banner?: string;
+  /**
    * O logo é negativo (arte clara, feita para fundo escuro)?
    *
    * A seção "Sobre" tem fundo claro, onde um logo branco simplesmente some. Com
@@ -69,6 +84,8 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   // Texto e logo enviados pela Lotus em 08/09/2026.
   'santa-angela': {
     logo: '/construtoras/santa-angela.png',
+    logoNegativo: '/construtoras/santa-angela-negativo.png',
+    banner: '/construtoras/banners/santa-angela.jpg',
     paragrafos: [
       'A Construtora Santa Angela atua há mais de 40 anos no mercado imobiliário de Jundiaí e região, com foco em construir empreendimentos de qualidade e proporcionar uma boa experiência de moradia.',
       'Fundada oficialmente em 1984 pela família Benassi, a empresa carrega uma história familiar iniciada em 1983, quando foi adquirido o primeiro terreno no Jardim Angela. O nome da empresa é uma homenagem à matriarca da família, Ângela Costa.',
