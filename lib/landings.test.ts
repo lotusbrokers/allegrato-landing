@@ -104,3 +104,14 @@ for (const slug of fallbackSlugs) {
 console.log(
   `ok — ${landings.length} landings em app/ + ${LANDINGS_HTML.length} estáticas, todas linkáveis`,
 );
+
+/* ---------- nomes que não geram o slug da landing ---------- */
+// Sem esta correção o registro do banco é descartado por não ter landing, a
+// entrada curada ocupa o lugar dele com a construtora genérica, e o
+// empreendimento some da página da construtora de verdade.
+assert.equal(slugParaLanding(null, 'Vivart Grand Alamedas'), 'vivarte');
+assert.equal(slugParaLanding(null, 'Authoria By Tebas'), 'authoria');
+// O landing_slug explícito continua tendo precedência sobre o mapa.
+assert.equal(slugParaLanding('outra-landing', 'Vivart Grand Alamedas'), 'outra-landing');
+// Nome sem correção segue derivando normalmente.
+assert.equal(slugParaLanding(null, 'Allegrato'), 'allegrato');

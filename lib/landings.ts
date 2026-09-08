@@ -92,5 +92,29 @@ export function hrefForSlug(slug: string): string | null {
  */
 export function slugParaLanding(landingSlug: string | null | undefined, nome: string): string {
   const explicito = landingSlug?.trim();
-  return slugify(explicito ? explicito : nome);
+  if (explicito) return slugify(explicito);
+  return LANDING_POR_NOME[slugify(nome)] ?? slugify(nome);
 }
+
+/**
+ * Nomes do dash que não geram o slug da landing correspondente.
+ *
+ * O vínculo normal sai do nome, e funciona para quase todos. Estes dois não
+ * batem por diferença de grafia, e o custo é alto: sem landing, o filtro
+ * `temPaginaPropria` descarta o registro do banco, a entrada curada de
+ * lib/developments.ts ocupa o lugar dele — e como ela traz a construtora
+ * genérica, o empreendimento some da página da construtora de verdade.
+ *
+ *   "Vivart Grand Alamedas"  → falta o "e"; a landing é /vivarte.
+ *                              Custa o único lançamento da Diretiva.
+ *   "Authoria By Tebas"      → a landing é /authoria.
+ *                              Custa um lançamento da Tebas.
+ *
+ * A correção definitiva é no dash, e existe campo próprio para ela: preencher
+ * `landing_slug` (migration 0004) resolve sem tocar em código, e o valor
+ * explícito tem precedência sobre este mapa. Corrigido lá, apagar a linha daqui.
+ */
+const LANDING_POR_NOME: Record<string, string> = {
+  'vivart-grand-alamedas': 'vivarte',
+  'authoria-by-tebas': 'authoria',
+};
