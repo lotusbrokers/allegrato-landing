@@ -351,14 +351,17 @@ const residencialSaoVenancio: Bairro = {
  * O artigo vem por parâmetro em vez de deduzido do nome: são quatro casos, e
  * um deles ("a Vila Rio Branco") já contraria a regra do "Jardim". Adivinhar
  * gênero de nome próprio custa mais do que escrever a letra.
+ *
+ * A foto também é parâmetro: sem guia escrito, ela é o que a página tem para
+ * mostrar do bairro. Quem ainda não tem foto passa '' e cai no gradiente.
  */
-function bairroSemGuiaAinda(nome: string, slug: string, artigo: 'o' | 'a'): Bairro {
+function bairroSemGuiaAinda(nome: string, slug: string, artigo: 'o' | 'a', heroImg = ''): Bairro {
   return {
     slug,
     nome,
     cidade: 'Jundiaí',
     tagline: `Bairro de Jundiaí. O guia ainda está sendo escrito — por enquanto, veja ${artigo} ${nome} no mapa e os imóveis que a Lotus tem na região.`,
-    heroImg: '',
+    heroImg,
     stats: [],
     tldr: `${artigo === 'o' ? 'O' : 'A'} ${nome} fica em Jundiaí, São Paulo. O guia completo do bairro — como é viver aqui, comércio, acessos e lazer — ainda está sendo escrito. Por enquanto, esta página traz a localização no mapa e os imóveis que a Lotus tem por lá. Para saber como é o bairro antes de decidir, fale com a gente: quem atende conhece a região de perto.`,
     guide: [],
@@ -370,10 +373,10 @@ function bairroSemGuiaAinda(nome: string, slug: string, artigo: 'o' | 'a'): Bair
   };
 }
 
-const jardimMessina = bairroSemGuiaAinda('Jardim Messina', 'jardim-messina', 'o');
-const jardimPacaembu = bairroSemGuiaAinda('Jardim Pacaembu', 'jardim-pacaembu', 'o');
-const vilaRioBranco = bairroSemGuiaAinda('Vila Rio Branco', 'vila-rio-branco', 'a');
-const jardimColonial = bairroSemGuiaAinda('Jardim Colonial', 'jardim-colonial', 'o');
+const jardimMessina = bairroSemGuiaAinda('Jardim Messina', 'jardim-messina', 'o', '/bairros/jardim-messina.jpg');
+const jardimPacaembu = bairroSemGuiaAinda('Jardim Pacaembu', 'jardim-pacaembu', 'o', '/bairros/jardim-pacaembu.jpg');
+const vilaRioBranco = bairroSemGuiaAinda('Vila Rio Branco', 'vila-rio-branco', 'a', '/bairros/vila-rio-branco.jpg');
+const jardimColonial = bairroSemGuiaAinda('Jardim Colonial', 'jardim-colonial', 'o', '/bairros/jardim-colonial.jpg');
 
 /* ---------------------------------------------------------------------------
  * JUNDIAÍ E ITUPEVA — segunda leva de guias
@@ -392,8 +395,9 @@ const jardimColonial = bairroSemGuiaAinda('Jardim Colonial', 'jardim-colonial', 
  * "Transparência de mercado" só aparece com dado real. Os `stats` do topo saem
  * de afirmações do próprio texto, nunca de estimativa.
  *
- * `heroImg: ''` em todos: não vieram fotos. Cai no gradiente do template. Ao
- * receber foto, salvar em /public/bairros/<slug>.jpg e preencher o campo.
+ * As fotos chegaram em 08/09/2026 e estão em /public/bairros/<slug>.jpg. Horto
+ * Florestal e Recanto Quarto Centenário seguem com `heroImg: ''` — as fotos
+ * deles não vieram — e caem no gradiente do template até chegarem.
  * ------------------------------------------------------------------------- */
 
 const parqueDoColegio: Bairro = {
@@ -402,7 +406,7 @@ const parqueDoColegio: Bairro = {
   cidade: 'Jundiaí',
   tagline:
     'Bairro tradicional de Jundiaí que combina tranquilidade residencial, ruas arborizadas, infraestrutura completa e excelente localização.',
-  heroImg: '',
+  heroImg: '/bairros/parque-do-colegio.jpg',
   stats: [
     { value: 'Anos 1950', label: 'origem do loteamento' },
     { value: 'Residencial', label: 'perfil predominante' },
@@ -434,7 +438,7 @@ const parqueDaRepresa: Bairro = {
   cidade: 'Jundiaí',
   tagline:
     'Na região norte de Jundiaí, um bairro que se destaca pela tranquilidade, pela infraestrutura completa e pela forte conexão com a natureza.',
-  heroImg: '',
+  heroImg: '/bairros/parque-da-represa.jpg',
   stats: [
     { value: 'Zona norte', label: 'região de Jundiaí' },
     { value: 'Parque Linear', label: 'lazer no bairro' },
@@ -465,7 +469,7 @@ const jardimTannus: Bairro = {
   cidade: 'Jundiaí',
   tagline:
     'Na região oeste de Jundiaí, um bairro residencial conhecido pelo ambiente tranquilo, pelas ruas organizadas e pela proximidade com a Serra do Japi.',
-  heroImg: '',
+  heroImg: '/bairros/jardim-tannus.jpg',
   stats: [
     { value: 'Zona oeste', label: 'região de Jundiaí' },
     { value: 'Serra do Japi', label: 'natureza ao lado' },
@@ -496,7 +500,7 @@ const jardimGuanabara: Bairro = {
   cidade: 'Jundiaí',
   tagline:
     'Na região oeste de Jundiaí, um bairro residencial com tranquilidade, infraestrutura completa e fácil acesso às principais vias da cidade.',
-  heroImg: '',
+  heroImg: '/bairros/jardim-guanabara.jpg',
   stats: [
     { value: 'Zona oeste', label: 'região de Jundiaí' },
     { value: 'Familiar', label: 'perfil predominante' },
@@ -527,7 +531,7 @@ const gramadao: Bairro = {
   cidade: 'Jundiaí',
   tagline:
     'Na região oeste de Jundiaí, um bairro conhecido pela tranquilidade, pelas áreas verdes e pela qualidade de vida.',
-  heroImg: '',
+  heroImg: '/bairros/gramadao.jpg',
   stats: [
     { value: 'Zona oeste', label: 'região de Jundiaí' },
     { value: 'Arborizado', label: 'ambiente predominante' },
@@ -557,7 +561,7 @@ const retiro: Bairro = {
   cidade: 'Jundiaí',
   tagline:
     'Um dos bairros mais consolidados de Jundiaí, com infraestrutura completa, mobilidade privilegiada e imóveis de perfis bem diferentes entre si.',
-  heroImg: '',
+  heroImg: '/bairros/retiro.jpg',
   stats: [
     { value: 'Zona oeste', label: 'região de Jundiaí' },
     { value: 'Misto', label: 'perfil urbano' },
@@ -587,7 +591,7 @@ const jardimSamambaia: Bairro = {
   cidade: 'Jundiaí',
   tagline:
     'Uma das regiões mais valorizadas de Jundiaí: perfil residencial, ruas arborizadas, imóveis de alto padrão e localização estratégica.',
-  heroImg: '',
+  heroImg: '/bairros/jardim-samambaia.jpg',
   stats: [
     { value: 'Alto padrão', label: 'perfil residencial' },
     { value: 'Jundiaí Shopping', label: 'comércio próximo' },
@@ -638,7 +642,7 @@ const jardimErmida: Bairro = {
   cidade: 'Jundiaí',
   tagline:
     'Uma das regiões mais promissoras de Jundiaí: tranquilidade, boa infraestrutura e acesso rápido às principais vias da cidade.',
-  heroImg: '',
+  heroImg: '/bairros/jardim-ermida.jpg',
   stats: [
     { value: 'Condomínios', label: 'perfil predominante' },
     { value: 'Serra do Japi', label: 'natureza próxima' },
@@ -699,7 +703,7 @@ const vilaHortolandia: Bairro = {
   cidade: 'Jundiaí',
   tagline:
     'Na região oeste de Jundiaí, um bairro que combina tradição, infraestrutura completa e excelente mobilidade urbana.',
-  heroImg: '',
+  heroImg: '/bairros/vila-hortolandia.jpg',
   stats: [
     { value: 'Zona oeste', label: 'região de Jundiaí' },
     { value: 'Misto', label: 'perfil do bairro' },
@@ -729,7 +733,7 @@ const aeroporto: Bairro = {
   cidade: 'Jundiaí',
   tagline:
     'Na região oeste de Jundiaí, um bairro que combina história, tranquilidade e grande potencial de valorização.',
-  heroImg: '',
+  heroImg: '/bairros/aeroporto.jpg',
   stats: [
     { value: 'Desde 1941', label: 'aeroporto em atividade' },
     { value: 'Zona oeste', label: 'região de Jundiaí' },
@@ -760,7 +764,7 @@ const engordadouro: Bairro = {
   cidade: 'Jundiaí',
   tagline:
     'Na região noroeste de Jundiaí, um bairro em transformação que une tradição, desenvolvimento urbano, áreas verdes e qualidade de vida.',
-  heroImg: '',
+  heroImg: '/bairros/engordadouro.jpg',
   stats: [
     { value: 'Zona noroeste', label: 'região de Jundiaí' },
     { value: 'Parque Ângelo Costa', label: 'lazer no bairro' },
