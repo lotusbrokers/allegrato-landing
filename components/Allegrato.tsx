@@ -198,7 +198,7 @@ export default function Allegrato() {
             Conquiste agora seu lugar.
           </h1>
           <p className="hero-sub">
-            O apartamento mais completo do Medeiros para você sair do aluguel pagando pouco, lazer com tudo pronto e a segurança da construtora nº 1 de Jundiaí.
+            O apartamento mais completo do Medeiros para você sair do aluguel pagando pouco, lazer com tudo pronto e a segurança de um empreendimento realizado pela Santa Angela Construtora.
           </p>
           <div className="price-pill">
             <span>
@@ -1167,7 +1167,7 @@ export default function Allegrato() {
                 40+ anos de história
               </h3>
               <p>
-                Santa Angela: mais de 20 empreendimentos entregues em Jundiaí e prêmios Master Imobiliário.
+                Santa Angela Construtora: 59 empreendimentos realizados, 10.990 unidades entregues e mais de 850 mil m² construídos.
               </p>
             </div>
             <div className="tcard reveal d3">
@@ -1316,7 +1316,7 @@ export default function Allegrato() {
                     Chamar agora no WhatsApp
                   </a>
                   <p className="privacy">
-                    Ao enviar, você concorda em ser contatado sobre o Allegrato Residencial. Seus dados não são compartilhados com terceiros.
+                    Ao enviar, você autoriza a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a entrar em contato sobre o Allegrato Residencial, conforme a <a href="/lotus-privacidade" target="_top">Política de Privacidade da Lotus Brokers</a>.
                   </p>
                 </form>
               </div>
@@ -1435,7 +1435,7 @@ export default function Allegrato() {
           </path>
         </svg>
         <span className="txt">
-          Fale conosco
+          Falar com corretor Lotus
         </span>
       </a>
       {/* lightbox */}

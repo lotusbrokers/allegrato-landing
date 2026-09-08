@@ -1773,7 +1773,7 @@ export default function Vigore() {
             )}
           >
             <img
-              src="https://static.wixstatic.com/media/72b66e_1045ce5fbb2249f898325feaebb01a3f~mv2.png/v1/crop/x_370,y_271,w_1180,h_538,scale_1/santa-angela.png"
+              src="/construtoras/santa-angela.png"
               alt="Santa Angela Construtora"
               style={parseStyle(
                 'height:clamp(82px,11vw,122px);width:auto;max-width:90%;object-fit:contain'
@@ -1917,7 +1917,7 @@ export default function Vigore() {
                 "font-family:'Hanken Grotesk';font-weight:400;font-size:17px;line-height:1.7;color:rgba(255,255,255,.72);margin-bottom:30px;max-width:44ch;opacity:0;transform:translateY(24px);transition:all .8s cubic-bezier(.16,.84,.44,1) .12s"
               )}
             >
-              Preencha o formulário e um de nossos consultores entra em contato pelo WhatsApp com
+              Preencha o formulário e um corretor da Lotus Brokers entra em contato pelo WhatsApp com
               todas as condições e disponibilidade.
             </p>
             <Hoverable
@@ -2151,7 +2151,7 @@ export default function Vigore() {
               "font-family:'Hanken Grotesk';font-size:12px;color:rgba(255,255,255,.4);margin-top:22px"
             )}
           >
-            © 2026 Imobiliária Lotus Brokers, Todos os direitos reservados.
+            © 2026 Imobiliária Lotus Brokers. Página, divulgação e atendimento sob responsabilidade da Lotus Brokers, autorizada a comercializar este empreendimento. Realização: Santa Angela Construtora.
           </p>
         </div>
       </footer>

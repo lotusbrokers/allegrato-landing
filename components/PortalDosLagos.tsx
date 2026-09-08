@@ -310,7 +310,7 @@ export default function PortalDosLagos() {
           <a href="#diferenciais">Diferenciais</a>
           <a href="#galeria">Galeria</a>
           <a href="#realizacao">Quem realiza</a>
-          <a href="#contato"><span className="script">fale conosco</span> Receber valores</a>
+          <a href="#contato"><span className="script">Lotus Brokers</span> Receber valores</a>
         </nav>
         <div className="mmenu__foot">
           <a className="btn btn--wa btn--block" href="#" data-wa="menu">
@@ -613,7 +613,7 @@ export default function PortalDosLagos() {
               <button className="btn btn--lg btn--block" type="submit">Enviar pelo WhatsApp
                 <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: '19px', height: '19px' }}><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.06c-.24.68-1.42 1.32-1.95 1.36-.5.05-.5.41-3.15-.66-2.65-1.07-4.3-3.78-4.43-3.96-.13-.18-1.06-1.4-1.06-2.68 0-1.28.67-1.9.91-2.17.24-.26.52-.33.7-.33l.5.01c.16 0 .38-.06.59.45.24.59.81 2.04.88 2.19.07.15.12.32.02.51-.1.18-.15.3-.29.46l-.43.5c-.14.14-.29.3-.12.58.16.27.74 1.21 1.58 1.96 1.09.97 2 1.27 2.28 1.42.27.14.43.11.59-.07.16-.18.69-.8.87-1.08.18-.27.36-.22.59-.13.24.09 1.52.72 1.78.85.27.13.44.2.5.31.07.11.07.62-.17 1.3Z"></path></svg>
               </button>
-              <p className="form-note">Ao enviar, você abre uma conversa no WhatsApp. Não compartilhamos seus dados.</p>
+              <p className="form-note">Ao enviar, você abre uma conversa no WhatsApp com a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, conforme a <a href="/lotus-privacidade" target="_top">Política de Privacidade da Lotus Brokers</a>.</p>
             </form>
             <div className="form-ok" id="formOk">
               <div className="ok-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M20 6 9 17l-5-5"></path></svg></div>
@@ -705,8 +705,8 @@ export default function PortalDosLagos() {
             As informações constantes no Memorial de Incorporação e nos futuros Instrumentos de Compra e Venda prevalecerão sobre as divulgadas neste material. Todas as imagens e perspectivas aqui contidas são meramente ilustrativas. As tonalidades das cores, formas e texturas podem sofrer alterações. A vegetação exposta é meramente ilustrativa e será entregue de acordo com o Projeto Paisagístico, podendo apresentar diferenças de tamanho e porte. Registro nº R3 feito no 1º Cartório de Registro de Imóveis de Jundiaí-SP, sobre matrícula nº 169.626 (protocolo nº 447.596).
           </p>
           <div className="legal__bar">
-            <span>© <span id="yr"></span> Portal dos Lagos</span>
-            <span>Realização: Santa Angela · Capital · Mac Lucer</span>
+            <span>© <span id="yr"></span> Portal dos Lagos · Página, divulgação e atendimento pela Imobiliária Lotus Brokers, autorizada a comercializar este empreendimento.</span>
+            <span>Realização: Santa Angela Construtora · Capital · Mac Lucer</span>
           </div>
         </div>
       </footer>

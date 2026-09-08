@@ -462,7 +462,7 @@ export default function MaxxSantaAngela({
             </div>
             <div data-priceinline="" style={parseStyle('display:none;margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.25)')}>
               <span style={parseStyle('font-size:11px;letter-spacing:.26em;font-weight:700;color:#E7D2A6')}>A PARTIR DE</span>
-              <div style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:34px;color:#fff;margin-top:4px;line-height:1")}>R$ 790.365,90</div>
+              <div style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:34px;color:#fff;margin-top:4px;line-height:1")}>R$ 815.071,24*</div>
               <p style={parseStyle('font-size:11.5px;color:#E3D8C6;margin:8px 0 0')}>*Torre B · 97 m² · tabela maio/2026.</p>
             </div>
           </div>
@@ -470,7 +470,7 @@ export default function MaxxSantaAngela({
         {showPriceVal && (
           <div data-reveal="" style={parseStyle('opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.16,1,.3,1) .25s,transform 1s cubic-bezier(.16,1,.3,1) .25s;position:absolute;right:32px;bottom:76px;background:rgba(251,248,243,.96);backdrop-filter:blur(6px);padding:24px 30px;border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.3);max-width:300px')} data-pricecard="">
             <span style={parseStyle('font-size:11px;letter-spacing:.26em;font-weight:700;color:#9a8a72')}>A PARTIR DE</span>
-            <div style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:38px;color:#2B2521;margin-top:6px;line-height:1")}>R$ 790.365<span style={parseStyle('font-size:22px')}>,90</span></div>
+            <div style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:38px;color:#2B2521;margin-top:6px;line-height:1")}>R$ 815.071<span style={parseStyle('font-size:22px')}>,24*</span></div>
             <p style={parseStyle('font-size:11.5px;color:#8a7d6f;margin:12px 0 0;line-height:1.5')}>*Torre B · 97 m² · valores ref. tabela maio/2026. Consulte um corretor para outras unidades.</p>
           </div>
         )}
@@ -698,22 +698,22 @@ export default function MaxxSantaAngela({
       <section style={parseStyle('position:relative;padding:clamp(56px,6vw,84px) 32px;background:#33291f;color:#F6F1E8;overflow:hidden')}>
         <div style={parseStyle('max-width:1100px;margin:0 auto;text-align:center')} data-reveal="">
           <div data-reveal="" style={parseStyle('opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)')}>
-            <img src="https://santaangelaconstrutora.com.br/wp-content/uploads/2022/11/logo-01.png" alt="Santa Angela Construtora" style={parseStyle('height:58px;width:auto;margin:0 auto 30px;display:block;opacity:.96')} />
-            <span style={parseStyle('font-size:11.5px;letter-spacing:.32em;font-weight:700;color:#D9B877')}>A CONSTRUTORA MAIS CONFIÁVEL DA REGIÃO</span>
+            <img src="/construtoras/santa-angela-negativo.png" alt="Santa Angela Construtora, realizadora do empreendimento" style={parseStyle('height:58px;width:auto;margin:0 auto 30px;display:block;opacity:.96')} />
+            <span style={parseStyle('font-size:11.5px;letter-spacing:.32em;font-weight:700;color:#D9B877')}>REALIZAÇÃO</span>
             <h2 style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;font-size:clamp(26px,3.6vw,46px);line-height:1.2;margin:22px auto 0;max-width:780px")}>Há mais de 40 anos construindo lares e a confiança de milhares de famílias.</h2>
           </div>
           <div style={parseStyle('display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:44px')} data-statgrid="">
             <div data-reveal="" style={parseStyle('opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)')}>
-              <div data-count="40" data-suffix="+" style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:clamp(48px,7vw,82px);color:#D9B877;line-height:1")}>40+</div>
-              <div style={parseStyle('font-size:14px;color:#cabfae;margin-top:10px;letter-spacing:.04em')}>anos de experiência no mercado</div>
+              <div data-count="40" data-suffix="+" style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:clamp(48px,7vw,82px);color:#D9B877;line-height:1")}>59</div>
+              <div style={parseStyle('font-size:14px;color:#cabfae;margin-top:10px;letter-spacing:.04em')}>empreendimentos realizados</div>
             </div>
             <div data-reveal="" style={parseStyle('opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1) .12s,transform .8s cubic-bezier(.16,1,.3,1) .12s')}>
-              <div data-count="9800" data-suffix="+" data-fmt="thousand" style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:clamp(48px,7vw,82px);color:#D9B877;line-height:1")}>9.800+</div>
+              <div data-count="9800" data-suffix="+" data-fmt="thousand" style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:clamp(48px,7vw,82px);color:#D9B877;line-height:1")}>10.990</div>
               <div style={parseStyle('font-size:14px;color:#cabfae;margin-top:10px;letter-spacing:.04em')}>unidades entregues</div>
             </div>
             <div data-reveal="" style={parseStyle('opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1) .24s,transform .8s cubic-bezier(.16,1,.3,1) .24s')}>
-              <div style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:clamp(48px,7vw,82px);color:#D9B877;line-height:1")}>100%</div>
-              <div style={parseStyle('font-size:14px;color:#cabfae;margin-top:10px;letter-spacing:.04em')}>seriedade e transparência</div>
+              <div style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:clamp(48px,7vw,82px);color:#D9B877;line-height:1")}>+850 mil</div>
+              <div style={parseStyle('font-size:14px;color:#cabfae;margin-top:10px;letter-spacing:.04em')}>m² construídos</div>
             </div>
           </div>
         </div>
@@ -725,10 +725,10 @@ export default function MaxxSantaAngela({
           <div data-reveal="" style={parseStyle('opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)')}>
             <div style={parseStyle('display:flex;align-items:center;gap:14px;margin-bottom:22px')}>
               <span style={parseStyle('width:34px;height:1px;background:#B0894E')}></span>
-              <span style={parseStyle('font-size:11.5px;letter-spacing:.32em;font-weight:700;color:#B0894E')}>FALE COM A GENTE</span>
+              <span style={parseStyle('font-size:11.5px;letter-spacing:.32em;font-weight:700;color:#B0894E')}>ATENDIMENTO LOTUS BROKERS</span>
             </div>
-            <h2 style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:500;font-size:clamp(30px,4vw,50px);line-height:1.08;margin:0;color:#2B2521")}>Tire suas dúvidas com<br />um corretor.</h2>
-            <p style={parseStyle('font-size:16.5px;line-height:1.7;color:#5e5347;margin:24px 0 0')}>Preencha o formulário e nossa equipe entra em contato. Prefere conversar agora? Chame no WhatsApp.</p>
+            <h2 style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:500;font-size:clamp(30px,4vw,50px);line-height:1.08;margin:0;color:#2B2521")}>Tire suas dúvidas com<br />um corretor Lotus.</h2>
+            <p style={parseStyle('font-size:16.5px;line-height:1.7;color:#5e5347;margin:24px 0 0')}>Preencha o formulário e um corretor da Lotus Brokers entra em contato. Prefere conversar agora? Chame no WhatsApp.</p>
             <Hoverable as="a" href={waLink} target="_blank" rel="noopener" baseStyle={parseStyle('display:inline-flex;align-items:center;gap:12px;margin-top:28px;background:#3FA39C;color:#fff;font-weight:700;font-size:15px;padding:16px 30px;border-radius:46px;transition:transform .3s')} hoverStyle={parseStyle('transform:translateY(-3px)')}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.3A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.8-.6-3-1.3-5-4.4-5.1-4.6-.2-.2-1.3-1.7-1.3-3.2s.8-2.3 1.1-2.6c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .7.5l.9 2.1c.1.2.1.4 0 .6l-.4.6c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.7-.1l.9-1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.4.1.2.1.9-.1 1.3z"></path></svg>
               WhatsApp (11) 92614-3393
@@ -759,7 +759,7 @@ export default function MaxxSantaAngela({
                   </Focusable>
                 </label>
                 <Hoverable as="button" type="submit" baseStyle={parseStyle('margin-top:6px;background:#8f6a2c;color:#fff;font-weight:700;font-size:15.5px;padding:17px;border:none;border-radius:46px;letter-spacing:.02em;transition:transform .3s,background .3s')} hoverStyle={parseStyle('transform:translateY(-2px);background:#7d5a26')}>Quero saber mais</Hoverable>
-                <p style={parseStyle('font-size:11.5px;color:#9a8a72;line-height:1.5;margin:2px 0 0')}>Ao enviar, autorizo o contato de corretores e parceiros, inclusive por WhatsApp, e declaro estar ciente da Política de Privacidade da Santa Angela.</p>
+                <p style={parseStyle('font-size:11.5px;color:#9a8a72;line-height:1.5;margin:2px 0 0')}>Ao enviar, autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a me contatar por telefone, e-mail ou WhatsApp, e declaro estar ciente da <a href="/lotus-privacidade" target="_top" style={parseStyle('color:#8f6a2c;text-decoration:underline')}>Política de Privacidade da Lotus Brokers</a>.</p>
               </form>
             )}
           </div>
@@ -775,13 +775,17 @@ export default function MaxxSantaAngela({
                 <svg width="30" height="34" viewBox="0 0 100 112" fill="none" stroke="currentColor" strokeWidth="4.4" strokeLinejoin="round" strokeLinecap="round"><rect x="13" y="26" width="26" height="78"></rect><rect x="61" y="26" width="26" height="78"></rect><polyline points="39,26 50,64 61,26"></polyline></svg>
                 <span style={parseStyle('display:flex;flex-direction:column;line-height:1')}><span style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:22px;letter-spacing:.16em;padding-left:.16em")}>MAXX</span><span style={parseStyle('font-size:8.5px;letter-spacing:.42em;margin-top:3px;color:#9a8a72;font-weight:600')}>SANTA ANGELA</span></span>
               </div>
-              <p style={parseStyle('font-size:14px;line-height:1.7;margin:22px 0 0;max-width:340px')}>Rua João Tonini, 400, Vila Galvão, Jundiaí/SP.</p>
-              <p style={parseStyle('font-size:14px;line-height:1.7;margin:14px 0 0;max-width:340px')}><strong style={parseStyle('color:#F6F1E8')}>Vendas:</strong> Casa Santa Angela, Av. Antônio Frederico Ozanan, 7600, atrás do Burger King Latorre.</p>
+              <p style={parseStyle('font-size:14px;line-height:1.7;margin:22px 0 0;max-width:340px')}>Página, divulgação e atendimento sob responsabilidade da Imobiliária Lotus Brokers, autorizada a comercializar os empreendimentos da Santa Angela Construtora.</p>
+              {/* O endereço de vendas e o canal de relacionamento da Santa
+                  Angela saíram daqui: o atendimento desta página é da Lotus, e
+                  manter os canais da construtora no fluxo de captação confunde
+                  quem está atendendo. */}
+              <p style={parseStyle('font-size:14px;line-height:1.7;margin:14px 0 0;max-width:340px')}><strong style={parseStyle('color:#F6F1E8')}>Atendimento:</strong> Lotus Brokers, pelo WhatsApp ou pelo formulário desta página.</p>
             </div>
             <div>
               <h4 style={parseStyle('font-size:12px;letter-spacing:.26em;color:#D9B877;font-weight:700;margin:0 0 18px')}>CONTATO</h4>
               <Hoverable as="a" href={waLink} target="_blank" rel="noopener" baseStyle={parseStyle('display:block;font-size:14.5px;margin-bottom:12px')} hoverStyle={parseStyle('color:#fff')}>WhatsApp (11) 92614-3393</Hoverable>
-              <Hoverable as="a" href="mailto:relacionamento@santangela.com.br" baseStyle={parseStyle('display:block;font-size:14.5px;margin-bottom:12px')} hoverStyle={parseStyle('color:#fff')}>relacionamento@santangela.com.br</Hoverable>
+              <Hoverable as="a" href="/lotus-privacidade" target="_top" baseStyle={parseStyle('display:block;font-size:14.5px;margin-bottom:12px')} hoverStyle={parseStyle('color:#fff')}>Política de Privacidade</Hoverable>
             </div>
             <div>
               <h4 style={parseStyle('font-size:12px;letter-spacing:.26em;color:#D9B877;font-weight:700;margin:0 0 18px')}>NAVEGAÇÃO</h4>
@@ -793,7 +797,7 @@ export default function MaxxSantaAngela({
           </div>
           <p style={parseStyle('font-size:11px;line-height:1.7;color:#7d7163;margin:48px 0 0;border-top:1px solid rgba(255,255,255,.08);padding-top:28px')}>Incorporação imobiliária registrada conforme R.7 da matrícula nº 163.077 do 1º Cartório de Registro de Imóveis de Jundiaí, em 13 de fevereiro de 2020. Todas as imagens são perspectivas digitais do empreendimento, razão pela qual as informações constantes no Memorial de Incorporação e nos contratos de promessa de compra e venda prevalecerão sobre as imagens divulgadas neste material. As árvores estão em sua perspectiva adulta, podendo haver variação de tamanho na entrega. Objetos de decoração, mobiliário e equipamentos retratados não fazem parte da entrega das unidades nem das áreas comuns.</p>
           <p style={parseStyle('font-size:12px;color:#7d7163;margin:22px 0 0')}>Maxx Santa Angela · Santa Angela Construtora, material publicitário sem valor contratual.</p>
-          <p style={parseStyle('font-size:12.5px;color:#cabfae;margin:10px 0 0;font-weight:700;letter-spacing:.02em')}>Página desenvolvida pela <span style={parseStyle('color:#D9B877')}>Imobiliária Lotus Brokers</span>.</p>
+          <p style={parseStyle('font-size:12.5px;color:#cabfae;margin:10px 0 0;font-weight:700;letter-spacing:.02em')}>Página, divulgação e atendimento pela <span style={parseStyle('color:#D9B877')}>Imobiliária Lotus Brokers</span>, imobiliária autorizada a comercializar este empreendimento. A Santa Angela Construtora é a realizadora do empreendimento.</p>
         </div>
       </footer>
 

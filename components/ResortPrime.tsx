@@ -381,12 +381,12 @@ export default function ResortPrime() {
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.405z"></path></svg>
                 Falar no WhatsApp
               </button>
-              <p className="legal">Ao enviar, você concorda em receber contato sobre o empreendimento.</p>
+              <p className="legal">Ao enviar, você autoriza a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a entrar em contato sobre o empreendimento, conforme a <a href="/lotus-privacidade" target="_top">Política de Privacidade da Lotus Brokers</a>.</p>
             </form>
             <div className="form-ok" id="form-hero-ok" style={{ display: 'none' }}>
               <div className="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 6 9 17l-5-5"></path></svg></div>
               <h3>Quase lá!</h3>
-              <p>Abrimos o WhatsApp para você concluir o agendamento. Em breve nosso time retorna.</p>
+              <p>Abrimos o WhatsApp para você concluir o agendamento. Em breve um corretor da Lotus Brokers retorna.</p>
             </div>
           </div>
         </div>
@@ -675,12 +675,12 @@ export default function ResortPrime() {
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.405z"></path></svg>
                 Agende sua visita
               </button>
-              <p className="legal">Retornamos pelo WhatsApp informado. Atendimento Santa Angela Construtora.</p>
+              <p className="legal">Retornamos pelo WhatsApp informado. Atendimento pela Imobiliária Lotus Brokers.</p>
             </form>
             <div className="form-ok" id="form-cta-ok" style={{ display: 'none' }}>
               <div className="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 6 9 17l-5-5"></path></svg></div>
               <h3>Recebido!</h3>
-              <p>Abrimos o WhatsApp para concluir. Nosso time entra em contato em breve.</p>
+              <p>Abrimos o WhatsApp para concluir. Um corretor da Lotus Brokers entra em contato em breve.</p>
             </div>
           </div>
         </div>
@@ -719,7 +719,7 @@ export default function ResortPrime() {
             <p>Registro do Imóvel: Incorporação registrada na matrícula 171.488 no 1º Cartório de Registro de Imóveis de Jundiaí-SP, em 16/11/21.</p>
           </div>
           <div className="footer__bar">
-            <span>© 2025 Lotus Brokers. Todos os direitos reservados.</span>
+            <span>© 2026 Imobiliária Lotus Brokers. Página, divulgação e atendimento sob responsabilidade da Lotus Brokers, autorizada a comercializar este empreendimento. Realização: Santa Angela Construtora.</span>
             <span>Resort Prime Santa Angela · Jundiaí / SP</span>
           </div>
         </div>

@@ -880,7 +880,7 @@ export default function AltosDaAvenida({
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.05L2 22l5.1-1.33A10 10 0 1 0 12 2Zm5.5 14.2c-.23.66-1.34 1.26-1.85 1.3-.5.05-.97.23-3.27-.68-2.75-1.08-4.5-3.9-4.64-4.08-.13-.18-1.1-1.47-1.1-2.8s.7-1.98.95-2.25a1 1 0 0 1 .72-.34l.52.01c.17.01.4-.06.62.48.23.55.78 1.9.85 2.04.07.14.11.3.02.48-.09.18-.14.3-.27.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.56.16.27.72 1.18 1.54 1.91 1.06.94 1.95 1.24 2.22 1.38.27.14.43.12.59-.07.16-.18.68-.79.86-1.06.18-.27.36-.23.61-.14.25.09 1.6.75 1.87.89.27.14.45.2.52.32.07.11.07.66-.16 1.32Z"></path></svg>
                 Enviar pelo WhatsApp
               </Hoverable>
-              <p style={parseStyle('margin:4px 0 0; font-size:11.5px; line-height:1.5; color:#a59a89; text-align:center;')}>Ao enviar, você autoriza o contato de corretores e parceiros, inclusive por WhatsApp, sobre o empreendimento.</p>
+              <p style={parseStyle('margin:4px 0 0; font-size:11.5px; line-height:1.5; color:#a59a89; text-align:center;')}>Ao enviar, você autoriza a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a entrar em contato, inclusive por WhatsApp, conforme a <a href="/lotus-privacidade" target="_top" style={parseStyle('color:inherit;text-decoration:underline')}>Política de Privacidade da Lotus Brokers</a>.</p>
             </div>
           </form>
         </div>
@@ -961,7 +961,7 @@ export default function AltosDaAvenida({
             </div>
           </div>
           <p style={parseStyle('margin:26px 0 0; font-size:11.5px; line-height:1.7; color:rgba(255,255,255,.42); max-width:1000px;')}>Imagens meramente ilustrativas, sujeitas a alteração. As tonalidades das cores, formas e texturas podem sofrer alterações. Os móveis e utensílios são sugestões de decoração e não fazem parte do contrato de aquisição. As medidas dos apartamentos são internas e de face a face. Registro do Imóvel: Incorporação registrada na matrícula 155.214 no 2º Oficial de Registro de Imóveis de Jundiaí, em 24/05/21. Material informativo elaborado pela Imobiliária Lotus Brokers.</p>
-          <p style={parseStyle('margin:18px 0 0; font-size:12px; color:rgba(255,255,255,.5);')}>© 2026 Imobiliária Lotus Brokers · Altos da Avenida, Construtora Santa Angela.</p>
+          <p style={parseStyle('margin:18px 0 0; font-size:12px; color:rgba(255,255,255,.5);')}>© 2026 Imobiliária Lotus Brokers · Página, divulgação e atendimento sob responsabilidade da Lotus Brokers, autorizada a comercializar este empreendimento. Realização: Santa Angela Construtora.</p>
         </div>
       </footer>
 
