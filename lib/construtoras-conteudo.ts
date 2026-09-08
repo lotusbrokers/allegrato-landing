@@ -330,6 +330,23 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
       'Em essência: a REM Construtora combina tradição, confiança e inovação, desenvolvendo empreendimentos com foco em qualidade, pontualidade, rentabilidade e melhoria da vida de seus clientes.',
     ],
   },
+
+  // Texto e logo enviados pela Lotus em 08/09/2026. Sem bloco de números: os
+  // dela vêm dentro do texto corrido, e recortá-los para virar destaque seria
+  // escolher por ela quais números merecem a vitrine.
+  'sebel-empreendimentos': {
+    logo: '/construtoras/sebel-empreendimentos.png',
+    paragrafos: [
+      'A Sebel Empreendimentos é uma incorporadora e construtora com mais de 40 anos de atuação no mercado imobiliário, reunindo experiência, solidez e excelência na execução de empreendimentos residenciais, comerciais e obras públicas.',
+      'Desde 1980, a empresa construiu uma trajetória marcada pela versatilidade e capacidade técnica, atuando desde projetos residenciais de alto padrão até grandes conjuntos habitacionais. Ao longo de sua história, já são mais de 100 mil m² de obras realizadas e aproximadamente 1.500 unidades habitacionais, sempre com atenção à qualidade construtiva, planejamento e aos detalhes de cada projeto.',
+      'À frente da empresa está o engenheiro João Carlos Custódio, profissional com mais de 50 anos de experiência no setor da construção civil. Sua trajetória reúne participação em projetos que ultrapassam 500 mil m² de área construída e mais de 10 mil unidades habitacionais, além de obras comerciais, escolas, retrofit, restauro, infraestrutura urbana e manutenção rodoviária.',
+      'A Sebel também mantém seu compromisso com a qualidade, responsabilidade social, respeito aos colaboradores e cuidado com o meio ambiente, princípios reconhecidos por sua certificação no Programa Brasileiro da Qualidade e Produtividade do Habitat (PBQP-H).',
+    ],
+    paragrafosFinais: [
+      'Em constante expansão, a empresa possui mais de 1.500 unidades habitacionais em processo de aprovação na cidade de São Paulo, além de um complexo comercial com mais de 7 mil m². Em Jundiaí, a Sebel reforça sua confiança no desenvolvimento da região com projetos já aprovados e empreendimentos em execução.',
+      'Com presença em São Paulo e escritório em Jundiaí, a Sebel Empreendimentos transforma experiência em projetos sólidos, bem planejados e preparados para gerar valor ao longo do tempo.',
+    ],
+  },
 };
 
 /** O conteúdo institucional desta construtora, ou null se ainda não houver. */
