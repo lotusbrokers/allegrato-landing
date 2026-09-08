@@ -1783,84 +1783,15 @@ export default function Vigore() {
           <p
             data-reveal=""
             style={parseStyle(
-              "font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:clamp(24px,3.4vw,42px);line-height:1.25;color:#fff;max-width:24ch;margin:0 auto 50px;opacity:0;transform:translateY(24px);transition:all .8s cubic-bezier(.16,.84,.44,1) .08s"
+              "font-family:'Hanken Grotesk';font-size:15px;line-height:1.7;color:rgba(255,255,255,.66);max-width:520px;margin:0 auto;text-align:center"
             )}
           >
-            “Há mais de 40 anos realizando o sonho de morar bem em Jundiaí.”
+            Empreendimento realizado pela Santa Angela Construtora.{' '}
+            <a href="/construtoras/santa-angela" target="_top" style={parseStyle('color:#c8a86a;text-decoration:underline')}>
+              Conheça a construtora
+            </a>
+            .
           </p>
-          <div
-            style={parseStyle(
-              'display:grid;grid-template-columns:repeat(3,1fr);gap:30px;max-width:760px;margin:0 auto'
-            )}
-          >
-            <div
-              data-reveal=""
-              style={parseStyle(
-                'opacity:0;transform:translateY(24px);transition:all .8s cubic-bezier(.16,.84,.44,1) .1s'
-              )}
-            >
-              <div
-                data-count="40"
-                data-prefix="+"
-                style={parseStyle(
-                  "font-family:'Archivo';font-weight:800;font-size:clamp(34px,4vw,52px);color:#F2581E;line-height:1"
-                )}
-              >
-                +0
-              </div>
-              <div
-                style={parseStyle(
-                  "font-family:'Hanken Grotesk';font-size:14px;color:rgba(255,255,255,.6);margin-top:6px"
-                )}
-              >
-                anos de mercado
-              </div>
-            </div>
-            <div
-              data-reveal=""
-              style={parseStyle(
-                'opacity:0;transform:translateY(24px);transition:all .8s cubic-bezier(.16,.84,.44,1) .18s'
-              )}
-            >
-              <div
-                data-count="9800"
-                data-prefix="+"
-                style={parseStyle(
-                  "font-family:'Archivo';font-weight:800;font-size:clamp(34px,4vw,52px);color:#F2581E;line-height:1"
-                )}
-              >
-                +0
-              </div>
-              <div
-                style={parseStyle(
-                  "font-family:'Hanken Grotesk';font-size:14px;color:rgba(255,255,255,.6);margin-top:6px"
-                )}
-              >
-                unidades entregues
-              </div>
-            </div>
-            <div
-              data-reveal=""
-              style={parseStyle(
-                'opacity:0;transform:translateY(24px);transition:all .8s cubic-bezier(.16,.84,.44,1) .26s'
-              )}
-            >
-              <div
-                style={parseStyle(
-                  "font-family:'Archivo';font-weight:800;font-size:clamp(34px,4vw,52px);color:#F2581E;line-height:1"
-                )}
-              >
-                A
-              </div>
-              <div
-                style={parseStyle(
-                  "font-family:'Hanken Grotesk';font-size:14px;color:rgba(255,255,255,.6);margin-top:6px"
-                )}
-              >
-                PBQP-H nível A · ISO 9001
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 

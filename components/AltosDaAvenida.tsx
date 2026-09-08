@@ -185,14 +185,13 @@ const DIF_COMUM = [
   'Infraestrutura para Wi-Fi nas áreas de lazer',
 ];
 
-const CERTS = ['PBQP-H 2018 · Nível A', 'ISO 9001:2015', 'NBR 15575 · Desempenho', 'NBR 9050 · Acessibilidade', 'NBR 16071 · Playground'];
 
 const FAQS = [
   { q: 'Onde fica o Altos da Avenida?', a: 'Na Avenida Samuel Martins, Jardim do Lago, em Jundiaí/SP, a cerca de 10 minutos da Rodovia Anhanguera e 15 minutos do Centro de Jundiaí, com escolas, padarias, mercados, bares e restaurantes por perto.' },
   { q: 'Quais são as metragens e plantas disponíveis?', a: 'São apartamentos de 58, 68, 96 e 105m², com opções de 2 ou 3 dormitórios e suíte. Fale com a Imobiliária Lotus Brokers para conferir a disponibilidade de cada torre.' },
   { q: 'O empreendimento tem área de lazer?', a: 'Sim, lazer completo: piscina adulto e infantil, academia, fitness externo, salão de festas, coworking, salão de jogos, espaço gamer, quadra poliesportiva, playground, espaço baby, espaço pet, bem-estar, 2 churrasqueiras e muito mais.' },
   { q: 'Qual é o status da obra?', a: 'O Altos da Avenida é um empreendimento da Construtora Santa Angela atualmente em construção. Consulte a Imobiliária Lotus Brokers para informações atualizadas sobre prazos.' },
-  { q: 'Quem é a construtora?', a: 'A Construtora Santa Angela atua há mais de 40 anos em Jundiaí, Americana e Itatiba, com mais de 9.800 unidades entregues e certificações de qualidade como PBQP-H nível A e ISO 9001:2015.' },
+  { q: 'Quem realiza e quem atende?', a: 'O Altos da Avenida é realizado pela Santa Angela Construtora. A página, a divulgação e o atendimento são da Imobiliária Lotus Brokers, autorizada a comercializar o empreendimento.' },
   { q: 'Como faço para visitar ou saber os valores?', a: 'É só preencher o formulário desta página ou clicar no botão do WhatsApp. Um especialista da Imobiliária Lotus Brokers vai te atender e passar valores, condições e disponibilidade.' },
 ];
 
@@ -584,20 +583,6 @@ export default function AltosDaAvenida({
             <p data-reveal="" data-reveal-delay="200" style={parseStyle('margin:18px 0 0; font-size:17px; line-height:1.8; color:#4a463f; max-width:540px;')}>
               A implantação foi desenhada com fluxos não-ortogonais, que se deixam preencher por um paisagismo assinado com o conceito de <em>Land Art</em>, onde o grafismo dos jardins agrega valor artístico a cada caminho.
             </p>
-            <div data-reveal="" data-reveal-delay="260" style={parseStyle('display:flex; gap:38px; margin-top:40px; flex-wrap:wrap;')}>
-              <div data-counter="40" style={parseStyle('display:flex; flex-direction:column;')}>
-                <span style={parseStyle("font-family:'Cormorant Garamond',serif; font-size:54px; font-weight:600; color:#bd6a45; line-height:1;")}><span data-count-target="">40</span><span style={parseStyle('font-size:30px;')}>+</span></span>
-                <span style={parseStyle("font-family:'Barlow Semi Condensed',sans-serif; font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:#6f665b; margin-top:6px;")}>Anos de Santa Angela</span>
-              </div>
-              <div data-counter="9800" style={parseStyle('display:flex; flex-direction:column;')}>
-                <span style={parseStyle("font-family:'Cormorant Garamond',serif; font-size:54px; font-weight:600; color:#bd6a45; line-height:1;")}><span data-count-target="">9.800</span><span style={parseStyle('font-size:30px;')}>+</span></span>
-                <span style={parseStyle("font-family:'Barlow Semi Condensed',sans-serif; font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:#6f665b; margin-top:6px;")}>Unidades entregues</span>
-              </div>
-              <div style={parseStyle('display:flex; flex-direction:column;')}>
-                <span style={parseStyle("font-family:'Cormorant Garamond',serif; font-size:54px; font-weight:600; color:#bd6a45; line-height:1;")}>2,70<span style={parseStyle('font-size:24px;')}>m</span></span>
-                <span style={parseStyle("font-family:'Barlow Semi Condensed',sans-serif; font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:#6f665b; margin-top:6px;")}>Pé-direito dos apês</span>
-              </div>
-            </div>
           </div>
           <div data-reveal="" data-reveal-delay="120" style={parseStyle('position:relative;')}>
             <div style={parseStyle('position:relative; border-radius:4px; overflow:hidden; box-shadow:0 40px 80px rgba(23,63,49,.28);')}>
@@ -807,15 +792,6 @@ export default function AltosDaAvenida({
               </div>
             </div>
           </div>
-          {/* certifications */}
-          <div data-reveal="" style={parseStyle('margin-top:24px; background:#fff; border-radius:6px; padding:32px clamp(28px,3vw,44px); box-shadow:0 20px 50px rgba(23,63,49,.07); display:flex; flex-wrap:wrap; align-items:center; gap:30px; justify-content:space-between;')}>
-            <span style={parseStyle("font-family:'Barlow Semi Condensed',sans-serif; font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#173f31;")}>Qualidade &amp; Segurança certificadas</span>
-            <div style={parseStyle('display:flex; flex-wrap:wrap; gap:12px;')}>
-              {CERTS.map((c, i) => (
-                <span key={i} style={parseStyle('display:inline-flex; align-items:center; gap:8px; background:#f6f1e8; border:1px solid #e4dac7; border-radius:40px; padding:9px 18px; font-size:13.5px; font-weight:600; color:#1f5240;')}>{c}</span>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
@@ -835,11 +811,6 @@ export default function AltosDaAvenida({
             <h2 data-reveal="" data-reveal-delay="80" style={parseStyle("margin:0; font-family:'Cormorant Garamond',serif; font-size:clamp(34px,4.6vw,58px); font-weight:600; line-height:1.05;")}>Há 40 anos realizando<br />sonhos em Jundiaí</h2>
             <p data-reveal="" data-reveal-delay="140" style={parseStyle('margin:26px 0 0; font-size:17px; line-height:1.8; color:rgba(255,255,255,.8); max-width:560px;')}>A Construtora Santa Angela está presente em Jundiaí, Americana e Itatiba. Em constante transformação, evolui a cada projeto em observação, inovação e criatividade, acompanhando todas as fases da obra, do início à entrega das chaves.</p>
             <p data-reveal="" data-reveal-delay="200" style={parseStyle('margin:16px 0 0; font-size:17px; line-height:1.8; color:rgba(255,255,255,.8); max-width:560px;')}>Com confiança, respeito e comprometimento, queremos que a sua família viva a melhor experiência num empreendimento Santa Angela.</p>
-            <div data-reveal="" data-reveal-delay="260" style={parseStyle('display:flex; gap:48px; margin-top:38px; flex-wrap:wrap;')}>
-              <div><span style={parseStyle("font-family:'Cormorant Garamond',serif; font-size:48px; font-weight:600; color:#e9b896; line-height:1;")}>+40</span><span style={parseStyle("display:block; font-family:'Barlow Semi Condensed',sans-serif; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.6); margin-top:6px;")}>anos de história</span></div>
-              <div><span style={parseStyle("font-family:'Cormorant Garamond',serif; font-size:48px; font-weight:600; color:#e9b896; line-height:1;")}>+9.800</span><span style={parseStyle("display:block; font-family:'Barlow Semi Condensed',sans-serif; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.6); margin-top:6px;")}>unidades entregues</span></div>
-              <div><span style={parseStyle("font-family:'Cormorant Garamond',serif; font-size:48px; font-weight:600; color:#e9b896; line-height:1;")}>3</span><span style={parseStyle("display:block; font-family:'Barlow Semi Condensed',sans-serif; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.6); margin-top:6px;")}>cidades atendidas</span></div>
-            </div>
           </div>
         </div>
       </section>

@@ -700,21 +700,7 @@ export default function MaxxSantaAngela({
           <div data-reveal="" style={parseStyle('opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)')}>
             <img src="/construtoras/santa-angela-negativo.png" alt="Santa Angela Construtora, realizadora do empreendimento" style={parseStyle('height:58px;width:auto;margin:0 auto 30px;display:block;opacity:.96')} />
             <span style={parseStyle('font-size:11.5px;letter-spacing:.32em;font-weight:700;color:#D9B877')}>REALIZAÇÃO</span>
-            <h2 style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;font-size:clamp(26px,3.6vw,46px);line-height:1.2;margin:22px auto 0;max-width:780px")}>Há mais de 40 anos construindo lares e a confiança de milhares de famílias.</h2>
-          </div>
-          <div style={parseStyle('display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:44px')} data-statgrid="">
-            <div data-reveal="" style={parseStyle('opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)')}>
-              <div data-count="40" data-suffix="+" style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:clamp(48px,7vw,82px);color:#D9B877;line-height:1")}>59</div>
-              <div style={parseStyle('font-size:14px;color:#cabfae;margin-top:10px;letter-spacing:.04em')}>empreendimentos realizados</div>
-            </div>
-            <div data-reveal="" style={parseStyle('opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1) .12s,transform .8s cubic-bezier(.16,1,.3,1) .12s')}>
-              <div data-count="9800" data-suffix="+" data-fmt="thousand" style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:clamp(48px,7vw,82px);color:#D9B877;line-height:1")}>10.990</div>
-              <div style={parseStyle('font-size:14px;color:#cabfae;margin-top:10px;letter-spacing:.04em')}>unidades entregues</div>
-            </div>
-            <div data-reveal="" style={parseStyle('opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1) .24s,transform .8s cubic-bezier(.16,1,.3,1) .24s')}>
-              <div style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:clamp(48px,7vw,82px);color:#D9B877;line-height:1")}>+850 mil</div>
-              <div style={parseStyle('font-size:14px;color:#cabfae;margin-top:10px;letter-spacing:.04em')}>m² construídos</div>
-            </div>
+            <p style={parseStyle('font-size:15px;line-height:1.7;color:#cabfae;margin:18px auto 0;max-width:560px')}>Empreendimento realizado pela Santa Angela Construtora. <a href="/construtoras/santa-angela" target="_top" style={parseStyle('color:#D9B877;text-decoration:underline')}>Conheça a construtora</a>.</p>
           </div>
         </div>
       </section>

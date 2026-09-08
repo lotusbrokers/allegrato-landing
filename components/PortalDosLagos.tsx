@@ -497,13 +497,6 @@ export default function PortalDosLagos() {
             <div className="diff-item"><div className="diff-item__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M3 9h18l-1.5 11h-15z"></path><path d="M3 9 5 4h14l2 5"></path><path d="M9 13v3M15 13v3"></path></svg></div><h4>Infra para mini mercado</h4><p>Estrutura prevista para a implantação de um mini mercado no condomínio.</p></div>
             <div className="diff-item"><div className="diff-item__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="11" width="18" height="10" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div><h4>Áreas comuns equipadas</h4><p>Espaços entregues equipados e decorados, prontos para usar.</p></div>
           </div>
-          <div className="cert-strip reveal" data-d="2">
-            <span>PBQP-H Nível A</span>
-            <span>NBR 15575 Desempenho</span>
-            <span>NBR 9050 Acessibilidade</span>
-            <span>NBR 16071 Playground</span>
-            <span>ISO 9001:2015</span>
-          </div>
         </div>
       </section>
 
@@ -665,11 +658,6 @@ export default function PortalDosLagos() {
           </div>
           <div className="realiza__logos reveal" data-d="1">
             <img src="/portal-dos-lagos/a002.jpg" alt="Santa Angela Construtora, Capital Empreendimentos e Mac Lucer" />
-          </div>
-          <div className="realiza__cards reveal" data-d="1">
-            <div className="rc"><b>Santa Angela Construtora</b><p><span className="yr">+35 anos</span> presentes em Jundiaí, Americana e Itatiba. Certificações PBQP-H nível A e ISO 9001:2015.</p></div>
-            <div className="rc"><b>Capital Empreendimentos</b><p><span className="yr">+35 anos</span> de atuação, com destaque no segmento de loteamentos residenciais e incorporação.</p></div>
-            <div className="rc"><b>Mac Lucer Empreendimentos</b><p><span className="yr">+25 anos</span> no mercado. Empresa familiar reconhecida pela qualidade dos seus projetos.</p></div>
           </div>
         </div>
       </section>

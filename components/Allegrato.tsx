@@ -1120,7 +1120,7 @@ export default function Allegrato() {
               Segurança & Confiança
             </span>
             <h2>
-              A tranquilidade de comprar com a nº 1 de Jundiaí.
+              A tranquilidade de comprar com quem acompanha o empreendimento de perto.
             </h2>
           </div>
           <div className="trust-grid">
@@ -1156,20 +1156,6 @@ export default function Allegrato() {
                 Prefeitura de Jundiaí (Alvará SAEPRO1318/2025) e GRAPROHAB (nº 230/2024). Incorporação registrada na matrícula.
               </p>
             </div>
-            <div className="tcard reveal d2">
-              <div className="ic">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                  <path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-5h6v5">
-                  </path>
-                </svg>
-              </div>
-              <h3>
-                40+ anos de história
-              </h3>
-              <p>
-                Santa Angela Construtora: 59 empreendimentos realizados, 10.990 unidades entregues e mais de 850 mil m² construídos.
-              </p>
-            </div>
             <div className="tcard reveal d3">
               <div className="ic">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -1186,23 +1172,6 @@ export default function Allegrato() {
                 Matrícula nº 187.994 (1º RI de Jundiaí), sem hipotecas, penhoras ou ações.
               </p>
             </div>
-          </div>
-          <div className="certs reveal">
-            <span className="cert">
-              PBQP-H nível A
-            </span>
-            <span className="cert">
-              ISO 9001:2015
-            </span>
-            <span className="cert">
-              NBR 15575 · Desempenho
-            </span>
-            <span className="cert">
-              NBR 9050 · Acessibilidade
-            </span>
-            <span className="cert">
-              NBR 16071 · Playground
-            </span>
           </div>
         </div>
       </section>
