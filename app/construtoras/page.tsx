@@ -3,7 +3,8 @@ import Link from 'next/link';
 import LotusHeader from '@/components/LotusHeader';
 import RodapeLotus from '@/components/RodapeLotus';
 import { getLancamentosList, isListItemApresentavel } from '@/lib/lancamentos';
-import { agruparPorConstrutora } from '@/lib/construtoras-paginas';
+import { agruparPorConstrutora, comCuradasSemLancamento } from '@/lib/construtoras-paginas';
+import { curadasSemLancamento } from '@/lib/construtoras-conteudo';
 
 // Mesmo ISR das demais rotas do portal.
 export const revalidate = 3600;
@@ -29,7 +30,10 @@ export default async function ConstrutorasPage() {
   // apresentável: uma construtora não deve aparecer aqui por causa de um
   // cadastro pela metade que nem chega a ser exibido em /lotus-lancamentos.
   const lancamentos = (await getLancamentosList()).filter(isListItemApresentavel);
-  const construtoras = agruparPorConstrutora(lancamentos);
+  // Junto das que vêm dos lançamentos entram as que só têm conteúdo curado —
+  // a view portal_lancamentos não expõe os lançamentos de todas as construtoras
+  // do dashboard, e sem isto essas ficariam sem página mesmo com texto pronto.
+  const construtoras = comCuradasSemLancamento(agruparPorConstrutora(lancamentos), curadasSemLancamento());
 
   const ld = {
     '@context': 'https://schema.org',
@@ -107,7 +111,9 @@ export default async function ConstrutorasPage() {
                         {c.nome}
                       </h2>
                       <div style={{ fontSize: 13.5, color: '#3f6249' }}>
-                        {c.lancamentos.length} {c.lancamentos.length === 1 ? 'empreendimento' : 'empreendimentos'} com a Lotus
+                        {c.lancamentos.length > 0
+                          ? c.lancamentos.length + (c.lancamentos.length === 1 ? ' empreendimento' : ' empreendimentos') + ' com a Lotus'
+                          : 'Conheça a construtora'}
                       </div>
                       {/* A foto é de um empreendimento, não da construtora. Dizer
                           isso evita que ela passe por imagem institucional. */}

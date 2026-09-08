@@ -5,15 +5,15 @@ import LotusHeader from '@/components/LotusHeader';
 import RodapeLotus from '@/components/RodapeLotus';
 import CardEmpreendimento from '@/components/CardEmpreendimento';
 import { getLancamentosList, isListItemApresentavel } from '@/lib/lancamentos';
-import { agruparPorConstrutora, construtoraPorSlug } from '@/lib/construtoras-paginas';
-import { conteudoDaConstrutora } from '@/lib/construtoras-conteudo';
+import { agruparPorConstrutora, comCuradasSemLancamento, construtoraPorSlug } from '@/lib/construtoras-paginas';
+import { conteudoDaConstrutora, curadasSemLancamento } from '@/lib/construtoras-conteudo';
 
 export const revalidate = 3600;
 
 /** As construtoras vêm do banco, então a lista de rotas também. */
 async function todas() {
   const lancamentos = (await getLancamentosList()).filter(isListItemApresentavel);
-  return agruparPorConstrutora(lancamentos);
+  return comCuradasSemLancamento(agruparPorConstrutora(lancamentos), curadasSemLancamento());
 }
 
 export async function generateStaticParams() {
@@ -29,8 +29,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const cidades = [...new Set(c.lancamentos.map((l) => l.city).filter(Boolean))].join(', ');
   const url = `https://www.lotusbrokers.com.br/construtoras/${c.slug}`;
   const descricao =
-    `${quantos} ${quantos === 1 ? 'empreendimento' : 'empreendimentos'} da ${c.nome}` +
-    `${cidades ? ` em ${cidades}` : ''} com acompanhamento da Lotus Brokers. Veja plantas, condições e fale com um especialista.`;
+    quantos > 0
+      ? `${quantos} ${quantos === 1 ? 'empreendimento' : 'empreendimentos'} da ${c.nome}` +
+        `${cidades ? ` em ${cidades}` : ''} com acompanhamento da Lotus Brokers. Veja plantas, condições e fale com um especialista.`
+      : `Conheça a ${c.nome}, construtora parceira da Lotus Brokers em Jundiaí e região: história, números e diferenciais.`;
 
   return {
     title: `${c.nome}, lançamentos e empreendimentos | Lotus Brokers`,
@@ -103,8 +105,14 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
               {c.nome}
             </h1>
             <p style={{ fontSize: 17, color: 'rgba(247,242,232,.8)', fontWeight: 300, lineHeight: 1.55, margin: 0, maxWidth: 680 }}>
-              {c.lancamentos.length} {c.lancamentos.length === 1 ? 'empreendimento acompanhado' : 'empreendimentos acompanhados'} pela Lotus
-              {cidades.length > 0 && ` em ${cidades.join(', ')}`}.
+              {c.lancamentos.length > 0 ? (
+                <>
+                  {c.lancamentos.length} {c.lancamentos.length === 1 ? 'empreendimento acompanhado' : 'empreendimentos acompanhados'} pela Lotus
+                  {cidades.length > 0 && ` em ${cidades.join(', ')}`}.
+                </>
+              ) : (
+                'Construtora parceira da Lotus Brokers em Jundiaí e região.'
+              )}
             </p>
             {c.capa && (
               <div style={{ fontSize: 12, color: 'rgba(247,242,232,.5)', marginTop: 14 }}>
@@ -127,11 +135,22 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
                 // muito diferentes — empilhados (Santa Ângela, ~2:1) e
                 // horizontais (GP, ~4,5:1). Só com altura fixa o horizontal
                 // saía com o dobro da largura do empilhado e dominava a seção.
-                <img
-                  src={sobre.logo}
-                  alt={c.nome}
-                  style={{ maxHeight: 92, maxWidth: 300, width: 'auto', height: 'auto', display: 'block', marginBottom: 30 }}
-                />
+                //
+                // Logo negativo (arte clara) ganha uma placa escura atrás: nesta
+                // seção o fundo é claro, e sem ela a marca simplesmente sumiria.
+                <div
+                  style={
+                    sobre.logoEmFundoEscuro
+                      ? { display: 'inline-block', background: '#15241c', borderRadius: 14, padding: '18px 22px', marginBottom: 30 }
+                      : { marginBottom: 30 }
+                  }
+                >
+                  <img
+                    src={sobre.logo}
+                    alt={c.nome}
+                    style={{ maxHeight: 92, maxWidth: 300, width: 'auto', height: 'auto', display: 'block' }}
+                  />
+                </div>
               )}
               <h2 style={{ fontFamily: "'Fraunces',serif", fontWeight: 300, fontSize: 'clamp(26px,3.2vw,38px)', color: '#15241c', lineHeight: 1.1, margin: '0 0 22px' }}>
                 Sobre a {c.nome}
@@ -177,11 +196,19 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
                     {sobre.lista.titulo}
                   </div>
                   <ul style={{ margin: 0, paddingLeft: 20, display: 'flex', flexDirection: 'column', gap: 9, listStyle: 'disc', maxWidth: 760 }}>
-                    {sobre.lista.itens.map((item) => (
-                      <li key={item} style={{ fontSize: 16.5, color: '#3f6249', fontWeight: 300, lineHeight: 1.65 }}>
-                        {item}
-                      </li>
-                    ))}
+                    {/* Como no FAQ: quando o item traz "Termo — explicação", o
+                        termo vem destacado. Item sem travessão sai inteiro. */}
+                    {sobre.lista.itens.map((item) => {
+                      const corte = item.indexOf(' — ');
+                      const termo = corte > 0 ? item.slice(0, corte) : null;
+                      const resto = corte > 0 ? item.slice(corte) : item;
+                      return (
+                        <li key={item} style={{ fontSize: 16.5, color: '#3f6249', fontWeight: 300, lineHeight: 1.65 }}>
+                          {termo && <strong style={{ fontWeight: 600, color: '#15241c' }}>{termo}</strong>}
+                          {resto}
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               )}
@@ -199,6 +226,7 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
             A única seção que sai do banco: o vínculo construtora → empreendimento
             do dashboard. O "Sobre" acima depende de texto enviado pela Lotus,
             porque esse cadastro não existe lá — ver lib/construtoras-conteudo.ts. */}
+        {c.lancamentos.length > 0 && (
         <section style={{ padding: '70px 32px 90px' }}>
           <div style={{ maxWidth: 1280, margin: '0 auto' }}>
             <h2 style={{ fontFamily: "'Fraunces',serif", fontWeight: 300, fontSize: 'clamp(26px,3.2vw,38px)', color: '#15241c', lineHeight: 1.1, margin: '0 0 8px' }}>
@@ -215,6 +243,7 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
             </div>
           </div>
         </section>
+        )}
 
         {/* ---------------- CTA ---------------- */}
         <section style={{ background: '#ece2cf', padding: '80px 32px' }}>

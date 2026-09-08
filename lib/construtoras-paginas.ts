@@ -83,6 +83,25 @@ export function agruparPorConstrutora<T extends LancamentoDaConstrutora>(
     .sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
 }
 
+/**
+ * Acrescenta as construtoras que só têm conteúdo curado, sem lançamento.
+ *
+ * Entram sem empreendimento e sem capa: a página fica com a parte
+ * institucional, e a seção de lançamentos some em vez de exibir grade vazia.
+ * Quem já veio dos lançamentos não é duplicado — o slug do banco tem
+ * precedência, porque os dados dele são os reais.
+ */
+export function comCuradasSemLancamento<T extends LancamentoDaConstrutora>(
+  construtoras: readonly Construtora<T>[],
+  curadas: readonly { slug: string; nome: string }[]
+): Construtora<T>[] {
+  const jaTem = new Set(construtoras.map((c) => c.slug));
+  const extras = curadas
+    .filter((c) => !jaTem.has(c.slug))
+    .map((c) => ({ nome: c.nome, slug: c.slug, lancamentos: [] as T[], capa: null }));
+  return [...construtoras, ...extras].sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
+}
+
 /** A construtora de um slug, ou null se não houver. */
 export function construtoraPorSlug<T extends LancamentoDaConstrutora>(
   construtoras: readonly Construtora<T>[],

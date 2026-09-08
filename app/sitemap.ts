@@ -4,7 +4,8 @@ import { getCondominioIds } from '@/lib/condominios';
 import { bairroSlugsIndexaveis } from '@/lib/bairros';
 import { landingSlugs } from '@/lib/landings';
 import { getLancamentosList, isListItemApresentavel } from '@/lib/lancamentos';
-import { agruparPorConstrutora } from '@/lib/construtoras-paginas';
+import { agruparPorConstrutora, comCuradasSemLancamento } from '@/lib/construtoras-paginas';
+import { curadasSemLancamento } from '@/lib/construtoras-conteudo';
 
 /**
  * Sitemap dinâmico do portal.
@@ -63,7 +64,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Falha do banco não pode derrubar o sitemap inteiro: sem construtoras, o
   // arquivo sai com as demais rotas, como já acontece com imóveis e condomínios.
   const construtoras = await getLancamentosList()
-    .then((l) => agruparPorConstrutora(l.filter(isListItemApresentavel)))
+    .then((l) => comCuradasSemLancamento(agruparPorConstrutora(l.filter(isListItemApresentavel)), curadasSemLancamento()))
     .catch((e) => {
       console.error('[sitemap] construtoras indisponíveis:', e);
       return [];
