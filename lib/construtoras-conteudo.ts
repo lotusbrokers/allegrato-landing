@@ -347,6 +347,23 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
       'Com presença em São Paulo e escritório em Jundiaí, a Sebel Empreendimentos transforma experiência em projetos sólidos, bem planejados e preparados para gerar valor ao longo do tempo.',
     ],
   },
+
+  // Texto e logo enviados pela Lotus em 08/09/2026. O arquivo veio em JPEG com
+  // fundo branco e só o símbolo; o fundo foi vazado a partir das bordas, o que
+  // deixou o "t" como recorte — ele adota a cor de quem está atrás, que é como
+  // essa marca é desenhada. O wordmark "TEBAS" não veio no arquivo.
+  tebas: {
+    logo: '/construtoras/tebas.png',
+    paragrafos: [
+      'A TEBAS é uma incorporadora com 45 anos de história, reconhecida pela tradição, credibilidade e excelência no desenvolvimento de empreendimentos imobiliários de alto padrão.',
+      'Atualmente liderada pelos sócios José Roberto e Mauro, a empresa reúne experiência e competência consolidadas ao longo de dezenas de empreendimentos entregues, sempre com atenção à qualidade, elegância e às necessidades reais de seus clientes.',
+      'Sua atuação parte de uma leitura cuidadosa do mercado, das transformações urbanas e das novas formas de morar e investir. Essa inteligência permite desenvolver projetos alinhados ao estilo de vida contemporâneo, ao potencial de cada localização e às expectativas de valorização ao longo do tempo.',
+      'Com forte presença em Jundiaí, a TEBAS se consolidou como referência no segmento de alto padrão, contribuindo para a evolução urbana da cidade por meio de empreendimentos que qualificam o entorno, elevam o padrão construtivo e proporcionam mais qualidade de vida.',
+    ],
+    paragrafosFinais: [
+      'Mais do que construir imóveis, a TEBAS constrói relações de confiança, segurança e longo prazo. Um legado desenvolvido ao longo de décadas e que continua evoluindo a partir do mesmo compromisso com qualidade, solidez e visão de futuro.',
+    ],
+  },
 };
 
 /** O conteúdo institucional desta construtora, ou null se ainda não houver. */
