@@ -349,9 +349,10 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   },
 
   // Texto e logo enviados pela Lotus em 08/09/2026. O arquivo veio em JPEG com
-  // fundo branco e só o símbolo; o fundo foi vazado a partir das bordas, o que
-  // deixou o "t" como recorte — ele adota a cor de quem está atrás, que é como
-  // essa marca é desenhada. O wordmark "TEBAS" não veio no arquivo.
+  // fundo branco; ele foi vazado por preenchimento a partir das bordas, e não
+  // por "todo branco vira transparente" — o "t" do símbolo também é branco e
+  // sumiria junto. Como ele encosta na borda do círculo, virou recorte, que é
+  // como essa marca é desenhada: adota a cor de quem está atrás.
   tebas: {
     logo: '/construtoras/tebas.png',
     paragrafos: [
@@ -362,6 +363,23 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
     ],
     paragrafosFinais: [
       'Mais do que construir imóveis, a TEBAS constrói relações de confiança, segurança e longo prazo. Um legado desenvolvido ao longo de décadas e que continua evoluindo a partir do mesmo compromisso com qualidade, solidez e visão de futuro.',
+    ],
+  },
+
+  // Texto e logo enviados pela Lotus em 08/09/2026. Ainda sem lançamento na
+  // view portal_lancamentos — o dashboard tem quatro, que não chegam nela.
+  'vic-engenharia': {
+    nome: 'VIC Engenharia',
+    logo: '/construtoras/vic-engenharia.png',
+    paragrafos: [
+      'A VIC Engenharia é uma incorporadora e construtora que atua no desenvolvimento de empreendimentos planejados para proporcionar mais qualidade de vida, segurança e acessibilidade aos seus clientes.',
+      'Formada pela união de profissionais experientes dos mercados de incorporação imobiliária e construção civil, a empresa combina conhecimento técnico, eficiência e visão de mercado para entregar empreendimentos com qualidade construtiva e condições acessíveis, mantendo o compromisso com a satisfação de clientes, parceiros, investidores e colaboradores.',
+      'Sua trajetória é respaldada por importantes certificações do setor, como o Certificado NDT CAIXA, destinado a construtoras que apresentam elevado nível de desempenho técnico e boas práticas na execução de suas obras, além das certificações Casa + Azul CAIXA e Nível A, que reforçam seu compromisso com sustentabilidade, responsabilidade social, governança e gestão da qualidade.',
+      'A dimensão de sua atuação também posiciona a VIC entre as principais empresas do mercado imobiliário brasileiro. A companhia figura entre as 20 maiores construtoras do país, segundo ranking da revista O Empreiteiro, além de ocupar posição de destaque dentro do seu segmento.',
+    ],
+    paragrafosFinais: [
+      'Com mais de 19 mil unidades entregues ou em construção e mais de 43 mil pessoas vivendo em empreendimentos VIC, a empresa mantém presença em cinco estados e no Distrito Federal, ampliando continuamente sua atuação pelo Brasil.',
+      'Mais do que construir imóveis, a VIC Engenharia busca criar oportunidades para que milhares de famílias realizem o sonho da casa própria, unindo escala, responsabilidade, qualidade e evolução constante em cada novo empreendimento.',
     ],
   },
 };
