@@ -6,7 +6,7 @@ import RodapeLotus from '@/components/RodapeLotus';
 import CardEmpreendimento from '@/components/CardEmpreendimento';
 import { getLancamentosList, isListItemApresentavel } from '@/lib/lancamentos';
 import { agruparPorConstrutora, comCuradasSemLancamento, construtoraPorSlug } from '@/lib/construtoras-paginas';
-import { conteudoDaConstrutora, curadasSemLancamento } from '@/lib/construtoras-conteudo';
+import { conteudoDaConstrutora, curadasSemLancamento, logoClaroDaConstrutora } from '@/lib/construtoras-conteudo';
 
 export const revalidate = 3600;
 
@@ -91,14 +91,10 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
 
   // O banner enviado pela Lotus vence a capa emprestada de um empreendimento.
   const fundoDoHero = sobre?.banner ?? c.capa?.img ?? null;
-  // No hero, que é escuro, só entra logo de arte clara: o negativo declarado,
-  // ou o próprio logo quando ele já é negativo. Sem um dos dois, fica o nome
-  // escrito, que é o que sempre esteve ali.
   // O logo fica no hero, no lugar do nome — o mesmo desenho em toda página da
-  // seção. Quem ainda não enviou logo mantém o nome escrito, que é o que
-  // sempre esteve ali.
-  const logoDoHero = sobre?.logoNegativo ?? sobre?.logo ?? null;
-
+  // seção. Quem ainda não tem versão clara da marca mantém o nome escrito, que
+  // é o que sempre esteve ali.
+  const logoDoHero = logoClaroDaConstrutora(c.slug);
 
   const SITE = 'https://www.lotusbrokers.com.br';
   const ld = {

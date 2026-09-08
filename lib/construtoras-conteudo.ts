@@ -504,6 +504,22 @@ export function conteudoDaConstrutora(slug: string): ConteudoConstrutora | null 
   return CONTEUDO[slug] ?? POR_CHAVE_FROUXA[slug.replaceAll('-', '')] ?? null;
 }
 
+/**
+ * O logo desta construtora em arte clara, ou null se não houver.
+ *
+ * É o único logo que o portal exibe: tanto o hero da página dela quanto o card
+ * na listagem têm fundo escuro. Pode vir de `logoNegativo` — a versão clara
+ * declarada — ou do próprio `logo`, quando ele já é negativo.
+ *
+ * Sem versão clara não há o que mostrar: um logo escuro sobre fundo escuro
+ * some. Quem chama decide o que colocar no lugar.
+ */
+export function logoClaroDaConstrutora(slug: string): string | null {
+  const c = conteudoDaConstrutora(slug);
+  if (!c) return null;
+  return c.logoNegativo ?? (c.logoEmFundoEscuro ? c.logo ?? null : null);
+}
+
 /** Slugs que já têm conteúdo — usado pelo teste para conferir os caminhos. */
 export function slugsComConteudo(): string[] {
   return Object.keys(CONTEUDO);

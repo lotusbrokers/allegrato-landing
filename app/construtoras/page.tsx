@@ -6,7 +6,7 @@ import AbasLancamentos from '@/components/AbasLancamentos';
 import SliderConstrutoras from '@/components/SliderConstrutoras';
 import { getLancamentosList, isListItemApresentavel } from '@/lib/lancamentos';
 import { agruparPorConstrutora, comCuradasSemLancamento } from '@/lib/construtoras-paginas';
-import { curadasSemLancamento } from '@/lib/construtoras-conteudo';
+import { curadasSemLancamento, logoClaroDaConstrutora } from '@/lib/construtoras-conteudo';
 
 // Mesmo ISR das demais rotas do portal.
 export const revalidate = 3600;
@@ -97,7 +97,9 @@ export default async function ConstrutorasPage() {
               </p>
             ) : (
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(310px,1fr))', gap: 24 }}>
-                {construtoras.map((c) => (
+                {construtoras.map((c) => {
+                  const logo = logoClaroDaConstrutora(c.slug);
+                  return (
                   <Link
                     key={c.slug}
                     className="lt-card-emp"
@@ -112,16 +114,39 @@ export default async function ConstrutorasPage() {
                       boxShadow: '0 16px 40px -32px rgba(21,36,28,.34)',
                     }}
                   >
-                    <div style={{ position: 'relative', aspectRatio: '4 / 3', background: '#1d3a2c' }}>
-                      {c.capa && (
+                    {/* A placa é da construtora, não de um empreendimento dela:
+                        o logo em arte clara, centrado no verde, com folga em
+                        volta. A proporção é mais baixa que a de uma foto porque
+                        uma marca não precisa de altura — precisa de ar.
+
+                        Construtora sem versão clara do logo não ganha placa: um
+                        retângulo verde vazio parece imagem quebrada. O card
+                        começa pelo nome, que já estava logo abaixo. */}
+                    {logo && (
+                      // Altura fixa, e não aspect-ratio: com a proporção, o
+                      // limite de altura do logo em % ficava circular (a altura
+                      // da placa vinha da largura, e a do logo vinha da placa) e
+                      // o Chrome resolvia esticando a placa das marcas
+                      // empilhadas. Uma placa de logo também não ganha nada
+                      // crescendo junto com a coluna.
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          height: 210,
+                          background: '#1d3a2c',
+                          padding: 28,
+                        }}
+                      >
                         <img
-                          src={c.capa.img}
-                          alt={`${c.capa.empreendimento}, empreendimento da ${c.nome}`}
+                          src={logo}
+                          alt={`Logo da ${c.nome}`}
                           loading="lazy"
-                          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                          style={{ maxWidth: '76%', maxHeight: 150, width: 'auto', height: 'auto' }}
                         />
-                      )}
-                    </div>
+                      </div>
+                    )}
                     <div style={{ padding: 20, display: 'flex', flexDirection: 'column', flex: 1 }}>
                       <h2 style={{ fontFamily: "'Fraunces',serif", fontWeight: 400, fontSize: 23, color: '#15241c', margin: '0 0 6px', lineHeight: 1.05 }}>
                         {c.nome}
@@ -131,11 +156,6 @@ export default async function ConstrutorasPage() {
                           ? c.lancamentos.length + (c.lancamentos.length === 1 ? ' empreendimento' : ' empreendimentos') + ' com a Lotus'
                           : 'Conheça a construtora'}
                       </div>
-                      {/* A foto é de um empreendimento, não da construtora. Dizer
-                          isso evita que ela passe por imagem institucional. */}
-                      {c.capa && (
-                        <div style={{ fontSize: 12, color: '#8aa593', marginTop: 6 }}>Foto: {c.capa.empreendimento}</div>
-                      )}
                       <div
                         style={{
                           marginTop: 'auto',
@@ -150,7 +170,8 @@ export default async function ConstrutorasPage() {
                       </div>
                     </div>
                   </Link>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>
