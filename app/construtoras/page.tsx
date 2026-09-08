@@ -62,11 +62,21 @@ export default async function ConstrutorasPage() {
               Quem constrói
             </div>
             <h1 style={{ fontFamily: "'Fraunces',serif", fontWeight: 300, fontSize: 'clamp(30px,4vw,50px)', color: '#f7f2e8', lineHeight: 1.06, margin: '0 0 18px', maxWidth: 780 }}>
-              As construtoras por trás dos empreendimentos que acompanhamos.
+              As construtoras por trás dos empreendimentos que acompanhamos
             </h1>
+            {/* Texto da Lotus, 08/09/2026. Três parágrafos e não um bloco só:
+                são três ideias distintas — por que olhamos a construtora, o que
+                a seção mostra, e o que isso serve. */}
+            <p style={{ fontSize: 17, color: 'rgba(247,242,232,.78)', fontWeight: 300, lineHeight: 1.55, margin: '0 0 14px', maxWidth: 680 }}>
+              Por trás de cada lançamento existe uma construtora — e conhecer quem está por trás do projeto faz parte da
+              nossa análise.
+            </p>
+            <p style={{ fontSize: 17, color: 'rgba(247,242,232,.78)', fontWeight: 300, lineHeight: 1.55, margin: '0 0 14px', maxWidth: 680 }}>
+              Nesta seção, você encontra as construtoras dos empreendimentos acompanhados pela Lotus, além de todos os
+              projetos de cada uma que estão no nosso radar.
+            </p>
             <p style={{ fontSize: 17, color: 'rgba(247,242,232,.78)', fontWeight: 300, lineHeight: 1.55, margin: 0, maxWidth: 680 }}>
-              Antes de recomendar um lançamento, o Squad Lançamentos analisa quem está construindo. Aqui você vê cada
-              construtora e todos os empreendimentos dela que a Lotus acompanha.
+              Uma forma simples de entender não apenas o que está sendo lançado, mas também quem está construindo.
             </p>
           </div>
         </section>

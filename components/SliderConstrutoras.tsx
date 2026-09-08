@@ -62,7 +62,13 @@ const S = {
     marginBottom: 34,
     boxShadow: '0 20px 50px -38px rgba(21,36,28,.5)',
   } as CSSProperties,
-  palco: { position: 'relative', aspectRatio: '16 / 7' } as CSSProperties,
+  /* 16:9 porque é a proporção em que as imagens chegam: a da Santa Ângela
+     (1600x900) e a da GP (640x360) são 16:9 exatas, e assim aparecem inteiras,
+     sem recorte nenhum. Em 16:7, o valor anterior, a caixa era mais achatada
+     que as fotos e o object-fit cortava — na da Auten (670x458) sumiam 36% da
+     altura, decepando a base dos prédios. Em 16:9 ela perde 18% e os prédios
+     ficam inteiros. Mudar isto sem olhar as fotos volta a cortá-las. */
+  palco: { position: 'relative', aspectRatio: '16 / 9' } as CSSProperties,
   slide: (visivel: boolean): CSSProperties => ({
     position: 'absolute',
     inset: 0,
@@ -80,14 +86,6 @@ const S = {
     background: 'linear-gradient(to top, rgba(21,36,28,.86) 0%, rgba(21,36,28,.35) 42%, rgba(21,36,28,0) 70%)',
   } as CSSProperties,
   texto: { position: 'absolute', left: 0, right: 0, bottom: 0, padding: 'clamp(20px,3vw,34px)' } as CSSProperties,
-  rotulo: {
-    fontSize: 12.5,
-    fontWeight: 600,
-    letterSpacing: '.18em',
-    textTransform: 'uppercase',
-    color: '#cdab6e',
-    marginBottom: 10,
-  } as CSSProperties,
   nome: {
     fontFamily: "'Fraunces',serif",
     fontWeight: 300,
@@ -176,7 +174,6 @@ export default function SliderConstrutoras() {
               />
               <div style={S.veu} />
               <div style={S.texto}>
-                <div style={S.rotulo}>Construtora em destaque</div>
                 <div style={S.nome}>{s.nome}</div>
                 <span style={S.chamada}>
                   Ver a construtora <span aria-hidden="true">→</span>
