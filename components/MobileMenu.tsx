@@ -27,7 +27,7 @@
 import Link from 'next/link';
 import { createPortal } from 'react-dom';
 import { useEffect, useState, type CSSProperties } from 'react';
-import { NAV_ITEMS } from './LotusHeader';
+import { NAV_ITEMS, RECRUTAMENTO_HREF, RECRUTAMENTO_LABEL } from './LotusHeader';
 
 const WHATSAPP_DEFAULT = '5511926143393';
 
@@ -200,6 +200,17 @@ export default function MobileMenu({
                   {item.label}
                 </Link>
               ))}
+              {/* Entra como item da lista, e não como segundo botão: no painel
+                  o CTA de WhatsApp fica sozinho no rodapé e continua sendo a
+                  ação principal. */}
+              <Link
+                href={RECRUTAMENTO_HREF}
+                target="_top"
+                style={S.navLink}
+                onClick={() => setOpen(false)}
+              >
+                {RECRUTAMENTO_LABEL}
+              </Link>
             </nav>
 
             <a href={waLink} target="_blank" rel="noopener" style={S.cta} onClick={() => setOpen(false)}>

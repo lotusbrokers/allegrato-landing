@@ -24,6 +24,7 @@ import React, {
   type ReactNode,
 } from 'react';
 import { empsFallback, EMP_IMG, type EmpItem } from '@/lib/lancamentos-list-fallback';
+import { opcoesDeFiltro, passaNosFiltros, SEM_FILTRO } from '@/lib/filtros-lancamentos';
 import Link from 'next/link';
 import LotusHeader from './LotusHeader';
 
@@ -189,11 +190,11 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
   const emps = empsProp && empsProp.length > 0 ? empsProp : empsFallback;
 
   // state = { fCity, fStage, fType, fPrice, sortKey, openFaq: 0, leadDone, newsDone }
-  const [fCity, setFCity] = useState('any');
-  const [fStage, setFStage] = useState('any');
-  const [fType, setFType] = useState('any');
-  const [fPrice, setFPrice] = useState('any');
-  const [fBuilder, setFBuilder] = useState('any');
+  const [fCity, setFCity] = useState(SEM_FILTRO);
+  const [fStage, setFStage] = useState(SEM_FILTRO);
+  const [fType, setFType] = useState(SEM_FILTRO);
+  const [fPrice, setFPrice] = useState(SEM_FILTRO);
+  const [fBuilder, setFBuilder] = useState(SEM_FILTRO);
   const [sortKey, setSortKey] = useState(ORDEM_PADRAO);
   const [openFaq, setOpenFaq] = useState(0);
   const [leadDone, setLeadDone] = useState(false);
@@ -207,13 +208,12 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
     encodeURIComponent('Quero ver os lançamentos selecionados pela Lotus.');
 
   // Filtro + ordenação (renderVals).
-  let list = emps.filter(
-    (e) =>
-      (fCity === 'any' || e.city === fCity) &&
-      (fStage === 'any' || e.stage === fStage) &&
-      (fType === 'any' || e.type === fType) &&
-      (fPrice === 'any' || e.priceNum <= parseInt(fPrice, 10)) &&
-      (fBuilder === 'any' || e.builder === fBuilder),
+  // As opcoes saem do proprio acervo, e a regra de "passa ou nao passa" mora em
+  // lib/filtros-lancamentos.ts — modulo puro, coberto por teste. O que estava
+  // aqui comparava contra opcoes escritas a mao que nao batiam com o banco.
+  const opcoes = opcoesDeFiltro(emps);
+  let list = emps.filter((e) =>
+    passaNosFiltros(e, { cidade: fCity, estagio: fStage, tipologia: fType, preco: fPrice, construtora: fBuilder }),
   );
   // O nome desempata os dois ordenamentos por preco: quem nao tem valor
   // cadastrado entra com priceNum 0, entao sem criterio de desempate esse bloco
@@ -225,7 +225,11 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
   const view = list.map((e) => ({ ...e, img: e.img ?? EMP_IMG[e.id] }));
 
   const hasFilter =
-    fCity !== 'any' || fStage !== 'any' || fType !== 'any' || fPrice !== 'any' || fBuilder !== 'any';
+    fCity !== SEM_FILTRO ||
+    fStage !== SEM_FILTRO ||
+    fType !== SEM_FILTRO ||
+    fPrice !== SEM_FILTRO ||
+    fBuilder !== SEM_FILTRO;
 
   // Opcoes vindas dos proprios lancamentos, e nao de lista escrita a mao: se o
   // dashboard cadastrar uma construtora nova, ela aparece aqui sozinha. Nome
@@ -238,11 +242,11 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
   const noResults = list.length === 0;
 
   const clearFilters = () => {
-    setFCity('any');
-    setFStage('any');
-    setFType('any');
-    setFPrice('any');
-    setFBuilder('any');
+    setFCity(SEM_FILTRO);
+    setFStage(SEM_FILTRO);
+    setFType(SEM_FILTRO);
+    setFPrice(SEM_FILTRO);
+    setFBuilder(SEM_FILTRO);
     setSortKey(ORDEM_PADRAO);
   };
 
@@ -319,18 +323,44 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
           {/* filtros */}
           <div style={parseStyle('display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px;')}>
             <div style={parseStyle('display:flex;flex-wrap:wrap;gap:10px;align-items:center;')}>
-              <select className="lt-field" value={fCity} onChange={(e) => setFCity(e.target.value)}>
-                <option value="any">Todas as cidades</option><option value="Jundiaí">Jundiaí</option><option value="Itupeva">Itupeva</option><option value="Vinhedo">Vinhedo</option>
-              </select>
-              <select className="lt-field" value={fStage} onChange={(e) => setFStage(e.target.value)}>
-                <option value="any">Todos os estágios</option><option value="Pré-lançamento">Pré-lançamento</option><option value="Em obras">Em obras</option><option value="Pronto">Pronto para morar</option>
-              </select>
-              <select className="lt-field" value={fType} onChange={(e) => setFType(e.target.value)}>
-                <option value="any">Todas as tipologias</option><option value="2 dorms">2 dormitórios</option><option value="3 dorms">3 dormitórios</option><option value="4 dorms">4 dorms / cobertura</option>
-              </select>
-              <select className="lt-field" value={fPrice} onChange={(e) => setFPrice(e.target.value)}>
-                <option value="any">Qualquer valor</option><option value="600000">Até R$ 600 mil</option><option value="900000">Até R$ 900 mil</option><option value="1500000">Até R$ 1,5 mi</option><option value="9999999">Acima de R$ 1,5 mi</option>
-              </select>
+              {/* Todos os seletores seguem a mesma regra da construtora, que ja
+                  era assim: a opcao existe porque existe imovel para ela, e o
+                  seletor inteiro some quando nenhum imovel tem aquele dado.
+                  Antes as opcoes eram fixas e nao batiam com o banco — ver o
+                  cabecalho de lib/filtros-lancamentos.ts. */}
+              {opcoes.cidades.length > 1 && (
+                <select className="lt-field" aria-label="Filtrar por cidade" value={fCity} onChange={(e) => setFCity(e.target.value)}>
+                  <option value={SEM_FILTRO}>Todas as cidades</option>
+                  {opcoes.cidades.map((c) => (
+                    <option key={c} value={c}>{c}</option>
+                  ))}
+                </select>
+              )}
+              {opcoes.estagios.length > 1 && (
+                <select className="lt-field" aria-label="Filtrar por estágio da obra" value={fStage} onChange={(e) => setFStage(e.target.value)}>
+                  <option value={SEM_FILTRO}>Todos os estágios</option>
+                  {opcoes.estagios.map((e2) => (
+                    <option key={e2} value={e2}>{e2}</option>
+                  ))}
+                </select>
+              )}
+              {opcoes.tipologias.length > 1 && (
+                <select className="lt-field" aria-label="Filtrar por tipologia" value={fType} onChange={(e) => setFType(e.target.value)}>
+                  <option value={SEM_FILTRO}>Todas as tipologias</option>
+                  {opcoes.tipologias.map((t) => (
+                    <option key={t} value={t}>{t}</option>
+                  ))}
+                </select>
+              )}
+              {opcoes.temPreco && (
+                <select className="lt-field" aria-label="Filtrar por valor" value={fPrice} onChange={(e) => setFPrice(e.target.value)}>
+                  <option value={SEM_FILTRO}>Qualquer valor</option>
+                  <option value="600000">Até R$ 600 mil</option>
+                  <option value="900000">Até R$ 900 mil</option>
+                  <option value="1500000">Até R$ 1,5 mi</option>
+                  <option value="99000000">Acima de R$ 1,5 mi</option>
+                </select>
+              )}
               {/* Construtora: unico filtro com opcoes dinamicas. Some por
                   inteiro quando nenhum lancamento publicado tem construtora
                   preenchida, em vez de exibir um seletor de uma opcao so. */}

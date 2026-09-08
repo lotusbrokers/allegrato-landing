@@ -16,13 +16,24 @@
  * de lib/lancamentos.ts.
  */
 
-/** Reduz a chave de comparação: sem acento, sem caixa, sem espaço repetido. */
+/**
+ * Chave de comparação: sem acento, sem caixa e sem espaço nenhum.
+ *
+ * O espaço sai por inteiro, e não só o repetido: "F A Oliva" e "FA Oliva"
+ * convivem no dashboard e são a mesma empresa. Com o espaço na chave elas
+ * ficavam separadas — duas opções no filtro e, desde que /construtoras existe,
+ * duas páginas para a mesma construtora.
+ *
+ * O risco de juntar demais é fundir empresas que se diferenciem só pelo
+ * espaçamento do nome. Não existe caso assim no acervo, e seria um nome mal
+ * escolhido de qualquer forma.
+ */
 function chave(nome: string): string {
   return nome
     .normalize('NFKD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
-    .replace(/\s+/g, ' ')
+    .replace(/\s+/g, '')
     .trim();
 }
 
@@ -36,7 +47,8 @@ function chave(nome: string): string {
  * não é alcançado pelo filtro, que é honesto, em vez de aparecer sob um nome
  * que não é o dele.
  */
-const PLACEHOLDERS = new Set(['construtora', 'incorporadora', 'construtor', 'alto padrao', 'n/a', '-', '--']);
+// Comparados pela mesma chave sem espaço — por isso 'altopadrao', e não 'alto padrao'.
+const PLACEHOLDERS = new Set(['construtora', 'incorporadora', 'construtor', 'altopadrao', 'n/a', '-', '--']);
 
 function ehPlaceholder(nome: string): boolean {
   return PLACEHOLDERS.has(chave(nome));

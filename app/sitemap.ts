@@ -3,6 +3,8 @@ import { getImovelCodigos } from '@/lib/imoveis';
 import { getCondominioIds } from '@/lib/condominios';
 import { bairroSlugsIndexaveis } from '@/lib/bairros';
 import { landingSlugs } from '@/lib/landings';
+import { getLancamentosList, isListItemApresentavel } from '@/lib/lancamentos';
+import { agruparPorConstrutora } from '@/lib/construtoras-paginas';
 
 /**
  * Sitemap dinâmico do portal.
@@ -34,6 +36,7 @@ const FIXAS: { rota: string; prioridade: number; frequencia: MetadataRoute.Sitem
   { rota: '/lotus-sobre', prioridade: 0.6, frequencia: 'monthly' },
   { rota: '/lotus-blog', prioridade: 0.7, frequencia: 'weekly' },
   { rota: '/lotus-faq', prioridade: 0.5, frequencia: 'monthly' },
+  { rota: '/construtoras', prioridade: 0.6, frequencia: 'weekly' },
   { rota: '/lotus-anunciar', prioridade: 0.6, frequencia: 'monthly' },
   { rota: '/lotus-recrutamento', prioridade: 0.4, frequencia: 'monthly' },
   { rota: '/lotus-privacidade', prioridade: 0.2, frequencia: 'yearly' },
@@ -56,6 +59,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       return [] as string[];
     }),
   ]);
+
+  // Falha do banco não pode derrubar o sitemap inteiro: sem construtoras, o
+  // arquivo sai com as demais rotas, como já acontece com imóveis e condomínios.
+  const construtoras = await getLancamentosList()
+    .then((l) => agruparPorConstrutora(l.filter(isListItemApresentavel)))
+    .catch((e) => {
+      console.error('[sitemap] construtoras indisponíveis:', e);
+      return [];
+    });
 
   const url = (rota: string) => `${SITE}${rota}`;
 
@@ -87,6 +99,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
     ...condominios.map((id) => ({
       url: url(`/lotus-condominio/${id}`),
+      lastModified: agora,
+      changeFrequency: 'monthly' as const,
+      priority: 0.5,
+    })),
+    // Uma página por construtora, derivada dos lançamentos — a mesma fonte que
+    // gera as rotas em generateStaticParams. Construtora que sai do acervo sai
+    // do sitemap sozinha.
+    ...construtoras.map((c) => ({
+      url: url(`/construtoras/${c.slug}`),
       lastModified: agora,
       changeFrequency: 'monthly' as const,
       priority: 0.5,

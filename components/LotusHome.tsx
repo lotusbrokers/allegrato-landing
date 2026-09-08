@@ -290,7 +290,7 @@ const postsFallback = POSTS.slice(0, 3);
  * Eram todos os publicáveis, o que fazia a seção crescer sem limite conforme
  * a Lotus cadastrava empreendimento.
  */
-const DESTAQUES_NA_HOME = 5;
+const DESTAQUES_NA_HOME = 6;
 
 const brokers: Array<{ name: string; squad: string; area: string; creci: string; slot: string; img?: string }> = [
   { name: 'Marina Tavares', squad: 'Alto Padrão', area: 'Eloy Chaves', creci: 'CRECI 000001-F', slot: 'lotus-broker-marina' },
@@ -557,6 +557,21 @@ export default function LotusHome({
             <Hoverable as="a" href="/lotus-blog" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Blog</Hoverable>
           </nav>
           <div style={parseStyle('display:flex;align-items:center;gap:12px;')}>
+            {/* Pílula vazada, irmã do CTA ao lado: mesma fonte, padding e raio,
+                só sem preenchimento — dois dourados sólidos tirariam do
+                WhatsApp o papel de ação principal. Espelha BotaoCorretor de
+                components/LotusHeader.tsx, que faz o mesmo nas páginas
+                internas. Mudou lá, muda aqui. */}
+            <Hoverable
+              as="a"
+              href="/lotus-recrutamento"
+              target="_top"
+              data-cta-corretor=""
+              baseStyle={parseStyle('display:inline-flex;align-items:center;background:transparent;color:#cdab6e;font-weight:600;font-size:14.5px;padding:10px 19px;border:1px solid rgba(205,171,110,.55);border-radius:40px;white-space:nowrap;transition:background .2s ease, color .2s ease, border-color .2s ease;')}
+              hoverStyle={parseStyle('background:#cdab6e;color:#15241c;border-color:#cdab6e')}
+            >
+              Quero ser corretor Lotus
+            </Hoverable>
             <Hoverable
               as="a"
               href={waLink}

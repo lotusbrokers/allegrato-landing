@@ -54,3 +54,10 @@ test('preenchimento generico nao vira opcao de filtro', () => {
 test('placeholder nao entra no mapa de canonicalizacao', () => {
   assert.equal(mapaDeConstrutoras(['Construtora']).size, 0);
 });
+
+test('espaçamento diferente no nome não cria duas construtoras', () => {
+  // "F A Oliva" e "FA Oliva" convivem no dashboard e são a mesma empresa.
+  // Separadas, viravam duas opções no filtro e duas páginas em /construtoras.
+  assert.deepEqual(construtorasParaFiltro(['F A Oliva', 'FA Oliva', 'F A Oliva']), ['F A Oliva']);
+  assert.deepEqual(construtorasParaFiltro(['Mac Lucer', 'MacLucer']), ['Mac Lucer']);
+});

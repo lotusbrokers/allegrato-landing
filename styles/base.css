@@ -174,4 +174,16 @@
   [data-rodape-lotus] { padding-bottom: 92px; }
 }
 
-
+/* ---- Card de empreendimento das páginas de construtora. ----
+   Mesma elevação no hover que o <Hoverable> aplica na listagem de lançamentos,
+   só que em CSS: as páginas de /construtoras são Server Components e não
+   mandam esse componente para o navegador. Mudou o card lá, muda aqui. */
+.lt-card-emp { transition: transform .3s ease, box-shadow .3s ease; }
+.lt-card-emp:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 30px 60px -34px rgba(21, 36, 28, .5);
+}
+@media (prefers-reduced-motion: reduce) {
+  .lt-card-emp { transition: none; }
+  .lt-card-emp:hover { transform: none; }
+}

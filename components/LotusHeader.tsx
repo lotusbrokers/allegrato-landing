@@ -23,6 +23,16 @@ import MobileMenu from './MobileMenu';
 
 const WHATSAPP_DEFAULT = '5511926143393';
 
+/**
+ * Destino do "Quero ser corretor Lotus".
+ *
+ * A rota já existia (app/lotus-recrutamento) e é a mesma que o FAQ público
+ * indica ao candidato. Exportada para o MobileMenu apontar para cá em vez de
+ * repetir o caminho — o mesmo motivo de NAV_ITEMS morar neste arquivo.
+ */
+export const RECRUTAMENTO_HREF = '/lotus-recrutamento';
+export const RECRUTAMENTO_LABEL = 'Quero ser corretor Lotus';
+
 /** Item ativo (recebe cor dourada e não é hoverável). */
 export type LotusNavKey =
   | 'lancamentos'
@@ -96,6 +106,23 @@ const S = {
     transition: 'background .2s',
   } as CSSProperties,
   ctaHover: { background: '#cdab6e' } as CSSProperties,
+  /* Mesma pílula do CTA — fonte, peso, padding, raio e transição idênticos —,
+     só que vazada. Dois botões dourados sólidos lado a lado brigariam pela
+     mesma atenção e o WhatsApp deixaria de ser a ação principal; vazado, o
+     convite ao corretor fica visível sem disputar. No hover ele preenche e
+     vira exatamente o CTA. */
+  ctaSec: {
+    background: 'transparent',
+    color: '#cdab6e',
+    fontWeight: 600,
+    fontSize: 14,
+    padding: '8px 16px',
+    borderRadius: 40,
+    border: '1px solid rgba(205,171,110,.55)',
+    whiteSpace: 'nowrap',
+    transition: 'background .2s, color .2s, border-color .2s',
+  } as CSSProperties,
+  ctaSecHover: { background: '#cdab6e', color: '#15241c', borderColor: '#cdab6e' } as CSSProperties,
 };
 
 function LotusMark() {
@@ -134,6 +161,23 @@ function CtaButton({ href, label }: { href: string; label: string }) {
     >
       {label}
     </a>
+  );
+}
+
+/** Convite ao corretor: pílula vazada, rota interna (<Link>, sem full reload). */
+export function BotaoCorretor() {
+  const [hover, setHover] = useState(false);
+  return (
+    <Link
+      href={RECRUTAMENTO_HREF}
+      target="_top"
+      data-cta-corretor=""
+      style={{ ...S.ctaSec, ...(hover ? S.ctaSecHover : null) }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
+      {RECRUTAMENTO_LABEL}
+    </Link>
   );
 }
 
@@ -182,6 +226,10 @@ export default function LotusHeader({
         </nav>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          {/* Fora do rightSlot de proposito: Busca e Imovel substituem o CTA
+              padrao pelo botao deles, e o convite ao corretor deve aparecer
+              nessas paginas tambem. */}
+          <BotaoCorretor />
           {rightSlot ?? <CtaButton href={waLink} label={cta} />}
           <MobileMenu whatsapp={whatsapp} cta={cta} ctaHref={ctaHref} />
         </div>

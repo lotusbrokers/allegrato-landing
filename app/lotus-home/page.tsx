@@ -30,18 +30,29 @@ function toDevelopment(c: LancamentoCard): DevelopmentCard {
 // herdam. Mantê-la aqui viraria uma segunda cópia para divergir.
 
 /**
- * Quais lançamentos abrem a vitrine da home.
+ * A vitrine da home, na ordem exata pedida pela Lotus.
  *
- * /lotus-lancamentos ordena por nome, e a home mostra só cinco. Sem esta
- * lista, um lançamento novo só apareceria na home se o nome começasse com A:
- * o Epic e o Mistral Jundiaí, pedidos em 04/09/2026, ficavam de fora pela
- * letra, atrás de Allegrato, Altissimi, Altos da Avenida, Auten e Authoria.
+ * /lotus-lancamentos ordena por nome e a home mostra seis. Sem esta lista a
+ * ordem seria alfabética, que é acaso e não curadoria: quem decide o que abre
+ * a home é quem edita esta linha.
  *
  * Os slugs daqui vêm primeiro, na ordem escrita; o resto segue a ordem da
- * listagem. Slug que não existir mais é ignorado, então tirar uma landing do
- * ar não quebra a home nem exige mexer aqui.
+ * listagem. Slug que não existir mais é simplesmente ignorado, então tirar uma
+ * landing do ar não quebra a home nem exige mexer aqui — mas a vaga dela é
+ * preenchida pelo próximo da ordem alfabética, e não pelo seguinte desta lista.
+ *
+ * Pedido de 08/09/2026: Castanheira, Allegrato, Santorini, Mistral, Oasis,
+ * Auten. São seis, o mesmo número que DESTAQUES_NA_HOME em LotusHome.tsx —
+ * mexer num sem o outro deixa a lista curada pela metade ou com sobra.
  */
-const DESTAQUES_DA_HOME: readonly string[] = ['/epic-jundiai', '/mistral-jundiai'];
+const DESTAQUES_DA_HOME: readonly string[] = [
+  '/reserva-castanheira',
+  '/allegrato',
+  '/santorini',
+  '/mistral-jundiai',
+  '/oasis',
+  '/auten-jundiai',
+];
 
 /** Os destaques na frente, preservando a ordem original para os demais. */
 function comDestaquesNaFrente(lista: DevelopmentCard[]): DevelopmentCard[] {
