@@ -10,6 +10,22 @@ import { conteudoDaConstrutora, curadasSemLancamento } from '@/lib/construtoras-
 
 export const revalidate = 3600;
 
+/**
+ * Caixas do logo, no hero e no "Sobre".
+ *
+ * Duas medidas porque as marcas chegam em dois formatos, e a mesma caixa não
+ * serve para os dois: a horizontal é larga e baixa, a empilhada é alta e
+ * estreita. As duas têm área parecida (~28.000px² no hero, ~23.000px² no
+ * "Sobre"), então as marcas pesam igual na página, que é o que importa.
+ *
+ * Quem usa a empilhada declara `logoVertical` em lib/construtoras-conteudo.ts.
+ */
+const AJUSTE = { width: 'auto', height: 'auto', display: 'block' } as const;
+const CAIXA_HERO = { maxHeight: 104, maxWidth: 320, ...AJUSTE } as const;
+const CAIXA_HERO_EMPILHADA = { maxHeight: 230, maxWidth: 170, ...AJUSTE } as const;
+const CAIXA_SOBRE = { maxHeight: 92, maxWidth: 300, ...AJUSTE } as const;
+const CAIXA_EMPILHADA = { maxHeight: 210, maxWidth: 150, ...AJUSTE } as const;
+
 /** As construtoras vêm do banco, então a lista de rotas também. */
 async function todas() {
   const lancamentos = (await getLancamentosList()).filter(isListItemApresentavel);
@@ -122,7 +138,7 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
                 <img
                   src={logoDoHero}
                   alt={c.nome}
-                  style={{ maxHeight: 104, maxWidth: 320, width: 'auto', height: 'auto', display: 'block' }}
+                  style={sobre?.logoVertical ? CAIXA_HERO_EMPILHADA : CAIXA_HERO}
                 />
               ) : (
                 c.nome
@@ -184,7 +200,7 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
                   <img
                     src={sobre.logo}
                     alt={c.nome}
-                    style={{ maxHeight: 92, maxWidth: 300, width: 'auto', height: 'auto', display: 'block' }}
+                    style={sobre.logoVertical ? CAIXA_EMPILHADA : CAIXA_SOBRE}
                   />
                 </div>
               )}

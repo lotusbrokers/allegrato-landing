@@ -51,3 +51,16 @@ test('o texto da Santa Angela chegou inteiro', () => {
   );
   assert.equal(c.paragrafosFinais?.length, 2);
 });
+
+test('a busca ignora hifens: mudar a grafia no dash não apaga a seção', () => {
+  // "FA Oliva" e "F. A. Oliva" são a mesma empresa e geram slugs diferentes.
+  // Foi exatamente assim que a seção dela ficou publicada vazia: o conteúdo
+  // estava escrito como "f-a-oliva" e a página pedia "fa-oliva".
+  const conteudo = conteudoDaConstrutora('fa-oliva');
+  assert.ok(conteudo, 'fa-oliva precisa existir — é o slug que o dash gera hoje');
+  assert.equal(conteudoDaConstrutora('f-a-oliva'), conteudo);
+});
+
+test('a VVC declara marca empilhada — sem isso o nome dela sai ilegível', () => {
+  assert.equal(conteudoDaConstrutora('vvc-construtora')?.logoVertical, true);
+});

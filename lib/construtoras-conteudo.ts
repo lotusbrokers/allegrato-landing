@@ -49,6 +49,15 @@ export type ConteudoConstrutora = {
    */
   banner?: string;
   /**
+   * A marca é empilhada (símbolo em cima, nome embaixo)?
+   *
+   * A caixa do logo é larga e baixa, feita para marcas horizontais. Uma marca
+   * empilhada dentro dela sai com uns 60px de largura e o nome fica ilegível.
+   * Com isto ela ganha uma caixa alta e estreita — ver CAIXA_EMPILHADA em
+   * app/construtoras/[slug]/page.tsx.
+   */
+  logoVertical?: boolean;
+  /**
    * O logo é negativo (arte clara, feita para fundo escuro)?
    *
    * A seção "Sobre" tem fundo claro, onde um logo branco simplesmente some. Com
@@ -192,7 +201,12 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
 
   // Texto e logo enviados pela Lotus em 08/09/2026. O arquivo é a versão
   // negativa da marca (wordmark e slogan em branco), daí a placa escura.
-  'f-a-oliva': {
+  //
+  // A chave é "fa-oliva", sem separar as iniciais, porque é assim que o slug
+  // sai do nome cadastrado no dash ("FA Oliva"). Escrita como "f-a-oliva" ela
+  // não encontrava página nenhuma, e a seção sumia sem erro — o motivo de
+  // conteudoDaConstrutora hoje ignorar os hifens ao procurar.
+  'fa-oliva': {
     logo: '/construtoras/f-a-oliva.png',
     logoEmFundoEscuro: true,
     paragrafos: [
@@ -382,11 +396,64 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
       'Mais do que construir imóveis, a VIC Engenharia busca criar oportunidades para que milhares de famílias realizem o sonho da casa própria, unindo escala, responsabilidade, qualidade e evolução constante em cada novo empreendimento.',
     ],
   },
+
+  // Texto e logo enviados pela Lotus em 08/09/2026. A marca é empilhada, daí o
+  // logoVertical. Sem bloco de números: os dela vêm no meio do texto, e escolher
+  // quais virariam destaque seria escolher por ela.
+  'vvc-construtora': {
+    logo: '/construtoras/vvc-construtora.png',
+    logoVertical: true,
+    paragrafos: [
+      'A VVC atua desde 2002 no setor da construção civil, reunindo experiência no desenvolvimento, construção e incorporação de empreendimentos residenciais, comerciais e industriais.',
+      'Ao longo de sua trajetória, a empresa consolidou sua atuação a partir de pilares como qualidade construtiva, excelência na execução e compromisso com o cumprimento de prazos, buscando garantir segurança e eficiência em todas as etapas de seus projetos.',
+      'Com forte experiência na construção de condomínios residenciais verticais e horizontais, a VVC mantém processos orientados por elevados padrões de qualidade e melhoria contínua.',
+      'Esse compromisso é reforçado por importantes certificações, como o PBQP-H em seu nível máximo e a ISO 9001, reconhecimentos que atestam a conformidade de seus processos, a gestão da qualidade e a busca constante pela satisfação de seus clientes.',
+    ],
+    paragrafosFinais: [
+      'Com mais de duas décadas de atuação, a VVC combina experiência técnica, responsabilidade e organização construtiva para desenvolver empreendimentos sólidos e entregar projetos com qualidade e confiabilidade.',
+    ],
+  },
+
+  // Texto e logo enviados pela Lotus em 08/09/2026. O arquivo é a versão
+  // negativa (marca branca), daí a placa escura no "Sobre" — e, por ser clara,
+  // ela também serve no hero. Só que veio pequeno, 189x39. A caixa do logo é um
+  // máximo, não um alvo, então ele sai nítido, no tamanho de origem — e menor
+  // que as outras marcas, que preenchem os 320. Um arquivo maior o faz preencher
+  // a caixa sem mexer em código.
+  applausi: {
+    logo: '/construtoras/applausi.png',
+    logoEmFundoEscuro: true,
+    paragrafos: [
+      'A Applausi Empreendimentos nasceu em Jundiaí a partir da experiência de uma família tradicional do setor imobiliário, trazendo uma nova proposta para o desenvolvimento de empreendimentos urbanísticos: unir qualidade, arquitetura, planejamento e atenção aos detalhes para criar projetos capazes de proporcionar uma experiência de vida extraordinária.',
+      'Com o conceito “A Arte de Viver Bem”, a empresa desenvolve empreendimentos pensados para pessoas que valorizam qualidade de vida, bem-estar e espaços cuidadosamente planejados. Cada projeto é concebido com um olhar atento ao entorno, à funcionalidade e à forma como as pessoas se relacionam com a cidade.',
+      'À frente da Applausi está o arquiteto e urbanista Rafael Benassi, formado pela USP e pós-graduado em Desenho Ambiental e Arquitetura da Paisagem pela Universidade Presbiteriana Mackenzie. Sua trajetória inclui mais de uma década de experiência no desenvolvimento e gerenciamento de condomínios, loteamentos e bairros planejados, além da participação em projetos urbanos de grande escala.',
+      'Essa experiência se traduz em uma atuação orientada por planejamento urbano, sustentabilidade, eficiência e valorização dos espaços, buscando desenvolver empreendimentos que contribuam não apenas para a qualidade de vida de seus moradores, mas também para a evolução das regiões onde estão inseridos.',
+    ],
+    paragrafosFinais: [
+      'Com seriedade, compromisso com prazos e qualidade, respeito às pessoas e ao meio ambiente, a Applausi transforma desenvolvimento urbano em projetos pensados para viver melhor — com propósito, cuidado e excelência em cada detalhe.',
+    ],
+  },
 };
+
+/**
+ * Índice auxiliar, sem hifens: "f-a-oliva" e "fa-oliva" caem na mesma entrada.
+ *
+ * O slug da página nasce do campo `construtora` do lançamento, que é texto
+ * livre — "FA Oliva" e "F. A. Oliva" são a mesma empresa e geram slugs
+ * diferentes. Sem isto, uma correção de grafia no dash apaga a seção "Sobre"
+ * em silêncio: nada quebra, a página só passa a não ter conteúdo. Já aconteceu
+ * uma vez, com a própria FA Oliva.
+ *
+ * É a mesma ideia do `chave()` de lib/construtoras.ts, que ignora espaços ao
+ * comparar nomes de construtora.
+ */
+const POR_CHAVE_FROUXA: Record<string, ConteudoConstrutora> = Object.fromEntries(
+  Object.entries(CONTEUDO).map(([slug, c]) => [slug.replaceAll('-', ''), c])
+);
 
 /** O conteúdo institucional desta construtora, ou null se ainda não houver. */
 export function conteudoDaConstrutora(slug: string): ConteudoConstrutora | null {
-  return CONTEUDO[slug] ?? null;
+  return CONTEUDO[slug] ?? POR_CHAVE_FROUXA[slug.replaceAll('-', '')] ?? null;
 }
 
 /** Slugs que já têm conteúdo — usado pelo teste para conferir os caminhos. */
