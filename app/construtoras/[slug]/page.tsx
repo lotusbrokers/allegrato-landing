@@ -11,20 +11,31 @@ import { conteudoDaConstrutora, curadasSemLancamento } from '@/lib/construtoras-
 export const revalidate = 3600;
 
 /**
- * Caixas do logo, no hero e no "Sobre".
+ * Caixas do logo no hero.
  *
  * Duas medidas porque as marcas chegam em dois formatos, e a mesma caixa não
  * serve para os dois: a horizontal é larga e baixa, a empilhada é alta e
- * estreita. As duas têm área parecida (~28.000px² no hero, ~23.000px² no
- * "Sobre"), então as marcas pesam igual na página, que é o que importa.
+ * estreita. As duas têm área parecida (~28.000px²), então as marcas pesam
+ * igual na página, que é o que importa.
  *
  * Quem usa a empilhada declara `logoVertical` em lib/construtoras-conteudo.ts.
  */
 const AJUSTE = { width: 'auto', height: 'auto', display: 'block' } as const;
 const CAIXA_HERO = { maxHeight: 104, maxWidth: 320, ...AJUSTE } as const;
 const CAIXA_HERO_EMPILHADA = { maxHeight: 230, maxWidth: 170, ...AJUSTE } as const;
-const CAIXA_SOBRE = { maxHeight: 92, maxWidth: 300, ...AJUSTE } as const;
-const CAIXA_EMPILHADA = { maxHeight: 210, maxWidth: 150, ...AJUSTE } as const;
+
+/**
+ * Placa clara atrás do logo, no hero.
+ *
+ * O hero é verde-escuro, e a maioria das marcas é colorida ou escura: sem
+ * placa elas somem no fundo. A placa preserva as cores originais — inverter
+ * ou clarear mudaria a marca, que não é nossa para mudar.
+ *
+ * Marca negativa (arte clara) dispensa a placa: é justamente para fundo
+ * escuro que ela foi desenhada.
+ */
+const PLACA_CLARA = { display: 'inline-block', background: '#f7f2e8', borderRadius: 14, padding: '18px 22px' } as const;
+const SEM_PLACA = { display: 'inline-block' } as const;
 
 /** As construtoras vêm do banco, então a lista de rotas também. */
 async function todas() {
@@ -79,7 +90,12 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
   // No hero, que é escuro, só entra logo de arte clara: o negativo declarado,
   // ou o próprio logo quando ele já é negativo. Sem um dos dois, fica o nome
   // escrito, que é o que sempre esteve ali.
-  const logoDoHero = sobre?.logoNegativo ?? (sobre?.logoEmFundoEscuro ? sobre.logo : null);
+  // O logo fica no hero, no lugar do nome — o mesmo desenho em toda página da
+  // seção. Quem ainda não enviou logo mantém o nome escrito, que é o que
+  // sempre esteve ali.
+  const logoDoHero = sobre?.logoNegativo ?? sobre?.logo ?? null;
+  // Arte clara vai direto sobre o verde; arte escura ou colorida pede a placa.
+  const logoPedePlaca = !sobre?.logoNegativo && !sobre?.logoEmFundoEscuro;
 
   const SITE = 'https://www.lotusbrokers.com.br';
   const ld = {
@@ -131,15 +147,17 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
             </Link>
             {/* O logo ocupa o lugar do nome, mas dentro do <h1>: o alt carrega o
                 nome, então o buscador e o leitor de tela continuam recebendo o
-                título da página. Construtora sem versão clara do logo mantém o
-                nome escrito. */}
+                título da página. O <span> é o invólucro da placa — <div> não
+                pode entrar num <h1>. */}
             <h1 style={{ fontFamily: "'Fraunces',serif", fontWeight: 300, fontSize: 'clamp(32px,4.6vw,56px)', color: '#f7f2e8', lineHeight: 1.05, margin: '18px 0 16px' }}>
               {logoDoHero ? (
-                <img
-                  src={logoDoHero}
-                  alt={c.nome}
-                  style={sobre?.logoVertical ? CAIXA_HERO_EMPILHADA : CAIXA_HERO}
-                />
+                <span style={logoPedePlaca ? PLACA_CLARA : SEM_PLACA}>
+                  <img
+                    src={logoDoHero}
+                    alt={c.nome}
+                    style={sobre?.logoVertical ? CAIXA_HERO_EMPILHADA : CAIXA_HERO}
+                  />
+                </span>
               ) : (
                 c.nome
               )}
@@ -176,34 +194,8 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
                 desalinhada. A medida de leitura continua curta pelo maxWidth
                 dos parágrafos, não pelo do container. */}
             <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-              {/* O logo aparece UMA vez por página. Quando o hero já o mostra,
-                  repetir aqui logo abaixo fica redundante. Quando o hero mostra
-                  o nome escrito — porque a construtora ainda não tem versão
-                  clara da marca —, é aqui que a marca aparece, e tirá-la
-                  deixaria a página sem logo nenhum. */}
-              {sobre.logo && !logoDoHero && (
-                // Fundo claro: o logo entra nas cores da marca, sem tratamento.
-                // Limitado por altura E largura: os logos chegam em formatos
-                // muito diferentes — empilhados (Santa Ângela, ~2:1) e
-                // horizontais (GP, ~4,5:1). Só com altura fixa o horizontal
-                // saía com o dobro da largura do empilhado e dominava a seção.
-                //
-                // Logo negativo (arte clara) ganha uma placa escura atrás: nesta
-                // seção o fundo é claro, e sem ela a marca simplesmente sumiria.
-                <div
-                  style={
-                    sobre.logoEmFundoEscuro
-                      ? { display: 'inline-block', background: '#15241c', borderRadius: 14, padding: '18px 22px', marginBottom: 30 }
-                      : { marginBottom: 30 }
-                  }
-                >
-                  <img
-                    src={sobre.logo}
-                    alt={c.nome}
-                    style={sobre.logoVertical ? CAIXA_EMPILHADA : CAIXA_SOBRE}
-                  />
-                </div>
-              )}
+              {/* Sem logo aqui: ele já está no hero, e repeti-lo duas telas
+                  abaixo é a mesma marca duas vezes na mesma página. */}
               <h2 style={{ fontFamily: "'Fraunces',serif", fontWeight: 300, fontSize: 'clamp(26px,3.2vw,38px)', color: '#15241c', lineHeight: 1.1, margin: '0 0 22px' }}>
                 Sobre a {c.nome}
               </h2>

@@ -36,9 +36,10 @@ export type ConteudoConstrutora = {
   /**
    * Versão clara do logo, para o hero, que tem fundo escuro.
    *
-   * Só é necessária quando `logo` é colorido: um wordmark escuro sobre o navy
-   * do hero fica ilegível. Quando o próprio `logo` já é negativo
-   * (logoEmFundoEscuro), ele serve nos dois lugares e este campo fica de fora.
+   * É a melhor saída para uma marca colorida: ela aparece direto sobre o verde,
+   * sem a placa clara que as outras precisam. Quando o próprio `logo` já é
+   * negativo (logoEmFundoEscuro), ele mesmo faz esse papel e este campo fica
+   * de fora.
    */
   logoNegativo?: string;
   /**
@@ -53,17 +54,16 @@ export type ConteudoConstrutora = {
    *
    * A caixa do logo é larga e baixa, feita para marcas horizontais. Uma marca
    * empilhada dentro dela sai com uns 60px de largura e o nome fica ilegível.
-   * Com isto ela ganha uma caixa alta e estreita — ver CAIXA_EMPILHADA em
+   * Com isto ela ganha uma caixa alta e estreita — ver CAIXA_HERO_EMPILHADA em
    * app/construtoras/[slug]/page.tsx.
    */
   logoVertical?: boolean;
   /**
    * O logo é negativo (arte clara, feita para fundo escuro)?
    *
-   * A seção "Sobre" tem fundo claro, onde um logo branco simplesmente some. Com
-   * isto ele ganha uma placa escura atrás — o mesmo tratamento que o material
-   * impresso da marca usa, e não um remendo. Inverter as cores não serve:
-   * mudaria a marca.
+   * O hero é verde-escuro, e a marca colorida só se destaca dele sobre uma
+   * placa clara. A negativa dispensa a placa: é para fundo escuro que ela foi
+   * desenhada, e ali ela fica melhor sem moldura nenhuma.
    */
   logoEmFundoEscuro?: boolean;
   /** Abertura do "Sobre", antes dos números. */
