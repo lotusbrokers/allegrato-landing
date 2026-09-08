@@ -15,15 +15,20 @@ test('construtora sem conteúdo devolve null, e a seção some', () => {
   assert.equal(conteudoDaConstrutora('nao-cadastrada'), null);
 });
 
-test('todo logo declarado existe em public/', () => {
+test('toda imagem declarada existe em public/', () => {
+  // logoNegativo entra junto porque é ele que a página mostra: um caminho
+  // errado ali quebra a imagem no hero, não num canto qualquer.
   for (const slug of slugsComConteudo()) {
-    const logo = conteudoDaConstrutora(slug)?.logo;
-    if (!logo) continue;
-    assert.ok(logo.startsWith('/'), `${slug}: o caminho do logo precisa começar com / (veio "${logo}")`);
-    assert.ok(
-      existsSync(join(process.cwd(), 'public', logo)),
-      `${slug}: declara o logo "${logo}", que não existe em public/`
-    );
+    const c = conteudoDaConstrutora(slug)!;
+    for (const campo of ['logo', 'logoNegativo', 'banner'] as const) {
+      const caminho = c[campo];
+      if (!caminho) continue;
+      assert.ok(caminho.startsWith('/'), `${slug}.${campo}: o caminho precisa começar com / (veio "${caminho}")`);
+      assert.ok(
+        existsSync(join(process.cwd(), 'public', caminho)),
+        `${slug}.${campo}: declara "${caminho}", que não existe em public/`
+      );
+    }
   }
 });
 

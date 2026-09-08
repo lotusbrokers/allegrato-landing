@@ -31,15 +31,23 @@ export type ConteudoConstrutora = {
    * os dois se encontram e nada muda de lugar.
    */
   nome?: string;
-  /** Caminho em public/. A imagem precisa existir lá. */
+  /**
+   * O logo nas cores da marca. Caminho em public/, e o arquivo precisa existir.
+   *
+   * Não é o que a página mostra — é o que ela declara no JSON-LD, onde o
+   * buscador espera a marca de verdade, não uma versão de uso. Quem aparece na
+   * tela é `logoNegativo`.
+   */
   logo?: string;
   /**
-   * Versão clara do logo, para o hero, que tem fundo escuro.
+   * Versão clara do logo — a que a página mostra.
    *
-   * É a melhor saída para uma marca colorida: ela aparece direto sobre o verde,
-   * sem a placa clara que as outras precisam. Quando o próprio `logo` já é
-   * negativo (logoEmFundoEscuro), ele mesmo faz esse papel e este campo fica
-   * de fora.
+   * O hero é verde-escuro e o logo fica direto sobre ele, sem placa: só arte
+   * clara se destaca ali. Marca de cor única vira negativa mantendo o alfa e
+   * pintando o traço de branco; o recorte continua desenhando a forma.
+   *
+   * Sem este campo (nem logoEmFundoEscuro), a página mostra o nome escrito em
+   * vez do logo — melhor do que uma marca escura sumindo no fundo escuro.
    */
   logoNegativo?: string;
   /**
@@ -114,6 +122,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   // Texto e logo enviados pela Lotus em 08/09/2026.
   'mac-lucer': {
     logo: '/construtoras/mac-lucer.png',
+    logoNegativo: '/construtoras/mac-lucer-negativo.png',
     paragrafos: [
       'A Mac Lucer Empreendimentos nasceu da história e do empreendedorismo da família Benassi, de origem italiana. Sua trajetória na construção civil começou em 1993, quando José Benassi identificou uma oportunidade de desenvolver empreendimentos no Parque da Represa, em Jundiaí, dando início à história da empresa.',
       'O nome Mac Lucer homenageia as mulheres da família: Maria, Rosa, Cristina, Luci e Célia, reforçando a importância da família e da valorização feminina em sua história.',
@@ -138,10 +147,6 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   // texto usa — é ele que forma a URL.
   'auten-incorporadora': {
     logo: '/construtoras/auten.png',
-    // A marca é de cor única (um cinza-escuro), então a versão negativa dela é
-    // a mesma arte em branco — foi assim que este arquivo foi gerado, mantendo
-    // o alfa e pintando só o traço. Com ela o logo vai direto sobre o verde do
-    // hero, sem a placa clara que as marcas coloridas precisam.
     logoNegativo: '/construtoras/auten-negativo.png',
     paragrafos: [
       'A Auten, integrante do Grupo Cataguá Soluções Imobiliárias, atua no mercado imobiliário com quase quatro décadas de tradição, tendo como propósito transformar o comum em extraordinário.',
@@ -158,6 +163,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   // Texto e logo enviados pela Lotus em 08/09/2026.
   inkkorp: {
     logo: '/construtoras/inkkorp.png',
+    logoNegativo: '/construtoras/inkkorp-negativo.png',
     paragrafos: [
       'A INKKORP surge da união de quatro trajetórias com mais de 40 anos de experiência no mercado imobiliário e na construção civil, combinando visão empreendedora, excelência técnica, gestão e expertise comercial.',
       'A incorporadora desenvolve projetos com foco em qualidade, inovação, transparência, governança e geração de valor, buscando equilibrar as necessidades de moradores e investidores.',
@@ -184,6 +190,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   // Texto e logo enviados pela Lotus em 08/09/2026.
   'gp-desenvolvimento-urbano': {
     logo: '/construtoras/gp-desenvolvimento-urbano.png',
+    logoNegativo: '/construtoras/gp-desenvolvimento-urbano-negativo.png',
     paragrafos: [
       'A GP Desenvolvimento Urbano é uma empresa familiar com tradição desde 1985, especializada em desenvolvimento e urbanização, com foco em criar soluções sustentáveis, inovadoras e alinhadas às necessidades das cidades e de seus moradores.',
       'Ao longo de sua trajetória, a empresa atua no desenvolvimento de loteamentos residenciais, industriais, chácaras e bairros planejados, buscando transformar regiões e gerar qualidade de vida por meio de infraestrutura, mobilidade, saneamento e planejamento urbano.',
@@ -237,6 +244,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   emccamp: {
     nome: 'Emccamp',
     logo: '/construtoras/emccamp.png',
+    logoNegativo: '/construtoras/emccamp-negativo.png',
     paragrafos: [
       'A Emccamp Residencial é uma incorporadora e construtora de origem familiar, fundada em 1977, com sede em Belo Horizonte (MG). A empresa atua principalmente no mercado residencial, desenvolvendo apartamentos, pequenas áreas comerciais e loteamentos, com presença concentrada nos estados de Minas Gerais, Rio de Janeiro e São Paulo.',
       'A empresa tem como diferenciais a inovação, tecnologia, padronização e gestão eficiente, utilizando métodos construtivos modernos que permitem maior agilidade nas obras, redução de resíduos e controle de qualidade.',
@@ -294,6 +302,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   'grupo-zarin': {
     nome: 'Zarin',
     logo: '/construtoras/grupo-zarin.png',
+    logoNegativo: '/construtoras/grupo-zarin-negativo.png',
     paragrafos: [
       'A Zarin é uma empresa do setor imobiliário com mais de 25 anos de experiência, que tem como conceito central a solidez. Seu propósito vai além da construção de imóveis: busca criar empreendimentos que contribuam para a realização de sonhos, qualidade de vida e construção de futuros sustentáveis.',
       'Com mais de 520 mil m² construídos e 20 mil unidades entregues, a empresa combina qualidade, segurança, inovação e responsabilidade em seus projetos, buscando desenvolver comunidades e contribuir para o crescimento urbano de forma consciente.',
@@ -343,6 +352,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   // Texto e logo enviados pela Lotus em 08/09/2026.
   rem: {
     logo: '/construtoras/rem.png',
+    logoNegativo: '/construtoras/rem-negativo.png',
     paragrafos: [
       'A REM Construtora atua no mercado imobiliário desde 1990, tendo como principal fundamento a confiança nas relações. Ao longo de sua trajetória, desenvolveu empreendimentos residenciais e comerciais, além de projetos como agências bancárias e galpões.',
       'Com origem familiar, a empresa foi fundada por Renato Mauro e, posteriormente, passou a contar com a participação de outras gerações da família. Sua atuação combina tradição e inovação, buscando entregar qualidade, pontualidade e resultados consistentes.',
@@ -364,6 +374,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   // escolher por ela quais números merecem a vitrine.
   'sebel-empreendimentos': {
     logo: '/construtoras/sebel-empreendimentos.png',
+    logoNegativo: '/construtoras/sebel-empreendimentos-negativo.png',
     paragrafos: [
       'A Sebel Empreendimentos é uma incorporadora e construtora com mais de 40 anos de atuação no mercado imobiliário, reunindo experiência, solidez e excelência na execução de empreendimentos residenciais, comerciais e obras públicas.',
       'Desde 1980, a empresa construiu uma trajetória marcada pela versatilidade e capacidade técnica, atuando desde projetos residenciais de alto padrão até grandes conjuntos habitacionais. Ao longo de sua história, já são mais de 100 mil m² de obras realizadas e aproximadamente 1.500 unidades habitacionais, sempre com atenção à qualidade construtiva, planejamento e aos detalhes de cada projeto.',
@@ -383,6 +394,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   // como essa marca é desenhada: adota a cor de quem está atrás.
   tebas: {
     logo: '/construtoras/tebas.png',
+    logoNegativo: '/construtoras/tebas-negativo.png',
     paragrafos: [
       'A TEBAS é uma incorporadora com 45 anos de história, reconhecida pela tradição, credibilidade e excelência no desenvolvimento de empreendimentos imobiliários de alto padrão.',
       'Atualmente liderada pelos sócios José Roberto e Mauro, a empresa reúne experiência e competência consolidadas ao longo de dezenas de empreendimentos entregues, sempre com atenção à qualidade, elegância e às necessidades reais de seus clientes.',
@@ -399,6 +411,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   'vic-engenharia': {
     nome: 'VIC Engenharia',
     logo: '/construtoras/vic-engenharia.png',
+    logoNegativo: '/construtoras/vic-engenharia-negativo.png',
     paragrafos: [
       'A VIC Engenharia é uma incorporadora e construtora que atua no desenvolvimento de empreendimentos planejados para proporcionar mais qualidade de vida, segurança e acessibilidade aos seus clientes.',
       'Formada pela união de profissionais experientes dos mercados de incorporação imobiliária e construção civil, a empresa combina conhecimento técnico, eficiência e visão de mercado para entregar empreendimentos com qualidade construtiva e condições acessíveis, mantendo o compromisso com a satisfação de clientes, parceiros, investidores e colaboradores.',
@@ -416,6 +429,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   // quais virariam destaque seria escolher por ela.
   'vvc-construtora': {
     logo: '/construtoras/vvc-construtora.png',
+    logoNegativo: '/construtoras/vvc-construtora-negativo.png',
     logoVertical: true,
     paragrafos: [
       'A VVC atua desde 2002 no setor da construção civil, reunindo experiência no desenvolvimento, construção e incorporação de empreendimentos residenciais, comerciais e industriais.',

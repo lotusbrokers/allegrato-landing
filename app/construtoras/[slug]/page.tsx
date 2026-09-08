@@ -25,17 +25,21 @@ const CAIXA_HERO = { maxHeight: 104, maxWidth: 320, ...AJUSTE } as const;
 const CAIXA_HERO_EMPILHADA = { maxHeight: 230, maxWidth: 170, ...AJUSTE } as const;
 
 /**
- * Placa clara atrás do logo, no hero.
+ * A capa atrás do hero, no verde da Lotus.
  *
- * O hero é verde-escuro, e a maioria das marcas é colorida ou escura: sem
- * placa elas somem no fundo. A placa preserva as cores originais — inverter
- * ou clarear mudaria a marca, que não é nossa para mudar.
+ * A foto entra dessaturada e com pouca opacidade sobre o `#15241c` da seção:
+ * o que sobra é a imagem em tom verde, não uma foto colorida por baixo de um
+ * véu. Serve à leitura — o logo por cima é branco, e uma capa colorida
+ * disputava atenção com ele, além de deixar manchas claras onde o branco
+ * sumia.
  *
- * Marca negativa (arte clara) dispensa a placa: é justamente para fundo
- * escuro que ela foi desenhada.
+ * 0,3 mantém o ponto mais claro possível em torno de 30% de luminância, com
+ * folga de contraste para o branco em qualquer foto.
  */
-const PLACA_CLARA = { display: 'inline-block', background: '#f7f2e8', borderRadius: 14, padding: '18px 22px' } as const;
-const SEM_PLACA = { display: 'inline-block' } as const;
+const CAPA_EM_VERDE = {
+  position: 'absolute', inset: 0, width: '100%', height: '100%',
+  objectFit: 'cover', filter: 'grayscale(1)', opacity: 0.3,
+} as const;
 
 /** As construtoras vêm do banco, então a lista de rotas também. */
 async function todas() {
@@ -94,8 +98,7 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
   // seção. Quem ainda não enviou logo mantém o nome escrito, que é o que
   // sempre esteve ali.
   const logoDoHero = sobre?.logoNegativo ?? sobre?.logo ?? null;
-  // Arte clara vai direto sobre o verde; arte escura ou colorida pede a placa.
-  const logoPedePlaca = !sobre?.logoNegativo && !sobre?.logoEmFundoEscuro;
+
 
   const SITE = 'https://www.lotusbrokers.com.br';
   const ld = {
@@ -134,7 +137,7 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
               src={fundoDoHero}
               alt=""
               aria-hidden="true"
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.28 }}
+              style={CAPA_EM_VERDE}
             />
           )}
           <div style={{ position: 'relative', maxWidth: 1280, margin: '0 auto', padding: '86px 0 74px' }}>
@@ -147,17 +150,14 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
             </Link>
             {/* O logo ocupa o lugar do nome, mas dentro do <h1>: o alt carrega o
                 nome, então o buscador e o leitor de tela continuam recebendo o
-                título da página. O <span> é o invólucro da placa — <div> não
-                pode entrar num <h1>. */}
+                título da página. */}
             <h1 style={{ fontFamily: "'Fraunces',serif", fontWeight: 300, fontSize: 'clamp(32px,4.6vw,56px)', color: '#f7f2e8', lineHeight: 1.05, margin: '18px 0 16px' }}>
               {logoDoHero ? (
-                <span style={logoPedePlaca ? PLACA_CLARA : SEM_PLACA}>
-                  <img
-                    src={logoDoHero}
-                    alt={c.nome}
-                    style={sobre?.logoVertical ? CAIXA_HERO_EMPILHADA : CAIXA_HERO}
-                  />
-                </span>
+                <img
+                  src={logoDoHero}
+                  alt={c.nome}
+                  style={sobre?.logoVertical ? CAIXA_HERO_EMPILHADA : CAIXA_HERO}
+                />
               ) : (
                 c.nome
               )}
