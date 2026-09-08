@@ -187,3 +187,11 @@
   .lt-card-emp { transition: none; }
   .lt-card-emp:hover { transform: none; }
 }
+
+/* ---- Aba inativa de components/AbasLancamentos.tsx. ----
+   Em CSS e não em <Hoverable> porque o componente é usado também pela página de
+   construtoras, que é Server Component e não manda JavaScript ao navegador. */
+.lt-aba:hover {
+  background: rgba(21, 36, 28, .06);
+  border-color: rgba(21, 36, 28, .45);
+}

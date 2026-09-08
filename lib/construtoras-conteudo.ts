@@ -294,6 +294,25 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
       ],
     },
   },
+
+  // Texto e logo enviados pela Lotus em 08/09/2026.
+  rem: {
+    logo: '/construtoras/rem.png',
+    paragrafos: [
+      'A REM Construtora atua no mercado imobiliário desde 1990, tendo como principal fundamento a confiança nas relações. Ao longo de sua trajetória, desenvolveu empreendimentos residenciais e comerciais, além de projetos como agências bancárias e galpões.',
+      'Com origem familiar, a empresa foi fundada por Renato Mauro e, posteriormente, passou a contar com a participação de outras gerações da família. Sua atuação combina tradição e inovação, buscando entregar qualidade, pontualidade e resultados consistentes.',
+      'A REM tem como pilares transparência, comprometimento, ética, qualidade e respeito às pessoas, mantendo também preocupação com o meio ambiente, a segurança e a satisfação dos clientes.',
+      'Seu objetivo é identificar boas oportunidades e localizações, desenvolver projetos diferenciados e inovadores e aprimorar continuamente seus processos, buscando gerar valor tanto para clientes quanto para investidores.',
+    ],
+    numeros: [
+      { valor: '35 anos', rotulo: 'de dedicação e comprometimento' },
+      { valor: '630 mil', rotulo: 'm² construídos ou em construção' },
+      { valor: '56', rotulo: 'empreendimentos' },
+    ],
+    paragrafosFinais: [
+      'Em essência: a REM Construtora combina tradição, confiança e inovação, desenvolvendo empreendimentos com foco em qualidade, pontualidade, rentabilidade e melhoria da vida de seus clientes.',
+    ],
+  },
 };
 
 /** O conteúdo institucional desta construtora, ou null se ainda não houver. */

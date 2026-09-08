@@ -25,6 +25,7 @@ import React, {
 } from 'react';
 import { empsFallback, EMP_IMG, type EmpItem } from '@/lib/lancamentos-list-fallback';
 import { opcoesDeFiltro, passaNosFiltros, SEM_FILTRO } from '@/lib/filtros-lancamentos';
+import AbasLancamentos from './AbasLancamentos';
 import Link from 'next/link';
 import LotusHeader from './LotusHeader';
 
@@ -320,6 +321,8 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
       {/* FILTROS + GRID */}
       <section style={parseStyle('background:#f7f2e8;padding:70px 32px 100px;')}>
         <div style={parseStyle('max-width:1280px;margin:0 auto;')}>
+          {/* As duas abas da seção: esta lista e a de construtoras. */}
+          <AbasLancamentos ativa="empreendimentos" />
           {/* filtros */}
           <div style={parseStyle('display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px;')}>
             <div style={parseStyle('display:flex;flex-wrap:wrap;gap:10px;align-items:center;')}>
