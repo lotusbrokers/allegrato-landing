@@ -138,6 +138,11 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   // texto usa — é ele que forma a URL.
   'auten-incorporadora': {
     logo: '/construtoras/auten.png',
+    // A marca é de cor única (um cinza-escuro), então a versão negativa dela é
+    // a mesma arte em branco — foi assim que este arquivo foi gerado, mantendo
+    // o alfa e pintando só o traço. Com ela o logo vai direto sobre o verde do
+    // hero, sem a placa clara que as marcas coloridas precisam.
+    logoNegativo: '/construtoras/auten-negativo.png',
     paragrafos: [
       'A Auten, integrante do Grupo Cataguá Soluções Imobiliárias, atua no mercado imobiliário com quase quatro décadas de tradição, tendo como propósito transformar o comum em extraordinário.',
       'A empresa desenvolve empreendimentos exclusivos, priorizando localização, valorização, segurança e tecnologia. Seus projetos combinam design moderno, funcionalidade e sofisticação, criando ambientes que proporcionam uma experiência diferenciada de moradia, lazer e status.',
@@ -254,12 +259,21 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
     ],
   },
 
-  // Texto enviado pela Lotus em 08/09/2026. SEM LOGO de propósito: o arquivo
-  // recebido traz o wordmark em branco sobre uma placa branca opaca, que
-  // apareceria como um retângulo recortado em qualquer fundo. Assim que vier
-  // um arquivo com a marca em cor sólida e fundo transparente, declarar aqui.
+  // Texto enviado pela Lotus em 08/09/2026; logo em 08/09/2026, no segundo
+  // arquivo — o primeiro trazia o wordmark branco sobre placa branca opaca.
+  //
+  // ATENÇÃO: o arquivo recebido é uma RECRIAÇÃO da marca, não o original da
+  // Diretiva. Proporção, tom de azul e tipografia são aproximados. Vale como
+  // provisório; o arquivo oficial da construtora substitui sem mexer em código.
+  //
+  // O wordmark é branco e o símbolo é azul: os dois só convivem sobre fundo
+  // escuro, daí logoEmFundoEscuro — que aqui significa "vai direto no hero,
+  // sem placa clara", e não o contrário.
   diretiva: {
     nome: 'Diretiva',
+    logo: '/construtoras/diretiva.png',
+    logoEmFundoEscuro: true,
+    logoVertical: true,
     paragrafos: [
       'A Diretiva Engenharia e Construções possui mais de 40 anos de história e iniciou sua trajetória em Jundiaí, atuando no setor da construção civil. Ao longo dos anos, ampliou sua atuação para incorporação e construção de condomínios residenciais, obras comerciais e loteamentos residenciais, comerciais e industriais.',
       'A empresa tem como missão realizar os sonhos de seus clientes por meio de construções com qualidade, produtividade e durabilidade, mantendo compromisso com a sociedade e o meio ambiente.',
