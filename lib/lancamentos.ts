@@ -1,7 +1,7 @@
 import { supabase, TENANT_ID } from './supabase';
 import { hrefForSlug, slugParaLanding, slugify } from './landings';
 import { developmentsFallback, type DevelopmentCard } from './developments';
-import { mapaDeConstrutoras } from './construtoras';
+import { construtoraDoEmpreendimento, mapaDeConstrutoras } from './construtoras';
 
 // Reexportados por compatibilidade: a descoberta das landings mora em landings.ts
 // (ver o comentário de lá), mas `toCard`/`toListItem` continuam sendo o ponto de
@@ -80,7 +80,7 @@ export function toCard(row: LancamentoRow): LancamentoCard {
     name: row.nome,
     location: location(row.bairro, row.cidade),
     stage: row.estagio ?? '',
-    builder: row.construtora ?? '',
+    builder: construtoraDoEmpreendimento(row.nome, row.construtora),
     specs: row.specs ?? row.dormitorios ?? '',
     price: row.preco_texto ?? 'Consultar valor',
     exclusive: row.exclusivo ?? false,
@@ -139,7 +139,7 @@ export function toListItem(row: LancamentoRow): LancamentoListItem {
     price: precoOuNulo(row.preco_texto),
     specs: row.specs ?? row.dormitorios ?? '',
     exclusive: row.exclusivo ?? false,
-    builder: row.construtora?.trim() ?? '',
+    builder: construtoraDoEmpreendimento(row.nome, row.construtora),
     img: capa(row.fotos),
     href: hrefForSlug(slug),
   };

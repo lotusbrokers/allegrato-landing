@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { construtorasParaFiltro, mapaDeConstrutoras } from './construtoras.ts';
+import { construtoraDoEmpreendimento, construtorasParaFiltro, mapaDeConstrutoras } from './construtoras.ts';
 
 /**
  * Casos tirados do banco real: os dois grupos com grafia duplicada que a
@@ -60,4 +60,18 @@ test('espaçamento diferente no nome não cria duas construtoras', () => {
   // Separadas, viravam duas opções no filtro e duas páginas em /construtoras.
   assert.deepEqual(construtorasParaFiltro(['F A Oliva', 'FA Oliva', 'F A Oliva']), ['F A Oliva']);
   assert.deepEqual(construtorasParaFiltro(['Mac Lucer', 'MacLucer']), ['Mac Lucer']);
+});
+
+test('empreendimento com vínculo errado no dashboard vai para a construtora certa', () => {
+  // O Altissimi está cadastrado como "Santa Ângela" e é da Mac Lucer. Sem a
+  // correção ele aparecia na página de uma empresa que não o construiu.
+  assert.equal(construtoraDoEmpreendimento('Altissimi', 'Santa Ângela'), 'Mac Lucer');
+  assert.equal(construtoraDoEmpreendimento('ALTISSIMI', 'Santa Ângela'), 'Mac Lucer');
+});
+
+test('sem correção, vale o que o banco diz', () => {
+  assert.equal(construtoraDoEmpreendimento('Allegrato', 'Santa Ângela'), 'Santa Ângela');
+  assert.equal(construtoraDoEmpreendimento('Allegrato', '  Santa Ângela  '), 'Santa Ângela');
+  assert.equal(construtoraDoEmpreendimento('Allegrato', null), '');
+  assert.equal(construtoraDoEmpreendimento(null, 'Tebas'), 'Tebas');
 });

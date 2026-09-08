@@ -106,3 +106,44 @@ export function mapaDeConstrutoras(nomes: (string | null | undefined)[]): Map<st
 export function construtorasParaFiltro(nomes: (string | null | undefined)[]): string[] {
   return [...new Set(mapaDeConstrutoras(nomes).values())].sort((a, b) => a.localeCompare(b, 'pt-BR'));
 }
+
+/**
+ * Empreendimentos atribuídos à construtora errada no dashboard.
+ *
+ * O portal só lê o Supabase, então a correção definitiva é lá. Enquanto ela não
+ * vem, o vínculo errado não pode ficar de pé: ele aparece no filtro de
+ * construtora, no card e — desde que /construtoras existe — na página de uma
+ * empresa que não construiu aquele empreendimento. Atribuir obra à construtora
+ * errada é dizer algo falso sobre duas empresas de uma vez.
+ *
+ * Chave: nome do empreendimento como está cadastrado, pela mesma comparação
+ * usada para as construtoras (sem acento, sem caixa, sem espaço).
+ * Valor: a construtora correta.
+ *
+ * Ao corrigir no dashboard, apagar a linha daqui. Esvaziar o mapa devolve tudo
+ * ao que o banco diz.
+ */
+const CONSTRUTORA_CORRIGIDA: Record<string, string> = {
+  // 08/09/2026, informado pela Lotus: está como "Santa Ângela" no dashboard.
+  altissimi: 'Mac Lucer',
+};
+
+/**
+ * A construtora de um empreendimento: a corrigida, se houver, senão a do banco.
+ *
+ * Ponto único — lib/lancamentos.ts chama isto nas duas conversões de linha
+ * (card e item de listagem). Corrigir em um só dos dois deixaria a listagem e a
+ * home discordando sobre quem construiu.
+ */
+export function construtoraDoEmpreendimento(
+  nomeDoEmpreendimento: string | null | undefined,
+  construtoraDoBanco: string | null | undefined
+): string {
+  const corrigida = CONSTRUTORA_CORRIGIDA[chave(nomeDoEmpreendimento ?? '')];
+  return corrigida ?? (construtoraDoBanco?.trim() ?? '');
+}
+
+/** Empreendimentos com vínculo corrigido — o teste confere os nomes. */
+export function empreendimentosCorrigidos(): string[] {
+  return Object.keys(CONSTRUTORA_CORRIGIDA);
+}
