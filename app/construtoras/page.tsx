@@ -3,6 +3,7 @@ import Link from 'next/link';
 import LotusHeader from '@/components/LotusHeader';
 import RodapeLotus from '@/components/RodapeLotus';
 import AbasLancamentos from '@/components/AbasLancamentos';
+import SliderConstrutoras from '@/components/SliderConstrutoras';
 import { getLancamentosList, isListItemApresentavel } from '@/lib/lancamentos';
 import { agruparPorConstrutora, comCuradasSemLancamento } from '@/lib/construtoras-paginas';
 import { curadasSemLancamento } from '@/lib/construtoras-conteudo';
@@ -72,6 +73,8 @@ export default async function ConstrutorasPage() {
 
         <section style={{ padding: '70px 32px 100px' }}>
           <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+            {/* Vitrine curada da Lotus, antes da lista completa. */}
+            <SliderConstrutoras />
             {/* A mesma dupla de abas de /lotus-lancamentos, aqui com a outra ativa. */}
             <AbasLancamentos ativa="construtoras" />
             <div style={{ fontSize: 13.5, color: '#8aa593', marginBottom: 26 }}>
