@@ -6,6 +6,7 @@ import RodapeLotus from '@/components/RodapeLotus';
 import CardEmpreendimento from '@/components/CardEmpreendimento';
 import { getLancamentosList, isListItemApresentavel } from '@/lib/lancamentos';
 import { agruparPorConstrutora, construtoraPorSlug } from '@/lib/construtoras-paginas';
+import { conteudoDaConstrutora } from '@/lib/construtoras-conteudo';
 
 export const revalidate = 3600;
 
@@ -53,13 +54,19 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
   if (!c) notFound();
 
   const cidades = [...new Set(c.lancamentos.map((l) => l.city).filter(Boolean))];
+  const sobre = conteudoDaConstrutora(c.slug);
 
+  const SITE = 'https://www.lotusbrokers.com.br';
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: c.nome,
-    url: `https://www.lotusbrokers.com.br/construtoras/${c.slug}`,
+    url: `${SITE}/construtoras/${c.slug}`,
     ...(c.capa ? { image: c.capa.img } : {}),
+    // Logo e descrição só entram quando a Lotus enviou — declarar campo vazio
+    // seria pior do que não declarar.
+    ...(sobre?.logo ? { logo: `${SITE}${sobre.logo}` } : {}),
+    ...(sobre ? { description: sobre.paragrafos[0] } : {}),
     // makesOffer descreve o vínculo real que existe: os empreendimentos dela
     // acompanhados pela Lotus. Nada aqui é afirmação institucional sobre a
     // empresa, que o portal não tem como sustentar.
@@ -107,11 +114,67 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
           </div>
         </section>
 
+        {/* ---------------- Sobre a construtora ----------------
+            Só existe quando a Lotus enviou o texto (lib/construtoras-conteudo.ts).
+            Sem ele a página segue direto para os lançamentos, sem deixar buraco
+            nem preencher com texto genérico. */}
+        {sobre && (
+          <section style={{ padding: '74px 32px 10px' }}>
+            <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+              {sobre.logo && (
+                // Fundo claro: o logo entra nas cores da marca, sem tratamento.
+                <img
+                  src={sobre.logo}
+                  alt={`${c.nome}`}
+                  style={{ height: 92, width: 'auto', display: 'block', marginBottom: 30 }}
+                />
+              )}
+              <h2 style={{ fontFamily: "'Fraunces',serif", fontWeight: 300, fontSize: 'clamp(26px,3.2vw,38px)', color: '#15241c', lineHeight: 1.1, margin: '0 0 22px' }}>
+                Sobre a {c.nome}
+              </h2>
+
+              {sobre.paragrafos.map((t, i) => (
+                <p key={i} style={{ fontSize: 16.5, color: '#3f6249', fontWeight: 300, lineHeight: 1.65, margin: '0 0 16px', maxWidth: 760 }}>
+                  {t}
+                </p>
+              ))}
+
+              {sobre.numeros && sobre.numeros.length > 0 && (
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))',
+                    gap: 20,
+                    margin: '34px 0',
+                    padding: '30px 0',
+                    borderTop: '1px solid rgba(21,36,28,.12)',
+                    borderBottom: '1px solid rgba(21,36,28,.12)',
+                  }}
+                >
+                  {sobre.numeros.map((n) => (
+                    <div key={n.rotulo}>
+                      <div style={{ fontFamily: "'Fraunces',serif", fontWeight: 300, fontSize: 'clamp(30px,3.4vw,42px)', color: '#b18a4a', lineHeight: 1 }}>
+                        {n.valor}
+                      </div>
+                      <div style={{ fontSize: 13.5, color: '#3f6249', marginTop: 8, letterSpacing: '.02em' }}>{n.rotulo}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {sobre.paragrafosFinais?.map((t, i) => (
+                <p key={i} style={{ fontSize: 16.5, color: '#3f6249', fontWeight: 300, lineHeight: 1.65, margin: '0 0 16px', maxWidth: 760 }}>
+                  {t}
+                </p>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* ---------------- Lançamentos ----------------
-            É a seção que os dados sustentam. História, descrição institucional,
-            tempo de atuação e galeria própria não existem no dashboard — ver o
-            cabeçalho de lib/construtoras-paginas.ts. Quando existirem, entram
-            acima desta seção. */}
+            A única seção que sai do banco: o vínculo construtora → empreendimento
+            do dashboard. O "Sobre" acima depende de texto enviado pela Lotus,
+            porque esse cadastro não existe lá — ver lib/construtoras-conteudo.ts. */}
         <section style={{ padding: '70px 32px 90px' }}>
           <div style={{ maxWidth: 1280, margin: '0 auto' }}>
             <h2 style={{ fontFamily: "'Fraunces',serif", fontWeight: 300, fontSize: 'clamp(26px,3.2vw,38px)', color: '#15241c', lineHeight: 1.1, margin: '0 0 8px' }}>
