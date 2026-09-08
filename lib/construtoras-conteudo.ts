@@ -28,6 +28,12 @@ export type ConteudoConstrutora = {
   paragrafos: string[];
   /** Destaques numéricos. Sem eles, o bloco não aparece. */
   numeros?: NumeroDaConstrutora[];
+  /**
+   * Rótulo do bloco de números, quando a Lotus envia um — a Mac Lucer manda o
+   * período a que os números se referem, e sem isso o leitor não sabe se "16
+   * empreendimentos" é do ano ou da história inteira.
+   */
+  numerosTitulo?: string;
   /** Fecho, depois dos números. */
   paragrafosFinais?: string[];
 };
@@ -49,6 +55,28 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
     paragrafosFinais: [
       'Sua atuação é guiada por quatro valores principais: confiança, respeito, trabalho em equipe e comprometimento. A empresa também prioriza a qualidade das obras, o cumprimento de prazos, a satisfação de clientes e colaboradores e a melhoria contínua de seus processos.',
       'Em essência: a Santa Angela combina mais de quatro décadas de experiência, solidez e inovação para transformar sonhos em empreendimentos que contribuem para o desenvolvimento de Jundiaí e região.',
+    ],
+  },
+
+  // Texto e logo enviados pela Lotus em 08/09/2026.
+  'mac-lucer': {
+    logo: '/construtoras/mac-lucer.png',
+    paragrafos: [
+      'A Mac Lucer Empreendimentos nasceu da história e do empreendedorismo da família Benassi, de origem italiana. Sua trajetória na construção civil começou em 1993, quando José Benassi identificou uma oportunidade de desenvolver empreendimentos no Parque da Represa, em Jundiaí, dando início à história da empresa.',
+      'O nome Mac Lucer homenageia as mulheres da família: Maria, Rosa, Cristina, Luci e Célia, reforçando a importância da família e da valorização feminina em sua história.',
+      'Seu primeiro empreendimento foi o Residencial Olívio Boa, no Parque da Represa. Desde então, a empresa vem se consolidando no mercado imobiliário de Jundiaí e região, com foco em qualidade, credibilidade, inovação e relacionamento humanizado.',
+      'A Mac Lucer tem como principais valores comprometimento, acolhimento e integridade, buscando oferecer empreendimentos de alto padrão de qualidade, preços competitivos e atendimento especializado.',
+    ],
+    numerosTitulo: 'Principais números (1993–2025)',
+    numeros: [
+      { valor: '16', rotulo: 'empreendimentos' },
+      { valor: '2.076', rotulo: 'imóveis vendidos' },
+      { valor: '10', rotulo: 'empreendimentos entregues' },
+      { valor: '1.106', rotulo: 'imóveis em construção' },
+      { valor: '+370 mil', rotulo: 'm² construídos' },
+    ],
+    paragrafosFinais: [
+      'Em essência: a Mac Lucer une tradição familiar, qualidade e inovação, transformando sonhos em realidade e construindo não apenas imóveis, mas parte da história de seus clientes.',
     ],
   },
 };

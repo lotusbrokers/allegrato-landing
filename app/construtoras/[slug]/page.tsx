@@ -139,13 +139,18 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
                 </p>
               ))}
 
+              {sobre.numeros && sobre.numeros.length > 0 && sobre.numerosTitulo && (
+                <div style={{ fontSize: 13, fontWeight: 600, letterSpacing: '.16em', textTransform: 'uppercase', color: '#b18a4a', marginTop: 34 }}>
+                  {sobre.numerosTitulo}
+                </div>
+              )}
               {sobre.numeros && sobre.numeros.length > 0 && (
                 <div
                   style={{
                     display: 'grid',
                     gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))',
                     gap: 20,
-                    margin: '34px 0',
+                    margin: sobre.numerosTitulo ? '14px 0 34px' : '34px 0',
                     padding: '30px 0',
                     borderTop: '1px solid rgba(21,36,28,.12)',
                     borderBottom: '1px solid rgba(21,36,28,.12)',
