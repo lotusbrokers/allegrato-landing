@@ -79,6 +79,23 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
       'Em essência: a Mac Lucer une tradição familiar, qualidade e inovação, transformando sonhos em realidade e construindo não apenas imóveis, mas parte da história de seus clientes.',
     ],
   },
+
+  // Texto e logo enviados pela Lotus em 08/09/2026. A chave é o slug do nome
+  // cadastrado no dashboard ("Auten Incorporadora"), e não o nome curto que o
+  // texto usa — é ele que forma a URL.
+  'auten-incorporadora': {
+    logo: '/construtoras/auten.png',
+    paragrafos: [
+      'A Auten, integrante do Grupo Cataguá Soluções Imobiliárias, atua no mercado imobiliário com quase quatro décadas de tradição, tendo como propósito transformar o comum em extraordinário.',
+      'A empresa desenvolve empreendimentos exclusivos, priorizando localização, valorização, segurança e tecnologia. Seus projetos combinam design moderno, funcionalidade e sofisticação, criando ambientes que proporcionam uma experiência diferenciada de moradia, lazer e status.',
+      'A Auten busca superar as expectativas dos clientes em cada detalhe, estabelecendo novos padrões de qualidade e oferecendo não apenas espaços para morar, mas um estilo de vida único e uma experiência que vai além do imóvel.',
+    ],
+    // Sem bloco de números: a Lotus não enviou nenhum, e o bloco só aparece
+    // quando há o que mostrar.
+    paragrafosFinais: [
+      'Em essência: a Auten representa exclusividade, sofisticação, inovação e valorização, transformando cada empreendimento em uma experiência diferenciada.',
+    ],
+  },
 };
 
 /** O conteúdo institucional desta construtora, ou null se ainda não houver. */
