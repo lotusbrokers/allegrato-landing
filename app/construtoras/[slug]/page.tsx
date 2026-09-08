@@ -123,10 +123,14 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
             <div style={{ maxWidth: 1000, margin: '0 auto' }}>
               {sobre.logo && (
                 // Fundo claro: o logo entra nas cores da marca, sem tratamento.
+                // Limitado por altura E largura: os logos chegam em formatos
+                // muito diferentes — empilhados (Santa Ângela, ~2:1) e
+                // horizontais (GP, ~4,5:1). Só com altura fixa o horizontal
+                // saía com o dobro da largura do empilhado e dominava a seção.
                 <img
                   src={sobre.logo}
-                  alt={`${c.nome}`}
-                  style={{ height: 92, width: 'auto', display: 'block', marginBottom: 30 }}
+                  alt={c.nome}
+                  style={{ maxHeight: 92, maxWidth: 300, width: 'auto', height: 'auto', display: 'block', marginBottom: 30 }}
                 />
               )}
               <h2 style={{ fontFamily: "'Fraunces',serif", fontWeight: 300, fontSize: 'clamp(26px,3.2vw,38px)', color: '#15241c', lineHeight: 1.1, margin: '0 0 22px' }}>

@@ -131,6 +131,29 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
       'Em essência: a INKKORP busca transformar experiência e inteligência de mercado em empreendimentos que unem qualidade de vida, segurança para investidores e desenvolvimento responsável, criando espaços com propósito e valor para o futuro.',
     ],
   },
+
+  // Texto e logo enviados pela Lotus em 08/09/2026.
+  'gp-desenvolvimento-urbano': {
+    logo: '/construtoras/gp-desenvolvimento-urbano.png',
+    paragrafos: [
+      'A GP Desenvolvimento Urbano é uma empresa familiar com tradição desde 1985, especializada em desenvolvimento e urbanização, com foco em criar soluções sustentáveis, inovadoras e alinhadas às necessidades das cidades e de seus moradores.',
+      'Ao longo de sua trajetória, a empresa atua no desenvolvimento de loteamentos residenciais, industriais, chácaras e bairros planejados, buscando transformar regiões e gerar qualidade de vida por meio de infraestrutura, mobilidade, saneamento e planejamento urbano.',
+      'A GP tem como pilares transparência, qualidade, inovação, responsabilidade ambiental e desenvolvimento regional. Seu trabalho busca equilibrar crescimento urbano, preservação do meio ambiente e bem-estar social, mantendo uma visão de longo prazo.',
+    ],
+    // Nem todo destaque da GP é um número — "Desde 1985" e "Milhares" entram
+    // como vieram, no lugar do valor. Forçá-los a virar algarismo mudaria o que
+    // a empresa disse.
+    numeros: [
+      { valor: 'Desde 1985', rotulo: 'no mercado' },
+      { valor: '19', rotulo: 'empreendimentos imobiliários' },
+      { valor: '69 milhões', rotulo: 'de m² urbanizados' },
+      { valor: 'Milhares', rotulo: 'de unidades residenciais e comerciais entregues' },
+    ],
+    paragrafosFinais: [
+      'A empresa também possui forte atuação em ESG, com iniciativas ambientais, projetos sociais e práticas de governança. Entre seus projetos estão bairros planejados, sistemas de saneamento e abastecimento de água, melhorias viárias, mobilidade urbana e infraestrutura em diversas cidades.',
+      'Em essência: a GP Desenvolvimento Urbano vai além da criação de loteamentos: desenvolve regiões, transforma espaços e contribui para construir cidades mais sustentáveis, conectadas e preparadas para o futuro.',
+    ],
+  },
 };
 
 /** O conteúdo institucional desta construtora, ou null se ainda não houver. */
