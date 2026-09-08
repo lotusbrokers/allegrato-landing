@@ -123,6 +123,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   'mac-lucer': {
     logo: '/construtoras/mac-lucer.png',
     logoNegativo: '/construtoras/mac-lucer-negativo.png',
+    banner: '/construtoras/banners/mac-lucer.jpg',
     paragrafos: [
       'A Mac Lucer Empreendimentos nasceu da história e do empreendedorismo da família Benassi, de origem italiana. Sua trajetória na construção civil começou em 1993, quando José Benassi identificou uma oportunidade de desenvolver empreendimentos no Parque da Represa, em Jundiaí, dando início à história da empresa.',
       'O nome Mac Lucer homenageia as mulheres da família: Maria, Rosa, Cristina, Luci e Célia, reforçando a importância da família e da valorização feminina em sua história.',
@@ -164,6 +165,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   inkkorp: {
     logo: '/construtoras/inkkorp.png',
     logoNegativo: '/construtoras/inkkorp-negativo.png',
+    banner: '/construtoras/banners/inkkorp.jpg',
     paragrafos: [
       'A INKKORP surge da união de quatro trajetórias com mais de 40 anos de experiência no mercado imobiliário e na construção civil, combinando visão empreendedora, excelência técnica, gestão e expertise comercial.',
       'A incorporadora desenvolve projetos com foco em qualidade, inovação, transparência, governança e geração de valor, buscando equilibrar as necessidades de moradores e investidores.',
@@ -191,6 +193,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   'gp-desenvolvimento-urbano': {
     logo: '/construtoras/gp-desenvolvimento-urbano.png',
     logoNegativo: '/construtoras/gp-desenvolvimento-urbano-negativo.png',
+    banner: '/construtoras/banners/gp-desenvolvimento-urbano.jpg',
     paragrafos: [
       'A GP Desenvolvimento Urbano é uma empresa familiar com tradição desde 1985, especializada em desenvolvimento e urbanização, com foco em criar soluções sustentáveis, inovadoras e alinhadas às necessidades das cidades e de seus moradores.',
       'Ao longo de sua trajetória, a empresa atua no desenvolvimento de loteamentos residenciais, industriais, chácaras e bairros planejados, buscando transformar regiões e gerar qualidade de vida por meio de infraestrutura, mobilidade, saneamento e planejamento urbano.',
@@ -221,6 +224,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   'fa-oliva': {
     logo: '/construtoras/f-a-oliva.png',
     logoEmFundoEscuro: true,
+    banner: '/construtoras/banners/fa-oliva.jpg',
     paragrafos: [
       'A F. A. Oliva possui uma trajetória de mais de 70 anos no mercado imobiliário, iniciada em 1955, quando o engenheiro civil e empresário Francisco de Assis Oliva lançou o loteamento Jardim Ana Maria, em Jundiaí, hoje um dos bairros tradicionais da cidade.',
       'Ao longo de sua história, a empresa participou ativamente do desenvolvimento urbano de Jundiaí, destacando-se por projetos inovadores para cada época, como a venda de terrenos com projetos de casas na Vila Bela, a criação do bairro de alto padrão Malota e o desenvolvimento do Centro Comercial Beco Fino.',
@@ -245,6 +249,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
     nome: 'Emccamp',
     logo: '/construtoras/emccamp.png',
     logoNegativo: '/construtoras/emccamp-negativo.png',
+    banner: '/construtoras/banners/emccamp.jpg',
     paragrafos: [
       'A Emccamp Residencial é uma incorporadora e construtora de origem familiar, fundada em 1977, com sede em Belo Horizonte (MG). A empresa atua principalmente no mercado residencial, desenvolvendo apartamentos, pequenas áreas comerciais e loteamentos, com presença concentrada nos estados de Minas Gerais, Rio de Janeiro e São Paulo.',
       'A empresa tem como diferenciais a inovação, tecnologia, padronização e gestão eficiente, utilizando métodos construtivos modernos que permitem maior agilidade nas obras, redução de resíduos e controle de qualidade.',
@@ -282,6 +287,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
     logo: '/construtoras/diretiva.png',
     logoEmFundoEscuro: true,
     logoVertical: true,
+    banner: '/construtoras/banners/diretiva.jpg',
     paragrafos: [
       'A Diretiva Engenharia e Construções possui mais de 40 anos de história e iniciou sua trajetória em Jundiaí, atuando no setor da construção civil. Ao longo dos anos, ampliou sua atuação para incorporação e construção de condomínios residenciais, obras comerciais e loteamentos residenciais, comerciais e industriais.',
       'A empresa tem como missão realizar os sonhos de seus clientes por meio de construções com qualidade, produtividade e durabilidade, mantendo compromisso com a sociedade e o meio ambiente.',
@@ -303,6 +309,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
     nome: 'Zarin',
     logo: '/construtoras/grupo-zarin.png',
     logoNegativo: '/construtoras/grupo-zarin-negativo.png',
+    banner: '/construtoras/banners/grupo-zarin.jpg',
     paragrafos: [
       'A Zarin é uma empresa do setor imobiliário com mais de 25 anos de experiência, que tem como conceito central a solidez. Seu propósito vai além da construção de imóveis: busca criar empreendimentos que contribuam para a realização de sonhos, qualidade de vida e construção de futuros sustentáveis.',
       'Com mais de 520 mil m² construídos e 20 mil unidades entregues, a empresa combina qualidade, segurança, inovação e responsabilidade em seus projetos, buscando desenvolver comunidades e contribuir para o crescimento urbano de forma consciente.',
@@ -324,6 +331,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   'manduca-empreendimentos': {
     logo: '/construtoras/manduca-empreendimentos.png',
     logoEmFundoEscuro: true,
+    banner: '/construtoras/banners/manduca-empreendimentos.jpg',
     paragrafos: [
       'Com uma trajetória sólida e de sucesso, a Manduca Empreendimentos é reconhecida por sua excelência em projetos inovadores e pela busca incessante pela satisfação de seus clientes. Desde 2011, contribuem para o desenvolvimento urbano e o crescimento sustentável, sempre primando pela qualidade, transparência e compromisso em cada empreendimento.',
       'Com uma equipe comprometida em transformar sonhos em realidade, combina experiência e criatividade para oferecer projetos que superam expectativas e se destacam pelo estilo e conforto.',
@@ -353,6 +361,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   rem: {
     logo: '/construtoras/rem.png',
     logoNegativo: '/construtoras/rem-negativo.png',
+    banner: '/construtoras/banners/rem.jpg',
     paragrafos: [
       'A REM Construtora atua no mercado imobiliário desde 1990, tendo como principal fundamento a confiança nas relações. Ao longo de sua trajetória, desenvolveu empreendimentos residenciais e comerciais, além de projetos como agências bancárias e galpões.',
       'Com origem familiar, a empresa foi fundada por Renato Mauro e, posteriormente, passou a contar com a participação de outras gerações da família. Sua atuação combina tradição e inovação, buscando entregar qualidade, pontualidade e resultados consistentes.',
@@ -375,6 +384,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   'sebel-empreendimentos': {
     logo: '/construtoras/sebel-empreendimentos.png',
     logoNegativo: '/construtoras/sebel-empreendimentos-negativo.png',
+    banner: '/construtoras/banners/sebel-empreendimentos.jpg',
     paragrafos: [
       'A Sebel Empreendimentos é uma incorporadora e construtora com mais de 40 anos de atuação no mercado imobiliário, reunindo experiência, solidez e excelência na execução de empreendimentos residenciais, comerciais e obras públicas.',
       'Desde 1980, a empresa construiu uma trajetória marcada pela versatilidade e capacidade técnica, atuando desde projetos residenciais de alto padrão até grandes conjuntos habitacionais. Ao longo de sua história, já são mais de 100 mil m² de obras realizadas e aproximadamente 1.500 unidades habitacionais, sempre com atenção à qualidade construtiva, planejamento e aos detalhes de cada projeto.',
@@ -392,9 +402,16 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   // por "todo branco vira transparente" — o "t" do símbolo também é branco e
   // sumiria junto. Como ele encosta na borda do círculo, virou recorte, que é
   // como essa marca é desenhada: adota a cor de quem está atrás.
+  //
+  // O negativo dele não sai como o das outras. Aqui as contraformas das letras
+  // ("e", "b", "a", "s") são brancas OPACAS, não recortes: pintar tudo de
+  // branco funde traço e contraforma e o wordmark vira um borrão. Neste as
+  // áreas claras neutras foram vazadas, e o verde do hero aparece por dentro
+  // das letras — que é como um negativo desta marca tem de se comportar.
   tebas: {
     logo: '/construtoras/tebas.png',
     logoNegativo: '/construtoras/tebas-negativo.png',
+    banner: '/construtoras/banners/tebas.jpg',
     paragrafos: [
       'A TEBAS é uma incorporadora com 45 anos de história, reconhecida pela tradição, credibilidade e excelência no desenvolvimento de empreendimentos imobiliários de alto padrão.',
       'Atualmente liderada pelos sócios José Roberto e Mauro, a empresa reúne experiência e competência consolidadas ao longo de dezenas de empreendimentos entregues, sempre com atenção à qualidade, elegância e às necessidades reais de seus clientes.',
@@ -412,6 +429,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
     nome: 'VIC Engenharia',
     logo: '/construtoras/vic-engenharia.png',
     logoNegativo: '/construtoras/vic-engenharia-negativo.png',
+    banner: '/construtoras/banners/vic-engenharia.jpg',
     paragrafos: [
       'A VIC Engenharia é uma incorporadora e construtora que atua no desenvolvimento de empreendimentos planejados para proporcionar mais qualidade de vida, segurança e acessibilidade aos seus clientes.',
       'Formada pela união de profissionais experientes dos mercados de incorporação imobiliária e construção civil, a empresa combina conhecimento técnico, eficiência e visão de mercado para entregar empreendimentos com qualidade construtiva e condições acessíveis, mantendo o compromisso com a satisfação de clientes, parceiros, investidores e colaboradores.',
@@ -430,6 +448,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   'vvc-construtora': {
     logo: '/construtoras/vvc-construtora.png',
     logoNegativo: '/construtoras/vvc-construtora-negativo.png',
+    banner: '/construtoras/banners/vvc-construtora.jpg',
     logoVertical: true,
     paragrafos: [
       'A VVC atua desde 2002 no setor da construção civil, reunindo experiência no desenvolvimento, construção e incorporação de empreendimentos residenciais, comerciais e industriais.',
@@ -451,6 +470,7 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
   applausi: {
     logo: '/construtoras/applausi.png',
     logoEmFundoEscuro: true,
+    banner: '/construtoras/banners/applausi.jpg',
     paragrafos: [
       'A Applausi Empreendimentos nasceu em Jundiaí a partir da experiência de uma família tradicional do setor imobiliário, trazendo uma nova proposta para o desenvolvimento de empreendimentos urbanísticos: unir qualidade, arquitetura, planejamento e atenção aos detalhes para criar projetos capazes de proporcionar uma experiência de vida extraordinária.',
       'Com o conceito “A Arte de Viver Bem”, a empresa desenvolve empreendimentos pensados para pessoas que valorizam qualidade de vida, bem-estar e espaços cuidadosamente planejados. Cada projeto é concebido com um olhar atento ao entorno, à funcionalidade e à forma como as pessoas se relacionam com a cidade.',
