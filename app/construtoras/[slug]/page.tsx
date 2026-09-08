@@ -160,7 +160,12 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
                 desalinhada. A medida de leitura continua curta pelo maxWidth
                 dos parágrafos, não pelo do container. */}
             <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-              {sobre.logo && (
+              {/* O logo aparece UMA vez por página. Quando o hero já o mostra,
+                  repetir aqui logo abaixo fica redundante. Quando o hero mostra
+                  o nome escrito — porque a construtora ainda não tem versão
+                  clara da marca —, é aqui que a marca aparece, e tirá-la
+                  deixaria a página sem logo nenhum. */}
+              {sobre.logo && !logoDoHero && (
                 // Fundo claro: o logo entra nas cores da marca, sem tratamento.
                 // Limitado por altura E largura: os logos chegam em formatos
                 // muito diferentes — empilhados (Santa Ângela, ~2:1) e
