@@ -300,6 +300,38 @@ const semCapaRuim = <T extends { name: string }>(itens: T[]): T[] =>
     return !ocultos.has(k) || capasCuradas.has(k);
   });
 
+// EM REVISÃO — landings da Santa Angela, 08/09/2026.
+//
+// A construtora pediu ajustes de conformidade nas páginas dos empreendimentos
+// dela: quem responde pela página, pela divulgação e pelo atendimento é a
+// Lotus, e a Santa Angela aparece só como realizadora. Enquanto a revisão não
+// termina, estes empreendimentos ficam fora da vitrine, da home e da página da
+// construtora — a página continua existindo para quem tem o link, mas o site
+// não leva ninguém até ela.
+//
+// Chave = nome do empreendimento como o dashboard cadastra. Ao terminar a
+// revisão, apagar o nome devolve o empreendimento. Esvaziar a lista devolve
+// todos.
+const EM_REVISAO = [
+  'Allegrato',
+  'Altos da Avenida',
+  'Maxx Santa Ângela',
+  'Portal dos Lagos',
+  'Resort Prime',
+  'Vigóre',
+  'Gioviale',
+  'Reserva Castanheira',
+  'Santorini',
+];
+
+const emRevisao = new Set(EM_REVISAO.map(chaveNome));
+
+// Diferente de `semCapaRuim`: ali o motivo é a foto, e uma capa curada desfaz
+// o motivo sozinha. Aqui o motivo é a revisão da própria página, e só sai da
+// lista quem for revisado — não há atalho automático, de propósito.
+const semRevisaoPendente = <T extends { name: string }>(itens: T[]): T[] =>
+  itens.filter((i) => !emRevisao.has(chaveNome(i.name)));
+
 // Sem landing própria, o card só levava ao WhatsApp: o visitante clicava
 // esperando conhecer o empreendimento e caía no atendimento. Enquanto a página
 // não existir, o empreendimento fica fora da vitrine e da listagem.
@@ -336,7 +368,7 @@ const publicaveis = <T extends { name: string; img: string | null; href: string 
   itens: T[],
   completo: (i: T) => boolean
 ): T[] =>
-  semRepetidos(semCapaRuim(comCapaCurada(itens)).filter(temPaginaPropria).filter(completo));
+  semRepetidos(semRevisaoPendente(semCapaRuim(comCapaCurada(itens))).filter(temPaginaPropria).filter(completo));
 
 export async function getLancamentos(): Promise<LancamentoCard[]> {
   const rows = await fetchRowsComLanding();

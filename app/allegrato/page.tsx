@@ -7,6 +7,10 @@ import RodapeLotus from '@/components/RodapeLotus';
 
 // Metadata portada do <head> do fonte estático.
 export const metadata: Metadata = {
+  // EM REVISÃO (08/09/2026): fora do índice enquanto a revisão de
+  // conformidade das landings da Santa Angela não termina. Ver EM_REVISAO em
+  // lib/lancamentos.ts, que tira o empreendimento da vitrine pelo mesmo motivo.
+  robots: { index: false, follow: false },
   title: 'Allegrato Residencial · Bairro Medeiros, Jundiaí, Minha Casa Minha Vida',
   description:
     'O apartamento mais completo do Medeiros para você sair do aluguel pagando pouco. Lazer entregue decorado, condomínio econômico e a segurança da Santa Angela. Lançamento MCMV em Jundiaí/SP.',

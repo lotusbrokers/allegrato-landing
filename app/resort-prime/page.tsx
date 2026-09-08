@@ -7,6 +7,10 @@ import RodapeLotus from '@/components/RodapeLotus';
 
 // Metadata portada do <head> de resort-prime/index.html (paridade de SEO com o estático).
 export const metadata: Metadata = {
+  // EM REVISÃO (08/09/2026): fora do índice enquanto a revisão de
+  // conformidade das landings da Santa Angela não termina. Ver EM_REVISAO em
+  // lib/lancamentos.ts, que tira o empreendimento da vitrine pelo mesmo motivo.
+  robots: { index: false, follow: false },
   title:
     'Resort Prime Santa Angela, Lazer de Resort, todos os dias | Jundiaí',
   description:

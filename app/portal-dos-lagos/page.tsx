@@ -13,7 +13,10 @@ export const metadata: Metadata = {
   title: 'Portal dos Lagos, Loteamento Residencial em Jundiaí',
   description:
     'Portal dos Lagos: loteamento residencial de alto padrão em Jundiaí/SP, a 45 min de São Paulo. Clube completo, portaria blindada e infraestrutura premium. Fale com um corretor.',
-  robots: 'index, follow, max-image-preview:large',
+  // EM REVISÃO (08/09/2026): fora do índice enquanto a revisão de
+  // conformidade das landings da Santa Angela não termina. Ver EM_REVISAO em
+  // lib/lancamentos.ts, que tira o empreendimento da vitrine pelo mesmo motivo.
+  robots: { index: false, follow: false },
   alternates: {
     // Era imobiliariajapi.com.br — apontava o canonical para o domínio antigo,
     // dizendo ao Google que a versão oficial desta página vive fora do site.

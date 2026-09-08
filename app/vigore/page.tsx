@@ -26,7 +26,10 @@ export const metadata: Metadata = {
     'lazer completo',
     'Avenida Nami Azém',
   ],
-  robots: { index: true, follow: true },
+  // EM REVISÃO (08/09/2026): fora do índice enquanto a revisão de
+  // conformidade das landings da Santa Angela não termina. Ver EM_REVISAO em
+  // lib/lancamentos.ts, que tira o empreendimento da vitrine pelo mesmo motivo.
+  robots: { index: false, follow: false },
   alternates: { canonical: 'https://www.lotusbrokers.com.br/vigore' },
   openGraph: {
     type: 'website',
