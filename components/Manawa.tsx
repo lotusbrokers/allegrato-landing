@@ -704,7 +704,7 @@ export default function Manawa() {
       <section className="section contact" id="contato">
         <div className="wrap contact-grid">
           <div className="contact-txt reveal">
-            <span className="eyebrow">Fale com a JAPI</span>
+            <span className="eyebrow">Fale com a Lotus Brokers</span>
             <h2>Agende sua visita<br />ao decorado.</h2>
             <p>
               Preencha o formulário e nossa equipe entra em contato com plantas, condições e
@@ -808,7 +808,7 @@ export default function Manawa() {
       {/* WhatsApp float */}
       <a className="wa-float" href={WA_HREF} target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
         <span className="ico"><IconWa /></span>
-        <span className="lbl">Fale com a JAPI</span>
+        <span className="lbl">Fale com a Lotus Brokers</span>
       </a>
 
       {/* Lightbox */}

@@ -325,7 +325,7 @@ const CONTEUDO_REAL: Record<string, { bio?: BlocoBio[]; foto?: string }> = {
   'andre marcondes': {
     foto: '/corretores/andre-marcondes.jpg',
     bio: [
-      'Coordenador de Equipes da Japi Lançamentos, ANDRÉ atua há sete anos no mercado imobiliário de Jundiaí e região, após 20 anos na TOTVS, onde analisou processos e desenhou soluções de ERP para empresas de diversos portes. É formado em Comunicação e em Gestão de Negócios, foi professor universitário por cinco anos e possui formação complementar em negociação, pelo Program on Negotiation (PON), da Harvard Law School. Sua atuação vai além da apresentação do empreendimento: passa pela análise do contrato, pelo enquadramento de financiamento e pelo impacto real da compra no orçamento do cliente.',
+      'Coordenador de Equipes da Lotus Brokers, ANDRÉ atua há sete anos no mercado imobiliário de Jundiaí e região, após 20 anos na TOTVS, onde analisou processos e desenhou soluções de ERP para empresas de diversos portes. É formado em Comunicação e em Gestão de Negócios, foi professor universitário por cinco anos e possui formação complementar em negociação, pelo Program on Negotiation (PON), da Harvard Law School. Sua atuação vai além da apresentação do empreendimento: passa pela análise do contrato, pelo enquadramento de financiamento e pelo impacto real da compra no orçamento do cliente.',
       '"Meu trabalho não termina quando o cliente escolhe o imóvel. Ele começa quando a gente senta para entender o contrato e o que aquela decisão significa no orçamento dele."',
     ],
   },

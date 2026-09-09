@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Maitá Residencial — porte 1:1 de "Maitá Residencial - Japi Lançamentos (Wix).html"
+ * Maitá Residencial — porte 1:1 de "Maitá Residencial - Lotus Brokers (Wix).html"
  * (mecanismo dc-runtime) para React. CSS em app/maita/maita.css, assets em public/maita.
  *
  * Comportamentos portados do a016.js: nav sólida + link ativo, parallax, reveal on
@@ -1163,7 +1163,7 @@ export default function Maita() {
             </p>
             <div className="seller">
               <span className="badge">
-                Japi Lançamentos
+                Lotus Brokers
               </span>
               <span>
                 <small>
@@ -1180,7 +1180,7 @@ export default function Maita() {
         <div className="wrap cta__grid">
           <div data-reveal="">
             <span className="eyebrow light">
-              Fale com a Japi Lançamentos
+              Fale com a Lotus Brokers
             </span>
             <h2 style={parseStyle('margin:1rem 0 1.2rem')} className="h2">
               Agende sua visita ao{' '}
@@ -1189,7 +1189,7 @@ export default function Maita() {
               </em>
             </h2>
             <p className="lead">
-              Deixe seus dados e um especialista da Japi Lançamentos entra em contato com condições, disponibilidade de unidades e agendamento de visita.
+              Deixe seus dados e um especialista da Lotus Brokers entra em contato com condições, disponibilidade de unidades e agendamento de visita.
             </p>
             <ul className="cta__perks">
               <li>
@@ -1233,7 +1233,7 @@ export default function Maita() {
                   Recebemos o seu interesse!
                 </h3>
                 <p className="fnote" style={parseStyle('margin:.6rem auto 1.4rem;max-width:34ch')}>
-                  Um especialista da Japi Lançamentos vai falar com você. Para agilizar, finalize pelo {' '}WhatsApp{' '}.
+                  Um especialista da Lotus Brokers vai falar com você. Para agilizar, finalize pelo {' '}WhatsApp{' '}.
                 </p>
                 <a className="btn btn--wa btn--lg" href={sent} target="_blank" rel="noopener">
                   Continuar no {' '}WhatsApp{' '}
@@ -1301,7 +1301,7 @@ export default function Maita() {
               <p style={parseStyle('max-width:38ch')}>
                 Maitá Residencial, apartamentos de 2 e 3 dormitórios em Jundiaí/SP. Comercialização{' '}
                 <strong>
-                  Japi Lançamentos
+                  Lotus Brokers
                 </strong>
                 . Construção Mac Lucer.
               </p>
@@ -1368,7 +1368,7 @@ export default function Maita() {
               </h4>
               <ul>
                 <li>
-                  <a href={wa('Olá! Quero falar com a Japi Lançamentos sobre o Maitá.')} target="_blank" rel="noopener">
+                  <a href={wa('Olá! Quero falar com a Lotus Brokers sobre o Maitá.')} target="_blank" rel="noopener">
                     {' '}WhatsApp{' '}: (11) 92614-3393
                   </a>
                 </li>
@@ -1388,7 +1388,7 @@ export default function Maita() {
               O empreendimento só será comercializado após o registro do Memorial de Incorporação no Cartório de Registro de Imóveis, nos termos da Lei nº 4.591/64. Material preliminar, sujeito a alterações sem aviso prévio. Imagens meramente ilustrativas.
             </p>
             <p>
-              © 2026 Japi Lançamentos · Maitá Residencial / Mac Lucer.
+              © 2026 Lotus Brokers · Maitá Residencial / Mac Lucer.
             </p>
           </div>
         </div>

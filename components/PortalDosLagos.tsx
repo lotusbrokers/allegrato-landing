@@ -263,7 +263,7 @@ export default function PortalDosLagos() {
     <>
       {/* ============ NAV ============ */}
       <header className="nav" id="nav">
-        {/* O logo da Imobiliária Japi saiu daqui e a marca virou texto, porque o
+        {/* O logo da Imobiliária Lotus Brokers saiu daqui e a marca virou texto, porque o
             que existia era a marca da imobiliária e não a do empreendimento. Com o
             logo próprio enviado pela Lotus em 28/08/2026, a marca volta a ser
             imagem. É a versão negativa: o nav é transparente sobre o hero escuro e
@@ -315,7 +315,7 @@ export default function PortalDosLagos() {
         <div className="mmenu__foot">
           <a className="btn btn--wa btn--block" href="#" data-wa="menu">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.06c-.24.68-1.42 1.32-1.95 1.36-.5.05-.5.41-3.15-.66-2.65-1.07-4.3-3.78-4.43-3.96-.13-.18-1.06-1.4-1.06-2.68 0-1.28.67-1.9.91-2.17.24-.26.52-.33.7-.33l.5.01c.16 0 .38-.06.59.45.24.59.81 2.04.88 2.19.07.15.12.32.02.51-.1.18-.15.3-.29.46l-.43.5c-.14.14-.29.3-.12.58.16.27.74 1.21 1.58 1.96 1.09.97 2 1.27 2.28 1.42.27.14.43.11.59-.07.16-.18.69-.8.87-1.08.18-.27.36-.22.59-.13.24.09 1.52.72 1.78.85.27.13.44.2.5.31.07.11.07.62-.17 1.3Z"></path></svg>
-            WhatsApp da Japi
+            WhatsApp da Lotus Brokers
           </a>
         </div>
       </div>
@@ -328,9 +328,6 @@ export default function PortalDosLagos() {
         <div className="hero__inner">
           <div className="hero__lockup reveal in">
             <div className="lockup">
-              <div className="lockup__mark">
-                <svg viewBox="0 0 32 32" fill="none"><path d="M3 21 11 9.5 16 16 21 7.5 29 21Z" fill="#0c2429"></path><path d="M3.5 24.5C9 21.5 23 21.5 28.5 24.5" stroke="#0c2429" strokeWidth="1.6" strokeLinecap="round"></path></svg>
-              </div>
               <div className="lockup__txt">
                 <span className="lockup__name">PORTAL DOS LAGOS</span>
                 <span className="lockup__sub">LOTEAMENTO RESIDENCIAL</span>
@@ -567,7 +564,7 @@ export default function PortalDosLagos() {
       <section className="section lead" id="contato">
         <div className="wrap lead__grid">
           <div className="reveal">
-            <p className="eyebrow on-dark">Fale com a Japi</p>
+            <p className="eyebrow on-dark">Fale com a Lotus Brokers</p>
             <h2><span className="script">Receba valores</span> e condições</h2>
             <p className="lede" style={{ color: 'rgba(255,255,255,.82)', marginTop: '8px' }}>Preencha os dados e um consultor entra em contato pelo WhatsApp com todas as informações do Portal dos Lagos.</p>
             <div className="lead__list">

@@ -1345,7 +1345,7 @@ export default function DoppioJundiai() {
                   Receba o material completo e as condições de lançamento
                 </h2>
                 <p style={parseStyle('font-size:1.02rem;font-weight:300;line-height:1.75;color:rgba(240,230,214,.7);max-width:42ch;margin:0 0 30px')}>
-                  Fale agora com um consultor da Japi Lançamentos e seja um dos primeiros a conhecer o Doppio Jundiaí.
+                  Fale agora com um consultor da Lotus Brokers e seja um dos primeiros a conhecer o Doppio Jundiaí.
                 </p>
                 <div style={parseStyle('display:flex;align-items:center;gap:14px;padding:18px 0;border-top:1px solid rgba(231,205,156,.16)')}>
                   <span style={parseStyle('width:42px;height:42px;border-radius:50%;border:1px solid rgba(231,205,156,.35);display:grid;place-items:center;color:#e7cd9c')}>
@@ -1399,7 +1399,7 @@ export default function DoppioJundiai() {
                       Quero ser consultor · Falar agora
                     </button>
                     <p style={parseStyle('font-size:11px;color:rgba(240,230,214,.4);text-align:center;margin:2px 0 0;line-height:1.5')}>
-                      Ao enviar, você concorda em ser contatado pela Imobiliária Japi Lançamentos.
+                      Ao enviar, você concorda em ser contatado pela Imobiliária Lotus Brokers.
                     </p>
                   </form>
                 </>)}
@@ -1444,7 +1444,7 @@ export default function DoppioJundiai() {
                   Atendimento
                 </div>
                 <div style={parseStyle('font-size:14px;color:rgba(240,230,214,.7);line-height:1.9')}>
-                  Imobiliária Japi Lançamentos
+                  Imobiliária Lotus Brokers
                   <br />
                   <a style={parseStyle('color:#f3ece0;text-decoration:none')} href={waMain} target="_blank" rel="noopener">
                     +55 11 92614-3393
@@ -1461,7 +1461,7 @@ export default function DoppioJundiai() {
               Registro de Incorporação R.3 da matrícula 189.290, no 1º Oficial de Registro de Imóveis de Jundiaí/SP em 12/03/2026. MARINO JUNDIAI EMPREENDIMENTO IMOBILIARIO SPE LTDA, CNPJ nº 51.854.681/0001-96. Imagens e perspectivas são meramente ilustrativas, podendo sofrer alteração sem aviso prévio, inclusive quanto à forma, à cor, à textura e ao tamanho. Os acabamentos, a quantidade de móveis, os equipamentos e os utensílios serão entregues conforme o memorial descritivo. O porte da vegetação na entrega do empreendimento será de acordo com o projeto paisagístico e poderá apresentar diferença de tamanho. Comercialização: REM Consultoria e Vendas, CRECI J-33208 e Mediterrâneo Negócios Imobiliários Ltda CRECI 032134-J. MATERIAL PRELIMINAR, SUJEITO A ALTERAÇÕES. Produzido em 05/2026.
             </p>
             <div style={parseStyle('font-size:11px;color:rgba(240,230,214,.3);margin-top:20px')}>
-              © 2026 Doppio Jundiaí · Realização Construtora Marino & REM · Página por Imobiliária Japi Lançamentos.
+              © 2026 Doppio Jundiaí · Realização Construtora Marino & REM · Página por Imobiliária Lotus Brokers.
             </div>
           </div>
         </footer>

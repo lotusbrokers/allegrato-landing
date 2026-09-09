@@ -21,6 +21,7 @@ import React, {
   type ReactNode,
 } from 'react';
 import { sendLead } from '@/lib/lead';
+import { SITE } from '@/lib/site';
 
 /* ------------------------------------------------------------------ */
 /* Helpers                                                             */
@@ -800,10 +801,24 @@ export default function JardinsDoHorto({
             </div>
             <div>
               <div style={parseStyle('color:#F4EEE4; font-weight:700; font-size:14px; margin-bottom:14px;')}>Contato</div>
+              {/* Os dados da Lotus vêm escritos aqui, e não das props
+                  `imobiliaria`/`telefone`/`email`: elas nunca foram passadas por
+                  ninguém, então o que ia ao ar era o texto de exemplo
+                  ("sua imobiliária", "contato@suaimobiliaria.com.br"). O efeito
+                  applyContact continua sobrescrevendo se alguém passar as props,
+                  mas o padrão agora é o correto em vez do genérico. */}
+              <img
+                src="/logo-lotus-dourado.png"
+                alt="Lotus Brokers"
+                style={parseStyle('height:44px; width:auto; display:block; margin-bottom:14px;')}
+              />
               <div style={parseStyle('display:flex; flex-direction:column; gap:10px; font-size:14px;')}>
-                <span data-imob="">Anunciado por sua imobiliária</span>
-                <span data-tel="">WhatsApp · informe seu número</span>
-                <span data-mail="">contato@suaimobiliaria.com.br</span>
+                <span data-imob="">Anunciado por Imobiliária Lotus Brokers</span>
+                <span data-tel="">WhatsApp · (11) 92614-3393</span>
+                <span data-mail="">atendimento@lotusbrokers.com.br</span>
+                <span style={parseStyle('color:rgba(244,238,228,.45); font-size:12.5px; line-height:1.6;')}>
+                  {SITE.creciPj} · {SITE.cnpj}
+                </span>
               </div>
             </div>
           </div>

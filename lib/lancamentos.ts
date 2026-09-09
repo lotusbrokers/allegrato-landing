@@ -319,6 +319,7 @@ const EM_REVISAO = [
   'Portal dos Lagos',
   'Resort Prime',
   'Vigóre',
+  'Jardins do Horto',
   'Gioviale',
   'Reserva Castanheira',
   'Santorini',

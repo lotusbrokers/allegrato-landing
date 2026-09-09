@@ -13,7 +13,10 @@ export const metadata: Metadata = {
     'Jardins do Horto: apartamentos de 72m² e 95m², 2 e 3 dormitórios no Horto Florestal, Jundiaí/SP. Lazer completo, ao lado do Maxi Shopping. Um empreendimento Santa Angela. Agende sua visita.',
   keywords:
     'apartamento Horto Florestal, apartamento Jundiaí, Jardins do Horto, apartamento 2 dormitórios Jundiaí, apartamento 3 dormitórios Jundiaí, lançamento Jundiaí, Santa Angela Construtora',
-  robots: 'index,follow',
+  // EM REVISÃO (09/09/2026): fora do índice enquanto a revisão de
+  // conformidade das landings da Santa Angela não termina. Ver EM_REVISAO em
+  // lib/lancamentos.ts.
+  robots: { index: false, follow: false },
   openGraph: {
     type: 'website',
     title: 'Jardins do Horto, Morar bem no Horto Florestal, Jundiaí',
