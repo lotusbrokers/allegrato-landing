@@ -62,8 +62,8 @@ export const POSTS: Post[] = [
    * nenhuma hoje, entao trocar aqui nao quebra link — e no dia em que cada
    * artigo ganhar rota propria, ele ja serve de slug.
    *
-   * `img: ''` cai no gradiente do template: nao vieram capas. Ao receber,
-   * salvar em /public/blog/<id>.jpg e preencher o campo.
+   * `img: ''` cai no gradiente do template. Hoje os treze posts tem capa; a
+   * regra vale para o proximo: salvar em /public/blog/<nome>.jpg e preencher.
    *
    * Texto da Lotus, com dois ajustes de forma: "Lotus Brokers" no lugar de
    * "Lótus Brokers", que e como a marca aparece no resto do site, e
@@ -134,7 +134,7 @@ export const POSTS: Post[] = [
     ],
   },
   {
-    id: 'lancamentos-lazer-completo-jundiai', cat: 'Mercado', date: 'Ago 2026', publicadoEm: '2026-08-27', read: '5 min', img: '', slot: 'blog-lazer-completo', title: 'Lançamentos com lazer completo em Jundiaí: conforto, praticidade e valorização', excerpt: 'Saiba mais sobre lançamentos com lazer completo em Jundiaí e descubra oportunidades, tendências e informações relevantes para quem busca imóveis em Jundiaí.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'lancamentos-lazer-completo-jundiai', cat: 'Mercado', date: 'Ago 2026', publicadoEm: '2026-08-27', read: '5 min', img: '/blog/lazer-completo.jpg', slot: 'blog-lazer-completo', title: 'Lançamentos com lazer completo em Jundiaí: conforto, praticidade e valorização', excerpt: 'Saiba mais sobre lançamentos com lazer completo em Jundiaí e descubra oportunidades, tendências e informações relevantes para quem busca imóveis em Jundiaí.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'Empreendimentos novos com piscina, academia, salão de festas, espaço gourmet e áreas de convivência estão entre os mais procurados de Jundiaí. Este conteúdo explica o que caracteriza um lazer completo, por que a localização continua pesando mais do que a lista de itens, e o que comparar antes de decidir — para morar ou para investir.',
     body: [
       'Os lançamentos com lazer completo em Jundiaí estão entre as opções mais procuradas por quem deseja unir qualidade de vida, praticidade e valorização imobiliária. Com uma localização estratégica no interior de São Paulo, Jundiaí oferece infraestrutura urbana, acesso facilitado a importantes rodovias e uma ampla variedade de serviços, comércio e opções de lazer.',
