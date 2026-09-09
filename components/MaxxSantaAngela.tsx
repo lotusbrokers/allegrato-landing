@@ -464,7 +464,8 @@ export default function MaxxSantaAngela({
             <div data-priceinline="" style={parseStyle('display:none;margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.25)')}>
               <span style={parseStyle('font-size:11px;letter-spacing:.26em;font-weight:700;color:#E7D2A6')}>A PARTIR DE</span>
               <div style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:34px;color:#fff;margin-top:4px;line-height:1;white-space:nowrap")}>R$ 815.071,24*</div>
-              <p style={parseStyle('font-size:11.5px;color:#E3D8C6;margin:8px 0 0')}>*Torre B · 97 m² · tabela maio/2026.</p>
+              <p style={parseStyle('font-size:13px;color:#F6F1E8;margin:10px 0 0;line-height:1.45;font-weight:600')}>Consulte nossos corretores para conferir os valores de outras unidades!</p>
+              <p style={parseStyle('font-size:11.5px;color:#E3D8C6;margin:8px 0 0')}>*Torre B : 97m². Valor referente à tabela de setembro/2026.</p>
             </div>
           </div>
         </div>
@@ -474,7 +475,8 @@ export default function MaxxSantaAngela({
             {/* nowrap e clamp: com 38px fixos, "R$" caía numa linha e o número na
                 outra dentro do cartão. O valor precisa ser lido de uma vez. */}
             <div style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,38px);color:#2B2521;margin-top:6px;line-height:1;white-space:nowrap")}>R$ 815.071<span style={parseStyle('font-size:.58em')}>,24*</span></div>
-            <p style={parseStyle('font-size:11.5px;color:#8a7d6f;margin:12px 0 0;line-height:1.5')}>*Torre B · 97 m² · valores ref. tabela maio/2026. Consulte um corretor para outras unidades.</p>
+            <p style={parseStyle('font-size:15px;color:#2B2521;margin:14px 0 0;line-height:1.45;font-weight:600')}>Consulte nossos corretores para conferir os valores de outras unidades!</p>
+            <p style={parseStyle('font-size:11.5px;color:#8a7d6f;margin:10px 0 0;line-height:1.5')}>*Torre B : 97m². Valor referente à tabela de setembro/2026.</p>
           </div>
         )}
         <div style={parseStyle('position:absolute;left:50%;bottom:26px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.8);animation:mxFloat 2.6s ease-in-out infinite')}>
