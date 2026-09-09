@@ -702,3 +702,24 @@
   #vg-links { display: none !important; }
   #vg-burger { display: flex !important; }
 }
+
+/* ---------------------------------------------------------------------------
+ * Conserto do scroll reveal: o conteúdo ficava invisível na página publicada.
+ *
+ * O reveal é imperativo — o JS marca `data-vg-shown="1"` e escreve
+ * opacity:1 inline no elemento. Só que o `style` desses elementos vem do JSX,
+ * então qualquer re-render do React reescreve o atributo inteiro e devolve o
+ * opacity:0 original. A guarda `if (el.dataset.vgShown === '1') return` impede
+ * a segunda tentativa, e o bloco fica invisível para sempre.
+ *
+ * Em produção isso deixava o hero do Vigóre sem título, sem preço e sem CTA:
+ * 71 dos 72 blocos com opacity 0.
+ *
+ * A regra abaixo resolve pelo lado do CSS: uma declaração !important de folha
+ * de estilo vence estilo inline sem !important, então não importa quantas
+ * vezes o React reescreva o atributo — o que o JS já revelou continua visível.
+ * ------------------------------------------------------------------------- */
+[data-vg-shown='1'] {
+  opacity: 1 !important;
+  transform: none !important;
+}

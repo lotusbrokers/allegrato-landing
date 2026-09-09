@@ -216,7 +216,18 @@ export default function ResortPrime() {
       if (i >= items.length) i = 0;
       idx = i;
       const el = items[idx];
-      if (lbImg) lbImg.src = el.getAttribute('data-lb') || '';
+      // A fonte da ampliacao e a propria imagem que esta na tela. Os atributos
+      // data-lb apontavam para "images/...", pasta que nao existe neste projeto:
+      // o lightbox abria vazio em todas as 21 fotos. Lendo do <img> do proprio
+      // item, miniatura e ampliacao passam a ser o mesmo arquivo por construcao,
+      // e nao ha caminho paralelo para sair de sincronia.
+      // O item ora e um involucro com a foto dentro, ora e a propria <img> com
+      // o data-lb nela. Os dois casos existem nesta pagina.
+      const dentro = (el.tagName === 'IMG'
+        ? el
+        : el.querySelector('img')) as HTMLImageElement | null;
+      const fonte = dentro?.getAttribute('src') || el.getAttribute('data-lb') || '';
+      if (lbImg) lbImg.src = fonte;
       if (lbCap) lbCap.textContent = el.getAttribute('data-cap') || '';
     }
     items.forEach((el, i) => {
