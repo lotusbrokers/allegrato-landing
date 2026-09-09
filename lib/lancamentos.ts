@@ -312,17 +312,11 @@ const semCapaRuim = <T extends { name: string }>(itens: T[]): T[] =>
 // Chave = nome do empreendimento como o dashboard cadastra. Ao terminar a
 // revisão, apagar o nome devolve o empreendimento. Esvaziar a lista devolve
 // todos.
-const EM_REVISAO = [
-  'Allegrato',
-  'Altos da Avenida',
-  'Maxx Santa Ângela',
-  'Portal dos Lagos',
-  'Resort Prime',
-  'Vigóre',
-  'Jardins do Horto',
-  'Gioviale',
-  'Reserva Castanheira',
-  'Santorini',
+const EM_REVISAO: string[] = [
+  // Revisao concluida em 09/09/2026: as dez landings da Santa Angela voltaram
+  // ao ar. A lista fica, vazia, porque o mecanismo e o mesmo para a proxima vez
+  // — basta escrever o nome do empreendimento aqui para tira-lo da vitrine, da
+  // home e da pagina da construtora enquanto a pagina estiver em revisao.
 ];
 
 const emRevisao = new Set(EM_REVISAO.map(chaveNome));

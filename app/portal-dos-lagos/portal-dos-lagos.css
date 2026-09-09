@@ -791,7 +791,9 @@ h1,h2,h3,h4{font-family:var(--f-display);font-weight:500;line-height:1.08;letter
 .hero__cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
 .hero__trust{display:flex;align-items:center;gap:16px;margin-top:28px;flex-wrap:wrap;
   font-family:var(--f-display);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6)}
-.hero__trust img{height:26px;opacity:.92;filter:saturate(0) brightness(1.6)}
+/* O logo agora e a versao negativa, ja branca e com fundo transparente: o
+   filtro que existia para clarear o JPEG so serviria para estourar o traco. */
+.hero__trust img{height:30px;opacity:.92}
 .hero__scroll{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;
   font-family:var(--f-display);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.6);z-index:2}
 .hero__scroll .mouse{width:22px;height:36px;border:1.5px solid rgba(255,255,255,.5);border-radius:12px;position:relative}

@@ -343,9 +343,11 @@ export default function PortalDosLagos() {
           </div>
           <div className="hero__trust reveal in" data-d="3">
             <span>Realização</span>
-            {/* Só a Santa Angela no hero (recorte de a002.jpg). O lockup com as
-                três construtoras segue na seção REALIZAÇÃO, mais abaixo. */}
-            <img src="/portal-dos-lagos/santa-angela.jpg" alt="Santa Angela Construtora" />
+            {/* Versão negativa, com alfa. O arquivo anterior era um JPEG com o
+                logo cravado numa placa navy opaca — sobre a foto do hero a placa
+                aparecia como uma caixa. O lockup com as três realizadoras segue
+                na seção REALIZAÇÃO, mais abaixo. */}
+            <img src="/construtoras/santa-angela-negativo.png" alt="Santa Angela Construtora, realizadora do empreendimento" />
           </div>
         </div>
         <a className="hero__scroll" href="#destaques" aria-label="Rolar">
