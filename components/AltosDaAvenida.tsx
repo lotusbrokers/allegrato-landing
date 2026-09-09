@@ -401,6 +401,14 @@ export default function AltosDaAvenida({
       if (gal) {
         gal.style.gridTemplateColumns = mob ? 'repeat(2,1fr)' : 'repeat(12,1fr)';
         gal.style.gridAutoRows = mob ? '160px' : '240px';
+        // Os cards trazem span de 3 a 6, medida da grade de 12 colunas. Em duas
+        // colunas esses spans nao cabem e o navegador empilha os cards uns por
+        // cima dos outros — era o que quebrava a secao no celular. No mobile
+        // cada card ocupa uma celula; no desktop volta ao span de origem.
+        gal.querySelectorAll<HTMLElement>('[data-col]').forEach((c) => {
+          c.style.gridColumn = mob ? 'span 1' : 'span ' + (c.dataset.col || '1');
+          c.style.gridRow = mob ? 'span 1' : 'span ' + (c.dataset.row || '1');
+        });
       }
     };
     applyResponsive();
@@ -656,6 +664,8 @@ export default function AltosDaAvenida({
                 key={i}
                 as="button"
                 onClick={() => galleryOpen(i)}
+                data-col={g.colSpan}
+                data-row={g.rowSpan}
                 baseStyle={parseStyle('position:relative; border:none; padding:0; cursor:pointer; overflow:hidden; border-radius:4px; grid-column:span ' + g.colSpan + '; grid-row:span ' + g.rowSpan + '; background:#ddd;')}
                 hoverStyle={{}}
               >
