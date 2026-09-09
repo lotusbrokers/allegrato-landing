@@ -653,8 +653,8 @@ export default function ResortPrime() {
           </div>
 
           <div className="lead-card reveal d1" id="form-cta">
-            <h3>Receba o atendimento Prime</h3>
-            <p className="sub">Preencha e fale agora com um especialista.</p>
+            <h3>Fale com um especialista Lotus Brokers</h3>
+            <p className="sub">Preencha e fale agora com um especialista da Lotus Brokers.</p>
             <form id="lead-form-2" data-ok="form-cta-ok" noValidate>
               <div className="field">
                 <label htmlFor="c-nome">Nome</label>
@@ -708,8 +708,9 @@ export default function ResortPrime() {
               <h4>Atendimento</h4>
               <ul className="footer__links">
                 <li><a href="https://wa.me/5511926143393" target="_blank" rel="noopener">WhatsApp: +55 11 92614-3393</a></li>
-                <li>Av. Caetano Gornati</li>
-                <li>Engordadouro, Jundiaí / SP</li>
+                <li style={{ marginTop: 10 }}>
+                  <img src="/logo-lotus-dourado.png" alt="Imobiliária Lotus Brokers" style={{ height: 40, width: 'auto', display: 'block' }} />
+                </li>
                 <li>Atendimento pela Imobiliária Lotus Brokers</li>
               </ul>
             </div>

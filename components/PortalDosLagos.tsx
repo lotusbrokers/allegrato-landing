@@ -282,7 +282,6 @@ export default function PortalDosLagos() {
           <a href="#lazer">Lazer</a>
           <a href="#diferenciais">Diferenciais</a>
           <a href="#galeria">Galeria</a>
-          <a href="#realizacao">Quem realiza</a>
         </nav>
         <div className="nav__cta">
           <span className="nav__phone">
@@ -309,7 +308,6 @@ export default function PortalDosLagos() {
           <a href="#lazer">Lazer &amp; Convivência</a>
           <a href="#diferenciais">Diferenciais</a>
           <a href="#galeria">Galeria</a>
-          <a href="#realizacao">Quem realiza</a>
           <a href="#contato"><span className="script">Lotus Brokers</span> Receber valores</a>
         </nav>
         <div className="mmenu__foot">
@@ -546,22 +544,6 @@ export default function PortalDosLagos() {
         </div>
       </section>
 
-      {/* ============ CTA BAND ============ */}
-      <section className="ctaband">
-        <div className="ctaband__bg" style={{ backgroundImage: 'url("/portal-dos-lagos/a013.jpg")', backgroundPosition: 'center 58%' }}></div>
-        <div className="wrap reveal">
-          <h2><span className="script">O seu próximo capítulo</span> começa aqui</h2>
-          <p>Garanta as melhores condições do lançamento. Fale agora com um consultor e receba valores, plantas e disponibilidade de lotes.</p>
-          <div className="hero__cta">
-            <a className="btn btn--lg" href="#contato" data-cta="band">Receber valores agora <span className="ar">→</span></a>
-            <a className="btn btn--wa btn--lg" href="#" data-wa="band">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.06c-.24.68-1.42 1.32-1.95 1.36-.5.05-.5.41-3.15-.66-2.65-1.07-4.3-3.78-4.43-3.96-.13-.18-1.06-1.4-1.06-2.68 0-1.28.67-1.9.91-2.17.24-.26.52-.33.7-.33l.5.01c.16 0 .38-.06.59.45.24.59.81 2.04.88 2.19.07.15.12.32.02.51-.1.18-.15.3-.29.46l-.43.5c-.14.14-.29.3-.12.58.16.27.74 1.21 1.58 1.96 1.09.97 2 1.27 2.28 1.42.27.14.43.11.59-.07.16-.18.69-.8.87-1.08.18-.27.36-.22.59-.13.24.09 1.52.72 1.78.85.27.13.44.2.5.31.07.11.07.62-.17 1.3Z"></path></svg>
-              Chamar no WhatsApp
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* ============ LEAD FORM ============ */}
       <section className="section lead" id="contato">
         <div className="wrap lead__grid">
@@ -648,24 +630,16 @@ export default function PortalDosLagos() {
         </div>
       </section>
 
-      {/* ============ REALIZAÇÃO ============ */}
-      <section className="section realiza" id="realizacao">
-        <div className="wrap">
-          <div className="center reveal" style={{ maxWidth: '640px', marginInline: 'auto' }}>
-            <p className="eyebrow center">Quem realiza</p>
-            <h2 className="h-sec">Tradição e qualidade <span className="script">comprovadas</span></h2>
-          </div>
-          <div className="realiza__logos reveal" data-d="1">
-            <img src="/portal-dos-lagos/a002.jpg" alt="Santa Angela Construtora, Capital Empreendimentos e Mac Lucer" />
-          </div>
-        </div>
-      </section>
-
       {/* ============ FOOTER ============ */}
       <footer className="footer">
         <div className="wrap">
           <div className="footer__top">
             <div>
+              <img
+                src="/portal-dos-lagos/logo.png"
+                alt="Portal dos Lagos"
+                style={{ height: 54, width: 'auto', display: 'block', marginBottom: 18 }}
+              />
               <p style={{ maxWidth: '34ch' }}>Especialistas em empreendimentos de alto padrão na região de Jundiaí. Atendimento consultivo do primeiro contato à chave na mão.</p>
               <a className="footer__wa" href="#" data-wa="footer">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.06c-.24.68-1.42 1.32-1.95 1.36-.5.05-.5.41-3.15-.66-2.65-1.07-4.3-3.78-4.43-3.96-.13-.18-1.06-1.4-1.06-2.68 0-1.28.67-1.9.91-2.17.24-.26.52-.33.7-.33l.5.01c.16 0 .38-.06.59.45.24.59.81 2.04.88 2.19.07.15.12.32.02.51-.1.18-.15.3-.29.46l-.43.5c-.14.14-.29.3-.12.58.16.27.74 1.21 1.58 1.96 1.09.97 2 1.27 2.28 1.42.27.14.43.11.59-.07.16-.18.69-.8.87-1.08.18-.27.36-.22.59-.13.24.09 1.52.72 1.78.85.27.13.44.2.5.31.07.11.07.62-.17 1.3Z"></path></svg>
@@ -678,8 +652,7 @@ export default function PortalDosLagos() {
               <a href="#lazer">Lazer &amp; Convivência</a>
               <a href="#diferenciais">Diferenciais</a>
               <a href="#galeria">Galeria</a>
-              <a href="#realizacao">Quem realiza</a>
-            </div>
+              </div>
             <div className="footer__col">
               <h5>O empreendimento</h5>
               <a href="#contato">Receber valores</a>

@@ -1012,8 +1012,11 @@
 .mobile-menu .btn { margin-top: 30px; }
 
 /* ============================ Logos (imagem) ============================ */
-.logo-img { display: inline-flex; align-items: center; }
-.logo-img img { display: block; width: auto; height: 38px; }
+/* flex-shrink:0 nos dois: dentro do header, que e um flex row, a imagem
+   virava item flexivel e era espremida — o logo de 1320x180 saia com 20px
+   de largura, o que parecia cabecalho sem marca. */
+.logo-img { display: inline-flex; align-items: center; flex: 0 0 auto; }
+.logo-img img { display: block; width: auto; height: 38px; flex: 0 0 auto; max-width: none; }
 .header .logo-img .l-dark { display: none; }
 .header.scrolled .logo-img .l-white { display: none; }
 .header.scrolled .logo-img .l-dark { display: inline; }

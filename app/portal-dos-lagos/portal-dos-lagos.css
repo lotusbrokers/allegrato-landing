@@ -738,8 +738,10 @@ h1,h2,h3,h4{font-family:var(--f-display);font-weight:500;line-height:1.08;letter
 /* O logo do empreendimento: altura fixa e largura automatica, para nao
    distorcer a arte. 30px no desktop e 24px no celular deixam a marca no mesmo
    peso visual dos itens do menu, sem competir com eles. */
-.nav__logo{height:30px;width:auto;display:block}
-@media (max-width:760px){.nav__logo{height:24px}}
+/* 30px deixava a marca miúda ao lado do menu; 46px a põe no mesmo peso
+   visual dos links, sem empurrar a altura do cabeçalho. */
+.nav__logo{height:46px;width:auto;display:block}
+@media (max-width:760px){.nav__logo{height:34px}}
 .nav__brand{
   display:flex;align-items:center;gap:12px;
   font-family:var(--f-display);font-size:16px;font-weight:600;

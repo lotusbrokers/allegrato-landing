@@ -927,7 +927,9 @@ export default function AltosDaAvenida({
                 <a href={waLink} target="_blank" rel="noopener" style={parseStyle('color:rgba(255,255,255,.7); text-decoration:none;')}>WhatsApp: {phoneDisplay}</a>
               </div>
               <div style={parseStyle('margin-top:18px; background:#fff; border-radius:6px; padding:10px 14px; display:inline-block;')}>
-                <img src={A + 'a000.jpg'} alt="Imobiliária Lotus Brokers" style={parseStyle('height:34px;')} />
+                {/* Era A + 'a000.jpg', que é o logo da Japi Lançamentos — sobrou
+                    do material antigo e estava rotulado como Lotus. */}
+                <img src="/logo-lotus-verde.png" alt="Imobiliária Lotus Brokers" style={parseStyle('height:38px;')} />
               </div>
             </div>
           </div>

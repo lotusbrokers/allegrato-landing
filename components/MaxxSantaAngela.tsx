@@ -463,7 +463,7 @@ export default function MaxxSantaAngela({
             </div>
             <div data-priceinline="" style={parseStyle('display:none;margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.25)')}>
               <span style={parseStyle('font-size:11px;letter-spacing:.26em;font-weight:700;color:#E7D2A6')}>A PARTIR DE</span>
-              <div style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:34px;color:#fff;margin-top:4px;line-height:1")}>R$ 815.071,24*</div>
+              <div style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:34px;color:#fff;margin-top:4px;line-height:1;white-space:nowrap")}>R$ 815.071,24*</div>
               <p style={parseStyle('font-size:11.5px;color:#E3D8C6;margin:8px 0 0')}>*Torre B · 97 m² · tabela maio/2026.</p>
             </div>
           </div>
@@ -471,7 +471,9 @@ export default function MaxxSantaAngela({
         {showPriceVal && (
           <div data-reveal="" style={parseStyle('opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.16,1,.3,1) .25s,transform 1s cubic-bezier(.16,1,.3,1) .25s;position:absolute;right:32px;bottom:76px;background:rgba(251,248,243,.96);backdrop-filter:blur(6px);padding:24px 30px;border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.3);max-width:300px')} data-pricecard="">
             <span style={parseStyle('font-size:11px;letter-spacing:.26em;font-weight:700;color:#9a8a72')}>A PARTIR DE</span>
-            <div style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:38px;color:#2B2521;margin-top:6px;line-height:1")}>R$ 815.071<span style={parseStyle('font-size:22px')}>,24*</span></div>
+            {/* nowrap e clamp: com 38px fixos, "R$" caía numa linha e o número na
+                outra dentro do cartão. O valor precisa ser lido de uma vez. */}
+            <div style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,38px);color:#2B2521;margin-top:6px;line-height:1;white-space:nowrap")}>R$ 815.071<span style={parseStyle('font-size:.58em')}>,24*</span></div>
             <p style={parseStyle('font-size:11.5px;color:#8a7d6f;margin:12px 0 0;line-height:1.5')}>*Torre B · 97 m² · valores ref. tabela maio/2026. Consulte um corretor para outras unidades.</p>
           </div>
         )}
