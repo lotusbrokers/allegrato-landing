@@ -70,7 +70,7 @@ export const POSTS: Post[] = [
    * "assertiva" no lugar de "assetiva", que estava com letra faltando.
    * ------------------------------------------------------------------ */
   {
-    id: 'memorial-descritivo-lancamento', cat: 'Guia', date: 'Ago 2026', publicadoEm: '2026-08-28', read: '7 min', img: '', slot: 'blog-memorial-descritivo', title: 'O que observar no memorial descritivo de um lançamento?', excerpt: 'Saiba mais sobre o que observar no memorial descritivo de um lançamento e descubra informações importantes para quem busca comprar, investir ou morar em um imóvel em Jundiaí.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'memorial-descritivo-lancamento', cat: 'Guia', date: 'Ago 2026', publicadoEm: '2026-08-28', read: '7 min', img: '/blog/memorial-descritivo.jpg', slot: 'blog-memorial-descritivo', title: 'O que observar no memorial descritivo de um lançamento?', excerpt: 'Saiba mais sobre o que observar no memorial descritivo de um lançamento e descubra informações importantes para quem busca comprar, investir ou morar em um imóvel em Jundiaí.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'O memorial descritivo é o documento que diz o que a incorporadora vai entregar: materiais, acabamentos, áreas comuns, lazer, tecnologia e vagas. Este guia reúne os sete pontos que merecem atenção na leitura e mostra como usar o documento para comparar dois lançamentos que parecem iguais na planta.',
     body: [
       { titulo: 'Introdução' },
