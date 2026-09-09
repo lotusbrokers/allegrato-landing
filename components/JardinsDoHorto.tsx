@@ -145,7 +145,6 @@ const nearby = ['Maxi Shopping Jundiaí', 'Parques da Cidade', 'Mundo das Crian�
 const difComuns = ['Geração de energia fotovoltaica', 'Áreas comuns equipadas e decoradas', 'Playground personalizado (Rubber Brasil)', 'Academia com consultoria Céltica e Movement', 'Piscinas com infra. para climatização', 'Infraestrutura para sistema de Wi-Fi'];
 const difGerais = ['Elevadores com tecnologia regenerativa', 'Energia elétrica subterrânea', 'Sensores de presença em halls e elevadores', 'Edifício garagem com vagas cobertas', 'Sala de expedição (guarda-volumes)', 'Amplo espaçamento entre torres'];
 const difUnidades = ['Pé direito de 2,70m', 'Esquadrias de alumínio sob medida com persiana', 'Bancadas de banheiro em mármore', 'Pias da cozinha e varanda em granito', 'Tratamento acústico no contrapiso', 'Infra. para automação e ar-condicionado'];
-const qualidade = ['PBQP-H Nível A', 'ISO 9001:2015', 'NBR 15575 · Desempenho', 'NBR 9050 · Acessibilidade'];
 
 const faqs = [
   { q: 'Onde fica o Jardins do Horto?', a: 'Na Rua Irineu de Toledo, nº 225, no bairro Horto Florestal, em Jundiaí/SP, ao lado do Maxi Shopping Jundiaí e próximo aos Parques da Cidade, Jardim Botânico e Sesc Jundiaí.' },
@@ -153,7 +152,7 @@ const faqs = [
   { q: 'Quantas torres e unidades terá o empreendimento?', a: 'São 2 torres, totalizando 268 unidades, com térreo + 16 pavimentos tipo e 4 elevadores por torre.' },
   { q: 'Como funcionam as vagas de garagem?', a: 'O empreendimento conta com 495 vagas vinculadas, distribuídas entre o Edifício Garagem e a implantação.' },
   { q: 'Qual a previsão de entrega?', a: 'A previsão de entrega é de 39 meses. A incorporação está registrada no 1º Oficial de Registro de Imóveis da Comarca de Jundiaí/SP.' },
-  { q: 'Quem é a construtora?', a: 'A Santa Angela Construtora atua há mais de 40 anos em Jundiaí, Americana e Itatiba, acompanhando cada projeto do início até a entrega das chaves.' },
+  { q: 'Quem realiza e quem atende?', a: 'O Jardins do Horto é realizado pela Santa Angela Construtora. A página, a divulgação e o atendimento são da Imobiliária Lotus Brokers, autorizada a comercializar o empreendimento.' },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -668,30 +667,6 @@ export default function JardinsDoHorto({
               </ul>
             </div>
           </div>
-          <div data-reveal="" style={parseStyle('opacity:0; transform:translateY(28px); transition:opacity .85s ease, transform .85s ease; margin-top:56px; padding:34px clamp(24px,4vw,48px); background:#201D19; border-radius:20px; display:flex; flex-wrap:wrap; align-items:center; gap:30px; justify-content:space-between;')}>
-            <div style={parseStyle("color:#F4EEE4; font-family:'Cormorant Garamond',serif; font-size:clamp(22px,2.4vw,30px); max-width:18ch;")}>Qualidade e segurança certificadas</div>
-            <div style={parseStyle('display:flex; flex-wrap:wrap; gap:14px;')}>
-              {qualidade.map((q, i) => (
-                <span key={i} style={parseStyle('padding:11px 18px; border:1px solid rgba(255,255,255,.22); border-radius:100px; color:#F4EEE4; font-size:13.5px; font-weight:600;')}>{q}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ============ SOBRE SANTA ANGELA ============ */}
-      <section data-screen-label="Construtora" style={parseStyle('position:relative; background:#2E3A2C; padding:clamp(80px,11vw,150px) 32px; overflow:hidden;')}>
-        <img src={IMG + 'a003.jpg'} alt="" aria-hidden="true" style={parseStyle('position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.16;')} />
-        <div style={parseStyle('position:absolute; inset:0; background:linear-gradient(90deg, #2E3A2C 30%, rgba(46,58,44,.6));')}></div>
-        <div style={parseStyle('position:relative; max-width:760px; margin:0 auto; text-align:center;')}>
-          <div data-reveal="" style={parseStyle('opacity:0; transform:translateY(30px); transition:opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1);')}>
-            <div style={parseStyle('font-size:13px; letter-spacing:.24em; text-transform:uppercase; font-weight:600; color:#F09080; margin-bottom:24px;')}>Realização · Santa Angela</div>
-            <h2 style={parseStyle("margin:0; color:#F6F1E9; font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(30px,4.4vw,58px); line-height:1.1;")}>Há mais de 40 anos realizando o sonho de morar bem</h2>
-            <p style={parseStyle('color:rgba(246,241,233,.82); font-size:17px; line-height:1.75; margin:28px 0 0;')}>
-              Presente em Jundiaí, Americana e Itatiba, a Construtora Santa Angela acompanha todas as fases de cada empreendimento, do início dos projetos à entrega das chaves. Com confiança, respeito e comprometimento, queremos que sua família viva a melhor experiência.
-            </p>
-            <p style={parseStyle("color:#F09080; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(22px,3vw,32px); margin:34px 0 0;")}>&quot;O brilho do interior é ter você.&quot;</p>
-          </div>
         </div>
       </section>
 
@@ -825,7 +800,7 @@ export default function JardinsDoHorto({
           <p style={parseStyle('font-size:11.5px; line-height:1.7; margin:26px 0 0; color:rgba(244,238,228,.4);')}>
             Imagens meramente ilustrativas. As informações constantes no Memorial de Incorporação e nos futuros Instrumentos de Compra e Venda prevalecerão sobre as divulgadas neste material. Incorporação registrada em 02 de fevereiro de 2024 no R.11 da matrícula nº 163.080 do 1º Oficial de Registro de Imóveis da Comarca de Jundiaí/SP. Quando da entrega, a vegetação poderá apresentar diferenças de tamanho e porte. Material preliminar, sujeito a alteração sem aviso prévio.
           </p>
-          <div style={parseStyle('margin-top:20px; font-size:12px; color:rgba(244,238,228,.35);')}>© 2026 Jardins do Horto · Santa Angela Construtora.</div>
+          <div style={parseStyle('margin-top:20px; font-size:12px; color:rgba(244,238,228,.35);')}>© 2026 Jardins do Horto · Realização: Santa Angela Construtora. Página, divulgação e atendimento pela Imobiliária Lotus Brokers, autorizada a comercializar o empreendimento.</div>
         </div>
       </footer>
 
