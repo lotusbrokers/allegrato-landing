@@ -710,7 +710,7 @@ export default function ResortPrime() {
                 <li><a href="https://wa.me/5511926143393" target="_blank" rel="noopener">WhatsApp: +55 11 92614-3393</a></li>
                 <li>Av. Caetano Gornati</li>
                 <li>Engordadouro, Jundiaí / SP</li>
-                <li><a href="https://santaangelaconstrutora.com.br" target="_blank" rel="noopener">santaangelaconstrutora.com.br</a></li>
+                <li>Atendimento pela Imobiliária Lotus Brokers</li>
               </ul>
             </div>
           </div>

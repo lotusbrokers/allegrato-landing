@@ -164,10 +164,11 @@ const lazer = [
   { n: '12', t: 'Fitness ao ar livre' },
 ];
 
-const base06 =
-  'https://santaangelaconstrutora.com.br/wp-content/uploads/2021/06/ADG04956-HDR-';
+// As fotos da galeria eram carregadas direto do site da construtora. Agora
+// são servidas daqui: além de a página não depender do servidor dela, um
+// arquivo trocado ou removido lá deixava de mudar o que aparece aqui.
 const galSrcs = ['3', '36', '33', '32', '31', '30', '26', '24', '22', '18', '17', '14'].map(
-  (n) => base06 + n + '-scaled.jpg'
+  (n) => '/maxx-santa-angela/galeria/' + n + '.jpg'
 );
 
 const diferenciais = [
@@ -191,19 +192,19 @@ const nearby = [
 const plantas = [
   {
     label: '71 m²',
-    img: 'https://santaangelaconstrutora.com.br/wp-content/uploads/2021/03/71-suite-1.png',
+    img: '/maxx-santa-angela/71-suite-1.png',
     tour: 'https://favarojr.com/st3/',
     desc: 'Planta inteligente com suíte, perfeita para o seu primeiro lar ou para morar com mais conforto.',
   },
   {
     label: '82 m²',
-    img: 'https://santaangelaconstrutora.com.br/wp-content/uploads/2021/03/82-1.png',
+    img: '/maxx-santa-angela/82-1.png',
     tour: 'https://my.matterport.com/show/?m=GuAJLRVnAkm',
     desc: 'Mais espaço para a família, com ambientes generosos e bem distribuídos.',
   },
   {
     label: '98 m²',
-    img: 'https://santaangelaconstrutora.com.br/wp-content/uploads/2021/03/98m-1.png',
+    img: '/maxx-santa-angela/98m-1.png',
     tour: 'https://favarojr.com/st4/',
     desc: 'A maior metragem do Maxx, pensada para quem quer viver com amplitude.',
   },
@@ -445,7 +446,7 @@ export default function MaxxSantaAngela({
       {/* ============ HERO ============ */}
       <header id="topo" style={parseStyle('position:relative;min-height:680px;height:90vh;max-height:900px;display:flex;align-items:flex-end;overflow:hidden;background:#1c1813')}>
         <div style={parseStyle('position:absolute;inset:0;overflow:hidden')}>
-          <img src="https://santaangelaconstrutora.com.br/wp-content/uploads/2021/06/CAPA-MAX-OLD.png" alt="Perspectiva das torres do Maxx Santa Angela" style={parseStyle('width:100%;height:100%;object-fit:cover;animation:mxKen 18s ease-out forwards')} />
+          <img src="/maxx-santa-angela/capa-max-old.jpg" alt="Perspectiva das torres do Maxx Santa Angela" style={parseStyle('width:100%;height:100%;object-fit:cover;animation:mxKen 18s ease-out forwards')} />
         </div>
         <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,17,13,.42) 0%,rgba(20,17,13,0) 26%,rgba(20,17,13,.12) 58%,rgba(20,17,13,.74) 100%)')}></div>
         <div style={parseStyle('position:relative;width:100%;max-width:1240px;margin:0 auto;padding:0 32px 76px;color:#fff')}>
@@ -502,7 +503,7 @@ export default function MaxxSantaAngela({
           </div>
           <div data-reveal="" style={parseStyle('opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.16,1,.3,1) .15s,transform .9s cubic-bezier(.16,1,.3,1) .15s;position:relative')}>
             <div style={parseStyle('position:relative;border-radius:20px;overflow:hidden;box-shadow:0 30px 70px rgba(43,37,33,.22);aspect-ratio:4/5')}>
-              <img src="https://santaangelaconstrutora.com.br/wp-content/uploads/2021/06/ADG04956-HDR-3-scaled.jpg" alt="Áreas comuns do Maxx Santa Angela" style={parseStyle('width:100%;height:100%;object-fit:cover')} />
+              <img src="/maxx-santa-angela/adg04956-hdr-3-scaled.jpg" alt="Áreas comuns do Maxx Santa Angela" style={parseStyle('width:100%;height:100%;object-fit:cover')} />
             </div>
             <div style={parseStyle('position:absolute;left:-26px;bottom:-26px;background:#3FA39C;color:#fff;padding:22px 26px;border-radius:16px;box-shadow:0 18px 44px rgba(63,163,156,.35);max-width:200px')}>
               <div style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-size:30px;font-weight:700;line-height:1")}>3 torres</div>
