@@ -1948,7 +1948,7 @@ export default function Vigore() {
                 "font-family:'Hanken Grotesk';font-size:11.5px;color:#a89e90;margin-top:14px;line-height:1.5"
               )}
             >
-              Ao enviar, você autoriza o contato de consultores, inclusive por WhatsApp, para
+              Ao enviar, você autoriza a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a entrar em contato, inclusive por WhatsApp, conforme a Política de Privacidade da Lotus Brokers (lotusbrokers.com.br/lotus-privacidade), para
               informações sobre o empreendimento.
             </p>
           </form>

@@ -747,7 +747,7 @@ export default function JardinsDoHorto({
                   </div>
                   <label style={parseStyle('display:flex; align-items:flex-start; gap:10px; font-size:12.5px; color:#6c6459; line-height:1.45; cursor:pointer;')}>
                     <input type="checkbox" required style={parseStyle('margin-top:2px; accent-color:#C75D40;')} />
-                    Autorizo o contato de corretores, inclusive por WhatsApp, para obter informações sobre o empreendimento.
+                    Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a entrar em contato, inclusive por WhatsApp, conforme a Política de Privacidade da Lotus Brokers, para obter informações sobre o empreendimento.
                   </label>
                   <Hoverable as="button" type="submit" baseStyle={parseStyle("margin-top:6px; width:100%; border:0; cursor:pointer; background:#C75D40; color:#fff; font-family:'Manrope',sans-serif; font-weight:700; font-size:16px; padding:18px; border-radius:100px; transition:background .25s ease, transform .25s ease;")} hoverStyle={parseStyle('background:#AE4D33; transform:translateY(-2px);')}>Quero falar com um corretor</Hoverable>
                 </div>
