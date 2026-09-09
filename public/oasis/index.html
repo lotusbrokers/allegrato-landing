@@ -173,7 +173,14 @@ footer{background:#0f271e;color:rgba(255,255,255,.6);padding:56px 0 40px;font-si
   .navlinks.open{display:flex;position:absolute;top:72px;left:0;right:0;flex-direction:column;background:var(--green);padding:24px;gap:18px}
   section{padding:70px 0}
 }
-@media(max-width:520px){.lazer-grid{grid-template-columns:1fr}.poi{grid-template-columns:1fr}.lz.big{grid-column:span 1}}
+@media(max-width:520px){.lazer-grid{grid-template-columns:1fr}.poi{grid-template-columns:1fr}.lz.big{grid-column:span 1}
+/* A faixa de numeros seguia em 4 colunas ate 320px: cada uma ficava com 55px
+   e o conteudo empurrava a pagina para fora da tela. Em duas colunas cabe. */
+.stats .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
+/* minmax(0,1fr) e nao 1fr: com 1fr a coluna nunca encolhe abaixo do
+   min-content, e "75-112 m2" nao quebra — a coluna ia a 181px e empurrava a
+   pagina para fora. O overflow-wrap deixa o numero quebrar se precisar. */
+.stat{border-right:none;overflow-wrap:anywhere}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}[data-reveal]{opacity:1;transform:none}}
 </style>
 <style>
