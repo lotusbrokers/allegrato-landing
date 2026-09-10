@@ -31,7 +31,9 @@ for (const slug of ['lotus-busca', 'lotus-home', 'meus-dados', 'api']) {
 }
 
 // Slug sem página: card cai no contato, não gera link quebrado.
-assert.equal(hrefForSlug('lago-samambaia'), null);
+// O exemplo era 'lago-samambaia' até a landing dela existir. Nome inventado
+// agora, para o teste não voltar a quebrar quando um empreendimento novo entrar.
+assert.equal(hrefForSlug('empreendimento-que-nao-existe'), null);
 
 /* ---------- slugParaLanding (coluna landing_slug, migration 0004) ---------- */
 // O motivo da coluna existir: nome comercial livre, link continua certo.

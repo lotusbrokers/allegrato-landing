@@ -39,7 +39,7 @@ export function isLandingDir(appDir: string, name: string): boolean {
  * enxerga — daí a lista explícita. Ao converter uma para componente React,
  * remover o slug daqui e criar app/<slug>/.
  */
-export const LANDINGS_HTML = ['altissimi', 'oasis', 'vila-triunfo', 'reserva-castanheira', 'santorini', 'epic-jundiai', 'mistral-jundiai', 'gioviale'] as const;
+export const LANDINGS_HTML = ['altissimi', 'oasis', 'vila-triunfo', 'reserva-castanheira', 'santorini', 'epic-jundiai', 'mistral-jundiai', 'gioviale', 'lago-samambaia'] as const;
 
 let cache: Set<string> | null = null;
 

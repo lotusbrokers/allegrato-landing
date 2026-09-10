@@ -250,7 +250,6 @@ function partesLocalizacao(location: string): { neighborhood: string; city: stri
 // Esvaziar a lista devolve todos.
 // 28/08/2026: capas trocadas no dashboard; ficam só os que ainda não foram mexidos.
 const OCULTOS_ATE_TROCAR_CAPA = [
-  'Lago Samambaia',
   'Vila Itália',
   'Mutton',
   'Diferenziato',
