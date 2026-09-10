@@ -639,5 +639,219 @@ document.addEventListener('DOMContentLoaded', async function() {
   else window.addEventListener('load', ligar);
 })();
 </script>
+
+<script data-lt-interacao="">
+/*
+  Devolve a esta landing os comportamentos que o template dela espera e que o
+  export "arquivo unico" nao trouxe — o mesmo script ausente que deixava a
+  pagina em branco (ver o bloco data-lt-revelar acima).
+
+  Sem ele, no ar: o cabecalho fixo ficava transparente por cima do texto assim
+  que a pagina rolava, o botao do WhatsApp nunca subia, o menu do celular nao
+  abria, as duvidas frequentes nao expandiam, as fotos da galeria nao ampliavam
+  e — o mais caro — o formulario de contato nao levava a lugar nenhum.
+
+  A VISIBILIDADE do conteudo nao depende deste bloco, de proposito: aquilo e
+  resolvido em CSS logo acima. Se este script falhar, a pagina continua legivel.
+
+  Tudo delegado no document e reconsultado a cada uso: a pagina empacotada
+  reconstroi o DOM inteiro, e qualquer referencia guardada apontaria para um no
+  que ja saiu da tela.
+
+  Nada aqui cita este empreendimento: numero e texto do WhatsApp saem do proprio
+  HTML. O bloco vale igual para as outras landings deste mesmo template.
+*/
+(function () {
+  var ALTURA_CABECALHO = 40;   // rolagem a partir da qual o cabecalho ganha fundo
+  var ALTURA_FLUTUANTE = 320;  // rolagem a partir da qual o botao do WhatsApp sobe
+
+  function achar(sel) { return document.querySelector(sel); }
+
+  /* ---------- cabecalho e botao flutuante ---------- */
+
+  function estadoDeRolagem() {
+    var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+    var cabecalho = achar('.header');
+    if (cabecalho) cabecalho.classList.toggle('scrolled', y > ALTURA_CABECALHO);
+    var flutuante = achar('.wa-float');
+    if (flutuante) flutuante.classList.toggle('show', y > ALTURA_FLUTUANTE);
+  }
+
+  /* ---------- menu do celular ---------- */
+
+  function fecharMenu() {
+    var botao = achar('.burger');
+    var menu = achar('.mobile-menu');
+    if (botao) botao.classList.remove('open');
+    if (menu) menu.classList.remove('open');
+  }
+
+  function alternarMenu() {
+    var botao = achar('.burger');
+    var menu = achar('.mobile-menu');
+    if (!botao || !menu) return;
+    var abrir = !menu.classList.contains('open');
+    botao.classList.toggle('open', abrir);
+    menu.classList.toggle('open', abrir);
+    botao.setAttribute('aria-expanded', abrir ? 'true' : 'false');
+  }
+
+  /* ---------- duvidas frequentes ---------- */
+
+  // O CSS deixa a resposta com max-height:0 e anima a propriedade, entao a
+  // altura tem de ser medida e escrita na hora — nao ha valor fixo que sirva.
+  function alternarPergunta(botao) {
+    var bloco = botao.closest('.qa');
+    if (!bloco) return;
+    var resposta = bloco.querySelector('.a');
+    var abrir = !bloco.classList.contains('open');
+    bloco.classList.toggle('open', abrir);
+    botao.setAttribute('aria-expanded', abrir ? 'true' : 'false');
+    if (resposta) resposta.style.maxHeight = abrir ? resposta.scrollHeight + 'px' : '';
+  }
+
+  function remedirRespostas() {
+    var abertas = document.querySelectorAll('.qa.open .a');
+    for (var i = 0; i < abertas.length; i++) {
+      abertas[i].style.maxHeight = abertas[i].scrollHeight + 'px';
+    }
+  }
+
+  /* ---------- galeria ---------- */
+
+  var foto = -1;
+
+  function fotos() {
+    var todas = document.querySelectorAll('.tile');
+    var lista = [];
+    for (var i = 0; i < todas.length; i++) if (todas[i].querySelector('img')) lista.push(todas[i]);
+    return lista;
+  }
+
+  function mostrarFoto(indice) {
+    var lista = fotos();
+    var caixa = achar('.lightbox');
+    if (!lista.length || !caixa) return;
+    foto = (indice + lista.length) % lista.length;
+    var quadro = lista[foto];
+    var origem = quadro.querySelector('img');
+    var img = caixa.querySelector('img');
+    if (img && origem) {
+      img.src = origem.currentSrc || origem.src;
+      img.alt = origem.alt || '';
+    }
+    var legenda = caixa.querySelector('.lb-cap');
+    if (legenda) {
+      var titulo = quadro.querySelector('.cap .t');
+      legenda.textContent = quadro.getAttribute('data-cap') || (titulo ? titulo.textContent : '');
+    }
+    caixa.classList.add('open');
+  }
+
+  function fecharFoto() {
+    var caixa = achar('.lightbox');
+    if (caixa) caixa.classList.remove('open');
+  }
+
+  /* ---------- formulario ---------- */
+
+  // Numero e texto de abertura saem do proprio HTML: o botao flutuante ja traz
+  // os dois, entao o bloco nao precisa saber de que empreendimento se trata.
+  function destinoDoWhatsapp() {
+    var link = achar('.wa-float[href*="wa.me"]') || achar('a[href*="wa.me"]');
+    if (!link) return null;
+    var href = link.getAttribute('href') || '';
+    var numero = href.match(/wa\.me\/(\d+)/);
+    if (!numero) return null;
+    var abertura = '';
+    var marca = href.indexOf('text=');
+    if (marca >= 0) {
+      try { abertura = decodeURIComponent(href.slice(marca + 5).replace(/\+/g, ' ')); } catch (err) { abertura = ''; }
+    }
+    return { numero: numero[1], abertura: abertura };
+  }
+
+  var CAMPOS = [['nome', 'Nome'], ['telefone', 'WhatsApp'], ['interesse', 'Interesse'], ['mensagem', 'Mensagem']];
+
+  function resumoDoFormulario(form) {
+    var linhas = [];
+    for (var i = 0; i < CAMPOS.length; i++) {
+      var campo = form.elements[CAMPOS[i][0]];
+      var valor = campo && campo.value ? String(campo.value).trim() : '';
+      if (valor) linhas.push(CAMPOS[i][1] + ': ' + valor);
+    }
+    return linhas.join('\n');
+  }
+
+  function enviarPeloWhatsapp(ev) {
+    var form = ev.target;
+    if (!form || form.tagName !== 'FORM' || !form.hasAttribute('data-wa')) return;
+    var destino = destinoDoWhatsapp();
+    // Sem numero na pagina nao ha para onde mandar. Melhor deixar o navegador
+    // seguir o caminho dele do que engolir o envio em silencio.
+    if (!destino) return;
+    ev.preventDefault();
+    var resumo = resumoDoFormulario(form);
+    var texto = destino.abertura ? destino.abertura + '\n\n' + resumo : resumo;
+    var url = 'https://wa.me/' + destino.numero + '?text=' + encodeURIComponent(texto);
+    var aba = window.open(url, '_blank', 'noopener');
+    // Bloqueador de pop-up (comum no iOS): abre na propria aba em vez de perder
+    // o contato preenchido.
+    if (!aba) window.location.href = url;
+  }
+
+  /* ---------- ligacoes ---------- */
+
+  function aoClicar(ev) {
+    var alvo = ev.target;
+    if (!alvo || !alvo.closest) return;
+
+    if (alvo.closest('.burger')) { ev.preventDefault(); alternarMenu(); return; }
+    if (alvo.closest('.mobile-menu a')) { fecharMenu(); return; }
+
+    var pergunta = alvo.closest('.qa button');
+    if (pergunta) { ev.preventDefault(); alternarPergunta(pergunta); return; }
+
+    var caixa = achar('.lightbox');
+    if (caixa && caixa.classList.contains('open')) {
+      if (alvo.closest('.lb-prev')) { mostrarFoto(foto - 1); return; }
+      if (alvo.closest('.lb-next')) { mostrarFoto(foto + 1); return; }
+      if (alvo.closest('.lb-close') || alvo === caixa) { fecharFoto(); return; }
+      return;
+    }
+
+    var quadro = alvo.closest('.tile');
+    if (quadro && quadro.querySelector('img')) {
+      var lista = fotos();
+      for (var i = 0; i < lista.length; i++) {
+        if (lista[i] === quadro) { mostrarFoto(i); return; }
+      }
+    }
+  }
+
+  function aoTeclar(ev) {
+    if (ev.key === 'Escape') { fecharFoto(); fecharMenu(); return; }
+    var caixa = achar('.lightbox');
+    if (!caixa || !caixa.classList.contains('open')) return;
+    if (ev.key === 'ArrowLeft') mostrarFoto(foto - 1);
+    if (ev.key === 'ArrowRight') mostrarFoto(foto + 1);
+  }
+
+  function ligar() {
+    document.addEventListener('click', aoClicar);
+    document.addEventListener('keydown', aoTeclar);
+    document.addEventListener('submit', enviarPeloWhatsapp);
+    window.addEventListener('scroll', estadoDeRolagem, { passive: true });
+    window.addEventListener('resize', function () { estadoDeRolagem(); remedirRespostas(); });
+    estadoDeRolagem();
+    // A pagina empacotada troca o documento inteiro: o cabecalho novo nasce sem
+    // a classe de rolagem, e precisa reganha-la.
+    new MutationObserver(estadoDeRolagem).observe(document.documentElement, { childList: true, subtree: true });
+  }
+
+  if (document.readyState === 'complete') ligar();
+  else window.addEventListener('load', ligar);
+})();
+</script>
 </body>
 </html>

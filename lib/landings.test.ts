@@ -105,6 +105,11 @@ for (const slug of LANDINGS_HTML) {
 // A correção mora no fim do arquivo, no bloco `data-lt-revelar`. Uma landing
 // nova que chegue escondendo `.reveal` sem trazer nem o script próprio nem o
 // bloco falha aqui, antes de ir ao ar.
+const ESTADOS_DE_SCRIPT = [
+  { regra: '.header.scrolled', classe: 'scrolled', sintoma: 'o cabeçalho fixo fica transparente por cima do texto' },
+  { regra: '.wa-float.show', classe: 'show', sintoma: 'o botão do WhatsApp nunca sobe' },
+];
+
 const escondeReveal = /\.reveal\s*\{[^}]*opacity\s*:\s*0/;
 
 for (const slug of LANDINGS_HTML) {
@@ -114,6 +119,22 @@ for (const slug of LANDINGS_HTML) {
     assert.ok(
       html.includes('data-lt-revelar') || html.includes('IntersectionObserver'),
       `landing ${slug} esconde .reveal e não traz como mostrar de volta — abriria em branco`,
+    );
+  }
+
+  // Mesma causa da página em branco, outro sintoma. O template também conta com
+  // o script para dar fundo ao cabeçalho fixo depois da rolagem e para fazer o
+  // botão do WhatsApp subir. Sem isso o cabeçalho atravessa o texto transparente
+  // e o botão nunca aparece — foi assim que as duas landings da Applausi ficaram
+  // desconfiguradas. O CSS declara o estado; alguém precisa aplicá-lo.
+  //
+  // A busca é pelo nome da classe entre aspas: o CSS a escreve como seletor
+  // (`.header.scrolled{`) e só um script a escreve como string.
+  for (const { regra, classe, sintoma } of ESTADOS_DE_SCRIPT) {
+    if (!html.includes(regra)) continue;
+    assert.ok(
+      html.includes(`'${classe}'`) || html.includes(`"${classe}"`),
+      `landing ${slug}: o CSS usa ${regra}, mas nenhum script aplica "${classe}" — ${sintoma}`,
     );
   }
 
