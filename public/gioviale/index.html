@@ -592,5 +592,52 @@ document.addEventListener('DOMContentLoaded', async function() {
   else window.addEventListener('load', ligar);
 })();
 </script>
+
+<script data-lt-revelar="">
+/*
+  Mostra os blocos de conteudo desta landing empacotada.
+
+  O template destas paginas esconde cada bloco com `.reveal{opacity:0}` e
+  `.clip-up{clip-path:inset(0 0 100% 0)}`, contando com um script proprio que
+  adiciona a classe `in` quando o bloco entra na tela. Esse script NAO veio no
+  arquivo unico exportado — chega aqui so a marcacao e o CSS.
+
+  Sem ele a pagina abre em branco: o texto esta no DOM, com opacidade zero.
+  Passou despercebido porque o proprio template tem um
+  `@media (prefers-reduced-motion:reduce)` que mostra tudo — em quem navega com
+  animacoes reduzidas a pagina aparece inteira, e so nela.
+
+  A regra abaixo e exatamente aquela do reduced-motion do template: dispensa a
+  animacao e deixa o conteudo visivel. Repor a revelacao por rolagem seria mais
+  fiel ao desenho, mas amarraria a VISIBILIDADE do conteudo a quem desenha
+  quadros — aba em segundo plano, rastreador headless e leitor de tela ficariam
+  de fora. Foi assim que a pagina foi ao ar em branco; nao vale repetir por uma
+  animacao.
+
+  O <style> e recolocado a cada reconstrucao do documento porque a pagina
+  empacotada monta o DOM do zero e leva o <head> junto — mesmo motivo do
+  lt-nav-css e do lt-rodape-css logo acima.
+*/
+(function () {
+  var CSS = '.reveal,.clip-up{opacity:1 !important;transform:none !important;clip-path:none !important;transition:none !important}';
+
+  function garantir() {
+    if (document.getElementById('lt-revelar-css')) return;
+    var st = document.createElement('style');
+    st.id = 'lt-revelar-css';
+    st.textContent = CSS;
+    (document.head || document.documentElement).appendChild(st);
+  }
+
+  function ligar() {
+    garantir();
+    new MutationObserver(garantir).observe(document.documentElement, { childList: true, subtree: true });
+  }
+
+  garantir();
+  if (document.readyState === 'complete') ligar();
+  else window.addEventListener('load', ligar);
+})();
+</script>
 </body>
 </html>

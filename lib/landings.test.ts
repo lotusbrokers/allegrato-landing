@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { existsSync, readdirSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { slugify, hrefForSlug, isLandingDir, slugParaLanding, LANDINGS_HTML } from './landings.ts';
 import { developmentsFallback } from './developments.ts';
@@ -90,6 +90,39 @@ for (const slug of LANDINGS_HTML) {
     `landing estática ${slug} está em LANDINGS_HTML mas não tem public/${slug}/index.html`,
   );
   assert.equal(hrefForSlug(slug), `/${slug}`, `landing estática ${slug} deveria linkar`);
+}
+
+/* ---------- a landing estática não pode ir ao ar em branco ---------- */
+// Como o Lago Samambaia foi: o template esconde cada bloco com
+// `.reveal{opacity:0}` e conta com um script que devolve a classe `in` quando o
+// bloco entra na tela — script que o export "arquivo único" não traz. O texto
+// fica no DOM, invisível, e a página abre vazia.
+//
+// Escapou da revisão porque o próprio template mostra tudo dentro de um
+// `@media (prefers-reduced-motion:reduce)`: quem revisa com animações reduzidas
+// vê a página inteira. Só o navegador comum vê o branco.
+//
+// A correção mora no fim do arquivo, no bloco `data-lt-revelar`. Uma landing
+// nova que chegue escondendo `.reveal` sem trazer nem o script próprio nem o
+// bloco falha aqui, antes de ir ao ar.
+const escondeReveal = /\.reveal\s*\{[^}]*opacity\s*:\s*0/;
+
+for (const slug of LANDINGS_HTML) {
+  const html = readFileSync(join(process.cwd(), 'public', slug, 'index.html'), 'utf8');
+
+  if (escondeReveal.test(html)) {
+    assert.ok(
+      html.includes('data-lt-revelar') || html.includes('IntersectionObserver'),
+      `landing ${slug} esconde .reveal e não traz como mostrar de volta — abriria em branco`,
+    );
+  }
+
+  // O rodapé institucional é quem identifica a imobiliária responsável pela
+  // página (CRECI e CNPJ inclusive) e quem devolve o visitante ao portal.
+  assert.ok(
+    html.includes('data-rodape-lotus'),
+    `landing ${slug} está sem o rodapé da Lotus`,
+  );
 }
 
 // E o contrário: entrada apontando para página que não existe vira card com link
