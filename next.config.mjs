@@ -47,6 +47,7 @@ const nextConfig = {
       { source: '/mistral-jundiai', destination: '/mistral-jundiai/index.html' },
       { source: '/gioviale', destination: '/gioviale/index.html' },
       { source: '/lago-samambaia', destination: '/lago-samambaia/index.html' },
+      { source: '/villaggio-engordadouro', destination: '/villaggio-engordadouro/index.html' },
     ];
   },
 };

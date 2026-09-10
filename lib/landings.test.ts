@@ -146,6 +146,14 @@ console.log(
 // empreendimento some da página da construtora de verdade.
 assert.equal(slugParaLanding(null, 'Vivart Grand Alamedas'), 'vivarte');
 assert.equal(slugParaLanding(null, 'Authoria By Tebas'), 'authoria');
+assert.equal(slugParaLanding(null, 'Villagio Engordadouro'), 'villaggio-engordadouro');
+// A trava que faltava: o mapa só cumpre a função se o destino existir de fato.
+// Um alvo com erro de digitação deixa o empreendimento fora da vitrine do mesmo
+// jeito que a falta do mapa — e em silêncio, que é o pior dos dois.
+for (const nome of ['Vivart Grand Alamedas', 'Authoria By Tebas', 'Villagio Engordadouro']) {
+  const slug = slugParaLanding(null, nome);
+  assert.ok(hrefForSlug(slug), `"${nome}" aponta para /${slug}, que não é uma landing existente`);
+}
 // O landing_slug explícito continua tendo precedência sobre o mapa.
 assert.equal(slugParaLanding('outra-landing', 'Vivart Grand Alamedas'), 'outra-landing');
 // Nome sem correção segue derivando normalmente.
