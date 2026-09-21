@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { POSTS } from './blog-posts.ts';
+import { POSTS, hrefDoArtigo } from './blog-posts.ts';
 
 /**
  * Invariantes da lista de artigos.
@@ -57,5 +57,15 @@ test('toda capa declarada existe em public/', () => {
       existsSync(join(process.cwd(), 'public', p.img)),
       `${p.id} aponta a capa para ${p.img}, que não existe em public/`
     );
+  }
+});
+
+// O id é o endereço do artigo (/lotus-blog/<id>). Acento, espaço ou maiúscula
+// ali viram URL com %C3%A7 no meio, ou duas URLs para o mesmo texto quando
+// alguém digita com outra caixa. Minúsculas, números e hífens, e só.
+test('o id de todo artigo serve de URL', () => {
+  for (const p of POSTS) {
+    assert.match(p.id, /^[a-z0-9]+(?:-[a-z0-9]+)*$/, `"${p.id}" não serve de endereço: use minúsculas, números e hífens`);
+    assert.equal(hrefDoArtigo(p.id), `/lotus-blog/${p.id}`);
   }
 });

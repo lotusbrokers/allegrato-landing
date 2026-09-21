@@ -6,6 +6,8 @@ import { landingSlugs } from '@/lib/landings';
 import { getLancamentosList, isListItemApresentavel } from '@/lib/lancamentos';
 import { agruparPorConstrutora, comCuradasSemLancamento } from '@/lib/construtoras-paginas';
 import { curadasSemLancamento } from '@/lib/construtoras-conteudo';
+import { POSTS, hrefDoArtigo } from '@/lib/blog-posts';
+import { publicados } from '@/lib/blog-agenda';
 
 /**
  * Sitemap dinâmico do portal.
@@ -89,6 +91,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...bairroSlugsIndexaveis().map((slug) => ({
       url: url(`/lotus-bairro/${slug}`),
       lastModified: agora,
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    })),
+    // Um endereço por artigo já publicado: o agendado entra no dia dele, como
+    // na listagem. lastModified é a data de publicação e não "agora" — o
+    // Google usa o campo para decidir o que rastrear de novo, e um sitemap que
+    // diz que tudo mudou a cada hora ensina o Google a ignorar o campo.
+    ...publicados(POSTS).map((post) => ({
+      url: url(hrefDoArtigo(post.id)),
+      lastModified: post.publicadoEm,
       changeFrequency: 'monthly' as const,
       priority: 0.6,
     })),

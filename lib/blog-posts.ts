@@ -43,6 +43,15 @@ export type Post = {
   body: BlocoArtigo[];
 };
 
+/**
+ * Endereço da página do artigo. Uma forma só para o blog, a home, o sitemap e
+ * o canonical — se cada um montasse a sua, bastaria uma divergir para o Google
+ * ver duas URLs para o mesmo texto.
+ */
+export function hrefDoArtigo(id: string): string {
+  return `/lotus-blog/${id}`;
+}
+
 // Exportado para a home consumir os destaques (LotusHome importa e mostra os
 // três primeiros). Antes a home mantinha uma lista própria de posts escrita à
 // mão, que envelheceu: títulos que não existiam mais no blog e nenhuma capa.
@@ -153,10 +162,12 @@ export const POSTS: Post[] = [
    * A ORDEM define o destaque da capa, e por isso o 24 vem primeiro: no dia
    * 28 ele assume a capa; ate la o filtro o remove e a capa fica com o 23.
    *
-   * ID legivel em vez do padrao antigo (p0, p00, p000...), que ganhava um
-   * zero a cada artigo novo e ja estava em cinco. O id nao aparece em URL
-   * nenhuma hoje, entao trocar aqui nao quebra link — e no dia em que cada
-   * artigo ganhar rota propria, ele ja serve de slug.
+   * O ID E A URL DO ARTIGO: /lotus-blog/<id>. Por isso legivel, em
+   * minusculas e com hifens — o teste recusa qualquer outra forma. E por
+   * isso tambem nao se troca depois de publicado: URL mudada e link
+   * quebrado para quem compartilhou e posicao perdida no Google. Os ids
+   * antigos (p0, p00, p000...) viraram slugs no dia em que a rota nasceu,
+   * enquanto ainda nao eram endereco de nada.
    *
    * `img: ''` cai no gradiente do template. Hoje os treze posts tem capa; a
    * regra vale para o proximo: salvar em /public/blog/<nome>.jpg e preencher.
@@ -289,7 +300,7 @@ export const POSTS: Post[] = [
     ],
   },
   {
-    id: 'p00000', cat: 'Região', date: 'Ago 2026', publicadoEm: '2026-08-01', read: '6 min', img: '/blog/bairro-caxambu.jpg', slot: 'blog-p00000', title: 'Bairro Caxambu: tradição, natureza e qualidade de vida em Jundiaí', excerpt: 'Conheça o bairro Caxambu, em Jundiaí, e descubra por que a região é uma das melhores opções para quem busca tranquilidade, qualidade de vida e valorização imobiliária.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'bairro-caxambu-jundiai', cat: 'Região', date: 'Ago 2026', publicadoEm: '2026-08-01', read: '6 min', img: '/blog/bairro-caxambu.jpg', slot: 'blog-p00000', title: 'Bairro Caxambu: tradição, natureza e qualidade de vida em Jundiaí', excerpt: 'Conheça o bairro Caxambu, em Jundiaí, e descubra por que a região é uma das melhores opções para quem busca tranquilidade, qualidade de vida e valorização imobiliária.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'Na região norte de Jundiaí, o Caxambu mantém perfil residencial e rural, herança da imigração italiana e da produção de uvas, com acesso fácil ao centro e às rodovias. Reúne casas, sobrados, chácaras, terrenos e condomínios fechados, e atrai quem busca espaço e tranquilidade sem perder praticidade.',
     body: [
       'O Caxambu é um dos bairros mais tradicionais de Jundiaí e se destaca por oferecer um estilo de vida que combina tranquilidade, contato com a natureza e excelente infraestrutura. Conhecido por sua forte influência da imigração italiana e pela produção de uvas e vinhos, o bairro preserva seu charme histórico ao mesmo tempo em que acompanha o crescimento imobiliário da cidade.',
@@ -335,7 +346,7 @@ export const POSTS: Post[] = [
     ],
   },
   {
-    id: 'p0000', cat: 'Guia', date: 'Ago 2026', publicadoEm: '2026-08-01', read: '8 min', img: '/blog/financiar-lancamento.jpg', slot: 'blog-p0000', title: 'Como financiar um lançamento imobiliário? Guia completo para comprar seu imóvel em Jundiaí', excerpt: 'Saiba como financiar um lançamento imobiliário, conheça as principais modalidades de crédito e descubra as melhores oportunidades para comprar imóveis em Jundiaí.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'como-financiar-lancamento-imobiliario', cat: 'Guia', date: 'Ago 2026', publicadoEm: '2026-08-01', read: '8 min', img: '/blog/financiar-lancamento.jpg', slot: 'blog-p0000', title: 'Como financiar um lançamento imobiliário? Guia completo para comprar seu imóvel em Jundiaí', excerpt: 'Saiba como financiar um lançamento imobiliário, conheça as principais modalidades de crédito e descubra as melhores oportunidades para comprar imóveis em Jundiaí.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'O financiamento de um lançamento acontece em duas fases: durante a obra você paga entrada e parcelas direto à construtora; depois da entrega, o saldo devedor é financiado no banco, que só então analisa crédito e renda. FGTS pode entrar na entrada ou na amortização, e a escolha entre SAC e Tabela Price muda o peso das primeiras parcelas.',
     body: [
       'Comprar um imóvel é uma das decisões financeiras mais importantes da vida. Quando se trata de um lançamento imobiliário, além da possibilidade de adquirir um imóvel novo e com excelente potencial de valorização, surgem diversas dúvidas sobre o processo de financiamento.',
@@ -436,7 +447,7 @@ export const POSTS: Post[] = [
     ],
   },
   {
-    id: 'p000', cat: 'Mercado', date: 'Ago 2026', publicadoEm: '2026-08-01', read: '8 min', img: '/blog/tendencias-lancamentos-jundiai.jpg', slot: 'blog-p000', title: 'Por que Jundiaí continua atraindo novos empreendimentos?', excerpt: 'Infraestrutura de lazer completa, plantas funcionais, sustentabilidade e tecnologia: as tendências que moldam os lançamentos imobiliários da cidade.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'por-que-jundiai-atrai-novos-empreendimentos', cat: 'Mercado', date: 'Ago 2026', publicadoEm: '2026-08-01', read: '8 min', img: '/blog/tendencias-lancamentos-jundiai.jpg', slot: 'blog-p000', title: 'Por que Jundiaí continua atraindo novos empreendimentos?', excerpt: 'Infraestrutura de lazer completa, plantas funcionais, sustentabilidade e tecnologia: as tendências que moldam os lançamentos imobiliários da cidade.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'Os lançamentos em Jundiaí seguem sete tendências claras: infraestrutura de lazer completa, plantas mais funcionais, soluções sustentáveis, tecnologia de segurança e gestão, valorização de bairros em expansão, foco em qualidade de vida e projetos desenhados para diferentes perfis de comprador, de jovens profissionais a investidores.',
     body: [
       'Jundiaí reúne características que favorecem o crescimento do setor imobiliário e mantêm a cidade entre os destinos mais procurados por famílias e investidores.',
@@ -518,7 +529,7 @@ export const POSTS: Post[] = [
     ],
   },
   {
-    id: 'p00', cat: 'Guia', date: 'Ago 2026', publicadoEm: '2026-08-01', read: '9 min', img: '/blog/imovel-na-planta.jpg', slot: 'blog-p00', title: 'Como comprar imóvel na planta com segurança? Guia completo para investir com tranquilidade em Jundiaí', excerpt: 'Saiba mais sobre como comprar imóvel na planta com segurança e descubra oportunidades, tendências e informações relevantes para quem busca imóveis em Jundiaí.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'comprar-imovel-na-planta-com-seguranca', cat: 'Guia', date: 'Ago 2026', publicadoEm: '2026-08-01', read: '9 min', img: '/blog/imovel-na-planta.jpg', slot: 'blog-p00', title: 'Como comprar imóvel na planta com segurança? Guia completo para investir com tranquilidade em Jundiaí', excerpt: 'Saiba mais sobre como comprar imóvel na planta com segurança e descubra oportunidades, tendências e informações relevantes para quem busca imóveis em Jundiaí.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'Comprar na planta compensa quando há preparo: pesquise a construtora, leia o memorial descritivo, confirme o registro da incorporação, avalie a localização e planeje o orçamento além do preço do imóvel, entrada, ITBI, registro e o financiamento do saldo após a entrega das chaves.',
     body: [
       'Comprar um imóvel na planta pode ser uma excelente oportunidade para quem deseja conquistar a casa própria ou investir em um patrimônio com alto potencial de valorização. Além de oferecer condições de pagamento mais flexíveis, os lançamentos imobiliários costumam reunir projetos modernos, infraestrutura completa e localização estratégica.',
@@ -609,7 +620,7 @@ export const POSTS: Post[] = [
     ],
   },
   {
-    id: 'p0', cat: 'Guia', date: 'Ago 2026', publicadoEm: '2026-08-01', read: '7 min', img: '/blog/melhores-bairros-jundiai.jpg', slot: 'blog-p0', title: 'Melhores bairros para morar em Jundiaí: guia completo para escolher o lugar ideal', excerpt: 'Jardim Ana Maria, Malota, Engordadouro, Bonfiglioli, Eloy Chaves, Medeiros e Vila Arens: o perfil de cada região e o que pesa na escolha.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'melhores-bairros-para-morar-em-jundiai', cat: 'Guia', date: 'Ago 2026', publicadoEm: '2026-08-01', read: '7 min', img: '/blog/melhores-bairros-jundiai.jpg', slot: 'blog-p0', title: 'Melhores bairros para morar em Jundiaí: guia completo para escolher o lugar ideal', excerpt: 'Jardim Ana Maria, Malota, Engordadouro, Bonfiglioli, Eloy Chaves, Medeiros e Vila Arens: o perfil de cada região e o que pesa na escolha.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'Sete bairros concentram a procura em Jundiaí: Jardim Ana Maria e Vila Arens pela praticidade perto do centro; Malota e Eloy Chaves pela tranquilidade e pela Serra do Japi; Engordadouro e Medeiros pelo ritmo de lançamentos e potencial de valorização; e o Jardim Bonfiglioli pelo equilíbrio entre os dois lados.',
     body: [
       'Jundiaí está entre as cidades mais desejadas do interior de São Paulo para quem busca qualidade de vida, segurança e valorização imobiliária. Sua localização estratégica entre São Paulo e Campinas, aliada à excelente infraestrutura urbana, faz com que a procura por imóveis em Jundiaí cresça ano após ano.',
@@ -672,7 +683,7 @@ export const POSTS: Post[] = [
     ],
   },
   {
-    id: 'p1', cat: 'Mercado', date: 'Jun 2026', publicadoEm: '2026-06-01', read: '7 min', img: '/forest-houses/a000.jpg', slot: 'blog-p1', title: 'Onde morar em Jundiaí em 2026: 5 bairros em ascensão', excerpt: 'A cidade cresce para além do centro. Veja os bairros que combinam infraestrutura, verde e valorização.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'onde-morar-em-jundiai-2026', cat: 'Mercado', date: 'Jun 2026', publicadoEm: '2026-06-01', read: '7 min', img: '/forest-houses/a000.jpg', slot: 'blog-p1', title: 'Onde morar em Jundiaí em 2026: 5 bairros em ascensão', excerpt: 'A cidade cresce para além do centro. Veja os bairros que combinam infraestrutura, verde e valorização.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'Eloy Chaves, Medeiros, Malota, Jardim do Lago e a região do Engordadouro combinam infraestrutura consolidada, áreas verdes e procura crescente e concentram boa parte das buscas por imóveis em Jundiaí em 2026.',
     body: [
       'Jundiaí sempre foi uma cidade de bairros fortes, cada um com identidade própria. Mas nos últimos anos, alguns deles passaram a concentrar a atenção de quem busca qualidade de vida sem abrir mão de estar perto de tudo.',
@@ -683,7 +694,7 @@ export const POSTS: Post[] = [
     ],
   },
   {
-    id: 'p2', cat: 'Guia', date: 'Jun 2026', publicadoEm: '2026-06-01', read: '6 min', img: '/blog/financiamento-2026.jpg', slot: 'blog-p2', title: 'Financiamento em 2026: o que muda e como se preparar', excerpt: 'Taxas, documentação e o passo a passo para chegar ao banco com aprovação quase garantida.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'financiamento-imobiliario-2026', cat: 'Guia', date: 'Jun 2026', publicadoEm: '2026-06-01', read: '6 min', img: '/blog/financiamento-2026.jpg', slot: 'blog-p2', title: 'Financiamento em 2026: o que muda e como se preparar', excerpt: 'Taxas, documentação e o passo a passo para chegar ao banco com aprovação quase garantida.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'Para financiar bem em 2026: organize a documentação de renda, cuide do score, compare bancos (as taxas variam mais do que parece) e faça a pré-aprovação antes de escolher o imóvel.',
     body: [
       'A pergunta mais comum de quem quer comprar o primeiro imóvel continua sendo a mesma: "será que o banco aprova?". A boa notícia é que a aprovação depende menos de sorte e mais de preparo.',
@@ -694,7 +705,7 @@ export const POSTS: Post[] = [
     ],
   },
   {
-    id: 'p3', cat: 'Região', date: 'Mai 2026', publicadoEm: '2026-05-01', read: '5 min', img: '/terrace-serra-do-japi/a000.jpg', slot: 'blog-p3', title: 'Serra do Japi: o que ter a serra por perto muda no seu dia', excerpt: 'Mais que paisagem: como a reserva influencia clima, lazer e valorização dos bairros vizinhos.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'serra-do-japi-morar-perto', cat: 'Região', date: 'Mai 2026', publicadoEm: '2026-05-01', read: '5 min', img: '/terrace-serra-do-japi/a000.jpg', slot: 'blog-p3', title: 'Serra do Japi: o que ter a serra por perto muda no seu dia', excerpt: 'Mais que paisagem: como a reserva influencia clima, lazer e valorização dos bairros vizinhos.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'A Serra do Japi é uma das maiores reservas de mata atlântica do interior paulista. Morar perto dela significa clima mais ameno, trilhas e lazer de fim de semana e bairros vizinhos historicamente mais valorizados.',
     body: [
       'Quem mora em Jundiaí fala da Serra do Japi com a naturalidade de quem fala de um vizinho querido. Mas o impacto dela no dia a dia vai muito além da vista bonita.',
@@ -704,7 +715,7 @@ export const POSTS: Post[] = [
     ],
   },
   {
-    id: 'p4', cat: 'Cidade', date: 'Mai 2026', publicadoEm: '2026-05-01', read: '4 min', img: '/gran-ville-santo-angelo/a000.jpg', slot: 'blog-p4', title: 'Itupeva em crescimento: por que a cidade atrai novas famílias', excerpt: 'Condomínios, indústria e a serra ao lado: o retrato de uma das cidades que mais crescem na região.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'itupeva-em-crescimento', cat: 'Cidade', date: 'Mai 2026', publicadoEm: '2026-05-01', read: '4 min', img: '/gran-ville-santo-angelo/a000.jpg', slot: 'blog-p4', title: 'Itupeva em crescimento: por que a cidade atrai novas famílias', excerpt: 'Condomínios, indústria e a serra ao lado: o retrato de uma das cidades que mais crescem na região.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'Itupeva cresce puxada por condomínios de casas, novos empregos e preço mais acessível que o de Jundiaí, mantendo acesso rápido à Anhanguera, perfil ideal para famílias que querem espaço.',
     body: [
       'Itupeva vive um momento raro: cresce em população, em empregos e em infraestrutura ao mesmo tempo, sem perder o jeito de cidade tranquila.',
@@ -714,7 +725,7 @@ export const POSTS: Post[] = [
     ],
   },
   {
-    id: 'p5', cat: 'Guia', date: 'Abr 2026', publicadoEm: '2026-04-01', read: '5 min', img: '/vistta-castanho/a000.jpg', slot: 'blog-p5', title: 'Vender um imóvel: os 5 erros que mais atrasam a venda', excerpt: 'Do preço errado à foto escura, o que segura um imóvel no mercado e como evitar.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'erros-que-atrasam-a-venda-de-imovel', cat: 'Guia', date: 'Abr 2026', publicadoEm: '2026-04-01', read: '5 min', img: '/vistta-castanho/a000.jpg', slot: 'blog-p5', title: 'Vender um imóvel: os 5 erros que mais atrasam a venda', excerpt: 'Do preço errado à foto escura, o que segura um imóvel no mercado e como evitar.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'Os erros que mais atrasam uma venda: preço fora do mercado, fotos ruins, anúncio genérico, visitas sem filtro e documentação desorganizada. Todos têm solução e ela começa pela avaliação correta.',
     body: [
       'Um imóvel que demora para vender quase nunca tem um problema, tem um conjunto de pequenos erros que se somam.',
@@ -725,7 +736,7 @@ export const POSTS: Post[] = [
     ],
   },
   {
-    id: 'p6', cat: 'Mercado', date: 'Abr 2026', publicadoEm: '2026-04-01', read: '6 min', img: '/vigore/a00.jpg', slot: 'blog-p6', title: 'Comprar na planta ou pronto: qual faz mais sentido pra você', excerpt: 'Preço, prazo, personalização e risco, a comparação honesta entre os dois caminhos.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'comprar-na-planta-ou-pronto', cat: 'Mercado', date: 'Abr 2026', publicadoEm: '2026-04-01', read: '6 min', img: '/vigore/a00.jpg', slot: 'blog-p6', title: 'Comprar na planta ou pronto: qual faz mais sentido pra você', excerpt: 'Preço, prazo, personalização e risco, a comparação honesta entre os dois caminhos.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'Na planta: melhor preço de entrada, pagamento diluído e valorização até a chave, mas exige esperar a obra. Pronto: mudança imediata e o que você vê é o que você leva, mas o preço já embute a valorização. A escolha depende do seu prazo e momento.',
     body: [
       'É uma das dúvidas mais comuns de quem chega até a gente: "compro na planta ou um imóvel pronto?". A resposta certa depende de uma pergunta anterior: quando você precisa morar?',

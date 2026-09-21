@@ -12,14 +12,14 @@ import { footerLegalLine } from '@/lib/site';
  *  - image-slot           -> <ImageSlot> (gradiente de fundo + <img> quando há src)
  *  - {{ expr }}           -> {expr}
  *
- * Estado do dc-runtime: { view:'index', artId:null, cat:'all', newsDone:false }.
+ * Do estado do dc-runtime ({ view, artId, cat, newsDone }) ficaram cat e
+ * newsDone. view e artId viraram rota: /lotus-blog/<id> (ver o componente).
  * renderVals() do fonte vira derivações diretas no corpo do componente.
  */
 
 import Link from 'next/link';
 import LotusHeader from './LotusHeader';
 import React, {
-  useEffect,
   useRef,
   useState,
   type CSSProperties,
@@ -143,7 +143,7 @@ const CATS = [
   { id: 'Região', label: 'Região' },
 ];
 
-import { POSTS, type Post } from '@/lib/blog-posts';
+import { POSTS, hrefDoArtigo, type Post } from '@/lib/blog-posts';
 
 /* Estilos de chip (strings literais do fonte). */
 const chipOn =
@@ -163,6 +163,16 @@ function LotusMark({ size }: { size: number }) {
 /* ------------------------------------------------------------------ */
 
 /**
+ * Desenha as duas telas do blog: o índice (/lotus-blog) e o artigo
+ * (/lotus-blog/<id>). Qual delas depende só de `artigo` — a rota do artigo o
+ * passa, o índice não.
+ *
+ * Até 21/09/2026 o artigo abria aqui dentro, trocando a tela por estado, sem
+ * mudar o endereço. Para o Google isso era uma página só: nenhum artigo tinha
+ * URL própria, título próprio ou descrição própria, e nenhum podia aparecer
+ * sozinho numa busca nem ser compartilhado por link. Agora cada artigo é uma
+ * página de verdade, e os cartões são links comuns.
+ *
  * `posts` chega pronto da rota, ja filtrado por data de publicacao.
  *
  * O filtro NAO roda aqui dentro de proposito: este e um componente de
@@ -173,17 +183,20 @@ function LotusMark({ size }: { size: number }) {
  *
  * O padrao POSTS existe para quem renderizar o componente solto (Storybook,
  * teste, pagina futura) nao receber uma tela vazia.
+ *
+ * Os dados estruturados (JSON-LD) saíram daqui: eram escritos por um efeito
+ * no navegador, então não existiam no HTML que o servidor entrega. Agora cada
+ * rota os escreve no servidor.
  */
 export default function LotusBlog({
   whatsapp = WHATSAPP_DEFAULT,
   posts = POSTS,
+  artigo,
 }: {
   whatsapp?: string;
   posts?: Post[];
+  artigo?: Post;
 } = {}) {
-  // state (espelha o `state` do dc-runtime)
-  const [view, setView] = useState<'index' | 'article'>('index');
-  const [artId, setArtId] = useState<string | null>(null);
   const [cat, setCat] = useState<string>('all');
   const [newsDone, setNewsDone] = useState<boolean>(false);
 
@@ -192,81 +205,29 @@ export default function LotusBlog({
   // waLink — lógica exata do script (sem ?text=).
   const waLink = 'https://wa.me/' + String(whatsapp ?? WHATSAPP_DEFAULT);
 
-  /* -------- componentDidMount: injeta JSON-LD dos posts em #blog-posts-jsonld -------- */
-  useEffect(() => {
-    try {
-      const months: Record<string, string> = { Jan: '01', Fev: '02', Mar: '03', Abr: '04', Mai: '05', Jun: '06', Jul: '07', Ago: '08', Set: '09', Out: '10', Nov: '11', Dez: '12' };
-      const iso = (d: string) => {
-        const p = d.split(' ');
-        return (p[1] || '2026') + '-' + (months[p[0]] || '01') + '-01';
-      };
-      const data = {
-        '@context': 'https://schema.org',
-        '@type': 'ItemList',
-        itemListElement: posts.map((p, i) => ({
-          '@type': 'ListItem',
-          position: i + 1,
-          item: {
-            '@type': 'BlogPosting',
-            headline: p.title,
-            description: p.tldr,
-            articleSection: p.cat,
-            datePublished: iso(p.date),
-            inLanguage: 'pt-BR',
-            author: { '@type': 'Organization', name: 'Lotus Brokers' },
-            publisher: { '@type': 'Organization', name: 'Lotus Brokers' },
-            articleBody: p.body.join(' '),
-          },
-        })),
-      };
-      const el = document.getElementById('blog-posts-jsonld');
-      if (el) el.textContent = JSON.stringify(data);
-    } catch (e) {}
-  }, []);
-
-  /* -------- ações (renderVals do fonte) -------- */
-  const openArt = (id: string) => {
-    setView('article');
-    setArtId(id);
-    window.scrollTo({ top: 0, behavior: 'auto' });
-  };
-  const backToIndex = () => {
-    setView('index');
-    window.scrollTo({ top: 0, behavior: 'auto' });
-  };
   const submitNews = (e: React.FormEvent) => {
     if (e && e.preventDefault) e.preventDefault();
     setNewsDone(true);
   };
 
-  // Derivados de estado (render context)
-  const isIndex = view === 'index';
-  const isArticle = view === 'article';
+  // Qual das duas telas
+  const art = artigo;
+  const isIndex = !art;
 
-  const featuredRaw = posts[0];
-  const featured = { ...featuredRaw, open: () => openArt(featuredRaw.id) };
-
-  const rest = posts.filter((p) => (cat === 'all' ? p.id !== featuredRaw.id : p.cat === cat));
+  const featured = posts[0];
+  const rest = posts.filter((p) => (cat === 'all' ? p.id !== featured.id : p.cat === cat));
   const cats = CATS.map((c) => ({
     label: c.label,
     select: () => setCat(c.id),
     style: cat === c.id ? chipOn : chipOff,
   }));
-  const postsView = rest.map((p) => ({ ...p, open: () => openArt(p.id) }));
 
-  const artRaw = posts.find((p) => p.id === artId) || posts[0];
-  const art = artRaw;
-  const related = posts.filter((p) => p.id !== artRaw.id)
-    .slice(0, 3)
-    .map((r) => ({ ...r, open: () => openArt(r.id) }));
+  const related = art ? posts.filter((p) => p.id !== art.id).slice(0, 3) : [];
 
   const newsNotDone = !newsDone;
 
   return (
     <div ref={rootRef}>
-      {/* JSON-LD preenchido pelo useEffect (equivale ao <script id="blog-posts-jsonld"> do helmet) */}
-      <script type="application/ld+json" id="blog-posts-jsonld" />
-
       {/* HEADER */}
       <LotusHeader active="blog" whatsapp={whatsapp} />
 
@@ -286,7 +247,8 @@ export default function LotusBlog({
           {/* destaque */}
           <section style={parseStyle('max-width:1200px;margin:0 auto;padding:48px 32px 0;')}>
             <Hoverable
-              onClick={featured.open}
+              as="a"
+              href={hrefDoArtigo(featured.id)}
               baseStyle={parseStyle('display:grid;grid-template-columns:1.3fr 1fr;gap:0;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 24px 60px -38px rgba(21,36,28,.5);cursor:pointer;transition:transform .3s ease;')}
               hoverStyle={parseStyle('transform:translateY(-3px)')}
             >
@@ -311,10 +273,11 @@ export default function LotusBlog({
               ))}
             </div>
             <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;')}>
-              {postsView.map((p, i) => (
+              {rest.map((p) => (
                 <Hoverable
-                  key={i}
-                  onClick={p.open}
+                  key={p.id}
+                  as="a"
+                  href={hrefDoArtigo(p.id)}
                   baseStyle={parseStyle('display:flex;flex-direction:column;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 16px 40px -32px rgba(21,36,28,.34);cursor:pointer;transition:transform .3s ease, box-shadow .3s ease;')}
                   hoverStyle={parseStyle('transform:translateY(-4px);box-shadow:0 28px 56px -34px rgba(21,36,28,.46)')}
                 >
@@ -359,13 +322,13 @@ export default function LotusBlog({
       )}
 
       {/* ============ ARTIGO ============ */}
-      {isArticle && (
+      {art && (
         <div>
           <div style={parseStyle('max-width:820px;margin:0 auto;padding:18px 32px 0;font-size:13px;color:#8aa593;')}>
-            <Hoverable as="button" onClick={backToIndex} baseStyle={parseStyle('background:none;border:none;color:#3f6249;font-size:13px;cursor:pointer;padding:0;')} hoverStyle={parseStyle('color:#b18a4a')}>Blog</Hoverable> › <span style={parseStyle('color:#15241c;')}>{art.title}</span>
+            <Hoverable as="a" href="/lotus-blog" baseStyle={parseStyle('color:#3f6249;font-size:13px;')} hoverStyle={parseStyle('color:#b18a4a')}>Blog</Hoverable> › <span style={parseStyle('color:#15241c;')}>{art.title}</span>
           </div>
           <article style={parseStyle('max-width:820px;margin:0 auto;padding:28px 32px 80px;')}>
-            <div style={parseStyle('font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#b18a4a;margin-bottom:14px;')}>{art.cat} · {art.date} · {art.read}</div>
+            <div style={parseStyle('font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#b18a4a;margin-bottom:14px;')}>{art.cat} · <time dateTime={art.publicadoEm}>{art.date}</time> · {art.read}</div>
             <h1 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(30px,4.4vw,52px);line-height:1.05;letter-spacing:-.02em;color:#15241c;margin:0 0 20px;")}>{art.title}</h1>
             <div style={parseStyle('display:flex;align-items:center;gap:12px;margin-bottom:30px;')}>
               <div style={parseStyle('width:42px;height:42px;border-radius:50%;background:#1d3a2c;overflow:hidden;position:relative;flex-shrink:0;')}>
@@ -418,10 +381,11 @@ export default function LotusBlog({
             <div style={parseStyle('max-width:1100px;margin:0 auto;')}>
               <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(22px,2.6vw,30px);color:#15241c;margin:0 0 26px;")}>Continue lendo</h2>
               <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;')}>
-                {related.map((r, i) => (
+                {related.map((r) => (
                   <Hoverable
-                    key={i}
-                    onClick={r.open}
+                    key={r.id}
+                    as="a"
+                    href={hrefDoArtigo(r.id)}
                     baseStyle={parseStyle('display:flex;gap:16px;align-items:center;background:#f7f2e8;border-radius:14px;padding:16px;cursor:pointer;transition:transform .25s ease;')}
                     hoverStyle={parseStyle('transform:translateY(-2px)')}
                   >
@@ -436,7 +400,7 @@ export default function LotusBlog({
                 ))}
               </div>
               <div style={parseStyle('margin-top:30px;text-align:center;')}>
-                <Hoverable as="button" onClick={backToIndex} baseStyle={parseStyle('background:none;border:1px solid rgba(21,36,28,.2);color:#1d3a2c;font-weight:600;font-size:14.5px;padding:12px 26px;border-radius:40px;cursor:pointer;')} hoverStyle={parseStyle('background:#f7f2e8')}>← Ver todos os artigos</Hoverable>
+                <Hoverable as="a" href="/lotus-blog" baseStyle={parseStyle('display:inline-block;border:1px solid rgba(21,36,28,.2);color:#1d3a2c;font-weight:600;font-size:14.5px;padding:12px 26px;border-radius:40px;')} hoverStyle={parseStyle('background:#f7f2e8')}>← Ver todos os artigos</Hoverable>
               </div>
             </div>
           </section>

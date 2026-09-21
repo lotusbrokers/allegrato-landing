@@ -24,7 +24,7 @@ import React, {
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { developmentsFallback, type DevelopmentCard } from '@/lib/developments';
-import { POSTS, type Post } from '@/lib/blog-posts';
+import { POSTS, hrefDoArtigo, type Post } from '@/lib/blog-posts';
 import { SQUADS } from '@/lib/squads';
 import MobileMenu from './MobileMenu';
 
@@ -949,8 +949,8 @@ export default function LotusHome({
           </div>
           <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:26px;margin-bottom:64px;')}>
             {/* hint-placeholder-count: 3 */}
-            {artigos.map((p, i) => (
-              <Hoverable key={i} as="a" data-reveal="" baseStyle={parseStyle('cursor:default;display:flex;flex-direction:column;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 18px 44px -30px rgba(21,36,28,.32);transition:transform .35s ease, box-shadow .35s ease;')} hoverStyle={parseStyle('transform:translateY(-5px);box-shadow:0 30px 60px -32px rgba(21,36,28,.42)')}>
+            {artigos.map((p) => (
+              <Hoverable key={p.id} as="a" href={hrefDoArtigo(p.id)} data-reveal="" baseStyle={parseStyle('cursor:pointer;display:flex;flex-direction:column;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 18px 44px -30px rgba(21,36,28,.32);transition:transform .35s ease, box-shadow .35s ease;')} hoverStyle={parseStyle('transform:translateY(-5px);box-shadow:0 30px 60px -32px rgba(21,36,28,.42)')}>
                 <div style={parseStyle('position:relative;aspect-ratio:16/10;background:#3f6249;')}>
                   <ImageSlot id={p.slot} src={p.img} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={p.title} />
                   <span style={parseStyle('position:absolute;top:14px;left:14px;background:rgba(247,242,232,.94);color:#1d3a2c;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 11px;border-radius:30px;')}>{p.cat}</span>
