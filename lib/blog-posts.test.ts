@@ -1,5 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import { POSTS } from './blog-posts.ts';
 
 /**
@@ -41,5 +43,19 @@ test('a categoria é uma das que o filtro do blog oferece', () => {
   const validas = new Set(['Cidade', 'Mercado', 'Guia', 'Região']);
   for (const p of POSTS) {
     assert.ok(validas.has(p.cat), `${p.id} usa categoria "${p.cat}", que não tem chip no blog`);
+  }
+});
+
+// Capa apontando para arquivo que não existe não quebra nada na tela: o card
+// mostra o gradiente de fundo e segue a vida. Foi assim que o blog já ficou
+// sem fotos uma vez sem ninguém perceber — a imagem nunca chegou a public/.
+// Post sem capa (`img: ''`) continua valendo; o que não vale é prometer uma.
+test('toda capa declarada existe em public/', () => {
+  for (const p of POSTS) {
+    if (!p.img) continue;
+    assert.ok(
+      existsSync(join(process.cwd(), 'public', p.img)),
+      `${p.id} aponta a capa para ${p.img}, que não existe em public/`
+    );
   }
 });

@@ -48,6 +48,102 @@ export type Post = {
 // mão, que envelheceu: títulos que não existiam mais no blog e nenhuma capa.
 export const POSTS: Post[] = [
   /* ------------------------------------------------------------------
+   * Enviado pela Lotus em 21/09/2026, para sair no mesmo dia.
+   *
+   * Primeiro da lista, e por isso o novo destaque da capa do blog.
+   *
+   * Texto da Lotus, com os mesmos ajustes de forma do lote de agosto:
+   * "Lotus Brokers" no lugar de "Lótus Brokers", que é como a marca aparece
+   * no resto do site, e os itens da lista começando em maiúscula e sem o
+   * ponto e vírgula, como nos demais artigos. A meta description enviada
+   * entrou como `excerpt`, palavra por palavra.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'jundiai-boa-cidade-para-investidores', cat: 'Mercado', date: 'Set 2026', publicadoEm: '2026-09-21', read: '7 min', img: '/blog/jundiai-investidores.jpg', slot: 'blog-jundiai-investidores', title: 'Jundiaí é uma boa cidade para investidores?', excerpt: 'Jundiaí é uma boa cidade para investidores? Descubra os principais fatores que tornam o mercado imobiliário de Jundiaí uma opção para quem busca valorização e oportunidades.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'Jundiaí reúne fundamentos que chamam a atenção de quem investe em imóveis: fica entre São Paulo e Campinas, com acesso pela Anhanguera e pela Bandeirantes, e tem estrutura própria de serviços, comércio, educação, saúde e lazer. Mas a valorização não é garantida e varia conforme o imóvel e a região. Este guia mostra os tipos de imóvel que costumam entrar na conta e os sete pontos para analisar antes de investir.',
+    body: [
+      'Para quem está avaliando onde investir em imóveis no interior de São Paulo, uma pergunta aparece com frequência: Jundiaí é uma boa cidade para investidores?',
+      'A resposta depende do perfil do investidor, do tipo de imóvel e dos objetivos do investimento. Porém, Jundiaí reúne características importantes para quem procura um mercado imobiliário com boa infraestrutura, localização estratégica e demanda por imóveis residenciais e comerciais.',
+      'Localizada entre São Paulo e Campinas, a cidade combina acesso a grandes centros urbanos com uma estrutura própria de serviços, comércio, educação, saúde e lazer. Essa combinação contribui para manter Jundiaí no radar de pessoas que buscam tanto qualidade de vida quanto oportunidades no mercado imobiliário.',
+      'Para entender melhor esse cenário, é importante analisar não apenas os preços dos imóveis, mas também fatores como localização, demanda, infraestrutura, perfil dos moradores e perspectivas de valorização.',
+      { titulo: 'Por que Jundiaí chama a atenção dos investidores?' },
+      'Um dos principais diferenciais de Jundiaí é sua localização estratégica.',
+      'A cidade está próxima de São Paulo e Campinas e possui acesso facilitado por importantes rodovias, como a Anhanguera e a Bandeirantes. Essa conectividade favorece a mobilidade de moradores e também fortalece a atividade econômica da região.',
+      'Na prática, isso amplia o interesse de pessoas que trabalham em grandes centros, mas procuram morar em uma cidade com características diferentes da capital.',
+      'Além da localização, Jundiaí possui uma economia diversificada e uma ampla oferta de serviços. O município conta com hospitais, escolas, universidades, centros comerciais, supermercados, restaurantes, áreas verdes e diferentes opções de lazer.',
+      'Para o investidor imobiliário, esses fatores são relevantes porque ajudam a sustentar a procura por imóveis em diferentes regiões da cidade.',
+      { titulo: 'Infraestrutura e qualidade de vida' },
+      'Investir em imóveis significa, em grande parte, entender o comportamento das pessoas que podem comprar ou alugar aquele imóvel no futuro.',
+      'Nesse aspecto, Jundiaí apresenta um perfil interessante.',
+      'A cidade oferece uma estrutura urbana desenvolvida, com bairros residenciais consolidados e regiões que passaram por expansão e transformação urbana ao longo dos anos.',
+      'Entre os fatores que influenciam a procura por imóveis estão:',
+      { itens: ['Facilidade de acesso a outras cidades', 'Oferta de comércio e serviços', 'Infraestrutura de saúde', 'Instituições de ensino', 'Opções de lazer e gastronomia', 'Áreas verdes e espaços para atividades ao ar livre', 'Variedade de bairros e padrões imobiliários'] },
+      'Essa diversidade permite encontrar oportunidades para diferentes estratégias, desde imóveis voltados para moradia até propriedades com potencial para locação.',
+      { titulo: 'Localização pode fazer diferença no investimento' },
+      'Dentro de Jundiaí, a localização é um dos pontos que merece maior atenção.',
+      'Dois imóveis com características semelhantes podem apresentar comportamentos diferentes de preço, liquidez e procura simplesmente por estarem em regiões distintas.',
+      'Por isso, quem pretende investir deve observar fatores como proximidade de avenidas importantes, acesso às rodovias, comércio, escolas, hospitais, transporte, condomínios e outros serviços.',
+      'Regiões consolidadas podem apresentar características diferentes de áreas em expansão. Da mesma forma, apartamentos compactos podem atender a um público diferente daquele que procura casas maiores ou imóveis de alto padrão.',
+      'Por isso, não existe uma única estratégia de investimento imobiliário que funcione para todos.',
+      { titulo: 'Existe potencial de valorização dos imóveis em Jundiaí?' },
+      'A valorização imobiliária não é garantida e pode variar significativamente de acordo com o imóvel, localização, momento de compra e condições econômicas.',
+      'Ainda assim, alguns fundamentos ajudam a explicar por que Jundiaí desperta interesse de investidores.',
+      'A proximidade com importantes polos econômicos, a infraestrutura urbana, a oferta de serviços e a procura por moradia são fatores que podem contribuir para a atratividade de determinadas regiões.',
+      'Além disso, mudanças na infraestrutura e o desenvolvimento de novos empreendimentos podem modificar o perfil de determinados bairros ao longo do tempo.',
+      'Por isso, ao analisar um imóvel para investimento, é importante olhar além do preço anunciado. Questões como demanda na região, padrão construtivo, condomínio, facilidade de revenda, potencial de locação e histórico de preços também devem fazer parte da análise.',
+      { titulo: 'Comprar imóvel para alugar em Jundiaí pode ser uma estratégia?' },
+      'Para alguns investidores, o objetivo não é apenas comprar um imóvel e esperar sua valorização. A estratégia pode envolver também a geração de renda por meio de aluguel.',
+      'Nesse caso, o perfil do imóvel e do público-alvo passa a ter ainda mais importância.',
+      'Apartamentos próximos a centros comerciais, regiões empresariais, instituições de ensino e vias de acesso, por exemplo, podem atender a públicos específicos que priorizam praticidade e mobilidade.',
+      'Já imóveis maiores, casas e propriedades de padrão elevado podem atender famílias que procuram mais espaço e conforto.',
+      'O ponto principal é identificar quem é o potencial locatário antes de escolher o imóvel.',
+      { titulo: 'Quais tipos de imóveis podem interessar aos investidores?' },
+      'Jundiaí possui um mercado diversificado, o que permite considerar diferentes estratégias.',
+      'Entre as opções que podem ser avaliadas estão:',
+      { titulo: 'Apartamentos', nivel: 3 },
+      'Podem atender tanto compradores que buscam o primeiro imóvel quanto pessoas interessadas em praticidade e localização.',
+      'Dependendo da região e do padrão, também podem ser considerados para locação.',
+      { titulo: 'Casas em condomínios', nivel: 3 },
+      'Podem atrair famílias que procuram segurança, espaço, lazer e qualidade de vida.',
+      'O segmento também pode apresentar oportunidades para investidores interessados em imóveis de maior padrão.',
+      { titulo: 'Imóveis comerciais', nivel: 3 },
+      'Salas, lojas e outros imóveis comerciais podem fazer sentido para investidores que procuram diversificar seu patrimônio e explorar a demanda empresarial de determinadas regiões.',
+      { titulo: 'Imóveis de alto padrão', nivel: 3 },
+      'Jundiaí também possui regiões com empreendimentos voltados a um público de maior poder aquisitivo.',
+      'Nesse segmento, características como localização, projeto, segurança, infraestrutura do condomínio e padrão construtivo ganham ainda mais importância.',
+      { titulo: 'O que analisar antes de investir em Jundiaí?' },
+      'Antes de tomar uma decisão, vale estruturar a análise em alguns pontos.',
+      { titulo: '1. Defina seu objetivo', nivel: 3 },
+      'Você busca renda mensal, valorização patrimonial, diversificação ou uma combinação desses fatores?',
+      { titulo: '2. Escolha o público-alvo', nivel: 3 },
+      'Entender quem poderá comprar ou alugar o imóvel ajuda a definir localização, metragem e padrão.',
+      { titulo: '3. Analise a localização', nivel: 3 },
+      'Observe acesso, comércio, serviços, transporte, escolas, hospitais e características do entorno.',
+      { titulo: '4. Compare imóveis semelhantes', nivel: 3 },
+      'Não considere apenas o preço total. Compare preço por metro quadrado, condomínio, IPTU, estado de conservação e características do empreendimento.',
+      { titulo: '5. Avalie a liquidez', nivel: 3 },
+      'Um imóvel pode apresentar um bom preço, mas isso não significa necessariamente que será fácil vendê-lo ou alugá-lo.',
+      { titulo: '6. Considere os custos', nivel: 3 },
+      'Além do valor de compra, existem despesas como documentação, impostos, condomínio, manutenção e eventuais reformas.',
+      { titulo: '7. Conte com orientação especializada', nivel: 3 },
+      'O conhecimento de profissionais que acompanham o mercado local pode ajudar a identificar diferenças entre bairros, empreendimentos e oportunidades.',
+      { titulo: 'Jundiaí ou São Paulo: por que investidores também olham para o interior?' },
+      'A proximidade com a capital é um dos elementos que tornam Jundiaí particularmente interessante para quem deseja investir fora de São Paulo sem ficar distante dos grandes centros.',
+      'A cidade permite analisar oportunidades em um mercado com características próprias, mas conectado a uma das regiões economicamente mais relevantes do país.',
+      'Para determinados compradores, isso também representa uma alternativa para morar com mais espaço e qualidade de vida, mantendo acesso relativamente fácil à capital e a outros municípios importantes.',
+      'Esse movimento pode gerar demanda tanto para compra quanto para locação, dependendo das condições do mercado e das características de cada região.',
+      { titulo: 'Então, Jundiaí é uma boa cidade para investidores?' },
+      'Jundiaí apresenta diversos fatores que podem torná-la relevante para quem busca oportunidades no mercado imobiliário, mas a escolha do imóvel precisa ser feita de acordo com o objetivo e o perfil de cada investidor.',
+      'Localização, infraestrutura, demanda, padrão do imóvel, potencial de locação, liquidez e preço são alguns dos elementos que devem ser analisados antes da compra.',
+      'Mais importante do que simplesmente procurar "o imóvel mais barato" é encontrar uma propriedade que faça sentido dentro da estratégia de investimento.',
+      'E é justamente nesse processo que uma imobiliária com conhecimento do mercado local pode fazer diferença.',
+      { titulo: 'Encontre oportunidades imobiliárias em Jundiaí com a Lotus Brokers' },
+      'Se você está pesquisando imóveis em Jundiaí para investir, morar ou gerar renda, a Lotus Brokers pode ajudar a encontrar opções alinhadas aos seus objetivos.',
+      'Nossa equipe pode auxiliar na análise de diferentes regiões, tipos de imóveis e oportunidades disponíveis no mercado.',
+      'Quer descobrir quais imóveis em Jundiaí fazem mais sentido para o seu perfil de investimento? Entre em contato com a Lotus Brokers e converse com um especialista.',
+    ],
+  },
+  /* ------------------------------------------------------------------
    * Lote enviado pela Lotus em 27/08/2026 (documento "SEO - Blog").
    *
    * Vem com data marcada por artigo, e por isso `publicadoEm`: o 24 fica
