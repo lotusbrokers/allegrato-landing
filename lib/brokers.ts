@@ -36,7 +36,10 @@ type BrokerRow = {
  */
 // Existem no Supabase, mas não devem aparecer no site.
 // No banco o Samir está cadastrado como "Samir Said" (não "Augusto").
-const OCULTOS = new Set(['reginaldo barbosa faleiros', 'samir said']);
+// Alex Xavier da Silva saiu do site em 22/09/2026, a pedido da Lotus. Enquanto
+// o cadastro dele existir no dashboard, é esta linha que o mantém fora; tirando
+// de lá, apague-a — a foto e a bio dele continuam em LotusCorretores.
+const OCULTOS = new Set(['reginaldo barbosa faleiros', 'samir said', 'alex xavier da silva']);
 
 // Vazio: Lara, Samir e Mariana já foram cadastrados no dashboard, então o banco
 // é a fonte deles. Mirleine também saiu do banco, e o OCULTOS dela foi removido

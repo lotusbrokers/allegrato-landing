@@ -424,6 +424,16 @@ const CONTEUDO_REAL: Record<string, { bio?: BlocoBio[]; foto?: string }> = {
       'Escolhi a profissão de corretora de imóveis porque acredito que um imóvel representa muito mais do que um investimento: é o lugar onde sonhos, histórias e famílias ganham um lar. Meu propósito é ajudar cada cliente a encontrar esse lugar especial, seja na conquista do primeiro imóvel ou na construção do seu patrimônio, sempre com dedicação, transparência e cuidado.',
     ],
   },
+  'gisele alves': {
+    foto: '/corretores/gisele-alves.webp',
+    bio: [
+      'Sou formada em Administração de Empresas, tenho conhecimentos em logística e construí minha experiência profissional na área de vendas, desenvolvendo ao longo dessa trajetória habilidades de organização, relacionamento e visão comercial.',
+      'Há mais de um ano, faço parte do mercado imobiliário, área na qual encontrei uma oportunidade de unir minha experiência com vendas ao contato próximo com pessoas e à realização de projetos importantes.',
+      'Minha formação em Administração e minha experiência comercial contribuem para que eu tenha uma atuação organizada, atenta e comprometida, buscando entender as necessidades de cada cliente e oferecer um atendimento personalizado.',
+      'Além da minha vida profissional, tenho dois papéis que tornam minha história ainda mais especial: sou mãe de duas filhas e avó de uma menina. A família é uma parte essencial da minha vida e também um dos valores que levo para a forma como me relaciono com as pessoas.',
+      'Hoje, no mercado imobiliário, meu propósito é construir relações de confiança e acompanhar meus clientes com dedicação em cada etapa, ajudando a transformar planos em novas conquistas.',
+    ],
+  },
   // No banco o nome tem dois espaços entre "Alexandra" e "Niero"; normalizarNome
   // colapsa isso, então a chave fica com espaço simples.
   'alexandra niero': {
