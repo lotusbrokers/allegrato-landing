@@ -660,12 +660,16 @@ export default function LotusImovel({
       </div>
 
       {/* LIGHTBOX */}
+      {/* Os três controles levam z-index porque vêm antes da foto no HTML: sem
+          ele, a foto (86vw no celular) fica por cima e engole o toque, que foi
+          como avançar a foto deixou de funcionar no celular. O fundo escuro com
+          borda clara é para o botão se ler também sobre uma foto clara. */}
       {lightboxOpen && (
         <>
           <div style={parseStyle('position:fixed;inset:0;z-index:100;background:rgba(10,18,14,.94);display:flex;align-items:center;justify-content:center;')}>
-            <button onClick={closeLightbox} aria-label="Fechar" style={parseStyle('position:absolute;top:22px;right:24px;width:44px;height:44px;border-radius:50%;background:rgba(247,242,232,.14);border:none;color:#f7f2e8;font-size:24px;cursor:pointer;')}>✕</button>
-            <button onClick={prevPhoto} aria-label="Anterior" style={parseStyle('position:absolute;left:24px;top:50%;transform:translateY(-50%);width:50px;height:50px;border-radius:50%;background:rgba(247,242,232,.14);border:none;color:#f7f2e8;font-size:26px;cursor:pointer;')}>‹</button>
-            <button onClick={nextPhoto} aria-label="Próxima" style={parseStyle('position:absolute;right:24px;top:50%;transform:translateY(-50%);width:50px;height:50px;border-radius:50%;background:rgba(247,242,232,.14);border:none;color:#f7f2e8;font-size:26px;cursor:pointer;')}>›</button>
+            <button onClick={closeLightbox} aria-label="Fechar" style={parseStyle('position:absolute;top:22px;right:24px;z-index:2;width:44px;height:44px;border-radius:50%;background:rgba(10,18,14,.62);border:1px solid rgba(247,242,232,.45);color:#f7f2e8;font-size:24px;cursor:pointer;')}>✕</button>
+            <button onClick={prevPhoto} aria-label="Anterior" style={parseStyle('position:absolute;left:14px;top:50%;transform:translateY(-50%);z-index:2;width:50px;height:50px;border-radius:50%;background:rgba(10,18,14,.62);border:1px solid rgba(247,242,232,.45);color:#f7f2e8;font-size:26px;line-height:1;cursor:pointer;')}>‹</button>
+            <button onClick={nextPhoto} aria-label="Próxima" style={parseStyle('position:absolute;right:14px;top:50%;transform:translateY(-50%);z-index:2;width:50px;height:50px;border-radius:50%;background:rgba(10,18,14,.62);border:1px solid rgba(247,242,232,.45);color:#f7f2e8;font-size:26px;line-height:1;cursor:pointer;')}>›</button>
             <div style={parseStyle('width:min(86vw,1100px);aspect-ratio:3/2;position:relative;border-radius:12px;overflow:hidden;')}>
               {photosView.map((p, i2) => (
                 <div key={i2} style={parseStyle(p.style)}><ImageSlot id={p.lbId} src={p.src} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={p.label} /></div>
