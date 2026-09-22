@@ -424,6 +424,18 @@ const CONTEUDO_REAL: Record<string, { bio?: BlocoBio[]; foto?: string }> = {
       'Escolhi a profissão de corretora de imóveis porque acredito que um imóvel representa muito mais do que um investimento: é o lugar onde sonhos, histórias e famílias ganham um lar. Meu propósito é ajudar cada cliente a encontrar esse lugar especial, seja na conquista do primeiro imóvel ou na construção do seu patrimônio, sempre com dedicação, transparência e cuidado.',
     ],
   },
+  // No banco o nome tem dois espaços entre "Alexandra" e "Niero"; normalizarNome
+  // colapsa isso, então a chave fica com espaço simples.
+  'alexandra niero': {
+    foto: '/corretores/alexandra-niero.webp',
+    bio: [
+      'Sou Alexandra Niero, corretora de imóveis, e encontrei no mercado imobiliário uma profissão que reúne tudo aquilo em que acredito: relacionamento, estratégia, confiança e realização.',
+      'Sou também advogada, mãe e bailarina — experiências que moldaram a profissional que sou hoje. Da advocacia, trago a segurança nas negociações e o olhar atento aos detalhes. Da maternidade, o cuidado e a sensibilidade. Do ballet, a disciplina, a constância e a determinação.',
+      'Como corretora, meu propósito é oferecer muito mais do que a intermediação de uma compra ou venda. Quero que cada cliente se sinta seguro, bem orientado e verdadeiramente representado em uma das decisões mais importantes da vida.',
+      'Acredito em um atendimento próximo, transparente e estratégico, construído com confiança e compromisso do início ao fim.',
+      'Hoje, na Lotus, inicio um novo ciclo com ainda mais propósito e a certeza de que imóveis conectam muito mais do que pessoas e lugares: conectam histórias, planos e novos começos. 🪷',
+    ],
+  },
   // Ainda não existe no Supabase: entra pela lista EXTRAS de lib/brokers.ts.
   'samir augusto': {
     foto: '/corretores/samir-augusto.jpg',
