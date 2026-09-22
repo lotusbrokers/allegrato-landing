@@ -424,6 +424,18 @@ const CONTEUDO_REAL: Record<string, { bio?: BlocoBio[]; foto?: string }> = {
       'Escolhi a profissão de corretora de imóveis porque acredito que um imóvel representa muito mais do que um investimento: é o lugar onde sonhos, histórias e famílias ganham um lar. Meu propósito é ajudar cada cliente a encontrar esse lugar especial, seja na conquista do primeiro imóvel ou na construção do seu patrimônio, sempre com dedicação, transparência e cuidado.',
     ],
   },
+  // No banco o nome tem dois espaços entre "Marcos" e "Lafratta"; normalizarNome
+  // colapsa isso, então a chave fica com espaço simples.
+  'marcos lafratta': {
+    foto: '/corretores/marcos-lafratta.webp',
+    bio: [
+      'Minha trajetória profissional sempre esteve ligada a negócios, relacionamento e análise, e encontrei no mercado imobiliário a oportunidade de reunir essas experiências para ajudar pessoas a tomarem decisões mais seguras na compra, venda e investimento em imóveis.',
+      'Como Corretor de Imóveis, atuo em Jundiaí e região, com atenção especial a lançamentos imobiliários e oportunidades nos segmentos residencial, corporativo e industrial.',
+      'Meu jeito de trabalhar começa por entender o que cada cliente realmente procura. Em vez de simplesmente apresentar imóveis, busco compreender objetivos, momento de vida, localização, orçamento e expectativas para então selecionar oportunidades que façam sentido. Tudo com transparência, informação de mercado e acompanhamento durante cada etapa da negociação.',
+      'Acredito que um bom atendimento imobiliário não deve ser baseado em pressão, mas em confiança e informação. Seja para encontrar um novo imóvel, investir ou vender uma propriedade, meu objetivo é tornar a decisão mais clara, organizada e segura.',
+      'Se você está procurando uma oportunidade em Jundiaí e região, fale comigo. Vamos conversar sobre o que você busca e encontrar juntos o imóvel que faça sentido para o seu momento.',
+    ],
+  },
   'gisele alves': {
     foto: '/corretores/gisele-alves.webp',
     bio: [
