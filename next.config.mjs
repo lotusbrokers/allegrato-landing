@@ -48,6 +48,9 @@ const nextConfig = {
       { source: '/gioviale', destination: '/gioviale/index.html' },
       { source: '/lago-samambaia', destination: '/lago-samambaia/index.html' },
       { source: '/villaggio-engordadouro', destination: '/villaggio-engordadouro/index.html' },
+      { source: '/reserva-di-medeiros', destination: '/reserva-di-medeiros/index.html' },
+      { source: '/edificio-trend', destination: '/edificio-trend/index.html' },
+      { source: '/auten-serrah', destination: '/auten-serrah/index.html' },
     ];
   },
 };

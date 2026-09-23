@@ -39,7 +39,7 @@ export function isLandingDir(appDir: string, name: string): boolean {
  * enxerga — daí a lista explícita. Ao converter uma para componente React,
  * remover o slug daqui e criar app/<slug>/.
  */
-export const LANDINGS_HTML = ['altissimi', 'oasis', 'vila-triunfo', 'reserva-castanheira', 'santorini', 'epic-jundiai', 'mistral-jundiai', 'gioviale', 'lago-samambaia', 'villaggio-engordadouro'] as const;
+export const LANDINGS_HTML = ['altissimi', 'oasis', 'vila-triunfo', 'reserva-castanheira', 'santorini', 'epic-jundiai', 'mistral-jundiai', 'gioviale', 'lago-samambaia', 'villaggio-engordadouro', 'reserva-di-medeiros', 'edificio-trend', 'auten-serrah'] as const;
 
 let cache: Set<string> | null = null;
 
@@ -99,8 +99,8 @@ export function slugParaLanding(landingSlug: string | null | undefined, nome: st
 /**
  * Nomes do dash que não geram o slug da landing correspondente.
  *
- * O vínculo normal sai do nome, e funciona para quase todos. Estes três não
- * batem por diferença de grafia, e o custo é alto: sem landing, o filtro
+ * O vínculo normal sai do nome, e funciona para quase todos. Estes quatro
+ * não batem por diferença de grafia, e o custo é alto: sem landing, o filtro
  * `temPaginaPropria` descarta o registro do banco, a entrada curada de
  * lib/developments.ts ocupa o lugar dele — e como ela traz a construtora
  * genérica, o empreendimento some da página da construtora de verdade.
@@ -111,6 +111,8 @@ export function slugParaLanding(landingSlug: string | null | undefined, nome: st
  *                              Custa um lançamento da Tebas.
  *   "Villagio Engordadouro"  → o material da Applausi escreve "Villaggio", com
  *                              dois G; a landing é /villaggio-engordadouro.
+ *   "Serrah"                 → o material da Auten chama de "Auten Serrah", e
+ *                              é assim que a landing se apresenta.
  *
  * A correção definitiva é no dash, e existe campo próprio para ela: preencher
  * `landing_slug` (migration 0004) resolve sem tocar em código, e o valor
@@ -120,4 +122,5 @@ const LANDING_POR_NOME: Record<string, string> = {
   'vivart-grand-alamedas': 'vivarte',
   'authoria-by-tebas': 'authoria',
   'villagio-engordadouro': 'villaggio-engordadouro',
+  serrah: 'auten-serrah',
 };
