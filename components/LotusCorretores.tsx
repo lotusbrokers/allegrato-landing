@@ -207,18 +207,20 @@ type Broker = {
   photoUrl?: string | null;
 };
 
-// Dados demo — usados só quando a página é renderizada sem brokers do banco
-// (fallback de compat). Em produção os corretores vêm de getBrokers().
-const BROKERS_FALLBACK: Broker[] = [
-  { id: 'erick', name: 'Erick Santos', first: 'Erick', squad: 'Alto Padrão', area: 'Jundiaí', city: 'Jundiaí', creci: 'CRECI 000000-F', active: 12, founder: true, slot: 'c-erick' },
-  { id: 'marina', name: 'Marina Tavares', first: 'Marina', squad: 'Alto Padrão', area: 'Eloy Chaves', city: 'Jundiaí', creci: 'CRECI 000001-F', active: 9, slot: 'c-marina' },
-  { id: 'rafael', name: 'Rafael Nunes', first: 'Rafael', squad: 'Lançamentos', area: 'Itupeva', city: 'Itupeva', creci: 'CRECI 000002-F', active: 15, slot: 'c-rafael' },
-  { id: 'juliana', name: 'Juliana Prado', first: 'Juliana', squad: 'Popular', area: 'Medeiros', city: 'Jundiaí', creci: 'CRECI 000003-F', active: 18, slot: 'c-juliana' },
-  { id: 'andre', name: 'André Salem', first: 'André', squad: 'Comercial', area: 'Centro', city: 'Jundiaí', creci: 'CRECI 000004-F', active: 11, slot: 'c-andre' },
-  { id: 'beatriz', name: 'Beatriz Lima', first: 'Beatriz', squad: 'Lançamentos', area: 'Vinhedo', city: 'Vinhedo', creci: 'CRECI 000005-F', active: 14, slot: 'c-beatriz' },
-  { id: 'thiago', name: 'Thiago Berto', first: 'Thiago', squad: 'Alto Padrão', area: 'Malota', city: 'Jundiaí', creci: 'CRECI 000006-F', active: 8, slot: 'c-thiago' },
-  { id: 'carol', name: 'Carolina Reis', first: 'Carolina', squad: 'Popular', area: 'Anhangabaú', city: 'Jundiaí', creci: 'CRECI 000007-F', active: 16, slot: 'c-carol' },
-];
+// VAZIO DE PROPÓSITO — não repovoar.
+//
+// Aqui moravam oito corretores de demonstração, herdados do porte do site
+// estático: "Erick Santos", "Marina Tavares" e companhia, com CRECI
+// 000000-F em diante. Eles só entravam quando a lista do banco chegava
+// vazia, o que parecia nunca acontecer — até 23/09/2026, quando a leitura
+// passou a responder "permission denied for view user_profiles" e o site
+// publicou oito pessoas inventadas, cada uma com um CRECI falso.
+//
+// Num site de imobiliária, dado de fachada no ar é pior do que página
+// vazia: o CRECI é registro profissional, e o visitante não tem como saber
+// que aquilo é enfeite. Sem corretor, a página diz que a lista está sendo
+// atualizada e oferece o WhatsApp (ver o bloco `equipeVazia`).
+const BROKERS_FALLBACK: Broker[] = [];
 
 // Campos que ainda não existem em tenant_brokers ficam com placeholder até
 // virem do banco (squad/area/creci/rating/reviews/active). Ver decisão de
@@ -551,8 +553,11 @@ export default function LotusCorretores({
   };
 
   // Seleção do perfil (raw + sel derivado), igual ao script.
-  const raw = BROKERS.find((b) => b.id === selId) || BROKERS[0];
-  const sel = {
+  //
+  // Pode nao haver ninguem: sem corretor, nao ha perfil para montar. O
+  // undefined aqui derrubava a pagina inteira na linha de baixo.
+  const raw = BROKERS.find((b) => b.id === selId) || BROKERS[0] || null;
+  const sel = raw && {
     ...raw,
     wa,
     bio: conteudoRealDe(raw.name)?.bio ?? bioFor(raw),
@@ -564,7 +569,7 @@ export default function LotusCorretores({
   // A pergunta "Quem é o melhor corretor para X?" saiu junto com sua resposta:
   // afirmava nota e "dezenas de famílias atendidas", números que não existem em
   // lugar nenhum. Sobra o que é verificável.
-  const pf = [
+  const pf = !raw ? [] : [
     { q: 'Como falar com ' + raw.first + '?', a: 'Pelo botão de WhatsApp direto nesta página, pelo formulário de contato, ou agendando uma conversa. ' + raw.first + ' responde pessoalmente.' },
   ];
   const profileFaqs = pf.map((f, i) => ({
@@ -583,6 +588,8 @@ export default function LotusCorretores({
   const count = list.length;
   const hasBrokers = list.length > 0;
   const noBrokers = list.length === 0;
+  // Lista vazia por falta de gente, e nao por causa do filtro.
+  const equipeVazia = BROKERS.length === 0;
   const isDirectory = view === 'list';
   const isProfile = view === 'profile';
   const notDone = !formDone;
@@ -692,12 +699,22 @@ export default function LotusCorretores({
               </>
             )}
             {noBrokers && (
-              <>
-                <div style={parseStyle('background:#ece2cf;border-radius:18px;padding:48px;text-align:center;')}>
-                  <div style={parseStyle("font-family:'Fraunces',serif;font-size:22px;color:#15241c;margin-bottom:8px;")}>Nenhum corretor nesse filtro.</div>
-                  <button onClick={() => { setFSquad('any'); setFCity('any'); setFName(''); }} style={parseStyle('margin-top:10px;background:#b18a4a;color:#15241c;font-weight:600;font-size:14px;padding:11px 22px;border:none;border-radius:30px;cursor:pointer;')}>Limpar filtros</button>
-                </div>
-              </>
+              <div style={parseStyle('background:#ece2cf;border-radius:18px;padding:48px;text-align:center;')}>
+                {/* Dois vazios diferentes: filtro que nao achou ninguem, e lista
+                    que chegou vazia. O segundo nao se resolve limpando filtro. */}
+                {equipeVazia ? (
+                  <>
+                    <div style={parseStyle("font-family:'Fraunces',serif;font-size:22px;color:#15241c;margin-bottom:8px;")}>Estamos atualizando a lista de corretores.</div>
+                    <p style={parseStyle('font-size:15px;color:#3f6249;font-weight:300;margin:0 0 16px;')}>Enquanto isso, fale com a Lotus no WhatsApp: a gente encaminha você para o especialista do bairro que procura.</p>
+                    <a href={waLink} target="_blank" rel="noopener" style={parseStyle('display:inline-block;background:#25543b;color:#f7f2e8;font-weight:600;font-size:14px;padding:11px 22px;border-radius:30px;')}>Falar no WhatsApp</a>
+                  </>
+                ) : (
+                  <>
+                    <div style={parseStyle("font-family:'Fraunces',serif;font-size:22px;color:#15241c;margin-bottom:8px;")}>Nenhum corretor nesse filtro.</div>
+                    <button onClick={() => { setFSquad('any'); setFCity('any'); setFName(''); }} style={parseStyle('margin-top:10px;background:#b18a4a;color:#15241c;font-weight:600;font-size:14px;padding:11px 22px;border:none;border-radius:30px;cursor:pointer;')}>Limpar filtros</button>
+                  </>
+                )}
+              </div>
             )}
           </section>
 
@@ -716,7 +733,7 @@ export default function LotusCorretores({
       )}
 
       {/* ============ PERFIL ============ */}
-      {isProfile && (
+      {isProfile && sel && (
         <div>
           {/* breadcrumb */}
           <div style={parseStyle('max-width:1100px;margin:0 auto;padding:18px 32px 0;font-size:13px;color:#8aa593;')}>
