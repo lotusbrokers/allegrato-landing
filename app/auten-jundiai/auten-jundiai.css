@@ -731,14 +731,14 @@ html{ scroll-behavior: smooth; scroll-padding-top: 94px; }
 .auten-root .tipo-tab .m2{ font-family: var(--display); font-size: 16px; margin-left: 6px; color: var(--brand); }
 .auten-root .tipo-tab.active{ background: var(--brand-deep); color: var(--paper); border-color: var(--brand-deep); }
 .auten-root .tipo-tab.active .m2{ color: var(--gold); }
-.auten-root .tipo-panel{ display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(30px,4vw,56px); margin-top: 36px; align-items: stretch; }
+.auten-root .tipo-panel{ display: grid; grid-template-columns: 1.55fr 1fr; gap: clamp(30px,4vw,56px); margin-top: 36px; align-items: stretch; }
 .auten-root .tipo-planta{ position: relative; display: flex; flex-direction: column; }
-.auten-root .tipo-planta .planta-card{ flex: 1; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 26px; box-shadow: 0 30px 60px -45px rgba(58,35,22,.7); position: relative; cursor: zoom-in; width: 100%; transition: box-shadow .35s var(--ease), transform .35s var(--ease); }
+.auten-root .tipo-planta .planta-card{ flex: 1; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 16px; box-shadow: 0 30px 60px -45px rgba(58,35,22,.7); position: relative; cursor: zoom-in; width: 100%; transition: box-shadow .35s var(--ease), transform .35s var(--ease); }
 .auten-root .tipo-planta .planta-card:hover{ box-shadow: 0 40px 70px -40px rgba(58,35,22,.8); transform: translateY(-3px); }
-.auten-root .tipo-planta .zoom-hint{ position: absolute; bottom: 14px; right: 14px; display: inline-flex; align-items: center; gap: 7px; background: rgba(58,35,22,.9); color: var(--cream); font-size: 12px; font-weight: 600; letter-spacing: .02em; padding: 8px 14px; border-radius: 100px; opacity: 0; transform: translateY(6px); transition: opacity .3s var(--ease), transform .3s var(--ease); backdrop-filter: blur(4px); }
+.auten-root .tipo-planta .zoom-hint{ position: absolute; bottom: 14px; right: 14px; display: inline-flex; align-items: center; gap: 7px; background: rgba(58,35,22,.9); color: var(--cream); font-size: 12px; font-weight: 600; letter-spacing: .02em; padding: 8px 14px; border-radius: 100px; opacity: .92; transition: opacity .3s var(--ease); backdrop-filter: blur(4px); }
 .auten-root .tipo-planta .zoom-hint svg{ width: 15px; height: 15px; }
-.auten-root .tipo-planta .planta-card:hover .zoom-hint{ opacity: 1; transform: none; }
-.auten-root .tipo-planta img{ width: 100%; height: auto; max-height: 520px; object-fit: contain; transition: opacity .35s var(--ease); }
+.auten-root .tipo-planta .planta-card:hover .zoom-hint{ opacity: 1; }
+.auten-root .tipo-planta img{ width: 100%; height: auto; max-height: min(78vh, 680px); object-fit: contain; transition: opacity .35s var(--ease); }
 .auten-root .tipo-planta .planta-cap{ text-align: center; font-size: 12px; color: var(--muted); margin-top: 14px; letter-spacing: .03em; }
 .auten-root .tipo-info{ display: flex; flex-direction: column; justify-content: center; }
 .auten-root .tipo-info .kicker{ font-size: 12px; letter-spacing:.2em; text-transform: uppercase; color: var(--brand); font-weight: 600;}
