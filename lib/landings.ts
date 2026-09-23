@@ -99,7 +99,7 @@ export function slugParaLanding(landingSlug: string | null | undefined, nome: st
 /**
  * Nomes do dash que não geram o slug da landing correspondente.
  *
- * O vínculo normal sai do nome, e funciona para quase todos. Estes quatro
+ * O vínculo normal sai do nome, e funciona para quase todos. Estes cinco
  * não batem por diferença de grafia, e o custo é alto: sem landing, o filtro
  * `temPaginaPropria` descarta o registro do banco, a entrada curada de
  * lib/developments.ts ocupa o lugar dele — e como ela traz a construtora
@@ -113,6 +113,8 @@ export function slugParaLanding(landingSlug: string | null | undefined, nome: st
  *                              dois G; a landing é /villaggio-engordadouro.
  *   "Serrah"                 → o material da Auten chama de "Auten Serrah", e
  *                              é assim que a landing se apresenta.
+ *   "Trend"                  → o empreendimento se chama "Edifício Trend"; a
+ *                              landing é /edificio-trend.
  *
  * A correção definitiva é no dash, e existe campo próprio para ela: preencher
  * `landing_slug` (migration 0004) resolve sem tocar em código, e o valor
@@ -123,4 +125,5 @@ const LANDING_POR_NOME: Record<string, string> = {
   'authoria-by-tebas': 'authoria',
   'villagio-engordadouro': 'villaggio-engordadouro',
   serrah: 'auten-serrah',
+  trend: 'edificio-trend',
 };

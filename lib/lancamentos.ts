@@ -277,7 +277,16 @@ const ocultos = new Set(OCULTOS_ATE_TROCAR_CAPA.map(chaveNome));
 // Avalon e SKY Videiras ficaram de fora: a capa que já tinham é a melhor foto
 // da landing deles.
 // 28/08/2026: todas as capas foram trocadas no dashboard — mapa esvaziado, o banco manda.
-const CAPAS_CURADAS: Record<string, string> = {};
+//
+// 23/09/2026: o Edifício Trend voltou a precisar do mecanismo. O cadastro dele
+// existe, mas sem nenhuma foto — e card sem imagem é escondido por
+// isListItemApresentavel, então o empreendimento não aparecia na vitrine mesmo
+// com a landing no ar. A capa aqui é a fachada, tirada da própria landing.
+// Publicada qualquer foto no dashboard, apagar esta linha: o banco volta a
+// mandar sozinho.
+const CAPAS_CURADAS: Record<string, string> = {
+  Trend: '/edificio-trend/capa.jpg',
+};
 
 const capasCuradas = new Map(Object.entries(CAPAS_CURADAS).map(([n, p]) => [chaveNome(n), p]));
 
