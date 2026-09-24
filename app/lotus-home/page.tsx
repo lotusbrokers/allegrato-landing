@@ -78,6 +78,36 @@ const DESTAQUES_DA_HOME: readonly string[] = [
   '/auten-jundiai',
 ];
 
+/**
+ * Capa que vale SÓ na home, por empreendimento.
+ *
+ * Pedido da Lotus em 24/09/2026: as fotos enviadas entram como capa dos cards
+ * de Reserva Castanheira, Allegrato e Santorini na home — e só na home. Em
+ * /lotus-lancamentos e na página da construtora os três seguem com a capa que
+ * vem do dashboard.
+ *
+ * Por isso não usa CAPAS_CURADAS de lib/lancamentos.ts: aquele mapa troca a
+ * capa em todo lugar e existe para contornar cadastro sem foto. Aqui a foto do
+ * banco está boa; o que muda é a vitrine da home, que é curadoria.
+ *
+ * Chave = o href da landing, a mesma de DESTAQUES_DA_HOME. Não o nome: a
+ * grafia vinda do dashboard varia e já quebrou casamento por nome antes.
+ * Valor = caminho em public/ (o arquivo precisa existir lá).
+ *
+ * Para devolver um card à capa do dashboard, apagar a linha dele.
+ */
+const CAPAS_DA_HOME: Record<string, string> = {
+  '/reserva-castanheira': '/capas-home/reserva-castanheira.jpg',
+  '/allegrato': '/capas-home/allegrato.jpg',
+  '/santorini': '/capas-home/santorini.jpg',
+};
+
+/** Troca a capa dos que estão no mapa; os demais passam intactos. */
+function comCapaDaHome(d: DevelopmentCard): DevelopmentCard {
+  const capa = CAPAS_DA_HOME[d.href ?? ''];
+  return capa ? { ...d, img: capa } : d;
+}
+
 /** Os destaques na frente, preservando a ordem original para os demais. */
 function comDestaquesNaFrente(lista: DevelopmentCard[]): DevelopmentCard[] {
   const destaque = (d: DevelopmentCard) => DESTAQUES_DA_HOME.indexOf(d.href ?? "");
@@ -97,7 +127,9 @@ export default async function LotusHomePage() {
   // e o componente cai no seu fallback interno — rede de segurança contra página
   // vazia, não completa a lista com mock.
   const [cards, imoveis] = await Promise.all([getLancamentos(), getImoveisBusca()]);
-  const apresentaveis = comDestaquesNaFrente(cards.filter(isApresentavel).map(toDevelopment));
+  const apresentaveis = comDestaquesNaFrente(
+    cards.filter(isApresentavel).map(toDevelopment).map(comCapaDaHome),
+  );
   const developments = apresentaveis.length > 0 ? apresentaveis : undefined;
 
   // Contagem real por bairro, pelo MESMO critério de getImoveisPorBairro: o
