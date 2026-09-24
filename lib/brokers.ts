@@ -49,7 +49,11 @@ const OCULTOS = new Set(['reginaldo barbosa faleiros', 'samir said', 'alex xavie
 // ninguém.
 //
 // Os nomes e os CRECIs são cópia do que o próprio dashboard tinha, lidos horas
-// antes de a permissão cair. Nada aqui é estimado: quem não tinha CRECI lá
+// antes de a permissão cair. A exceção é Gabriele Fávaro: ela não aparece no
+// cadastro que o portal enxerga (nem entre os 16 vínculos de corretor da
+// imobiliária), e o CRECI dela foi informado pela Lotus em 24/09/2026. Se ela
+// continuar fora do dashboard, some daqui junto com esta lista — vale conferir
+// o papel e o CRECI no cadastro dela. Nada aqui é estimado: quem não tinha CRECI lá
 // continua fora, e `imoveisAtivos` fica em zero porque o número muda todo dia
 // e não dá para conferir agora — em zero, a linha simplesmente não aparece.
 //
@@ -63,6 +67,7 @@ const EXTRAS: Broker[] = [
   { id: 'fabio-goncalves', name: 'Fábio Gonçalves', photoUrl: null, creci: '319294-F', imoveisAtivos: 0 },
   { id: 'fernanda-souza', name: 'Fernanda Souza', photoUrl: null, creci: '219893', imoveisAtivos: 0 },
   { id: 'flavia-ceolin', name: 'Flavia Ceolin', photoUrl: null, creci: '324927', imoveisAtivos: 0 },
+  { id: 'gabriele-favaro', name: 'Gabriele Fávaro', photoUrl: null, creci: '242152-F', imoveisAtivos: 0 },
   { id: 'gisele-alves', name: 'Gisele Alves', photoUrl: null, creci: '328459', imoveisAtivos: 0 },
   { id: 'humberto-martinez', name: 'Humberto Martinez', photoUrl: null, creci: '302852', imoveisAtivos: 0 },
   { id: 'lara-matos', name: 'Lara Matos', photoUrl: null, creci: '382.076 - F', imoveisAtivos: 0 },
