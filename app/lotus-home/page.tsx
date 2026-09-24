@@ -6,10 +6,34 @@ import { BAIRROS } from '@/lib/bairros';
 import { POSTS } from '@/lib/blog-posts';
 import { publicados } from '@/lib/blog-agenda';
 import { nomesDoBairro } from '@/lib/bairros-taxonomia';
+import { FAQ_HOME } from '@/lib/home-faq';
 
 // ISR: revalida a cada 1h. O Portal é praticamente read-only; revalidação
 // on-demand (trigger do dash → /api/revalidate) entra numa fase futura.
 export const revalidate = 3600;
+
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.lotusbrokers.com.br';
+
+/**
+ * FAQPage das perguntas que a home realmente exibe.
+ *
+ * Sai de FAQ_HOME, a mesma fonte que a seção desenha: assim o schema não pode
+ * divergir do que está na tela — anunciar pergunta invisível é justamente o
+ * que o Google proíbe em FAQPage.
+ */
+function faqJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    inLanguage: 'pt-BR',
+    mainEntity: FAQ_HOME.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+    isPartOf: { '@type': 'WebSite', url: SITE },
+  };
+}
 
 function toDevelopment(c: LancamentoCard): DevelopmentCard {
   return {
@@ -92,6 +116,13 @@ export default async function LotusHomePage() {
   const destaques = publicados(POSTS).slice(0, 3);
 
   return (
-    <LotusHome developments={developments} bairroCounts={bairroCounts} posts={destaques} />
+    <>
+      {/* "<" escapado: nenhum texto de resposta pode fechar o <script> antes da hora. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd()).replace(/</g, '\\u003c') }}
+      />
+      <LotusHome developments={developments} bairroCounts={bairroCounts} posts={destaques} />
+    </>
   );
 }

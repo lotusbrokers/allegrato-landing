@@ -26,6 +26,7 @@ import React, {
   type ReactNode,
 } from 'react';
 import LotusHeader from './LotusHeader';
+import ConsentimentoLgpd from './ConsentimentoLgpd';
 import { formatValor } from '@/lib/imoveis';
 import { CONSENT_EVENT, reabrirPreferencias } from '@/lib/consent';
 import { alternarFavorito, lerBuscas, lerFavoritos, podeGuardar, salvarBusca, type BuscaSalva } from '@/lib/preferencias';
@@ -671,12 +672,14 @@ export default function LotusBusca({
             <div style={parseStyle('background:rgba(205,171,110,.16);border:1px solid rgba(205,171,110,.4);border-radius:10px;padding:12px;font-size:13.5px;color:#cdab6e;text-align:center;')}>Pronto! Busca salva 🌿 Você será avisado primeiro.</div>
           )}
           {savedForm && (
-            <form onSubmit={submitSaved} style={parseStyle('display:flex;gap:8px;')}>
+            <form onSubmit={submitSaved} style={parseStyle('display:flex;flex-direction:column;gap:10px;')}>
+              <div style={parseStyle('display:flex;gap:8px;')}>
               <input type="text" required placeholder="(11) 99999-9999" style={parseStyle('flex:1;border:1px solid rgba(247,242,232,.25);background:rgba(247,242,232,.06);outline:none;color:#f7f2e8;font-size:14px;padding:11px 13px;border-radius:10px;')} />
               <button type="submit" style={parseStyle('background:#b18a4a;color:#15241c;font-weight:600;font-size:14px;padding:11px 16px;border:none;border-radius:10px;cursor:pointer;')}>Salvar</button>
+              </div>
+              <ConsentimentoLgpd tom="escuro" />
             </form>
           )}
-          <p style={parseStyle('font-size:11px;color:rgba(247,242,232,.45);margin:10px 0 0;')}>Ao salvar você concorda com a Política de Privacidade (LGPD).</p>
         </div>
       )}
 

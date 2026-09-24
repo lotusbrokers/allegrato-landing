@@ -25,6 +25,8 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { developmentsFallback, type DevelopmentCard } from '@/lib/developments';
 import { POSTS, hrefDoArtigo, type Post } from '@/lib/blog-posts';
+import ConsentimentoLgpd from './ConsentimentoLgpd';
+import { FAQ_HOME } from '@/lib/home-faq';
 import { SQUADS } from '@/lib/squads';
 import MobileMenu from './MobileMenu';
 
@@ -152,20 +154,7 @@ const LIA_ENABLED_DEFAULT = true;
 const BANNER_AUTO_DEFAULT = true;
 const REVEAL_ANIM_DEFAULT = true;
 
-const faqData = [
-  {
-    q: 'Qual a melhor imobiliária em Jundiaí e Itupeva?',
-    a: 'A Lotus Brokers é uma imobiliária moderna da região, voltada para um atendimento de excelência: equipe segmentada por especialidade e corretores que conhecem cada bairro, de lançamentos a revenda.',
-  },
-  {
-    q: 'A Lotus é uma imobiliária nova?',
-    a: 'Marca nova, time consolidado. A operação atua há mais de uma década na região e renasceu como Lotus, com a mesma gente que já conhece cada esquina.',
-  },
-  {
-    q: 'Como funciona o atendimento de vocês?',
-    a: 'Você fala com um especialista do seu bairro, não com um corretor que dá conta de tudo. A estrutura cuida do repetitivo; o corretor cuida de você, com processo transparente do começo ao pós-chave.',
-  },
-];
+const faqData = FAQ_HOME;
 
 const banners = [
   { slot: 'lotus-banner-1', eyebrow: 'Campanha do mês', title: 'Lançamentos com condições de pré-venda', text: 'Unidades selecionadas com tabela exclusiva por tempo limitado.', cta: 'Ver lançamentos', href: 'https://www.lotusbrokers.com.br/lotus-lancamentos', img: '/assets/doppio-capa.jpg' },
@@ -983,8 +972,9 @@ export default function LotusHome({
               {!subscribed && (
                 <form onSubmit={(e) => { e.preventDefault(); setSubscribed(true); }} style={parseStyle('display:flex;flex-direction:column;gap:12px;')}>
                   <input ref={emailRef} type="email" required placeholder="seu@email.com" style={parseStyle('border:1px solid rgba(247,242,232,.25);background:rgba(247,242,232,.06);outline:none;color:#f7f2e8;font-size:16px;padding:16px 18px;border-radius:12px;')} />
+                  <ConsentimentoLgpd tom="escuro" />
                   <Hoverable as="button" type="submit" baseStyle={parseStyle('display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#b18a4a;color:#15241c;font-weight:600;font-size:16px;padding:16px 24px;border:none;border-radius:12px;cursor:pointer;transition:background .2s, transform .2s;')} hoverStyle={parseStyle('background:#cdab6e;transform:translateY(-1px)')}>Quero me inscrever <span>→</span></Hoverable>
-                  <p style={parseStyle('font-size:12px;color:rgba(247,242,232,.5);margin:2px 0 0;line-height:1.5;')}>Ao se inscrever você concorda com a nossa Política de Privacidade (LGPD). Cancele quando quiser.</p>
+                  <p style={parseStyle('font-size:12px;color:rgba(247,242,232,.5);margin:2px 0 0;line-height:1.5;')}>Um e-mail por semana. Cancele quando quiser.</p>
                 </form>
               )}
             </div>

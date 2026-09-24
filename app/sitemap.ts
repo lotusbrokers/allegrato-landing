@@ -28,13 +28,17 @@ export const revalidate = 3600;
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.lotusbrokers.com.br';
 
+// /lotus-condominio saiu desta lista em 24/09/2026: aquela rota não tem
+// página — só redireciona para o primeiro condomínio publicado. Anunciar no
+// sitemap uma URL que redireciona vira "página com redirecionamento" no
+// Search Console e gasta rastreio à toa; os condomínios de verdade já entram
+// um a um mais abaixo. Mesma razão de /lotus-imovel nunca ter entrado.
 /** Páginas institucionais e de listagem, que existem independentemente de dados. */
 const FIXAS: { rota: string; prioridade: number; frequencia: MetadataRoute.Sitemap[number]['changeFrequency'] }[] = [
   { rota: '/lotus-home', prioridade: 1.0, frequencia: 'daily' },
   { rota: '/lotus-busca', prioridade: 0.9, frequencia: 'daily' },
   { rota: '/lotus-lancamentos', prioridade: 0.9, frequencia: 'daily' },
   { rota: '/lotus-bairro', prioridade: 0.7, frequencia: 'weekly' },
-  { rota: '/lotus-condominio', prioridade: 0.6, frequencia: 'weekly' },
   { rota: '/lotus-corretores', prioridade: 0.7, frequencia: 'weekly' },
   { rota: '/lotus-sobre', prioridade: 0.6, frequencia: 'monthly' },
   { rota: '/lotus-blog', prioridade: 0.7, frequencia: 'weekly' },

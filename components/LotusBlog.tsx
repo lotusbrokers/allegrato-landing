@@ -19,6 +19,7 @@ import { footerLegalLine } from '@/lib/site';
 
 import Link from 'next/link';
 import LotusHeader from './LotusHeader';
+import ConsentimentoLgpd from './ConsentimentoLgpd';
 import React, {
   useRef,
   useState,
@@ -311,8 +312,9 @@ export default function LotusBlog({
                 {newsNotDone && (
                   <form onSubmit={submitNews} style={parseStyle('display:flex;flex-direction:column;gap:10px;')}>
                     <input type="email" required placeholder="Seu melhor e-mail" style={parseStyle('width:100%;border:1px solid rgba(247,242,232,.25);background:rgba(247,242,232,.07);color:#f7f2e8;font-size:15px;padding:14px;border-radius:11px;outline:none;')} />
+                    <ConsentimentoLgpd tom="escuro" />
                     <Hoverable as="button" type="submit" baseStyle={parseStyle('background:#b18a4a;color:#15241c;font-weight:600;font-size:15px;padding:14px;border:none;border-radius:11px;cursor:pointer;transition:background .2s;')} hoverStyle={parseStyle('background:#cdab6e')}>Quero receber</Hoverable>
-                    <p style={parseStyle('font-size:11.5px;color:rgba(247,242,232,.55);margin:2px 0 0;line-height:1.4;')}>Ao inscrever, você concorda com a Política de Privacidade (LGPD). Cancele quando quiser.</p>
+                    <p style={parseStyle('font-size:11.5px;color:rgba(247,242,232,.55);margin:2px 0 0;line-height:1.4;')}>Um e-mail por semana. Cancele quando quiser.</p>
                   </form>
                 )}
               </div>

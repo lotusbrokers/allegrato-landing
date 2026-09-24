@@ -28,6 +28,7 @@ import { opcoesDeFiltro, passaNosFiltros, SEM_FILTRO } from '@/lib/filtros-lanca
 import AbasLancamentos from './AbasLancamentos';
 import Link from 'next/link';
 import LotusHeader from './LotusHeader';
+import ConsentimentoLgpd from './ConsentimentoLgpd';
 
 /* ------------------------------------------------------------------ */
 /* Helpers                                                             */
@@ -551,8 +552,9 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
               <>
                 <form onSubmit={submitNews} style={parseStyle('display:flex;flex-direction:column;gap:11px;')}>
                   <input type="email" required placeholder="Seu melhor e-mail" style={parseStyle('width:100%;border:1px solid rgba(21,36,28,.16);background:#fff;color:#15241c;font-size:15px;padding:14px;border-radius:11px;outline:none;')} />
+                  <ConsentimentoLgpd />
                   <button type="submit" style={parseStyle('background:#1d3a2c;color:#f7f2e8;font-weight:600;font-size:15px;padding:14px;border:none;border-radius:11px;cursor:pointer;transition:background .2s;')}>Inscrever na newsletter</button>
-                  <p style={parseStyle('font-size:11.5px;color:#8aa593;margin:2px 0 0;line-height:1.4;')}>Ao inscrever, você concorda com a Política de Privacidade (LGPD). Cancele quando quiser.</p>
+                  <p style={parseStyle('font-size:11.5px;color:#8aa593;margin:2px 0 0;line-height:1.4;')}>Um e-mail por semana. Cancele quando quiser.</p>
                 </form>
               </>
             )}
