@@ -572,7 +572,7 @@ body.menu-open .mobile-menu { opacity: 1; pointer-events: auto; }
   border: 1px solid var(--line-d); border-radius: 100px; padding: 8px 18px;
 }
 .hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent); }
-.hero-logo-wrap { display: block; }
+.hero-logo-wrap { display: block; margin: 0; } /* margin:0 porque agora é o h1 da página */
 .hero-logo-img { width: clamp(268px, 47vw, 624px); height: auto; filter: drop-shadow(0 12px 54px rgba(6,9,15,.55)); }
 .hero-tagline { margin-top: 30px; max-width: 480px; color: #fff; text-shadow: 0 2px 24px rgba(6,9,15,.9), 0 1px 4px rgba(6,9,15,.8); }
 .hero-specs {

@@ -745,9 +745,14 @@ export default function Authoria() {
             <span className="hero-badge" data-reveal="">
               <span className="dot"></span> Lançamento · Jundiaí, SP
             </span>
-            <div className="hero-logo-wrap" data-reveal="" style={{ '--rd': '.08s' } as React.CSSProperties}>
+            {/* h1 da landing: a Authoria era a única com conteúdo que não tinha
+                nenhum h1 — o nome do empreendimento só existia como logo. O
+                elemento é o mesmo, com a mesma classe e o mesmo lugar; o nome
+                acessível vem do alt da imagem. margin:0 na regra .hero-logo-wrap
+                anula o padrão do navegador para h1 e mantém o visual igual. */}
+            <h1 className="hero-logo-wrap" data-reveal="" style={{ '--rd': '.08s' } as React.CSSProperties}>
               <img src="/authoria/a003.png" alt="Authoria by Tebas" className="hero-logo-img" />
-            </div>
+            </h1>
             <p className="hero-tagline lede" data-reveal="" style={{ '--rd': '.16s' } as React.CSSProperties}>
               Quando você muda, o mundo muda também. Um encontro raro entre exclusividade, natureza e
               arquitetura.
