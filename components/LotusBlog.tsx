@@ -95,11 +95,20 @@ function ImageSlot({
   id,
   style,
   alt = '',
+  prioridade = false,
 }: {
   src?: string;
   id?: string;
   style?: CSSProperties;
   alt?: string;
+  /**
+   * Imagem acima da dobra (hero, capa, primeira foto da galeria).
+   *
+   * Sai do lazy e pede prioridade alta: adiar o que já está na tela
+   * atrasaria o LCP em vez de aliviar a página. Só para o que o usuário vê
+   * sem rolar — marcar demais anula o ganho.
+   */
+  prioridade?: boolean;
 }) {
   return (
     <div
@@ -114,6 +123,9 @@ function ImageSlot({
         <img
           src={src}
           alt={alt}
+          loading={prioridade ? 'eager' : 'lazy'}
+          fetchPriority={prioridade ? 'high' : undefined}
+          decoding="async"
           style={{
             position: 'absolute',
             inset: 0,
@@ -254,7 +266,7 @@ export default function LotusBlog({
               hoverStyle={parseStyle('transform:translateY(-3px)')}
             >
               <div style={parseStyle('position:relative;min-height:320px;background:#1d3a2c;')}>
-                <ImageSlot id={featured.slot} src={featured.img} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={featured.title} />
+                <ImageSlot prioridade id={featured.slot} src={featured.img} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={featured.title} />
                 <span style={parseStyle('position:absolute;top:16px;left:16px;background:#b18a4a;color:#15241c;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:6px 12px;border-radius:30px;')}>Destaque</span>
               </div>
               <div style={parseStyle('padding:clamp(28px,3.5vw,44px);display:flex;flex-direction:column;justify-content:center;')}>

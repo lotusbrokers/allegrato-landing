@@ -99,11 +99,20 @@ function ImageSlot({
   id,
   style,
   alt = '',
+  prioridade = false,
 }: {
   src?: string;
   id?: string;
   style?: CSSProperties;
   alt?: string;
+  /**
+   * Imagem acima da dobra (hero, capa, primeira foto da galeria).
+   *
+   * Sai do lazy e pede prioridade alta: adiar o que já está na tela
+   * atrasaria o LCP em vez de aliviar a página. Só para o que o usuário vê
+   * sem rolar — marcar demais anula o ganho.
+   */
+  prioridade?: boolean;
 }) {
   return (
     <div
@@ -118,6 +127,9 @@ function ImageSlot({
         <img
           src={src}
           alt={alt}
+          loading={prioridade ? 'eager' : 'lazy'}
+          fetchPriority={prioridade ? 'high' : undefined}
+          decoding="async"
           style={{
             position: 'absolute',
             inset: 0,
@@ -529,7 +541,13 @@ export default function LotusBusca({
         <div data-listcol="" data-mobile-off={mapOnMobile} style={parseStyle('padding:24px 28px 24px 0;')}>
           <div style={parseStyle('display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px;flex-wrap:wrap;')}>
             <div>
-              <div style={parseStyle("font-family:'Fraunces',serif;font-size:22px;color:#15241c;line-height:1.1;")}>{count} imóveis selecionados</div>
+              {/* h1 da página: a busca era a única rota do site sem nenhum
+                  heading — nem h1, nem h2. Leitor de tela não tinha por onde
+                  entrar na página e o Google via uma lista de cards sem título.
+                  É o mesmo texto que já estava na tela, no mesmo lugar: só
+                  deixou de ser <div>. margin e font-weight vêm explícitos para
+                  anular o padrão do navegador para h1 e manter o visual igual. */}
+              <h1 style={parseStyle("font-family:'Fraunces',serif;font-size:22px;font-weight:400;color:#15241c;line-height:1.1;margin:0;")}>{count} imóveis selecionados</h1>
               <div style={parseStyle('font-size:13.5px;color:#8aa593;margin-top:3px;')}>em Jundiaí, Itupeva e região · curados pelo especialista do bairro</div>
             </div>
             <div style={parseStyle('display:flex;align-items:center;gap:8px;')}>

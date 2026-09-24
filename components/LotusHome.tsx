@@ -113,11 +113,20 @@ function ImageSlot({
   id,
   style,
   alt = '',
+  prioridade = false,
 }: {
   src?: string;
   id?: string;
   style?: CSSProperties;
   alt?: string;
+  /**
+   * Imagem acima da dobra (hero, capa, primeira foto da galeria).
+   *
+   * Sai do lazy e pede prioridade alta: adiar o que já está na tela
+   * atrasaria o LCP em vez de aliviar a página. Só para o que o usuário vê
+   * sem rolar — marcar demais anula o ganho.
+   */
+  prioridade?: boolean;
 }) {
   return (
     <div
@@ -132,6 +141,9 @@ function ImageSlot({
         <img
           src={src}
           alt={alt}
+          loading={prioridade ? 'eager' : 'lazy'}
+          fetchPriority={prioridade ? 'high' : undefined}
+          decoding="async"
           style={{
             position: 'absolute',
             inset: 0,
@@ -159,7 +171,7 @@ const faqData = FAQ_HOME;
 const banners = [
   { slot: 'lotus-banner-1', eyebrow: 'Campanha do mês', title: 'Lançamentos com condições de pré-venda', text: 'Unidades selecionadas com tabela exclusiva por tempo limitado.', cta: 'Ver lançamentos', href: 'https://www.lotusbrokers.com.br/lotus-lancamentos', img: '/assets/doppio-capa.jpg' },
   { slot: 'lotus-banner-2', eyebrow: 'Serra do Japi', title: 'Casas em condomínio a partir de R$ 1,2 mi', text: 'Mais verde, mais privacidade, a 10 minutos do centro de Jundiaí.', cta: 'Explorar imóveis', href: 'https://www.lotusbrokers.com.br/lotus-busca', img: '/gran-ville-santo-angelo/a025.jpg' },
-  { slot: 'lotus-banner-3', eyebrow: 'Quer vender?', title: 'Uma estratégia de venda à altura do seu imóvel', text: 'Receba uma análise completa de precificação e posicionamento, conduzida por especialistas que conhecem profundamente a região.', cta: 'Anunciar agora', href: 'https://www.lotusbrokers.com.br/lotus-anunciar', img: 'https://i.postimg.cc/nzx1wvHM/Chat-GPT-Image-25-de-jun-de-2026-14-04-13.png' },
+  { slot: 'lotus-banner-3', eyebrow: 'Quer vender?', title: 'Uma estratégia de venda à altura do seu imóvel', text: 'Receba uma análise completa de precificação e posicionamento, conduzida por especialistas que conhecem profundamente a região.', cta: 'Anunciar agora', href: 'https://www.lotusbrokers.com.br/lotus-anunciar', img: '/home-hero-jundiai.jpg' },
 ];
 
 const reviewsData = [
@@ -580,7 +592,7 @@ export default function LotusHome({
       {/* ============ HERO ============ */}
       <section id="topo" style={parseStyle('position:relative;min-height:680px;display:flex;align-items:flex-start;background:#1d3a2c;overflow:visible;')}>
         {/* Hero = LCP da home: fetchPriority high para o browser priorizar o download. */}
-        <img src="https://i.postimg.cc/nzx1wvHM/Chat-GPT-Image-25-de-jun-de-2026-14-04-13.png" alt="Vista aérea de Jundiaí ao amanhecer, Lotus Brokers" fetchPriority="high" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%;')} />
+        <img src="/home-hero-jundiai.jpg" alt="Vista aérea de Jundiaí ao amanhecer, Lotus Brokers" fetchPriority="high" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%;')} />
         <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg, rgba(21,36,28,.55) 0%, rgba(21,36,28,.15) 38%, rgba(21,36,28,.78) 82%, rgba(21,36,28,.95) 100%);')}></div>
         <div style={{ position: 'absolute', inset: 0, opacity: 0.06, mixBlendMode: 'overlay', pointerEvents: 'none', backgroundImage: NOISE_BG }}></div>
         <div style={parseStyle('position:relative;z-index:2;width:100%;max-width:1280px;margin:0 auto;padding:150px 40px 80px;')}>

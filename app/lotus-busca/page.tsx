@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     description:
       'Casas, apartamentos, coberturas e terrenos em Jundiaí, Itupeva e região, curados pelo especialista do bairro.',
     images: [
-      'https://i.postimg.cc/nzx1wvHM/Chat-GPT-Image-25-de-jun-de-2026-14-04-13.png',
+      'https://www.lotusbrokers.com.br/home-hero-jundiai.jpg',
     ],
   },
   twitter: { card: 'summary_large_image' },

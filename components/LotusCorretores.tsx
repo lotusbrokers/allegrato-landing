@@ -112,12 +112,21 @@ function ImageSlot({
   id,
   style,
   alt = '',
+  prioridade = false,
   initials,
 }: {
   src?: string;
   id?: string;
   style?: CSSProperties;
   alt?: string;
+  /**
+   * Imagem acima da dobra (hero, capa, primeira foto da galeria).
+   *
+   * Sai do lazy e pede prioridade alta: adiar o que já está na tela
+   * atrasaria o LCP em vez de aliviar a página. Só para o que o usuário vê
+   * sem rolar — marcar demais anula o ganho.
+   */
+  prioridade?: boolean;
   /** Nome para gerar iniciais quando não há `src` (avatar-fallback). */
   initials?: string;
 }) {
@@ -145,6 +154,9 @@ function ImageSlot({
         <img
           src={src}
           alt={alt}
+          loading={prioridade ? 'eager' : 'lazy'}
+          fetchPriority={prioridade ? 'high' : undefined}
+          decoding="async"
           onError={() => setSrcComErro(src)}
           style={{
             position: 'absolute',

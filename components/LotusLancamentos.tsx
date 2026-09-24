@@ -109,11 +109,20 @@ function ImageSlot({
   id,
   style,
   alt = '',
+  prioridade = false,
 }: {
   src?: string;
   id?: string;
   style?: CSSProperties;
   alt?: string;
+  /**
+   * Imagem acima da dobra (hero, capa, primeira foto da galeria).
+   *
+   * Sai do lazy e pede prioridade alta: adiar o que já está na tela
+   * atrasaria o LCP em vez de aliviar a página. Só para o que o usuário vê
+   * sem rolar — marcar demais anula o ganho.
+   */
+  prioridade?: boolean;
 }) {
   return (
     <div
@@ -128,6 +137,9 @@ function ImageSlot({
         <img
           src={src}
           alt={alt}
+          loading={prioridade ? 'eager' : 'lazy'}
+          fetchPriority={prioridade ? 'high' : undefined}
+          decoding="async"
           style={{
             position: 'absolute',
             inset: 0,
@@ -280,7 +292,7 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
 
       {/* HERO */}
       <section style={parseStyle('background:#1d3a2c;position:relative;overflow:hidden;')}>
-        <ImageSlot id="lanc-hero" src="/assets/doppio-capa.jpg" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;opacity:.32;')} alt="Foto aérea de empreendimentos / região" />
+        <ImageSlot prioridade id="lanc-hero" src="/assets/doppio-capa.jpg" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;opacity:.32;')} alt="Foto aérea de empreendimentos / região" />
         <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,.7),rgba(21,36,28,.92));')}></div>
         <div style={parseStyle('position:relative;max-width:980px;margin:0 auto;padding:100px 32px;text-align:center;')}>
           <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#cdab6e;margin-bottom:24px;')}>Lançamentos em Jundiaí e região</div>

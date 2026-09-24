@@ -105,11 +105,20 @@ function ImageSlot({
   id,
   style,
   alt = '',
+  prioridade = false,
 }: {
   src?: string;
   id?: string;
   style?: CSSProperties;
   alt?: string;
+  /**
+   * Imagem acima da dobra (hero, capa, primeira foto da galeria).
+   *
+   * Sai do lazy e pede prioridade alta: adiar o que já está na tela
+   * atrasaria o LCP em vez de aliviar a página. Só para o que o usuário vê
+   * sem rolar — marcar demais anula o ganho.
+   */
+  prioridade?: boolean;
 }) {
   return (
     <div
@@ -124,6 +133,9 @@ function ImageSlot({
         <img
           src={src}
           alt={alt}
+          loading={prioridade ? 'eager' : 'lazy'}
+          fetchPriority={prioridade ? 'high' : undefined}
+          decoding="async"
           style={{
             position: 'absolute',
             inset: 0,
@@ -322,7 +334,7 @@ export default function LotusRecrutamento({
 
       {/* HERO */}
       <section style={parseStyle('background:#1d3a2c;position:relative;overflow:hidden;')}>
-        <ImageSlot id="recru-hero" src="/vigore/a18.jpg" alt="Foto do time / corretor em ação" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;opacity:.3;')} />
+        <ImageSlot prioridade id="recru-hero" src="/vigore/a18.jpg" alt="Foto do time / corretor em ação" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;opacity:.3;')} />
         <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(120deg,rgba(21,36,28,.95) 0%,rgba(21,36,28,.8) 55%,rgba(21,36,28,.65) 100%);')}></div>
         <div style={parseStyle('position:relative;max-width:1100px;margin:0 auto;padding:110px 32px;')}>
           <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#cdab6e;margin-bottom:24px;')}>Carreira na Lotus</div>

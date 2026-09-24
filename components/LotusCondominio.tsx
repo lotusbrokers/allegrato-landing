@@ -109,11 +109,20 @@ function ImageSlot({
   id,
   style,
   alt = '',
+  prioridade = false,
 }: {
   src?: string;
   id?: string;
   style?: CSSProperties;
   alt?: string;
+  /**
+   * Imagem acima da dobra (hero, capa, primeira foto da galeria).
+   *
+   * Sai do lazy e pede prioridade alta: adiar o que já está na tela
+   * atrasaria o LCP em vez de aliviar a página. Só para o que o usuário vê
+   * sem rolar — marcar demais anula o ganho.
+   */
+  prioridade?: boolean;
 }) {
   return (
     <div
@@ -128,6 +137,9 @@ function ImageSlot({
         <img
           src={src}
           alt={alt}
+          loading={prioridade ? 'eager' : 'lazy'}
+          fetchPriority={prioridade ? 'high' : undefined}
+          decoding="async"
           style={{
             position: 'absolute',
             inset: 0,
@@ -354,7 +366,7 @@ export default function LotusCondominio({
       {/* HERO */}
       <section style={parseStyle('max-width:1200px;margin:16px auto 0;padding:0 32px;')}>
         <div style={parseStyle('position:relative;border-radius:22px;overflow:hidden;height:clamp(320px,42vw,460px);background:#1d3a2c;')}>
-          <ImageSlot id="cond-hero" src={fotoCapa} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={`Foto do condomínio ${nome}`} />
+          <ImageSlot prioridade id="cond-hero" src={fotoCapa} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={`Foto do condomínio ${nome}`} />
           <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,.25) 0%,rgba(21,36,28,.2) 40%,rgba(21,36,28,.88) 100%);')}></div>
           <div style={parseStyle('position:absolute;left:0;right:0;bottom:0;padding:clamp(28px,4vw,48px);')}>
             <div style={parseStyle('font-size:12.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#cdab6e;margin-bottom:14px;')}>{tipoLabel} · {cidade}</div>

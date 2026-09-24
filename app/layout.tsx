@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     description:
       'Imobiliária moderna de Jundiaí e Itupeva, com atendimento de excelência. Lançamentos e revenda com especialistas de cada bairro.',
     images: [
-      'https://i.postimg.cc/nzx1wvHM/Chat-GPT-Image-25-de-jun-de-2026-14-04-13.png',
+      'https://www.lotusbrokers.com.br/home-hero-jundiai.jpg',
     ],
   },
   twitter: { card: 'summary_large_image' },

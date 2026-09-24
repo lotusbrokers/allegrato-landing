@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     description:
       'Política de Privacidade da Lotus Brokers, conforme a LGPD: quais dados coletamos, por quê e seus direitos.',
     images: [
-      'https://i.postimg.cc/nzx1wvHM/Chat-GPT-Image-25-de-jun-de-2026-14-04-13.png',
+      'https://www.lotusbrokers.com.br/home-hero-jundiai.jpg',
     ],
   },
   twitter: {
