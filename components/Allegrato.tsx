@@ -10,7 +10,7 @@
  *
  * Diferenças conscientes em relação ao fonte:
  *  - O hack de resolução do hero via blob do bundler saiu: em Next o asset tem
- *    caminho estável (/allegrato/hero-allegrato.jpg), então o <img> aponta direto.
+ *    caminho estável (/allegrato/a012.jpg), então o <img> aponta direto.
  *  - O lightbox usa o src real do <img> de cada tile; o `data-img` do fonte
  *    apontava para caminhos relativos que não existem fora do bundle.
  */
@@ -188,7 +188,7 @@ export default function Allegrato() {
       {/* ============ HERO ============ */}
       <section className="hero" id="hero">
         <div className="hero-bg">
-          <img id="heroImg" src="/allegrato/hero-allegrato.jpg" alt="Casal com o cachorro na sala, Allegrato Residencial" />
+          <img id="heroImg" src="/allegrato/a012.jpg" alt="Lazer do Allegrato Residencial ao entardecer" />
         </div>
         <div className="hero-inner">
           <span className="eyebrow">
