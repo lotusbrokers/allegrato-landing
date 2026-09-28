@@ -44,6 +44,38 @@ export type Post = {
 };
 
 /**
+ * Categorias do blog, na ordem em que aparecem na barra de filtros.
+ *
+ * Mora aqui, e não dentro de LotusBlog, pelo mesmo motivo dos artigos: é dado,
+ * e a rota precisa poder ler no servidor. A ordem é curadoria — "Todos" sempre
+ * primeiro, depois o que a Lotus quer destacar.
+ *
+ * Categoria escrita aqui só APARECE quando tem artigo publicado (ver
+ * categoriasComArtigo). Isso permite registrar uma seção nova antes do primeiro
+ * texto sair, sem deixar um filtro que leva a uma tela vazia no ar.
+ */
+export const CATEGORIAS_BLOG: { id: string; label: string }[] = [
+  { id: 'all', label: 'Todos' },
+  { id: 'Cidade', label: 'Cidade' },
+  { id: 'Mercado', label: 'Mercado' },
+  { id: 'Guia', label: 'Guias' },
+  { id: 'Documentação', label: 'Documentação' },
+  { id: 'Dicionário', label: 'Dicionário' },
+  { id: 'Região', label: 'Região' },
+];
+
+/**
+ * As categorias que de fato têm artigo entre os que já saíram.
+ *
+ * Recebe a lista já filtrada por data de publicação — artigo agendado não pode
+ * fazer aparecer um filtro que ainda não tem o que mostrar.
+ */
+export function categoriasComArtigo(publicados: Post[]): { id: string; label: string }[] {
+  const presentes = new Set(publicados.map((p) => p.cat));
+  return CATEGORIAS_BLOG.filter((c) => c.id === 'all' || presentes.has(c.id));
+}
+
+/**
  * Endereço da página do artigo. Uma forma só para o blog, a home, o sitemap e
  * o canonical — se cada um montasse a sua, bastaria uma divergir para o Google
  * ver duas URLs para o mesmo texto.
@@ -56,6 +88,243 @@ export function hrefDoArtigo(id: string): string {
 // três primeiros). Antes a home mantinha uma lista própria de posts escrita à
 // mão, que envelheceu: títulos que não existiam mais no blog e nenhuma capa.
 export const POSTS: Post[] = [
+  /* ------------------------------------------------------------------
+   * Enviado pela Lotus em 28/09/2026, para sair no mesmo dia.
+   *
+   * Primeiro da lista, e por isso o novo destaque da capa do blog.
+   *
+   * Texto da Lotus com os mesmos ajustes de forma dos lotes anteriores: itens
+   * de lista começando em maiúscula e sem ponto e vírgula, e o subtítulo
+   * enviado virando `excerpt`.
+   *
+   * NÚMEROS. Todos vieram no texto da Lotus e estão reproduzidos como
+   * chegaram, com a fonte nomeada no fim do artigo (Mapa de Crimes, sobre
+   * registros da SSP-SP) e o período explícito. Número de segurança pública
+   * sem fonte e sem data envelhece rápido e vira desinformação; por isso
+   * nenhum foi arredondado nem reescrito.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'jundiai-cidade-segura', cat: 'Cidade', date: 'Set 2026', publicadoEm: '2026-09-28', read: '6 min', img: '/blog/jundiai-cidade-segura.jpg', slot: 'blog-jundiai-cidade-segura', title: 'Jundiaí está entre as cidades mais seguras do Brasil, aponta levantamento', excerpt: 'Município se destaca pelos índices de segurança e ganha ainda mais força entre as cidades procuradas por quem busca qualidade de vida no interior de São Paulo.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'Jundiaí registrou 6.359 ocorrências entre agosto de 2025 e julho de 2026, uma taxa de 1.434,7 por 100 mil habitantes contra 2.186,8 no Estado de São Paulo. São 87 pontos no Índice Sentinel de Segurança, classificação "muito seguro" e 95ª posição entre 581 cidades paulistas. A cidade fica abaixo da média estadual nas quatro categorias avaliadas e teve queda de 13,3% nas ocorrências em relação ao período anterior.',
+    body: [
+      'Jundiaí ganhou mais um argumento para quem está pensando em mudar de cidade. Um levantamento sobre criminalidade coloca o município entre os destaques em segurança, reforçando uma característica que já faz parte da busca de muitas famílias que procuram um novo lugar para morar.',
+      'De acordo com os dados analisados pelo Mapa de Crimes, Jundiaí registrou 6.359 ocorrências nos últimos 12 meses analisados, entre agosto de 2025 e julho de 2026. O número corresponde a uma taxa de 1.434,7 ocorrências por 100 mil habitantes, abaixo da média de 2.186,8 registrada no Estado de São Paulo.',
+      'O município também alcançou 87 pontos no Índice Sentinel de Segurança, sendo classificado como “muito seguro” e aparecendo na 95ª posição entre 581 cidades paulistas avaliadas.',
+      { titulo: 'Jundiaí se destaca entre as cidades paulistas' },
+      'O levantamento considera diferentes categorias de criminalidade para chegar ao índice de segurança.',
+      'Em comparação com a média do Estado de São Paulo, Jundiaí apresentou índices inferiores em todas as quatro categorias avaliadas:',
+      { itens: ['39% abaixo da média estadual em crimes contra a vida', '27% abaixo em violência', '59% abaixo em roubos', '30% abaixo em furtos'] },
+      'Os números ajudam a explicar por que a segurança aparece como um dos fatores que podem pesar positivamente na escolha de Jundiaí como cidade para morar.',
+      { titulo: 'Queda nas ocorrências chama atenção' },
+      'Além de apresentar números abaixo da média estadual, Jundiaí também registrou redução nas ocorrências.',
+      'Segundo o levantamento, houve uma queda de 13,3% no número total de ocorrências na comparação entre os últimos 12 meses analisados e o período anterior.',
+      'Dados oficiais da Secretaria da Segurança Pública do Estado de São Paulo também apontaram redução em importantes indicadores criminais no município.',
+      'Em 2025, por exemplo, os roubos em geral caíram 19%, enquanto os furtos de veículos tiveram redução de 20% e os roubos de veículos diminuíram 17% em comparação com 2024.',
+      { titulo: 'Segurança é um dos motivos para escolher onde morar' },
+      'A segurança é um dos fatores mais importantes para quem está procurando uma nova cidade para viver.',
+      'Para famílias com crianças, profissionais que trabalham em home office, pessoas que querem sair da capital ou mesmo quem procura uma mudança de estilo de vida, encontrar uma cidade que combine infraestrutura e tranquilidade pode fazer toda a diferença.',
+      'É justamente nesse ponto que Jundiaí chama atenção.',
+      'A cidade reúne características que vão além dos indicadores de segurança: possui acesso às rodovias Anhanguera e Bandeirantes, proximidade com São Paulo e Campinas, ampla oferta de serviços, áreas verdes, opções de lazer e diferentes perfis de bairros.',
+      { titulo: 'Qualidade de vida coloca Jundiaí no radar de quem quer morar no interior' },
+      'A localização estratégica é outro diferencial.',
+      'Jundiaí está próxima de São Paulo, mas oferece uma dinâmica diferente da capital. Para quem deseja reduzir o ritmo sem se afastar completamente das oportunidades profissionais e comerciais da região metropolitana, a cidade pode representar um meio-termo interessante.',
+      'A presença da Serra do Japi e de outras áreas verdes também contribui para o perfil do município.',
+      'Na prática, é possível encontrar uma cidade com estrutura urbana completa e, ao mesmo tempo, ter contato mais próximo com a natureza.',
+      { titulo: 'E onde morar em Jundiaí?' },
+      'Os dados de segurança devem ser analisados com cuidado quando o assunto é escolher um bairro.',
+      'O número absoluto de ocorrências não significa necessariamente que determinada região seja mais ou menos perigosa, já que bairros com maior circulação de pessoas, comércio e serviços podem naturalmente concentrar mais registros.',
+      'Por isso, quem está procurando onde morar em Jundiaí deve considerar também infraestrutura, mobilidade, acesso, comércio, escolas, áreas verdes e o perfil do imóvel.',
+      'A cidade possui bairros com características bastante diferentes, permitindo encontrar opções para quem procura desde apartamentos mais compactos até casas, condomínios fechados e imóveis de alto padrão.',
+      { titulo: 'Jundiaí se consolida como opção para quem busca qualidade de vida' },
+      'Os dados de segurança reforçam uma característica importante de Jundiaí: a cidade reúne fatores que podem torná-la atrativa para quem procura qualidade de vida no interior de São Paulo.',
+      'Segurança, localização estratégica, infraestrutura, natureza e diversidade imobiliária formam um conjunto que ajuda a explicar por que o município aparece cada vez mais no radar de quem deseja mudar de cidade.',
+      'Para quem está pesquisando cidades seguras para morar em São Paulo, Jundiaí merece atenção.',
+      'Mais do que escolher apenas uma casa ou apartamento, a mudança de cidade representa uma decisão sobre estilo de vida. E, nesse aspecto, os números recentes de segurança acrescentam mais um motivo para colocar Jundiaí entre as opções.',
+      'Fontes: Mapa de Crimes, com dados baseados em registros da Secretaria da Segurança Pública do Estado de São Paulo (SSP-SP). Período analisado: agosto de 2025 a julho de 2026.',
+    ],
+  },
+  /* ------------------------------------------------------------------
+   * Primeiro artigo da seção Documentação, 28/09/2026.
+   *
+   * O conteúdo NÃO foi inventado: as definições de matrícula, certidões
+   * negativas e alienação fiduciária saem das respostas que a própria Lotus
+   * escreveu no FAQ público (lib/faq.ts, perguntas 24, 40 e 41), e o roteiro
+   * segue a pergunta 11, "como funciona o processo de compra".
+   *
+   * O que este texto deliberadamente NÃO traz: alíquota de ITBI, valor de
+   * cartório, prazo de registro e validade de certidão. Variam por município e
+   * mudam sem aviso — publicá-los aqui viraria desinformação em poucos meses.
+   * O artigo diz o que existe e por que importa, e manda perguntar o número
+   * atual a quem responde por ele.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'guia-documentacao-compra-imovel', cat: 'Documentação', date: 'Set 2026', publicadoEm: '2026-09-28', read: '8 min', img: '/blog/memorial-descritivo.jpg', slot: 'blog-guia-documentacao', title: 'Guia da documentação para comprar um imóvel: o que pedir, na ordem', excerpt: 'Matrícula, certidões, contrato e registro: o que cada documento da compra de um imóvel mostra, em que ordem pedir e o que faz um negócio parar.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'A documentação da compra tem três momentos: antes de assinar qualquer coisa, entre a proposta e o contrato, e depois do pagamento. A matrícula atualizada é o documento que mais revela e o primeiro a pedir — ela conta a história inteira do imóvel. As certidões olham para o vendedor, não para o imóvel. E a compra só termina no registro: sem ele, quem pagou ainda não é dono.',
+    body: [
+      'Comprar um imóvel envolve mais papel do que a maioria das pessoas espera, e quase toda negociação que trava, trava por documento. Não porque o documento seja complicado, mas porque ele aparece na hora errada: alguém descobre uma pendência depois de ter assinado, ou depois de ter pago.',
+      'Este guia organiza a documentação da compra na ordem em que ela deveria aparecer. Não substitui a análise de um advogado nem a conferência que a imobiliária faz — serve para você entender o que está sendo pedido e por quê.',
+      { titulo: 'Antes de assinar qualquer coisa' },
+      'Esta é a etapa que mais evita dor de cabeça, e a que mais gente pula.',
+      { titulo: 'A matrícula atualizada', nivel: 3 },
+      'A matrícula é a certidão do imóvel, emitida pelo Cartório de Registro de Imóveis. É o documento que conta a história dele: quem é o proprietário atual, os proprietários anteriores, a metragem, a descrição, e tudo o que pesa sobre o bem.',
+      'É o primeiro documento a pedir, e o que mais revela. Vale conferir:',
+      { itens: [
+        'Se quem está vendendo é de fato quem consta como proprietário',
+        'Se existe financiamento ou alienação fiduciária em aberto',
+        'Se há penhora, usufruto, indisponibilidade ou qualquer outro ônus averbado',
+        'Se a descrição e a metragem batem com o imóvel que você visitou',
+        'Se construções e reformas estão averbadas',
+      ] },
+      'Peça sempre a versão ATUALIZADA. Uma matrícula emitida há meses pode não mostrar o que foi averbado depois — e é exatamente o que foi averbado depois que costuma ser o problema.',
+      { titulo: 'As certidões negativas', nivel: 3 },
+      'Enquanto a matrícula olha para o imóvel, as certidões olham para quem vende. Elas mostram se existem processos ou dívidas capazes de atingir o negócio depois de fechado, inclusive anulando a venda.',
+      'As mais pedidas envolvem processos judiciais nas esferas cível, federal, trabalhista e fiscal, além de situações específicas quando o vendedor é empresa em vez de pessoa física.',
+      'A lista exata varia conforme o caso e conforme o banco, quando há financiamento. Quem conduz a compra diz quais se aplicam ao seu negócio.',
+      { titulo: 'Documentos do imóvel e do condomínio', nivel: 3 },
+      'Além da matrícula, costumam entrar na conferência:',
+      { itens: [
+        'IPTU do ano, para verificar débitos e conferir a inscrição do imóvel',
+        'Declaração de quitação do condomínio, quando houver',
+        'Habite-se, no caso de imóvel novo ou reformado',
+        'Convenção e regimento interno, para saber as regras antes de morar',
+      ] },
+      { titulo: 'Entre a proposta e o contrato' },
+      'Aceita a proposta, entra o contrato. O nome muda conforme o caso — compromisso de compra e venda, promessa, instrumento particular —, mas a função é a mesma: registrar o que foi combinado antes que a memória de cada lado comece a divergir.',
+      'O contrato precisa deixar claro, sem espaço para interpretação:',
+      { itens: [
+        'Quem são as partes e qual é exatamente o imóvel, com o número da matrícula',
+        'O valor, a forma de pagamento e as datas',
+        'O prazo de entrega das chaves e o que acontece se ele não for cumprido',
+        'Quem paga cada custo da transação',
+        'O que acontece se o financiamento não for aprovado',
+        'As multas, dos dois lados',
+      ] },
+      'A cláusula sobre financiamento não aprovado é a que mais falta e a que mais faz falta. Sem ela, o comprador pode ficar preso a um negócio que o banco decidiu não financiar.',
+      { titulo: 'Quando há financiamento' },
+      'O banco faz a própria análise, e ela corre em paralelo: análise de crédito do comprador, avaliação do imóvel por engenheiro credenciado e análise jurídica da documentação.',
+      'É comum o banco pedir documento que o vendedor não tinha em mãos, e é aí que o prazo estica. Adiantar a documentação do vendedor antes de o processo começar encurta o caminho mais do que qualquer outra coisa.',
+      'Na maioria dos financiamentos, o imóvel fica em alienação fiduciária: ele entra como garantia e a propriedade só passa integralmente para o comprador quando a dívida é quitada. É o que permite juros mais baixos, e é o que faz o banco ser rigoroso com o papel.',
+      { titulo: 'Depois do pagamento: o registro' },
+      'Aqui está o ponto que mais gera confusão. Pagar não transfere a propriedade. Assinar a escritura não transfere a propriedade.',
+      'No Brasil, quem transfere é o REGISTRO da escritura na matrícula do imóvel, no Cartório de Registro de Imóveis competente. Antes disso, quem pagou tem um direito contra o vendedor — não o imóvel.',
+      'A sequência final costuma ser:',
+      { itens: [
+        'Pagamento do ITBI, o imposto municipal de transmissão',
+        'Lavratura da escritura pública em cartório de notas, quando o caso exige',
+        'Registro na matrícula, no Registro de Imóveis',
+        'Transferência do IPTU e das contas de consumo',
+      ] },
+      'Só depois do registro a matrícula passa a mostrar o seu nome. É esse documento — a matrícula atualizada com o novo proprietário — que prova que a compra terminou.',
+      { titulo: 'O que este guia não traz, de propósito' },
+      'Você não vai encontrar aqui alíquota de ITBI, valor de cartório, prazo de registro nem validade de certidão.',
+      'Esses números variam por município e mudam sem aviso. Publicá-los num artigo seria entregar informação que envelhece em meses e que alguém pode usar para fazer conta errada. Pergunte o número atual a quem responde por ele: a prefeitura, o cartório ou quem está conduzindo a sua compra.',
+      { titulo: 'O erro mais comum' },
+      'Não é deixar de pedir um documento. É pedir na ordem errada.',
+      'Quem assina antes de ver a matrícula descobre o problema quando já tem dinheiro comprometido e prazo correndo. Quem lê a matrícula primeiro descobre o mesmo problema quando ainda pode negociar, exigir a regularização ou simplesmente escolher outro imóvel.',
+      'A documentação não é a parte burocrática da compra. É a parte que diz se a compra existe.',
+      'Se você está comprando em Jundiaí ou Itupeva e quer a conferência feita por quem faz isso todo dia, a Lotus acompanha o processo do primeiro documento ao registro.',
+    ],
+  },
+  /* ------------------------------------------------------------------
+   * Primeiro artigo da seção Dicionário, 28/09/2026.
+   *
+   * As definições que a Lotus já tinha escrito no FAQ público — matrícula,
+   * certidões negativas, alienação fiduciária, ITBI — entram com a MESMA
+   * substância daquelas respostas (lib/faq.ts, perguntas 16, 24, 40, 41). As
+   * demais são termos de uso corrente, definidos sem número, prazo nem
+   * alíquota: esses variam por município e por banco, e um dicionário que os
+   * cravasse envelheceria em meses.
+   *
+   * Entradas em ordem alfabética de propósito: dicionário se consulta, não se
+   * lê do começo ao fim, e agrupar por tema obrigaria quem procura um termo a
+   * adivinhar o tema dele.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'dicionario-imobiliario', cat: 'Dicionário', date: 'Set 2026', publicadoEm: '2026-09-28', read: '9 min', img: '/blog/financiamento-2026.jpg', slot: 'blog-dicionario-imobiliario', title: 'Dicionário imobiliário: 30 termos que aparecem na compra e na venda', excerpt: 'Matrícula, averbação, ITBI, alienação fiduciária, permuta: o que cada palavra do mercado imobiliário quer dizer, em português claro.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'Quem compra ou vende um imóvel encontra dezenas de palavras que ninguém usa em outro lugar da vida. Este dicionário reúne 30 delas em ordem alfabética, com a definição em uma ou duas frases. Sem alíquota, prazo ou valor: esses variam por município e por banco, e ficariam errados em poucos meses.',
+    body: [
+      'Comprar ou vender um imóvel é uma das poucas situações em que uma pessoa comum precisa entender vocabulário de cartório, de banco e de construção ao mesmo tempo. E quase ninguém avisa o que as palavras querem dizer.',
+      'Esta é uma lista de consulta. Está em ordem alfabética porque dicionário se consulta e não se lê de ponta a ponta — agrupar por tema obrigaria você a adivinhar em qual tema o termo está.',
+      'Uma observação sobre o que não está aqui: nenhum número. Alíquota de ITBI, prazo de registro, percentual de entrada e validade de certidão mudam por município e por banco. Um dicionário que os cravasse entregaria informação errada em poucos meses.',
+      { titulo: 'A' },
+      { itens: [
+        'Alienação fiduciária — o imóvel financiado entra como garantia do banco. A propriedade só passa integralmente ao comprador quando a dívida é quitada. É o que permite juros mais baixos do que num empréstimo comum.',
+        'Área privativa — o que é exclusivo da unidade, dentro das paredes. É o número que costuma importar no dia a dia.',
+        'Área comum — o que pertence a todos os condôminos: hall, piscina, salão, corredores.',
+        'Área total ou construída — a soma da privativa com a fração da área comum atribuída à unidade. É maior que a privativa e por isso aparece bastante em anúncio.',
+        'Averbação — anotação feita na matrícula para registrar um fato novo sobre o imóvel: uma construção, uma reforma, uma demolição, um casamento, uma dívida. Sem averbação, a mudança não existe para o cartório.',
+        'Avaliação — estimativa do valor de mercado do imóvel, feita a partir de comparação com imóveis semelhantes, localização e estado. Diferente de laudo de perícia, que tem outra finalidade e outro rigor formal.',
+      ] },
+      { titulo: 'C' },
+      { itens: [
+        'Cartório de Registro de Imóveis — onde a propriedade se transfere de verdade. Cada imóvel pertence à circunscrição de um cartório específico, definida pelo endereço.',
+        'Certidões negativas — documentos que mostram se existem processos ou dívidas capazes de atingir o negócio. Olham para quem VENDE, não para o imóvel.',
+        'Comissão — o percentual pago à imobiliária pela intermediação. Quem paga, quanto e quando é o que o contrato de captação define.',
+        'Compromisso de compra e venda — o contrato que registra o combinado antes da escritura. É nele que entram prazo, forma de pagamento e o que acontece se o financiamento não sair.',
+        'Condomínio — tanto o conjunto de unidades quanto a taxa mensal de manutenção. Pelo contexto se sabe qual dos dois.',
+        'Convenção de condomínio — o documento que estabelece as regras do condomínio. Vale a pena ler ANTES de comprar, não depois de mudar.',
+      ] },
+      { titulo: 'E' },
+      { itens: [
+        'Entrada — a parte do valor paga com recursos próprios, fora do financiamento. O mínimo varia por banco e por linha de crédito.',
+        'Escritura pública — o documento lavrado em cartório de notas que formaliza a venda. Ainda não transfere a propriedade: quem transfere é o registro dela na matrícula.',
+        'Exclusividade — acordo em que um só corretor ou imobiliária responde pela venda do imóvel por um período. Concentra o esforço em vez de espalhar o mesmo imóvel por anúncios que competem entre si.',
+      ] },
+      { titulo: 'F' },
+      { itens: [
+        'FGTS — pode ser usado na compra do imóvel residencial dentro de regras específicas de renda, valor e situação do comprador. As regras mudam; confirme as vigentes antes de contar com o recurso.',
+        'Financiamento — crédito de longo prazo em que o imóvel serve de garantia. O banco analisa o comprador, o imóvel e a documentação, nessa ordem de rigor.',
+        'Fração ideal — a parte do terreno e das áreas comuns que cabe a cada unidade. Aparece na matrícula e influencia o rateio do condomínio.',
+      ] },
+      { titulo: 'H' },
+      { itens: [
+        'Habite-se — autorização da prefeitura que atesta que a construção terminou conforme o projeto e pode ser ocupada. Imóvel novo sem habite-se não deveria ser entregue nem registrado.',
+      ] },
+      { titulo: 'I' },
+      { itens: [
+        'Imóvel na planta — vendido antes de construído, com entrega futura. Costuma ter condição de pagamento mais longa durante a obra.',
+        'Incorporadora — a empresa que idealiza o empreendimento, compra o terreno e responde pela venda. Nem sempre é a mesma que constrói.',
+        'IPTU — imposto municipal anual sobre a propriedade. Na compra, confira se está quitado: a dívida acompanha o imóvel, não o antigo dono.',
+        'ITBI — imposto municipal pago na transmissão do imóvel, antes do registro. Sem ele, o cartório não registra.',
+      ] },
+      { titulo: 'L' },
+      { itens: [
+        'Laudêmio — valor devido em transações de imóveis em terreno de marinha ou foreiro. Não é comum em Jundiaí, mas aparece em regiões litorâneas.',
+        'Loteamento — parcelamento de uma gleba em lotes, com aprovação da prefeitura e infraestrutura definida em projeto. Loteamento fechado tem controle de acesso.',
+      ] },
+      { titulo: 'M' },
+      { itens: [
+        'Matrícula — a certidão do imóvel no Registro de Imóveis. Conta a história completa dele: proprietários, metragem, descrição e tudo o que pesa sobre o bem. É o documento mais importante de qualquer negociação.',
+        'Memorial descritivo — o documento que detalha materiais, acabamentos e especificações de um empreendimento. É o que permite cobrar o que foi prometido na entrega.',
+        'Metro quadrado (valor do) — referência de preço por área usada para comparar imóveis. Serve de baliza, não de sentença: dois imóveis com o mesmo m² podem valer valores bem diferentes.',
+      ] },
+      { titulo: 'P' },
+      { itens: [
+        'Penhora — restrição judicial que bloqueia a venda do imóvel para garantir uma dívida. Aparece averbada na matrícula.',
+        'Permuta — troca de imóvel por imóvel, com ou sem complemento em dinheiro. Comum em negociação com construtora.',
+        'Planta humanizada — desenho da unidade com móveis, para dar noção de uso. É ilustração, não medida.',
+        'Proposta — a oferta formal do comprador, com valor e condições. Aceita, vira contrato.',
+      ] },
+      { titulo: 'R' },
+      { itens: [
+        'Registro — o ato que efetivamente transfere a propriedade, feito na matrícula do imóvel. Antes do registro, quem pagou tem um direito contra o vendedor, não o imóvel.',
+        'Regimento interno — as regras de convivência do condomínio: horários, uso das áreas comuns, obras, animais.',
+      ] },
+      { titulo: 'U' },
+      { itens: [
+        'Usufruto — direito de usar o imóvel e receber seus frutos sem ser o proprietário. Fica averbado na matrícula e limita o que o proprietário pode fazer.',
+        'Unidade autônoma — cada apartamento, casa ou sala com matrícula própria dentro de um condomínio.',
+      ] },
+      { titulo: 'V' },
+      { itens: [
+        'Vistoria — conferência do estado do imóvel antes da entrega das chaves. É o momento de apontar o que precisa ser corrigido, com registro por escrito.',
+        'VGV — valor geral de vendas, a soma do que um empreendimento pretende vender. Termo de mercado, raramente relevante para quem compra uma unidade.',
+      ] },
+      { titulo: 'Faltou algum?' },
+      'Este dicionário vai crescer. Se você esbarrou num termo que não está aqui, mande para a gente — a chance de outra pessoa ter a mesma dúvida é alta.',
+      'E se o termo apareceu num documento da sua negociação, vale mais perguntar a quem está conduzindo a compra do que procurar a definição solta: no papel, a palavra sempre vem com um contexto que muda o que ela significa para o seu caso.',
+    ],
+  },
   /* ------------------------------------------------------------------
    * Enviados pela Lotus em 24/09/2026, para sair no mesmo dia.
    *

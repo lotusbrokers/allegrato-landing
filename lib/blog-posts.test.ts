@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { POSTS, hrefDoArtigo } from './blog-posts.ts';
+import { CATEGORIAS_BLOG, POSTS, hrefDoArtigo } from './blog-posts.ts';
 
 /**
  * Invariantes da lista de artigos.
@@ -39,8 +39,13 @@ test('nenhum artigo fica sem título, resumo ou corpo', () => {
   }
 });
 
+// A lista de categorias era copiada aqui à mão, e divergiu na primeira seção
+// nova: o teste acusou "Documentação" como inválida enquanto a barra do blog já
+// a oferecia. Agora lê CATEGORIAS_BLOG, a mesma fonte que a barra usa — o teste
+// passa a checar o que importa (artigo com categoria que não existe) em vez de
+// guardar uma segunda lista para envelhecer.
 test('a categoria é uma das que o filtro do blog oferece', () => {
-  const validas = new Set(['Cidade', 'Mercado', 'Guia', 'Região']);
+  const validas = new Set(CATEGORIAS_BLOG.filter((c) => c.id !== 'all').map((c) => c.id));
   for (const p of POSTS) {
     assert.ok(validas.has(p.cat), `${p.id} usa categoria "${p.cat}", que não tem chip no blog`);
   }

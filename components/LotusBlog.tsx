@@ -148,15 +148,7 @@ const NOISE_BG =
 
 const WHATSAPP_DEFAULT = '5511926143393';
 
-const CATS = [
-  { id: 'all', label: 'Todos' },
-  { id: 'Cidade', label: 'Cidade' },
-  { id: 'Mercado', label: 'Mercado' },
-  { id: 'Guia', label: 'Guias' },
-  { id: 'Região', label: 'Região' },
-];
-
-import { POSTS, hrefDoArtigo, type Post } from '@/lib/blog-posts';
+import { POSTS, categoriasComArtigo, hrefDoArtigo, type Post } from '@/lib/blog-posts';
 
 /* Estilos de chip (strings literais do fonte). */
 const chipOn =
@@ -229,7 +221,10 @@ export default function LotusBlog({
 
   const featured = posts[0];
   const rest = posts.filter((p) => (cat === 'all' ? p.id !== featured.id : p.cat === cat));
-  const cats = CATS.map((c) => ({
+  // A barra mostra só categoria que tem artigo: chip que leva a uma tela vazia
+  // o visitante lê como defeito. Categoria nova entra sozinha quando o primeiro
+  // artigo dela sai.
+  const cats = categoriasComArtigo(posts).map((c) => ({
     label: c.label,
     select: () => setCat(c.id),
     style: cat === c.id ? chipOn : chipOff,
