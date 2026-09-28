@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { getImovelCodigos } from '@/lib/imoveis';
-import { getCondominioIds } from '@/lib/condominios';
+import { getCondominiosCards, isCondominioApresentavel } from '@/lib/condominios';
 import { bairroSlugsIndexaveis } from '@/lib/bairros';
 import { landingSlugs } from '@/lib/landings';
 import { getLancamentosList, isListItemApresentavel } from '@/lib/lancamentos';
@@ -62,10 +62,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       console.error('[sitemap] imóveis indisponíveis:', e);
       return [] as string[];
     }),
-    getCondominioIds().catch((e) => {
-      console.error('[sitemap] condomínios indisponíveis:', e);
-      return [] as string[];
-    }),
+    // Os MESMOS cards do índice, e não todos os cadastros: o sitemap só pode
+    // anunciar condomínio que a listagem mostra. Cadastro sem foto e sem
+    // descrição não entra na página nem aqui — sitemap apontando para página
+    // que o site não linka é o que vira "descoberta, não indexada".
+    getCondominiosCards()
+      .then((cs) => cs.filter(isCondominioApresentavel))
+      .catch((e) => {
+        console.error('[sitemap] condomínios indisponíveis:', e);
+        return [];
+      }),
   ]);
 
   // Falha do banco não pode derrubar o sitemap inteiro: sem construtoras, o
@@ -115,8 +121,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly' as const,
       priority: 0.8,
     })),
-    ...condominios.map((id) => ({
-      url: url(`/lotus-condominio/${id}`),
+    // Slug, não id: as URLs com UUID continuam respondendo (redirecionam com
+    // 308), mas quem anuncia no sitemap é o endereço definitivo.
+    ...condominios.map((c) => ({
+      url: url(`/lotus-condominio/${c.slug}`),
       lastModified: agora,
       changeFrequency: 'monthly' as const,
       priority: 0.5,

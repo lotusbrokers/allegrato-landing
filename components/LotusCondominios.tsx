@@ -2,7 +2,7 @@
 
 /**
  * LotusCondominios — índice de /lotus-condominio: lista os condomínios do
- * dashboard e leva cada card para a página dele em /lotus-condominio/[id].
+ * dashboard e leva cada card para a página dele em /lotus-condominio/[slug].
  *
  * Existia a página rica de cada condomínio e não existia a lista: /lotus-condominio
  * só redirecionava para o primeiro publicado, e o breadcrumb "Condomínios" que
@@ -98,13 +98,13 @@ function localDe(c: CondominioCard): string {
   return [c.bairro, c.cidade].filter(Boolean).join(', ');
 }
 
-/** Card do condomínio — mesmo desenho dos "condomínios parecidos" da página [id]. */
+/** Card do condomínio — mesmo desenho dos "condomínios parecidos" da página do condomínio. */
 function CondominioItem({ c }: { c: CondominioCard }) {
   const local = localDe(c);
   return (
     <Hoverable
       as="a"
-      href={`/lotus-condominio/${c.id}`}
+      href={`/lotus-condominio/${c.slug}`}
       target="_top"
       baseStyle={parseStyle('display:flex;flex-direction:column;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 14px 36px -32px rgba(21,36,28,.32);transition:transform .25s ease, box-shadow .25s ease;')}
       hoverStyle={parseStyle('transform:translateY(-3px);box-shadow:0 20px 44px -30px rgba(21,36,28,.45)')}

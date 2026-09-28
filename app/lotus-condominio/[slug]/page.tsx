@@ -1,13 +1,20 @@
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import LotusCondominio from '@/components/LotusCondominio';
 import {
   getCondominio,
+  getCondominioPorSlug,
   getCondominiosCards,
+  slugCondominio,
   type CondominioRow,
 } from '@/lib/condominios';
 
-// Rota dinâmica /lotus-condominio/[id] — lê cada condomínio do Supabase.
+// Rota dinâmica /lotus-condominio/[slug] — lê cada condomínio do Supabase.
+//
+// O endereço era /lotus-condominio/<uuid> até 28/09/2026. UUID não diz nada a
+// quem lê, não ajuda o Google e não dá para ditar no telefone; virou o nome do
+// condomínio. As URLs antigas continuam funcionando (ver `resolver`).
+//
 // ISR sob demanda: a página é renderizada no primeiro acesso (em runtime, onde
 // as env vars do Supabase existem) e cacheada por 1h. Não pré-renderizamos no
 // build (`generateStaticParams`) porque o ambiente de build não recebe as env
@@ -17,11 +24,36 @@ export const revalidate = 3600;
 
 const SITE = 'https://www.lotusbrokers.com.br';
 
-type Params = { params: Promise<{ id: string }> };
+/** UUID v4 canônico — o formato das URLs antigas. */
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+type Params = { params: Promise<{ slug: string }> };
+
+/**
+ * Resolve o parâmetro da URL, aceitando slug novo ou UUID antigo.
+ *
+ * As URLs com UUID ficaram no ar, entraram no sitemap e podem estar indexadas
+ * ou salvas por alguém — some-las devolveria 404 para quem já tinha o link. Em
+ * vez disso, o UUID encontra o condomínio e a página manda para o endereço novo
+ * com 308, que é o que o Google entende como "mudou de lugar para sempre".
+ *
+ * `redirecionarPara` só vem preenchido nesse caso; para o slug normal é null.
+ */
+async function resolver(
+  param: string,
+): Promise<{ cond: CondominioRow | null; redirecionarPara: string | null }> {
+  if (UUID.test(param)) {
+    const cond = await getCondominio(param);
+    return cond
+      ? { cond, redirecionarPara: `/lotus-condominio/${slugCondominio(cond.nome)}` }
+      : { cond: null, redirecionarPara: null };
+  }
+  return { cond: await getCondominioPorSlug(param), redirecionarPara: null };
+}
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const { id } = await params;
-  const cond = await getCondominio(id);
+  const { slug } = await params;
+  const { cond } = await resolver(slug);
   if (!cond) {
     return { title: 'Condomínio, Lotus Brokers', robots: { index: false } };
   }
@@ -31,7 +63,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const description =
     cond.descricao_site?.trim() ||
     `Tudo sobre morar no ${cond.nome}, ${cidade}: estrutura, localização e imóveis disponíveis com o especialista da Lotus.`;
-  const url = `${SITE}/lotus-condominio/${id}`;
+  // Canonical sempre no endereço novo, mesmo quando se chegou pelo UUID: duas
+  // URLs para o mesmo texto é o que o canonical existe para evitar.
+  const url = `${SITE}/lotus-condominio/${slugCondominio(cond.nome)}`;
   return {
     title,
     description,
@@ -49,9 +83,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 }
 
 // JSON-LD (ApartmentComplex + FAQPage + BreadcrumbList) adaptado ao condomínio.
-function buildJsonLd(cond: CondominioRow, id: string) {
+function buildJsonLd(cond: CondominioRow, slug: string) {
   const cidade = cond.cidade || 'Jundiaí e Itupeva';
-  const url = `${SITE}/lotus-condominio/${id}`;
+  const url = `${SITE}/lotus-condominio/${slug}`;
   const amenities = cond.infra_portaria_24h === true
     ? [{ '@type': 'LocationFeatureSpecification', name: 'Portaria 24h' }]
     : [];
@@ -108,12 +142,13 @@ function buildJsonLd(cond: CondominioRow, id: string) {
 }
 
 export default async function LotusCondominioPage({ params }: Params) {
-  const { id } = await params;
-  const cond = await getCondominio(id);
+  const { slug } = await params;
+  const { cond, redirecionarPara } = await resolver(slug);
+  if (redirecionarPara) permanentRedirect(redirecionarPara);
   if (!cond) notFound();
 
-  const relacionados = await getCondominiosCards(id);
-  const jsonLd = buildJsonLd(cond, id);
+  const relacionados = await getCondominiosCards(cond.id);
+  const jsonLd = buildJsonLd(cond, slugCondominio(cond.nome));
 
   return (
     <>
@@ -121,7 +156,7 @@ export default async function LotusCondominioPage({ params }: Params) {
         <script
           key={i}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(obj) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(obj).replace(/</g, '\\u003c') }}
         />
       ))}
       <LotusCondominio data={cond} relacionados={relacionados} />

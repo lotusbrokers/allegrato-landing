@@ -2,7 +2,7 @@ import { supabase, TENANT_ID } from './supabase';
 
 // Camada de dados dos CONDOMÍNIOS do Portal.
 // Fonte: view pública portal_condominios (Supabase, leitura anônima, RLS por
-// publicar_site=true). Usada pelas rotas dinâmicas /lotus-condominio/[id].
+// publicar_site=true). Usada pelas rotas dinâmicas /lotus-condominio/[slug].
 
 export type FotoCondominio = { id?: string; url: string; legenda?: string; isCapa?: boolean };
 
@@ -39,6 +39,8 @@ function capaUrl(fotos: FotoCondominio[] | null): string | null {
 // View de card resumido (para a listagem e os "relacionados").
 export type CondominioCard = {
   id: string;
+  /** Pedaço final da URL: /lotus-condominio/<slug>. Ver slugCondominio. */
+  slug: string;
   nome: string;
   bairro: string | null;
   cidade: string | null;
@@ -80,9 +82,32 @@ export function isCondominioApresentavel(c: CondominioCard): boolean {
   return Boolean(c.capa || c.resumo);
 }
 
+/**
+ * Slug do condomínio, derivado do nome.
+ *
+ * Derivado e não guardado: a view não tem coluna de slug, e criar uma seria uma
+ * segunda fonte da verdade para divergir do nome. Nome corrigido no dashboard,
+ * URL acompanha.
+ *
+ * Os 49 cadastros de hoje geram 49 slugs distintos — conferido antes de trocar
+ * as URLs. Se um dia dois condomínios colidirem, resolveSlug devolve o primeiro
+ * em ordem alfabética de id, de forma estável, e o outro fica inalcançável por
+ * slug: o sinal disso é o segundo sumir da listagem com a URL do primeiro.
+ * Nesse dia, desempatar aqui (sufixo de bairro é o caminho natural).
+ */
+export function slugCondominio(nome: string): string {
+  return nome
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
 export function toCard(row: CondominioRow): CondominioCard {
   return {
     id: row.id,
+    slug: slugCondominio(row.nome),
     nome: row.nome,
     bairro: row.bairro,
     cidade: row.cidade,
@@ -96,7 +121,8 @@ const SELECT_FULL =
   // infra_* usadas nos itens de lazer/estrutura da página
   'infra_piscina, infra_academia, infra_playground, infra_salao_festas, infra_churrasqueira, infra_quadra_poliesportiva, infra_portaria_24h, infra_espaco_gourmet, infra_brinquedoteca, infra_sauna_seca, infra_salao_jogos, infra_bicicletario, infra_espaco_pet, infra_wifi';
 
-// Um condomínio por id (para a rota /lotus-condominio/[id]).
+// Um condomínio por id. A rota entra por slug e chega aqui via getCondominioPorSlug;
+// o UUID antigo da URL também cai direto aqui antes de redirecionar.
 export async function getCondominio(id: string): Promise<CondominioRow | null> {
   const { data, error } = await supabase
     .from('portal_condominios')
@@ -112,7 +138,8 @@ export async function getCondominio(id: string): Promise<CondominioRow | null> {
   return (data as unknown as CondominioRow) ?? null;
 }
 
-// Todos os ids publicados (para generateStaticParams — prerender das rotas).
+// Todos os ids publicados. Continua aqui porque é a consulta mais barata para
+// saber se HÁ condomínio publicado; quem precisa de endereço usa getCondominioSlugs.
 export async function getCondominioIds(): Promise<string[]> {
   const { data, error } = await supabase
     .from('portal_condominios')
@@ -123,6 +150,41 @@ export async function getCondominioIds(): Promise<string[]> {
     return [];
   }
   return (data as { id: string }[]).map((r) => r.id);
+}
+
+/**
+ * id + slug de cada condomínio publicado — para o sitemap e para resolver a URL.
+ *
+ * Consulta leve de propósito (duas colunas): quem chama quer o endereço, não a
+ * ficha. A ficha vem depois, por id, com getCondominio.
+ */
+export async function getCondominioSlugs(): Promise<{ id: string; slug: string }[]> {
+  const { data, error } = await supabase
+    .from('portal_condominios')
+    .select('id, nome')
+    .eq('tenant_id', TENANT_ID);
+  if (error) {
+    console.error('[getCondominioSlugs] erro Supabase:', error.message);
+    return [];
+  }
+  return (data as { id: string; nome: string }[])
+    .map((r) => ({ id: r.id, slug: slugCondominio(r.nome) }))
+    // Ordem estável por id: com slugs iguais, o vencedor é sempre o mesmo entre
+    // requisições, em vez de depender da ordem que o banco devolveu.
+    .sort((a, b) => a.id.localeCompare(b.id));
+}
+
+/**
+ * Um condomínio pelo slug da URL.
+ *
+ * Duas consultas de propósito: a primeira é leve (id + nome de todos) e só
+ * serve para achar o id; a segunda traz a ficha completa daquele um. Puxar
+ * SELECT_FULL de todos — são ~100 colunas infra_* — para depois descartar 48
+ * seria muito mais caro do que o par de idas.
+ */
+export async function getCondominioPorSlug(slug: string): Promise<CondominioRow | null> {
+  const alvo = (await getCondominioSlugs()).find((c) => c.slug === slug);
+  return alvo ? getCondominio(alvo.id) : null;
 }
 
 // Cards resumidos (listagem / relacionados). Exclui opcionalmente um id.

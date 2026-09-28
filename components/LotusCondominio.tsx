@@ -578,7 +578,7 @@ export default function LotusCondominio({
           <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(22px,2.6vw,32px);color:#15241c;margin:0 0 28px;")}>Condomínios parecidos na região</h2>
           <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;')}>
             {relacionados.map((r) => (
-              <Hoverable key={r.id} as="a" href={`/lotus-condominio/${r.id}`} baseStyle={parseStyle('display:flex;flex-direction:column;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 14px 36px -32px rgba(21,36,28,.32);transition:transform .25s ease;')} hoverStyle={parseStyle('transform:translateY(-3px)')}>
+              <Hoverable key={r.id} as="a" href={`/lotus-condominio/${r.slug}`} baseStyle={parseStyle('display:flex;flex-direction:column;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 14px 36px -32px rgba(21,36,28,.32);transition:transform .25s ease;')} hoverStyle={parseStyle('transform:translateY(-3px)')}>
                 <div style={parseStyle('position:relative;aspect-ratio:16/10;background:#1d3a2c;')}><ImageSlot id={`cond-rel-${r.id}`} src={r.capa ?? undefined} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={r.nome} /></div>
                 <div style={parseStyle('padding:16px 18px;')}>
                   <h3 style={parseStyle("font-family:'Fraunces',serif;font-size:18px;color:#15241c;margin:0 0 4px;line-height:1.1;")}>{r.nome}</h3>

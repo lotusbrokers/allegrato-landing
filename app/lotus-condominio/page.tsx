@@ -57,7 +57,7 @@ export default async function LotusCondominioIndex() {
       '@type': 'ListItem',
       position: i + 1,
       name: [c.nome, c.bairro, c.cidade].filter(Boolean).join(', '),
-      url: `${SITE}/lotus-condominio/${c.id}`,
+      url: `${SITE}/lotus-condominio/${c.slug}`,
     })),
   };
 
