@@ -277,15 +277,29 @@ export async function getImovel(codigo: string): Promise<ImovelRow | null> {
 
 // Todos os códigos aprovados (para generateStaticParams).
 export async function getImovelCodigos(): Promise<string[]> {
+  return (await getImovelCodigosComData()).map((r) => r.codigo);
+}
+
+/**
+ * Código + data real de alteração, para o lastmod do sitemap.
+ *
+ * O lastmod anterior era a hora de gerar o arquivo: igual para todas as URLs e
+ * mudando sozinho a cada revalidação. O Google só usa o campo enquanto ele é
+ * confiável, e um sitemap que diz que tudo mudou agora ensina o contrário.
+ */
+export async function getImovelCodigosComData(): Promise<{ codigo: string; atualizadoEm: string | null }[]> {
   const { data, error } = await supabase
     .from('portal_imoveis')
-    .select('codigo_imovel')
+    .select('codigo_imovel, updated_at')
     .eq('tenant_id', TENANT_ID);
   if (error) {
     console.error('[getImovelCodigos] erro Supabase:', error.message);
     return [];
   }
-  return (data as { codigo_imovel: string }[]).map((r) => r.codigo_imovel);
+  return (data as { codigo_imovel: string; updated_at: string | null }[]).map((r) => ({
+    codigo: r.codigo_imovel,
+    atualizadoEm: r.updated_at ?? null,
+  }));
 }
 
 // Cards resumidos (relacionados / listagem). Exclui opcionalmente um código.

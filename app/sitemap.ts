@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { getImovelCodigos } from '@/lib/imoveis';
+import { getImovelCodigosComData } from '@/lib/imoveis';
 import { getCondominiosCards, isCondominioApresentavel } from '@/lib/condominios';
 import { bairroSlugsIndexaveis } from '@/lib/bairros';
 import { landingSlugs } from '@/lib/landings';
@@ -25,6 +25,21 @@ import { publicados } from '@/lib/blog-agenda';
  */
 
 export const revalidate = 3600;
+
+/**
+ * Data do deploy, para as páginas que só mudam quando o código muda.
+ *
+ * Avaliada uma vez por processo, e não a cada requisição: institucional,
+ * landing e guia de bairro não mudam de hora em hora, e carimbá-las com a hora
+ * atual fazia 155 das 172 URLs anunciarem alteração toda revalidação. O Google
+ * usa lastmod enquanto ele é confiável — e passa a ignorá-lo quando não é.
+ *
+ * Quem tem data real no banco (condomínio, imóvel, artigo) não usa esta.
+ */
+const DEPLOY = new Date();
+
+/** Data do banco quando existe; a do deploy quando não. */
+const quando = (iso: string | null | undefined): Date => (iso ? new Date(iso) : DEPLOY);
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.lotusbrokers.com.br';
 
@@ -53,14 +68,13 @@ const FIXAS: { rota: string; prioridade: number; frequencia: MetadataRoute.Sitem
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const agora = new Date();
 
   // Falha de banco não pode derrubar o sitemap inteiro: sem imóveis ele ainda
   // declara as páginas fixas e as landings, que é melhor do que erro 500.
   const [codigos, condominios] = await Promise.all([
-    getImovelCodigos().catch((e) => {
+    getImovelCodigosComData().catch((e) => {
       console.error('[sitemap] imóveis indisponíveis:', e);
-      return [] as string[];
+      return [] as { codigo: string; atualizadoEm: string | null }[];
     }),
     // Os MESMOS cards do índice, e não todos os cadastros: o sitemap só pode
     // anunciar condomínio que a listagem mostra. Cadastro sem foto e sem
@@ -88,20 +102,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...FIXAS.map((f) => ({
       url: url(f.rota),
-      lastModified: agora,
+      lastModified: DEPLOY,
       changeFrequency: f.frequencia,
       priority: f.prioridade,
     })),
     // Landings de empreendimento: derivadas do filesystem, igual aos cards.
     ...[...landingSlugs()].sort().map((slug) => ({
       url: url(`/${slug}`),
-      lastModified: agora,
+      lastModified: DEPLOY,
       changeFrequency: 'weekly' as const,
       priority: 0.8,
     })),
     ...bairroSlugsIndexaveis().map((slug) => ({
       url: url(`/lotus-bairro/${slug}`),
-      lastModified: agora,
+      lastModified: DEPLOY,
       changeFrequency: 'monthly' as const,
       priority: 0.6,
     })),
@@ -115,17 +129,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: 0.6,
     })),
-    ...codigos.map((codigo) => ({
-      url: url(`/lotus-imovel/${codigo}`),
-      lastModified: agora,
+    // lastmod = updated_at do dashboard, não a hora de gerar o arquivo.
+    ...codigos.map((im) => ({
+      url: url(`/lotus-imovel/${im.codigo}`),
+      lastModified: quando(im.atualizadoEm),
       changeFrequency: 'weekly' as const,
       priority: 0.8,
     })),
     // Slug, não id: as URLs com UUID continuam respondendo (redirecionam com
     // 308), mas quem anuncia no sitemap é o endereço definitivo.
+    // lastmod = updated_at do dashboard, idem.
     ...condominios.map((c) => ({
       url: url(`/lotus-condominio/${c.slug}`),
-      lastModified: agora,
+      lastModified: quando(c.atualizadoEm),
       changeFrequency: 'monthly' as const,
       priority: 0.5,
     })),
@@ -134,7 +150,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // do sitemap sozinha.
     ...construtoras.map((c) => ({
       url: url(`/construtoras/${c.slug}`),
-      lastModified: agora,
+      lastModified: DEPLOY,
       changeFrequency: 'monthly' as const,
       priority: 0.5,
     })),

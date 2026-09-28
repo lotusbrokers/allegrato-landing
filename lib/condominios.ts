@@ -32,6 +32,8 @@ export type CondominioRow = {
   ano_construcao: number | null;
   num_blocos_torres: number | null;
   descricao_site: string | null;
+  /** Carimbo do dashboard. Vira o lastmod da página no sitemap. */
+  updated_at: string | null;
   tour_virtual: string | null;
   metragens_disponiveis: number[] | null;
   fotos: FotoCondominio[] | null;
@@ -68,6 +70,14 @@ export type CondominioCard = {
    * saber se o condomínio tem o que a PÁGINA dele precisa para funcionar.
    */
   enderecoCompleto: boolean;
+  /**
+   * Data real da última alteração no dashboard (updated_at), em ISO.
+   *
+   * Só o sitemap usa. Existe porque o lastmod anterior era a hora de gerar o
+   * arquivo — igual para todas as páginas e mudando sozinho a cada revalidação,
+   * que é exatamente o padrão que faz o Google parar de confiar no campo.
+   */
+  atualizadoEm: string | null;
 };
 
 /**
@@ -141,6 +151,7 @@ export function toCard(row: CondominioRow): CondominioCard {
       preenchido(row.numero) &&
       preenchido(row.cidade) &&
       preenchido(row.cep),
+    atualizadoEm: row.updated_at ?? null,
   };
 }
 
@@ -219,7 +230,7 @@ export async function getCondominioPorSlug(slug: string): Promise<CondominioRow 
 export async function getCondominiosCards(excludeId?: string): Promise<CondominioCard[]> {
   const { data, error } = await supabase
     .from('portal_condominios')
-    .select('id, nome, bairro, cidade, logradouro, numero, cep, fotos, descricao_site')
+    .select('id, nome, bairro, cidade, logradouro, numero, cep, fotos, descricao_site, updated_at')
     .eq('tenant_id', TENANT_ID);
   if (error) {
     console.error('[getCondominiosCards] erro Supabase:', error.message);
