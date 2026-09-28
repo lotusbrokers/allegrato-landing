@@ -23,6 +23,7 @@ import Link from 'next/link';
 import LotusHeader from './LotusHeader';
 import LightboxFotos from './LightboxFotos';
 import React, {
+  useEffect,
   useRef,
   useState,
   type CSSProperties,
@@ -274,6 +275,30 @@ function buildGuide(data: CondominioRow) {
 // busca por condomínio quando a página foi portada; agora há, e os imóveis
 // chegam pela prop `imoveis` (ver getImoveisDoCondominio).
 
+/**
+ * Zoom do mapa conforme a largura da tela.
+ *
+ * Na mesma escala do Google, um celular mostra menos chão que um monitor: o
+ * mapa cabe em menos pixels. Para enxergar a mesma vizinhança, o celular
+ * precisa de um zoom MENOR — daí mobile vir abaixo de desktop, e não acima.
+ *
+ * Começa no valor de desktop e corrige depois de montar, para o HTML do
+ * servidor e o do cliente baterem. Não custa carregamento a mais: os dois mapas
+ * são lazy e ficam muito abaixo da dobra, então a correção acontece antes de
+ * qualquer um deles chegar perto da tela.
+ */
+function useZoomDoMapa(desktop: number, mobile: number): number {
+  const [zoom, setZoom] = useState(desktop);
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)');
+    const aplicar = () => setZoom(mq.matches ? mobile : desktop);
+    aplicar();
+    mq.addEventListener('change', aplicar);
+    return () => mq.removeEventListener('change', aplicar);
+  }, [desktop, mobile]);
+  return zoom;
+}
+
 /* ------------------------------------------------------------------ */
 /* Componente                                                          */
 /* ------------------------------------------------------------------ */
@@ -358,7 +383,15 @@ export default function LotusCondominio({
     .join(', ');
   const temEndereco = Boolean(data.logradouro && String(data.logradouro).trim());
   const mapaQuery = encodeURIComponent(temEndereco ? `${nome}, ${endereco}` : `${nome}, ${cidade}, SP`);
-  const mapaZoom = temEndereco ? 17 : 14;
+  /**
+   * Dois mapas, dois propósitos: o de cima mostra a VIZINHANÇA (o que tem em
+   * volta) e o de baixo mostra ONDE FICA. Daí zooms diferentes.
+   *
+   * Sem endereço cadastrado, os dois recuam: apontar rua sem saber a rua seria
+   * precisão fingida. São dois condomínios nessa situação hoje.
+   */
+  const zoomProximidades = useZoomDoMapa(temEndereco ? 16 : 13, temEndereco ? 15 : 12);
+  const mapaZoom = useZoomDoMapa(temEndereco ? 17 : 14, temEndereco ? 16 : 13);
 
   // Mini-stats do hero: só entram os campos que existem no banco (nada inventado).
   const stats: { value: string; label: string }[] = [
@@ -522,16 +555,25 @@ export default function LotusCondominio({
       {/* LOCALIZAÇÃO */}
       <section style={parseStyle('background:#1d3a2c;padding:90px 32px;')}>
         <div style={parseStyle('max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:stretch;')}>
+          {/* Mapa das proximidades. Era um SVG com três ruas inventadas, iguais
+              nas 49 páginas e sem nada do entorno; virou mapa de verdade no zoom
+              de bairro, que é onde aparecem mercado, escola, padaria e acesso. */}
           <div style={parseStyle('position:relative;border-radius:18px;overflow:hidden;min-height:360px;background:#e7e4d7;')}>
-            <svg viewBox="0 0 400 360" preserveAspectRatio="xMidYMid slice" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')}>
-              <rect width="400" height="360" fill="#e7e4d7"></rect>
-              <path d="M-20 90 L180 50 L420 120" stroke="#d8d2bf" strokeWidth="13" fill="none"></path>
-              <path d="M70 -20 L120 200 L90 380" stroke="#d8d2bf" strokeWidth="11" fill="none"></path>
-              <path d="M-20 250 L200 210 L420 260" stroke="#d8d2bf" strokeWidth="15" fill="none"></path>
-              <circle cx="300" cy="100" r="55" fill="#cdd9c6" opacity=".55"></circle>
-            </svg>
-            <div style={parseStyle('position:absolute;left:50%;top:48%;transform:translate(-50%,-100%);background:#1d3a2c;color:#f7f2e8;border:2px solid #f7f2e8;border-radius:30px;padding:6px 13px;font-size:12.5px;font-weight:700;')}>{nome}</div>
-            <div style={parseStyle('position:absolute;bottom:12px;left:12px;background:rgba(247,242,232,.9);border-radius:8px;padding:6px 10px;font-size:11.5px;color:#3f6249;')}>Localização aproximada</div>
+            <iframe
+              title={`O que tem perto do ${nome}`}
+              src={`https://www.google.com/maps?q=${mapaQuery}&z=${zoomProximidades}&output=embed`}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              style={parseStyle('position:absolute;inset:0;width:100%;height:100%;border:0;')}
+              allowFullScreen
+            ></iframe>
+            {/* A legenda diz a verdade dos dois casos: com endereço cadastrado
+                mostra o endereço; sem ele, avisa que a posição é aproximada. */}
+            <div style={parseStyle('position:absolute;bottom:12px;left:12px;right:12px;background:rgba(247,242,232,.92);border-radius:8px;padding:7px 11px;font-size:11.5px;color:#3f6249;line-height:1.35;pointer-events:none;')}>
+              {temEndereco
+                ? [data.logradouro, data.numero, data.bairro].filter(Boolean).join(', ')
+                : 'Localização aproximada'}
+            </div>
           </div>
           <div>
             <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#cdab6e;margin-bottom:14px;')}>Lazer e estrutura</div>
