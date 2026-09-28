@@ -18,12 +18,40 @@ import { getLancamentosList, isListItemApresentavel, type LancamentoListItem } f
 // quem lê, não ajuda o Google e não dá para ditar no telefone; virou o nome do
 // condomínio. As URLs antigas continuam funcionando (ver `resolver`).
 //
-// ISR sob demanda: a página é renderizada no primeiro acesso (em runtime, onde
-// as env vars do Supabase existem) e cacheada por 1h. Não pré-renderizamos no
-// build (`generateStaticParams`) porque o ambiente de build não recebe as env
-// vars do Supabase, e os dados mudam com frequência — prerender de tudo no build
-// não agrega aqui.
+// As 44 páginas são PRÉ-RENDERIDAS no build (ver generateStaticParams abaixo).
+//
+// Eram renderizadas sob demanda, com a premissa de que o build não recebia as
+// env vars do Supabase. A premissa era falsa: o índice /lotus-condominio sai do
+// build com os 44 cards vindos do banco, o que só é possível com acesso a ele.
+//
+// O custo da premissa errada foi alto. Medido em produção em 28/09/2026, a
+// PRIMEIRA visita a cada condomínio levava de 4 a 14 segundos de TTFB — são
+// cinco consultas em série, uma delas trazendo as fotos dos 49 cadastros. O
+// Googlebot desiste bem antes disso e reduz o rastreio do caminho inteiro: as
+// páginas estáticas do site (0,14s) estavam indexadas e as de condomínio não.
+//
+// Pré-renderizadas, saem do build como arquivo e respondem como as demais. O
+// ISR de 1h continua valendo para manter o conteúdo fresco, e dynamicParams
+// segue ligado (padrão): condomínio novo no dashboard, ou uma URL antiga com
+// UUID, ainda são atendidos sob demanda até o próximo build.
 export const revalidate = 3600;
+
+/**
+ * Os endereços que entram no build: os MESMOS que o índice e o sitemap listam.
+ *
+ * Usa isCondominioApresentavel para não gerar página de cadastro que o site
+ * não linka. Falha do banco devolve lista vazia em vez de derrubar o build —
+ * nesse caso as páginas voltam a ser servidas sob demanda, como antes.
+ */
+export async function generateStaticParams() {
+  try {
+    const cards = await getCondominiosCards();
+    return cards.filter(isCondominioApresentavel).map((c) => ({ slug: c.slug }));
+  } catch (e) {
+    console.error('[condominio] generateStaticParams sem banco:', e);
+    return [];
+  }
+}
 
 const SITE = 'https://www.lotusbrokers.com.br';
 
