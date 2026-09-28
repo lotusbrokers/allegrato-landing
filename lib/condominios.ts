@@ -16,6 +16,14 @@ export type CondominioRow = {
   bairro: string | null;
   cidade: string | null;
   estado: string | null;
+  /**
+   * Endereço de rua. Existe na view desde sempre e não era lido — é o que faz o
+   * mapa da página cravar o ponto em vez de procurar pelo nome do condomínio.
+   * 47 dos 49 cadastros têm os três preenchidos.
+   */
+  logradouro: string | null;
+  numero: string | null;
+  cep: string | null;
   tipo: string | null;
   status: string | null;
   status_comercial: string | null;
@@ -117,7 +125,7 @@ export function toCard(row: CondominioRow): CondominioCard {
 }
 
 const SELECT_FULL =
-  'id, tenant_id, nome, codigo, bairro, cidade, estado, tipo, status, status_comercial, construtora, incorporadora, ano_construcao, num_blocos_torres, descricao_site, tour_virtual, metragens_disponiveis, fotos, ' +
+  'id, tenant_id, nome, codigo, bairro, cidade, estado, logradouro, numero, cep, tipo, status, status_comercial, construtora, incorporadora, ano_construcao, num_blocos_torres, descricao_site, tour_virtual, metragens_disponiveis, fotos, ' +
   // infra_* usadas nos itens de lazer/estrutura da página
   'infra_piscina, infra_academia, infra_playground, infra_salao_festas, infra_churrasqueira, infra_quadra_poliesportiva, infra_portaria_24h, infra_espaco_gourmet, infra_brinquedoteca, infra_sauna_seca, infra_salao_jogos, infra_bicicletario, infra_espaco_pet, infra_wifi';
 

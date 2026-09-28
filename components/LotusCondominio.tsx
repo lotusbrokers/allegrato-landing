@@ -21,6 +21,7 @@ import { footerLegalLine } from '@/lib/site';
 
 import Link from 'next/link';
 import LotusHeader from './LotusHeader';
+import LightboxFotos from './LightboxFotos';
 import React, {
   useRef,
   useState,
@@ -302,6 +303,13 @@ export default function LotusCondominio({
 }) {
   // state do Component dc: { openFaq: 0, leadDone: false }
   const [openFaq, setOpenFaq] = useState(0);
+  /**
+   * Índice da foto aberta em tela cheia, ou null com a galeria fechada.
+   *
+   * Guardar o índice e não um booleano é o que permite abrir JÁ na foto que a
+   * pessoa clicou, em vez de sempre na primeira.
+   */
+  const [fotoAberta, setFotoAberta] = useState<number | null>(null);
   const [leadDone, setLeadDone] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -330,7 +338,27 @@ export default function LotusCondominio({
   const faqData = buildFaq(data);
   const guide = buildGuide(data);
 
-  const mapaQuery = encodeURIComponent(`${nome}, ${cidade}, SP`);
+  /**
+   * Endereço para o mapa, do mais preciso ao mais vago.
+   *
+   * Com rua, número e CEP o Google crava o ponto; sem eles sobra procurar pelo
+   * nome, que é o que a página fazia antes e às vezes caía no centro da cidade.
+   * O zoom acompanha: quarteirão quando há endereço, bairro quando não há —
+   * mostrar rua no zoom máximo sem saber a rua seria precisão fingida.
+   */
+  const endereco = [
+    data.logradouro,
+    data.numero,
+    data.bairro,
+    data.cidade,
+    data.estado || 'SP',
+    data.cep,
+  ]
+    .filter((p) => p && String(p).trim())
+    .join(', ');
+  const temEndereco = Boolean(data.logradouro && String(data.logradouro).trim());
+  const mapaQuery = encodeURIComponent(temEndereco ? `${nome}, ${endereco}` : `${nome}, ${cidade}, SP`);
+  const mapaZoom = temEndereco ? 17 : 14;
 
   // Mini-stats do hero: só entram os campos que existem no banco (nada inventado).
   const stats: { value: string; label: string }[] = [
@@ -452,13 +480,42 @@ export default function LotusCondominio({
             <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b18a4a;margin-bottom:18px;')}>Galeria</div>
             <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(28px,3.6vw,44px);color:#15241c;line-height:1.06;margin:0;")}>Por dentro do condomínio.</h2>
           </div>
+          {/* Cada peça do mosaico abre a galeria JÁ na foto clicada. São
+              <button> e não <div> com onClick: assim funcionam por teclado e o
+              leitor de tela anuncia que abrem alguma coisa. A primeira ocupa
+              duas linhas, como antes. */}
           <div style={parseStyle('display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:12px;height:clamp(320px,42vw,500px);border-radius:20px;overflow:hidden;')}>
-            <div style={parseStyle('grid-row:span 2;position:relative;background:#1d3a2c;')}><ImageSlot id="cond-g1" src={fotoAt(0)} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={`${nome}, foto 1`} /></div>
-            <div style={parseStyle('position:relative;background:#3f6249;')}><ImageSlot id="cond-g2" src={fotoAt(1)} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={`${nome}, foto 2`} /></div>
-            <div style={parseStyle('position:relative;background:#3f6249;')}><ImageSlot id="cond-g3" src={fotoAt(2)} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={`${nome}, foto 3`} /></div>
-            <div style={parseStyle('position:relative;background:#3f6249;')}><ImageSlot id="cond-g4" src={fotoAt(3)} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={`${nome}, foto 4`} /></div>
-            <div style={parseStyle('position:relative;background:#3f6249;')}><ImageSlot id="cond-g5" src={fotoAt(4)} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={`${nome}, foto 5`} /></div>
+            {[0, 1, 2, 3, 4].map((i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => galeria.length > 0 && setFotoAberta(Math.min(i, galeria.length - 1))}
+                aria-label={`Ampliar foto ${i + 1} de ${nome}`}
+                style={parseStyle(
+                  (i === 0 ? 'grid-row:span 2;' : '') +
+                    'position:relative;padding:0;border:none;background:' + (i === 0 ? '#1d3a2c' : '#3f6249') +
+                    ';cursor:' + (galeria.length > 0 ? 'zoom-in' : 'default') + ';',
+                )}
+              >
+                <ImageSlot id={`cond-g${i + 1}`} src={fotoAt(i)} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={`${nome}, foto ${i + 1}`} />
+              </button>
+            ))}
           </div>
+          {/* Só aparece quando há foto além das cinco do mosaico — botão que
+              promete "todas as 5" ao lado de 5 fotos visíveis não serve a nada. */}
+          {galeria.length > 5 && (
+            <div style={parseStyle('display:flex;justify-content:center;margin-top:24px;')}>
+              <Hoverable
+                as="button"
+                type="button"
+                onClick={() => setFotoAberta(0)}
+                baseStyle={parseStyle('display:inline-flex;align-items:center;gap:9px;background:#1d3a2c;color:#f7f2e8;font-weight:600;font-size:15px;padding:13px 28px;border:none;border-radius:40px;cursor:pointer;transition:background .2s;')}
+                hoverStyle={parseStyle('background:#15241c')}
+              >
+                Ver as {galeria.length} fotos <span aria-hidden="true">→</span>
+              </Hoverable>
+            </div>
+          )}
         </div>
       </section>
 
@@ -649,13 +706,24 @@ export default function LotusCondominio({
       </section>
       )}
 
+      {/* Montado só quando há foto aberta: fechado, não existe no DOM e não
+          deixa listener de teclado nem trava de rolagem para trás. */}
+      {fotoAberta !== null && (
+        <LightboxFotos
+          fotos={fotos}
+          indiceInicial={fotoAberta}
+          titulo={nome}
+          onFechar={() => setFotoAberta(null)}
+        />
+      )}
+
       {/* FOOTER */}
       <section id="mapa" style={parseStyle('background:#1d3a2c;padding:72px 32px;')}>
         <div style={parseStyle('max-width:1180px;margin:0 auto;')}>
           <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#cdab6e;margin-bottom:14px;')}>No mapa</div>
           <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(24px,2.6vw,32px);color:#f7f2e8;margin:0 0 24px;")}>{nome} no mapa</h2>
           <div style={parseStyle('position:relative;border-radius:18px;overflow:hidden;min-height:380px;background:#e7e4d7;')}>
-            <iframe title={`${nome} no mapa`} src={`https://www.google.com/maps?q=${mapaQuery}&z=14&output=embed`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;border:0;')} allowFullScreen></iframe>
+            <iframe title={`${nome} no mapa`} src={`https://www.google.com/maps?q=${mapaQuery}&z=${mapaZoom}&output=embed`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;border:0;')} allowFullScreen></iframe>
           </div>
         </div>
       </section>
