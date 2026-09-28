@@ -8,6 +8,8 @@ import {
   slugCondominio,
   type CondominioRow,
 } from '@/lib/condominios';
+import { getImoveisDoCondominio } from '@/lib/imoveis';
+import { getLancamentosList, isListItemApresentavel, type LancamentoListItem } from '@/lib/lancamentos';
 
 // Rota dinâmica /lotus-condominio/[slug] — lê cada condomínio do Supabase.
 //
@@ -28,6 +30,31 @@ const SITE = 'https://www.lotusbrokers.com.br';
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 type Params = { params: Promise<{ slug: string }> };
+
+/** Texto comparável: sem acento, sem caixa. "Jardim Ermida" casa com "jardim ermida". */
+function chave(texto: string | null | undefined): string {
+  return (texto ?? '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim();
+}
+
+/**
+ * Peso de proximidade: 2 = mesmo bairro, 1 = mesma cidade, 0 = nem um nem outro.
+ *
+ * Compara por CONTÉM e não por igualdade porque os dois lados guardam o local de
+ * jeitos diferentes: o condomínio tem bairro e cidade em campos separados, o
+ * lançamento traz "Bairro · Cidade" numa string só.
+ */
+function proximidade(texto: string, bairro: string | null, cidade: string | null): number {
+  const t = chave(texto);
+  const b = chave(bairro);
+  const c = chave(cidade);
+  if (b && t.includes(b)) return 2;
+  if (c && t.includes(c)) return 1;
+  return 0;
+}
 
 /**
  * Resolve o parâmetro da URL, aceitando slug novo ou UUID antigo.
@@ -147,7 +174,36 @@ export default async function LotusCondominioPage({ params }: Params) {
   if (redirecionarPara) permanentRedirect(redirecionarPara);
   if (!cond) notFound();
 
-  const relacionados = await getCondominiosCards(cond.id);
+  // Em paralelo: os três dependem só do que já temos em mãos. Os lançamentos
+  // falham sozinhos — sem eles a seção de semelhantes mostra só condomínios.
+  const [todosRelacionados, imoveis, lancamentosTodos] = await Promise.all([
+    getCondominiosCards(cond.id),
+    getImoveisDoCondominio(cond.id),
+    getLancamentosList().catch((e) => {
+      console.error('[condominio] lançamentos indisponíveis:', e);
+      return [] as LancamentoListItem[];
+    }),
+  ]);
+
+  // Semelhantes DE PERTO: mesmo bairro na frente, depois mesma cidade. Sem isso
+  // a lista vinha na ordem do banco e um condomínio de Itupeva podia abrir a
+  // seção na página de um de Jundiaí.
+  const relacionados = todosRelacionados
+    .map((r) => ({ r, peso: proximidade(`${r.bairro ?? ''} ${r.cidade ?? ''}`, cond.bairro, cond.cidade) }))
+    .sort((a, b) => b.peso - a.peso || a.r.nome.localeCompare(b.r.nome, 'pt-BR'))
+    .map((x) => x.r)
+    .slice(0, 4);
+
+  // Lançamentos da MESMA região, só com página própria e foto — card que não
+  // leva a lugar nenhum não ajuda quem está comparando.
+  const lancamentos = lancamentosTodos
+    .filter(isListItemApresentavel)
+    .filter((l) => l.href)
+    .map((l) => ({ l, peso: proximidade(l.neighborhood + ' ' + l.city, cond.bairro, cond.cidade) }))
+    .filter((x) => x.peso > 0)
+    .sort((a, b) => b.peso - a.peso || a.l.name.localeCompare(b.l.name, 'pt-BR'))
+    .map((x) => x.l)
+    .slice(0, 4);
   const jsonLd = buildJsonLd(cond, slugCondominio(cond.nome));
 
   return (
@@ -159,7 +215,12 @@ export default async function LotusCondominioPage({ params }: Params) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(obj).replace(/</g, '\\u003c') }}
         />
       ))}
-      <LotusCondominio data={cond} relacionados={relacionados} />
+      <LotusCondominio
+        data={cond}
+        relacionados={relacionados}
+        imoveis={imoveis}
+        lancamentos={lancamentos}
+      />
     </>
   );
 }

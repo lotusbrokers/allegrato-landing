@@ -324,6 +324,7 @@ export default function LotusHome({
   bairroCounts,
   posts,
   oportunidades,
+  vitrineFixa,
   condominios,
 }: {
   whatsapp?: string;
@@ -340,6 +341,9 @@ export default function LotusHome({
   // Imóveis prontos da vitrine "Oportunidades da semana", já na ordem dos selos
   // do dashboard (ver oportunidadesDaSemana em lib/imoveis). Vazio → seção some.
   oportunidades?: ImovelBusca[];
+  // Empreendimentos curados que abrem a mesma vitrine (ver VITRINE_FIXA na
+  // rota). Aparecem antes dos imóveis e com selo próprio: não são prontos.
+  vitrineFixa?: DevelopmentCard[];
   // Condomínios do dashboard para a vitrine horizontal. Vazio → seção some.
   condominios?: CondominioCard[];
 } = {}) {
@@ -808,17 +812,46 @@ export default function LotusHome({
           é exatamente quem pode preferir chave na mão. A ordem vem dos selos
           marcados no dashboard, então a Lotus troca a vitrine sem deploy.
           Sem imóvel nenhum, a seção não existe — título sozinho é pior que nada. */}
-      {oportunidades && oportunidades.length > 0 && (
+      {((oportunidades?.length ?? 0) > 0 || (vitrineFixa?.length ?? 0) > 0) && (
         <section id="oportunidades" style={parseStyle('background:#f7f2e8;padding:110px 40px;')}>
           <div style={parseStyle('max-width:1280px;margin:0 auto;')}>
             <CarrosselCards
               eyebrow="Oportunidades da semana"
-              titulo="Prontos para morar, escolhidos a dedo."
-              descricao="Imóveis com chave na mão que a Lotus está acompanhando de perto agora. A lista muda conforme o que entra e sai."
+              titulo="Exclusividades Lotus desta semana."
+              descricao="Imóveis que só se acham aqui, mais o empreendimento da vez. A lista muda conforme o que entra e sai."
               verTodos={{ label: 'Ver todos os imóveis', href: '/lotus-busca' }}
               rotulo="Oportunidades da semana"
             >
-              {oportunidades.map((im) => (
+              {(vitrineFixa ?? []).map((d) => (
+                <Hoverable
+                  key={d.href ?? d.name}
+                  as="a"
+                  href={d.href ?? '/lotus-lancamentos'}
+                  target="_top"
+                  baseStyle={parseStyle('width:min(300px,78vw);display:flex;flex-direction:column;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 18px 44px -30px rgba(21,36,28,.35);transition:transform .3s ease, box-shadow .3s ease;')}
+                  hoverStyle={parseStyle('transform:translateY(-5px);box-shadow:0 30px 60px -30px rgba(21,36,28,.45)')}
+                >
+                  <div style={parseStyle('position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,#1d3a2c,#3f6249);')}>
+                    {d.img && <img src={d.img} alt={d.name} loading="lazy" decoding="async" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;')} />}
+                    <span style={parseStyle('position:absolute;top:13px;left:13px;background:rgba(21,36,28,.78);color:#f7f2e8;font-size:11.5px;font-weight:600;padding:6px 11px;border-radius:30px;')}>{d.location}</span>
+                    {/* Selo diferente do dos imóveis de propósito: este é
+                        empreendimento, não unidade pronta. */}
+                    <span style={parseStyle('position:absolute;top:13px;right:13px;background:#1d3a2c;color:#f7f2e8;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;border-radius:30px;')}>Lançamento</span>
+                  </div>
+                  <div style={parseStyle('padding:18px 20px 22px;display:flex;flex-direction:column;flex:1;')}>
+                    <h3 style={parseStyle("font-family:'Fraunces',serif;font-weight:400;font-size:21px;line-height:1.08;margin:0 0 7px;color:#15241c;")}>{d.name}</h3>
+                    <div style={parseStyle('font-size:13.5px;color:#3f6249;')}>{d.specs}</div>
+                    <div style={parseStyle('margin-top:auto;padding-top:16px;display:flex;align-items:flex-end;justify-content:space-between;gap:10px;')}>
+                      <div>
+                        <div style={parseStyle('font-size:11.5px;color:#8aa593;font-weight:500;')}>a partir de</div>
+                        <div style={parseStyle("font-family:'Fraunces',serif;font-size:21px;color:#1d3a2c;font-weight:400;")}>{d.price}</div>
+                      </div>
+                      <span style={parseStyle('color:#b18a4a;font-weight:600;font-size:13.5px;white-space:nowrap;')}>Conhecer →</span>
+                    </div>
+                  </div>
+                </Hoverable>
+              ))}
+              {(oportunidades ?? []).map((im) => (
                 <Hoverable
                   key={im.codigo}
                   as="a"
@@ -830,11 +863,10 @@ export default function LotusHome({
                   <div style={parseStyle('position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,#1d3a2c,#3f6249);')}>
                     <img src={im.img} alt={`${im.type} em ${im.neighborhood}, ${im.city}`} loading="lazy" decoding="async" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;')} />
                     <span style={parseStyle('position:absolute;top:13px;left:13px;background:rgba(21,36,28,.78);color:#f7f2e8;font-size:11.5px;font-weight:600;padding:6px 11px;border-radius:30px;')}>{im.neighborhood || im.city}</span>
-                    {/* Só o super destaque vira selo. Marcar os dois níveis na
-                        tela tiraria o sentido de haver dois níveis. */}
-                    {im.destaque === 2 && (
-                      <span style={parseStyle('position:absolute;top:13px;right:13px;background:#b18a4a;color:#15241c;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;border-radius:30px;')}>Destaque</span>
-                    )}
+                    {/* Todos os imóveis da vitrine são exclusivos — é o filtro
+                        da seção —, então o selo diz isso, que é a informação que
+                        importa para quem compra. */}
+                    <span style={parseStyle('position:absolute;top:13px;right:13px;background:#b18a4a;color:#15241c;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;border-radius:30px;')}>Exclusivo</span>
                   </div>
                   <div style={parseStyle('padding:18px 20px 22px;display:flex;flex-direction:column;flex:1;')}>
                     <h3 style={parseStyle("font-family:'Fraunces',serif;font-weight:400;font-size:21px;line-height:1.08;margin:0 0 7px;color:#15241c;")}>{im.type} em {im.neighborhood || im.city}</h3>

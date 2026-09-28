@@ -43,6 +43,8 @@ export type ImovelRow = {
   /** Selos marcados no dashboard. Ordenam "Oportunidades da semana" na home. */
   destaque: boolean | null;
   super_destaque: boolean | null;
+  /** Exclusividade de venda com a Lotus. Define quem entra na vitrine da home. */
+  exclusivo: boolean | null;
 };
 
 function capaUrl(fotos: FotoImovel[] | null): string | null {
@@ -77,7 +79,7 @@ export function formatValor(v: number | null): string {
 }
 
 const SELECT_FULL =
-  'id, tenant_id, codigo_imovel, titulo, tipo, tipo_simplificado, finalidade, logradouro, numero, bairro, cidade, estado, cep, area_total, area_util, quartos, suites, banheiros, vagas, salas, valor_venda, valor_locacao, valor_condominio, valor_iptu, descricao, fotos, metragem_m2, condominio_id, link_video, tour_virtual, destaque, super_destaque';
+  'id, tenant_id, codigo_imovel, titulo, tipo, tipo_simplificado, finalidade, logradouro, numero, bairro, cidade, estado, cep, area_total, area_util, quartos, suites, banheiros, vagas, salas, valor_venda, valor_locacao, valor_condominio, valor_iptu, descricao, fotos, metragem_m2, condominio_id, link_video, tour_virtual, destaque, super_destaque, exclusivo';
 
 /* ------------------------------------------------------------------ */
 /* Busca (/lotus-busca) — imóveis reais aprovados, formato da UI        */
@@ -115,6 +117,8 @@ export type ImovelBusca = {
    * número é mais simples de ler do que desempatar duas flags em toda chamada.
    */
   destaque: 0 | 1 | 2;
+  /** Imóvel com exclusividade Lotus. É o filtro da vitrine da home. */
+  exclusivo: boolean;
 };
 
 export { resumoDescricao };
@@ -172,26 +176,60 @@ function toBusca(row: ImovelRow, index: number): ImovelBusca {
     y,
     recent: index, // ordem de retorno do banco = proxy de "mais recentes"
     destaque: row.super_destaque ? 2 : row.destaque ? 1 : 0,
+    exclusivo: row.exclusivo === true,
   };
 }
 
 /**
  * Os imóveis que abrem a vitrine "Oportunidades da semana" da home.
  *
- * A ordem é a do dashboard: super destaque na frente, depois destaque, e só
- * então os demais na ordem em que o banco devolve (proxy de mais recentes).
- * Quem decide a vitrine é quem marca o selo, não uma regra escrita aqui — e
- * por isso a lista nunca fica vazia: sem nenhum selo, ela mostra os mais
- * recentes em vez de sumir da home.
+ * Só EXCLUSIVOS, por decisão da Lotus (28/09/2026): a vitrine da home é para o
+ * que só se acha aqui. O filtro é a flag exclusivo do dashboard, então a
+ * vitrine se edita lá, sem deploy — mas ela também encolhe sozinha se as
+ * exclusividades acabarem, e nesse caso a seção some da home em vez de virar
+ * uma fileira de qualquer imóvel.
+ *
+ * Entre os exclusivos, a ordem ainda é a dos selos: super destaque na frente,
+ * depois destaque, depois os demais na ordem do banco (proxy de recentes).
  *
  * Só entra imóvel com foto: card sem imagem numa vitrine horizontal vira um
  * bloco de gradiente no meio da fileira. Mesmo critério das outras vitrines.
  */
 export function oportunidadesDaSemana(imoveis: ImovelBusca[], limite = 10): ImovelBusca[] {
   return imoveis
-    .filter((i) => i.img)
+    .filter((i) => i.exclusivo && i.img)
     .slice()
     .sort((a, b) => b.destaque - a.destaque || a.recent - b.recent)
+    .slice(0, limite);
+}
+
+/**
+ * Imóveis de um condomínio, para a página dele.
+ *
+ * Até hoje aquela seção mostrava quatro cards INVENTADOS — fotos de outros
+ * empreendimentos e "Consulte metragem e vagas" — em todas as 49 páginas,
+ * porque a busca por condomínio não existia quando a página foi portada. Existe
+ * agora: portal_imoveis tem condominio_id.
+ *
+ * Devolve lista vazia quando não há nenhum, e é a página que decide o que
+ * mostrar no lugar. Hoje 8 dos 49 condomínios têm imóvel cadastrado.
+ */
+export async function getImoveisDoCondominio(
+  condominioId: string,
+  limite = 6,
+): Promise<ImovelBusca[]> {
+  const { data, error } = await supabase
+    .from('portal_imoveis')
+    .select(SELECT_FULL)
+    .eq('tenant_id', TENANT_ID)
+    .eq('condominio_id', condominioId);
+  if (error) {
+    console.error('[getImoveisDoCondominio] erro Supabase:', error.message);
+    return [];
+  }
+  return (data as unknown as ImovelRow[])
+    .map((row, i) => toBusca(row, i))
+    .filter((i) => i.img)
     .slice(0, limite);
 }
 

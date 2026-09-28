@@ -109,6 +109,21 @@ function comCapaDaHome(d: DevelopmentCard): DevelopmentCard {
   return capa ? { ...d, img: capa } : d;
 }
 
+/**
+ * Empreendimentos que entram na vitrine "Oportunidades da semana" junto com os
+ * imóveis exclusivos.
+ *
+ * Existe porque a vitrine é de IMÓVEIS e a Lotus quis um LANÇAMENTO junto
+ * (Reserva Castanheira, 28/09/2026). São coisas diferentes, e o card de cada um
+ * diz qual é — sem isso, um loteamento em obras apareceria como pronto para
+ * morar.
+ *
+ * Chave = o href da landing, igual a DESTAQUES_DA_HOME e CAPAS_DA_HOME. Vem
+ * primeiro na fileira, na ordem escrita aqui. Href que não existir mais na
+ * listagem é ignorado sozinho.
+ */
+const VITRINE_FIXA: readonly string[] = ['/reserva-castanheira'];
+
 /** Os destaques na frente, preservando a ordem original para os demais. */
 function comDestaquesNaFrente(lista: DevelopmentCard[]): DevelopmentCard[] {
   const destaque = (d: DevelopmentCard) => DESTAQUES_DA_HOME.indexOf(d.href ?? "");
@@ -159,9 +174,16 @@ export default async function LotusHomePage() {
   const destaques = publicados(POSTS).slice(0, 3);
 
   // "Oportunidades da semana": sai da lista de imóveis que JÁ foi buscada acima
-  // para a contagem por bairro — nenhuma ida extra ao banco. A ordem é a dos
-  // selos do dashboard (ver oportunidadesDaSemana).
+  // para a contagem por bairro — nenhuma ida extra ao banco. Só exclusivos, e
+  // entre eles a ordem é a dos selos do dashboard (ver oportunidadesDaSemana).
   const oportunidades = oportunidadesDaSemana(imoveis);
+
+  // Os empreendimentos curados da vitrine, na ordem de VITRINE_FIXA. Saem da
+  // mesma lista de lançamentos que a home já usa, então herdam capa e preço do
+  // dashboard sem nada escrito à mão.
+  const vitrineFixa = VITRINE_FIXA.map((href) =>
+    apresentaveis.find((d) => d.href === href),
+  ).filter((d): d is DevelopmentCard => Boolean(d));
 
   // Doze na vitrine: o suficiente para a faixa ter o que deslizar sem carregar
   // 48 imagens na home. O resto está no índice, que é onde o "ver todos" leva.
@@ -182,6 +204,7 @@ export default async function LotusHomePage() {
         bairroCounts={bairroCounts}
         posts={destaques}
         oportunidades={oportunidades}
+        vitrineFixa={vitrineFixa}
         condominios={condominios}
       />
     </>

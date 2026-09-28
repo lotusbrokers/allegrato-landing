@@ -29,6 +29,8 @@ import React, {
   type ReactNode,
 } from 'react';
 import type { CondominioRow, CondominioCard } from '@/lib/condominios';
+import type { ImovelBusca } from '@/lib/imoveis';
+import type { LancamentoListItem } from '@/lib/lancamentos';
 
 /* ------------------------------------------------------------------ */
 /* Helpers                                                             */
@@ -265,15 +267,11 @@ function buildGuide(data: CondominioRow) {
   ];
 }
 
-// imoveis: sem fonte por condomínio no escopo atual — vitrine genérica na paleta
-// (títulos/preços neutros, sem cravar dados de um imóvel específico).
-// ponytail: vitrine estática; trocar por busca real de imóveis do condomínio quando existir a lib.
-const imoveis = [
-  { slot: 'cond-im-1', img: '/forest-houses/a002.jpg', tag: 'Revenda', title: 'Casa à venda', specs: 'Consulte metragem e vagas' },
-  { slot: 'cond-im-2', img: '/vistta-castanho/a007.jpg', tag: 'Revenda', title: 'Apartamento à venda', specs: 'Consulte metragem e vagas' },
-  { slot: 'cond-im-3', img: '/gran-ville-santo-angelo/a038.jpg', tag: 'Revenda', title: 'Unidade disponível', specs: 'Consulte metragem e vagas' },
-  { slot: 'cond-im-4', img: '/auten-jundiai/a023.jpg', tag: 'Lançamento', title: 'Unidade disponível', specs: 'Consulte metragem e vagas' },
-];
+// A vitrine estática de quatro imóveis saiu em 28/09/2026. Ela mostrava fotos
+// de OUTROS empreendimentos com "Consulte metragem e vagas" nas 49 páginas, e
+// os cards levavam a /lotus-imovel, que só redireciona. Existia porque não havia
+// busca por condomínio quando a página foi portada; agora há, e os imóveis
+// chegam pela prop `imoveis` (ver getImoveisDoCondominio).
 
 /* ------------------------------------------------------------------ */
 /* Componente                                                          */
@@ -282,10 +280,24 @@ const imoveis = [
 export default function LotusCondominio({
   data,
   relacionados,
+  imoveis = [],
+  lancamentos = [],
   whatsapp = WHATSAPP_DEFAULT,
 }: {
   data: CondominioRow;
   relacionados: CondominioCard[];
+  /**
+   * Imóveis REAIS deste condomínio, vindos da rota. Vazio é o caso comum:
+   * hoje 8 dos 49 condomínios têm imóvel cadastrado, e os outros 41 mostram o
+   * convite para falar com um corretor no lugar da vitrine.
+   */
+  imoveis?: ImovelBusca[];
+  /**
+   * Lançamentos da mesma região, já filtrados e ordenados pela rota. Entram na
+   * seção de semelhantes ao lado dos condomínios: quem compara condomínio
+   * costuma comparar o que está sendo lançado por perto.
+   */
+  lancamentos?: LancamentoListItem[];
   whatsapp?: string;
 }) {
   // state do Component dc: { openFaq: 0, leadDone: false }
@@ -450,30 +462,6 @@ export default function LotusCondominio({
         </div>
       </section>
 
-      {/* IMÓVEIS NO CONDOMÍNIO */}
-      <section style={parseStyle('background:#ece2cf;padding:90px 32px;')}>
-        <div style={parseStyle('max-width:1200px;margin:0 auto;')}>
-          <div style={parseStyle('display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:36px;')}>
-            <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(26px,3vw,40px);color:#15241c;margin:0;")}>Imóveis no {nome}</h2>
-            <a target="_top" href="/lotus-busca" style={parseStyle('display:inline-flex;align-items:center;gap:8px;color:#1d3a2c;font-weight:600;font-size:15px;border-bottom:1.5px solid #b18a4a;padding-bottom:3px;')}>Ver todos no condomínio <span>→</span></a>
-          </div>
-          <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;')}>
-            {imoveis.map((m, i) => (
-              <Hoverable key={i} as="a" target="_top" href="/lotus-imovel" baseStyle={parseStyle('display:flex;flex-direction:column;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 16px 40px -30px rgba(21,36,28,.34);transition:transform .3s ease;')} hoverStyle={parseStyle('transform:translateY(-4px)')}>
-                <div style={parseStyle('position:relative;aspect-ratio:4/3;background:#1d3a2c;')}>
-                  <ImageSlot id={m.slot} src={m.img} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={m.title} />
-                  <span style={parseStyle('position:absolute;top:12px;left:12px;background:rgba(29,58,44,.82);color:#f7f2e8;font-size:11px;font-weight:600;padding:5px 11px;border-radius:30px;')}>{m.tag}</span>
-                </div>
-                <div style={parseStyle('padding:18px;')}>
-                  <div style={parseStyle("font-family:'Fraunces',serif;font-size:19px;color:#1d3a2c;")}>{m.title}</div>
-                  <div style={parseStyle('font-size:12.5px;color:#3f6249;margin-top:6px;')}>{m.specs}</div>
-                </div>
-              </Hoverable>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* LOCALIZAÇÃO */}
       <section style={parseStyle('background:#1d3a2c;padding:90px 32px;')}>
         <div style={parseStyle('max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:stretch;')}>
@@ -505,6 +493,57 @@ export default function LotusCondominio({
             )}
             <a target="_top" href="/lotus-bairro" style={parseStyle('display:inline-flex;align-items:center;gap:8px;color:#cdab6e;font-weight:600;font-size:14.5px;border-bottom:1.5px solid #b18a4a;padding-bottom:3px;')}>Conhecer a região de {cidade} <span>→</span></a>
           </div>
+        </div>
+      </section>
+
+      {/* IMÓVEIS NO CONDOMÍNIO — só quando há. Vitrine vazia com "ver todos"
+          que não leva a nada é pior do que não ter vitrine. */}
+      {imoveis.length > 0 && (
+        <section style={parseStyle('background:#ece2cf;padding:90px 32px;')}>
+          <div style={parseStyle('max-width:1200px;margin:0 auto;')}>
+            <div style={parseStyle('display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:36px;')}>
+              <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(26px,3vw,40px);color:#15241c;margin:0;")}>
+                {imoveis.length === 1 ? 'Imóvel disponível no ' : 'Imóveis disponíveis no '}{nome}
+              </h2>
+              <a target="_top" href="/lotus-busca" style={parseStyle('display:inline-flex;align-items:center;gap:8px;color:#1d3a2c;font-weight:600;font-size:15px;border-bottom:1.5px solid #b18a4a;padding-bottom:3px;')}>Ver todos os imóveis <span>→</span></a>
+            </div>
+            <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;')}>
+              {imoveis.map((im) => (
+                <Hoverable key={im.codigo} as="a" target="_top" href={`/lotus-imovel/${im.codigo}`} baseStyle={parseStyle('display:flex;flex-direction:column;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 16px 40px -30px rgba(21,36,28,.34);transition:transform .3s ease;')} hoverStyle={parseStyle('transform:translateY(-4px)')}>
+                  <div style={parseStyle('position:relative;aspect-ratio:4/3;background:#1d3a2c;')}>
+                    <ImageSlot id={im.slot} src={im.img} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={`${im.type} no ${nome}`} />
+                    {im.exclusivo && (
+                      <span style={parseStyle('position:absolute;top:12px;left:12px;background:#b18a4a;color:#15241c;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:5px 11px;border-radius:30px;')}>Exclusivo Lotus</span>
+                    )}
+                  </div>
+                  <div style={parseStyle('padding:18px;')}>
+                    <div style={parseStyle("font-family:'Fraunces',serif;font-size:19px;color:#1d3a2c;")}>{im.type}</div>
+                    <div style={parseStyle('font-size:12.5px;color:#3f6249;margin-top:6px;')}>
+                      {[im.beds ? `${im.beds} dorm.` : null, im.area ? `${im.area} m²` : null, im.vagas ? `${im.vagas} vaga${im.vagas > 1 ? 's' : ''}` : null].filter(Boolean).join(' · ') || 'Consulte as condições'}
+                    </div>
+                    <div style={parseStyle("font-family:'Fraunces',serif;font-size:20px;color:#15241c;margin-top:12px;")}>{im.price}</div>
+                  </div>
+                </Hoverable>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* CTA DO CORRETOR — sempre, tendo imóvel listado ou não. Quando há lista,
+          ele é o "e se nenhum destes servir"; quando não há, é o único caminho.
+          Nenhum corretor é nomeado: o WhatsApp é o da Lotus, e inventar um nome
+          aqui seria publicar pessoa que não existe. */}
+      <section style={parseStyle('background:#f7f2e8;padding:90px 32px;')}>
+        <div style={parseStyle('max-width:760px;margin:0 auto;text-align:center;')}>
+          <div style={parseStyle('font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#b18a4a;margin-bottom:14px;')}>Unidades no {nome}</div>
+          <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(26px,3vw,40px);color:#15241c;margin:0 0 16px;line-height:1.08;")}>Fale com um corretor posicionado no {nome}.</h2>
+          {/* O texto serve aos dois casos: nem promete "em breve" quando não há
+              anúncio, nem repete a lista quando há. */}
+          <p style={parseStyle('font-size:17px;color:#3f6249;font-weight:300;line-height:1.55;max-width:560px;margin:0 auto 30px;')}>
+            Nem tudo que está à venda no {nome} chega aos portais. Diga o que você procura e quem acompanha o condomínio avisa assim que aparecer, muitas vezes antes de virar anúncio.
+          </p>
+          <Hoverable as="a" href={waLink} target="_blank" rel="noopener" baseStyle={parseStyle('display:inline-flex;align-items:center;gap:8px;background:#1d3a2c;color:#f7f2e8;font-weight:600;font-size:16px;padding:15px 30px;border-radius:40px;transition:background .2s;')} hoverStyle={parseStyle('background:#15241c')}>Falar com um corretor <span>→</span></Hoverable>
         </div>
       </section>
 
@@ -572,10 +611,15 @@ export default function LotusCondominio({
         </div>
       </section>
 
-      {/* CONDOMÍNIOS RELACIONADOS */}
+      {/* SEMELHANTES E PERTO DAQUI — condomínios e lançamentos da mesma região.
+          A rota já entrega os dois ordenados por proximidade (mesmo bairro
+          primeiro). Sem nenhum dos dois, a seção não existe. */}
+      {(relacionados.length > 0 || lancamentos.length > 0) && (
       <section style={parseStyle('background:#f7f2e8;padding:90px 32px;')}>
         <div style={parseStyle('max-width:1200px;margin:0 auto;')}>
-          <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(22px,2.6vw,32px);color:#15241c;margin:0 0 28px;")}>Condomínios parecidos na região</h2>
+          <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(22px,2.6vw,32px);color:#15241c;margin:0 0 28px;")}>
+            {lancamentos.length > 0 ? `Perto do ${nome}` : 'Condomínios parecidos na região'}
+          </h2>
           <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;')}>
             {relacionados.map((r) => (
               <Hoverable key={r.id} as="a" href={`/lotus-condominio/${r.slug}`} baseStyle={parseStyle('display:flex;flex-direction:column;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 14px 36px -32px rgba(21,36,28,.32);transition:transform .25s ease;')} hoverStyle={parseStyle('transform:translateY(-3px)')}>
@@ -586,9 +630,24 @@ export default function LotusCondominio({
                 </div>
               </Hoverable>
             ))}
+            {/* Lançamento é outra coisa que condomínio pronto, e o selo diz
+                isso — sem ele, os dois tipos de card viram a mesma promessa. */}
+            {lancamentos.map((l) => (
+              <Hoverable key={l.id} as="a" href={l.href ?? '/lotus-lancamentos'} baseStyle={parseStyle('display:flex;flex-direction:column;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 14px 36px -32px rgba(21,36,28,.32);transition:transform .25s ease;')} hoverStyle={parseStyle('transform:translateY(-3px)')}>
+                <div style={parseStyle('position:relative;aspect-ratio:16/10;background:#1d3a2c;')}>
+                  <ImageSlot id={`lanc-rel-${l.id}`} src={l.img ?? undefined} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={l.name} />
+                  <span style={parseStyle('position:absolute;top:11px;left:11px;background:#1d3a2c;color:#f7f2e8;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:30px;')}>Lançamento</span>
+                </div>
+                <div style={parseStyle('padding:16px 18px;')}>
+                  <h3 style={parseStyle("font-family:'Fraunces',serif;font-size:18px;color:#15241c;margin:0 0 4px;line-height:1.1;")}>{l.name}</h3>
+                  <div style={parseStyle('font-size:12.5px;color:#8aa593;')}>{[l.neighborhood, l.city].filter(Boolean).join(', ')}</div>
+                </div>
+              </Hoverable>
+            ))}
           </div>
         </div>
       </section>
+      )}
 
       {/* FOOTER */}
       <section id="mapa" style={parseStyle('background:#1d3a2c;padding:72px 32px;')}>
