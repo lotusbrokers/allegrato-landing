@@ -16,7 +16,7 @@ import { join } from 'node:path';
  * basta: o link aparece sozinho, sem lista para esquecer de atualizar.
  *
  * `fs` é seguro aqui porque só Server Components chegam neste módulo
- * (app/lotus-home e app/lotus-lancamentos, via lancamentos.ts).
+ * (app/page.tsx e app/lotus-lancamentos, via lancamentos.ts).
  */
 
 // 'construtoras' entrou em 08/09/2026 e não tem o prefixo lotus-: sem estar

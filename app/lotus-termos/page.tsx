@@ -62,13 +62,13 @@ export default function LotusTermosPage() {
       <style dangerouslySetInnerHTML={{ __html: css }} />
       <header>
         <div className="bar">
-          <a className="logo" href="../lotus-home/">
+          <a className="logo" href="/">
             <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" style={{ height: 34, width: 'auto', display: 'block' }} />
             <span>
               Lotus<i>BROKERS</i>
             </span>
           </a>
-          <a className="back" href="../lotus-home/">
+          <a className="back" href="/">
             ← Voltar ao site
           </a>
         </div>
@@ -262,7 +262,7 @@ export default function LotusTermosPage() {
         </p>
 
         <p style={{ marginTop: 40 }}>
-          <a href="../lotus-home/">← Voltar para a Lotus Brokers</a>
+          <a href="/">← Voltar para a Lotus Brokers</a>
         </p>
       </main>
       <footer>

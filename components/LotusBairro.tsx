@@ -304,7 +304,7 @@ export default function LotusBairro({
 
       {/* BREADCRUMB */}
       <div style={parseStyle('max-width:1200px;margin:0 auto;padding:18px 32px 0;font-size:13px;color:#8aa593;')}>
-        <Hoverable as="a" href="/lotus-bairro" target="_top" baseStyle={parseStyle('color:#3f6249;')} hoverStyle={parseStyle('color:#b18a4a')}>Bairros</Hoverable> › <Link href="/lotus-home" style={parseStyle('color:#3f6249;')}>{bairro.cidade}</Link> › <span style={parseStyle('color:#15241c;')}>{nomeBairro}</span>
+        <Hoverable as="a" href="/lotus-bairro" target="_top" baseStyle={parseStyle('color:#3f6249;')} hoverStyle={parseStyle('color:#b18a4a')}>Bairros</Hoverable> › <Link href="/" style={parseStyle('color:#3f6249;')}>{bairro.cidade}</Link> › <span style={parseStyle('color:#15241c;')}>{nomeBairro}</span>
       </div>
 
       {/* HERO */}
@@ -497,7 +497,7 @@ export default function LotusBairro({
             <div style={parseStyle('display:flex;flex-direction:column;gap:14px;')}>
               {/* sc-for list=posts as=p (3) */}
               {posts.map((p, i) => (
-                <Hoverable key={i} as="a" href="/lotus-home" target="_top" baseStyle={parseStyle('display:flex;gap:16px;align-items:center;background:#fff;border-radius:14px;padding:16px;box-shadow:0 14px 36px -32px rgba(21,36,28,.34);transition:transform .25s ease;')} hoverStyle={parseStyle('transform:translateY(-2px)')}>
+                <Hoverable key={i} as="a" href="/" target="_top" baseStyle={parseStyle('display:flex;gap:16px;align-items:center;background:#fff;border-radius:14px;padding:16px;box-shadow:0 14px 36px -32px rgba(21,36,28,.34);transition:transform .25s ease;')} hoverStyle={parseStyle('transform:translateY(-2px)')}>
                   <div style={parseStyle('width:74px;height:60px;border-radius:10px;background:#1d3a2c;flex-shrink:0;overflow:hidden;position:relative;')}><ImageSlot id={p.slot} src={p.img} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt="post" /></div>
                   <div>
                     <div style={parseStyle('font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#b18a4a;margin-bottom:4px;')}>{p.cat}</div>
@@ -547,7 +547,7 @@ export default function LotusBairro({
                 <Hoverable as="a" href="/lotus-busca" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Comprar &amp; alugar</Hoverable>
                 <Hoverable as="a" href="/lotus-anunciar" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Anunciar imóvel</Hoverable>
                 <Hoverable as="a" href="/lotus-bairro" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Bairros</Hoverable>
-                <Hoverable as="a" href="/lotus-home#blog" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Blog</Hoverable>
+                <Hoverable as="a" href="/#blog" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Blog</Hoverable>
               </div>
             </div>
             <div>

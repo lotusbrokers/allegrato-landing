@@ -316,7 +316,7 @@ export default function LotusRecrutamento({
       {/* HEADER */}
       <header style={parseStyle('position:sticky;top:0;z-index:60;background:#15241c;')}>
         <div style={parseStyle('max-width:1200px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:32px;')}>
-          <a target="_top" href="/lotus-home" style={parseStyle('display:flex;align-items:center;gap:11px;')}>
+          <a target="_top" href="/" style={parseStyle('display:flex;align-items:center;gap:11px;')}>
             <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" style={{ height: 34, width: 'auto', display: 'block' }} />
           </a>
           <nav style={parseStyle('display:flex;align-items:center;gap:24px;font-size:14.5px;font-weight:500;color:rgba(247,242,232,.85);')}>
@@ -325,8 +325,8 @@ export default function LotusRecrutamento({
             <Hoverable as="a" target="_top" href="/lotus-bairro" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Bairros</Hoverable>
             <Hoverable as="a" target="_top" href="/lotus-sobre" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>A Lotus</Hoverable>
             <Hoverable as="a" target="_top" href="/lotus-corretores" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Corretores</Hoverable>
-            <Hoverable as="a" target="_top" href="/lotus-home#guias" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Guias</Hoverable>
-            <Hoverable as="a" target="_top" href="/lotus-home#blog" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Blog</Hoverable>
+            <Hoverable as="a" target="_top" href="/#guias" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Guias</Hoverable>
+            <Hoverable as="a" target="_top" href="/#blog" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Blog</Hoverable>
           </nav>
           <Hoverable as="a" href="#candidatar" baseStyle={parseStyle('background:#b18a4a;color:#15241c;font-weight:600;font-size:14px;padding:9px 17px;border-radius:40px;transition:background .2s;')} hoverStyle={parseStyle('background:#cdab6e')}>Quero ser corretor</Hoverable>
         </div>
@@ -585,7 +585,7 @@ export default function LotusRecrutamento({
                 <Hoverable as="a" target="_top" href="/lotus-busca" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Comprar &amp; alugar</Hoverable>
                 <Hoverable as="a" target="_top" href="/lotus-anunciar" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Anunciar imóvel</Hoverable>
                 <Hoverable as="a" target="_top" href="/lotus-bairro" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Bairros</Hoverable>
-                <Hoverable as="a" target="_top" href="/lotus-home#blog" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Blog</Hoverable>
+                <Hoverable as="a" target="_top" href="/#blog" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Blog</Hoverable>
               </div>
             </div>
             <div>

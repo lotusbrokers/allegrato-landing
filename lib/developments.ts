@@ -1,6 +1,6 @@
 // Empreendimentos curados do site estático — fonte de fallback da home.
 // Módulo compartilhável (sem 'use client'): importado tanto pelo Server Component
-// (app/lotus-home/page.tsx, que faz o merge com o Supabase) quanto pelo Client
+// (app/page.tsx, que faz o merge com o Supabase) quanto pelo Client
 // Component (LotusHome). Importar isto de um módulo 'use client' para o server
 // resultava em `undefined` no bundle do servidor — por isso vive aqui.
 

@@ -221,7 +221,7 @@ export default function LotusHeader({
   return (
     <header style={S.header}>
       <div style={S.inner(maxWidth)}>
-        <Link href="/lotus-home" style={S.logo}>
+        <Link href="/" style={S.logo}>
           <LotusMark />
         </Link>
 

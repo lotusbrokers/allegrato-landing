@@ -372,7 +372,7 @@ export default function LotusCondominio({
 
       {/* BREADCRUMB */}
       <div style={parseStyle('max-width:1200px;margin:0 auto;padding:18px 32px 0;font-size:13px;color:#8aa593;')}>
-        <Hoverable as="a" target="_top" href="/lotus-condominio" baseStyle={parseStyle('color:#3f6249;')} hoverStyle={parseStyle('color:#b18a4a')}>Condomínios</Hoverable> › <a target="_top" href="/lotus-home" style={parseStyle('color:#3f6249;')}>{cidade}</a> › <span style={parseStyle('color:#15241c;')}>{nome}</span>
+        <Hoverable as="a" target="_top" href="/lotus-condominio" baseStyle={parseStyle('color:#3f6249;')} hoverStyle={parseStyle('color:#b18a4a')}>Condomínios</Hoverable> › <a target="_top" href="/" style={parseStyle('color:#3f6249;')}>{cidade}</a> › <span style={parseStyle('color:#15241c;')}>{nome}</span>
       </div>
 
       {/* HERO */}
@@ -686,7 +686,7 @@ export default function LotusCondominio({
                 <Hoverable as="a" target="_top" href="/lotus-busca" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Comprar &amp; alugar</Hoverable>
                 <Hoverable as="a" target="_top" href="/lotus-anunciar" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Anunciar imóvel</Hoverable>
                 <Hoverable as="a" target="_top" href="/lotus-bairro" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Bairros</Hoverable>
-                <Hoverable as="a" target="_top" href="/lotus-home#blog" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Blog</Hoverable>
+                <Hoverable as="a" target="_top" href="/#blog" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Blog</Hoverable>
               </div>
             </div>
             <div>

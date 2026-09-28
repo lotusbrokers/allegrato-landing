@@ -253,7 +253,7 @@ const PERFIS_PLACEHOLDER_ATIVOS = false;
  * blog logo abaixo já teve e que já foi resolvido do mesmo jeito.
  *
  * Aqui fica só o que é da home: o slot da imagem. A contagem vem do banco
- * (prop bairroCounts), calculada em app/lotus-home/page.tsx.
+ * (prop bairroCounts), calculada em app/page.tsx.
  */
 const CARDS_BAIRRO = [
   { bairroSlug: 'eloy-chaves', slot: 'lotus-bairro-eloy' },

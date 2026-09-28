@@ -596,7 +596,7 @@ input,select,textarea{width:100%;max-width:100%}
         var ini = document.createElement('span');
         ini.className = 'lt-atalhos';
         ini.style.marginRight = '12px';
-        ini.innerHTML = pilula('/lotus-home', CASA, 'Início');
+        ini.innerHTML = pilula('/', CASA, 'Início');
         // So da para entrar como primeiro filho do menu quando a marca esta
         // FORA dele: em Reserva Castanheira, Santorini e Oasis o <nav> guarda
         // logo, menu e CTAs no mesmo flex, e prender no comeco punha o
@@ -625,7 +625,7 @@ input,select,textarea{width:100%;max-width:100%}
       var linha = document.createElement('div');
       linha.className = 'lt-atalhos';
       linha.style.cssText = 'width:100%;margin-right:0;padding-bottom:10px;box-sizing:border-box';
-      linha.innerHTML = pilula('/lotus-home', CASA, 'Início') + pilula('/lotus-lancamentos', SETA, 'Voltar');
+      linha.innerHTML = pilula('/', CASA, 'Início') + pilula('/lotus-lancamentos', SETA, 'Voltar');
       barra.appendChild(linha);
       // Alinha com o logo: cada pagina usa um padding proprio na barra.
       var logo = barra.querySelector('a');

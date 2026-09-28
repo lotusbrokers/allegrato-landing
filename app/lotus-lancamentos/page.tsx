@@ -7,7 +7,7 @@ import {
   type LancamentoListItem,
 } from '@/lib/lancamentos';
 
-// ISR: revalida a cada 1h. Mesmo padrão de app/lotus-home/page.tsx.
+// ISR: revalida a cada 1h. Mesmo padrão de app/page.tsx.
 export const revalidate = 3600;
 
 function toEmpItem(item: LancamentoListItem, i: number): EmpItem {

@@ -19,7 +19,7 @@ export const runtime = 'nodejs';
 // Páginas que dependem dos dados de `lancamentos`. Revalidadas por padrão quando
 // o corpo não especifica `path`. Manter em sincronia com as rotas que leem o
 // Supabase (hoje: home e a listagem de lançamentos).
-const DEFAULT_PATHS = ['/lotus-home', '/lotus-lancamentos'];
+const DEFAULT_PATHS = ['/', '/lotus-lancamentos'];
 
 // Comparação de tamanho constante (evita timing attack no segredo).
 function safeEqual(a: string, b: string): boolean {

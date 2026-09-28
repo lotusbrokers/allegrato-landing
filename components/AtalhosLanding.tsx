@@ -282,7 +282,7 @@ export default function AtalhosLanding() {
   // renders e o React quebra por isso.
   if (!montagem) return null;
 
-  const inicio = <Atalho href="/lotus-home" rotulo="Início" icone={<IconeCasa />} cor={cor} />;
+  const inicio = <Atalho href="/" rotulo="Início" icone={<IconeCasa />} cor={cor} />;
   const voltar = <Atalho href="/lotus-lancamentos" rotulo="Voltar" icone={<IconeSeta />} cor={cor} />;
 
   if (montagem.modo === 'inline') {

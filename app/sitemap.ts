@@ -35,7 +35,7 @@ const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.lotusbrokers.com.b
 // aquela continua sendo só redirecionamento.
 /** Páginas institucionais e de listagem, que existem independentemente de dados. */
 const FIXAS: { rota: string; prioridade: number; frequencia: MetadataRoute.Sitemap[number]['changeFrequency'] }[] = [
-  { rota: '/lotus-home', prioridade: 1.0, frequencia: 'daily' },
+  { rota: '/', prioridade: 1.0, frequencia: 'daily' },
   { rota: '/lotus-busca', prioridade: 0.9, frequencia: 'daily' },
   { rota: '/lotus-lancamentos', prioridade: 0.9, frequencia: 'daily' },
   { rota: '/lotus-bairro', prioridade: 0.7, frequencia: 'weekly' },

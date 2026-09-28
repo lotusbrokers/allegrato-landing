@@ -11,7 +11,7 @@ const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.lotusbrokers.com.b
  * artigo marcado para amanha so apareceria no proximo push.
  *
  * A janela de ate uma hora depois da meia-noite e aceitavel para blog, e e
- * o mesmo intervalo que /lotus-home ja usa.
+ * o mesmo intervalo que a home ja usa.
  */
 export const revalidate = 3600;
 
