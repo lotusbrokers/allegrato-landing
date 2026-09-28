@@ -40,6 +40,109 @@ export const CATS: Cat[] = [
   { id: 'Corretor', label: 'Quero ser corretor' },
 ];
 
+/* ------------------------------------------------------------------ */
+/* Personas                                                            */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Quem está perguntando.
+ *
+ * Camada SOBRE as categorias, não no lugar delas: categoria agrupa por
+ * assunto, persona agrupa por pessoa. Uma dúvida sobre matrícula é de
+ * "Documentação" para todo mundo, mas interessa ao primeiro comprador, ao
+ * comprador de alto padrão, a quem compra terreno e a quem vende.
+ */
+export type PersonaId = 'primeiro-imovel' | 'alto-padrao' | 'terreno' | 'vendedor' | 'corretor';
+
+export type Persona = {
+  id: PersonaId;
+  /** Como aparece no botão. Escrito em primeira pessoa: quem escolhe é o visitante. */
+  label: string;
+  /** Uma linha explicando para quem é aquele recorte. */
+  chamada: string;
+  /**
+   * O mesmo recorte em terceira pessoa, para entrar em frase corrida.
+   *
+   * O label e escrito em primeira pessoa porque quem clica e o visitante
+   * ("Quero vender"), e encaixar isso depois de "para quem" sai errado:
+   * "para quem quero vender". Este campo existe so para a contagem.
+   */
+  emTerceiraPessoa: string;
+};
+
+export const PERSONAS: Persona[] = [
+  {
+    id: 'primeiro-imovel',
+    label: 'Vou comprar o primeiro',
+    emTerceiraPessoa: 'vai comprar o primeiro imóvel',
+    chamada: 'Financiamento, FGTS, entrada, renda e o passo a passo da compra.',
+  },
+  {
+    id: 'alto-padrao',
+    label: 'Procuro alto padrão',
+    emTerceiraPessoa: 'procura alto padrão',
+    chamada: 'Pronto ou na planta, o que conferir, valorização e a região.',
+  },
+  {
+    id: 'terreno',
+    label: 'Quero um terreno',
+    emTerceiraPessoa: 'procura um terreno',
+    chamada: 'Matrícula, certidões, impostos e o que checar antes de fechar.',
+  },
+  {
+    id: 'vendedor',
+    label: 'Quero vender',
+    emTerceiraPessoa: 'vai vender',
+    chamada: 'Preço, exclusividade, documentos e como a venda acontece.',
+  },
+  {
+    id: 'corretor',
+    label: 'Quero ser corretor',
+    emTerceiraPessoa: 'quer ser corretor',
+    chamada: 'Como se candidatar e o que a Lotus oferece a quem entra.',
+  },
+];
+
+/**
+ * Quais perguntas entram em cada persona, por id.
+ *
+ * Curadoria, não regra automática: a categoria não serve de atalho aqui. Quem
+ * compra o primeiro imóvel precisa das sete de Financiamento, mas quem procura
+ * alto padrão raramente — e os dois precisam de "o que devo verificar antes de
+ * comprar", que é da categoria Comprar.
+ *
+ * Repetir id entre personas é o esperado. Editar aqui muda a página inteira.
+ *
+ * LACUNA CONHECIDA: terreno não tem NENHUMA pergunta própria no FAQ — as dez
+ * abaixo são as genéricas que de fato se aplicam. Financiamento de terreno,
+ * loteamento x gleba, taxas específicas e o que muda na matrícula são perguntas
+ * que ainda precisam ser escritas pela Lotus; quando existirem, entram aqui.
+ */
+export const PERGUNTAS_DA_PERSONA: Record<PersonaId, number[]> = {
+  // Financiamento é a espinha: entrada, renda, FGTS, documentos, alienação.
+  'primeiro-imovel': [9, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 29, 40, 41, 42],
+  // Menos financiamento, mais decisão: pronto x planta, valorização, região.
+  'alto-padrao': [4, 6, 8, 10, 13, 14, 15, 16, 18, 26, 27, 28, 30, 40, 41, 43, 44, 45],
+  // Só as genéricas que se aplicam de verdade. Ver a lacuna no comentário acima.
+  terreno: [11, 14, 15, 16, 40, 41, 42, 43, 44, 45],
+  // As nove de Vender, mais documentos, jurídico, LGPD e o aviso de que a
+  // Lotus não faz locação — que é dúvida de proprietário, não de comprador.
+  vendedor: [3, 4, 7, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 45],
+  // Quem se candidata quer saber da casa antes de saber do processo.
+  corretor: [1, 2, 4, 6, 46, 47],
+};
+
+/**
+ * As perguntas de uma persona, na ordem original do FAQ.
+ *
+ * Ordem do documento e não a do mapa acima: a sequência das 47 foi pensada e
+ * reordená-la por persona embaralharia a leitura sem ganho.
+ */
+export function faqDaPersona(persona: PersonaId): FaqItem[] {
+  const ids = new Set(PERGUNTAS_DA_PERSONA[persona] ?? []);
+  return FAQ.filter((f) => ids.has(f.id));
+}
+
 export type FaqItem = {
   id: number;
   cat: string;

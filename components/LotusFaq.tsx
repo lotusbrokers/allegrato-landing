@@ -14,6 +14,7 @@ import { footerLegalLine } from '@/lib/site';
 import Link from 'next/link';
 import LotusHeader from './LotusHeader';
 import React, {
+  useMemo,
   useRef,
   useState,
   type CSSProperties,
@@ -97,11 +98,27 @@ function Hoverable<T extends keyof React.JSX.IntrinsicElements = 'div'>({
 
 const WHATSAPP_DEFAULT = '5511926143393';
 
-import { CATS, FAQ, respostaEmTexto, type Cat, type FaqItem } from '@/lib/faq';
+import {
+  CATS,
+  FAQ,
+  PERGUNTAS_DA_PERSONA,
+  PERSONAS,
+  respostaEmTexto,
+  type Cat,
+  type FaqItem,
+  type PersonaId,
+} from '@/lib/faq';
 
 /* chips (valores EXATOS do renderVals) */
 const CHIP_ON = 'border:none;border-radius:30px;padding:10px 18px;font-size:13.5px;font-weight:600;cursor:pointer;background:#1d3a2c;color:#f7f2e8;transition:all .2s;';
 const CHIP_OFF = 'border:1px solid rgba(21,36,28,.16);border-radius:30px;padding:10px 18px;font-size:13.5px;font-weight:600;cursor:pointer;background:#fff;color:#3f6249;transition:all .2s;';
+
+/* Persona é escolha de QUEM SOU, não de assunto — por isso cartão retangular
+   com duas linhas, e não mais uma pílula igual às de categoria. */
+const PERSONA_BASE =
+  'text-align:left;border-radius:12px;padding:13px 16px;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;gap:3px;';
+const PERSONA_ON = PERSONA_BASE + 'border:1px solid #1d3a2c;background:#1d3a2c;color:#f7f2e8;';
+const PERSONA_OFF = PERSONA_BASE + 'border:1px solid rgba(21,36,28,.14);background:#fff;color:#15241c;';
 
 /**
  * Corpo da resposta: parágrafo, lista, fecho e observação.
@@ -153,6 +170,8 @@ export default function LotusFaq({
 } = {}) {
   // state = { cat: 'all', query: '', openId: null, askDone: false };
   const [cat, setCat] = useState<string>('all');
+  /** Persona escolhida, ou null para "todas as pessoas" (o padrão). */
+  const [persona, setPersona] = useState<PersonaId | null>(null);
   const [query, setQuery] = useState<string>('');
   const [openId, setOpenId] = useState<number | null>(null);
   const [askDone, setAskDone] = useState<boolean>(false);
@@ -173,8 +192,34 @@ export default function LotusFaq({
   // renderVals (derivados de state)
   const q = query.trim().toLowerCase();
 
+  /** Ids da persona escolhida; null quando não há persona (mostra tudo). */
+  const idsDaPersona = useMemo(
+    () => (persona ? new Set(PERGUNTAS_DA_PERSONA[persona]) : null),
+    [persona],
+  );
+
+  /**
+   * Só as categorias que a persona escolhida realmente tem.
+   *
+   * Sem isto daria para combinar "Quero ser corretor" com "Financiamento" e
+   * cair numa lista vazia — que o visitante lê como defeito, não como filtro.
+   */
+  const catsVisiveis = useMemo(() => {
+    if (!idsDaPersona) return CATS;
+    const presentes = new Set(FAQ.filter((f) => idsDaPersona.has(f.id)).map((f) => f.cat));
+    return CATS.filter((c) => c.id === 'all' || presentes.has(c.id));
+  }, [idsDaPersona]);
+
+  /** Troca a persona e desfaz um filtro de assunto que deixaria de existir. */
+  const escolherPersona = (id: PersonaId | null) => {
+    setPersona((atual) => (atual === id ? null : id));
+    setCat('all');
+    setOpenId(null);
+  };
+
   const list = FAQ.filter(
     (f) =>
+      (!idsDaPersona || idsDaPersona.has(f.id)) &&
       (cat === 'all' || f.cat === cat) &&
       // A busca varre a resposta inteira — parágrafo, lista e fechos. Só com
       // f.a, procurar por "FGTS" ou "ITBI" não achava nada: esses termos moram
@@ -184,6 +229,7 @@ export default function LotusFaq({
 
   const catLabel = (CATS.find((c) => c.id === cat) || ({} as Cat)).label;
   const catSuffix = cat === 'all' ? '' : ' em ' + catLabel;
+  const personaAtual = PERSONAS.find((x) => x.id === persona) ?? null;
 
   const hasQuery = query !== '';
   const hasResults = list.length > 0;
@@ -229,14 +275,43 @@ export default function LotusFaq({
       {/* CATEGORIAS + LISTA */}
       <section style={parseStyle('background:#f7f2e8;padding:48px 32px 100px;')}>
         <div style={parseStyle('max-width:980px;margin:0 auto;')}>
+          {/* QUEM SOU — recorte por persona, antes do recorte por assunto.
+              Clicar de novo no mesmo cartão desfaz a escolha. */}
+          <div style={parseStyle('max-width:900px;margin:0 auto 34px;')}>
+            <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#b18a4a;text-align:center;margin-bottom:16px;')}>Comece por quem você é</div>
+            <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:10px;')}>
+              {PERSONAS.map((pp) => {
+                const ativa = persona === pp.id;
+                return (
+                  <button
+                    key={pp.id}
+                    type="button"
+                    onClick={() => escolherPersona(pp.id)}
+                    aria-pressed={ativa}
+                    style={parseStyle(ativa ? PERSONA_ON : PERSONA_OFF)}
+                  >
+                    <span style={parseStyle('font-size:14.5px;font-weight:700;line-height:1.2;')}>{pp.label}</span>
+                    <span style={parseStyle('font-size:12px;line-height:1.35;opacity:.72;font-weight:400;')}>{pp.chamada}</span>
+                  </button>
+                );
+              })}
+            </div>
+            {personaAtual && (
+              <div style={parseStyle('display:flex;justify-content:center;margin-top:14px;')}>
+                <button type="button" onClick={() => escolherPersona(null)} style={parseStyle('background:none;border:none;color:#b18a4a;font-size:13.5px;font-weight:600;cursor:pointer;text-decoration:underline;')}>
+                  Ver as {FAQ.length} perguntas, sem recorte
+                </button>
+              </div>
+            )}
+          </div>
+
           <div style={parseStyle('display:flex;flex-wrap:wrap;gap:9px;justify-content:center;max-width:760px;margin:0 auto 40px;')}>
-            {/* hint-placeholder-count="9" */}
-            {CATS.map((c, i) => (
+            {catsVisiveis.map((c, i) => (
               <button key={i} onClick={() => { setCat(c.id); setOpenId(null); }} style={parseStyle(cat === c.id ? CHIP_ON : CHIP_OFF)}>{c.label}</button>
             ))}
           </div>
 
-          <div style={parseStyle('font-size:13.5px;color:#8aa593;margin-bottom:18px;')}>{list.length} perguntas{catSuffix}</div>
+          <div style={parseStyle('font-size:13.5px;color:#8aa593;margin-bottom:18px;')} aria-live="polite">{list.length} {list.length === 1 ? 'pergunta' : 'perguntas'}{catSuffix}{personaAtual ? ' para quem ' + personaAtual.emTerceiraPessoa : ''}</div>
 
           {hasResults && (
             <>
