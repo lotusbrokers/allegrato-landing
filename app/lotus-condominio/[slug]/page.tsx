@@ -7,6 +7,7 @@ import {
   getCondominiosCards,
   slugCondominio,
   type CondominioRow,
+  isCondominioApresentavel,
 } from '@/lib/condominios';
 import { getImoveisDoCondominio } from '@/lib/imoveis';
 import { getLancamentosList, isListItemApresentavel, type LancamentoListItem } from '@/lib/lancamentos';
@@ -189,6 +190,7 @@ export default async function LotusCondominioPage({ params }: Params) {
   // a lista vinha na ordem do banco e um condomínio de Itupeva podia abrir a
   // seção na página de um de Jundiaí.
   const relacionados = todosRelacionados
+    .filter(isCondominioApresentavel)
     .map((r) => ({ r, peso: proximidade(`${r.bairro ?? ''} ${r.cidade ?? ''}`, cond.bairro, cond.cidade) }))
     .sort((a, b) => b.peso - a.peso || a.r.nome.localeCompare(b.r.nome, 'pt-BR'))
     .map((x) => x.r)

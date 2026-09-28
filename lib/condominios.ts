@@ -61,6 +61,13 @@ export type CondominioCard = {
    * descrição não tem o que mostrar numa página.
    */
   resumo: string | null;
+  /**
+   * Rua, número, cidade e CEP preenchidos no dashboard.
+   *
+   * Booleano e não o endereço inteiro: o card não mostra endereço, só precisa
+   * saber se o condomínio tem o que a PÁGINA dele precisa para funcionar.
+   */
+  enderecoCompleto: boolean;
 };
 
 /**
@@ -78,16 +85,24 @@ function resumoDe(descricao: string | null, limite = 150): string | null {
   return (ultimoEspaco > 60 ? corte.slice(0, ultimoEspaco) : corte).trimEnd() + '…';
 }
 
+/** Campo preenchido de verdade: nem null, nem string de espaços. */
+function preenchido(v: string | null | undefined): boolean {
+  return Boolean(v && String(v).trim());
+}
+
 /**
- * Entra no índice quem tem o que mostrar: foto ou descrição.
+ * Entra na vitrine quem tem FOTO e ENDEREÇO COMPLETO.
  *
- * Mesmo critério de isListItemApresentavel em lib/lancamentos.ts, e pela mesma
- * razão: card vazio levando a página vazia é pior para quem procura do que o
- * condomínio não aparecer ainda. Publicada a foto ou a descrição no dashboard,
- * ele volta sozinho — não há lista para editar aqui.
+ * Os dois pilares da página do condomínio. Sem foto, o card é um bloco de
+ * gradiente na fileira e a galeria não existe. Sem rua e número, o mapa não
+ * crava o ponto e mostra o centro do município — o que é pior do que não
+ * mostrar mapa nenhum, porque parece preciso e não é.
+ *
+ * Dos 49 cadastros de 28/09/2026, 44 passam. Preenchido o que falta no
+ * dashboard, o condomínio volta sozinho: não há lista para editar aqui.
  */
 export function isCondominioApresentavel(c: CondominioCard): boolean {
-  return Boolean(c.capa || c.resumo);
+  return Boolean(c.capa) && c.enderecoCompleto;
 }
 
 /**
@@ -121,6 +136,11 @@ export function toCard(row: CondominioRow): CondominioCard {
     cidade: row.cidade,
     capa: capaUrl(row.fotos),
     resumo: resumoDe(row.descricao_site),
+    enderecoCompleto:
+      preenchido(row.logradouro) &&
+      preenchido(row.numero) &&
+      preenchido(row.cidade) &&
+      preenchido(row.cep),
   };
 }
 
@@ -199,7 +219,7 @@ export async function getCondominioPorSlug(slug: string): Promise<CondominioRow 
 export async function getCondominiosCards(excludeId?: string): Promise<CondominioCard[]> {
   const { data, error } = await supabase
     .from('portal_condominios')
-    .select('id, nome, bairro, cidade, fotos, descricao_site')
+    .select('id, nome, bairro, cidade, logradouro, numero, cep, fotos, descricao_site')
     .eq('tenant_id', TENANT_ID);
   if (error) {
     console.error('[getCondominiosCards] erro Supabase:', error.message);
