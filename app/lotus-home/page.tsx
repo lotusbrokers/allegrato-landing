@@ -1,7 +1,8 @@
 import LotusHome from '@/components/LotusHome';
 import { type DevelopmentCard } from '@/lib/developments';
 import { getLancamentos, isApresentavel, type LancamentoCard } from '@/lib/lancamentos';
-import { getImoveisBusca } from '@/lib/imoveis';
+import { getImoveisBusca, oportunidadesDaSemana } from '@/lib/imoveis';
+import { getCondominiosCards, isCondominioApresentavel } from '@/lib/condominios';
 import { BAIRROS } from '@/lib/bairros';
 import { POSTS } from '@/lib/blog-posts';
 import { publicados } from '@/lib/blog-agenda';
@@ -126,7 +127,17 @@ export default async function LotusHomePage() {
   // portal_lancamentos. Se vier vazio (banco sem dados / falha), passa undefined
   // e o componente cai no seu fallback interno — rede de segurança contra página
   // vazia, não completa a lista com mock.
-  const [cards, imoveis] = await Promise.all([getLancamentos(), getImoveisBusca()]);
+  // A falha dos condomínios não pode derrubar a home: sem eles a vitrine some
+  // e o resto da página continua. Lançamentos e imóveis já se protegem nas
+  // suas próprias camadas.
+  const [cards, imoveis, condominiosTodos] = await Promise.all([
+    getLancamentos(),
+    getImoveisBusca(),
+    getCondominiosCards().catch((e) => {
+      console.error('[home] condomínios indisponíveis:', e);
+      return [];
+    }),
+  ]);
   const apresentaveis = comDestaquesNaFrente(
     cards.filter(isApresentavel).map(toDevelopment).map(comCapaDaHome),
   );
@@ -147,6 +158,18 @@ export default async function LotusHomePage() {
   // agendamento: artigo marcado para amanha nao pode vazar na home hoje.
   const destaques = publicados(POSTS).slice(0, 3);
 
+  // "Oportunidades da semana": sai da lista de imóveis que JÁ foi buscada acima
+  // para a contagem por bairro — nenhuma ida extra ao banco. A ordem é a dos
+  // selos do dashboard (ver oportunidadesDaSemana).
+  const oportunidades = oportunidadesDaSemana(imoveis);
+
+  // Doze na vitrine: o suficiente para a faixa ter o que deslizar sem carregar
+  // 48 imagens na home. O resto está no índice, que é onde o "ver todos" leva.
+  const condominios = condominiosTodos
+    .filter(isCondominioApresentavel)
+    .sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'))
+    .slice(0, 12);
+
   return (
     <>
       {/* "<" escapado: nenhum texto de resposta pode fechar o <script> antes da hora. */}
@@ -154,7 +177,13 @@ export default async function LotusHomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd()).replace(/</g, '\\u003c') }}
       />
-      <LotusHome developments={developments} bairroCounts={bairroCounts} posts={destaques} />
+      <LotusHome
+        developments={developments}
+        bairroCounts={bairroCounts}
+        posts={destaques}
+        oportunidades={oportunidades}
+        condominios={condominios}
+      />
     </>
   );
 }

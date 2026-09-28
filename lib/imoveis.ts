@@ -40,6 +40,9 @@ export type ImovelRow = {
   condominio_id: string | null;
   link_video: string | null;
   tour_virtual: string | null;
+  /** Selos marcados no dashboard. Ordenam "Oportunidades da semana" na home. */
+  destaque: boolean | null;
+  super_destaque: boolean | null;
 };
 
 function capaUrl(fotos: FotoImovel[] | null): string | null {
@@ -74,7 +77,7 @@ export function formatValor(v: number | null): string {
 }
 
 const SELECT_FULL =
-  'id, tenant_id, codigo_imovel, titulo, tipo, tipo_simplificado, finalidade, logradouro, numero, bairro, cidade, estado, cep, area_total, area_util, quartos, suites, banheiros, vagas, salas, valor_venda, valor_locacao, valor_condominio, valor_iptu, descricao, fotos, metragem_m2, condominio_id, link_video, tour_virtual';
+  'id, tenant_id, codigo_imovel, titulo, tipo, tipo_simplificado, finalidade, logradouro, numero, bairro, cidade, estado, cep, area_total, area_util, quartos, suites, banheiros, vagas, salas, valor_venda, valor_locacao, valor_condominio, valor_iptu, descricao, fotos, metragem_m2, condominio_id, link_video, tour_virtual, destaque, super_destaque';
 
 /* ------------------------------------------------------------------ */
 /* Busca (/lotus-busca) — imóveis reais aprovados, formato da UI        */
@@ -105,6 +108,13 @@ export type ImovelBusca = {
   x: string; // posição do pin no mapa decorativo (derivada do código)
   y: string;
   recent: number; // score p/ ordenação "mais recentes" (derivado)
+  /**
+   * Peso do selo: 2 = super destaque, 1 = destaque, 0 = sem selo.
+   *
+   * Número e não dois booleanos porque o único uso é ordenar, e comparar um
+   * número é mais simples de ler do que desempatar duas flags em toda chamada.
+   */
+  destaque: 0 | 1 | 2;
 };
 
 export { resumoDescricao };
@@ -161,7 +171,28 @@ function toBusca(row: ImovelRow, index: number): ImovelBusca {
     x,
     y,
     recent: index, // ordem de retorno do banco = proxy de "mais recentes"
+    destaque: row.super_destaque ? 2 : row.destaque ? 1 : 0,
   };
+}
+
+/**
+ * Os imóveis que abrem a vitrine "Oportunidades da semana" da home.
+ *
+ * A ordem é a do dashboard: super destaque na frente, depois destaque, e só
+ * então os demais na ordem em que o banco devolve (proxy de mais recentes).
+ * Quem decide a vitrine é quem marca o selo, não uma regra escrita aqui — e
+ * por isso a lista nunca fica vazia: sem nenhum selo, ela mostra os mais
+ * recentes em vez de sumir da home.
+ *
+ * Só entra imóvel com foto: card sem imagem numa vitrine horizontal vira um
+ * bloco de gradiente no meio da fileira. Mesmo critério das outras vitrines.
+ */
+export function oportunidadesDaSemana(imoveis: ImovelBusca[], limite = 10): ImovelBusca[] {
+  return imoveis
+    .filter((i) => i.img)
+    .slice()
+    .sort((a, b) => b.destaque - a.destaque || a.recent - b.recent)
+    .slice(0, limite);
 }
 
 /** Imóveis reais aprovados (RLS status_aprovacao='aprovado') p/ a busca. */

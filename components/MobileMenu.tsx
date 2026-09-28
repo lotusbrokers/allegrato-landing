@@ -27,7 +27,7 @@
 import Link from 'next/link';
 import { createPortal } from 'react-dom';
 import { useEffect, useState, type CSSProperties } from 'react';
-import { NAV_ITEMS, RECRUTAMENTO_HREF, RECRUTAMENTO_LABEL } from './LotusHeader';
+import { NAV_ITEMS, NAV_ITENS_LATERAIS, RECRUTAMENTO_HREF, RECRUTAMENTO_LABEL } from './LotusHeader';
 
 const WHATSAPP_DEFAULT = '5511926143393';
 
@@ -190,6 +190,18 @@ export default function MobileMenu({
 
             <nav className="lt-mobile-nav">
               {NAV_ITEMS.map((item) => (
+                <Link
+                  key={item.key}
+                  href={item.href}
+                  target="_top"
+                  style={S.navLink}
+                  onClick={() => setOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              {/* Só no painel: não cabem na barra do topo. Ver NAV_ITENS_LATERAIS. */}
+              {NAV_ITENS_LATERAIS.map((item) => (
                 <Link
                   key={item.key}
                   href={item.href}

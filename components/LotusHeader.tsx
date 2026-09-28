@@ -55,6 +55,18 @@ export const NAV_ITEMS: { key: Exclude<LotusNavKey, null>; label: string; href: 
   { key: 'blog', label: 'Blog', href: '/lotus-blog' },
 ];
 
+/**
+ * Itens que existem SÓ no painel lateral, depois dos de cima.
+ *
+ * A barra do topo já leva sete itens mais dois botões e aperta entre 1024 e
+ * 1280px — um oitavo quebraria a linha. O painel é vertical e não tem esse
+ * limite, então o destino vive lá. Fica neste arquivo, e não dentro do
+ * MobileMenu, pelo mesmo motivo de NAV_ITEMS: navegação se edita num lugar só.
+ */
+export const NAV_ITENS_LATERAIS: { key: string; label: string; href: string }[] = [
+  { key: 'condominios', label: 'Condomínios', href: '/lotus-condominio' },
+];
+
 /* Estilos fixos (idênticos ao padrão interno atual). */
 const S = {
   header: { position: 'sticky', top: 0, zIndex: 60, background: '#15241c' } as CSSProperties,
