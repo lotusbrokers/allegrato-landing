@@ -43,7 +43,42 @@ export type CondominioCard = {
   bairro: string | null;
   cidade: string | null;
   capa: string | null;
+  /**
+   * Primeira frase de descricao_site, para o card do índice.
+   *
+   * Serve a duas coisas: dá ao card uma linha de contexto além do bairro, e é
+   * metade do teste de isCondominioApresentavel — cadastro sem foto E sem
+   * descrição não tem o que mostrar numa página.
+   */
+  resumo: string | null;
 };
+
+/**
+ * Primeira frase útil da descrição, curta o bastante para caber no card.
+ *
+ * Corta na fronteira de palavra e só reticencia quando de fato sobrou texto —
+ * "…" num texto que terminou sozinho é ruído.
+ */
+function resumoDe(descricao: string | null, limite = 150): string | null {
+  const limpo = (descricao ?? '').replace(/\s+/g, ' ').trim();
+  if (!limpo) return null;
+  if (limpo.length <= limite) return limpo;
+  const corte = limpo.slice(0, limite);
+  const ultimoEspaco = corte.lastIndexOf(' ');
+  return (ultimoEspaco > 60 ? corte.slice(0, ultimoEspaco) : corte).trimEnd() + '…';
+}
+
+/**
+ * Entra no índice quem tem o que mostrar: foto ou descrição.
+ *
+ * Mesmo critério de isListItemApresentavel em lib/lancamentos.ts, e pela mesma
+ * razão: card vazio levando a página vazia é pior para quem procura do que o
+ * condomínio não aparecer ainda. Publicada a foto ou a descrição no dashboard,
+ * ele volta sozinho — não há lista para editar aqui.
+ */
+export function isCondominioApresentavel(c: CondominioCard): boolean {
+  return Boolean(c.capa || c.resumo);
+}
 
 export function toCard(row: CondominioRow): CondominioCard {
   return {
@@ -52,6 +87,7 @@ export function toCard(row: CondominioRow): CondominioCard {
     bairro: row.bairro,
     cidade: row.cidade,
     capa: capaUrl(row.fotos),
+    resumo: resumoDe(row.descricao_site),
   };
 }
 
@@ -93,7 +129,7 @@ export async function getCondominioIds(): Promise<string[]> {
 export async function getCondominiosCards(excludeId?: string): Promise<CondominioCard[]> {
   const { data, error } = await supabase
     .from('portal_condominios')
-    .select('id, nome, bairro, cidade, fotos')
+    .select('id, nome, bairro, cidade, fotos, descricao_site')
     .eq('tenant_id', TENANT_ID);
   if (error) {
     console.error('[getCondominiosCards] erro Supabase:', error.message);
