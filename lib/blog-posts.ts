@@ -89,9 +89,73 @@ export function hrefDoArtigo(id: string): string {
 // mão, que envelheceu: títulos que não existiam mais no blog e nenhuma capa.
 export const POSTS: Post[] = [
   /* ------------------------------------------------------------------
-   * Enviado pela Lotus em 28/09/2026, para sair no mesmo dia.
+   * Enviado pela Lotus em 29/09/2026, para sair no mesmo dia.
    *
    * Primeiro da lista, e por isso o novo destaque da capa do blog.
+   *
+   * É NOTÍCIA, e notícia envelhece: o texto fala do fim da greve da Caixa
+   * como fato do dia. Os fatos foram conferidos na imprensa antes de publicar
+   * — início em 10/09/2026, julgamento no TST em 29/09 com retorno até 30/09,
+   * a fatia de dois terços do crédito habitacional e a estimativa de quase
+   * 50 mil contratos em 13 dias úteis (511 mil financiamentos no 1º semestre,
+   * média de 4.089 por dia útil). Reproduzidos como a Lotus enviou, com a
+   * mesma ressalva do original ("segundo informações divulgadas", "uma
+   * estimativa apontou").
+   *
+   * Ajustes de forma, os mesmos dos lotes anteriores: itens de lista começando
+   * em maiúscula e sem ponto e vírgula, o subtítulo virando `excerpt` e a
+   * marca grafada "Lotus Brokers", sem acento, como no resto do site.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'fim-greve-caixa-financiamentos-imobiliarios', cat: 'Mercado', date: 'Set 2026', publicadoEm: '2026-09-29', read: '5 min', img: '/blog/fim-greve-caixa.jpg', slot: 'blog-fim-greve-caixa', title: 'Fim da greve da Caixa deve destravar financiamentos imobiliários e movimentar o mercado', excerpt: 'Após semanas de paralisação, decisão do TST determina o fim da greve dos funcionários da Caixa Econômica Federal; setor imobiliário espera retomada dos processos de financiamento, repasses e contratos habitacionais.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'A greve dos funcionários da Caixa, iniciada em 10 de setembro, terminou por decisão do TST, com retorno até 30 de setembro. A expectativa é de retomada gradual dos financiamentos que ficaram parados — análise de documentos, assinatura de contratos e liberação de recursos —, sem normalização instantânea. Quem tem processo em andamento não precisa recomeçar: vale conferir a validade dos documentos, guardar protocolos e acompanhar cada etapa com o corretor ou o correspondente bancário.',
+    body: [
+      'A greve dos funcionários da Caixa Econômica Federal chegou ao fim após decisão do Tribunal Superior do Trabalho (TST), trazendo expectativa de retomada gradual dos processos que dependem do banco para a conclusão de financiamentos imobiliários.',
+      'A paralisação, iniciada em 10 de setembro, afetou operações em diferentes etapas, incluindo análise de documentos, assinatura de contratos e liberação de recursos. O impacto atingiu compradores de imóveis, construtoras, incorporadoras, correspondentes bancários e corretores.',
+      'A decisão do TST determina o retorno dos funcionários até 30 de setembro. Com isso, o mercado imobiliário passa a acompanhar a normalização dos atendimentos e o escoamento dos processos que ficaram represados durante a paralisação.',
+      { titulo: 'O que muda para quem está comprando um imóvel?' },
+      'Para quem já possui um financiamento em andamento, o principal efeito esperado é a retomada do fluxo operacional.',
+      'Isso pode beneficiar compradores que estavam aguardando:',
+      { itens: ['Análise ou conclusão de documentação', 'Assinatura do contrato de financiamento', 'Liberação de recursos para o vendedor', 'Etapas relacionadas ao registro do imóvel', 'Conclusão de operações vinculadas ao crédito habitacional'] },
+      'Entretanto, a retomada não significa necessariamente que todos os processos serão concluídos de forma instantânea. A expectativa é de redução gradual da fila acumulada, conforme os funcionários retornem às atividades e o banco consiga processar as operações represadas.',
+      'Durante a greve, especialistas alertaram que atrasos em uma etapa poderiam provocar um efeito cascata em toda a compra do imóvel, principalmente quando o financiamento era essencial para a conclusão da negociação.',
+      { titulo: 'Impacto no mercado imobiliário' },
+      'A Caixa possui papel central no financiamento habitacional brasileiro. Segundo informações divulgadas durante a paralisação, o banco responde por cerca de dois terços dos financiamentos habitacionais do país.',
+      'Durante a greve, uma estimativa apontou que aproximadamente 50 mil contratos deixaram de ser formalizados em 13 dias úteis, afetando desde operações do Minha Casa, Minha Vida até financiamentos de imóveis de outros segmentos.',
+      'O impacto não ficou restrito aos compradores.',
+      { titulo: 'Construtoras e incorporadoras', nivel: 3 },
+      'O atraso nos financiamentos também afetou o fluxo financeiro de empresas do setor. Repasses relacionados às obras e aos contratos ficaram mais lentos, pressionando o caixa de incorporadoras e construtoras.',
+      'A normalização das atividades da Caixa tende, portanto, a contribuir para a retomada desses fluxos e para uma maior previsibilidade financeira no setor.',
+      { titulo: 'Corretores e correspondentes', nivel: 3 },
+      'Outro efeito da paralisação foi sobre o pagamento de comissões.',
+      'Em operações nas quais a remuneração está vinculada à conclusão do financiamento ou à liberação dos recursos, o atraso bancário também significou atraso no recebimento de profissionais que já haviam participado da venda.',
+      { titulo: 'E o Minha Casa, Minha Vida?' },
+      'O impacto também é relevante para o Minha Casa, Minha Vida, programa que possui forte dependência das operações de crédito habitacional da Caixa.',
+      'Com a retomada das atividades, a expectativa do mercado é de que os processos represados voltem a avançar, permitindo que compradores que já estavam em negociação possam dar continuidade à aquisição do imóvel.',
+      'Para quem pretende comprar pelo programa, o momento pode ser interessante para organizar a documentação e buscar orientação profissional enquanto o sistema retoma seu ritmo.',
+      { titulo: 'Quem já tinha financiamento em andamento deve fazer o quê?' },
+      'Quem estava com um processo parado não precisa necessariamente começar tudo novamente.',
+      'O primeiro passo é verificar em qual etapa o financiamento está e se existe alguma pendência documental.',
+      'Também é importante:',
+      { itens: ['Conferir se toda a documentação continua válida', 'Verificar se houve alguma solicitação adicional da instituição financeira', 'Guardar protocolos e comprovantes de atendimento', 'Confirmar com o corretor ou correspondente bancário a situação atual do processo', 'Acompanhar a previsão para assinatura e liberação dos recursos'] },
+      'Em alguns casos, documentos ou certidões podem precisar ser atualizados caso tenham perdido a validade durante o período de espera.',
+      { titulo: 'O que o comprador deve observar daqui para frente?' },
+      'A retomada da Caixa representa uma notícia positiva para o mercado, mas o comprador deve evitar assumir que todos os prazos serão automaticamente normalizados.',
+      'Se houver um contrato de compra e venda com prazo próximo do vencimento, é importante comunicar formalmente as partes envolvidas sobre a situação do financiamento e avaliar a necessidade de ajustar os prazos.',
+      'Durante a paralisação, especialistas recomendaram que compradores documentassem as etapas do processo e mantivessem registros de protocolos, documentos enviados, aprovações e comunicações com a instituição financeira.',
+      { titulo: 'Retomada pode movimentar o mercado imobiliário' },
+      'O fim da greve representa um importante passo para a normalização do mercado imobiliário brasileiro.',
+      'A expectativa é que, nos próximos dias, o processamento dos contratos represados aumente gradualmente, permitindo a conclusão de negócios que ficaram aguardando etapas relacionadas à Caixa.',
+      'Para quem pretende comprar, vender ou investir em imóveis, o cenário reforça a importância de contar com profissionais que acompanhem não apenas a escolha do imóvel, mas também todo o processo de financiamento e documentação.',
+      { titulo: 'Está pensando em comprar um imóvel em Jundiaí?' },
+      'A Lotus Brokers acompanha oportunidades imobiliárias em Jundiaí e região e pode ajudar você a encontrar um imóvel de acordo com seu perfil, entender as possibilidades de financiamento e avançar com mais segurança em cada etapa da negociação.',
+      'Quer encontrar seu próximo imóvel em Jundiaí? Fale com a Lotus Brokers e conheça as oportunidades disponíveis.',
+    ],
+  },
+  /* ------------------------------------------------------------------
+   * Enviado pela Lotus em 28/09/2026, para sair no mesmo dia.
+   *
+   * Foi o destaque da capa do blog até 29/09/2026.
    *
    * Texto da Lotus com os mesmos ajustes de forma dos lotes anteriores: itens
    * de lista começando em maiúscula e sem ponto e vírgula, e o subtítulo
