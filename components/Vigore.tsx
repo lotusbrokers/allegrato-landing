@@ -759,7 +759,7 @@ export default function Vigore() {
             "margin-top:18px;text-align:center;font-family:'Archivo';font-weight:700;font-size:14px;letter-spacing:.04em;text-transform:uppercase;color:#fff;background:#F2581E;padding:15px;border-radius:100px;text-decoration:none"
           )}
         >
-          Falar no WhatsApp
+          Fale com a Lotus
         </a>
       </div>
 
@@ -883,7 +883,7 @@ export default function Vigore() {
                   "font-family:'Hanken Grotesk';font-weight:600;font-size:13px;line-height:1.45;color:rgba(255,255,255,.9);margin-top:8px;max-width:34ch"
                 )}
               >
-                Consulte nossos parceiros de vendas para conferir os valores de outras unidades!
+                Fale com a Lotus para conferir os valores das outras unidades.
               </span>
             </div>
           </div>
@@ -1878,8 +1878,6 @@ export default function Vigore() {
               )}
             >
               WhatsApp · <span style={parseStyle('color:#fff;font-weight:600')}>(11) 92614-3393</span>
-              <br />
-              Decorado na Casa Santa Angela · Av. Antônio Frederico Ozanan, 7600
             </div>
           </div>
           <form

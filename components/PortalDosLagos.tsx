@@ -339,7 +339,7 @@ export default function PortalDosLagos() {
               </div>
             </div>
           </div>
-          <p className="eyebrow on-dark reveal in" data-d="1">Jundiaí · SP {' '},{' '} Lançamento</p>
+          <p className="eyebrow on-dark reveal in" data-d="1">Jundiaí · SP {' '},{' '} Entregue</p>
           <h1 className="reveal in" data-d="1" id="heroH1"><span className="script">Respire a leveza da vida</span> em um loteamento feito para você</h1>
           <p className="hero__sub reveal in" data-d="2">Um verdadeiro clube imerso na natureza, com lagos, áreas verdes e infraestrutura de alto padrão, a 45 minutos da capital paulista, no coração de Jundiaí.</p>
           <div className="hero__cta reveal in" data-d="3">

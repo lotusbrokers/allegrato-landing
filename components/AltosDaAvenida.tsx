@@ -545,7 +545,7 @@ export default function AltosDaAvenida({
             <div data-reveal="" data-reveal-delay="320" style={parseStyle('display:flex; flex-wrap:wrap; gap:16px; margin-top:42px;')}>
               <Hoverable as="a" href={waLink} target="_blank" rel="noopener" baseStyle={parseStyle("display:inline-flex; align-items:center; gap:11px; font-family:'Barlow Semi Condensed',sans-serif; font-size:16px; letter-spacing:.08em; text-transform:uppercase; color:#fff; text-decoration:none; background:#bd6a45; padding:18px 34px; border-radius:46px; box-shadow:0 14px 34px rgba(189,106,69,.42); transition:transform .3s, box-shadow .3s;")} hoverStyle={parseStyle('transform:translateY(-3px); box-shadow:0 20px 44px rgba(189,106,69,.55);')}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.05L2 22l5.1-1.33A10 10 0 1 0 12 2Zm5.5 14.2c-.23.66-1.34 1.26-1.85 1.3-.5.05-.97.23-3.27-.68-2.75-1.08-4.5-3.9-4.64-4.08-.13-.18-1.1-1.47-1.1-2.8s.7-1.98.95-2.25a1 1 0 0 1 .72-.34l.52.01c.17.01.4-.06.62.48.23.55.78 1.9.85 2.04.07.14.11.3.02.48-.09.18-.14.3-.27.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.56.16.27.72 1.18 1.54 1.91 1.06.94 1.95 1.24 2.22 1.38.27.14.43.12.59-.07.16-.18.68-.79.86-1.06.18-.27.36-.23.61-.14.25.09 1.6.75 1.87.89.27.14.45.2.52.32.07.11.07.66-.16 1.32Z"></path></svg>
-                Falar no WhatsApp
+                Fale com a Lotus
               </Hoverable>
               <Hoverable as="a" href="#empreendimento" baseStyle={parseStyle("display:inline-flex; align-items:center; gap:10px; font-family:'Barlow Semi Condensed',sans-serif; font-size:16px; letter-spacing:.08em; text-transform:uppercase; color:#fff; text-decoration:none; padding:18px 30px; border-radius:46px; border:1px solid rgba(255,255,255,.45); transition:background .3s, border-color .3s;")} hoverStyle={parseStyle('background:rgba(255,255,255,.12); border-color:#fff;')}>Conhecer o projeto</Hoverable>
             </div>
@@ -569,7 +569,7 @@ export default function AltosDaAvenida({
               <span style={parseStyle("font-family:'Barlow Semi Condensed',sans-serif; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#e6cdba;")}>Da Rod. Anhanguera</span>
             </div>
             <div style={parseStyle('flex:1; min-width:160px; padding:22px 8px; display:flex; flex-direction:column; gap:3px;')}>
-              <span style={parseStyle("font-family:'Cormorant Garamond',serif; font-size:30px; font-weight:600; color:#fff; line-height:1;")}>Em obras</span>
+              <span style={parseStyle("font-family:'Cormorant Garamond',serif; font-size:30px; font-weight:600; color:#fff; line-height:1;")}>Entregue</span>
               <span style={parseStyle("font-family:'Barlow Semi Condensed',sans-serif; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#e6cdba;")}>Construtora Santa Angela</span>
             </div>
           </div>
@@ -820,7 +820,7 @@ export default function AltosDaAvenida({
             </div>
             <h2 data-reveal="" data-reveal-delay="80" style={parseStyle("margin:0; font-family:'Cormorant Garamond',serif; font-size:clamp(34px,4.6vw,58px); font-weight:600; line-height:1.05;")}>Há 40 anos realizando<br />sonhos em Jundiaí</h2>
             <p data-reveal="" data-reveal-delay="140" style={parseStyle('margin:26px 0 0; font-size:17px; line-height:1.8; color:rgba(255,255,255,.8); max-width:560px;')}>A Construtora Santa Angela está presente em Jundiaí, Americana e Itatiba. Em constante transformação, evolui a cada projeto em observação, inovação e criatividade, acompanhando todas as fases da obra, do início à entrega das chaves.</p>
-            <p data-reveal="" data-reveal-delay="200" style={parseStyle('margin:16px 0 0; font-size:17px; line-height:1.8; color:rgba(255,255,255,.8); max-width:560px;')}>Com confiança, respeito e comprometimento, queremos que a sua família viva a melhor experiência num empreendimento Santa Angela.</p>
+            <p data-reveal="" data-reveal-delay="200" style={parseStyle('margin:16px 0 0; font-size:17px; line-height:1.8; color:rgba(255,255,255,.8); max-width:560px;')}>Com confiança, respeito e comprometimento, a Lotus acompanha a sua família em cada etapa: da primeira visita à entrega das chaves, com quem conhece o Altos da Avenida por dentro.</p>
           </div>
         </div>
       </section>
