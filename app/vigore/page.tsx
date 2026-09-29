@@ -72,8 +72,8 @@ const jsonLd = {
   makesOffer: {
     '@type': 'Offer',
     priceCurrency: 'BRL',
-    price: '395948.71',
-    description: 'Apartamento Torre A, 53 m². Tabela maio/2026.',
+    price: '410191.20',
+    description: 'Apartamento Torre A, 53 m². Tabela setembro/2026.',
     seller: { '@type': 'Organization', name: 'Construtora Santa Angela' },
   },
 };
