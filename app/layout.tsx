@@ -56,7 +56,7 @@ const jsonLd = {
     addressLocality: 'Jundiaí',
     streetAddress: 'Av. José Luiz Sereno, 655, sala 5, Jardim Ermida II',
   },
-  slogan: 'Grandes escolhas têm endereço.',
+  slogan: 'Grandes histórias têm endereço.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

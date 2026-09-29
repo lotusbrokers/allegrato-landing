@@ -300,7 +300,7 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
               carrega a ideia (a escolha), a segunda o momento (antes da chave).
               A cor separa as duas, branco e bege. */}
           <h1 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(38px,5.4vw,68px);line-height:1.03;letter-spacing:-.02em;color:#fff;margin:0 0 22px;")}>
-            <span style={parseStyle('display:block;')}>Grandes escolhas</span>
+            <span style={parseStyle('display:block;')}>Grandes histórias</span>
             {/* Bege entre o #ece2cf (fundo bege do site) e o #cdab6e (dourado).
                 O #ece2cf tinha só 1.28x de contraste contra o branco da linha
                 de cima: as duas liam como a mesma cor e a separação sumia. */}
@@ -583,7 +583,7 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
               <div style={parseStyle('display:flex;align-items:center;gap:12px;margin-bottom:18px;')}>
                 <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" style={{ height: 34, width: 'auto', display: 'block' }} />
               </div>
-              <p style={parseStyle("font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:19px;color:rgba(247,242,232,.85);line-height:1.35;max-width:300px;margin:0 0 18px;")}>Grandes escolhas têm endereço.</p>
+              <p style={parseStyle("font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:19px;color:rgba(247,242,232,.85);line-height:1.35;max-width:300px;margin:0 0 18px;")}>Grandes histórias têm endereço.</p>
               <p style={parseStyle('font-size:13.5px;color:rgba(247,242,232,.55);line-height:1.6;margin:0;')}>Consultoria imobiliária para compra, venda, locação e investimento em imóveis de médio e alto padrão em Jundiaí, Itupeva e região.</p>
             </div>
             <div>

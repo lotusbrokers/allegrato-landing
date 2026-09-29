@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     siteName: 'Lotus Brokers',
     type: 'website',
     url: 'https://www.lotusbrokers.com.br/lotus-lancamentos',
-    title: 'Grandes escolhas começam antes da chave | Lotus Brokers',
+    title: 'Grandes histórias começam antes da chave | Lotus Brokers',
     description:
       'Pré-lançamentos, imóveis em obras e prontos para morar, analisados por localização, projeto, condição e potencial.',
     images: [

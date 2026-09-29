@@ -184,7 +184,7 @@ export default function RodapeLotus({ tema = TEMA_PADRAO }: { tema?: TemaRodape 
               margin: '0 0 16px',
             }}
           >
-            Grandes escolhas têm endereço.
+            Grandes histórias têm endereço.
           </p>
           <p style={{ fontSize: 13.5, lineHeight: 1.6, margin: '0 0 20px', maxWidth: 340 }}>
             Consultoria imobiliária para compra, venda, locação e investimento em imóveis de médio e

@@ -614,7 +614,7 @@ export default function LotusHome({
             <div style={parseStyle('background:linear-gradient(135deg,rgba(11,22,16,.9),rgba(21,36,28,.6) 58%,rgba(21,36,28,.24));backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);border:1px solid rgba(205,171,110,.18);border-radius:24px;padding:38px 42px 34px;max-width:780px;box-shadow:0 36px 80px -44px rgba(0,0,0,.65);margin-bottom:40px;')}>
               <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#cdab6e;margin-bottom:20px;')}>Jundiaí · Itupeva · Interior de São Paulo</div>
               <h1 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(42px,6vw,78px);line-height:1.02;letter-spacing:-.02em;color:#f7f2e8;margin:0 0 26px;")}>
-                Grandes escolhas<br /><em style={parseStyle('font-style:italic;font-weight:300;color:#cdab6e;')}>têm endereço</em>
+                Grandes histórias<br /><em style={parseStyle('font-style:italic;font-weight:300;color:#cdab6e;')}>têm endereço</em>
               </h1>
               <p style={parseStyle('font-size:clamp(17px,1.5vw,20px);line-height:1.5;color:rgba(247,242,232,.88);max-width:560px;margin:0;font-weight:300;')}>Consultoria imobiliária em Jundiaí e Itupeva para comprar, vender ou investir com estratégia, clareza e segurança. Especialistas em imóveis de médio e alto padrão, com conhecimento profundo da região e acompanhamento em cada etapa.</p>
             </div>
@@ -1028,7 +1028,7 @@ export default function LotusHome({
           <div data-reveal="" style={parseStyle('display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px;margin-bottom:48px;')}>
             <div style={parseStyle('max-width:620px;')}>
               <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b18a4a;margin-bottom:18px;')}>Quem viveu, conta</div>
-              <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(30px,4vw,48px);line-height:1.06;letter-spacing:-.02em;margin:0;color:#15241c;")}>Grandes escolhas, contadas por quem viveu.</h2>
+              <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(30px,4vw,48px);line-height:1.06;letter-spacing:-.02em;margin:0;color:#15241c;")}>Grandes histórias, contadas por quem viveu.</h2>
             </div>
           </div>
 
@@ -1306,7 +1306,7 @@ export default function LotusHome({
               <div style={parseStyle('display:flex;align-items:center;gap:12px;margin-bottom:20px;')}>
                 <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" style={{ height: 34, width: 'auto', display: 'block' }} />
               </div>
-              <p style={parseStyle("font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:19px;color:rgba(247,242,232,.85);line-height:1.35;max-width:300px;margin:0 0 20px;")}>Grandes escolhas têm endereço.</p>
+              <p style={parseStyle("font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:19px;color:rgba(247,242,232,.85);line-height:1.35;max-width:300px;margin:0 0 20px;")}>Grandes histórias têm endereço.</p>
               <p style={parseStyle('font-size:13.5px;color:rgba(247,242,232,.55);line-height:1.6;margin:0;')}>Consultoria imobiliária para compra, venda, locação e investimento em imóveis de médio e alto padrão em Jundiaí, Itupeva e região.</p>
             </div>
             <div>

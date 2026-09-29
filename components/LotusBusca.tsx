@@ -672,7 +672,7 @@ export default function LotusBusca({
         <div style={parseStyle('max-width:1480px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;')}>
           <div style={parseStyle('display:flex;align-items:center;gap:11px;')}>
             <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" style={{ height: 34, width: 'auto', display: 'block' }} />
-            <span style={parseStyle("font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:rgba(247,242,232,.8);")}>Grandes escolhas têm endereço.</span>
+            <span style={parseStyle("font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:rgba(247,242,232,.8);")}>Grandes histórias têm endereço.</span>
           </div>
           <div style={parseStyle('font-size:12.5px;color:rgba(247,242,232,.5);')}>{footerLegalLine()}</div>
         </div>
