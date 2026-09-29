@@ -14,11 +14,15 @@ export const metadata: Metadata = {
   keywords:
     'apartamento Horto Florestal, apartamento Jundiaí, Jardins do Horto, apartamento 2 dormitórios Jundiaí, apartamento 3 dormitórios Jundiaí, lançamento Jundiaí, Santa Angela Construtora',
   robots: { index: true, follow: true },
+  // Sem canonical próprio a página herdava o da home (app/layout.tsx) e o Google
+  // podia tratá-la como cópia da home.
+  alternates: { canonical: 'https://www.lotusbrokers.com.br/jardins-do-horto' },
   openGraph: {
     type: 'website',
+    url: 'https://www.lotusbrokers.com.br/jardins-do-horto',
     title: 'Jardins do Horto, Horto Florestal, Jundiaí | Lotus Brokers',
     description:
-      'Apartamentos de 72m² e 95m² com lazer completo no coração do Horto Florestal. Um empreendimento Santa Angela.',
+      'Apartamentos de 72m² e 95m² com lazer completo no coração do Horto Florestal, Jundiaí. Atendimento pela Imobiliária Lotus Brokers.',
     images: ['assets/img/p01.jpg'],
   },
 };
@@ -29,7 +33,7 @@ const residenceLd = {
   '@type': 'Residence',
   name: 'Jardins do Horto',
   description:
-    'Apartamentos de 72m² e 95m², 2 e 3 dormitórios, no Horto Florestal, Jundiaí/SP. Lazer completo. Um empreendimento Santa Angela Construtora.',
+    'Apartamentos de 72m² e 95m², 2 e 3 dormitórios, no Horto Florestal, Jundiaí/SP. Lazer completo. Realização Santa Angela Construtora; atendimento pela Imobiliária Lotus Brokers.',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Rua Irineu de Toledo, 225',

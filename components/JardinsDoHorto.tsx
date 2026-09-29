@@ -167,8 +167,11 @@ export type JardinsDoHortoProps = {
 };
 
 // Número da Lotus. O default era '' e o waHref caía em '#contato': os botões de
-// WhatsApp desta landing rolavam a página em vez de abrir a conversa.
-const WHATSAPP_DEFAULT = 'https://wa.me/5511926143393';
+// WhatsApp desta landing rolavam a página em vez de abrir a conversa. A mensagem
+// pronta identifica o empreendimento e a Lotus, como nas outras landings.
+const WHATSAPP_DEFAULT =
+  'https://wa.me/5511926143393?text=' +
+  encodeURIComponent('Olá! Vi a página do Jardins do Horto (Imobiliária Lotus Brokers) e gostaria de mais informações.');
 
 export default function JardinsDoHorto({
   whatsappUrl = WHATSAPP_DEFAULT,
@@ -420,7 +423,7 @@ export default function JardinsDoHorto({
             <a data-navlink="" href="#plantas" style={parseStyle('text-decoration:none; color:rgba(255,255,255,.92); font-size:14px; font-weight:600; transition:color .35s ease, opacity .2s;')}>Plantas</a>
             <a data-navlink="" href="#lazer" style={parseStyle('text-decoration:none; color:rgba(255,255,255,.92); font-size:14px; font-weight:600; transition:color .35s ease, opacity .2s;')}>Lazer</a>
             <a data-navlink="" href="#diferenciais" style={parseStyle('text-decoration:none; color:rgba(255,255,255,.92); font-size:14px; font-weight:600; transition:color .35s ease, opacity .2s;')}>Diferenciais</a>
-            <Hoverable as="a" href="#contato" baseStyle={parseStyle('text-decoration:none; background:#C75D40; color:#fff; font-size:14px; font-weight:700; padding:12px 22px; border-radius:100px; letter-spacing:.01em; transition:background .25s ease, transform .25s ease;')} hoverStyle={parseStyle('background:#AE4D33; transform:translateY(-2px);')}>Fale com um corretor</Hoverable>
+            <Hoverable as="a" href="#contato" baseStyle={parseStyle('text-decoration:none; background:#C75D40; color:#fff; font-size:14px; font-weight:700; padding:12px 22px; border-radius:100px; letter-spacing:.01em; transition:background .25s ease, transform .25s ease;')} hoverStyle={parseStyle('background:#AE4D33; transform:translateY(-2px);')}>Fale com um corretor da Lotus</Hoverable>
           </nav>
           <button data-menubtn="" onClick={toggleMenu} aria-label="Menu" style={parseStyle('display:none; background:transparent; border:0; cursor:pointer; padding:8px;')}>
             <span data-burger="" style={parseStyle('display:block; width:26px; height:2px; background:#fff; box-shadow:0 8px 0 #fff, 0 -8px 0 #fff; transition:background .35s ease;')}></span>
@@ -442,7 +445,7 @@ export default function JardinsDoHorto({
             <a onClick={closeMenu} href="#lazer" style={parseStyle("text-decoration:none; color:#F4EEE4; font-family:'Cormorant Garamond',serif; font-size:34px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.1);")}>Lazer</a>
             <a onClick={closeMenu} href="#diferenciais" style={parseStyle("text-decoration:none; color:#F4EEE4; font-family:'Cormorant Garamond',serif; font-size:34px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.1);")}>Diferenciais</a>
           </div>
-          <a onClick={closeMenu} href="#contato" style={parseStyle('margin-top:auto; text-align:center; text-decoration:none; background:#C75D40; color:#fff; font-weight:700; padding:18px; border-radius:100px; font-size:16px;')}>Fale com um corretor</a>
+          <a onClick={closeMenu} href="#contato" style={parseStyle('margin-top:auto; text-align:center; text-decoration:none; background:#C75D40; color:#fff; font-weight:700; padding:18px; border-radius:100px; font-size:16px;')}>Fale com um corretor da Lotus</a>
         </div>
       )}
 
@@ -749,7 +752,7 @@ export default function JardinsDoHorto({
                     <input type="checkbox" name="consentimento" required style={parseStyle('margin-top:2px; accent-color:#C75D40;')} />
                     Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o Jardins do Horto, conforme a <a href="/lotus-privacidade" target="_top" style={{ textDecoration: 'underline' }}>Política de Privacidade da Lotus Brokers</a>. A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da Santa Angela Construtora.
                   </label>
-                  <Hoverable as="button" type="submit" baseStyle={parseStyle("margin-top:6px; width:100%; border:0; cursor:pointer; background:#C75D40; color:#fff; font-family:'Manrope',sans-serif; font-weight:700; font-size:16px; padding:18px; border-radius:100px; transition:background .25s ease, transform .25s ease;")} hoverStyle={parseStyle('background:#AE4D33; transform:translateY(-2px);')}>Quero falar com um corretor</Hoverable>
+                  <Hoverable as="button" type="submit" baseStyle={parseStyle("margin-top:6px; width:100%; border:0; cursor:pointer; background:#C75D40; color:#fff; font-family:'Manrope',sans-serif; font-weight:700; font-size:16px; padding:18px; border-radius:100px; transition:background .25s ease, transform .25s ease;")} hoverStyle={parseStyle('background:#AE4D33; transform:translateY(-2px);')}>Quero falar com um corretor da Lotus</Hoverable>
                 </div>
               </form>
             )}
@@ -763,7 +766,7 @@ export default function JardinsDoHorto({
           <div style={parseStyle('display:flex; flex-wrap:wrap; gap:36px; justify-content:space-between; align-items:flex-start; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,.1);')}>
             <div style={parseStyle('max-width:340px;')}>
               <img src={IMG + 'a001.png'} alt="Jardins do Horto" style={parseStyle('height:48px; margin-bottom:18px;')} />
-              <p style={parseStyle('font-size:14px; line-height:1.65; margin:0;')}>Um empreendimento Santa Angela Construtora, no coração do Horto Florestal, Jundiaí/SP.</p>
+              <p style={parseStyle('font-size:14px; line-height:1.65; margin:0;')}><strong style={parseStyle('color:#fff;')}>Esta página é da Imobiliária Lotus Brokers.</strong><br />Divulgação e atendimento pela Lotus, imobiliária autorizada a comercializar o Jardins do Horto, no Horto Florestal, Jundiaí/SP.</p>
             </div>
             <div>
               <div style={parseStyle('color:#F4EEE4; font-weight:700; font-size:14px; margin-bottom:14px;')}>Navegação</div>

@@ -432,7 +432,7 @@ export default function MaxxSantaAngela({
               baseStyle={parseStyle('display:inline-flex;align-items:center;gap:9px;background:#2B2521;color:#F6F1E8;font-weight:700;font-size:13.5px;padding:12px 22px;border-radius:40px;letter-spacing:.02em;transition:transform .3s,background .3s')}
               hoverStyle={parseStyle('transform:translateY(-2px);background:#8f6a2c')}
             >
-              Fale com um corretor
+              Fale com um corretor da Lotus
             </Hoverable>
           </div>
           <button onClick={toggleMobile} aria-label="Menu" data-burger="" style={parseStyle('display:none;background:none;border:none;flex-direction:column;gap:5px;padding:8px')}>
@@ -797,7 +797,7 @@ export default function MaxxSantaAngela({
       </footer>
 
       {/* ============ FLOATING WHATSAPP ============ */}
-      <Hoverable as="a" href={waLink} target="_blank" rel="noopener" aria-label="WhatsApp" baseStyle={parseStyle('position:fixed;right:24px;bottom:24px;z-index:70;width:60px;height:60px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(37,211,102,.45);animation:mxPulse 2.6s infinite;transition:transform .3s')} hoverStyle={parseStyle('transform:scale(1.08)')}>
+      <Hoverable as="a" href={waLink} target="_blank" rel="noopener" aria-label="Fale com a Lotus" baseStyle={parseStyle('position:fixed;right:24px;bottom:24px;z-index:70;width:60px;height:60px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(37,211,102,.45);animation:mxPulse 2.6s infinite;transition:transform .3s')} hoverStyle={parseStyle('transform:scale(1.08)')}>
         <svg width="32" height="32" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.3A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.8-.6-3-1.3-5-4.4-5.1-4.6-.2-.2-1.3-1.7-1.3-3.2s.8-2.3 1.1-2.6c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .7.5l.9 2.1c.1.2.1.4 0 .6l-.4.6c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.7-.1l.9-1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.4.1.2.1.9-.1 1.3z"></path></svg>
       </Hoverable>
 
@@ -821,7 +821,7 @@ export default function MaxxSantaAngela({
               <a key={i} href={lnk.href} onClick={closeMobile} style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-size:30px;color:#2B2521;padding:14px 0;border-bottom:1px solid rgba(43,37,33,.1)")}>{lnk.label}</a>
             ))}
           </div>
-          <a href={waLink} target="_blank" rel="noopener" style={parseStyle('margin-top:auto;text-align:center;background:#8f6a2c;color:#fff;font-weight:700;padding:18px;border-radius:46px')}>Fale com um corretor</a>
+          <a href={waLink} target="_blank" rel="noopener" style={parseStyle('margin-top:auto;text-align:center;background:#8f6a2c;color:#fff;font-weight:700;padding:18px;border-radius:46px')}>Fale com um corretor da Lotus</a>
         </div>
       )}
     </div>

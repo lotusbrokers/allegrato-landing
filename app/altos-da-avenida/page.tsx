@@ -14,8 +14,12 @@ export const metadata: Metadata = {
   keywords:
     'Altos da Avenida, apartamento Jundiaí, lançamento Jundiaí, Jardim do Lago, Avenida Samuel Martins, apartamento 2 dormitórios Jundiaí, apartamento 3 dormitórios, Santa Angela',
   robots: { index: true, follow: true },
+  // Sem canonical próprio a página herdava o da home (app/layout.tsx) e o Google
+  // podia tratá-la como cópia da home.
+  alternates: { canonical: 'https://www.lotusbrokers.com.br/altos-da-avenida' },
   openGraph: {
     type: 'website',
+    url: 'https://www.lotusbrokers.com.br/altos-da-avenida',
     locale: 'pt_BR',
     title: 'Altos da Avenida, Jardim do Lago, Jundiaí | Lotus Brokers',
     description:

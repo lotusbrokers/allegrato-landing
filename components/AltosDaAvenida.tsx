@@ -190,7 +190,7 @@ const FAQS = [
   { q: 'Onde fica o Altos da Avenida?', a: 'Na Avenida Samuel Martins, Jardim do Lago, em Jundiaí/SP, a cerca de 10 minutos da Rodovia Anhanguera e 15 minutos do Centro de Jundiaí, com escolas, padarias, mercados, bares e restaurantes por perto.' },
   { q: 'Quais são as metragens e plantas disponíveis?', a: 'São apartamentos de 58, 68, 96 e 105m², com opções de 2 ou 3 dormitórios e suíte. Fale com a Imobiliária Lotus Brokers para conferir a disponibilidade de cada torre.' },
   { q: 'O empreendimento tem área de lazer?', a: 'Sim, lazer completo: piscina adulto e infantil, academia, fitness externo, salão de festas, coworking, salão de jogos, espaço gamer, quadra poliesportiva, playground, espaço baby, espaço pet, bem-estar, 2 churrasqueiras e muito mais.' },
-  { q: 'Qual é o status da obra?', a: 'O Altos da Avenida é um empreendimento da Construtora Santa Angela atualmente em construção. Consulte a Imobiliária Lotus Brokers para informações atualizadas sobre prazos.' },
+  { q: 'Qual é o status da obra?', a: 'O Altos da Avenida é um empreendimento da Santa Angela Construtora já entregue. Fale com a Imobiliária Lotus Brokers para conhecer as unidades disponíveis e agendar a sua visita.' },
   { q: 'Quem realiza e quem atende?', a: 'O Altos da Avenida é realizado pela Santa Angela Construtora. A página, a divulgação e o atendimento são da Imobiliária Lotus Brokers, autorizada a comercializar o empreendimento.' },
   { q: 'Como faço para visitar ou saber os valores?', a: 'É só preencher o formulário desta página ou clicar no botão do WhatsApp. Um especialista da Imobiliária Lotus Brokers vai te atender e passar valores, condições e disponibilidade.' },
 ];
@@ -819,7 +819,7 @@ export default function AltosDaAvenida({
               <span style={parseStyle("font-family:'Barlow Semi Condensed',sans-serif; font-size:13px; letter-spacing:.3em; text-transform:uppercase; color:#e9b896;")}>A Construtora</span>
             </div>
             <h2 data-reveal="" data-reveal-delay="80" style={parseStyle("margin:0; font-family:'Cormorant Garamond',serif; font-size:clamp(34px,4.6vw,58px); font-weight:600; line-height:1.05;")}>Há 40 anos realizando<br />sonhos em Jundiaí</h2>
-            <p data-reveal="" data-reveal-delay="140" style={parseStyle('margin:26px 0 0; font-size:17px; line-height:1.8; color:rgba(255,255,255,.8); max-width:560px;')}>A Construtora Santa Angela está presente em Jundiaí, Americana e Itatiba. Em constante transformação, evolui a cada projeto em observação, inovação e criatividade, acompanhando todas as fases da obra, do início à entrega das chaves.</p>
+            <p data-reveal="" data-reveal-delay="140" style={parseStyle('margin:26px 0 0; font-size:17px; line-height:1.8; color:rgba(255,255,255,.8); max-width:560px;')}>Realizadora do Altos da Avenida, a Santa Angela Construtora atua em Jundiaí, Americana e Itatiba e acompanha todas as fases da obra, do início à entrega das chaves.</p>
             <p data-reveal="" data-reveal-delay="200" style={parseStyle('margin:16px 0 0; font-size:17px; line-height:1.8; color:rgba(255,255,255,.8); max-width:560px;')}>Com confiança, respeito e comprometimento, a Lotus acompanha a sua família em cada etapa: da primeira visita à entrega das chaves, com quem conhece o Altos da Avenida por dentro.</p>
           </div>
         </div>
@@ -863,7 +863,7 @@ export default function AltosDaAvenida({
               </label>
               <Hoverable as="button" type="submit" baseStyle={parseStyle("margin-top:8px; display:inline-flex; align-items:center; justify-content:center; gap:11px; font-family:'Barlow Semi Condensed',sans-serif; font-size:16px; letter-spacing:.08em; text-transform:uppercase; color:#fff; background:#bd6a45; border:none; padding:17px; border-radius:46px; cursor:pointer; box-shadow:0 12px 30px rgba(189,106,69,.35); transition:transform .3s, box-shadow .3s;")} hoverStyle={parseStyle('transform:translateY(-2px); box-shadow:0 18px 40px rgba(189,106,69,.5);')}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.05L2 22l5.1-1.33A10 10 0 1 0 12 2Zm5.5 14.2c-.23.66-1.34 1.26-1.85 1.3-.5.05-.97.23-3.27-.68-2.75-1.08-4.5-3.9-4.64-4.08-.13-.18-1.1-1.47-1.1-2.8s.7-1.98.95-2.25a1 1 0 0 1 .72-.34l.52.01c.17.01.4-.06.62.48.23.55.78 1.9.85 2.04.07.14.11.3.02.48-.09.18-.14.3-.27.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.56.16.27.72 1.18 1.54 1.91 1.06.94 1.95 1.24 2.22 1.38.27.14.43.12.59-.07.16-.18.68-.79.86-1.06.18-.27.36-.23.61-.14.25.09 1.6.75 1.87.89.27.14.45.2.52.32.07.11.07.66-.16 1.32Z"></path></svg>
-                Enviar pelo WhatsApp
+                Enviar e falar com a Lotus
               </Hoverable>
               
             </div>
@@ -979,7 +979,7 @@ export default function AltosDaAvenida({
       </div>
 
       {/* floating whatsapp */}
-      <a href={waLink} target="_blank" rel="noopener" aria-label="WhatsApp" style={parseStyle('position:fixed; bottom:26px; right:26px; z-index:115; width:60px; height:60px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 30px rgba(37,211,102,.5); animation:adFloat 3.5s ease-in-out infinite;')}>
+      <a href={waLink} target="_blank" rel="noopener" aria-label="Fale com a Lotus" style={parseStyle('position:fixed; bottom:26px; right:26px; z-index:115; width:60px; height:60px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 30px rgba(37,211,102,.5); animation:adFloat 3.5s ease-in-out infinite;')}>
         <svg width="32" height="32" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.05L2 22l5.1-1.33A10 10 0 1 0 12 2Zm5.5 14.2c-.23.66-1.34 1.26-1.85 1.3-.5.05-.97.23-3.27-.68-2.75-1.08-4.5-3.9-4.64-4.08-.13-.18-1.1-1.47-1.1-2.8s.7-1.98.95-2.25a1 1 0 0 1 .72-.34l.52.01c.17.01.4-.06.62.48.23.55.78 1.9.85 2.04.07.14.11.3.02.48-.09.18-.14.3-.27.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.56.16.27.72 1.18 1.54 1.91 1.06.94 1.95 1.24 2.22 1.38.27.14.43.12.59-.07.16-.18.68-.79.86-1.06.18-.27.36-.23.61-.14.25.09 1.6.75 1.87.89.27.14.45.2.52.32.07.11.07.66-.16 1.32Z"></path></svg>
       </a>
     </div>

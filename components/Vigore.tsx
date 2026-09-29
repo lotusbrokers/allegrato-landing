@@ -670,7 +670,7 @@ export default function Vigore() {
             )}
             hoverStyle={parseStyle('background:#d8430c;transform:translateY(-2px)')}
           >
-            WhatsApp
+            WhatsApp Lotus
           </Hoverable>
         </div>
         <button
@@ -1869,7 +1869,7 @@ export default function Vigore() {
               )}
               hoverStyle={parseStyle('filter:brightness(1.08)')}
             >
-              <span style={parseStyle('font-size:20px')}>✆</span> Chamar no WhatsApp agora
+              <span style={parseStyle('font-size:20px')}>✆</span> Chamar a Lotus no WhatsApp
             </Hoverable>
             <div
               data-reveal=""
@@ -1945,7 +1945,7 @@ export default function Vigore() {
                 )}
                 hoverStyle={parseStyle('background:#d8430c;transform:translateY(-2px)')}
               >
-                Enviar pelo WhatsApp
+                Enviar e falar com a Lotus
               </Hoverable>
             </div>
             <label style={{ display: 'flex', alignItems: 'flex-start', gap: 9, fontSize: 12, lineHeight: 1.45, cursor: 'pointer', textAlign: 'left' }}>
@@ -2093,7 +2093,7 @@ export default function Vigore() {
         href={waMain}
         target="_blank"
         rel="noopener"
-        aria-label="WhatsApp"
+        aria-label="Fale com a Lotus"
         style={parseStyle(
           'position:fixed;right:22px;bottom:22px;z-index:80;width:60px;height:60px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 14px 34px -8px rgba(37,211,102,.6);animation:vgPulse 2.6s infinite'
         )}

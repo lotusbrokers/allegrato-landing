@@ -36,9 +36,11 @@ export type EmpItem = {
 // não batem 1:1 com o slug da landing (ex.: id 'jardins' -> /jardins-do-horto), por
 // isso o href é explícito aqui em vez de derivado do id.
 export const empsFallback: EmpItem[] = [
-  { id: 'allegrato', name: 'Allegrato', neighborhood: 'Medeiros', city: 'Jundiaí', stage: 'Em obras', type: '3 dorms', priceNum: 720000, price: 'R$ 720 mil', specs: '3 dorms · 92–118 m² · 1–2 vagas', exclusive: true, slot: 'le-1', href: '/allegrato' },
-  { id: 'jardins', name: 'Jardins do Horto', neighborhood: 'Horto', city: 'Jundiaí', stage: 'Pré-lançamento', type: '3 dorms', priceNum: 1200000, price: 'R$ 1,2 mi', specs: '3 suítes · 105–140 m² · 2–3 vagas', exclusive: true, slot: 'le-2', href: '/jardins-do-horto' },
-  { id: 'vigore', name: 'Vigore', neighborhood: 'Anhangabaú', city: 'Jundiaí', stage: 'Em obras', type: '2 dorms', priceNum: 540000, price: 'R$ 540 mil', specs: '2–3 dorms · 64–88 m² · 1–2 vagas', exclusive: false, slot: 'le-3', href: '/vigore' },
+  // Santa Angela: valores alinhados às landings e ao dashboard (set/2026). Só
+  // entram no ar quando o Supabase não responde, mas não podem contradizer a página.
+  { id: 'allegrato', name: 'Allegrato', neighborhood: 'Medeiros', city: 'Jundiaí', stage: 'Em obras', type: '2 dorms', priceNum: 358182, price: 'R$ 358.182', specs: '2 dorms · 55–65 m² · Minha Casa Minha Vida', exclusive: true, slot: 'le-1', href: '/allegrato' },
+  { id: 'jardins', name: 'Jardins do Horto', neighborhood: 'Horto Florestal', city: 'Jundiaí', stage: 'Em obras', type: '3 dorms', priceNum: 0, price: null, specs: '2 e 3 dorms · 72 e 95 m²', exclusive: true, slot: 'le-2', href: '/jardins-do-horto' },
+  { id: 'vigore', name: 'Vigóre', neighborhood: 'Colônia', city: 'Jundiaí', stage: 'Em obras', type: '2 dorms', priceNum: 410191.2, price: 'R$ 410.191,20', specs: '2 dorms · 53–54 m² · lazer completo', exclusive: false, slot: 'le-3', href: '/vigore' },
   { id: 'terrace', name: 'Terrace Jundiaí', neighborhood: 'Centro', city: 'Jundiaí', stage: 'Pronto', type: '4 dorms', priceNum: 1650000, price: 'R$ 1,65 mi', specs: 'Coberturas · 180–230 m² · 3 vagas', exclusive: false, slot: 'le-4', href: '/terrace-serra-do-japi' },
   { id: 'doppio', name: 'Doppio Jundiaí', neighborhood: 'Vila Arens', city: 'Jundiaí', stage: 'Pré-lançamento', type: '2 dorms', priceNum: 480000, price: 'R$ 480 mil', specs: '1–2 dorms · 38–62 m² · 1 vaga', exclusive: true, slot: 'le-5', href: '/doppio-jundiai' },
   { id: 'reserva', name: 'Reserva da Serra', neighborhood: 'Caxambu', city: 'Itupeva', stage: 'Em obras', type: '4 dorms', priceNum: 1890000, price: 'R$ 1,89 mi', specs: 'Casas em condomínio · 4 suítes · 280 m²', exclusive: true, slot: 'le-6', href: null },
