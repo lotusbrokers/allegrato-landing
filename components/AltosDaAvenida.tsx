@@ -525,7 +525,11 @@ export default function AltosDaAvenida({
       </div>
 
       {/* ============ HERO ============ */}
-      <section id="topo" data-screen-label="Hero" style={parseStyle('position:relative; min-height:680px; height:90vh; max-height:900px; display:flex; flex-direction:column; justify-content:center; overflow:hidden;')}>
+      {/* Altura MÍNIMA, não fixa: com height:90vh o conteúdo que não cabia vazava
+          para cima (o bloco é centralizado) e "Viva os seus" ia parar sobre o
+          logo do cabeçalho. Agora o hero cresce com o conteúdo. O recuo do topo
+          acompanha a altura do cabeçalho — ver [data-hero-inner] no CSS. */}
+      <section id="topo" data-screen-label="Hero" style={parseStyle('position:relative; min-height:clamp(680px,90vh,900px); display:flex; flex-direction:column; justify-content:center; overflow:hidden;')}>
         <div style={parseStyle('position:absolute; inset:0; z-index:0;')}>
           <img src={A + 'a005.png'} alt="Piscina do Altos da Avenida ao entardecer" style={parseStyle('width:100%; height:100%; object-fit:cover; animation:adKenBurns 22s ease-in-out infinite alternate;')} />
         </div>
@@ -533,11 +537,11 @@ export default function AltosDaAvenida({
         <div style={parseStyle('position:absolute; inset:0; z-index:1; background:linear-gradient(0deg,rgba(13,33,25,.7) 0%,rgba(13,33,25,0) 35%);')}></div>
 
         <div style={parseStyle('position:relative; z-index:2; flex:1; display:flex; align-items:center; width:100%;')}>
-          <div style={parseStyle('max-width:1340px; margin:0 auto; padding:120px clamp(20px,4vw,64px) 40px; width:100%; box-sizing:border-box;')}>
+          <div data-hero-inner="" style={parseStyle('max-width:1340px; margin:0 auto; padding:120px clamp(20px,4vw,64px) 40px; width:100%; box-sizing:border-box;')}>
           <div style={parseStyle('max-width:720px;')}>
             <h1 style={parseStyle('margin:0; color:#fff; line-height:.96;')}>
-              <span data-reveal="" data-reveal-delay="80" style={parseStyle("display:block; font-family:'Sacramento',cursive; font-size:clamp(46px,7vw,92px); color:#e9b896; font-weight:400; line-height:.9; margin-bottom:-4px;")}>Viva os seus</span>
-              <span data-reveal="" data-reveal-delay="160" style={parseStyle("display:block; font-family:'Cormorant Garamond',serif; font-size:clamp(58px,11vw,148px); font-weight:600; letter-spacing:-.01em;")}>Altos momentos</span>
+              <span data-reveal="" data-reveal-delay="80" style={parseStyle("display:block; font-family:'Sacramento',cursive; font-size:clamp(46px,min(7vw,11vh),92px); color:#e9b896; font-weight:400; line-height:.9; margin-bottom:-4px;")}>Viva os seus</span>
+              <span data-reveal="" data-reveal-delay="160" style={parseStyle("display:block; font-family:'Cormorant Garamond',serif; font-size:clamp(58px,min(11vw,17vh),148px); font-weight:600; letter-spacing:-.01em;")}>Altos momentos</span>
             </h1>
             <p data-reveal="" data-reveal-delay="240" style={parseStyle('margin:30px 0 0; max-width:560px; font-size:clamp(16px,1.5vw,20px); line-height:1.65; color:rgba(255,255,255,.9); font-weight:400;')}>
               Apartamentos de <strong style={parseStyle('font-weight:600;')}>58 a 105m²</strong>, com 2 ou 3 dormitórios e opção de suíte, numa das melhores localizações de Jundiaí, com lazer completo para toda a família.
@@ -555,7 +559,7 @@ export default function AltosDaAvenida({
 
         {/* hero facts strip, no fluxo (margin-top:auto cola na base sem sobrepor o conteúdo) */}
         <div data-reveal="" data-reveal-delay="400" style={parseStyle('position:relative; z-index:3; margin-top:auto; background:rgba(13,33,25,.42); backdrop-filter:blur(6px); border-top:1px solid rgba(255,255,255,.14);')}>
-          <div style={parseStyle('max-width:1340px; margin:0 auto; padding:0 clamp(20px,4vw,64px); display:flex; flex-wrap:wrap;')}>
+          <div data-facts="" style={parseStyle('max-width:1340px; margin:0 auto; padding:0 clamp(20px,4vw,64px); display:flex; flex-wrap:wrap;')}>
             <div style={parseStyle('flex:1; min-width:160px; padding:22px 8px; display:flex; flex-direction:column; gap:3px; border-right:1px solid rgba(255,255,255,.12);')}>
               <span style={parseStyle("font-family:'Cormorant Garamond',serif; font-size:30px; font-weight:600; color:#fff; line-height:1;")}>58–105m²</span>
               <span style={parseStyle("font-family:'Barlow Semi Condensed',sans-serif; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#e6cdba;")}>Metragens</span>

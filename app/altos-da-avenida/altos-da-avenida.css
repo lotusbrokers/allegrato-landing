@@ -552,3 +552,26 @@ html { scroll-behavior: smooth; scroll-padding-top: 98px; }
   .ada-root header > nav { flex-wrap: wrap !important; row-gap: 10px !important; }
   .ada-root [data-desk-nav] { flex-shrink: 0 !important; }
 }
+
+/* ---- Hero: o título não pode entrar embaixo do cabeçalho fixo. ----
+
+   O recuo do topo do hero era 120px fixos, pensado para o cabeçalho de uma
+   linha (90px). Só que o cabeçalho muda de altura por faixa de largura: passa
+   a duas linhas quando o menu não cabe e quando os atalhos "Início/Voltar"
+   descem, chegando a 163px. Nessas faixas "Viva os seus" ficava sobre o logo.
+
+   Cada faixa abaixo é a altura medida do cabeçalho mais ~34px de respiro.
+   !important porque o padding original é estilo inline no componente. */
+.ada-root [data-hero-inner] { padding-top: 124px !important; }
+@media (max-width: 1249px) { .ada-root [data-hero-inner] { padding-top: 196px !important; } }
+@media (max-width: 899px)  { .ada-root [data-hero-inner] { padding-top: 166px !important; } }
+@media (max-width: 640px)  { .ada-root [data-hero-inner] { padding-top: 124px !important; } }
+
+/* Faixa de números no celular: duas colunas, com o valor ocupando sozinho a
+   linha de baixo. Em coluna única os cinco itens somavam ~450px de altura e
+   empurravam o título para fora da tela. */
+@media (max-width: 640px) {
+  .ada-root [data-facts] { display: grid !important; grid-template-columns: 1fr 1fr; }
+  .ada-root [data-facts] > div { min-width: 0 !important; padding: 16px 8px !important; border-right: 0 !important; }
+  .ada-root [data-facts] > div:last-child { grid-column: 1 / -1; }
+}
