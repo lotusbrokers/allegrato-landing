@@ -739,4 +739,11 @@ section{position:relative}
   .gal{grid-template-columns:repeat(2,1fr)}
   .foot-top{grid-template-columns:1fr}
   .sim-out{flex-direction:column;align-items:flex-start}
+  /* Pilula de preco: no celular o valor fica numa linha e a nota da tabela
+     desce para a de baixo. Sem isto os quatro itens dividiam a largura e
+     "A partir de" quebrava palavra por palavra. */
+  .price-pill{flex-wrap:wrap;row-gap:2px;border-radius:20px;padding:.7em 1.1em}
+  .price-pill span:first-child{white-space:nowrap}
+  .price-pill .dot{display:none}
+  .price-pill span:last-child{flex-basis:100%;font-size:.84rem;opacity:.85}
 }

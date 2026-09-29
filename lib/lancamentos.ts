@@ -2,6 +2,7 @@ import { supabase, TENANT_ID } from './supabase';
 import { hrefForSlug, slugParaLanding, slugify } from './landings';
 import { developmentsFallback, type DevelopmentCard } from './developments';
 import { construtoraDoEmpreendimento, mapaDeConstrutoras } from './construtoras';
+import { corrigirCadastro } from './correcoes-cadastro';
 
 // Reexportados por compatibilidade: a descoberta das landings mora em landings.ts
 // (ver o comentário de lá), mas `toCard`/`toListItem` continuam sendo o ponto de
@@ -47,6 +48,12 @@ export type LancamentoRow = {
 // Ponto único da regra — antes o slug era derivado em toCard e toListItem
 // separadamente, que é como um dos dois acabaria divergindo do outro.
 const slugDaLanding = (row: LancamentoRow) => slugParaLanding(row.landing_slug, row.nome);
+
+// Cadastro defasado no dashboard é corrigido antes de virar card — ver
+// lib/correcoes-cadastro.ts. Só os cards passam por aqui: getLancamentosRows
+// (diagnóstico) e getLancamentoParaLead seguem lendo a linha crua do banco.
+const comCadastroCorrigido = (row: LancamentoRow): LancamentoRow =>
+  corrigirCadastro(row, slugDaLanding(row));
 
 // Card rico — o shape que os cards de empreendimento (home + lançamentos) consomem.
 // Espelha os campos do array estático atual para manter o design idêntico.
@@ -374,7 +381,7 @@ const publicaveis = <T extends { name: string; img: string | null; href: string 
   semRepetidos(semRevisaoPendente(semCapaRuim(comCapaCurada(itens))).filter(temPaginaPropria).filter(completo));
 
 export async function getLancamentos(): Promise<LancamentoCard[]> {
-  const rows = await fetchRowsComLanding();
+  const rows = (await fetchRowsComLanding()).map(comCadastroCorrigido);
   const cards = rows.map(toCard);
 
   // Só conta como "coberta pelo banco" a landing cujo card do banco realmente vai
@@ -434,7 +441,7 @@ export async function getLancamentoParaLead(
 
 // Itens da listagem /lotus-lancamentos (com campos de filtro).
 export async function getLancamentosList(): Promise<LancamentoListItem[]> {
-  const rows = await fetchRowsComLanding();
+  const rows = (await fetchRowsComLanding()).map(comCadastroCorrigido);
   const itens = rows.map(toListItem);
 
   // Mesmo critério da home: cadastro incompleto (sem foto/cidade) não bloqueia o

@@ -213,12 +213,12 @@ export default function Allegrato() {
               A partir de
             </span>
             <b>
-              R$ 350 mil
+              R$ 365.345,98*
             </b>
             <span className="dot">
             </span>
             <span>
-              tabela de pré-lançamento sujeita a ajustes
+              *Valor referente à tabela de setembro/2026
             </span>
           </div>
           <div className="hero-cta">

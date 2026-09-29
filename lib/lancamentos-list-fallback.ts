@@ -38,7 +38,7 @@ export type EmpItem = {
 export const empsFallback: EmpItem[] = [
   // Santa Angela: valores alinhados às landings e ao dashboard (set/2026). Só
   // entram no ar quando o Supabase não responde, mas não podem contradizer a página.
-  { id: 'allegrato', name: 'Allegrato', neighborhood: 'Medeiros', city: 'Jundiaí', stage: 'Em obras', type: '2 dorms', priceNum: 358182, price: 'R$ 358.182', specs: '2 dorms · 55–65 m² · Minha Casa Minha Vida', exclusive: true, slot: 'le-1', href: '/allegrato' },
+  { id: 'allegrato', name: 'Allegrato', neighborhood: 'Medeiros', city: 'Jundiaí', stage: 'Em obras', type: '2 dorms', priceNum: 365345.98, price: 'R$ 365.345', specs: '2 dorms · 55–65 m² · Minha Casa Minha Vida', exclusive: true, slot: 'le-1', href: '/allegrato' },
   { id: 'jardins', name: 'Jardins do Horto', neighborhood: 'Horto Florestal', city: 'Jundiaí', stage: 'Em obras', type: '3 dorms', priceNum: 0, price: null, specs: '2 e 3 dorms · 72 e 95 m²', exclusive: true, slot: 'le-2', href: '/jardins-do-horto' },
   { id: 'vigore', name: 'Vigóre', neighborhood: 'Colônia', city: 'Jundiaí', stage: 'Em obras', type: '2 dorms', priceNum: 410191.2, price: 'R$ 410.191,20', specs: '2 dorms · 53–54 m² · lazer completo', exclusive: false, slot: 'le-3', href: '/vigore' },
   { id: 'terrace', name: 'Terrace Jundiaí', neighborhood: 'Centro', city: 'Jundiaí', stage: 'Pronto', type: '4 dorms', priceNum: 1650000, price: 'R$ 1,65 mi', specs: 'Coberturas · 180–230 m² · 3 vagas', exclusive: false, slot: 'le-4', href: '/terrace-serra-do-japi' },

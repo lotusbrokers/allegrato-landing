@@ -561,7 +561,7 @@ export default function PortalDosLagos() {
             <div className="lead__list">
               <div className="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6 9 17l-5-5"></path></svg> Atendimento personalizado, sem compromisso</div>
               <div className="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6 9 17l-5-5"></path></svg> Tabela de valores, plantas e disponibilidade</div>
-              <div className="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6 9 17l-5-5"></path></svg> Condições especiais de lançamento</div>
+              <div className="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6 9 17l-5-5"></path></svg> Condições especiais para as últimas unidades</div>
             </div>
           </div>
           <div className="form-card reveal" data-d="1">
