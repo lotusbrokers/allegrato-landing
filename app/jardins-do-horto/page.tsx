@@ -8,15 +8,15 @@ import RodapeLotus from '@/components/RodapeLotus';
 // Metadata portada do <head>/<helmet> de jardins-do-horto/index.html (paridade de SEO).
 export const metadata: Metadata = {
   title:
-    'Jardins do Horto, Apartamentos de 72m² e 95m² no Horto Florestal, Jundiaí | Santa Angela',
+    'Jardins do Horto, da Santa Angela, no Horto Florestal, Jundiaí | Imobiliária Lotus Brokers',
   description:
-    'Jardins do Horto: apartamentos de 72m² e 95m², 2 e 3 dormitórios no Horto Florestal, Jundiaí/SP. Lazer completo, ao lado do Maxi Shopping. Um empreendimento Santa Angela. Agende sua visita.',
+    'Jardins do Horto, da Santa Angela Construtora: apartamentos de 72m² e 95m², 2 e 3 dormitórios no Horto Florestal, Jundiaí/SP, com lazer completo ao lado do Maxi Shopping. Atendimento pela Imobiliária Lotus Brokers, autorizada a comercializar os empreendimentos da Santa Angela.',
   keywords:
     'apartamento Horto Florestal, apartamento Jundiaí, Jardins do Horto, apartamento 2 dormitórios Jundiaí, apartamento 3 dormitórios Jundiaí, lançamento Jundiaí, Santa Angela Construtora',
   robots: { index: true, follow: true },
   openGraph: {
     type: 'website',
-    title: 'Jardins do Horto, Morar bem no Horto Florestal, Jundiaí',
+    title: 'Jardins do Horto, Horto Florestal, Jundiaí | Lotus Brokers',
     description:
       'Apartamentos de 72m² e 95m² com lazer completo no coração do Horto Florestal. Um empreendimento Santa Angela.',
     images: ['assets/img/p01.jpg'],

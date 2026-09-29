@@ -10,9 +10,9 @@ import RodapeLotus from '@/components/RodapeLotus';
 export const viewport: Viewport = { themeColor: '#091b20' };
 
 export const metadata: Metadata = {
-  title: 'Portal dos Lagos, Loteamento Residencial em Jundiaí',
+  title: 'Portal dos Lagos, loteamento da Santa Angela em Jundiaí | Imobiliária Lotus Brokers',
   description:
-    'Portal dos Lagos: loteamento residencial de alto padrão em Jundiaí/SP, a 45 min de São Paulo. Clube completo, portaria blindada e infraestrutura premium. Fale com um corretor.',
+    'Portal dos Lagos, loteamento residencial da Santa Angela Construtora em Jundiaí/SP, a 45 min de São Paulo: clube completo, portaria blindada e infraestrutura premium. Atendimento pela Imobiliária Lotus Brokers, autorizada a comercializar os empreendimentos da Santa Angela.',
   robots: { index: true, follow: true },
   alternates: {
     // Era imobiliariajapi.com.br — apontava o canonical para o domínio antigo,
@@ -23,14 +23,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'pt_BR',
-    title: 'Portal dos Lagos, Loteamento Residencial em Jundiaí',
+    title: 'Portal dos Lagos, loteamento da Santa Angela em Jundiaí | Imobiliária Lotus Brokers',
     description:
       'Portal dos Lagos: loteamento residencial de alto padrão em Jundiaí/SP, a 45 min de São Paulo. Clube completo, portaria blindada e infraestrutura premium.',
     images: ['/portal-dos-lagos/a001.jpg'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Portal dos Lagos, Loteamento Residencial em Jundiaí',
+    title: 'Portal dos Lagos, loteamento da Santa Angela em Jundiaí | Imobiliária Lotus Brokers',
     description:
       'Clube completo, portaria blindada e infraestrutura premium em Jundiaí/SP, a 45 min de São Paulo.',
     images: ['/portal-dos-lagos/a001.jpg'],

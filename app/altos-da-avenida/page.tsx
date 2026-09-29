@@ -8,16 +8,16 @@ import RodapeLotus from '@/components/RodapeLotus';
 // Metadata portada do <head>/<helmet> de altos-da-avenida/index.html (paridade de SEO).
 export const metadata: Metadata = {
   title:
-    'Altos da Avenida, Apartamentos de 58 a 105m² em Jundiaí | Imobiliária Lotus Brokers',
+    'Altos da Avenida, da Santa Angela, no Jardim do Lago, Jundiaí | Imobiliária Lotus Brokers',
   description:
-    'Altos da Avenida, em Jundiaí: apartamentos de 58, 68, 96 e 105m² com 2 ou 3 dormitórios e opção de suíte, no Jardim do Lago. Lazer completo, a 10 min da Anhanguera. Fale com a Imobiliária Lotus Brokers.',
+    'Altos da Avenida, da Santa Angela Construtora, no Jardim do Lago, Jundiaí: apartamentos de 58, 68, 96 e 105m² com 2 ou 3 dormitórios e opção de suíte, lazer completo, a 10 min da Anhanguera. Atendimento pela Imobiliária Lotus Brokers, autorizada a comercializar os empreendimentos da Santa Angela.',
   keywords:
     'Altos da Avenida, apartamento Jundiaí, lançamento Jundiaí, Jardim do Lago, Avenida Samuel Martins, apartamento 2 dormitórios Jundiaí, apartamento 3 dormitórios, Santa Angela',
   robots: { index: true, follow: true },
   openGraph: {
     type: 'website',
     locale: 'pt_BR',
-    title: 'Altos da Avenida, Viva os seus Altos momentos em Jundiaí',
+    title: 'Altos da Avenida, Jardim do Lago, Jundiaí | Lotus Brokers',
     description:
       'Apartamentos de 58 a 105m² com lazer completo no Jardim do Lago, Jundiaí. Fale com a Imobiliária Lotus Brokers.',
   },

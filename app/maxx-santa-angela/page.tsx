@@ -13,16 +13,16 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   robots: { index: true, follow: true },
   title:
-    'Maxx Santa Angela | Apartamentos de 71 a 98m² ao lado do Maxi Shopping Jundiaí',
+    'Maxx Santa Angela, apartamentos ao lado do Maxi Shopping, Jundiaí | Imobiliária Lotus Brokers',
   description:
-    'Maxx Santa Angela: apartamentos de 71 a 98 m², 2 e 3 dormitórios, ao lado do Maxi Shopping Jundiaí. Lazer completo, áreas comuns decoradas e a confiança de quem entregou +9.800 unidades. A partir de R$ 790.365,90.',
+    'Maxx Santa Angela, da Santa Angela Construtora: apartamentos de 71 a 98 m², 2 e 3 dormitórios, ao lado do Maxi Shopping Jundiaí, com lazer completo e áreas comuns decoradas. Atendimento pela Imobiliária Lotus Brokers, autorizada a comercializar os empreendimentos da Santa Angela.',
   openGraph: {
     type: 'website',
-    title: 'Maxx Santa Angela, More pertinho de quem você gosta',
+    title: 'Maxx Santa Angela, ao lado do Maxi Shopping, Jundiaí | Lotus Brokers',
     description:
       'Apartamentos de 71 a 98 m² ao lado do Maxi Shopping Jundiaí. Lazer completo e a assinatura Santa Angela.',
     images: [
-      'https://santaangelaconstrutora.com.br/wp-content/uploads/2021/06/CAPA-MAX-OLD.png',
+      '/maxx-santa-angela/capa-max-old.jpg',
     ],
   },
 };
@@ -35,7 +35,7 @@ const residenceLd = {
   description:
     'Apartamentos de 71 a 98 m², 2 e 3 dormitórios, ao lado do Maxi Shopping Jundiaí.',
   image:
-    'https://santaangelaconstrutora.com.br/wp-content/uploads/2021/06/CAPA-MAX-OLD.png',
+    '/maxx-santa-angela/capa-max-old.jpg',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Rua João Tonini, 400 - Vila Galvão',

@@ -13,9 +13,9 @@ export const viewport: Viewport = {
 // canonical/og:url seguem o padrão das demais rotas (domínio lotusbrokers.com.br).
 export const metadata: Metadata = {
   title:
-    'Residencial Vigóre | Apartamentos de 2 dormitórios com lazer completo no Colônia, Jundiaí',
+    'Residencial Vigóre, da Santa Angela, no Colônia, Jundiaí | Imobiliária Lotus Brokers',
   description:
-    'Residencial Vigóre, apartamentos de 53 a 54 m², 2 dormitórios e lazer completo no bairro Colônia, em Jundiaí/SP. 3 torres, 280 unidades. A partir de R$ 395.948,71. Agende sua visita ao decorado.',
+    'Residencial Vigóre, da Santa Angela Construtora: apartamentos de 53 a 54 m², 2 dormitórios e lazer completo no bairro Colônia, em Jundiaí/SP. 3 torres, 280 unidades. Atendimento pela Imobiliária Lotus Brokers, autorizada a comercializar os empreendimentos da Santa Angela.',
   keywords: [
     'Residencial Vigóre',
     'apartamento Jundiaí',
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
     type: 'website',
     url: 'https://www.lotusbrokers.com.br/vigore',
     locale: 'pt_BR',
-    title: 'Residencial Vigóre | Viver bem no Colônia, Jundiaí',
+    title: 'Residencial Vigóre, no Colônia, Jundiaí | Lotus Brokers',
     description:
-      'Apartamentos de 53 a 54 m² com lazer completo no bairro Colônia. 3 torres, 280 unidades. A partir de R$ 395.948,71.',
+      'Apartamentos de 53 a 54 m² com lazer completo no bairro Colônia. 3 torres, 280 unidades. Atendimento pela Imobiliária Lotus Brokers.',
   },
   twitter: { card: 'summary_large_image' },
 };
