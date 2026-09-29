@@ -703,7 +703,7 @@ export default function JardinsDoHorto({
             <div style={parseStyle('margin-top:34px; display:flex; flex-direction:column; gap:16px;')}>
               <a href={waHref} target="_blank" rel="noopener" style={parseStyle('display:inline-flex; align-items:center; gap:12px; text-decoration:none; color:#F4EEE4; font-weight:600; font-size:16px;')}>
                 <span style={parseStyle('display:grid; place-items:center; width:46px; height:46px; border-radius:50%; background:#25D366; color:#fff; font-size:20px; flex-shrink:0;')}>✆</span>
-                Falar agora no WhatsApp
+                Fale com a Lotus
               </a>
               <div style={parseStyle('display:flex; align-items:center; gap:12px; color:rgba(244,238,228,.7); font-size:15px;')}>
                 <span style={parseStyle('display:grid; place-items:center; width:46px; height:46px; border-radius:50%; background:rgba(255,255,255,.08); color:#F09080; font-size:18px; flex-shrink:0;')}>◍</span>
@@ -746,7 +746,7 @@ export default function JardinsDoHorto({
                     </select>
                   </div>
                   <label style={parseStyle('display:flex; align-items:flex-start; gap:10px; font-size:12.5px; color:#6c6459; line-height:1.45; cursor:pointer;')}>
-                    <input type="checkbox" required style={parseStyle('margin-top:2px; accent-color:#C75D40;')} />
+                    <input type="checkbox" name="consentimento" required style={parseStyle('margin-top:2px; accent-color:#C75D40;')} />
                     Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o Jardins do Horto, conforme a <a href="/lotus-privacidade" target="_top" style={{ textDecoration: 'underline' }}>Política de Privacidade da Lotus Brokers</a>. A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da Santa Angela Construtora.
                   </label>
                   <Hoverable as="button" type="submit" baseStyle={parseStyle("margin-top:6px; width:100%; border:0; cursor:pointer; background:#C75D40; color:#fff; font-family:'Manrope',sans-serif; font-weight:700; font-size:16px; padding:18px; border-radius:100px; transition:background .25s ease, transform .25s ease;")} hoverStyle={parseStyle('background:#AE4D33; transform:translateY(-2px);')}>Quero falar com um corretor</Hoverable>
@@ -805,7 +805,7 @@ export default function JardinsDoHorto({
       </footer>
 
       {/* ============ FLOAT WHATSAPP ============ */}
-      <a href={waHref} target="_blank" rel="noopener" aria-label="WhatsApp" style={parseStyle('position:fixed; right:22px; bottom:22px; z-index:80; width:58px; height:58px; border-radius:50%; background:#25D366; color:#fff; display:grid; place-items:center; font-size:26px; text-decoration:none; box-shadow:0 14px 34px -8px rgba(37,211,102,.6); animation:jh-float 4s ease-in-out infinite;')}>✆</a>
+      <a href={waHref} target="_blank" rel="noopener" aria-label="Fale com a Lotus" style={parseStyle('position:fixed; right:22px; bottom:22px; z-index:80; width:58px; height:58px; border-radius:50%; background:#25D366; color:#fff; display:grid; place-items:center; font-size:26px; text-decoration:none; box-shadow:0 14px 34px -8px rgba(37,211,102,.6); animation:jh-float 4s ease-in-out infinite;')}>✆</a>
 
       {/* ============ LIGHTBOX ============ */}
       {lb != null && (
