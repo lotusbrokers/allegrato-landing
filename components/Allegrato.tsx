@@ -174,7 +174,7 @@ export default function Allegrato() {
               <path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.6-.8-2.6-1.4-3.7-3.2-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 1.9.8 2.7.9 3.6.8.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2">
               </path>
             </svg>
-            WhatsApp
+            WhatsApp Lotus
           </a>
         </div>
         <button
@@ -1230,7 +1230,7 @@ export default function Allegrato() {
                   Quero condições de pré-lançamento
                 </h3>
                 <p className="fc-sub">
-                  Preencha e fale com um especialista pelo WhatsApp.
+                  Preencha e fale com um especialista da Lotus Brokers pelo WhatsApp.
                 </p>
                 <form id="leadForm" noValidate onSubmit={onSubmit}>
                   <div className="field">
@@ -1280,7 +1280,7 @@ export default function Allegrato() {
                     </select>
                   </div>
                   <button type="submit" className="btn btn-primary">
-                    Quero falar com um especialista
+                    Falar com um especialista da Lotus
                   </button>
                   <div className="or">
                     ou
@@ -1290,7 +1290,7 @@ export default function Allegrato() {
                       <path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.6-.8-2.6-1.4-3.7-3.2-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 1.9.8 2.7.9 3.6.8.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2">
                       </path>
                     </svg>
-                    Chamar agora no WhatsApp
+                    Chamar a Lotus no WhatsApp
                   </a>
                   <label style={{ display: 'flex', alignItems: 'flex-start', gap: 9, fontSize: 12, lineHeight: 1.45, cursor: 'pointer', textAlign: 'left' }}>
                 <input type="checkbox" name="consentimento" required ref={consentRef} style={{ marginTop: 2, flexShrink: 0 }} />
@@ -1309,14 +1309,14 @@ export default function Allegrato() {
                   Recebemos seu contato!
                 </h3>
                 <p className="muted">
-                  Estamos te levando para o WhatsApp para falar com um especialista agora mesmo. Se não abrir automaticamente, toque no botão abaixo.
+                  Estamos te levando para o WhatsApp para falar com um especialista da Lotus agora mesmo. Se não abrir automaticamente, toque no botão abaixo.
                 </p>
                 <a style={parseStyle('margin-top:18px')} className="btn btn-wa wa-link" href={sentUrl || waDefault} target="_blank" rel="noopener">
                   <svg viewBox="0 0 24 24" fill="currentColor">
                     <path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.6-.8-2.6-1.4-3.7-3.2-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 1.9.8 2.7.9 3.6.8.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2">
                     </path>
                   </svg>
-                  Abrir WhatsApp
+                  Abrir o WhatsApp da Lotus
                 </a>
               </div>
             </div>
@@ -1330,16 +1330,10 @@ export default function Allegrato() {
             <div>
               <img className="alle" src="/allegrato/a001.png" alt="Allegrato Residencial" />
               <p>
-                Av. Juvenal Arantes, 1240, Bairro Medeiros, Jundiaí/SP.
+                <strong style={parseStyle('color:#fff')}>Esta página é da Imobiliária Lotus Brokers.</strong>
                 <br />
-                Empreendimento Minha Casa Minha Vida da Santa Angela Construtora.
+                Divulgação e atendimento pela Lotus, imobiliária autorizada a comercializar o Allegrato Residencial.
               </p>
-              <div className="sa">
-                <span style={parseStyle('font-size:.82rem')} className="muted">
-                  Realização
-                </span>
-                <img src="/allegrato/a002.png" alt="Santa Angela Construtora" />
-              </div>
             </div>
             <div>
               <h4>
@@ -1375,12 +1369,12 @@ export default function Allegrato() {
             </div>
             <div>
               <h4>
-                Atendimento
+                Atendimento Lotus Brokers
               </h4>
               <ul>
                 <li>
                   <a className="wa-link" href={waDefault} target="_blank" rel="noopener">
-                    WhatsApp de vendas
+                    WhatsApp da Lotus
                   </a>
                 </li>
                 <li>
@@ -1390,7 +1384,7 @@ export default function Allegrato() {
                 </li>
                 <li>
                   <a href="#contato">
-                    Agendar visita com a equipe
+                    Agendar visita com a Lotus
                   </a>
                 </li>
               </ul>
@@ -1398,11 +1392,8 @@ export default function Allegrato() {
           </div>
           <div className="foot-bottom">
             <p className="foot-legal">
-              Imagens meramente ilustrativas. As perspectivas artísticas e plantas podem sofrer alterações sem aviso prévio. Mobiliário, decoração e paisagismo de áreas comuns conforme memorial descritivo e faseamento de entrega. Itens de lazer entregues por fases. Incorporação registrada sob matrícula nº 187.994 no 1º Oficial de Registro de Imóveis de Jundiaí/SP. Valores e condições sujeitos a análise de crédito e disponibilidade. © 2026 Santa Angela Construtora.
+              Imagens meramente ilustrativas. As perspectivas artísticas e plantas podem sofrer alterações sem aviso prévio. Mobiliário, decoração e paisagismo de áreas comuns conforme memorial descritivo e faseamento de entrega. Itens de lazer entregues por fases. Incorporação registrada sob matrícula nº 187.994 no 1º Oficial de Registro de Imóveis de Jundiaí/SP. Valores e condições sujeitos a análise de crédito e disponibilidade.
             </p>
-            <span style={parseStyle('font-size:.78rem')} className="muted">
-              SPE 27, Santa Angela Empreendimento Imobiliário Ltda.
-            </span>
           </div>
         </div>
       </footer>
