@@ -791,11 +791,11 @@ h1,h2,h3,h4{font-family:var(--f-display);font-weight:500;line-height:1.08;letter
 .hero h1 .script{display:block;font-size:clamp(40px,6.3vw,84px);line-height:1;color:var(--gold-2);margin-bottom:3px;text-shadow:0 2px 16px rgba(0,0,0,.55),0 1px 3px rgba(0,0,0,.5)}
 .hero__sub{font-size:clamp(15px,1.8vw,20px);max-width:54ch;margin:18px 0 0;color:rgba(255,255,255,.92)}
 .hero__cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
-.hero__trust{display:flex;align-items:center;gap:16px;margin-top:28px;flex-wrap:wrap;
-  font-family:var(--f-display);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6)}
-/* O logo agora e a versao negativa, ja branca e com fundo transparente: o
-   filtro que existia para clarear o JPEG so serviria para estourar o traco. */
-.hero__trust img{height:30px;opacity:.92}
+/* Valor oficial no hero (no lugar do antigo selo de realizacao). */
+.hero__price{display:flex;flex-direction:column;gap:6px;margin-top:28px;max-width:36ch}
+.hero__price .l{font-family:var(--f-display);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-2)}
+.hero__price .v{font-size:clamp(28px,3.4vw,40px);font-weight:600;line-height:1;color:#fff;white-space:nowrap;text-shadow:0 2px 16px rgba(0,0,0,.45)}
+.hero__price .n{font-size:14px;line-height:1.45;color:rgba(255,255,255,.85)}
 .hero__scroll{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;
   font-family:var(--f-display);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.6);z-index:2}
 .hero__scroll .mouse{width:22px;height:36px;border:1.5px solid rgba(255,255,255,.5);border-radius:12px;position:relative}

@@ -346,13 +346,13 @@ export default function PortalDosLagos() {
             <a className="btn btn--lg" href="#contato" data-cta="hero">Quero saber valores <span className="ar">→</span></a>
             <a className="btn btn--ghost btn--lg" href="#localizacao">Ver localização</a>
           </div>
-          <div className="hero__trust reveal in" data-d="3">
-            <span>Realização</span>
-            {/* Versão negativa, com alfa. O arquivo anterior era um JPEG com o
-                logo cravado numa placa navy opaca — sobre a foto do hero a placa
-                aparecia como uma caixa. O lockup com as três realizadoras segue
-                na seção REALIZAÇÃO, mais abaixo. */}
-            <img src="/construtoras/santa-angela-negativo.png" alt="Santa Angela Construtora, realizadora do empreendimento" />
+          {/* O selo "Realização" com o logo da construtora saiu daqui (as
+              realizadoras seguem na seção REALIZAÇÃO, mais abaixo). No lugar,
+              o valor oficial, como nas landings do Vigóre e do Maxx. */}
+          <div className="hero__price reveal in" data-d="3">
+            <span className="l">A partir de</span>
+            <span className="v">R$ 637.805,49*</span>
+            <span className="n">Fale com a Lotus para conferir os valores dos outros lotes.</span>
           </div>
         </div>
         <a className="hero__scroll" href="#destaques" aria-label="Rolar">
@@ -673,7 +673,7 @@ export default function PortalDosLagos() {
             </div>
           </div>
           <p className="legal">
-            As informações constantes no Memorial de Incorporação e nos futuros Instrumentos de Compra e Venda prevalecerão sobre as divulgadas neste material. Todas as imagens e perspectivas aqui contidas são meramente ilustrativas. As tonalidades das cores, formas e texturas podem sofrer alterações. A vegetação exposta é meramente ilustrativa e será entregue de acordo com o Projeto Paisagístico, podendo apresentar diferenças de tamanho e porte. Registro nº R3 feito no 1º Cartório de Registro de Imóveis de Jundiaí-SP, sobre matrícula nº 169.626 (protocolo nº 447.596).
+            As informações constantes no Memorial de Incorporação e nos futuros Instrumentos de Compra e Venda prevalecerão sobre as divulgadas neste material. Todas as imagens e perspectivas aqui contidas são meramente ilustrativas. As tonalidades das cores, formas e texturas podem sofrer alterações. A vegetação exposta é meramente ilustrativa e será entregue de acordo com o Projeto Paisagístico, podendo apresentar diferenças de tamanho e porte. Registro nº R3 feito no 1º Cartório de Registro de Imóveis de Jundiaí-SP, sobre matrícula nº 169.626 (protocolo nº 447.596). *Valor de lote a partir de R$ 637.805,49, referente à tabela de setembro/2026, sujeito a alteração sem aviso prévio.
           </p>
           <div className="legal__bar">
             <span>© <span id="yr"></span> Portal dos Lagos · Página, divulgação e atendimento pela Imobiliária Lotus Brokers, autorizada a comercializar este empreendimento.</span>
