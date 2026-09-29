@@ -857,11 +857,15 @@ export default function AltosDaAvenida({
                   <option>105m², 3 dormitórios c/ suíte</option>
                 </select>
               </label>
+              <label style={{ display: 'flex', alignItems: 'flex-start', gap: 9, fontSize: 12, lineHeight: 1.45, cursor: 'pointer', textAlign: 'left' }}>
+                <input type="checkbox" name="consentimento" required style={{ marginTop: 2, flexShrink: 0 }} />
+                <span>Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o Altos da Avenida, conforme a <a href="/lotus-privacidade" target="_top" style={{ textDecoration: 'underline' }}>Política de Privacidade da Lotus Brokers</a>. A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da Santa Angela Construtora.</span>
+              </label>
               <Hoverable as="button" type="submit" baseStyle={parseStyle("margin-top:8px; display:inline-flex; align-items:center; justify-content:center; gap:11px; font-family:'Barlow Semi Condensed',sans-serif; font-size:16px; letter-spacing:.08em; text-transform:uppercase; color:#fff; background:#bd6a45; border:none; padding:17px; border-radius:46px; cursor:pointer; box-shadow:0 12px 30px rgba(189,106,69,.35); transition:transform .3s, box-shadow .3s;")} hoverStyle={parseStyle('transform:translateY(-2px); box-shadow:0 18px 40px rgba(189,106,69,.5);')}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.05L2 22l5.1-1.33A10 10 0 1 0 12 2Zm5.5 14.2c-.23.66-1.34 1.26-1.85 1.3-.5.05-.97.23-3.27-.68-2.75-1.08-4.5-3.9-4.64-4.08-.13-.18-1.1-1.47-1.1-2.8s.7-1.98.95-2.25a1 1 0 0 1 .72-.34l.52.01c.17.01.4-.06.62.48.23.55.78 1.9.85 2.04.07.14.11.3.02.48-.09.18-.14.3-.27.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.56.16.27.72 1.18 1.54 1.91 1.06.94 1.95 1.24 2.22 1.38.27.14.43.12.59-.07.16-.18.68-.79.86-1.06.18-.27.36-.23.61-.14.25.09 1.6.75 1.87.89.27.14.45.2.52.32.07.11.07.66-.16 1.32Z"></path></svg>
                 Enviar pelo WhatsApp
               </Hoverable>
-              <p style={parseStyle('margin:4px 0 0; font-size:11.5px; line-height:1.5; color:#a59a89; text-align:center;')}>Ao enviar, você autoriza a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a entrar em contato, inclusive por WhatsApp, conforme a <a href="/lotus-privacidade" target="_top" style={parseStyle('color:inherit;text-decoration:underline')}>Política de Privacidade da Lotus Brokers</a>.</p>
+              
             </div>
           </form>
         </div>

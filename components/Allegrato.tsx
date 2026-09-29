@@ -105,6 +105,10 @@ export default function Allegrato() {
     };
   }, [lb, closeLb, stepLb]);
 
+  /* Caixa de consentimento: o form é noValidate, então o `required` nativo não
+     vale e a checagem entra aqui, no mesmo lugar em que nome e telefone são
+     conferidos. */
+  const consentRef = useRef<HTMLInputElement>(null);
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const nome = nomeRef.current?.value.trim() || '';
@@ -115,6 +119,10 @@ export default function Allegrato() {
     }
     if (telDigits.length < 10) {
       foneRef.current?.focus();
+      return;
+    }
+    if (!consentRef.current?.checked) {
+      consentRef.current?.focus();
       return;
     }
     const interesse = interesseRef.current?.value || '';
@@ -1284,9 +1292,10 @@ export default function Allegrato() {
                     </svg>
                     Chamar agora no WhatsApp
                   </a>
-                  <p className="privacy">
-                    Ao enviar, você autoriza a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a entrar em contato sobre o Allegrato Residencial, conforme a <a href="/lotus-privacidade" target="_top">Política de Privacidade da Lotus Brokers</a>.
-                  </p>
+                  <label style={{ display: 'flex', alignItems: 'flex-start', gap: 9, fontSize: 12, lineHeight: 1.45, cursor: 'pointer', textAlign: 'left' }}>
+                <input type="checkbox" name="consentimento" required ref={consentRef} style={{ marginTop: 2, flexShrink: 0 }} />
+                <span>Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o Allegrato Residencial, conforme a <a href="/lotus-privacidade" target="_top" style={{ textDecoration: 'underline' }}>Política de Privacidade da Lotus Brokers</a>. A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da Santa Angela Construtora.</span>
+              </label>
                 </form>
               </div>
               <div style={sentUrl ? undefined : parseStyle('display:none')} id="successView" className="form-success">

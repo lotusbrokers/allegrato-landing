@@ -123,7 +123,9 @@ export default function ResortPrime() {
           const fieldEl = inp.closest('.field');
           const val = inp.value.trim();
           let valid = true;
-          if (!val) valid = false;
+          // Caixa: para checkbox o que vale é `checked`, não `value` (que é "on"
+          // mesmo desmarcada).
+          if (inp.type === 'checkbox' ? !inp.checked : !val) valid = false;
           if (
             inp.type === 'email' &&
             val &&
@@ -388,11 +390,17 @@ export default function ResortPrime() {
                 <input id="h-tel" name="telefone" type="tel" placeholder="(11) 90000-0000" data-required="" data-phone="" />
                 <span className="err">Informe um telefone válido.</span>
               </div>
+              <div className="field">
+                <label style={{ display: 'flex', alignItems: 'flex-start', gap: 9, fontSize: 12, lineHeight: 1.45, cursor: 'pointer', textAlign: 'left' }}>
+                <input type="checkbox" name="consentimento" required data-required="" style={{ marginTop: 2, flexShrink: 0 }} />
+                <span>Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o Resort Prime Santa Angela, conforme a <a href="/lotus-privacidade" target="_top" style={{ textDecoration: 'underline' }}>Política de Privacidade da Lotus Brokers</a>. A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da Santa Angela Construtora.</span>
+              </label>
+              </div>
               <button type="submit" className="btn btn-primary btn-block">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.405z"></path></svg>
                 Falar no WhatsApp
               </button>
-              <p className="legal">Ao enviar, você autoriza a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a entrar em contato sobre o empreendimento, conforme a <a href="/lotus-privacidade" target="_top">Política de Privacidade da Lotus Brokers</a>.</p>
+              
             </form>
             <div className="form-ok" id="form-hero-ok" style={{ display: 'none' }}>
               <div className="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 6 9 17l-5-5"></path></svg></div>
@@ -681,6 +689,12 @@ export default function ResortPrime() {
                 <label htmlFor="c-tel">Telefone / WhatsApp</label>
                 <input id="c-tel" name="telefone" type="tel" placeholder="(11) 90000-0000" data-required="" data-phone="" />
                 <span className="err">Informe um telefone válido.</span>
+              </div>
+              <div className="field">
+                <label style={{ display: 'flex', alignItems: 'flex-start', gap: 9, fontSize: 12, lineHeight: 1.45, cursor: 'pointer', textAlign: 'left' }}>
+                <input type="checkbox" name="consentimento" required data-required="" style={{ marginTop: 2, flexShrink: 0 }} />
+                <span>Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o Resort Prime Santa Angela, conforme a <a href="/lotus-privacidade" target="_top" style={{ textDecoration: 'underline' }}>Política de Privacidade da Lotus Brokers</a>. A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da Santa Angela Construtora.</span>
+              </label>
               </div>
               <button type="submit" className="btn btn-wa btn-block">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.405z"></path></svg>

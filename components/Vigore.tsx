@@ -1950,14 +1950,10 @@ export default function Vigore() {
                 Enviar pelo WhatsApp
               </Hoverable>
             </div>
-            <p
-              style={parseStyle(
-                "font-family:'Hanken Grotesk';font-size:11.5px;color:#a89e90;margin-top:14px;line-height:1.5"
-              )}
-            >
-              Ao enviar, você autoriza a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a entrar em contato, inclusive por WhatsApp, conforme a Política de Privacidade da Lotus Brokers (lotusbrokers.com.br/lotus-privacidade), para
-              informações sobre o empreendimento.
-            </p>
+            <label style={{ display: 'flex', alignItems: 'flex-start', gap: 9, fontSize: 12, lineHeight: 1.45, cursor: 'pointer', textAlign: 'left' }}>
+                <input type="checkbox" name="consentimento" required style={{ marginTop: 2, flexShrink: 0 }} />
+                <span>Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o Residencial Vigóre, conforme a <a href="/lotus-privacidade" target="_top" style={{ textDecoration: 'underline' }}>Política de Privacidade da Lotus Brokers</a>. A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da Santa Angela Construtora.</span>
+              </label>
           </form>
         </div>
       </section>

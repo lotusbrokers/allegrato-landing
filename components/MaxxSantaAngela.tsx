@@ -749,8 +749,12 @@ export default function MaxxSantaAngela({
                     <option>Dias de semana pela manhã</option><option>Dias de semana à tarde</option><option>Dias de semana à noite</option><option>Final de semana pela manhã</option><option>Final de semana à tarde</option>
                   </Focusable>
                 </label>
+                <label style={{ display: 'flex', alignItems: 'flex-start', gap: 9, fontSize: 12, lineHeight: 1.45, cursor: 'pointer', textAlign: 'left' }}>
+                <input type="checkbox" name="consentimento" required style={{ marginTop: 2, flexShrink: 0 }} />
+                <span>Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o Maxx Santa Angela, conforme a <a href="/lotus-privacidade" target="_top" style={{ textDecoration: 'underline' }}>Política de Privacidade da Lotus Brokers</a>. A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da Santa Angela Construtora.</span>
+              </label>
                 <Hoverable as="button" type="submit" baseStyle={parseStyle('margin-top:6px;background:#8f6a2c;color:#fff;font-weight:700;font-size:15.5px;padding:17px;border:none;border-radius:46px;letter-spacing:.02em;transition:transform .3s,background .3s')} hoverStyle={parseStyle('transform:translateY(-2px);background:#7d5a26')}>Quero saber mais</Hoverable>
-                <p style={parseStyle('font-size:11.5px;color:#9a8a72;line-height:1.5;margin:2px 0 0')}>Ao enviar, autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a me contatar por telefone, e-mail ou WhatsApp, e declaro estar ciente da <a href="/lotus-privacidade" target="_top" style={parseStyle('color:#8f6a2c;text-decoration:underline')}>Política de Privacidade da Lotus Brokers</a>.</p>
+                
               </form>
             )}
           </div>
