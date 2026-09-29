@@ -832,6 +832,12 @@
 .field.invalid input { border-color: #d9534f; box-shadow: 0 0 0 4px rgba(217,83,79,0.12); }
 .field .err { color: #c0392b; font-size: 0.78rem; margin-top: 5px; display: none; font-family: var(--ff-head); font-weight: 600; }
 .field.invalid .err { display: block; }
+/* Consentimento. O checkbox mora dentro de .field (a validacao marca o campo
+   por ali), mas nao e campo de texto: sem estas regras ele herdava width:100%
+   e o padding de `.field input`, ocupava a linha inteira e o texto ao lado
+   ficava com largura zero, uma letra por linha. */
+.field label.consent { font-family: var(--ff-body); font-weight: 400; letter-spacing: 0; text-transform: none; margin-bottom: 0; }
+.field label.consent input[type="checkbox"] { width: auto; padding: 0; border: 0; border-radius: 0; background: none; flex: none; }
 .lead-card .legal { font-size: 0.74rem; color: var(--muted-2); margin-top: 14px; text-align: center; line-height: 1.5; }
 .form-ok { text-align: center; padding: 18px 0; }
 .form-ok .check { width: 66px; height: 66px; border-radius: 50%; background: rgba(60,126,115,0.14); color: var(--teal); display:flex; align-items:center; justify-content:center; margin: 0 auto 16px; }
