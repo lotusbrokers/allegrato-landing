@@ -1,5 +1,6 @@
 'use client';
 import { footerLegalLine } from '@/lib/site';
+import { imagemOtimizada } from '@/lib/imagem-otimizada';
 
 /**
  * LotusBusca — porte 1:1 de lotus-busca (mecanismo dc-runtime) para React.
@@ -100,11 +101,14 @@ function ImageSlot({
   style,
   alt = '',
   prioridade = false,
+  sizes = '100vw',
 }: {
   src?: string;
   id?: string;
   style?: CSSProperties;
   alt?: string;
+  /** Largura que a imagem ocupa na tela, para o navegador escolher no srcset. */
+  sizes?: string;
   /**
    * Imagem acima da dobra (hero, capa, primeira foto da galeria).
    *
@@ -125,7 +129,8 @@ function ImageSlot({
     >
       {src && (
         <img
-          src={src}
+          {...imagemOtimizada(src)}
+          sizes={sizes}
           alt={alt}
           loading={prioridade ? 'eager' : 'lazy'}
           fetchPriority={prioridade ? 'high' : undefined}
@@ -561,7 +566,7 @@ export default function LotusBusca({
 
           {hasResults && (
             <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px;')}>
-              {resultsView.map((r) => (
+              {resultsView.map((r, i) => (
                 <Hoverable
                   key={r.id}
                   as="a"
@@ -575,7 +580,7 @@ export default function LotusBusca({
                   hoverStyle={parseStyle('transform:translateY(-3px);box-shadow:0 26px 54px -30px rgba(21,36,28,.46)')}
                 >
                   <div style={parseStyle('position:relative;aspect-ratio:4/3;background:#1d3a2c;')}>
-                    <ImageSlot id={r.slot} src={r.img} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={r.type + ' · ' + r.neighborhood} />
+                    <ImageSlot id={r.slot} src={r.img} prioridade={i === 0} sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 33vw" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={r.type + ' · ' + r.neighborhood} />
                     {r.badge && (
                       <span style={parseStyle('position:absolute;top:12px;left:12px;background:#b18a4a;color:#15241c;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:5px 10px;border-radius:30px;')}>{r.badge}</span>
                     )}
@@ -671,7 +676,7 @@ export default function LotusBusca({
       <footer data-rodape-portal="" style={parseStyle('background:#15241c;padding:40px 32px;margin-top:24px;')}>
         <div style={parseStyle('max-width:1480px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;')}>
           <div style={parseStyle('display:flex;align-items:center;gap:11px;')}>
-            <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" style={{ height: 34, width: 'auto', display: 'block' }} />
+            <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" width={800} height={300} style={{ height: 34, width: 'auto', display: 'block' }} />
             <span style={parseStyle("font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:rgba(247,242,232,.8);")}>Grandes histórias têm endereço.</span>
           </div>
           <div style={parseStyle('font-size:12.5px;color:rgba(247,242,232,.5);')}>{footerLegalLine()}</div>

@@ -23,6 +23,7 @@ import React, {
   type ReactNode,
 } from 'react';
 import { sendLead } from '@/lib/lead';
+import { imagemOtimizada } from '@/lib/imagem-otimizada';
 
 /* ------------------------------------------------------------------ */
 /* Helpers                                                             */
@@ -531,7 +532,7 @@ export default function AltosDaAvenida({
           acompanha a altura do cabeçalho — ver [data-hero-inner] no CSS. */}
       <section id="topo" data-screen-label="Hero" style={parseStyle('position:relative; min-height:clamp(680px,90vh,900px); display:flex; flex-direction:column; justify-content:center; overflow:hidden;')}>
         <div style={parseStyle('position:absolute; inset:0; z-index:0;')}>
-          <img src={A + 'a005.png'} alt="Piscina do Altos da Avenida ao entardecer" style={parseStyle('width:100%; height:100%; object-fit:cover; animation:adKenBurns 22s ease-in-out infinite alternate;')} />
+          <img {...imagemOtimizada(A + 'a005.png')} sizes="100vw" fetchPriority="high" alt="Piscina do Altos da Avenida ao entardecer" style={parseStyle('width:100%; height:100%; object-fit:cover; animation:adKenBurns 22s ease-in-out infinite alternate;')} />
         </div>
         <div style={parseStyle('position:absolute; inset:0; z-index:1; background:linear-gradient(105deg,rgba(13,33,25,.86) 0%,rgba(13,33,25,.6) 38%,rgba(13,33,25,.18) 70%,rgba(189,106,69,.12) 100%);')}></div>
         <div style={parseStyle('position:absolute; inset:0; z-index:1; background:linear-gradient(0deg,rgba(13,33,25,.7) 0%,rgba(13,33,25,0) 35%);')}></div>

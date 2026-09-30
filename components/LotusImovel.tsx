@@ -1,5 +1,6 @@
 'use client';
 import { footerLegalLine } from '@/lib/site';
+import { imagemOtimizada } from '@/lib/imagem-otimizada';
 import { demonstrativoDe, temAreaDeTerreno } from '@/lib/tipologia';
 import { bairroDoGuia } from '@/lib/bairros-taxonomia';
 import CtaSimulacao from './CtaSimulacao';
@@ -113,11 +114,14 @@ function ImageSlot({
   alt = '',
   prioridade = false,
   imediata = false,
+  sizes = '100vw',
 }: {
   src?: string;
   id?: string;
   style?: CSSProperties;
   alt?: string;
+  /** Largura que a imagem ocupa na tela, para o navegador escolher no srcset. */
+  sizes?: string;
   /**
    * Imagem acima da dobra (hero, capa, primeira foto da galeria).
    *
@@ -152,7 +156,8 @@ function ImageSlot({
     >
       {src && !falhou && (
         <img
-          src={src}
+          {...imagemOtimizada(src)}
+          sizes={sizes}
           alt={alt}
           loading={prioridade || imediata ? 'eager' : 'lazy'}
           fetchPriority={prioridade ? 'high' : undefined}
@@ -465,7 +470,7 @@ export default function LotusImovel({
                     (first ? '#1d3a2c' : '#3f6249') + ';',
                 )}
               >
-                <ImageSlot prioridade={first} imediata={!first} id={`imovel-foto-${slot + 1}`} src={src} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={fotoLegenda(slot)} />
+                <ImageSlot prioridade={first} imediata={!first} sizes={first ? '(max-width: 900px) 100vw, 60vw' : '(max-width: 900px) 50vw, 20vw'} id={`imovel-foto-${slot + 1}`} src={src} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={fotoLegenda(slot)} />
                 {first && (
                   <>
                     <span style={parseStyle('position:absolute;top:16px;left:16px;background:#b18a4a;color:#15241c;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:6px 12px;border-radius:30px;')}>Lotus Listing</span>

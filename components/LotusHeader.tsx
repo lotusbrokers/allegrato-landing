@@ -139,7 +139,7 @@ const S = {
 
 function LotusMark() {
   return (
-    <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" style={{ height: 34, width: 'auto', display: 'block' }} />
+    <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" width={800} height={300} style={{ height: 34, width: 'auto', display: 'block' }} />
   );
 }
 

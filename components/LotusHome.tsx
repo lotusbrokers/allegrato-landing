@@ -1,6 +1,7 @@
 'use client';
 import { getBairro } from '@/lib/bairros';
 import { footerLegalLine } from '@/lib/site';
+import { imagemOtimizada } from '@/lib/imagem-otimizada';
 
 /**
  * LotusHome — porte 1:1 de lotus-home/index.html (mecanismo dc-runtime) para React.
@@ -117,11 +118,14 @@ function ImageSlot({
   style,
   alt = '',
   prioridade = false,
+  sizes = '100vw',
 }: {
   src?: string;
   id?: string;
   style?: CSSProperties;
   alt?: string;
+  /** Largura que a imagem ocupa na tela, para o navegador escolher no srcset. */
+  sizes?: string;
   /**
    * Imagem acima da dobra (hero, capa, primeira foto da galeria).
    *
@@ -142,7 +146,8 @@ function ImageSlot({
     >
       {src && (
         <img
-          src={src}
+          {...imagemOtimizada(src)}
+          sizes={sizes}
           alt={alt}
           loading={prioridade ? 'eager' : 'lazy'}
           fetchPriority={prioridade ? 'high' : undefined}
@@ -560,7 +565,7 @@ export default function LotusHome({
       >
         <div style={parseStyle('max-width:1280px;margin:0 auto;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;gap:32px;')}>
           <a href="#topo" style={parseStyle('display:flex;align-items:center;gap:12px;')}>
-            <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" style={{ height: 34, width: 'auto', display: 'block' }} />
+            <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" width={800} height={300} style={{ height: 34, width: 'auto', display: 'block' }} />
           </a>
           <nav data-portal-nav="" style={parseStyle('display:flex;align-items:center;gap:34px;font-size:15px;font-weight:500;color:rgba(247,242,232,.86);')}>
             <Hoverable as="a" href="/lotus-busca" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Comprar</Hoverable>
@@ -606,7 +611,7 @@ export default function LotusHome({
       {/* ============ HERO ============ */}
       <section id="topo" style={parseStyle('position:relative;min-height:680px;display:flex;align-items:flex-start;background:#1d3a2c;overflow:visible;')}>
         {/* Hero = LCP da home: fetchPriority high para o browser priorizar o download. */}
-        <img src="/home-hero-jundiai.jpg" alt="Vista aérea de Jundiaí ao amanhecer, Lotus Brokers" fetchPriority="high" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%;')} />
+        <img {...imagemOtimizada('/home-hero-jundiai.jpg')} sizes="100vw" alt="Vista aérea de Jundiaí ao amanhecer, Lotus Brokers" fetchPriority="high" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%;')} />
         <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg, rgba(21,36,28,.55) 0%, rgba(21,36,28,.15) 38%, rgba(21,36,28,.78) 82%, rgba(21,36,28,.95) 100%);')}></div>
         <div style={{ position: 'absolute', inset: 0, opacity: 0.06, mixBlendMode: 'overlay', pointerEvents: 'none', backgroundImage: NOISE_BG }}></div>
         <div style={parseStyle('position:relative;z-index:2;width:100%;max-width:1280px;margin:0 auto;padding:150px 40px 80px;')}>
@@ -713,7 +718,7 @@ export default function LotusHome({
                     <Hoverable as="a" href={b.href} target="_top" baseStyle={parseStyle('align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:#b18a4a;color:#15241c;font-weight:600;font-size:14.5px;padding:12px 24px;border-radius:40px;transition:transform .2s, background .2s;')} hoverStyle={parseStyle('background:#cdab6e;transform:translateY(-2px)')}>{b.cta} <span>→</span></Hoverable>
                   </div>
                   <div style={parseStyle('position:relative;background:#15241c;')}>
-                    <ImageSlot src={b.img} id={b.slot} alt={b.alt} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} />
+                    <ImageSlot src={b.img} id={b.slot} alt={b.alt} sizes="(max-width: 900px) 100vw, 50vw" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} />
                     <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(90deg,#1d3a2c 0%,rgba(29,58,44,.35) 24%,rgba(29,58,44,0) 60%);')}></div>
                   </div>
                 </div>
@@ -740,7 +745,7 @@ export default function LotusHome({
           </div>
           <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:28px;')}>
             <Hoverable as="a" target="_top" href="/lotus-lancamentos" data-reveal="" baseStyle={parseStyle('position:relative;display:block;border-radius:20px;overflow:hidden;min-height:380px;background:#1d3a2c;box-shadow:0 24px 60px -30px rgba(21,36,28,.45);transition:transform .4s ease, box-shadow .4s ease;')} hoverStyle={parseStyle('transform:translateY(-4px);box-shadow:0 34px 70px -30px rgba(21,36,28,.55)')}>
-              <ImageSlot src="/altos-da-avenida/a005.png" id="lotus-motor-a" alt="Piscina do Altos da Avenida ao entardecer, lançamento em Jundiaí" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} />
+              <ImageSlot src="/altos-da-avenida/a005.png" id="lotus-motor-a" sizes="(max-width: 900px) 100vw, 50vw" alt="Piscina do Altos da Avenida ao entardecer, lançamento em Jundiaí" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} />
               <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,.1),rgba(21,36,28,.85));')}></div>
               <div style={parseStyle('position:absolute;left:0;right:0;bottom:0;padding:36px;')}>
                 <div style={parseStyle('font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#cdab6e;margin-bottom:12px;')}>Lançamentos</div>
@@ -750,7 +755,7 @@ export default function LotusHome({
               </div>
             </Hoverable>
             <Hoverable as="a" href="/lotus-busca" target="_top" data-reveal="" baseStyle={parseStyle('position:relative;display:block;border-radius:20px;overflow:hidden;min-height:380px;background:#3f6249;box-shadow:0 24px 60px -30px rgba(21,36,28,.45);transition:transform .4s ease, box-shadow .4s ease;')} hoverStyle={parseStyle('transform:translateY(-4px);box-shadow:0 34px 70px -30px rgba(21,36,28,.55)')}>
-              <ImageSlot src="/gran-ville-santo-angelo/a025.jpg" id="lotus-motor-b" alt="Casa com piscina em condomínio fechado, imóvel selecionado pela Lotus" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} />
+              <ImageSlot src="/gran-ville-santo-angelo/a025.jpg" id="lotus-motor-b" sizes="(max-width: 900px) 100vw, 50vw" alt="Casa com piscina em condomínio fechado, imóvel selecionado pela Lotus" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} />
               <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,.1),rgba(21,36,28,.85));')}></div>
               <div style={parseStyle('position:absolute;left:0;right:0;bottom:0;padding:36px;')}>
                 <div style={parseStyle('font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#cdab6e;margin-bottom:12px;')}>Comprar &amp; alugar</div>
@@ -780,7 +785,7 @@ export default function LotusHome({
               // continuava dizendo "Ver este empreendimento" sem levar a lugar nenhum.
               <Hoverable key={i} as="a" href={d.href ?? waLink} target={d.href ? '_top' : '_blank'} rel="noopener" data-reveal="" baseStyle={parseStyle('display:flex;flex-direction:column;background:#f7f2e8;border-radius:18px;overflow:hidden;box-shadow:0 18px 44px -28px rgba(21,36,28,.35);transition:transform .35s ease, box-shadow .35s ease;')} hoverStyle={parseStyle('transform:translateY(-5px);box-shadow:0 30px 60px -30px rgba(21,36,28,.45)')}>
                 <div style={parseStyle('position:relative;aspect-ratio:4/3;background:#1d3a2c;')}>
-                  {d.img && <img src={d.img} alt={d.name} loading="lazy" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;')} />}
+                  {d.img && <img {...imagemOtimizada(d.img, [640, 1080])} sizes="(max-width: 640px) 100vw, 33vw" alt={d.name} loading="lazy" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;')} />}
                   <div style={parseStyle('position:absolute;top:14px;left:14px;display:flex;gap:8px;')}>
                     <span style={parseStyle('background:rgba(21,36,28,.78);backdrop-filter:blur(4px);color:#f7f2e8;font-size:11.5px;font-weight:600;letter-spacing:.04em;padding:6px 11px;border-radius:30px;')}>{d.location}</span>
                   </div>
@@ -834,7 +839,7 @@ export default function LotusHome({
                   hoverStyle={parseStyle('transform:translateY(-5px);box-shadow:0 30px 60px -30px rgba(21,36,28,.45)')}
                 >
                   <div style={parseStyle('position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,#1d3a2c,#3f6249);')}>
-                    {d.img && <img src={d.img} alt={d.name} loading="lazy" decoding="async" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;')} />}
+                    {d.img && <img {...imagemOtimizada(d.img, [640, 1080])} sizes="(max-width: 640px) 100vw, 33vw" alt={d.name} loading="lazy" decoding="async" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;')} />}
                     <span style={parseStyle('position:absolute;top:13px;left:13px;background:rgba(21,36,28,.78);color:#f7f2e8;font-size:11.5px;font-weight:600;padding:6px 11px;border-radius:30px;')}>{d.location}</span>
                     {/* Selo diferente do dos imóveis de propósito: este é
                         empreendimento, não unidade pronta. */}
@@ -863,7 +868,7 @@ export default function LotusHome({
                   hoverStyle={parseStyle('transform:translateY(-5px);box-shadow:0 30px 60px -30px rgba(21,36,28,.45)')}
                 >
                   <div style={parseStyle('position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,#1d3a2c,#3f6249);')}>
-                    <img src={im.img} alt={`${im.type} em ${im.neighborhood}, ${im.city}`} loading="lazy" decoding="async" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;')} />
+                    <img {...imagemOtimizada(im.img, [640, 1080])} sizes="(max-width: 640px) 100vw, 33vw" alt={`${im.type} em ${im.neighborhood}, ${im.city}`} loading="lazy" decoding="async" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;')} />
                     <span style={parseStyle('position:absolute;top:13px;left:13px;background:rgba(21,36,28,.78);color:#f7f2e8;font-size:11.5px;font-weight:600;padding:6px 11px;border-radius:30px;')}>{im.neighborhood || im.city}</span>
                     {/* Todos os imóveis da vitrine são exclusivos — é o filtro
                         da seção —, então o selo diz isso, que é a informação que
@@ -888,7 +893,7 @@ export default function LotusHome({
       )}
 
       {/* ============ COMO TRABALHAMOS / SQUADS ============ */}
-      <section id="sobre" style={parseStyle('background:#1d3a2c;padding:120px 40px;position:relative;overflow:hidden;')}>
+      <section id="sobre" style={parseStyle('content-visibility:auto;contain-intrinsic-size:auto 800px;background:#1d3a2c;padding:120px 40px;position:relative;overflow:hidden;')}>
         <div style={{ position: 'absolute', inset: 0, opacity: 0.05, mixBlendMode: 'overlay', pointerEvents: 'none', backgroundImage: NOISE_BG }}></div>
         <div style={parseStyle('max-width:1280px;margin:0 auto;position:relative;')}>
           <div data-reveal="" style={parseStyle('max-width:680px;margin-bottom:60px;')}>
@@ -912,7 +917,7 @@ export default function LotusHome({
       </section>
 
       {/* ============ BAIRROS ============ */}
-      <section id="bairros" style={parseStyle('background:#f7f2e8;padding:120px 40px;')}>
+      <section id="bairros" style={parseStyle('content-visibility:auto;contain-intrinsic-size:auto 800px;background:#f7f2e8;padding:120px 40px;')}>
         <div style={parseStyle('max-width:1280px;margin:0 auto;')}>
           <div data-reveal="" style={parseStyle('max-width:640px;margin-bottom:52px;')}>
             <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b18a4a;margin-bottom:18px;')}>Nossa região</div>
@@ -927,7 +932,7 @@ export default function LotusHome({
             {/* hint-placeholder-count: 4 */}
             {neighborhoodsJundiai.map((n, i) => (
               <Hoverable key={i} as="a" href={`/lotus-bairro/${n.bairroSlug}`} target="_top" data-reveal="" baseStyle={parseStyle('position:relative;display:block;aspect-ratio:3/4;border-radius:16px;overflow:hidden;box-shadow:0 16px 40px -28px rgba(21,36,28,.4);transition:transform .35s ease;')} hoverStyle={parseStyle('transform:translateY(-4px)')}>
-                <ImageSlot id={n.slot} src={n.img} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={n.name} />
+                <ImageSlot id={n.slot} src={n.img} sizes="(max-width: 640px) 100vw, 33vw" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={n.name} />
                 <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,0) 40%,rgba(21,36,28,.85));')}></div>
                 <div style={parseStyle('position:absolute;left:0;right:0;bottom:0;padding:20px;')}>
                   <div style={parseStyle('font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#cdab6e;margin-bottom:5px;')}>{n.city}</div>
@@ -944,7 +949,7 @@ export default function LotusHome({
       {/* Depois dos bairros, de propósito: quem acabou de escolher a região é
           quem pergunta em qual condomínio. Leva ao índice /lotus-condominio. */}
       {condominios && condominios.length > 0 && (
-        <section id="condominios" style={parseStyle('background:#ece2cf;padding:110px 40px;')}>
+        <section id="condominios" style={parseStyle('content-visibility:auto;contain-intrinsic-size:auto 800px;background:#ece2cf;padding:110px 40px;')}>
           <div style={parseStyle('max-width:1280px;margin:0 auto;')}>
             <CarrosselCards
               eyebrow="Condomínios"
@@ -964,7 +969,7 @@ export default function LotusHome({
                 >
                   <div style={parseStyle('position:relative;aspect-ratio:16/10;background:linear-gradient(135deg,#1d3a2c,#3f6249);')}>
                     {c.capa && (
-                      <img src={c.capa} alt={[c.nome, c.bairro, c.cidade].filter(Boolean).join(', ')} loading="lazy" decoding="async" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;')} />
+                      <img {...imagemOtimizada(c.capa, [640, 1080])} sizes="(max-width: 640px) 100vw, 33vw" alt={[c.nome, c.bairro, c.cidade].filter(Boolean).join(', ')} loading="lazy" decoding="async" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;')} />
                     )}
                   </div>
                   <div style={parseStyle('padding:18px 20px 22px;display:flex;flex-direction:column;flex:1;')}>
@@ -982,7 +987,7 @@ export default function LotusHome({
       )}
 
       {/* ============ CORRETORES / PROVA HUMANA ============ */}
-      <section id="corretores" style={parseStyle('background:#ece2cf;padding:120px 40px;')}>
+      <section id="corretores" style={parseStyle('content-visibility:auto;contain-intrinsic-size:auto 800px;background:#ece2cf;padding:120px 40px;')}>
         <div style={parseStyle('max-width:1280px;margin:0 auto;')}>
           <div data-reveal="" style={parseStyle('max-width:640px;margin-bottom:52px;')}>
             <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b18a4a;margin-bottom:18px;')}>Os especialistas</div>
@@ -1025,7 +1030,7 @@ export default function LotusHome({
 
       {/* ============ DEPOIMENTOS ============ */}
       {DEPOIMENTOS_ATIVOS && (
-      <section id="depoimentos" style={parseStyle('background:#f7f2e8;padding:90px 40px 36px;')}>
+      <section id="depoimentos" style={parseStyle('content-visibility:auto;contain-intrinsic-size:auto 800px;background:#f7f2e8;padding:90px 40px 36px;')}>
         <div style={parseStyle('max-width:1280px;margin:0 auto;')}>
           <div data-reveal="" style={parseStyle('display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px;margin-bottom:48px;')}>
             <div style={parseStyle('max-width:620px;')}>
@@ -1074,7 +1079,7 @@ export default function LotusHome({
       )}
 
       {/* ============ BLOG ============ */}
-      <section id="blog" style={parseStyle('background:#f7f2e8;padding:56px 40px 120px;')}>
+      <section id="blog" style={parseStyle('content-visibility:auto;contain-intrinsic-size:auto 800px;background:#f7f2e8;padding:56px 40px 120px;')}>
         <div style={parseStyle('max-width:1280px;margin:0 auto;')}>
           <div data-reveal="" style={parseStyle('display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:52px;')}>
             <div style={parseStyle('max-width:620px;')}>
@@ -1130,7 +1135,7 @@ export default function LotusHome({
       </section>
 
       {/* ============ GUIAS PRÁTICOS ============ */}
-      <section id="guias" style={parseStyle('background:#ece2cf;padding:120px 40px;')}>
+      <section id="guias" style={parseStyle('content-visibility:auto;contain-intrinsic-size:auto 800px;background:#ece2cf;padding:120px 40px;')}>
         <div style={parseStyle('max-width:1280px;margin:0 auto;')}>
           <div data-reveal="" style={parseStyle('display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:52px;')}>
             <div style={parseStyle('max-width:620px;')}>
@@ -1159,7 +1164,7 @@ export default function LotusHome({
       </section>
 
       {/* ============ ANUNCIAR CTA ============ */}
-      <section id="anunciar" style={parseStyle('background:#3f6249;padding:110px 40px;position:relative;overflow:hidden;')}>
+      <section id="anunciar" style={parseStyle('content-visibility:auto;contain-intrinsic-size:auto 800px;background:#3f6249;padding:110px 40px;position:relative;overflow:hidden;')}>
         <div style={{ position: 'absolute', inset: 0, opacity: 0.05, mixBlendMode: 'overlay', pointerEvents: 'none', backgroundImage: NOISE_BG }}></div>
         <div data-reveal="" style={parseStyle('max-width:880px;margin:0 auto;text-align:center;position:relative;')}>
           <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#cdab6e;margin-bottom:20px;')}>Quer vender ou alugar?</div>
@@ -1306,7 +1311,7 @@ export default function LotusHome({
           <div style={parseStyle('display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;padding-bottom:56px;border-bottom:1px solid rgba(247,242,232,.12);')}>
             <div>
               <div style={parseStyle('display:flex;align-items:center;gap:12px;margin-bottom:20px;')}>
-                <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" style={{ height: 34, width: 'auto', display: 'block' }} />
+                <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" width={800} height={300} style={{ height: 34, width: 'auto', display: 'block' }} />
               </div>
               <p style={parseStyle("font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:19px;color:rgba(247,242,232,.85);line-height:1.35;max-width:300px;margin:0 0 20px;")}>Grandes histórias têm endereço.</p>
               <p style={parseStyle('font-size:13.5px;color:rgba(247,242,232,.55);line-height:1.6;margin:0;')}>Consultoria imobiliária para compra, venda, locação e investimento em imóveis de médio e alto padrão em Jundiaí, Itupeva e região.</p>

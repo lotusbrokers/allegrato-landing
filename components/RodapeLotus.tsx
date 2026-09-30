@@ -170,6 +170,8 @@ export default function RodapeLotus({ tema = TEMA_PADRAO }: { tema?: TemaRodape 
           <img
             src="/logo-lotus-dourado.png"
             alt="Lotus Brokers"
+            width={800}
+            height={300}
             style={{ height: 34, width: 'auto', display: 'block', marginBottom: 18 }}
           />
           <p
