@@ -1164,22 +1164,6 @@ export default function Allegrato() {
                 Prefeitura de Jundiaí (Alvará SAEPRO1318/2025) e GRAPROHAB (nº 230/2024). Incorporação registrada na matrícula.
               </p>
             </div>
-            <div className="tcard reveal d3">
-              <div className="ic">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z">
-                  </path>
-                  <path d="M14 2v6h6M9 13l2 2 4-4">
-                  </path>
-                </svg>
-              </div>
-              <h3>
-                Matrícula limpa
-              </h3>
-              <p>
-                Matrícula nº 187.994 (1º RI de Jundiaí), sem hipotecas, penhoras ou ações.
-              </p>
-            </div>
           </div>
         </div>
       </section>
@@ -1392,7 +1376,7 @@ export default function Allegrato() {
           </div>
           <div className="foot-bottom">
             <p className="foot-legal">
-              Imagens meramente ilustrativas. As perspectivas artísticas e plantas podem sofrer alterações sem aviso prévio. Mobiliário, decoração e paisagismo de áreas comuns conforme memorial descritivo e faseamento de entrega. Itens de lazer entregues por fases. Incorporação registrada sob matrícula nº 187.994 no 1º Oficial de Registro de Imóveis de Jundiaí/SP. Valores e condições sujeitos a análise de crédito e disponibilidade.
+              Imagens meramente ilustrativas. As perspectivas artísticas e plantas podem sofrer alterações sem aviso prévio. Mobiliário, decoração e paisagismo de áreas comuns conforme memorial descritivo e faseamento de entrega. Itens de lazer entregues por fases. Incorporação registrada no 1º Oficial de Registro de Imóveis de Jundiaí/SP. Valores e condições sujeitos a análise de crédito e disponibilidade.
             </p>
           </div>
         </div>

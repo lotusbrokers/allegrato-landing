@@ -641,7 +641,8 @@ section{position:relative}
 
 /* ---------- trust / security ---------- */
 .trust{background:var(--sand)}
-.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:44px}
+/* auto-fit: eram 3 cards numa grade de 4 colunas; com 2 (o de matricula saiu) a grade se ajusta ao que ha. */
+.trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:44px}
 .tcard{background:var(--cream);border:1px solid var(--line-soft);border-radius:var(--radius);padding:26px 24px;box-shadow:var(--shadow-sm)}
 .tcard .ic{width:46px;height:46px;border-radius:12px;background:rgba(42,140,149,.12);color:var(--teal-deep);display:grid;place-items:center;margin-bottom:16px}
 .tcard .ic svg{width:23px;height:23px}

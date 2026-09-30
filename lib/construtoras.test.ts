@@ -9,13 +9,22 @@ import { construtoraDoEmpreendimento, construtorasParaFiltro, mapaDeConstrutoras
 
 test('agrupa variantes que só diferem por acento', () => {
   const nomes = [...Array(11).fill('Santa Angela'), ...Array(3).fill('Santa Ângela')];
-  assert.deepEqual(construtorasParaFiltro(nomes), ['Santa Ângela']);
+  assert.deepEqual(construtorasParaFiltro(nomes), ['Santa Angela']);
 });
 
-test('a variante acentuada vence mesmo sendo minoria', () => {
+test('grafia oficial vence a heurística do acento', () => {
+  // O nome oficial da Santa Angela é sem acento; a variante acentuada do
+  // dashboard é reescrita mesmo quando é a única presente.
   const m = mapaDeConstrutoras(['Santa Angela', 'Santa Angela', 'Santa Ângela']);
-  assert.equal(m.get('Santa Angela'), 'Santa Ângela');
-  assert.equal(m.get('Santa Ângela'), 'Santa Ângela');
+  assert.equal(m.get('Santa Angela'), 'Santa Angela');
+  assert.equal(m.get('Santa Ângela'), 'Santa Angela');
+  assert.deepEqual(construtorasParaFiltro(['Santa Ângela']), ['Santa Angela']);
+});
+
+test('sem grafia oficial, a variante acentuada vence mesmo sendo minoria', () => {
+  const m = mapaDeConstrutoras(['Avela', 'Avela', 'Avelã']);
+  assert.equal(m.get('Avela'), 'Avelã');
+  assert.equal(m.get('Avelã'), 'Avelã');
 });
 
 test('caixa mista vence CAIXA ALTA', () => {
@@ -69,9 +78,9 @@ test('empreendimento com vínculo errado no dashboard vai para a construtora cer
   assert.equal(construtoraDoEmpreendimento('ALTISSIMI', 'Santa Ângela'), 'Mac Lucer');
 });
 
-test('sem correção, vale o que o banco diz', () => {
-  assert.equal(construtoraDoEmpreendimento('Allegrato', 'Santa Ângela'), 'Santa Ângela');
-  assert.equal(construtoraDoEmpreendimento('Allegrato', '  Santa Ângela  '), 'Santa Ângela');
+test('sem correção, vale o que o banco diz — na grafia oficial, quando houver', () => {
+  assert.equal(construtoraDoEmpreendimento('Allegrato', 'Santa Ângela'), 'Santa Angela');
+  assert.equal(construtoraDoEmpreendimento('Allegrato', '  Santa Ângela  '), 'Santa Angela');
   assert.equal(construtoraDoEmpreendimento('Allegrato', null), '');
   assert.equal(construtoraDoEmpreendimento(null, 'Tebas'), 'Tebas');
 });

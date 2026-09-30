@@ -13,7 +13,7 @@ test('agrupa as grafias da mesma construtora numa página só', () => {
     l('Vigóre', 'SANTA ANGELA'),
   ]);
   assert.equal(cs.length, 1);
-  assert.equal(cs[0].nome, 'Santa Ângela');
+  assert.equal(cs[0].nome, 'Santa Angela');
   assert.equal(cs[0].slug, 'santa-angela');
   assert.equal(cs[0].lancamentos.length, 3);
 });

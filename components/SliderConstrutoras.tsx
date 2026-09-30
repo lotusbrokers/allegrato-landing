@@ -32,10 +32,10 @@ type Slide = {
 
 const SLIDES: Slide[] = [
   {
-    nome: 'Santa Ângela',
+    nome: 'Santa Angela',
     href: '/construtoras/santa-angela',
     img: '/construtoras/slides/santa-angela.jpg',
-    legenda: 'Allegrato, empreendimento da Santa Ângela',
+    legenda: 'Allegrato, empreendimento da Santa Angela',
   },
   {
     nome: 'GP Desenvolvimento Urbano',

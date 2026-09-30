@@ -801,7 +801,7 @@ export default function JardinsDoHorto({
             </div>
           </div>
           <p style={parseStyle('font-size:11.5px; line-height:1.7; margin:26px 0 0; color:rgba(244,238,228,.4);')}>
-            Imagens meramente ilustrativas. As informações constantes no Memorial de Incorporação e nos futuros Instrumentos de Compra e Venda prevalecerão sobre as divulgadas neste material. Incorporação registrada em 02 de fevereiro de 2024 no R.11 da matrícula nº 163.080 do 1º Oficial de Registro de Imóveis da Comarca de Jundiaí/SP. Quando da entrega, a vegetação poderá apresentar diferenças de tamanho e porte. Material preliminar, sujeito a alteração sem aviso prévio.
+            Imagens meramente ilustrativas. As informações constantes no Memorial de Incorporação e nos futuros Instrumentos de Compra e Venda prevalecerão sobre as divulgadas neste material. Incorporação registrada no 1º Oficial de Registro de Imóveis de Jundiaí/SP. Quando da entrega, a vegetação poderá apresentar diferenças de tamanho e porte. Material preliminar, sujeito a alteração sem aviso prévio.
           </p>
           <div style={parseStyle('margin-top:20px; font-size:12px; color:rgba(244,238,228,.35);')}>© 2026 Jardins do Horto · Realização: Santa Angela Construtora. Página, divulgação e atendimento pela Imobiliária Lotus Brokers, autorizada a comercializar o empreendimento.</div>
         </div>

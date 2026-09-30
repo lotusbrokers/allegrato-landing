@@ -58,14 +58,34 @@ const temAcento = (s: string) => /[\u00C0-\u024F]/.test(s);
 const soMaiuscula = (s: string) => s === s.toUpperCase() && /[A-Z]{3,}/.test(s);
 
 /**
+ * Grafia oficial de construtoras cujo nome o dashboard escreve de outro jeito.
+ *
+ * A heurística de melhorVariante prefere a forma acentuada, e para a Santa
+ * Angela isso errava: o nome oficial da empresa é SEM acento (é assim que ela
+ * se apresenta e como está nas landings), mas "Santa Ângela" chegava a vencer
+ * por ter acento. Chave: a mesma comparação sem acento/caixa/espaço. O slug
+ * (/construtoras/santa-angela) não muda — slugify já tirava o acento.
+ */
+const GRAFIA_OFICIAL: Record<string, string> = {
+  santaangela: 'Santa Angela',
+};
+
+/** O nome como a construtora escreve, quando há grafia oficial registrada. */
+function grafiaOficial(nome: string): string {
+  return GRAFIA_OFICIAL[chave(nome)] ?? nome;
+}
+
+/**
  * Entre variantes da mesma construtora, escolhe a que vai aparecer no filtro.
  *
- * A mais frequente NÃO é o melhor critério: "Santa Angela" aparece mais que
- * "Santa Ângela" justamente porque digitar sem acento é o atalho comum. Então a
- * ordem é: com acento ganha de sem acento, caixa mista ganha de CAIXA ALTA, e só
- * então a frequência desempata.
+ * Grafia oficial registrada vence tudo. Fora isso, a mais frequente NÃO é o
+ * melhor critério: digitar sem acento é o atalho comum, então a ordem é: com
+ * acento ganha de sem acento, caixa mista ganha de CAIXA ALTA, e só então a
+ * frequência desempata.
  */
 function melhorVariante(variantes: string[], frequencia: Map<string, number>): string {
+  const oficial = GRAFIA_OFICIAL[chave(variantes[0])];
+  if (oficial) return oficial;
   return [...variantes].sort((a, b) => {
     if (temAcento(a) !== temAcento(b)) return temAcento(a) ? -1 : 1;
     if (soMaiuscula(a) !== soMaiuscula(b)) return soMaiuscula(a) ? 1 : -1;
@@ -140,7 +160,9 @@ export function construtoraDoEmpreendimento(
   construtoraDoBanco: string | null | undefined
 ): string {
   const corrigida = CONSTRUTORA_CORRIGIDA[chave(nomeDoEmpreendimento ?? '')];
-  return corrigida ?? (construtoraDoBanco?.trim() ?? '');
+  // A grafia oficial entra aqui também: os cards da home leem esta função
+  // direto, sem passar pelo mapa do filtro.
+  return grafiaOficial(corrigida ?? (construtoraDoBanco?.trim() ?? ''));
 }
 
 /** Empreendimentos com vínculo corrigido — o teste confere os nomes. */

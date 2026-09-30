@@ -826,7 +826,7 @@ export default function AltosDaAvenida({
               <span style={parseStyle('width:28px; height:1px; background:#e9b896;')}></span>
               <span style={parseStyle("font-family:'Barlow Semi Condensed',sans-serif; font-size:13px; letter-spacing:.3em; text-transform:uppercase; color:#e9b896;")}>A Construtora</span>
             </div>
-            <h2 data-reveal="" data-reveal-delay="80" style={parseStyle("margin:0; font-family:'Cormorant Garamond',serif; font-size:clamp(34px,4.6vw,58px); font-weight:600; line-height:1.05;")}>Há 40 anos realizando<br />sonhos em Jundiaí</h2>
+            <h2 data-reveal="" data-reveal-delay="80" style={parseStyle("margin:0; font-family:'Cormorant Garamond',serif; font-size:clamp(34px,4.6vw,58px); font-weight:600; line-height:1.05;")}>Realização<br />Santa Angela Construtora</h2>
             <p data-reveal="" data-reveal-delay="140" style={parseStyle('margin:26px 0 0; font-size:17px; line-height:1.8; color:rgba(255,255,255,.8); max-width:560px;')}>Realizadora do Altos da Avenida, a Santa Angela Construtora atua em Jundiaí, Americana e Itatiba e acompanha todas as fases da obra, do início à entrega das chaves.</p>
             <p data-reveal="" data-reveal-delay="200" style={parseStyle('margin:16px 0 0; font-size:17px; line-height:1.8; color:rgba(255,255,255,.8); max-width:560px;')}>Com confiança, respeito e comprometimento, a Lotus acompanha a sua família em cada etapa: da primeira visita à entrega das chaves, com quem conhece o Altos da Avenida por dentro.</p>
           </div>
@@ -955,7 +955,7 @@ export default function AltosDaAvenida({
               </div>
             </div>
           </div>
-          <p style={parseStyle('margin:26px 0 0; font-size:11.5px; line-height:1.7; color:rgba(255,255,255,.42); max-width:1000px;')}>Imagens meramente ilustrativas, sujeitas a alteração. As tonalidades das cores, formas e texturas podem sofrer alterações. Os móveis e utensílios são sugestões de decoração e não fazem parte do contrato de aquisição. As medidas dos apartamentos são internas e de face a face. Registro do Imóvel: Incorporação registrada na matrícula 155.214 no 2º Oficial de Registro de Imóveis de Jundiaí, em 24/05/21. Material informativo elaborado pela Imobiliária Lotus Brokers. *Valor a partir de R$ 884.223,72, referente à tabela de setembro/2026, sujeito a alteração sem aviso prévio.</p>
+          <p style={parseStyle('margin:26px 0 0; font-size:11.5px; line-height:1.7; color:rgba(255,255,255,.42); max-width:1000px;')}>Imagens meramente ilustrativas, sujeitas a alteração. As tonalidades das cores, formas e texturas podem sofrer alterações. Os móveis e utensílios são sugestões de decoração e não fazem parte do contrato de aquisição. As medidas dos apartamentos são internas e de face a face. Incorporação registrada no 2º Oficial de Registro de Imóveis de Jundiaí/SP. Material informativo elaborado pela Imobiliária Lotus Brokers. *Valor a partir de R$ 884.223,72, referente à tabela de setembro/2026, sujeito a alteração sem aviso prévio.</p>
           <p style={parseStyle('margin:18px 0 0; font-size:12px; color:rgba(255,255,255,.5);')}>© 2026 Imobiliária Lotus Brokers · Página, divulgação e atendimento sob responsabilidade da Lotus Brokers, autorizada a comercializar este empreendimento. Realização: Santa Angela Construtora.</p>
         </div>
       </footer>

@@ -2075,8 +2075,7 @@ export default function Vigore() {
             divulgadas neste material. Todas as imagens e perspectivas são meramente ilustrativas.
             Os móveis e utensílios são sugestões de decoração e não fazem parte do contrato de
             aquisição. As medidas dos apartamentos são internas e de face a face. Incorporação
-            registrada em 28 de março de 2025 no R.4 da matrícula nº 179.120 do 1º Oficial de
-            Registro de Imóveis da Comarca de Jundiaí/SP.
+            registrada no 1º Oficial de Registro de Imóveis de Jundiaí/SP.
           </p>
           <p
             style={parseStyle(

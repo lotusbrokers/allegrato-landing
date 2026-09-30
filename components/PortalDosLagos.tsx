@@ -673,7 +673,7 @@ export default function PortalDosLagos() {
             </div>
           </div>
           <p className="legal">
-            As informações constantes no Memorial de Incorporação e nos futuros Instrumentos de Compra e Venda prevalecerão sobre as divulgadas neste material. Todas as imagens e perspectivas aqui contidas são meramente ilustrativas. As tonalidades das cores, formas e texturas podem sofrer alterações. A vegetação exposta é meramente ilustrativa e será entregue de acordo com o Projeto Paisagístico, podendo apresentar diferenças de tamanho e porte. Registro nº R3 feito no 1º Cartório de Registro de Imóveis de Jundiaí-SP, sobre matrícula nº 169.626 (protocolo nº 447.596). *Valor de lote a partir de R$ 637.805,49, referente à tabela de setembro/2026, sujeito a alteração sem aviso prévio.
+            As informações constantes no Memorial de Incorporação e nos futuros Instrumentos de Compra e Venda prevalecerão sobre as divulgadas neste material. Todas as imagens e perspectivas aqui contidas são meramente ilustrativas. As tonalidades das cores, formas e texturas podem sofrer alterações. A vegetação exposta é meramente ilustrativa e será entregue de acordo com o Projeto Paisagístico, podendo apresentar diferenças de tamanho e porte. Loteamento registrado no 1º Oficial de Registro de Imóveis de Jundiaí/SP. *Valor de lote a partir de R$ 637.805,49, referente à tabela de setembro/2026, sujeito a alteração sem aviso prévio.
           </p>
           <div className="legal__bar">
             <span>© <span id="yr"></span> Portal dos Lagos · Página, divulgação e atendimento pela Imobiliária Lotus Brokers, autorizada a comercializar este empreendimento.</span>

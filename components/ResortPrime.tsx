@@ -634,7 +634,7 @@ export default function ResortPrime() {
             <div className="diff-card reveal d1">
               <div className="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path></svg></div>
               <h3>Sistema Vedaporta</h3>
-              <p>Mais um benefício Santa Angela: veda a porta fechada contra insetos, poeira, água e luz, com maior eficiência térmica e acústica.</p>
+              <p>Mais um diferencial do Resort Prime: veda a porta fechada contra insetos, poeira, água e luz, com maior eficiência térmica e acústica.</p>
             </div>
             <div className="diff-card reveal d2">
               <div className="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18V5l12-2v13M9 13l12-2"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg></div>
@@ -743,7 +743,7 @@ export default function ResortPrime() {
           </div>
           <div className="footer__legal">
             <p>Imagens e perspectivas meramente ilustrativas. As informações constantes no Memorial de Incorporação e nos futuros Instrumentos de Compra e Venda prevalecerão sobre as divulgadas neste material. As tonalidades de cores, formas e texturas podem sofrer alterações. Móveis e utensílios são sugestões de decoração e não fazem parte do contrato de aquisição. A vegetação apresenta porte adulto de referência e será entregue conforme o Projeto Paisagístico. Material preliminar, sujeito a alteração sem aviso prévio.</p>
-            <p>Registro do Imóvel: Incorporação registrada na matrícula 171.488 no 1º Cartório de Registro de Imóveis de Jundiaí-SP, em 16/11/21.</p>
+            <p>Incorporação registrada no 1º Oficial de Registro de Imóveis de Jundiaí/SP.</p>
             <p>*Valor a partir de R$ 988.992,74, referente à tabela de setembro/2026, sujeito a alteração sem aviso prévio.</p>
           </div>
           <div className="footer__bar">

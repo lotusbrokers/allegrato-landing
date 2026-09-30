@@ -16,6 +16,7 @@
 
 /** Campos do cadastro que um card exibe e que podem ser corrigidos. */
 export type CamposCorrigiveis = {
+  nome: string;
   preco_texto: string | null;
   preco_num: number | null;
   specs: string | null;
@@ -64,6 +65,9 @@ export const CORRECOES_DE_CADASTRO: Record<string, Correcao[]> = {
     { campo: 'preco_num', de: 358182, para: 365345.98 },
   ],
   'maxx-santa-angela': [
+    // O nome oficial é sem acento (como na landing). O slug não muda: slugify
+    // já tirava o acento, e o lead continua casando pela linha crua do banco.
+    { campo: 'nome', de: 'Maxx Santa Ângela', para: 'Maxx Santa Angela' },
     // O Maxx fica na Vila Galvão (Rua João Tonini, 400) e parte de 71 m².
     { campo: 'bairro', de: 'Horto Florestal', para: 'Vila Galvão' },
     { campo: 'specs', de: '51–98 m² · 2 e 3 dorms', para: '71–98 m² · 2 e 3 dorms' },
@@ -93,6 +97,7 @@ export function corrigirCadastro<T extends CamposCorrigiveis>(
   if (aplicaveis.length === 0) return row;
 
   const corrigido: CamposCorrigiveis = {
+    nome: row.nome,
     preco_texto: row.preco_texto,
     preco_num: row.preco_num,
     specs: row.specs,
