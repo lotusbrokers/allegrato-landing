@@ -151,7 +151,7 @@ function ImageSlot({
           alt={alt}
           loading={prioridade ? 'eager' : 'lazy'}
           fetchPriority={prioridade ? 'high' : undefined}
-          decoding="async"
+          decoding={prioridade ? 'sync' : 'async'}
           style={{
             position: 'absolute',
             inset: 0,
@@ -611,7 +611,7 @@ export default function LotusHome({
       {/* ============ HERO ============ */}
       <section id="topo" style={parseStyle('position:relative;min-height:680px;display:flex;align-items:flex-start;background:#1d3a2c;overflow:visible;')}>
         {/* Hero = LCP da home: fetchPriority high para o browser priorizar o download. */}
-        <img {...imagemOtimizada('/home-hero-jundiai.jpg')} sizes="100vw" alt="Vista aérea de Jundiaí ao amanhecer, Lotus Brokers" fetchPriority="high" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%;')} />
+        <img {...imagemOtimizada('/home-hero-jundiai.jpg')} sizes="100vw" alt="Vista aérea de Jundiaí ao amanhecer, Lotus Brokers" fetchPriority="high" decoding="sync" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%;')} />
         <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg, rgba(21,36,28,.55) 0%, rgba(21,36,28,.15) 38%, rgba(21,36,28,.78) 82%, rgba(21,36,28,.95) 100%);')}></div>
         <div style={{ position: 'absolute', inset: 0, opacity: 0.06, mixBlendMode: 'overlay', pointerEvents: 'none', backgroundImage: NOISE_BG }}></div>
         <div style={parseStyle('position:relative;z-index:2;width:100%;max-width:1280px;margin:0 auto;padding:150px 40px 80px;')}>

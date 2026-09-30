@@ -19,9 +19,20 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 // X-Robots-Tag do next.config.mjs vale para todas — no modo noindex ele manda.
 const indexavel = siteIndexavel();
 
+// Verificação de propriedade no Google Search Console e no Bing Webmaster Tools
+// pelo método da meta tag: o token que cada painel mostra entra nas envs do
+// deploy e o <meta> só é emitido quando a env existe. Alternativa ao registro
+// TXT no DNS, que não depende de deploy. Lidas no build, como as demais.
+const verificacaoGoogle = process.env.GOOGLE_SITE_VERIFICATION?.trim();
+const verificacaoBing = process.env.BING_SITE_VERIFICATION?.trim();
+
 export const metadata: Metadata = {
   ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
   robots: indexavel ? { index: true, follow: true } : { index: false, follow: false },
+  verification: {
+    ...(verificacaoGoogle ? { google: verificacaoGoogle } : {}),
+    ...(verificacaoBing ? { other: { 'msvalidate.01': verificacaoBing } } : {}),
+  },
   title: 'Imóveis, lançamentos e bairros em Jundiaí e Itupeva | Lotus Brokers',
   description:
     'Lotus Brokers, imobiliária moderna de Jundiaí e Itupeva, voltada para um atendimento de excelência. Lançamentos, casas, apartamentos e terrenos com especialistas que conhecem cada bairro.',

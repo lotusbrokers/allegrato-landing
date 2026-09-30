@@ -20,6 +20,7 @@
 import Link from 'next/link';
 import React, { useState, type CSSProperties, type ReactNode } from 'react';
 import MobileMenu from './MobileMenu';
+import { imagemOtimizada } from '@/lib/imagem-otimizada';
 
 const WHATSAPP_DEFAULT = '5511926143393';
 
@@ -137,9 +138,13 @@ const S = {
   ctaSecHover: { background: '#cdab6e', color: '#15241c', borderColor: '#cdab6e' } as CSSProperties,
 };
 
+// O PNG original tem 800x300 e 39 KB, mas aparece com 34px de altura (~91px
+// de largura): pelo otimizador vira WebP de 256/384px (13–22 KB). É eager em
+// toda página, então o React o pré-carrega no <head> junto com a imagem LCP —
+// cada KB aqui disputa banda com ela em 4G lento.
 function LotusMark() {
   return (
-    <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" width={800} height={300} style={{ height: 34, width: 'auto', display: 'block' }} />
+    <img {...imagemOtimizada('/logo-lotus-dourado.png', [256, 384], 90)} sizes="91px" alt="Lotus Brokers" width={800} height={300} style={{ height: 34, width: 'auto', display: 'block' }} />
   );
 }
 

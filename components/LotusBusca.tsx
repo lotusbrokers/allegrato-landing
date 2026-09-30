@@ -134,7 +134,7 @@ function ImageSlot({
           alt={alt}
           loading={prioridade ? 'eager' : 'lazy'}
           fetchPriority={prioridade ? 'high' : undefined}
-          decoding="async"
+          decoding={prioridade ? 'sync' : 'async'}
           style={{
             position: 'absolute',
             inset: 0,

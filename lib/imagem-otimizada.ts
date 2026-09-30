@@ -20,7 +20,11 @@ const HOSTS_LIBERADOS = [
   'vvcconstrutora.com.br',
 ];
 
-/** Larguras dos `deviceSizes` padrão do Next — só essas o otimizador aceita. */
+/**
+ * Larguras dos `deviceSizes` padrão do Next. O otimizador aceita só estas e
+ * as de `imageSizes` (16, 32, 48, 64, 96, 128, 256, 384) — ícones e logos
+ * pequenos passam as menores explicitamente.
+ */
 export const LARGURAS_PADRAO = [640, 1080, 1920];
 const QUALIDADE_PADRAO = 72;
 

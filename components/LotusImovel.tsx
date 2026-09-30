@@ -135,6 +135,11 @@ function ImageSlot({
    * fotos menores do mosaico. Com `loading="lazy"` elas ficavam à mercê do
    * observador de rolagem, e o mosaico abria com a capa carregada e quatro
    * blocos verdes — as URLs respondiam 200, o navegador é que não as pedia.
+   *
+   * Eager, mas com `fetchPriority="low"`: o React 19 pré-carrega no <head>
+   * toda <img> eager que não seja de prioridade baixa, e as quatro miniaturas
+   * entravam na fila junto com a capa. Em 4G lento a capa (LCP) esperava por
+   * elas; com prioridade baixa o navegador as busca logo depois da capa.
    */
   imediata?: boolean;
 }) {
@@ -160,8 +165,8 @@ function ImageSlot({
           sizes={sizes}
           alt={alt}
           loading={prioridade || imediata ? 'eager' : 'lazy'}
-          fetchPriority={prioridade ? 'high' : undefined}
-          decoding="async"
+          fetchPriority={prioridade ? 'high' : imediata ? 'low' : undefined}
+          decoding={prioridade ? 'sync' : 'async'}
           onError={() => setFalhou(true)}
           style={{
             position: 'absolute',
