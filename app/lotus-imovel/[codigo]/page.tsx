@@ -1,13 +1,9 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import LotusImovel from '@/components/LotusImovel';
-import {
-  formatValor,
-  getImovel,
-  getImoveisCards,
-  type ImovelRow,
-} from '@/lib/imoveis';
+import { getImovel, getImoveisCards, type ImovelRow } from '@/lib/imoveis';
 import { resumoDescricao } from '@/lib/resumo-imovel';
+import { tituloDaPdp } from '@/lib/titulo-imovel';
 
 // Rota dinâmica /lotus-imovel/[codigo] — lê cada imóvel do Supabase.
 // ISR sob demanda: a página é renderizada no primeiro acesso (em runtime, onde
@@ -53,10 +49,11 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   // quem ve valor antes de clicar clica mais. Titulo e meta NAO sao copy da
   // pagina: aparecem so na aba do navegador e no resultado de busca, entao
   // mexer aqui nao altera nada do que o visitante le no site.
-  const precoTitulo = imovel.valor_venda || imovel.valor_locacao || null;
-  const title = precoTitulo
-    ? `${titulo}, ${formatValor(precoTitulo)} | Lotus Brokers`
-    : `${titulo}, à venda | Lotus Brokers`;
+  //
+  // Montado dos campos, e nao do `titulo` livre do feed: aquele ja traz preco
+  // e metragem, e concatenar o preco de novo dava "R$310.000,00, R$ 310.000".
+  // og:title e twitter:title usam o mesmo texto (ver lib/titulo-imovel.ts).
+  const title = tituloDaPdp(imovel);
   // 155 caracteres e o que o Google exibe; cortar em 200 no meio de uma palavra
   // deixava reticencias no lugar errado. resumoDescricao corta em fim de frase
   // ou no ultimo espaco.
@@ -72,11 +69,11 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       siteName: 'Lotus Brokers',
       type: 'website',
       url,
-      title: titulo,
+      title,
       description,
       images: capa ? [capa] : undefined,
     },
-    twitter: { card: 'summary_large_image' },
+    twitter: { card: 'summary_large_image', title, description },
   };
 }
 

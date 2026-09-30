@@ -112,6 +112,7 @@ function ImageSlot({
   style,
   alt = '',
   prioridade = false,
+  imediata = false,
 }: {
   src?: string;
   id?: string;
@@ -125,23 +126,38 @@ function ImageSlot({
    * sem rolar — marcar demais anula o ganho.
    */
   prioridade?: boolean;
+  /**
+   * Também acima da dobra, mas sem disputar prioridade com a capa: as quatro
+   * fotos menores do mosaico. Com `loading="lazy"` elas ficavam à mercê do
+   * observador de rolagem, e o mosaico abria com a capa carregada e quatro
+   * blocos verdes — as URLs respondiam 200, o navegador é que não as pedia.
+   */
+  imediata?: boolean;
 }) {
+  // Foto que o navegador não conseguiu carregar (404, bloqueio, arquivo
+  // corrompido): sai a <img> quebrada e entra um placeholder neutro, com
+  // aviso, em vez do gradiente verde da marca — que parecia foto faltando.
+  const [falhou, setFalhou] = useState(false);
+  const semFoto = !src || falhou;
   return (
     <div
       id={id}
       style={{
         display: 'block',
-        background: 'linear-gradient(135deg,#1d3a2c,#3f6249)',
+        background: semFoto
+          ? 'linear-gradient(135deg,#ece6da,#d9d1c2)'
+          : 'linear-gradient(135deg,#1d3a2c,#3f6249)',
         ...style,
       }}
     >
-      {src && (
+      {src && !falhou && (
         <img
           src={src}
           alt={alt}
-          loading={prioridade ? 'eager' : 'lazy'}
+          loading={prioridade || imediata ? 'eager' : 'lazy'}
           fetchPriority={prioridade ? 'high' : undefined}
           decoding="async"
+          onError={() => setFalhou(true)}
           style={{
             position: 'absolute',
             inset: 0,
@@ -150,6 +166,26 @@ function ImageSlot({
             objectFit: 'cover',
           }}
         />
+      )}
+      {falhou && (
+        <span
+          role="img"
+          aria-label={alt ? `${alt} (foto indisponível)` : 'Foto indisponível'}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 12,
+            fontWeight: 600,
+            letterSpacing: '.08em',
+            textTransform: 'uppercase',
+            color: '#6b6357',
+          }}
+        >
+          Foto indisponível
+        </span>
       )}
     </div>
   );
@@ -429,7 +465,7 @@ export default function LotusImovel({
                     (first ? '#1d3a2c' : '#3f6249') + ';',
                 )}
               >
-                <ImageSlot prioridade={first} id={`imovel-foto-${slot + 1}`} src={src} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={fotoLegenda(slot)} />
+                <ImageSlot prioridade={first} imediata={!first} id={`imovel-foto-${slot + 1}`} src={src} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={fotoLegenda(slot)} />
                 {first && (
                   <>
                     <span style={parseStyle('position:absolute;top:16px;left:16px;background:#b18a4a;color:#15241c;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:6px 12px;border-radius:30px;')}>Lotus Listing</span>
