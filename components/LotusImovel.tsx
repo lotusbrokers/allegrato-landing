@@ -4,6 +4,7 @@ import { imagemOtimizada, logoLotus } from '@/lib/imagem-otimizada';
 import { demonstrativoDe, temAreaDeTerreno } from '@/lib/tipologia';
 import { bairroDoGuia } from '@/lib/bairros-taxonomia';
 import CtaSimulacao from './CtaSimulacao';
+import MapaEmbed from './MapaEmbed';
 import { listBairros } from '@/lib/bairros';
 
 /**
@@ -571,7 +572,7 @@ export default function LotusImovel({
       {/* LOCALIZAÇÃO + BAIRRO */}
       <section id="mapa" style={parseStyle('background:#1d3a2c;padding:80px 32px;')}>
         <div style={parseStyle('max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:stretch;')}>
-          <div style={parseStyle('position:relative;border-radius:18px;overflow:hidden;min-height:360px;background:#e7e4d7;')}><iframe title={`Mapa de ${bairro}, ${cidade}`} src={`https://www.google.com/maps?q=${mapaQuery}&z=14&output=embed`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;border:0;')} allowFullScreen></iframe></div>
+          <div style={parseStyle('position:relative;border-radius:18px;overflow:hidden;min-height:360px;background:#e7e4d7;')}><MapaEmbed title={`Mapa de ${bairro}, ${cidade}`} src={`https://www.google.com/maps?q=${mapaQuery}&z=14&output=embed`} /></div>
           <div>
             <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#cdab6e;margin-bottom:14px;')}>No bairro</div>
             <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(24px,2.6vw,32px);color:#f7f2e8;margin:0 0 22px;")}>Bem localizado em {bairro}.</h2>
