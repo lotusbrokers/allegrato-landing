@@ -172,9 +172,9 @@ const REVEAL_ANIM_DEFAULT = true;
 const faqData = FAQ_HOME;
 
 const banners = [
-  { slot: 'lotus-banner-1', eyebrow: 'Campanha do mês', title: 'Lançamentos com condições de pré-venda', text: 'Unidades selecionadas com tabela exclusiva por tempo limitado.', cta: 'Ver lançamentos', href: 'https://www.lotusbrokers.com.br/lotus-lancamentos', img: '/assets/doppio-capa.jpg' },
-  { slot: 'lotus-banner-2', eyebrow: 'Serra do Japi', title: 'Casas em condomínio a partir de R$ 1,2 mi', text: 'Mais verde, mais privacidade, a 10 minutos do centro de Jundiaí.', cta: 'Explorar imóveis', href: 'https://www.lotusbrokers.com.br/lotus-busca', img: '/gran-ville-santo-angelo/a025.jpg' },
-  { slot: 'lotus-banner-3', eyebrow: 'Quer vender?', title: 'Uma estratégia de venda à altura do seu imóvel', text: 'Receba uma análise completa de precificação e posicionamento, conduzida por especialistas que conhecem profundamente a região.', cta: 'Anunciar agora', href: 'https://www.lotusbrokers.com.br/lotus-anunciar', img: '/home-hero-jundiai.jpg' },
+  { slot: 'lotus-banner-1', eyebrow: 'Campanha do mês', title: 'Lançamentos com condições de pré-venda', text: 'Unidades selecionadas com tabela exclusiva por tempo limitado.', cta: 'Ver lançamentos', href: 'https://www.lotusbrokers.com.br/lotus-lancamentos', img: '/assets/doppio-capa.jpg', alt: 'Vista aérea do Doppio Jundiaí ao anoitecer, torre iluminada junto à avenida' },
+  { slot: 'lotus-banner-2', eyebrow: 'Serra do Japi', title: 'Casas em condomínio a partir de R$ 1,2 mi', text: 'Mais verde, mais privacidade, a 10 minutos do centro de Jundiaí.', cta: 'Explorar imóveis', href: 'https://www.lotusbrokers.com.br/lotus-busca', img: '/gran-ville-santo-angelo/a025.jpg', alt: 'Casa térrea moderna com piscina e varanda gourmet em condomínio fechado' },
+  { slot: 'lotus-banner-3', eyebrow: 'Quer vender?', title: 'Uma estratégia de venda à altura do seu imóvel', text: 'Receba uma análise completa de precificação e posicionamento, conduzida por especialistas que conhecem profundamente a região.', cta: 'Anunciar agora', href: 'https://www.lotusbrokers.com.br/lotus-anunciar', img: '/home-hero-jundiai.jpg', alt: 'Vista aérea de Jundiaí ao amanhecer' },
 ];
 
 const reviewsData = [
@@ -614,7 +614,9 @@ export default function LotusHome({
             <div style={parseStyle('background:linear-gradient(135deg,rgba(11,22,16,.9),rgba(21,36,28,.6) 58%,rgba(21,36,28,.24));backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);border:1px solid rgba(205,171,110,.18);border-radius:24px;padding:38px 42px 34px;max-width:780px;box-shadow:0 36px 80px -44px rgba(0,0,0,.65);margin-bottom:40px;')}>
               <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#cdab6e;margin-bottom:20px;')}>Jundiaí · Itupeva · Interior de São Paulo</div>
               <h1 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(42px,6vw,78px);line-height:1.02;letter-spacing:-.02em;color:#f7f2e8;margin:0 0 26px;")}>
-                Grandes histórias<br /><em style={parseStyle('font-style:italic;font-weight:300;color:#cdab6e;')}>têm endereço</em>
+                {/* O espaço antes do <br /> é de propósito: sem ele o texto lido
+                    por leitor de tela e o copiado saem "históriastêm". */}
+                Grandes histórias{' '}<br /><em style={parseStyle('font-style:italic;font-weight:300;color:#cdab6e;')}>têm endereço</em>
               </h1>
               <p style={parseStyle('font-size:clamp(17px,1.5vw,20px);line-height:1.5;color:rgba(247,242,232,.88);max-width:560px;margin:0;font-weight:300;')}>Consultoria imobiliária em Jundiaí e Itupeva para comprar, vender ou investir com estratégia, clareza e segurança. Especialistas em imóveis de médio e alto padrão, com conhecimento profundo da região e acompanhamento em cada etapa.</p>
             </div>
@@ -711,7 +713,7 @@ export default function LotusHome({
                     <Hoverable as="a" href={b.href} target="_top" baseStyle={parseStyle('align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:#b18a4a;color:#15241c;font-weight:600;font-size:14.5px;padding:12px 24px;border-radius:40px;transition:transform .2s, background .2s;')} hoverStyle={parseStyle('background:#cdab6e;transform:translateY(-2px)')}>{b.cta} <span>→</span></Hoverable>
                   </div>
                   <div style={parseStyle('position:relative;background:#15241c;')}>
-                    <ImageSlot src={b.img} id={b.slot} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} />
+                    <ImageSlot src={b.img} id={b.slot} alt={b.alt} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} />
                     <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(90deg,#1d3a2c 0%,rgba(29,58,44,.35) 24%,rgba(29,58,44,0) 60%);')}></div>
                   </div>
                 </div>
@@ -738,7 +740,7 @@ export default function LotusHome({
           </div>
           <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:28px;')}>
             <Hoverable as="a" target="_top" href="/lotus-lancamentos" data-reveal="" baseStyle={parseStyle('position:relative;display:block;border-radius:20px;overflow:hidden;min-height:380px;background:#1d3a2c;box-shadow:0 24px 60px -30px rgba(21,36,28,.45);transition:transform .4s ease, box-shadow .4s ease;')} hoverStyle={parseStyle('transform:translateY(-4px);box-shadow:0 34px 70px -30px rgba(21,36,28,.55)')}>
-              <ImageSlot src="/altos-da-avenida/a005.png" id="lotus-motor-a" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} />
+              <ImageSlot src="/altos-da-avenida/a005.png" id="lotus-motor-a" alt="Piscina do Altos da Avenida ao entardecer, lançamento em Jundiaí" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} />
               <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,.1),rgba(21,36,28,.85));')}></div>
               <div style={parseStyle('position:absolute;left:0;right:0;bottom:0;padding:36px;')}>
                 <div style={parseStyle('font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#cdab6e;margin-bottom:12px;')}>Lançamentos</div>
@@ -748,7 +750,7 @@ export default function LotusHome({
               </div>
             </Hoverable>
             <Hoverable as="a" href="/lotus-busca" target="_top" data-reveal="" baseStyle={parseStyle('position:relative;display:block;border-radius:20px;overflow:hidden;min-height:380px;background:#3f6249;box-shadow:0 24px 60px -30px rgba(21,36,28,.45);transition:transform .4s ease, box-shadow .4s ease;')} hoverStyle={parseStyle('transform:translateY(-4px);box-shadow:0 34px 70px -30px rgba(21,36,28,.55)')}>
-              <ImageSlot src="/gran-ville-santo-angelo/a025.jpg" id="lotus-motor-b" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} />
+              <ImageSlot src="/gran-ville-santo-angelo/a025.jpg" id="lotus-motor-b" alt="Casa com piscina em condomínio fechado, imóvel selecionado pela Lotus" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} />
               <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,.1),rgba(21,36,28,.85));')}></div>
               <div style={parseStyle('position:absolute;left:0;right:0;bottom:0;padding:36px;')}>
                 <div style={parseStyle('font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#cdab6e;margin-bottom:12px;')}>Comprar &amp; alugar</div>

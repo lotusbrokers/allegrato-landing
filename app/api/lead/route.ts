@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { buildLeadPayload, type Lead } from '@/lib/lead';
+import { buildLeadPayload, consentimentoValido, type Lead } from '@/lib/lead';
 import { landingSlugs } from '@/lib/landings';
 
 // Proxy server-side dos formulários das landings → webhook de leads da LIA.
@@ -165,7 +165,21 @@ export async function POST(req: NextRequest) {
     source: str(body?.source),
     interest: str(body?.interest),
     message: str(body?.message),
+    consent: body?.consent === true ? true : undefined,
+    consentAt: str(body?.consentAt),
   };
+
+  // Consentimento LGPD. Quem declara o campo tem de declarar verdadeiro e
+  // datado — `consent: false` ou data inválida não vira lead. O formulário de
+  // Anunciar sempre declara; as landings de lançamento ainda não mandam o
+  // campo (o checkbox delas é obrigatório no navegador) e seguem como estão.
+  const declarouConsentimento = body != null && typeof body === 'object' && 'consent' in body;
+  if (
+    (declarouConsentimento || lead.source === 'landing_lotus-anunciar') &&
+    !consentimentoValido(body?.consent, body?.consentAt)
+  ) {
+    return NextResponse.json({ error: 'consent_required' }, { status: 400 });
+  }
 
   const payload = buildLeadPayload(lead);
 

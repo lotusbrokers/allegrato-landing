@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { toE164, leadId, buildLeadPayload } from './lead.ts';
+import { toE164, leadId, buildLeadPayload, consentimentoValido } from './lead.ts';
 
 /* ---------- toE164 ---------- */
 // celular com DDD, com máscara
@@ -88,5 +88,45 @@ const sujo = buildLeadPayload({
   interest: 'Odeon Residencial',
 });
 assert.equal(sujo.data.name, 'MariaSouza', 'caracteres de controle removidos');
+
+// consentimento LGPD entra em `message`, em texto, datado
+const comConsentimento = buildLeadPayload({
+  name: 'Ana',
+  phone: '11999998888',
+  source: 'landing_lotus-anunciar',
+  interest: 'Avaliação de imóvel em Medeiros',
+  message: 'Casa, 120 m²',
+  consent: true,
+  consentAt: '2026-09-30T12:00:00.000Z',
+});
+assert.equal(
+  comConsentimento.data.message,
+  'Casa, 120 m² · Consentimento LGPD: sim, em 2026-09-30T12:00:00.000Z.',
+);
+const soConsentimento = buildLeadPayload({
+  name: 'Ana',
+  phone: '11999998888',
+  source: 'landing_lotus-anunciar',
+  interest: 'Avaliação de imóvel em Medeiros',
+  consent: true,
+  consentAt: '2026-09-30T12:00:00.000Z',
+});
+assert.equal(soConsentimento.data.message, 'Consentimento LGPD: sim, em 2026-09-30T12:00:00.000Z.');
+// consent false ou ausente não inventa a linha
+const semConsentimento = buildLeadPayload({
+  name: 'Ana',
+  phone: '11999998888',
+  source: 'landing_lotus-anunciar',
+  interest: 'Avaliação de imóvel em Medeiros',
+  consent: false,
+});
+assert.ok(!('message' in semConsentimento.data), 'sem consentimento não há linha de consentimento');
+
+/* ---------- consentimentoValido (regra que a rota /api/lead aplica) ---------- */
+assert.equal(consentimentoValido(true, '2026-09-30T12:00:00.000Z'), true);
+assert.equal(consentimentoValido(false, '2026-09-30T12:00:00.000Z'), false, 'desmarcado não vale');
+assert.equal(consentimentoValido('true', '2026-09-30T12:00:00.000Z'), false, 'só booleano verdadeiro');
+assert.equal(consentimentoValido(true, 'não-é-data'), false, 'precisa de instante legível');
+assert.equal(consentimentoValido(true, undefined), false, 'precisa do instante');
 
 console.log('ok');

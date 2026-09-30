@@ -1,5 +1,6 @@
 'use client';
 import { footerLegalLine } from '@/lib/site';
+import { sendLead } from '@/lib/lead';
 
 /**
  * LotusAnunciar — porte 1:1 de lotus-anunciar/index.html (mecanismo dc-runtime) para React.
@@ -250,6 +251,11 @@ export default function LotusAnunciar({
   const [step, setStep] = useState(1);
   const [done, setDone] = useState(false);
   const [areaError, setAreaError] = useState(false);
+  // Consentimento LGPD do passo 3: o estado guarda o clique, o erro alimenta a
+  // mensagem acessível, e a ref permite levar o foco ao checkbox quando falta.
+  const [consent, setConsent] = useState(false);
+  const [consentError, setConsentError] = useState(false);
+  const consentRef = useRef<HTMLInputElement>(null);
   const [f, setF] = useState({
     bairro: 'Eloy Chaves',
     tipo: 'Casa',
@@ -312,6 +318,28 @@ export default function LotusAnunciar({
   const back = () => setStep((s) => Math.max(1, s - 1));
   const submit = (e: React.FormEvent) => {
     if (e && e.preventDefault) e.preventDefault();
+    // O `required` do checkbox já segura o envio no navegador; esta checagem é
+    // a garantia por trás dele (e a mensagem acessível): nenhum caminho passa
+    // sem o consentimento marcado.
+    if (!consentRef.current?.checked) {
+      setConsentError(true);
+      consentRef.current?.focus();
+      return;
+    }
+    // Só aqui o contato sai da tela. Antes, o formulário mostrava a estimativa
+    // e não registrava o lead em lugar nenhum — o visitante deixava nome e
+    // WhatsApp e ninguém recebia. Vai pela mesma rota das landings, com o
+    // consentimento (marcado + instante) dentro do payload.
+    sendLead({
+      name: f.nome,
+      phone: f.whats,
+      email: f.email,
+      source: 'landing_lotus-anunciar',
+      interest: `Avaliação de imóvel em ${f.bairro}`,
+      message: `Avaliação online: ${f.tipo}, ${f.area} m², ${f.dorms} dorm., ${f.vagas} vaga(s), estado ${f.estado}, ${f.bairro}. Estimativa ${low} a ${high}.`,
+      consent: true,
+      consentAt: new Date().toISOString(),
+    });
     setDone(true);
   };
   const restart = () => {
@@ -502,9 +530,31 @@ export default function LotusAnunciar({
                     <input className="lt-field" type="text" required placeholder="WhatsApp" value={f.whats} onInput={(e) => setFVal('whats', (e.target as HTMLInputElement).value)} />
                     <input className="lt-field" type="email" placeholder="E-mail (opcional)" value={f.email} onInput={(e) => setFVal('email', (e.target as HTMLInputElement).value)} />
                     <label style={parseStyle('display:flex;align-items:flex-start;gap:9px;font-size:12px;color:#3f6249;line-height:1.45;cursor:pointer;')}>
-                      <input type="checkbox" required style={parseStyle('margin-top:2px;width:16px;height:16px;accent-color:#1d3a2c;')} />
-                      Autorizo a Lotus a entrar em contato e concordo com a Política de Privacidade (LGPD).
+                      <input
+                        ref={consentRef}
+                        type="checkbox"
+                        name="consentimento"
+                        required
+                        checked={consent}
+                        aria-invalid={consentError || undefined}
+                        aria-describedby={consentError ? 'anunciar-consentimento-erro' : undefined}
+                        onChange={(e) => {
+                          setConsent(e.target.checked);
+                          if (e.target.checked) setConsentError(false);
+                        }}
+                        onInvalid={() => setConsentError(true)}
+                        style={parseStyle('margin-top:2px;width:16px;height:16px;flex-shrink:0;accent-color:#1d3a2c;')}
+                      />
+                      <span>
+                        Autorizo a Imobiliária Lotus Brokers a entrar em contato comigo por telefone, e-mail ou WhatsApp sobre a avaliação do meu imóvel, conforme a{' '}
+                        <Link href="/lotus-privacidade" target="_top" style={{ textDecoration: 'underline' }}>Política de Privacidade da Lotus Brokers</Link>.
+                      </span>
                     </label>
+                    {consentError && (
+                      <p id="anunciar-consentimento-erro" role="alert" style={parseStyle('margin:-6px 0 0;font-size:12.5px;font-weight:600;color:#b3261e;')}>
+                        Para continuar, marque a autorização de contato.
+                      </p>
+                    )}
                     <div style={parseStyle('display:flex;gap:10px;margin-top:4px;')}>
                       <button type="button" onClick={back} style={parseStyle('flex:0 0 auto;background:none;border:1px solid rgba(21,36,28,.18);color:#3f6249;font-weight:600;font-size:15px;padding:15px 20px;border-radius:11px;cursor:pointer;')}>←</button>
                       <Hoverable as="button" type="submit" baseStyle={parseStyle('flex:1;background:#1d3a2c;color:#f7f2e8;font-weight:600;font-size:15.5px;padding:15px;border:none;border-radius:11px;cursor:pointer;transition:background .2s;')} hoverStyle={parseStyle('background:#15241c')}>Ver minha estimativa</Hoverable>

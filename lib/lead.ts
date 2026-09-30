@@ -18,6 +18,13 @@ export type Lead = {
   source: string; // "landing_allegrato", sempre "landing_" + slug da rota
   interest: string; // nome do empreendimento, "Allegrato Residencial"
   message?: string;
+  /**
+   * Consentimento LGPD declarado no formulário (checkbox marcado) e o instante
+   * em que foi dado, em ISO 8601. Opcionais porque as landings de lançamento
+   * ainda não mandam o campo — o checkbox delas é obrigatório no navegador.
+   */
+  consent?: boolean;
+  consentAt?: string;
 };
 
 const LIMITS = {
@@ -66,6 +73,15 @@ export function leadId(source: string, phone: string, name: string): string {
   return `portal:${source}:${key}`;
 }
 
+/**
+ * Consentimento declarado no corpo é válido: marcado (`true`, não "true" nem 1)
+ * e datado com um instante ISO 8601 que o Date consegue ler. Função pura para
+ * a rota e o teste falarem da mesma regra.
+ */
+export function consentimentoValido(consent: unknown, consentAt: unknown): boolean {
+  return consent === true && typeof consentAt === 'string' && !Number.isNaN(Date.parse(consentAt));
+}
+
 /** Envelope do webhook. Campos vazios são omitidos, não enviados em branco. */
 export function buildLeadPayload(lead: Lead): {
   event: 'lead.created';
@@ -86,7 +102,15 @@ export function buildLeadPayload(lead: Lead): {
   const email = clean(lead.email, LIMITS.email);
   if (email) data.email = email;
 
-  const message = clean(lead.message, LIMITS.message);
+  // O consentimento vai dentro de `message`, em texto. O contrato do webhook é
+  // um Record<string,string> fechado e um campo desconhecido poderia ser
+  // recusado do outro lado; em texto ele fica legível e auditável por quem
+  // atende. Se o CRM abrir campo próprio para isto, é só mover daqui.
+  const consentimento =
+    lead.consent === true
+      ? `Consentimento LGPD: sim, em ${clean(lead.consentAt, 40) || 'data não informada'}.`
+      : '';
+  const message = clean([lead.message, consentimento].filter(Boolean).join(' · '), LIMITS.message);
   if (message) data.message = message;
 
   return { event: 'lead.created', data };
