@@ -1,6 +1,32 @@
+import { siteIndexavel } from './lib/indexacao.mjs';
+
+// Indexação por ambiente — a mesma regra de app/layout.tsx (meta robots) e
+// app/robots.ts (robots.txt). Lida no build: mudar SITE_INDEXABLE pede deploy.
+const indexavel = siteIndexavel();
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Domínio sem www responde 200 com o mesmo conteúdo (o proxy entrega os dois
+  // hosts a este servidor). Canonical já apontava para o www, mas o certo é o
+  // redirect: um endereço só, sem depender de o robô honrar o canonical.
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'lotusbrokers.com.br' }],
+        destination: 'https://www.lotusbrokers.com.br/:path*',
+        permanent: true,
+      },
+    ];
+  },
+  // X-Robots-Tag vale para toda resposta, inclusive as landings estáticas de
+  // public/ e as páginas que declaram o próprio meta robots. No modo
+  // indexável não emite nada: o padrão do robô já é indexar.
+  async headers() {
+    if (indexavel) return [];
+    return [{ source: '/:path*', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] }];
+  },
   images: {
     // As fotos vêm de hosts externos (watermark do dash, Storage Supabase, CDNs
     // usados nas landings). Liberamos os hosts conhecidos; ampliar conforme surgirem.

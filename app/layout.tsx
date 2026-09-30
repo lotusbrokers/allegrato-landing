@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { SITE } from '@/lib/site';
+import { siteIndexavel } from '@/lib/indexacao.mjs';
 import './globals.css';
 import CookieConsent from '@/components/CookieConsent';
 import Analytics, { AnalyticsNoScript } from '@/components/Analytics';
@@ -13,8 +14,14 @@ import PreloadHints from '@/components/PreloadHints';
 // se a env existir (senão o Next usa o default do runtime sem quebrar o build).
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
+// Indexação por ambiente (SITE_INDEXABLE; ver lib/indexacao.mjs). Página que
+// declara o próprio `robots` sobrescreve este meta, mas o cabeçalho
+// X-Robots-Tag do next.config.mjs vale para todas — no modo noindex ele manda.
+const indexavel = siteIndexavel();
+
 export const metadata: Metadata = {
   ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
+  robots: indexavel ? { index: true, follow: true } : { index: false, follow: false },
   title: 'Imóveis, lançamentos e bairros em Jundiaí e Itupeva | Lotus Brokers',
   description:
     'Lotus Brokers, imobiliária moderna de Jundiaí e Itupeva, voltada para um atendimento de excelência. Lançamentos, casas, apartamentos e terrenos com especialistas que conhecem cada bairro.',
