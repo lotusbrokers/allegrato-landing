@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { createPortal } from 'react-dom';
 import { useEffect, useState, type CSSProperties } from 'react';
 import { footerLegalLine } from '@/lib/site';
+import { logoLotus } from '@/lib/imagem-otimizada';
 
 /**
  * Bloco institucional do rodapé, com a mesma estrutura do rodapé da home,
@@ -168,10 +169,11 @@ export default function RodapeLotus({ tema = TEMA_PADRAO }: { tema?: TemaRodape 
       >
         <div style={{ minWidth: 0 }}>
           <img
-            src="/logo-lotus-dourado.png"
+            {...logoLotus()}
             alt="Lotus Brokers"
             width={800}
             height={300}
+            loading="lazy"
             style={{ height: 34, width: 'auto', display: 'block', marginBottom: 18 }}
           />
           <p

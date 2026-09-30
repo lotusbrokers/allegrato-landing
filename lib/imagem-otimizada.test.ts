@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { imagemOtimizada, otimizavel } from './imagem-otimizada.ts';
+import { imagemOtimizada, logoLotus, otimizavel } from './imagem-otimizada.ts';
 
 test('arquivo de public/ e hosts do feed passam pelo otimizador', () => {
   assert.equal(otimizavel('/altos-da-avenida/a005.png'), true);
@@ -24,4 +24,11 @@ test('srcset com as larguras pedidas e src na variante de 1080', () => {
   );
   const pequeno = imagemOtimizada('/x.jpg', [640], 60);
   assert.equal(pequeno.src, '/_next/image?url=%2Fx.jpg&w=640&q=60');
+});
+
+test('logo da Lotus: larguras pequenas (imageSizes do Next), qualidade alta e sizes fixo', () => {
+  const r = logoLotus();
+  assert.equal(r.src, '/_next/image?url=%2Flogo-lotus-dourado.png&w=384&q=90');
+  assert.equal(r.srcSet, '/_next/image?url=%2Flogo-lotus-dourado.png&w=256&q=90 256w, /_next/image?url=%2Flogo-lotus-dourado.png&w=384&q=90 384w');
+  assert.equal(r.sizes, '91px');
 });

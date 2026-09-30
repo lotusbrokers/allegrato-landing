@@ -1,6 +1,6 @@
 'use client';
 import { footerLegalLine } from '@/lib/site';
-import { imagemOtimizada } from '@/lib/imagem-otimizada';
+import { imagemOtimizada, logoLotus } from '@/lib/imagem-otimizada';
 
 /**
  * LotusBusca — porte 1:1 de lotus-busca (mecanismo dc-runtime) para React.
@@ -676,7 +676,7 @@ export default function LotusBusca({
       <footer data-rodape-portal="" style={parseStyle('background:#15241c;padding:40px 32px;margin-top:24px;')}>
         <div style={parseStyle('max-width:1480px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;')}>
           <div style={parseStyle('display:flex;align-items:center;gap:11px;')}>
-            <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" width={800} height={300} style={{ height: 34, width: 'auto', display: 'block' }} />
+            <img {...logoLotus()} alt="Lotus Brokers" width={800} height={300} loading="lazy" style={{ height: 34, width: 'auto', display: 'block' }} />
             <span style={parseStyle("font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:rgba(247,242,232,.8);")}>Grandes histórias têm endereço.</span>
           </div>
           <div style={parseStyle('font-size:12.5px;color:rgba(247,242,232,.5);')}>{footerLegalLine()}</div>

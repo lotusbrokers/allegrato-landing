@@ -42,6 +42,16 @@ export function otimizavel(src: string | null | undefined): boolean {
  * `src` (a variante de 1080px, para navegador sem srcset) e `srcSet` com as
  * larguras pedidas. Sem `srcSet` quando a imagem não passa pelo otimizador.
  */
+/**
+ * Logo da Lotus (public/logo-lotus-dourado.png, PNG de 800x300 e 39 KB) nas
+ * larguras que os 34px de altura pedem (~91px; 256/384 cobrem DPR 2 e 3).
+ * Aparece em todo cabeçalho e rodapé; como o React pré-carrega toda <img>
+ * eager, cada KB dele disputa banda com a imagem LCP em 4G lento.
+ */
+export function logoLotus(): { src: string; srcSet?: string; sizes: string } {
+  return { ...imagemOtimizada('/logo-lotus-dourado.png', [256, 384], 90), sizes: '91px' };
+}
+
 export function imagemOtimizada(
   src: string,
   larguras: number[] = LARGURAS_PADRAO,

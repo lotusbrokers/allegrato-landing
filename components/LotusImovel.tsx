@@ -1,6 +1,6 @@
 'use client';
 import { footerLegalLine } from '@/lib/site';
-import { imagemOtimizada } from '@/lib/imagem-otimizada';
+import { imagemOtimizada, logoLotus } from '@/lib/imagem-otimizada';
 import { demonstrativoDe, temAreaDeTerreno } from '@/lib/tipologia';
 import { bairroDoGuia } from '@/lib/bairros-taxonomia';
 import CtaSimulacao from './CtaSimulacao';
@@ -655,7 +655,7 @@ export default function LotusImovel({
           <div style={parseStyle('display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;padding-bottom:56px;border-bottom:1px solid rgba(247,242,232,.12);')}>
             <div>
               <div style={parseStyle('display:flex;align-items:center;gap:12px;margin-bottom:20px;')}>
-                <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" style={{ height: 34, width: 'auto', display: 'block' }} />
+                <img {...logoLotus()} alt="Lotus Brokers" width={800} height={300} loading="lazy" style={{ height: 34, width: 'auto', display: 'block' }} />
               </div>
               <p style={parseStyle("font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:19px;color:rgba(247,242,232,.85);line-height:1.35;max-width:300px;margin:0 0 20px;")}>Grandes histórias têm endereço.</p>
               <p style={parseStyle('font-size:13.5px;color:rgba(247,242,232,.55);line-height:1.6;margin:0;')}>Consultoria imobiliária para compra, venda, locação e investimento em imóveis de médio e alto padrão em Jundiaí, Itupeva e região.</p>
