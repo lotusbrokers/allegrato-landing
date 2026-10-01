@@ -177,6 +177,7 @@ export default function Vivarte({
   const nomeRef = useRef<HTMLInputElement>(null);
   const telRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
+  const consentRef = useRef<HTMLInputElement>(null);
 
   // paused (hover na galeria pausa o carrossel) e zoom via ref (para o handler de teclado)
   const pausedRef = useRef(false);
@@ -300,6 +301,7 @@ export default function Vivarte({
       email,
       source: 'landing_vivarte',
       interest: 'Vivarte Grand Alamedas',
+      ...(consentRef.current?.checked ? { consent: true, consentAt: new Date().toISOString() } : {}),
     });
     const n = String(whatsappNumber ?? WHATSAPP_NUMBER_DEFAULT).replace(/\D/g, '');
     const msg =
@@ -718,9 +720,21 @@ export default function Vivarte({
                   onFocus={(e) => { e.currentTarget.style.borderColor = '#A9743F'; }}
                   onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(27,24,19,.18)'; }}
                 />
+                <label style={parseStyle('display:flex;align-items:flex-start;gap:9px;font-size:12px;line-height:1.45;color:#5A5547;cursor:pointer;text-align:left;margin:6px 0 10px;')}>
+                  <input ref={consentRef} type="checkbox" name="consentimento" required style={parseStyle('width:auto;margin:2px 0 0;flex-shrink:0;')} />
+                  <span>
+                    Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a
+                    entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o Vivarte Grand Alamedas,
+                    conforme a{' '}
+                    <a href="/lotus-privacidade" target="_top" style={parseStyle('color:inherit;text-decoration:underline;')}>
+                      Política de Privacidade da Lotus Brokers
+                    </a>
+                    . A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da Diretiva.
+                  </span>
+                </label>
                 <div style={parseStyle('min-height:20px;font-size:12px;color:#b4452f;margin-bottom:10px;')}>{formError}</div>
                 <Hoverable as="button" type="submit" baseStyle={parseStyle("width:100%;padding:17px;border:none;cursor:pointer;background:#A9743F;color:#F6F1E6;border-radius:2px;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.18em;text-transform:uppercase;transition:background .35s;")} hoverStyle={parseStyle('background:#1B2E22;')}>Quero agendar minha visita</Hoverable>
-                <div style={parseStyle('font-size:11px;color:#8a8475;text-align:center;margin-top:14px;line-height:1.5;')}>Ao enviar, você concorda em ser contatado sobre o empreendimento.</div>
+                <div style={parseStyle('font-size:11px;color:#8a8475;text-align:center;margin-top:14px;line-height:1.5;')}>Atendimento pela Imobiliária Lotus Brokers.</div>
               </form>
             )}
             {sent && (

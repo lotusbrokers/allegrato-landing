@@ -7,7 +7,7 @@ import RodapeLotus from '@/components/RodapeLotus';
 
 // Metadata portada do <helmet> de vivarte/index.html (paridade de SEO com o estático).
 export const metadata: Metadata = {
-  title: 'Vivarte Grand Alamedas | Apartamentos à venda em Jundiaí, Serra do Japi',
+  title: 'Vivarte Grand Alamedas, apartamentos na Serra do Japi, Jundiaí | Imobiliária Lotus Brokers',
   description:
     'Vivarte Grand Alamedas: apartamentos de 2 e 3 dormitórios em Jundiaí, com vista para a Serra do Japi, ampla varanda e mais de 30 itens de lazer. Lançamento Grupo Diretiva. Agende sua visita.',
   keywords:
