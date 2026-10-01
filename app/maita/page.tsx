@@ -8,7 +8,7 @@ import RodapeLotus from '@/components/RodapeLotus';
 // Metadata portada do <head> do fonte estático. O canonical aponta para o domínio
 // do portal (o original apontava para japilancamentos.com.br).
 export const metadata: Metadata = {
-  title: 'Maitá Residencial Jundiaí | Apartamentos 2 e 3 Dormitórios',
+  title: 'Maitá Residencial, apartamentos de 2 e 3 dormitórios em Jundiaí | Imobiliária Lotus Brokers',
   description:
     'Maitá Residencial em Jundiaí/SP: apartamentos de 2 e 3 dormitórios com suíte, 63 a 80 m², lazer completo e conexão com a natureza. Obras iniciadas.',
   keywords:

@@ -8,7 +8,7 @@ import RodapeLotus from '@/components/RodapeLotus';
 // Metadata portada do <helmet> de avela/index.html (paridade de SEO com o estático).
 export const metadata: Metadata = {
   title:
-    'Avelã Vila Residencial, Apartamentos em Itupeva/SP | A beleza do campo no coração da cidade',
+    'Avelã Vila Residencial, apartamentos em Itupeva | Imobiliária Lotus Brokers',
   description:
     'Avelã Vila Residencial em Itupeva/SP: apartamentos de 2 e 3 dormitórios, de 66 a 87 m², com gardens privativos e mais de 12 espaços de lazer. Agende sua visita.',
   keywords:

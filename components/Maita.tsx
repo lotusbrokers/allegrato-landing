@@ -291,6 +291,8 @@ export default function Maita() {
       email,
       source: 'landing_maita',
       interest: 'Maitá Residencial',
+      consent: true,
+      consentAt: new Date().toISOString(),
     });
     setSent(
       wa(
@@ -1267,13 +1269,15 @@ export default function Maita() {
               </label>
             </div>
             <label className="consent" style={errs.consent ? parseStyle('color:var(--coral)') : undefined}>
-              <input ref={consentRef} type="checkbox" id="f-consent" />
+              <input ref={consentRef} type="checkbox" id="f-consent" name="consentimento" required />
               <span>
-                Estou ciente das condições de tratamento dos meus dados pessoais e coleta de cookies ao continuar meu cadastro, conforme a{' '}
-                <a href="/lotus-privacidade">
-                  Política de Privacidade
+                Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a
+                entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o Maitá Residencial, conforme a{' '}
+                <a href="/lotus-privacidade" target="_top">
+                  Política de Privacidade da Lotus Brokers
                 </a>
-                .
+                . A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da
+                Mac Lucer.
               </span>
             </label>
             <button type="submit" className="btn btn--gold btn--lg">

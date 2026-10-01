@@ -118,6 +118,20 @@ const ExpandIcon = () => (
 /* ------------------------------------------------------------------ */
 
 const WHATSAPP_DEFAULT = '5511926143393';
+
+/**
+ * "5511926143393" → "(11) 92614-3393".
+ *
+ * O telefone exibido sai do mesmo valor que monta o link do WhatsApp. Antes
+ * era texto solto, e a página mostrava um telefone que não é da Lotus
+ * enquanto o link já abria o WhatsApp da Lotus (atendimento da LIA).
+ * Número fora do padrão de celular brasileiro volta como veio.
+ */
+function telefoneExibido(numero: string): string {
+  const m = numero.replace(/\D/g, '').match(/^(?:55)?(\d{2})(\d{5})(\d{4})$/);
+  return m ? `(${m[1]}) ${m[2]}-${m[3]}` : numero;
+}
+
 const REVEAL_ANIM_DEFAULT = true;
 
 type Plan = {
@@ -162,7 +176,7 @@ const PLANS: Plan[] = [
 // [minutos, ponto] — valores exatos (’ = ’ em "Wet’n Wild").
 const distances: Array<{ t: string; p: string }> = [
   ['3', 'TexBeer Cervejaria'],
-  ['6', 'Plantão de Vendas'],
+  ['6', 'Decorado para visita agendada com a Lotus'],
   ['8', 'Parque da Cidade'],
   ['10', 'Sítio Sassafraz'],
   ['15', 'Jundiaí'],
@@ -265,6 +279,7 @@ export default function Avela({
 
   // waLink — lógica exata do script.
   const wa = (whatsappPhone || WHATSAPP_DEFAULT).replace(/\D/g, '');
+  const telefone = telefoneExibido(wa);
   const waLink =
     'https://wa.me/' +
     wa +
@@ -456,7 +471,7 @@ export default function Avela({
                 hoverStyle={parseStyle('transform:translateY(-2px);box-shadow:0 12px 26px -8px rgba(37,211,102,.8);')}
               >
                 <svg viewBox="0 0 24 24" width="17" height="17" fill="#fff"><path d="M12 2a9.9 9.9 0 0 0-8.5 15l-1.4 5.1 5.2-1.4A10 10 0 1 0 12 2zm0 2a8 8 0 1 1-4.2 14.8l-.4-.2-3 .8.8-2.9-.2-.4A8 8 0 0 1 12 4zm-3.3 4.3c-.2 0-.5 0-.7.3-.3.3-1 .9-1 2.3s1 2.7 1.2 2.9c.1.2 2 3.1 4.9 4.2 2.4 1 2.9.8 3.4.7.5 0 1.6-.6 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4l-2-1c-.3-.1-.5-.1-.7.1l-.7.9c-.1.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.4.1-.6l.5-.5c.1-.2.2-.3.3-.5 0-.2 0-.4-.1-.5l-.9-2.2c-.2-.5-.4-.5-.6-.5z"></path></svg>
-                (11) 91314-1100
+                WhatsApp Lotus · {telefone}
               </Hoverable>
             </nav>
           )}
@@ -559,7 +574,7 @@ export default function Avela({
           </div>
           <div data-reveal="up" data-delay="270" style={parseStyle('display:flex;flex-direction:column;gap:4px;')}>
             <span style={parseStyle("font-family:'Zilla Slab',serif;font-size:30px;font-weight:700;color:#E59B3E;")}>6 min</span>
-            <span style={parseStyle('font-size:14.5px;color:rgba(246,242,233,.72);')}>do plantão de vendas</span>
+            <span style={parseStyle('font-size:14.5px;color:rgba(246,242,233,.72);')}>Decorado para visita agendada com a Lotus</span>
           </div>
         </div>
       </section>
@@ -741,11 +756,11 @@ export default function Avela({
           <div data-reveal="left" style={parseStyle('color:#fff;')}>
             <div style={parseStyle(S.eyebrowLight)}><span style={parseStyle(S.eyebrowLeaf)}></span>Agende sua visita</div>
             <h2 style={parseStyle("font-family:'Zilla Slab',serif;font-weight:600;font-size:clamp(30px,4.4vw,52px);line-height:1.06;margin:0 0 18px;text-wrap:balance;")}>Venha conhecer o Avelã de perto</h2>
-            <p style={parseStyle('font-size:17.5px;line-height:1.65;color:rgba(255,255,255,.88);margin:0 0 30px;max-width:460px;')}>Preencha seus dados e um de nossos consultores entrará em contato para apresentar plantas, valores e condições. Sem compromisso.</p>
+            <p style={parseStyle('font-size:17.5px;line-height:1.65;color:rgba(255,255,255,.88);margin:0 0 30px;max-width:460px;')}>Preencha seus dados e um corretor da Lotus entrará em contato para apresentar plantas, valores e condições. Sem compromisso.</p>
             <div style={parseStyle('display:flex;flex-direction:column;gap:16px;')}>
               <a href={waLink} target="_blank" rel="noopener" style={parseStyle('display:inline-flex;align-items:center;gap:13px;color:#fff;text-decoration:none;font-size:17px;font-weight:600;')}>
                 <span style={parseStyle('width:46px;height:46px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;flex-shrink:0;')}><WaIcon size={22} /></span>
-                (11) 91314-1100
+                WhatsApp Lotus · {telefone}
               </a>
               <div style={parseStyle('display:inline-flex;align-items:center;gap:13px;color:rgba(255,255,255,.85);font-size:16px;')}>
                 <span style={parseStyle('width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(255,255,255,.2);')}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s7-7 7-12a7 7 0 1 0-14 0c0 5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.4"></circle></svg></span>
@@ -768,6 +783,7 @@ export default function Avela({
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
+                  const consentimento = e.currentTarget.querySelector<HTMLInputElement>('input[name="consentimento"]');
                   sendLead({
                     name: form.nome,
                     phone: form.tel,
@@ -775,6 +791,7 @@ export default function Avela({
                     source: 'landing_avela',
                     interest: 'Avelã Vila Residencial',
                     message: form.interesse,
+                    ...(consentimento?.checked ? { consent: true, consentAt: new Date().toISOString() } : {}),
                   });
                   setSent(true);
                 }}
@@ -800,6 +817,18 @@ export default function Avela({
                       <option>Ainda estou decidindo</option>
                     </select>
                   </label>
+                  <label style={parseStyle('display:flex;align-items:flex-start;gap:9px;font-size:12px;line-height:1.45;color:#a7a08c;cursor:pointer;text-align:left;')}>
+                    <input type="checkbox" name="consentimento" required style={parseStyle('margin:2px 0 0;flex-shrink:0;width:auto;')} />
+                    <span>
+                      Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a
+                      entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o Avelã Vila Residencial, conforme a{' '}
+                      <a href="/lotus-privacidade" target="_top" style={parseStyle('color:inherit;text-decoration:underline;')}>
+                        Política de Privacidade da Lotus Brokers
+                      </a>
+                      . A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da
+                      Mac Lucer. Ao enviar, você será direcionado ao WhatsApp da Lotus Brokers.
+                    </span>
+                  </label>
                 </div>
                 <Hoverable
                   as="button"
@@ -810,7 +839,7 @@ export default function Avela({
                   Quero ser contatado
                   <ArrowIcon size={18} />
                 </Hoverable>
-                <p style={parseStyle('font-size:12px;color:#a7a08c;text-align:center;margin:14px 0 0;line-height:1.5;')}>Ao enviar, você concorda em ser contatado sobre o empreendimento Avelã Vila Residencial.</p>
+                <p style={parseStyle('font-size:12px;color:#a7a08c;text-align:center;margin:14px 0 0;line-height:1.5;')}>Atendimento pela Imobiliária Lotus Brokers.</p>
               </form>
             )}
           </div>
@@ -837,7 +866,7 @@ export default function Avela({
             <div>
               <h4 style={parseStyle("font-family:'Zilla Slab',serif;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:#fff;margin:0 0 16px;")}>Contato</h4>
               <div style={parseStyle('display:flex;flex-direction:column;gap:10px;font-size:15px;')}>
-                <a href={waLink} target="_blank" rel="noopener" style={parseStyle('text-decoration:none;color:rgba(246,242,233,.78);')}>WhatsApp · (11) 91314-1100</a>
+                <a href={waLink} target="_blank" rel="noopener" style={parseStyle('text-decoration:none;color:rgba(246,242,233,.78);')}>WhatsApp Lotus · {telefone}</a>
                 <a href="https://maclucer.com.br" target="_blank" rel="noopener" style={parseStyle('text-decoration:none;color:rgba(246,242,233,.78);')}>maclucer.com.br</a>
                 <span style={parseStyle('color:rgba(246,242,233,.78);')}>@maclucer</span>
                 <span style={parseStyle('color:rgba(246,242,233,.78);')}>Itupeva · São Paulo</span>

@@ -9,7 +9,7 @@ import RodapeLotus from '@/components/RodapeLotus';
 export const viewport: Viewport = { themeColor: '#2c1e10' };
 
 export const metadata: Metadata = {
-  title: 'Manawa Residencial em Jundiaí | 2 e 3 Dormitórios com Suíte',
+  title: 'Manawa Residencial, 2 e 3 dormitórios com suíte em Jundiaí | Imobiliária Lotus Brokers',
   description:
     'Manawa Residencial em Jundiaí/SP: apartamentos de 65,96 a 102,79 m², 2 e 3 dormitórios com suíte, +15 itens de lazer, vagas 100% cobertas e infraestrutura para carro elétrico. Obras em andamento. Agende sua visita.',
   keywords:

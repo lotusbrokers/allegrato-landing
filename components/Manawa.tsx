@@ -282,7 +282,8 @@ export default function Manawa() {
     if (!nome.value.trim()) { setErrNome(true); ok = false; } else setErrNome(false);
     if (tel.replace(/\D/g, '').length < 8) { setErrTel(true); ok = false; } else setErrTel(false);
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value)) { setErrEmail(true); ok = false; } else setErrEmail(false);
-    if (!consent.checked) { ok = false; }
+    // Sem feedback a pessoa clicava e nada acontecia: a mensagem nativa do campo diz o que falta.
+    if (!consent.checked) { consent.reportValidity(); ok = false; }
     if (!ok) return;
 
     sendLead({
@@ -292,6 +293,8 @@ export default function Manawa() {
       source: 'landing_manawa',
       interest: 'Manawa Residencial',
       message: interesse.value,
+      consent: true,
+      consentAt: new Date().toISOString(),
     });
 
     const msg =
@@ -522,7 +525,7 @@ export default function Manawa() {
             </div>
             <p className="lead">
               Apartamentos de 65,96 a 102,79 m², com opções de 2 e 3 dormitórios. Clique em uma planta
-              para ampliar e solicite a tabela completa com a nossa equipe.
+              para ampliar e solicite a tabela completa com um corretor da Lotus.
             </p>
           </div>
           <div className="plan-figs reveal">
@@ -607,7 +610,7 @@ export default function Manawa() {
                 </div>
                 <div className="tl-item">
                   <div className="tl-dot"></div>
-                  <div className="tl-body"><b>Entrega</b><span>Consulte a previsão atualizada com a nossa equipe.</span></div>
+                  <div className="tl-body"><b>Entrega</b><span>Consulte a previsão atualizada com um corretor da Lotus.</span></div>
                 </div>
               </div>
               <div className="obra-stamp">
@@ -642,8 +645,8 @@ export default function Manawa() {
               <div className="addr">
                 <span className="ic"><IconKey /></span>
                 <div>
-                  <b>Decorado &amp; Plantão de Vendas</b>
-                  <span>Rua Olívio Boa, 270 · Parque da Represa<br />Jundiaí / SP</span>
+                  <b>Visite o decorado com um corretor da Lotus</b>
+                  <span>Agende pelo WhatsApp</span>
                 </div>
               </div>
               <a
@@ -707,7 +710,7 @@ export default function Manawa() {
             <span className="eyebrow">Fale com a Lotus Brokers</span>
             <h2>Agende sua visita<br />ao decorado.</h2>
             <p>
-              Preencha o formulário e nossa equipe entra em contato com plantas, condições e
+              Preencha o formulário e um corretor da Lotus entra em contato com plantas, condições e
               disponibilidade de unidades do Manawa Residencial.
             </p>
             <ul className="contact-perks">
@@ -719,7 +722,7 @@ export default function Manawa() {
           <div className="form-card reveal">
             <form id="leadForm" noValidate onSubmit={onSubmit} style={{ display: formSent ? 'none' : undefined }}>
               <h3>Quero conhecer o Manawa</h3>
-              <p className="fsub">Resposta rápida pela nossa equipe.</p>
+              <p className="fsub">Resposta rápida pela equipe Lotus.</p>
               <div className={'field' + (errNome ? ' err' : '')}>
                 <label htmlFor="nome">Nome completo</label>
                 <input ref={nomeRef} type="text" id="nome" name="nome" placeholder="Seu nome" required />
@@ -752,14 +755,19 @@ export default function Manawa() {
                 </select>
               </div>
               <label className="consent">
-                <input ref={consentRef} type="checkbox" id="consent" required />
+                <input ref={consentRef} type="checkbox" id="consent" name="consentimento" required />
                 <span>
-                  Estou ciente das condições de tratamento dos meus dados pessoais e coleta de cookies,
-                  conforme a Política de Privacidade.
+                  Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a
+                  entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o Manawa Residencial, conforme a{' '}
+                  <a href="/lotus-privacidade" target="_top">
+                    Política de Privacidade da Lotus Brokers
+                  </a>
+                  . A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da
+                  Mac Lucer. Ao enviar, você será direcionado ao WhatsApp da Lotus Brokers.
                 </span>
               </label>
-              <button type="submit" className="btn btn-gold">Enviar e falar com a equipe</button>
-              <p className="form-note">Ao enviar, você será direcionado ao nosso WhatsApp com a mensagem pronta.</p>
+              <button type="submit" className="btn btn-gold">Enviar e falar com a Lotus</button>
+              <p className="form-note">Atendimento pela Imobiliária Lotus Brokers.</p>
             </form>
             <div className="form-ok" id="formOk" style={{ display: formSent ? 'block' : undefined }}>
               <div className="check"><IconCheckBig /></div>
