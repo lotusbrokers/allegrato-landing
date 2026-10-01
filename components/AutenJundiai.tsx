@@ -144,6 +144,7 @@ export default function AutenJundiai() {
         const tel = (data.get('tel') || '').toString().trim();
         const email = (data.get('email') || '').toString().trim();
         const tipo = (data.get('tipo') || '').toString().trim();
+        const consentimento = form.querySelector<HTMLInputElement>('input[name="consentimento"]');
         sendLead({
           name: nome,
           phone: tel,
@@ -151,6 +152,7 @@ export default function AutenJundiai() {
           source: 'landing_auten-jundiai',
           interest: 'Auten Jundiaí',
           message: tipo,
+          ...(consentimento?.checked ? { consent: true, consentAt: new Date().toISOString() } : {}),
         });
         let msg = 'Olá! Tenho interesse no Auten Jundiaí.';
         if (nome) msg += ' Meu nome é ' + nome + '.';
@@ -635,8 +637,22 @@ export default function AutenJundiai() {
                       </select>
                     </div>
                   </div>
+                  <div className="field">
+                    <label className="consent">
+                      <input type="checkbox" name="consentimento" required />
+                      <span>
+                        Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a
+                        entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o Auten Jundiaí, conforme a{' '}
+                        <a href="/lotus-privacidade" target="_top">
+                          Política de Privacidade da Lotus Brokers
+                        </a>
+                        . A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da
+                        Auten Incorporadora.
+                      </span>
+                    </label>
+                  </div>
                   <button type="submit" className="btn btn-wpp" style={{ justifyContent: 'center' }}>Quero receber agora</button>
-                  <p className="legal">Ao enviar, você concorda em ser contatado por nossos consultores. Seus dados estão protegidos.</p>
+                  <p className="legal">Seus dados estão protegidos.</p>
                 </form>
               </div>
             </div>
@@ -1002,6 +1018,20 @@ export default function AutenJundiai() {
                 <div className="field"><label htmlFor="e2">E-mail</label><input id="e2" name="email" type="email" placeholder="voce@email.com" required /></div>
               </div>
               <div className="field"><label htmlFor="t2">WhatsApp</label><input id="t2" name="tel" type="tel" placeholder="(11) 90000-0000" required /></div>
+              <div className="field">
+                <label className="consent">
+                  <input type="checkbox" name="consentimento" required />
+                  <span>
+                    Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a
+                    entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o Auten Jundiaí, conforme a{' '}
+                    <a href="/lotus-privacidade" target="_top">
+                      Política de Privacidade da Lotus Brokers
+                    </a>
+                    . A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da
+                    Auten Incorporadora.
+                  </span>
+                </label>
+              </div>
               <button type="submit" className="btn btn-wpp" style={{ width: '100%', justifyContent: 'center' }}>Quero falar com um especialista</button>
             </form>
             <p className="or" style={{ textAlign: 'center' }}>ou chame direto no <a className="js-wpp" style={{ color: 'var(--brand)', fontWeight: 600 }} href="#" data-msg="Olá! Quero falar sobre o Auten Jundiaí.">WhatsApp →</a></p>
@@ -1034,7 +1064,7 @@ export default function AutenJundiai() {
               <p style={{ marginTop: '14px', color: '#8a7a66' }}><strong style={{ color: '#b9a892' }}>Lotus Brokers</strong><br />CRECI 21829-J<br />(11) 92614-3393<br />contato@lotusbrokers.com.br</p>
             </div>
           </div>
-          <p className="legal">O &quot;Auten Jundiaí&quot; é um empreendimento imobiliário aprovado pela Prefeitura Municipal de Jundiaí/SP, através da Lei nº 9.321 de 2019, pelo Processo de Aprovação SAEPRO 2025/355. A incorporação imobiliária encontra-se devidamente registrada sob o R. 8 na matrícula nº 42.826, do 1º Cartório de Registro de Imóveis da Comarca de Jundiaí/SP, em conformidade com a Lei nº 4.591/64. Todas as imagens deste material são meramente ilustrativas, podendo sofrer alterações durante a compatibilização técnica. A vegetação que compõe o paisagismo é ilustrativa e representa o porte adulto de referência das espécies. O projeto será executado de acordo com o memorial descritivo.</p>
+          <p className="legal">O &quot;Auten Jundiaí&quot; é um empreendimento imobiliário aprovado pela Prefeitura Municipal de Jundiaí/SP, através da Lei nº 9.321 de 2019, pelo Processo de Aprovação SAEPRO 2025/355. Incorporação registrada no 1º Oficial de Registro de Imóveis de Jundiaí/SP, em conformidade com a Lei nº 4.591/64. Todas as imagens deste material são meramente ilustrativas, podendo sofrer alterações durante a compatibilização técnica. A vegetação que compõe o paisagismo é ilustrativa e representa o porte adulto de referência das espécies. O projeto será executado de acordo com o memorial descritivo.</p>
           <div className="copyr">
             <span>© 2026 Auten Incorporadora, Grupo Cataguá Soluções Imobiliárias.</span>
             <span>Material de divulgação · Página desenvolvida por Lotus Brokers.</span>

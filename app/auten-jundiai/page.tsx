@@ -8,7 +8,7 @@ import RodapeLotus from '@/components/RodapeLotus';
 // Metadata portada do <head> de auten-jundiai/index.html (paridade de SEO com o estático).
 export const metadata: Metadata = {
   title:
-    'Auten Jundiaí | Apartamentos de 128 a 264 m² no Anhangabaú, Até 4 Suítes e 4 Vagas',
+    'Auten Jundiaí, apartamentos de 128 a 264 m² no Anhangabaú, Jundiaí | Imobiliária Lotus Brokers',
   description:
     'Auten Jundiaí: alto padrão no Anhangabaú, a 3 min da Rua do Retiro. Apartamentos de 128 a 264 m², até 4 suítes e 4 vagas, +20 itens de lazer e apenas 74 unidades. Agende sua visita.',
   keywords: [

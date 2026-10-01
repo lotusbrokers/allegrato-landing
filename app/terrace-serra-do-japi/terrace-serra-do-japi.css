@@ -757,6 +757,9 @@ section{position:relative;}
 .form-field input::placeholder{color:#a7a399;}
 .form-field input:focus{outline:none;border-bottom-color:var(--rose);}
 .form-consent{font-size:.74rem;color:var(--txt-soft);margin:6px 0 24px;font-weight:300;line-height:1.5;}
+.form-field label.consent{display:flex;align-items:flex-start;gap:9px;font-size:.74rem;line-height:1.5;color:var(--txt-soft);cursor:pointer;text-align:left;text-transform:none;letter-spacing:0;font-weight:300;margin:0;}
+.form-field label.consent input[type=checkbox]{width:auto;padding:0;margin:2px 0 0;flex:none;background:none;border:0;border-radius:0;}
+.form-field label.consent a{color:inherit;text-decoration:underline;}
 .cta-form .btn{width:100%;justify-content:center;}
 .form-direct{margin-top:22px;text-align:center;font-size:.8rem;color:var(--txt-soft);}
 .form-direct a{color:var(--rose-deep);border-bottom:1px solid var(--rose);padding-bottom:1px;font-weight:400;}

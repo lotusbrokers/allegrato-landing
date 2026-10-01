@@ -8,7 +8,7 @@ import RodapeLotus from '@/components/RodapeLotus';
 // Metadata portada do <head> de terrace-serra-do-japi/index.html (valores EXATOS).
 export const metadata: Metadata = {
   title:
-    'Terrace Serra do Japi, Apartamentos de Alto Padrão em Jundiaí | Lotus Brokers',
+    'Terrace Serra do Japi, apartamentos de alto padrão em Jundiaí | Imobiliária Lotus Brokers',
   description:
     'Terrace Serra do Japi: residências de 157 a 203 m² com vista permanente para a Serra do Japi, no Jardim das Samambaias, Jundiaí. 3 torres, lazer premium e localização privilegiada. Consulte valores com a Lotus Brokers.',
   keywords:

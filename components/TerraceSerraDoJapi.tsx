@@ -241,12 +241,20 @@ export default function TerraceSerraDoJapi() {
         const nome = (f.nome.value || '').trim();
         const tel = (f.telefone.value || '').trim();
         const email = (f.email.value || '').trim();
+        // O <form> tem noValidate, então o required do checkbox não barra o envio
+        // sozinho: a verificação fica aqui, com a mensagem nativa do navegador.
+        const consentimento = form.querySelector<HTMLInputElement>('input[name="consentimento"]');
+        if (consentimento && !consentimento.checked) {
+          consentimento.reportValidity();
+          return;
+        }
         sendLead({
           name: nome,
           phone: tel,
           email,
           source: 'landing_terrace-serra-do-japi',
           interest: 'Terrace Serra do Japi',
+          ...(consentimento?.checked ? { consent: true, consentAt: new Date().toISOString() } : {}),
         });
         const msg =
           'Ola! Tenho interesse no Terrace Serra do Japi (Jundiai).%0A%0A' +
@@ -512,7 +520,7 @@ export default function TerraceSerraDoJapi() {
         <a href="#lazer">Lazer</a>
         <a href="#plantas">Plantas</a>
         <a href="#assinaturas">Assinaturas</a>
-        <a href="#contato">Fale conosco</a>
+        <a href="#contato">Fale com a Lotus</a>
       </div>
 
       {/* ============ HERO ============ */}
@@ -2245,10 +2253,21 @@ export default function TerraceSerraDoJapi() {
                     required
                   />
                 </div>
-                <p className="form-consent">
-                  Ao enviar, você será direcionado ao nosso WhatsApp para um
-                  atendimento personalizado.
-                </p>
+                <div className="form-field">
+                  <label className="consent">
+                    <input type="checkbox" name="consentimento" required />
+                    <span>
+                      Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a
+                      entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o Terrace Serra do Japi,
+                      conforme a{' '}
+                      <a href="/lotus-privacidade" target="_top">
+                        Política de Privacidade da Lotus Brokers
+                      </a>
+                      . A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da
+                      Auten Incorporadora. Ao enviar, você será direcionado ao WhatsApp da Lotus Brokers.
+                    </span>
+                  </label>
+                </div>
                 <button type="submit" className="btn">
                   Quero conhecer o Terrace
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
@@ -2336,9 +2355,9 @@ export default function TerraceSerraDoJapi() {
           <p className="footer__legal">
             O Condomínio Terrace Serra do Japi é um projeto de construção
             aprovado pela Prefeitura Municipal de Jundiaí/SP, objeto da Aprovação
-            de edifício n.º 2022/2043 expedida em 11 de maio de 2023, devidamente
-            registrado no R15 da matrícula n.º 35.424 em 10 de julho de 2023, no
-            2º Cartório de Registro de Imóveis de Jundiaí/SP. Todas as imagens
+            de edifício n.º 2022/2043 expedida em 11 de maio de 2023.
+            Incorporação registrada no 2º Oficial de Registro de Imóveis de
+            Jundiaí/SP. Todas as imagens
             deste material são meramente ilustrativas e sujeitas a alterações. O
             projeto será executado de acordo com o memorial descritivo, inclusive
             equipamentos, acabamentos e a decoração das áreas comuns. Projeto
