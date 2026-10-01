@@ -339,12 +339,14 @@ export default function DoppioJundiai() {
     const tel = (f.elements.namedItem('telefone') as HTMLInputElement)?.value.trim() || '';
     const email = (f.elements.namedItem('email') as HTMLInputElement)?.value.trim() || '';
     if (!nome || !tel) return;
+    const consentimento = f.querySelector<HTMLInputElement>('input[name="consentimento"]');
     sendLead({
       name: nome,
       phone: tel,
       email,
       source: 'landing_doppio-jundiai',
       interest: 'Doppio Jundiaí',
+      ...(consentimento?.checked ? { consent: true, consentAt: new Date().toISOString() } : {}),
     });
     const text =
       `Olá! Sou ${nome} e tenho interesse no Doppio Jundiaí.\nTelefone: ${tel}` +
@@ -1371,7 +1373,7 @@ export default function DoppioJundiai() {
                       Tudo certo!
                     </h3>
                     <p style={parseStyle('color:rgba(240,230,214,.7);font-size:15px;line-height:1.6;margin:0;max-width:30ch')}>
-                      Abrimos o WhatsApp para finalizar seu contato. Caso não tenha aberto, fale conosco pelo botão verde.
+                      Abrimos o WhatsApp para finalizar seu contato. Caso não tenha aberto, fale com a Lotus pelo botão verde.
                     </p>
                   </div>
                 </>)}
@@ -1395,11 +1397,24 @@ export default function DoppioJundiai() {
                       </label>
                       <input className="field" name="email" type="email" placeholder="voce@email.com" />
                     </div>
+                    <div>
+                      <label className="consent">
+                        <input type="checkbox" name="consentimento" required />
+                        <span>
+                          Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a
+                          entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o Doppio Jundiaí, conforme a{' '}
+                          <a href="/lotus-privacidade" target="_top">
+                            Política de Privacidade da Lotus Brokers
+                          </a>
+                          . A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da REM.
+                        </span>
+                      </label>
+                    </div>
                     <button style={parseStyle('justify-content:center;margin-top:8px;width:100%')} type="submit" className="btn-gold">
                       Quero ser consultor · Falar agora
                     </button>
                     <p style={parseStyle('font-size:11px;color:rgba(240,230,214,.4);text-align:center;margin:2px 0 0;line-height:1.5')}>
-                      Ao enviar, você concorda em ser contatado pela Imobiliária Lotus Brokers.
+                      Atendimento pela Imobiliária Lotus Brokers.
                     </p>
                   </form>
                 </>)}
@@ -1458,7 +1473,7 @@ export default function DoppioJundiai() {
               </div>
             </div>
             <p style={parseStyle('font-size:10.5px;line-height:1.7;color:rgba(240,230,214,.36);margin:26px 0 0;max-width:none')}>
-              Registro de Incorporação R.3 da matrícula 189.290, no 1º Oficial de Registro de Imóveis de Jundiaí/SP em 12/03/2026. MARINO JUNDIAI EMPREENDIMENTO IMOBILIARIO SPE LTDA, CNPJ nº 51.854.681/0001-96. Imagens e perspectivas são meramente ilustrativas, podendo sofrer alteração sem aviso prévio, inclusive quanto à forma, à cor, à textura e ao tamanho. Os acabamentos, a quantidade de móveis, os equipamentos e os utensílios serão entregues conforme o memorial descritivo. O porte da vegetação na entrega do empreendimento será de acordo com o projeto paisagístico e poderá apresentar diferença de tamanho. Comercialização: REM Consultoria e Vendas, CRECI J-33208 e Mediterrâneo Negócios Imobiliários Ltda CRECI 032134-J. MATERIAL PRELIMINAR, SUJEITO A ALTERAÇÕES. Produzido em 05/2026.
+              Incorporação registrada no 1º Oficial de Registro de Imóveis de Jundiaí/SP. MARINO JUNDIAI EMPREENDIMENTO IMOBILIARIO SPE LTDA, CNPJ nº 51.854.681/0001-96. Imagens e perspectivas são meramente ilustrativas, podendo sofrer alteração sem aviso prévio, inclusive quanto à forma, à cor, à textura e ao tamanho. Os acabamentos, a quantidade de móveis, os equipamentos e os utensílios serão entregues conforme o memorial descritivo. O porte da vegetação na entrega do empreendimento será de acordo com o projeto paisagístico e poderá apresentar diferença de tamanho. Comercialização: REM Consultoria e Vendas, CRECI J-33208 e Mediterrâneo Negócios Imobiliários Ltda CRECI 032134-J. MATERIAL PRELIMINAR, SUJEITO A ALTERAÇÕES. Produzido em 05/2026.
             </p>
             <div style={parseStyle('font-size:11px;color:rgba(240,230,214,.3);margin-top:20px')}>
               © 2026 Doppio Jundiaí · Realização Construtora Marino & REM · Página por Imobiliária Lotus Brokers.

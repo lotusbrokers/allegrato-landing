@@ -408,6 +408,9 @@ img{display:block;max-width:100%}
 .wa-float{position:fixed;right:24px;bottom:24px;z-index:55;width:62px;height:62px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 12px 34px -8px rgba(37,211,102,.6);transition:transform .35s,box-shadow .35s;animation:floatY 3.5s ease-in-out infinite}
 .wa-float:hover{transform:scale(1.08)}
 .field{width:100%;background:rgba(255,250,242,.04);border:1px solid rgba(231,205,156,.22);border-radius:8px;padding:16px 18px;color:#f3ece0;font-family:'Hanken Grotesk',sans-serif;font-size:15px;font-weight:300;transition:.3s;outline:none}
+.consent{display:flex;align-items:flex-start;gap:9px;font-size:.72rem;line-height:1.45;color:rgba(240,230,214,.55);cursor:pointer;text-align:left}
+.consent input[type=checkbox]{width:auto;padding:0;margin:2px 0 0;flex:none;background:none;border:0;border-radius:0}
+.consent a{color:inherit;text-decoration:underline}
 .field::placeholder{color:rgba(240,230,214,.4)}
 .field:focus{border-color:#caa067;background:rgba(255,250,242,.07)}
 .marquee{display:flex;gap:0;white-space:nowrap;animation:scrollx 38s linear infinite;will-change:transform}
