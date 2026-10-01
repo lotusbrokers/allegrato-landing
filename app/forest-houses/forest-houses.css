@@ -780,6 +780,10 @@ h1, h2, h3, h4 {
 .field input:focus, .field textarea:focus, .field select:focus { outline:none; border-color: var(--forest); background: var(--paper); box-shadow: 0 0 0 3px rgba(19,81,55,.1); }
 .form .btn { width:100%; margin-top: 22px; }
 .form__note { font-size:.74rem; color: var(--ink-faint); margin-top: 14px; line-height:1.5; }
+.field label.consent { display:flex; align-items:flex-start; gap:9px; font-size:.72rem; line-height:1.45; font-weight:400; letter-spacing:0; text-transform:none; margin-bottom:0; color: var(--ink-faint); cursor:pointer; text-align:left; }
+.field label.consent input[type=checkbox] { width:auto; padding:0; margin:2px 0 0; flex:none; background:none; border:0; border-radius:0; }
+.field label.consent a { color:inherit; text-decoration:underline; }
+.field.invalid label.consent { color:#b4452f; }
 .field.invalid input, .field.invalid textarea { border-color: #b4452f; box-shadow: 0 0 0 3px rgba(180,69,47,.1); }
 .form__ok { display:none; text-align:center; padding: 30px 10px; }
 .form__ok.show { display:block; animation: fadeUp .5s var(--ease) both; }

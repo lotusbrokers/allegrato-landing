@@ -9,8 +9,7 @@ import RodapeLotus from '@/components/RodapeLotus';
 export const viewport: Viewport = { themeColor: '#022B1D' };
 
 export const metadata: Metadata = {
-  title:
-    'Forest Houses | Casas em Condomínio em Louveira/SP, Lotus Brokers',
+  title: 'Forest Houses, casas em condomínio em Louveira | Imobiliária Lotus Brokers',
   description:
     'Forest Houses: casas em condomínio de 147m² e 200m² com 3 suítes e sacada em Louveira/SP. Lazer completo, fiação subterrânea, gás encanado e localização privilegiada a 2 km do centro. Agende sua visita com a Lotus Brokers.',
   keywords:

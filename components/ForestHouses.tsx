@@ -287,6 +287,14 @@ export default function ForestHouses() {
             valid = false;
           } else wrap?.classList.remove('invalid');
         });
+        // O <form> é noValidate: o required do checkbox não barra o envio sozinho,
+        // então o consentimento é conferido aqui, no mesmo padrão dos outros campos.
+        const consentimento = form.querySelector<HTMLInputElement>('input[name="consentimento"]');
+        const consentWrap = consentimento?.closest('.field');
+        if (!consentimento?.checked) {
+          consentWrap?.classList.add('invalid');
+          valid = false;
+        } else consentWrap?.classList.remove('invalid');
         if (!valid) return;
         sendLead({
           name: nome.value.trim(),
@@ -295,6 +303,7 @@ export default function ForestHouses() {
           source: 'landing_forest-houses',
           interest: 'Forest Houses',
           message: f.interesse.value,
+          ...(consentimento?.checked ? { consent: true, consentAt: new Date().toISOString() } : {}),
         });
         let msg = 'Olá! Sou ' + nome.value.trim() + '.';
         msg += ' Tenho interesse no Forest Houses (' + f.interesse.value + ').';
@@ -321,9 +330,15 @@ export default function ForestHouses() {
         el.addEventListener('input', onInput);
         inputHandlers.push([el, onInput]);
       });
+      const consentInput = form.querySelector<HTMLInputElement>('input[name="consentimento"]');
+      const onConsentChange = () => {
+        if (consentInput?.checked) consentInput.closest('.field')?.classList.remove('invalid');
+      };
+      consentInput?.addEventListener('change', onConsentChange);
       cleanups.push(() => {
         form.removeEventListener('submit', onSubmit);
         inputHandlers.forEach(([el, h]) => el.removeEventListener('input', h));
+        consentInput?.removeEventListener('change', onConsentChange);
       });
     }
 
@@ -717,16 +732,31 @@ export default function ForestHouses() {
                     <option value="Ainda estou decidindo">Ainda estou decidindo</option>
                   </select>
                 </div>
+                <div className="field">
+                  <label className="consent">
+                    <input type="checkbox" name="consentimento" required />
+                    <span>
+                      Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a
+                      entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o condomínio Forest
+                      Houses, conforme a{' '}
+                      <a href="/lotus-privacidade" target="_top">
+                        Política de Privacidade da Lotus Brokers
+                      </a>
+                      . A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da
+                      Manduca Empreendimentos.
+                    </span>
+                  </label>
+                </div>
                 <button type="submit" className="btn btn--wa" style={{ '--bg': 'var(--forest)', '--fg': 'var(--sand)' } as React.CSSProperties}>
                   <svg className="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2a9.9 9.9 0 0 0-8.43 15.14L2 22l4.97-1.3A9.9 9.9 0 1 0 12.04 2Z" /></svg>
                   Enviar pelo WhatsApp
                 </button>
-                <p className="form__note">Ao enviar, você concorda em ser contatado pela Lotus Brokers sobre o Forest Houses.</p>
+                <p className="form__note">Atendimento pela Imobiliária Lotus Brokers.</p>
               </form>
               <div className="form__ok" id="formOk">
                 <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="12" cy="12" r="10" /><path d="m8 12 3 3 5-6" /></svg>
                 <h3>Quase lá!</h3>
-                <p className="sm" style={{ marginTop: '8px' }}>Abrimos o WhatsApp com sua mensagem. É só enviar para falar com nossa equipe.</p>
+                <p className="sm" style={{ marginTop: '8px' }}>Abrimos o WhatsApp com sua mensagem. É só enviar para falar com a equipe Lotus.</p>
               </div>
             </div>
           </div>
