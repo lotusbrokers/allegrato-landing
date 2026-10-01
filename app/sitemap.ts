@@ -3,11 +3,13 @@ import { getImovelCodigosComData } from '@/lib/imoveis';
 import { getCondominiosCards, isCondominioApresentavel } from '@/lib/condominios';
 import { bairroSlugsIndexaveis } from '@/lib/bairros';
 import { landingSlugs } from '@/lib/landings';
-import { getLancamentosList, isListItemApresentavel } from '@/lib/lancamentos';
+import { getLancamentosList, isListItemApresentavel, type LancamentoListItem } from '@/lib/lancamentos';
 import { agruparPorConstrutora, comCuradasSemLancamento } from '@/lib/construtoras-paginas';
 import { curadasSemLancamento } from '@/lib/construtoras-conteudo';
 import { POSTS, hrefDoArtigo } from '@/lib/blog-posts';
 import { publicados } from '@/lib/blog-agenda';
+import { ROTAS_FIXAS } from '@/lib/sitemap-rotas';
+import { dataDaRota, dataDoGrupo, maisRecente } from '@/lib/datas-de-alteracao';
 
 /**
  * Sitemap dinâmico do portal.
@@ -27,51 +29,32 @@ import { publicados } from '@/lib/blog-agenda';
 export const revalidate = 3600;
 
 /**
- * Data do deploy, para as páginas que só mudam quando o código muda.
+ * lastmod.
  *
- * Avaliada uma vez por processo, e não a cada requisição: institucional,
- * landing e guia de bairro não mudam de hora em hora, e carimbá-las com a hora
- * atual fazia 155 das 172 URLs anunciarem alteração toda revalidação. O Google
- * usa lastmod enquanto ele é confiável — e passa a ignorá-lo quando não é.
+ * Quem tem data real no banco (imóvel, condomínio, artigo) usa a dela. As
+ * rotas estáticas — institucionais, landings, bairros, construtoras — usam a
+ * data do último commit que tocou os arquivos delas, lida de
+ * lib/datas-de-alteracao.json (gerado por scripts/datas-de-alteracao.mjs).
  *
- * Quem tem data real no banco (condomínio, imóvel, artigo) não usa esta.
+ * Até 30/09/2026 elas levavam a hora do build: 90 das 176 URLs anunciavam
+ * alteração a cada deploy, e o Google aprende a ignorar o campo quando ele
+ * não é confiável. Refazer o build não é alterar a página.
+ *
+ * Os índices (/lotus-busca, /lotus-lancamentos, /lotus-condominio,
+ * /lotus-blog, /lotus-bairro, /construtoras) mudam quando o filho mais novo
+ * entra: o lastmod deles é o mais recente entre o próprio arquivo e o que
+ * listam. Rota sem data conhecida sai sem lastmod — o campo é opcional, e
+ * omitir é melhor do que inventar.
  */
-const DEPLOY = new Date();
-
-/** Data do banco quando existe; a do deploy quando não. */
-const quando = (iso: string | null | undefined): Date => (iso ? new Date(iso) : DEPLOY);
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.lotusbrokers.com.br';
 
-// /lotus-condominio voltou em 28/09/2026, agora como índice de verdade: saiu
-// em 24/09 porque a rota só redirecionava, e anunciar redirecionamento no
-// sitemap vira "página com redirecionamento" no Search Console. Ganhou
-// listagem própria, então volta. /lotus-imovel segue fora pelo motivo antigo:
-// aquela continua sendo só redirecionamento.
-/** Páginas institucionais e de listagem, que existem independentemente de dados. */
-const FIXAS: { rota: string; prioridade: number; frequencia: MetadataRoute.Sitemap[number]['changeFrequency'] }[] = [
-  { rota: '/', prioridade: 1.0, frequencia: 'daily' },
-  { rota: '/lotus-busca', prioridade: 0.9, frequencia: 'daily' },
-  { rota: '/lotus-lancamentos', prioridade: 0.9, frequencia: 'daily' },
-  { rota: '/lotus-bairro', prioridade: 0.7, frequencia: 'weekly' },
-  { rota: '/lotus-condominio', prioridade: 0.7, frequencia: 'weekly' },
-  { rota: '/lotus-corretores', prioridade: 0.7, frequencia: 'weekly' },
-  { rota: '/lotus-sobre', prioridade: 0.6, frequencia: 'monthly' },
-  { rota: '/lotus-blog', prioridade: 0.7, frequencia: 'weekly' },
-  { rota: '/lotus-faq', prioridade: 0.5, frequencia: 'monthly' },
-  { rota: '/construtoras', prioridade: 0.6, frequencia: 'weekly' },
-  { rota: '/lotus-anunciar', prioridade: 0.6, frequencia: 'monthly' },
-  { rota: '/lotus-recrutamento', prioridade: 0.4, frequencia: 'monthly' },
-  { rota: '/lotus-privacidade', prioridade: 0.2, frequencia: 'yearly' },
-  { rota: '/lotus-termos', prioridade: 0.2, frequencia: 'yearly' },
-  { rota: '/lotus-cookies', prioridade: 0.2, frequencia: 'yearly' },
-];
+type Frequencia = MetadataRoute.Sitemap[number]['changeFrequency'];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-
   // Falha de banco não pode derrubar o sitemap inteiro: sem imóveis ele ainda
   // declara as páginas fixas e as landings, que é melhor do que erro 500.
-  const [codigos, condominios] = await Promise.all([
+  const [codigos, condominios, lancamentos] = await Promise.all([
     getImovelCodigosComData().catch((e) => {
       console.error('[sitemap] imóveis indisponíveis:', e);
       return [] as { codigo: string; atualizadoEm: string | null }[];
@@ -86,73 +69,79 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         console.error('[sitemap] condomínios indisponíveis:', e);
         return [];
       }),
+    // Sem lançamentos as páginas de construtora ficam só com as curadas, como
+    // já acontece com imóveis e condomínios.
+    getLancamentosList().catch((e) => {
+      console.error('[sitemap] lançamentos indisponíveis:', e);
+      return [] as LancamentoListItem[];
+    }),
   ]);
 
-  // Falha do banco não pode derrubar o sitemap inteiro: sem construtoras, o
-  // arquivo sai com as demais rotas, como já acontece com imóveis e condomínios.
-  const construtoras = await getLancamentosList()
-    .then((l) => comCuradasSemLancamento(agruparPorConstrutora(l.filter(isListItemApresentavel)), curadasSemLancamento()))
-    .catch((e) => {
-      console.error('[sitemap] construtoras indisponíveis:', e);
-      return [];
-    });
+  // Uma página por construtora, derivada dos lançamentos — a mesma fonte que
+  // gera as rotas em generateStaticParams. Construtora que sai do acervo sai
+  // do sitemap sozinha.
+  const construtoras = comCuradasSemLancamento(
+    agruparPorConstrutora(lancamentos.filter(isListItemApresentavel)),
+    curadasSemLancamento(),
+  );
+  // Um endereço por artigo já publicado: o agendado entra no dia dele, como
+  // na listagem.
+  const posts = publicados(POSTS);
 
   const url = (rota: string) => `${SITE}${rota}`;
+  const entrada = (
+    rota: string,
+    lastModified: Date | undefined,
+    changeFrequency: Frequencia,
+    priority: number,
+  ): MetadataRoute.Sitemap[number] => ({
+    url: url(rota),
+    ...(lastModified ? { lastModified } : {}),
+    changeFrequency,
+    priority,
+  });
+
+  // Bairros e construtoras: data da própria entrada quando o gerador conseguiu
+  // isolá-la no histórico; senão a do arquivo que todas compartilham.
+  const dataDoBairro = (slug: string) => dataDaRota(`/lotus-bairro/${slug}`) ?? dataDoGrupo('bairros');
+  const dataDaConstrutora = (slug: string) => dataDaRota(`/construtoras/${slug}`) ?? dataDoGrupo('construtoras');
+  const bairros = bairroSlugsIndexaveis();
+
+  const dataDoIndice: Record<string, Date | undefined> = {
+    '/lotus-busca': maisRecente(dataDaRota('/lotus-busca'), ...codigos.map((im) => im.atualizadoEm)),
+    '/lotus-lancamentos': maisRecente(dataDaRota('/lotus-lancamentos'), ...lancamentos.map((l) => l.atualizadoEm)),
+    '/lotus-condominio': maisRecente(dataDaRota('/lotus-condominio'), ...condominios.map((c) => c.atualizadoEm)),
+    '/lotus-blog': maisRecente(dataDaRota('/lotus-blog'), ...posts.map((p) => p.publicadoEm)),
+    '/lotus-bairro': maisRecente(dataDaRota('/lotus-bairro'), ...bairros.map(dataDoBairro)),
+    '/construtoras': maisRecente(
+      dataDaRota('/construtoras'),
+      ...construtoras.map((c) => dataDaConstrutora(c.slug)),
+      ...lancamentos.map((l) => l.atualizadoEm),
+    ),
+  };
 
   return [
-    ...FIXAS.map((f) => ({
-      url: url(f.rota),
-      lastModified: DEPLOY,
-      changeFrequency: f.frequencia,
-      priority: f.prioridade,
-    })),
+    ...ROTAS_FIXAS.map((f) =>
+      entrada(f.rota, f.rota in dataDoIndice ? dataDoIndice[f.rota] : dataDaRota(f.rota), f.frequencia, f.prioridade),
+    ),
     // Landings de empreendimento: derivadas do filesystem, igual aos cards.
-    ...[...landingSlugs()].sort().map((slug) => ({
-      url: url(`/${slug}`),
-      lastModified: DEPLOY,
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
-    })),
-    ...bairroSlugsIndexaveis().map((slug) => ({
-      url: url(`/lotus-bairro/${slug}`),
-      lastModified: DEPLOY,
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    })),
-    // Um endereço por artigo já publicado: o agendado entra no dia dele, como
-    // na listagem. lastModified é a data de publicação e não "agora" — o
-    // Google usa o campo para decidir o que rastrear de novo, e um sitemap que
-    // diz que tudo mudou a cada hora ensina o Google a ignorar o campo.
-    ...publicados(POSTS).map((post) => ({
-      url: url(hrefDoArtigo(post.id)),
-      lastModified: post.publicadoEm,
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    })),
-    // lastmod = updated_at do dashboard, não a hora de gerar o arquivo.
-    ...codigos.map((im) => ({
-      url: url(`/lotus-imovel/${im.codigo}`),
-      lastModified: quando(im.atualizadoEm),
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
-    })),
+    ...[...landingSlugs()].sort().map((slug) => entrada(`/${slug}`, dataDaRota(`/${slug}`), 'weekly', 0.8)),
+    ...bairros.map((slug) => entrada(`/lotus-bairro/${slug}`, dataDoBairro(slug), 'monthly', 0.6)),
+    // lastmod = data de publicação do artigo.
+    ...posts.map((post) => entrada(hrefDoArtigo(post.id), maisRecente(post.publicadoEm), 'monthly', 0.6)),
+    // lastmod = updated_at do dashboard.
+    ...codigos.map((im) => entrada(`/lotus-imovel/${im.codigo}`, maisRecente(im.atualizadoEm), 'weekly', 0.8)),
     // Slug, não id: as URLs com UUID continuam respondendo (redirecionam com
     // 308), mas quem anuncia no sitemap é o endereço definitivo.
-    // lastmod = updated_at do dashboard, idem.
-    ...condominios.map((c) => ({
-      url: url(`/lotus-condominio/${c.slug}`),
-      lastModified: quando(c.atualizadoEm),
-      changeFrequency: 'monthly' as const,
-      priority: 0.5,
-    })),
-    // Uma página por construtora, derivada dos lançamentos — a mesma fonte que
-    // gera as rotas em generateStaticParams. Construtora que sai do acervo sai
-    // do sitemap sozinha.
-    ...construtoras.map((c) => ({
-      url: url(`/construtoras/${c.slug}`),
-      lastModified: DEPLOY,
-      changeFrequency: 'monthly' as const,
-      priority: 0.5,
-    })),
+    ...condominios.map((c) => entrada(`/lotus-condominio/${c.slug}`, maisRecente(c.atualizadoEm), 'monthly', 0.5)),
+    // A página da construtora muda com o texto dela e com os lançamentos que lista.
+    ...construtoras.map((c) =>
+      entrada(
+        `/construtoras/${c.slug}`,
+        maisRecente(dataDaConstrutora(c.slug), ...c.lancamentos.map((l) => l.atualizadoEm)),
+        'monthly',
+        0.5,
+      ),
+    ),
   ];
 }

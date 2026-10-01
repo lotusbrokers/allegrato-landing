@@ -122,6 +122,8 @@ export type LancamentoListItem = {
   builder: string;
   img: string | null;
   href: string | null; // landing rica se existir; senão null (card abre contato)
+  /** updated_at do dashboard, para o lastmod do sitemap; null quando o dash não informa. */
+  atualizadoEm: string | null;
 };
 
 // Normaliza o preço da listagem para `string | null`. Além do campo vazio, trata
@@ -149,6 +151,7 @@ export function toListItem(row: LancamentoRow): LancamentoListItem {
     builder: construtoraDoEmpreendimento(row.nome, row.construtora),
     img: capa(row.fotos),
     href: hrefForSlug(slug),
+    atualizadoEm: row.updated_at ?? null,
   };
 }
 
@@ -472,6 +475,8 @@ export async function getLancamentosList(): Promise<LancamentoListItem[]> {
       builder: d.builder,
       img: d.img,
       href: d.href,
+      // Curado no código, sem registro no dash: não há data de alteração.
+      atualizadoEm: null,
     };
   });
 

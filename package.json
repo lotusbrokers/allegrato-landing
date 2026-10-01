@@ -5,7 +5,9 @@
   "description": "Portal público Lotus Brokers — Next.js (App Router). Consome o Supabase do octo-dash2 (somente leitura).",
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/datas-de-alteracao.mjs",
     "build": "next build",
+    "datas": "node scripts/datas-de-alteracao.mjs",
     "start": "next start -H 0.0.0.0 -p 3000",
     "lint": "next lint",
     "test": "npx tsx --test lib/*.test.ts lib/*.test.mts",
