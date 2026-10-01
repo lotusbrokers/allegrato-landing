@@ -336,12 +336,23 @@ export default function GranVilleSantoAngelo() {
         if (!nome || !tel) {
           return;
         }
+        // O <form> é noValidate, então o navegador não barra o envio sem o
+        // consentimento: a checagem fica aqui, com a mensagem nativa do campo.
+        const consentimento = form.querySelector(
+          '[name="consentimento"]',
+        ) as HTMLInputElement | null;
+        if (!consentimento?.checked) {
+          consentimento?.reportValidity();
+          return;
+        }
         sendLead({
           name: nome,
           phone: tel,
           email,
           source: 'landing_gran-ville-santo-angelo',
           interest: 'Gran Ville Santo Angelo',
+          consent: true,
+          consentAt: new Date().toISOString(),
         });
         const msg =
           'Olá! Tenho interesse no Gran Ville Santo Angelo.%0A%0ANome: ' +
@@ -1779,16 +1790,17 @@ export default function GranVilleSantoAngelo() {
               </div>
             </div>
             <div className="reveal d1">
-              <span className="eyebrow">Somos a GP Desenvolvimento Urbano</span>
+              <span className="eyebrow">Realização GP Desenvolvimento Urbano</span>
               <h2 className="h2" style={{ margin: '1.1rem 0 .8rem' }}>
                 Tradição em urbanização nacional.
               </h2>
               <p className="muted">
-                Com mais de 39 anos, desempenhamos um papel fundamental no
-                desenvolvimento urbano inteligente, sustentável e alinhado às
-                tendências globais. Somos referência em projetos planejados na
-                região metropolitana de São Paulo e chegamos a Itupeva há mais
-                de 10 anos, em 2012, com o Gran Ville São Venâncio.
+                Com mais de 39 anos, a GP Desenvolvimento Urbano desempenha um
+                papel fundamental no desenvolvimento urbano inteligente,
+                sustentável e alinhado às tendências globais. A GP é referência
+                em projetos planejados na região metropolitana de São Paulo e
+                chegou a Itupeva há mais de 10 anos, em 2012, com o Gran Ville
+                São Venâncio.
               </p>
               <div className="gp__stats">
                 <div className="gs">
@@ -1824,8 +1836,8 @@ export default function GranVilleSantoAngelo() {
                 Tudo o que você precisa saber.
               </h2>
               <p className="muted" style={{ marginTop: '1.2rem' }}>
-                Não encontrou sua resposta? Fale com a nossa Central de Vendas
-                pelo WhatsApp.
+                Não encontrou sua resposta? Fale com um corretor da Lotus pelo
+                WhatsApp.
               </p>
               <a
                 className="btn wa"
@@ -1874,9 +1886,8 @@ export default function GranVilleSantoAngelo() {
                     Sim. Loteamento com controle de acesso aprovado e registrado
                     conforme a Lei 6766/79, aprovado pelo GRAPROHAB (certificado
                     n°017/2023) e pela CETESB, com alvará de loteamento
-                    n°1.460/2023. Todos os atos estão registrados na Matrícula
-                    n°192.201 do 1º Oficial de Registro de Imóveis de
-                    Jundiaí-SP.
+                    n°1.460/2023. Loteamento registrado no 1º Oficial de Registro
+                    de Imóveis de Jundiaí/SP.
                   </p>
                 </div>
               </div>
@@ -1935,7 +1946,7 @@ export default function GranVilleSantoAngelo() {
         <div className="wrap">
           <div className="contact__grid">
             <div className="contact__info reveal">
-              <span className="eyebrow">Fale com a gente</span>
+              <span className="eyebrow">Fale com a Lotus</span>
               <h2
                 className="h2"
                 style={{ margin: '1.1rem 0 .8rem', color: 'var(--paper)' }}
@@ -1956,7 +1967,7 @@ export default function GranVilleSantoAngelo() {
                     </svg>
                   </span>
                   <div>
-                    <div className="chan__l">WhatsApp · Central de Vendas</div>
+                    <div className="chan__l">WhatsApp · Lotus Brokers</div>
                     <a
                       className="chan__v"
                       href="https://wa.me/5511926143393?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Gran%20Ville%20Santo%20Angelo."
@@ -2041,6 +2052,21 @@ export default function GranVilleSantoAngelo() {
                       placeholder="voce@email.com"
                     />
                   </div>
+                  <div className="field">
+                    <label className="consent">
+                      <input type="checkbox" name="consentimento" required />
+                      <span>
+                        Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a
+                        entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o loteamento Gran Ville
+                        Santo Ângelo, conforme a{' '}
+                        <a href="/lotus-privacidade" target="_top">
+                          Política de Privacidade da Lotus Brokers
+                        </a>
+                        . A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da
+                        GP Desenvolvimento Urbano.
+                      </span>
+                    </label>
+                  </div>
                   <button className="btn lg" type="submit">
                     <span>
                       Quero saber mais{' '}
@@ -2055,8 +2081,7 @@ export default function GranVilleSantoAngelo() {
                     </span>
                   </button>
                   <p className="form__legal">
-                    Ao enviar, você concorda em ser contactado pela equipe de
-                    vendas. Seus dados não são compartilhados com terceiros.
+                    Seus dados não são compartilhados com terceiros.
                   </p>
                 </form>
                 <div className="form__ok">
@@ -2072,7 +2097,7 @@ export default function GranVilleSantoAngelo() {
                   </div>
                   <h3>Recebemos seu contato!</h3>
                   <p className="sub">
-                    Estamos te direcionando ao WhatsApp da Central de Vendas.
+                    Estamos te direcionando ao WhatsApp da Lotus Brokers.
                   </p>
                   <a
                     className="btn wa ok-wa"
@@ -2160,9 +2185,9 @@ export default function GranVilleSantoAngelo() {
             aprovado pela CETESB conforme TCRA n°13.202/2023, processo
             CETESB/SIMA n°3600376/2022, alvará de loteamento n°1.460/2023, Decreto
             de aprovação n°3.630 de 29/06/2023, todos emitidos pela Prefeitura
-            Municipal de Itupeva, todos os atos de aprovação registrados na
-            Matrícula n°192.201 do Primeiro Oficial de Registro de Imóveis de
-            Jundiaí-SP. Imagens e perspectivas meramente ilustrativas. As
+            Municipal de Itupeva. Loteamento registrado no 1º Oficial de
+            Registro de Imóveis de Jundiaí/SP. Imagens e perspectivas
+            meramente ilustrativas. As
             metragens e itens de lazer referem-se ao projeto aprovado e podem
             sofrer alterações. Consulte condições comerciais.
           </p>
