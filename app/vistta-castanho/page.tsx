@@ -7,7 +7,7 @@ import RodapeLotus from '@/components/RodapeLotus';
 
 // Metadata portada do <head> do index.html original (valores EXATOS).
 export const metadata: Metadata = {
-  title: 'Vistta Castanho · Loteamento Fechado em Jundiaí, SP',
+  title: 'Vistta Castanho, loteamento fechado em Jundiaí | Imobiliária Lotus Brokers',
   description:
     'Vistta Castanho: loteamento fechado com lotes a partir de 126 m² no bairro do Castanho, Jundiaí, entre São Paulo e Campinas. Clube completo, lago, portaria inteligente e natureza. Fale com um corretor.',
   keywords:

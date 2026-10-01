@@ -610,6 +610,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .field select{color:var(--text-cream-mut);appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C2A05A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1.05em center}
 .field select.filled{color:var(--text-cream)}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold);background:rgba(244,238,226,.08)}
+.field label.consent{display:flex;align-items:flex-start;gap:9px;font-size:.72rem;line-height:1.45;color:var(--text-cream-mut);cursor:pointer;text-align:left}
+.field label.consent input[type=checkbox]{width:auto;padding:0;margin:2px 0 0;flex:none;background:none;border:0;border-radius:0}
+.field label.consent a{color:inherit;text-decoration:underline}
 .lead-card .btn{width:100%;margin-top:6px}
 .lead-card .legal{font-size:.68rem;color:var(--text-cream-mut);text-align:center;margin-top:13px;line-height:1.4}
 

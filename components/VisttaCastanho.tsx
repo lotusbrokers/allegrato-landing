@@ -194,6 +194,7 @@ export default function VisttaCastanho() {
           const field = f as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
           if (field.name) data[field.name] = field.value.trim();
         });
+        const consentimento = form.querySelector<HTMLInputElement>('input[name="consentimento"]');
         sendLead({
           name: data.nome,
           phone: data.telefone,
@@ -201,6 +202,7 @@ export default function VisttaCastanho() {
           source: 'landing_vistta-castanho',
           interest: 'Vistta Castanho',
           message: [data.interesse, data.mensagem].filter(Boolean).join(', '),
+          ...(consentimento?.checked ? { consent: true, consentAt: new Date().toISOString() } : {}),
         });
         let msg =
           'Olá! Tenho interesse no *Vistta Castanho* (loteamento fechado no Castanho, Jundiaí).';
@@ -471,6 +473,21 @@ export default function VisttaCastanho() {
                       <option>Conhecer condições</option>
                       <option>Agendar visita ao plantão</option>
                     </select>
+                  </div>
+                  <div className="field">
+                    <label className="consent">
+                      <input type="checkbox" name="consentimento" required />
+                      <span>
+                        Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a
+                        entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o loteamento Vistta
+                        Castanho, conforme a{' '}
+                        <a href="/lotus-privacidade" target="_top">
+                          Política de Privacidade da Lotus Brokers
+                        </a>
+                        . A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da
+                        Applausi Construtora. Ao enviar, você será direcionado ao WhatsApp da Lotus Brokers.
+                      </span>
+                    </label>
                   </div>
                   <button type="submit" className="btn btn-gold btn-lg">
                     <svg viewBox="0 0 24 24" fill="currentColor">
@@ -1010,6 +1027,21 @@ export default function VisttaCastanho() {
               <div className="field">
                 <textarea name="mensagem" rows={3} placeholder="Mensagem (opcional)"></textarea>
               </div>
+              <div className="field">
+                <label className="consent">
+                  <input type="checkbox" name="consentimento" required />
+                  <span>
+                    Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a
+                    entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o loteamento Vistta
+                    Castanho, conforme a{' '}
+                    <a href="/lotus-privacidade" target="_top">
+                      Política de Privacidade da Lotus Brokers
+                    </a>
+                    . A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da
+                    Applausi Construtora. Ao enviar, você será direcionado ao WhatsApp da Lotus Brokers.
+                  </span>
+                </label>
+              </div>
               <button type="submit" className="btn btn-gold btn-lg">
                 <svg viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.9 5-1.3A10 10 0 1 0 12 2Zm5.6 14.1c-.2.7-1.4 1.3-1.9 1.3-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.5-.3.4c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.7-.1l.8-1c.2-.2.4-.2.6-.1l2 .9c.2.1.4.2.4.3.1.2.1.6-.1 1.1Z"></path>
@@ -1017,7 +1049,7 @@ export default function VisttaCastanho() {
                 Enviar pelo WhatsApp
               </button>
               <p className="legal">
-                Ao enviar, você abre uma conversa no WhatsApp. Imagens meramente ilustrativas.
+                Atendimento pela Imobiliária Lotus Brokers. Imagens meramente ilustrativas.
               </p>
             </form>
           </div>
