@@ -7,7 +7,7 @@ import RodapeLotus from '@/components/RodapeLotus';
 
 // Metadata portada do <helmet> do fonte estático.
 export const metadata: Metadata = {
-  title: 'Best View Residence, Swiss Park, Campinas/SP | 2 e 3 dorms. com suíte',
+  title: 'Best View Residence, apartamentos de 2 e 3 dorms no Swiss Park, Campinas | Imobiliária Lotus Brokers',
   description:
     'Best View Residence no Swiss Park, Campinas/SP: apartamentos de 2 e 3 dormitórios com suíte, de 62 a 78 m² e opções Garden, 2 vagas cobertas e 22 itens de lazer.',
   keywords:

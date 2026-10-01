@@ -7,7 +7,7 @@ import RodapeLotus from '@/components/RodapeLotus';
 
 // Metadata portada do <helmet> do fonte estático.
 export const metadata: Metadata = {
-  title: 'Odeon Residencial, Portal do Paraíso II | Apartamentos de 95 e 112 m² em Jundiaí',
+  title: 'Odeon Residencial, apartamentos de 95 e 112 m² no Portal do Paraíso II, Jundiaí | Imobiliária Lotus Brokers',
   description:
     'Odeon Residencial em Jundiaí/SP: apartamentos de 95,85 m² e 112,3 m² com varanda gourmet integrada, até 3 dormitórios e 14 áreas de lazer decoradas e equipadas.',
   keywords:

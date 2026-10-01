@@ -15,6 +15,7 @@
 import React, { useEffect, useState, type CSSProperties } from 'react';
 import { Hoverable, parseStyle, waHref } from '@/lib/dc-runtime';
 import { sendLead } from '@/lib/lead';
+import { SITE } from '@/lib/site';
 
 const WA_NUMBER = '5511926143393';
 const buildWhats = (text?: string) =>
@@ -325,14 +326,16 @@ export default function Odeon() {
   const setNomeEv = (e: React.ChangeEvent<HTMLInputElement>) => setNome(e.target.value);
   const setTelefoneEv = (e: React.ChangeEvent<HTMLInputElement>) => setTelefone(e.target.value);
   const setInteresseEv = (e: React.ChangeEvent<HTMLSelectElement>) => setInteresse(e.target.value);
-  const enviarForm = (e: React.FormEvent) => {
+  const enviarForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const consentimento = e.currentTarget.querySelector<HTMLInputElement>('input[name="consentimento"]');
     sendLead({
       name: nome,
       phone: telefone,
       source: 'landing_odeon',
       interest: 'Odeon Residencial',
       message: interesse,
+      ...(consentimento?.checked ? { consent: true, consentAt: new Date().toISOString() } : {}),
     });
     const txt = `Olá! Sou ${nome} (${telefone}). ${interesse}, Odeon Residencial, Jundiaí.`;
     window.open(buildWhats(txt), '_blank', 'noopener');
@@ -900,11 +903,23 @@ export default function Odeon() {
                   Agendar visita ao decorado
                 </option>
               </select>
+              <label style={parseStyle('display: flex; align-items: flex-start; gap: 9px; font-size: 12px; line-height: 1.45; color: #9AA0AC; cursor: pointer; text-align: left;')}>
+                <input type="checkbox" name="consentimento" required style={parseStyle('margin: 2px 0 0; flex-shrink: 0; width: auto;')} />
+                <span>
+                  Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a
+                  entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o Odeon Residencial, conforme a{' '}
+                  <a href="/lotus-privacidade" target="_top" style={parseStyle('color: inherit; text-decoration: underline;')}>
+                    Política de Privacidade da Lotus Brokers
+                  </a>
+                  . A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da
+                  F A Oliva.
+                </span>
+              </label>
               <Hoverable as="button" baseStyle={parseStyle("background: #C08A4E; color: #fff; border: none; border-radius: 3px; padding: 17px; font-size: 15px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; font-family: 'Hanken Grotesk', sans-serif; transition: background .25s, transform .25s;")} hoverStyle={{ background: '#B07A3E', transform: 'translateY(-1px)' }} type="submit">
                 Falar no WhatsApp
               </Hoverable>
               <p style={parseStyle('margin: 0; color: #9AA0AC; font-size: 11.5px; line-height: 1.5;')}>
-                Ao enviar, você concorda em ser contatado sobre o Odeon Residencial. CRECI 55261.
+                {SITE.nome} · {SITE.creciPj}.
               </p>
             </form>
           </div>
@@ -937,7 +952,7 @@ export default function Odeon() {
               </div>
             </div>
             <p style={parseStyle('margin: 0; font-size: 11.5px; line-height: 1.8; color: rgba(255,255,255,.45); max-width: 1050px;')}>
-              Projeto aprovado pela Prefeitura Municipal de Jundiaí no dia 27/08/2021 sob o número 34.675-7/2019. Alvará de execução de obra particular nº 166/2021. Memorial de Incorporação registrado sob R.02 na matrícula 171.939, do 1º Oficial de Registro de Imóveis da Comarca de Jundiaí/SP. Todas as imagens deste material são meramente ilustrativas e estão sujeitas a adequações. As perspectivas retratam o projeto paisagístico com vegetação em fase adulta, estágio que será alcançado com a ação do tempo. CRECI 55261.
+              Projeto aprovado pela Prefeitura Municipal de Jundiaí no dia 27/08/2021 sob o número 34.675-7/2019. Alvará de execução de obra particular nº 166/2021. Incorporação registrada no 1º Oficial de Registro de Imóveis de Jundiaí/SP. Todas as imagens deste material são meramente ilustrativas e estão sujeitas a adequações. As perspectivas retratam o projeto paisagístico com vegetação em fase adulta, estágio que será alcançado com a ação do tempo. {SITE.nome} · {SITE.creciPj}.
             </p>
           </div>
         </footer>

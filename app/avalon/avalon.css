@@ -135,6 +135,9 @@ nav{display:flex;align-items:center;justify-content:space-between;height:72px}
 .field input:focus,.field select:focus{outline:none;border-color:var(--copper);box-shadow:0 0 0 3px var(--copper-soft)}
 .form-card .btn{width:100%;justify-content:center;margin-top:6px}
 .consent{font-size:.72rem;color:var(--muted);margin-top:14px;text-align:center}
+.field label.consent{display:flex;align-items:flex-start;gap:9px;font-size:.72rem;line-height:1.45;color:var(--muted);cursor:pointer;text-align:left;text-transform:none;letter-spacing:0;font-weight:400;margin:0}
+.field label.consent input[type=checkbox]{width:auto;padding:0;margin:2px 0 0;flex:none;background:none;border:0;border-radius:0}
+.field label.consent a{color:inherit;text-decoration:underline}
 .ok-msg{display:none;text-align:center;padding:20px 0}
 .ok-msg.show{display:block}
 .ok-msg .big{font-family:var(--serif);font-size:1.6rem;color:var(--brown);margin-bottom:8px}

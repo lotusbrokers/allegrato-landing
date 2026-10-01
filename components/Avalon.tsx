@@ -12,6 +12,7 @@
 import React, { useRef, useState } from 'react';
 import { parseStyle, useReveal, waHref } from '@/lib/dc-runtime';
 import { sendLead } from '@/lib/lead';
+import { SITE } from '@/lib/site';
 
 const WHATSAPP = '5511926143393';
 const EMP = 'Avalon Residencial';
@@ -27,6 +28,7 @@ export default function Avalon() {
   const nomeRef = useRef<HTMLInputElement>(null);
   const telRef = useRef<HTMLInputElement>(null);
   const interesseRef = useRef<HTMLSelectElement>(null);
+  const consentRef = useRef<HTMLInputElement>(null);
 
   useReveal('[data-reveal]', 'in', 0.15);
 
@@ -41,6 +43,7 @@ export default function Avalon() {
       source: 'landing_avalon',
       interest: 'Avalon Residencial',
       message: interesse,
+      ...(consentRef.current?.checked ? { consent: true, consentAt: new Date().toISOString() } : {}),
     });
     window.open(
       waLink(`Olá! Meu nome é ${nome}. ${interesse}. Meu WhatsApp: ${tel}.`),
@@ -74,7 +77,7 @@ export default function Avalon() {
               Localização
             </a>
             <a href="#contato" className="btn btn-copper">
-              Fale conosco
+              Fale com a Lotus
             </a>
           </div>
           <button type="button" className="burger" aria-label="Menu" aria-expanded={navOpen} onClick={() => setNavOpen((o) => !o)}>
@@ -810,7 +813,7 @@ export default function Avalon() {
               Não perca tempo
             </p>
             <h2>
-              Fale comigo agora mesmo.
+              Fale com a Lotus agora mesmo.
             </h2>
             <p className="lead">
               Preencha e receba a tabela de valores, plantas e condições atualizadas direto no seu WhatsApp. Atendimento rápido, sem compromisso.
@@ -874,11 +877,25 @@ export default function Avalon() {
                       </option>
                     </select>
                   </div>
+                  <div className="field">
+                    <label className="consent">
+                      <input ref={consentRef} type="checkbox" name="consentimento" required />
+                      <span>
+                        Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a
+                        entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o Avalon Residencial,
+                        conforme a{' '}
+                        <a href="/lotus-privacidade" target="_top">
+                          Política de Privacidade da Lotus Brokers
+                        </a>
+                        . A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da F A Oliva.
+                      </span>
+                    </label>
+                  </div>
                   <button type="submit" className="btn btn-copper">
                     Quero receber informações →
                   </button>
                   <p className="consent">
-                    Ao enviar, você concorda em ser contatado sobre o Avalon Residencial, inclusive por WhatsApp. CRECI [INSERIR CRECI].
+                    {SITE.nome} · {SITE.creciPj}.
                   </p>
                 </form>
               </div>
@@ -887,7 +904,7 @@ export default function Avalon() {
                   ✓ Recebido!
                 </p>
                 <p className="sm">
-                  Abrimos o seu WhatsApp com a mensagem pronta, é só enviar. Nossa equipe responde em instantes.
+                  Abrimos o seu WhatsApp com a mensagem pronta, é só enviar. A equipe Lotus responde em instantes.
                 </p>
               </div>
             </div>
@@ -915,7 +932,7 @@ export default function Avalon() {
             </div>
           </div>
           <p className="legal">
-            Perspectivas artísticas, meramente ilustrativas. Móveis, utensílios e itens de decoração não fazem parte do Memorial Descritivo. *Incluso box na garagem, com áreas de 3 a 5 m². Áreas privativas de 105 m² e 75,5 m²; unidades Garden de 143,1 m² e 103,8 m². Empreendimento sujeito a aprovação e registro de incorporação, [INSERIR DADOS DE INCORPORAÇÃO / Nº DE REGISTRO]. Realização: F A Oliva. CRECI [INSERIR]. Consulte o Memorial Descritivo.
+            Perspectivas artísticas, meramente ilustrativas. Móveis, utensílios e itens de decoração não fazem parte do Memorial Descritivo. *Incluso box na garagem, com áreas de 3 a 5 m². Áreas privativas de 105 m² e 75,5 m²; unidades Garden de 143,1 m² e 103,8 m². Empreendimento sujeito a aprovação e registro de incorporação. Realização: F A Oliva. Intermediação: {SITE.nome} · {SITE.creciPj}. Consulte o Memorial Descritivo.
           </p>
         </div>
       </footer>

@@ -265,14 +265,16 @@ export default function BestViewResidence() {
   const setNomeEv = (e: React.ChangeEvent<HTMLInputElement>) => setNome(e.target.value);
   const setEmailEv = (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
   const setFoneEv = (e: React.ChangeEvent<HTMLInputElement>) => setFone(e.target.value);
-  const enviarForm = (e: React.FormEvent) => {
+  const enviarForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const consentimento = e.currentTarget.querySelector<HTMLInputElement>('input[name="consentimento"]');
     sendLead({
       name: fNome,
       phone: fFone,
       email: fEmail,
       source: 'landing_best-view-residence',
       interest: 'Best View Residence',
+      ...(consentimento?.checked ? { consent: true, consentAt: new Date().toISOString() } : {}),
     });
     window.open(waLinkForm, '_blank', 'noopener');
     setSent(true);
@@ -874,11 +876,24 @@ export default function BestViewResidence() {
                   TELEFONE / WHATSAPP
                   <input style={parseStyle('font-family: Montserrat, sans-serif; font-size: 15px; padding: 14px 16px; border: 1px solid #c9bfae; background: #fff; color: #362627; outline-color: #A2A37E;')} type="tel" name="telefone" required autoComplete="tel" value={fFone} onChange={setFoneEv} placeholder="(11) 90000-0000" />
                 </label>
+                <label style={parseStyle('display: flex; align-items: flex-start; gap: 9px; font-size: 12px; line-height: 1.45; color: #6b5a52; cursor: pointer; text-align: left;')}>
+                  <input style={parseStyle('width: auto; margin: 2px 0 0; flex-shrink: 0;')} type="checkbox" name="consentimento" required />
+                  <span>
+                    Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a
+                    entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o Best View Residence,
+                    conforme a{' '}
+                    <a style={parseStyle('color: inherit; text-decoration: underline;')} href="/lotus-privacidade" target="_top">
+                      Política de Privacidade da Lotus Brokers
+                    </a>
+                    . A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da F A Oliva.
+                    Ao enviar, você será direcionado ao WhatsApp da Lotus Brokers.
+                  </span>
+                </label>
                 <Hoverable as="button" baseStyle={parseStyle('margin-top: 8px; font-family: Montserrat, sans-serif; background: #362627; color: #E9D7A8; border: none; cursor: pointer; font-weight: 800; font-size: 14px; letter-spacing: .08em; padding: 18px 20px; border-radius: 999px; transition: all .18s ease;')} hoverStyle={parseStyle('background: #241819; transform: translateY(-1px);')} type="submit">
                   QUERO SABER MAIS
                 </Hoverable>
                 <p style={parseStyle('margin: 0; font-size: 11px; line-height: 1.6; color: #8d7f76;')}>
-                  Ao enviar, você será direcionado ao WhatsApp da Lotus Brokers com seus dados preenchidos. Nada é publicado ou compartilhado.
+                  Nada é publicado ou compartilhado.
                 </p>
               </form>
             </>)}
