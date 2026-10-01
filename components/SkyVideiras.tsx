@@ -27,6 +27,7 @@ export default function SkyVideiras() {
   const nomeRef = useRef<HTMLInputElement>(null);
   const telRef = useRef<HTMLInputElement>(null);
   const interesseRef = useRef<HTMLSelectElement>(null);
+  const consentRef = useRef<HTMLInputElement>(null);
 
   useReveal('[data-reveal]', 'in', 0.15);
 
@@ -41,6 +42,7 @@ export default function SkyVideiras() {
       source: 'landing_sky-videiras',
       interest: 'SKY Videiras',
       message: interesse,
+      ...(consentRef.current?.checked ? { consent: true, consentAt: new Date().toISOString() } : {}),
     });
     window.open(
       waLink(`Olá! Meu nome é ${nome}. ${interesse}. Meu WhatsApp: ${tel}.`),
@@ -74,7 +76,7 @@ export default function SkyVideiras() {
               Localização
             </a>
             <a href="#contato" className="btn btn-gold">
-              Fale conosco
+              Fale com a Lotus
             </a>
           </div>
           <button type="button" className="burger" aria-label="Menu" aria-expanded={navOpen} onClick={() => setNavOpen((o) => !o)}>
@@ -733,7 +735,7 @@ export default function SkyVideiras() {
               Antecipe-se
             </p>
             <h2>
-              Fale conosco agora mesmo.
+              Fale com a Lotus agora mesmo.
             </h2>
             <p className="lead">
               Preencha e receba a tabela de unidades, plantas e condições atualizadas direto no seu WhatsApp. Atendimento rápido, sem compromisso.
@@ -794,11 +796,25 @@ export default function SkyVideiras() {
                       </option>
                     </select>
                   </div>
+                  <div className="field">
+                    <label className="consent">
+                      <input ref={consentRef} type="checkbox" name="consentimento" required />
+                      <span>
+                        Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a
+                        entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o SKY Videiras, conforme a{' '}
+                        <a href="/lotus-privacidade" target="_top">
+                          Política de Privacidade da Lotus Brokers
+                        </a>
+                        . A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da Sebel
+                        Empreendimentos.
+                      </span>
+                    </label>
+                  </div>
                   <button type="submit" className="btn btn-gold">
                     Quero receber informações →
                   </button>
                   <p className="consent">
-                    Ao enviar, você concorda em ser contatado sobre o SKY Videiras, inclusive por WhatsApp. CRECI [INSERIR CRECI].
+                    Atendimento pela Imobiliária Lotus Brokers. CRECI [INSERIR CRECI].
                   </p>
                 </form>
               </div>
@@ -807,7 +823,7 @@ export default function SkyVideiras() {
                   ✓ Recebido!
                 </p>
                 <p className="sm">
-                  Abrimos o seu WhatsApp com a mensagem pronta, é só enviar. Nossa equipe responde em instantes.
+                  Abrimos o seu WhatsApp com a mensagem pronta, é só enviar. A equipe Lotus responde em instantes.
                 </p>
               </div>
             </div>
@@ -835,7 +851,7 @@ export default function SkyVideiras() {
             </div>
           </div>
           <p className="legal">
-            Perspectivas artísticas, preliminares e meramente ilustrativas. As áreas comuns serão entregues equipadas e decoradas conforme Memorial Descritivo. Móveis, utensílios e itens de decoração são meramente ilustrativos. Metragens conforme boletário. Empreendimento sujeito a aprovação e registro de incorporação, [INSERIR DADOS DE INCORPORAÇÃO / Nº DE REGISTRO]. Realização: SEBEL Empreendimentos. CRECI [INSERIR].
+            Perspectivas artísticas, preliminares e meramente ilustrativas. As áreas comuns serão entregues equipadas e decoradas conforme Memorial Descritivo. Móveis, utensílios e itens de decoração são meramente ilustrativos. Metragens conforme boletário. Empreendimento sujeito a aprovação e registro de incorporação. Realização: SEBEL Empreendimentos. CRECI [INSERIR].
           </p>
         </div>
       </footer>

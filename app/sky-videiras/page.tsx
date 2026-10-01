@@ -23,7 +23,7 @@ const montserrat = Montserrat({
 
 // Metadata portada do <head> do fonte estático.
 export const metadata: Metadata = {
-  title: 'SKY Videiras, Apartamentos 2 e 3 dorms com suíte em Jundiaí',
+  title: 'SKY Videiras, apartamentos de 2 e 3 dorms com suíte em Jundiaí | Imobiliária Lotus Brokers',
   description:
     'SKY Videiras, da SEBEL Empreendimentos. Apartamentos de 2 e 3 dormitórios com suíte, de 56,96 a 83,31 m², lazer completo no rooftop com vista para a Serra do Japi. Jd. Quintas das Videiras, Jundiaí/SP. Obras iniciadas.',
   keywords:

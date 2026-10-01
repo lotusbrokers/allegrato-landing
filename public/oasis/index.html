@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oásis Residencial — Apartamentos de 75 a 112 m², 2 e 3 dorms com suíte</title>
+<title>Oásis Residencial, apartamentos de 75 a 112 m² com suíte em Jundiaí | Imobiliária Lotus Brokers</title>
 <link rel="canonical" href="https://www.lotusbrokers.com.br/oasis">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.lotusbrokers.com.br/oasis">
@@ -150,7 +150,9 @@ nav{display:flex;align-items:center;justify-content:space-between;height:72px}
 .field input,.field select{width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:10px;font-family:var(--sans);font-size:.98rem;transition:.2s;background:#fff}
 .field input:focus,.field select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft)}
 .form-card .btn{width:100%;justify-content:center;margin-top:6px}
-.consent{font-size:.72rem;color:var(--muted);margin-top:14px;text-align:center}
+.field label.consent{display:flex;align-items:flex-start;gap:9px;margin:0;font-size:.72rem;font-weight:400;letter-spacing:0;text-transform:none;line-height:1.45;color:var(--muted);cursor:pointer;text-align:left}
+.field label.consent input[type=checkbox]{width:auto;padding:0;margin:2px 0 0;flex:none;background:none;border:0;border-radius:0}
+.field label.consent a{color:inherit;text-decoration:underline}
 .ok-msg{display:none;text-align:center;padding:20px 0}
 .ok-msg.show{display:block}
 .ok-msg .big{font-family:var(--serif);font-size:1.6rem;color:var(--green);margin-bottom:8px}
@@ -221,7 +223,7 @@ footer{background:#0f271e;color:rgba(255,255,255,.6);padding:56px 0 40px;font-si
       <a href="#plantas">Plantas</a>
       <a href="#lazer">Lazer</a>
       <a href="#localizacao">Localização</a>
-      <a href="#contato" class="btn btn-gold">Fale conosco</a>
+      <a href="#contato" class="btn btn-gold">Fale com a Lotus</a>
     </div>
     <button class="burger" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
   </nav>
@@ -446,7 +448,7 @@ footer{background:#0f271e;color:rgba(255,255,255,.6);padding:56px 0 40px;font-si
   <div class="wrap contato-grid">
     <div data-reveal>
       <p class="eyebrow">Antecipe-se</p>
-      <h2>Fale conosco agora mesmo.</h2>
+      <h2>Fale com a Lotus agora mesmo.</h2>
       <p class="lead">Preencha e receba a tabela de unidades, plantas e condições atualizadas direto no seu WhatsApp. Atendimento rápido, sem compromisso.</p>
       <ul class="benef">
         <li>Tabela de valores e condições atualizadas</li>
@@ -471,13 +473,15 @@ footer{background:#0f271e;color:rgba(255,255,255,.6);padding:56px 0 40px;font-si
                 <option>Quero agendar uma visita</option>
               </select>
             </div>
+            <div class="field">
+              <label class="consent"><input type="checkbox" name="consentimento" required> <span>Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o Oásis Residencial, conforme a <a href="/lotus-privacidade" target="_top">Política de Privacidade da Lotus Brokers</a>. A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da Sebel Empreendimentos.</span></label>
+            </div>
             <button type="submit" class="btn btn-gold">Quero receber informações →</button>
-            <p class="consent">Ao enviar, você concorda em ser contatado sobre o Oásis Residencial, inclusive por WhatsApp.</p>
           </form>
         </div>
         <div class="ok-msg" id="okMsg">
           <p class="big">✓ Recebido!</p>
-          <p class="sm">Abrimos o seu WhatsApp com a mensagem pronta — é só enviar. Nossa equipe responde em instantes.</p>
+          <p class="sm">Abrimos o seu WhatsApp com a mensagem pronta — é só enviar. A equipe Lotus responde em instantes.</p>
         </div>
       </div>
     </div>

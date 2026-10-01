@@ -143,6 +143,9 @@ nav{display:flex;align-items:center;justify-content:space-between;height:72px}
 .field label{display:block;font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:7px}
 .field input,.field select{width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:10px;font-family:var(--sans);font-size:.98rem;transition:.2s;background:#fff}
 .field input:focus,.field select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft)}
+.field label.consent{display:flex;align-items:flex-start;gap:9px;font-size:.72rem;line-height:1.45;font-weight:400;letter-spacing:0;text-transform:none;margin:0;color:var(--muted);cursor:pointer;text-align:left}
+.field label.consent input[type=checkbox]{width:auto;padding:0;margin:2px 0 0;flex:none;background:none;border:0;border-radius:0}
+.field label.consent a{color:inherit;text-decoration:underline}
 .form-card .btn{width:100%;justify-content:center;margin-top:6px}
 .consent{font-size:.72rem;color:var(--muted);margin-top:14px;text-align:center}
 .ok-msg{display:none;text-align:center;padding:20px 0}
