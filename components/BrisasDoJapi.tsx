@@ -158,7 +158,7 @@ const locPoints = [
 
 const faqsData = [
   { q: 'Quantas torres e unidades tem o condomínio?', a: 'O Brisas do Japi é um condomínio vertical com 9 torres e 920 unidades no total, em uma área de 29.000m².' },
-  { q: 'O Brisas do Japi aceita o Minha Casa Minha Vida?', a: 'Sim. O empreendimento se enquadra no Novo Minha Casa Minha Vida. Faça uma simulação de financiamento com nossos corretores e descubra suas condições.' },
+  { q: 'O Brisas do Japi aceita o Minha Casa Minha Vida?', a: 'Sim. O empreendimento se enquadra no Novo Minha Casa Minha Vida. Faça uma simulação de financiamento com um corretor da Lotus e descubra suas condições.' },
   { q: 'Quais são os tamanhos das unidades?', a: 'Studio de 34m² e apartamentos de 2 dormitórios de 49m², 52m² (1 suíte) e 66m² (1 suíte), todos com varanda e vaga.' },
   { q: 'Onde fica o empreendimento?', a: 'No Bairro Medeiros, em Jundiaí/SP, com vista para a Serra do Japi e infraestrutura completa por perto. Entre em contato para agendar uma visita guiada.' },
   { q: 'Os apartamentos têm vaga de garagem?', a: 'Sim, todas as tipologias incluem vaga. O condomínio ainda conta com 44 vagas para visitantes.' },
@@ -191,6 +191,7 @@ export default function BrisasDoJapi({
   const telRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const tipoRef = useRef<HTMLSelectElement>(null);
+  const consentRef = useRef<HTMLInputElement>(null);
 
   /* -------- waBase / waMsg — lógica EXATA do script -------- */
   const waBase = () => {
@@ -305,6 +306,7 @@ export default function BrisasDoJapi({
       source: 'landing_brisas-do-japi',
       interest: 'Brisas do Japi',
       message: tipo,
+      ...(consentRef.current?.checked ? { consent: true, consentAt: new Date().toISOString() } : {}),
     });
     setSent(true);
     window.open(waMsg(msg), '_blank');
@@ -583,7 +585,7 @@ export default function BrisasDoJapi({
             </div>
             <div style={parseStyle('background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:24px;')}>
               <div style={parseStyle("font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:8px;")}>Simulação personalizada</div>
-              <div style={parseStyle('font-size:14.5px;color:rgba(232,240,239,.75);line-height:1.5;')}>Nossos corretores ajudam você a simular o financiamento e conhecer o decorado.</div>
+              <div style={parseStyle('font-size:14.5px;color:rgba(232,240,239,.75);line-height:1.5;')}>Corretores da Lotus ajudam você a simular o financiamento e conhecer o decorado.</div>
             </div>
           </div>
           <CtaSimulacao style={parseStyle('margin-top:26px')} />
@@ -657,8 +659,12 @@ export default function BrisasDoJapi({
                     <option>2 Dorms (1 suíte) · 52m²</option>
                     <option>2 Dorms (1 suíte) · 66m²</option>
                   </select>
+                  <label style={parseStyle('display:flex;align-items:flex-start;gap:9px;font-size:12px;line-height:1.45;color:#8a949b;cursor:pointer;text-align:left;')}>
+                    <input ref={consentRef} type="checkbox" name="consentimento" required style={parseStyle('margin:2px 0 0;flex-shrink:0;width:auto;')} />
+                    <span>Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o Brisas do Japi, conforme a <a href="/lotus-privacidade" target="_top" style={parseStyle('color:inherit;text-decoration:underline;')}>Política de Privacidade da Lotus Brokers</a>. A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da VVC Construtora.</span>
+                  </label>
                   <Hoverable as="button" type="submit" baseStyle={parseStyle('margin-top:6px;background:#c8a45c;color:#152730;border:none;font-size:16px;font-weight:700;padding:16px;border-radius:100px;cursor:pointer;box-shadow:0 12px 28px rgba(200,164,92,.4);transition:transform .2s ease;')} hoverStyle={parseStyle('transform:translateY(-2px);')}>Quero receber as condições</Hoverable>
-                  <p style={parseStyle('font-size:11.5px;color:#8a949b;text-align:center;line-height:1.5;margin:2px 0 0;')}>Ao enviar, você concorda em ser contatado sobre o Brisas do Japi. Seus dados estão protegidos pela LGPD.</p>
+                  <p style={parseStyle('font-size:11.5px;color:#8a949b;text-align:center;line-height:1.5;margin:2px 0 0;')}>Seus dados estão protegidos pela LGPD.</p>
                 </div>
               </form>
             )}
@@ -701,7 +707,7 @@ export default function BrisasDoJapi({
               </div>
             </div>
           </div>
-          <p style={parseStyle('font-size:11.5px;line-height:1.7;margin:28px 0 0;max-width:none;')}>Incorporação registrada no 1º Oficial de Registro de Imóveis, Títulos e Documentos e Civil de Pessoa Jurídica da Comarca de Jundiaí/SP, no Livro nº 2 – Registro Geral, matrícula 173.538, em 17 de abril de 2023. As imagens aqui apresentadas são de caráter meramente ilustrativo, tendo como finalidade a divulgação do empreendimento para fins comerciais e estão sujeitas a alterações. O projeto será executado de acordo com o Memorial Descritivo. A vegetação que compõe o paisagismo é ilustrativa, apresenta porte adulto de referência e, na entrega do empreendimento, apresentará diferença de tamanho, pois será entregue em forma de mudas, conforme o projeto. A construtora reserva-se no direito de alterar as especificações deste material publicitário, prevalecendo as condições informadas no ato da venda e estabelecidas em contrato. CRECISP: 28693-J.</p>
+          <p style={parseStyle('font-size:11.5px;line-height:1.7;margin:28px 0 0;max-width:none;')}>Incorporação registrada no 1º Oficial de Registro de Imóveis de Jundiaí/SP. As imagens aqui apresentadas são de caráter meramente ilustrativo, tendo como finalidade a divulgação do empreendimento para fins comerciais e estão sujeitas a alterações. O projeto será executado de acordo com o Memorial Descritivo. A vegetação que compõe o paisagismo é ilustrativa, apresenta porte adulto de referência e, na entrega do empreendimento, apresentará diferença de tamanho, pois será entregue em forma de mudas, conforme o projeto. A construtora reserva-se no direito de alterar as especificações deste material publicitário, prevalecendo as condições informadas no ato da venda e estabelecidas em contrato. CRECISP: 28693-J.</p>
           <div style={parseStyle('margin-top:26px;font-size:12.5px;color:rgba(232,240,239,.45);')}>Uma realização VVC Construtora · © 2026 · Todos os direitos reservados.</div>
         </div>
       </footer>
