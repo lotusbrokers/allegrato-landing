@@ -7,7 +7,7 @@ import RodapeLotus from '@/components/RodapeLotus';
 
 // Metadata portada do <head> de authoria/index.html (paridade de SEO com o estático).
 export const metadata: Metadata = {
-  title: 'Authoria by Tebas | Apartamentos de 3 e 4 Suítes em Jundiaí, 137 a 211 m²',
+  title: 'Authoria by Tebas, apartamentos de 3 e 4 suítes, 137 a 211 m², em Jundiaí | Imobiliária Lotus Brokers',
   description:
     'Authoria by Tebas: alto padrão elevado ao estado da arte em Jundiaí. Apartamentos de 3 e 4 suítes, 137,39 a 211,91 m², 4 torres, lazer completo com piscina coberta, beach tennis, coworking e mais. Arquitetura HOCH e paisagismo Benedito Abbud. Agende sua visita ao decorado.',
   keywords:

@@ -814,6 +814,7 @@ body.menu-open .mobile-menu { opacity: 1; pointer-events: auto; }
 .form-card .consent { display: flex; gap: 10px; align-items: flex-start; margin: 6px 0 20px; }
 .form-card .consent input { margin-top: 3px; accent-color: var(--accent); }
 .form-card .consent label { font-size: 12px; color: var(--t-faint); line-height: 1.5; }
+.form-card .consent a { color: inherit; text-decoration: underline; }
 .form-card button[type=submit] { width: 100%; }
 .form-ok { display: none; text-align: center; padding: 30px 0; }
 .form-ok.show { display: block; animation: fade .6s var(--ease); }

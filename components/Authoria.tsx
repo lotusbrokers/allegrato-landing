@@ -460,6 +460,7 @@ export default function Authoria() {
           email: (form as any).email.value,
           tipologia: (form as any).tipologia.value,
         };
+        const consentimento = form.querySelector<HTMLInputElement>('input[name="consentimento"]');
         sendLead({
           name: data.nome,
           phone: data.telefone,
@@ -467,6 +468,7 @@ export default function Authoria() {
           source: 'landing_authoria',
           interest: 'Authoria by Tebas',
           message: data.tipologia,
+          ...(consentimento?.checked ? { consent: true, consentAt: new Date().toISOString() } : {}),
         });
         const msg =
           'Olá! Quero agendar uma visita ao Authoria by Tebas.%0A' +
@@ -1660,7 +1662,7 @@ export default function Authoria() {
               <div className="form-card" data-reveal="" style={{ '--rd': '.1s' } as React.CSSProperties}>
                 <form id="leadForm" noValidate>
                   <h3>Agende sua visita</h3>
-                  <p className="fsub">Preencha e nossa equipe entra em contato.</p>
+                  <p className="fsub">Preencha e um corretor da Lotus entra em contato.</p>
                   <div className="field">
                     <input type="text" name="nome" placeholder="Nome completo" required autoComplete="name" />
                   </div>
@@ -1677,10 +1679,16 @@ export default function Authoria() {
                     </select>
                   </div>
                   <div className="consent">
-                    <input type="checkbox" id="consent" required />
+                    <input type="checkbox" id="consent" name="consentimento" required />
                     <label htmlFor="consent">
-                      Autorizo o contato e o tratamento dos meus dados conforme a Política de
-                      Privacidade.
+                      Autorizo a Imobiliária Lotus Brokers, responsável por esta página e pelo atendimento, a
+                      entrar em contato comigo por telefone, e-mail ou WhatsApp sobre o Authoria by Tebas,
+                      conforme a{' '}
+                      <a href="/lotus-privacidade" target="_top">
+                        Política de Privacidade da Lotus Brokers
+                      </a>
+                      . A Lotus Brokers é imobiliária autorizada a comercializar os empreendimentos da Tebas
+                      Construtora e Incorporadora.
                     </label>
                   </div>
                   <button type="submit" className="btn btn-solid">
@@ -1691,7 +1699,7 @@ export default function Authoria() {
                   <div className="chk">✓</div>
                   <h3>Recebemos seu contato!</h3>
                   <p className="fsub" style={{ marginBottom: 0 }}>
-                    Em breve um de nossos consultores fala com você.
+                    Em breve um corretor da Lotus fala com você.
                   </p>
                 </div>
               </div>
@@ -1737,9 +1745,8 @@ export default function Authoria() {
           </div>
           <div className="ft-legal">
             <p>
-              Authoria by Tebas, Incorporação registrada conforme R.04, Matrícula 179.898, do 2º
-              Oficial de Registro de Imóveis, Títulos e Documentos e Civil de Pessoas Jurídicas da
-              Comarca de Jundiaí, em 18 de abril de 2023. Imagens preliminares e perspectivas
+              Authoria by Tebas. Incorporação registrada no 2º Oficial de Registro de Imóveis de
+              Jundiaí/SP. Imagens preliminares e perspectivas
               ilustradas, sujeitas a alterações sem aviso prévio. O paisagismo retratado reflete o porte
               adulto da vegetação. As áreas comuns serão entregues equipadas e decoradas conforme o
               Memorial Descritivo. O empreendimento só poderá ser comercializado após registro no
