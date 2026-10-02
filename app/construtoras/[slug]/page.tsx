@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import LotusHeader from '@/components/LotusHeader';
 import RodapeLotus from '@/components/RodapeLotus';
 import CardEmpreendimento from '@/components/CardEmpreendimento';
-import { getLancamentosList, isListItemApresentavel } from '@/lib/lancamentos';
+import { getLancamentosList, isListItemApresentavel, type LancamentoListItem } from '@/lib/lancamentos';
 import { agruparPorConstrutora, comCuradasSemLancamento, construtoraPorSlug } from '@/lib/construtoras-paginas';
 import { conteudoDaConstrutora, curadasSemLancamento, logoClaroDaConstrutora } from '@/lib/construtoras-conteudo';
 
@@ -81,6 +81,81 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
+/**
+ * Perguntas e respostas sobre os empreendimentos da construtora que a Lotus
+ * acompanha.
+ *
+ * Diferente do "Sobre", que só existe quando a Lotus envia o texto da empresa,
+ * isto sai dos próprios lançamentos: nome, bairro, cidade, fase e preço. Vale
+ * para toda construtora sem afirmar nada sobre ela que o portal não tenha como
+ * sustentar. Construtora com um empreendimento só mostrava pouco mais que o
+ * card (menos de 100 palavras na página), e página assim costuma ficar fora do
+ * Google.
+ *
+ * Pergunta sem dado para responder não entra.
+ */
+type Pergunta = {
+  pergunta: string;
+  /** Texto corrido: vai para o JSON-LD e para a tela quando não há `itens`. */
+  resposta: string;
+  /** Na tela, a primeira resposta vira lista com link para cada landing. */
+  itens?: { nome: string; href: string | null; detalhe: string }[];
+};
+
+const emLista = (nomes: string[]) =>
+  nomes.length <= 1 ? nomes.join('') : `${nomes.slice(0, -1).join(', ')} e ${nomes[nomes.length - 1]}`;
+
+function perguntasDaConstrutora(nome: string, lancamentos: LancamentoListItem[]): Pergunta[] {
+  if (lancamentos.length === 0) return [];
+  const perguntas: Pergunta[] = [];
+
+  const itens = lancamentos.map((l) => ({
+    nome: l.name,
+    href: l.href,
+    detalhe: [[l.neighborhood, l.city].filter(Boolean).join(', '), l.specs].filter(Boolean).join(' · '),
+  }));
+  perguntas.push({
+    pergunta: `Quais empreendimentos da ${nome} a Lotus acompanha?`,
+    resposta:
+      `${lancamentos.length === 1 ? 'Um empreendimento' : `${lancamentos.length} empreendimentos`}: ` +
+      itens.map((i) => (i.detalhe ? `${i.nome}, ${i.detalhe}` : i.nome)).join('; ') +
+      '.',
+    itens,
+  });
+
+  const comFase = lancamentos.filter((l) => l.stage);
+  if (comFase.length > 0) {
+    perguntas.push({
+      pergunta: `Em que fase estão os empreendimentos da ${nome}?`,
+      resposta: comFase.map((l) => `${l.name}: ${l.stage}`).join('. ') + '.',
+    });
+  }
+
+  const comPreco = lancamentos.filter((l) => l.price);
+  const semPreco = lancamentos.filter((l) => !l.price).map((l) => l.name);
+  perguntas.push({
+    pergunta: `Quanto custam os imóveis da ${nome}?`,
+    resposta: [
+      ...comPreco.map((l) => `${l.name}: ${l.price}.`),
+      semPreco.length === lancamentos.length
+        ? `Os valores são informados pelo especialista da Lotus, conforme a tabela vigente da ${nome}.`
+        : semPreco.length > 0
+          ? `Para ${emLista(semPreco)}, o valor é informado pelo especialista da Lotus, conforme a tabela vigente.`
+          : '',
+    ]
+      .filter(Boolean)
+      .join(' '),
+  });
+
+  perguntas.push({
+    pergunta: `Como falar com a Lotus sobre a ${nome}?`,
+    resposta:
+      'Pelo WhatsApp (11) 92614-3393 ou pelo formulário na página de cada empreendimento. O especialista do ' +
+      'Squad Lançamentos acompanha visitas, simulações de financiamento e propostas.',
+  });
+  return perguntas;
+}
+
 export default async function ConstrutoraPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const c = construtoraPorSlug(await todas(), slug);
@@ -116,9 +191,24 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
     })),
   };
 
+  const perguntas = perguntasDaConstrutora(c.nome, c.lancamentos);
+  const ldPerguntas =
+    perguntas.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: perguntas.map((p) => ({
+            '@type': 'Question',
+            name: p.pergunta,
+            acceptedAnswer: { '@type': 'Answer', text: p.resposta },
+          })),
+        }
+      : null;
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
+      {ldPerguntas && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldPerguntas) }} />}
       <LotusHeader active="lancamentos" />
 
       <main style={{ background: '#f7f2e8' }}>
@@ -283,6 +373,46 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
             </div>
           </div>
         </section>
+        )}
+
+        {/* ---------------- Perguntas ----------------
+            Sai dos lançamentos, como a seção acima (ver perguntasDaConstrutora).
+            Cada empreendimento citado leva para a própria landing. */}
+        {perguntas.length > 0 && (
+          <section style={{ padding: '0 32px 90px' }}>
+            <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+              <h2 style={{ fontFamily: "'Fraunces',serif", fontWeight: 300, fontSize: 'clamp(26px,3.2vw,38px)', color: '#15241c', lineHeight: 1.1, margin: '0 0 26px' }}>
+                Perguntas sobre a {c.nome}
+              </h2>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 760 }}>
+                {perguntas.map((p) => (
+                  <div key={p.pergunta}>
+                    <h3 style={{ fontFamily: "'Fraunces',serif", fontWeight: 400, fontSize: 20, color: '#15241c', lineHeight: 1.25, margin: '0 0 8px' }}>
+                      {p.pergunta}
+                    </h3>
+                    {p.itens ? (
+                      <ul style={{ margin: 0, paddingLeft: 20, display: 'flex', flexDirection: 'column', gap: 6, listStyle: 'disc' }}>
+                        {p.itens.map((i) => (
+                          <li key={i.nome} style={{ fontSize: 16.5, color: '#3f6249', fontWeight: 300, lineHeight: 1.6 }}>
+                            {i.href ? (
+                              <Link href={i.href} target="_top" style={{ color: '#15241c', fontWeight: 500, textDecoration: 'underline' }}>
+                                {i.nome}
+                              </Link>
+                            ) : (
+                              <strong style={{ color: '#15241c', fontWeight: 500 }}>{i.nome}</strong>
+                            )}
+                            {i.detalhe && ` · ${i.detalhe}`}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p style={{ fontSize: 16.5, color: '#3f6249', fontWeight: 300, lineHeight: 1.65, margin: 0 }}>{p.resposta}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
         )}
 
         {/* ---------------- CTA ---------------- */}
