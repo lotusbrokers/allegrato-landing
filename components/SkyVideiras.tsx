@@ -12,6 +12,7 @@
 import React, { useRef, useState } from 'react';
 import { parseStyle, useReveal, waHref } from '@/lib/dc-runtime';
 import { sendLead } from '@/lib/lead';
+import { SITE } from '@/lib/site';
 
 const WHATSAPP = '5511926143393';
 const EMP = 'SKY Videiras';
@@ -814,7 +815,7 @@ export default function SkyVideiras() {
                     Quero receber informações →
                   </button>
                   <p className="consent">
-                    Atendimento pela Imobiliária Lotus Brokers. CRECI [INSERIR CRECI].
+                    Atendimento pela Imobiliária Lotus Brokers. {SITE.creciPj}.
                   </p>
                 </form>
               </div>
@@ -851,7 +852,7 @@ export default function SkyVideiras() {
             </div>
           </div>
           <p className="legal">
-            Perspectivas artísticas, preliminares e meramente ilustrativas. As áreas comuns serão entregues equipadas e decoradas conforme Memorial Descritivo. Móveis, utensílios e itens de decoração são meramente ilustrativos. Metragens conforme boletário. Empreendimento sujeito a aprovação e registro de incorporação. Realização: SEBEL Empreendimentos. CRECI [INSERIR].
+            Perspectivas artísticas, preliminares e meramente ilustrativas. As áreas comuns serão entregues equipadas e decoradas conforme Memorial Descritivo. Móveis, utensílios e itens de decoração são meramente ilustrativos. Metragens conforme boletário. Empreendimento sujeito a aprovação e registro de incorporação. Realização: SEBEL Empreendimentos. Intermediação: {SITE.nome} · {SITE.creciPj}.
           </p>
         </div>
       </footer>
