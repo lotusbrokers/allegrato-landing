@@ -143,10 +143,11 @@ const CONTEUDO: Record<string, ConteudoConstrutora> = {
     ],
   },
 
-  // Texto e logo enviados pela Lotus em 08/09/2026. A chave é o slug do nome
-  // cadastrado no dashboard ("Auten Incorporadora"), e não o nome curto que o
-  // texto usa — é ele que forma a URL.
-  'auten-incorporadora': {
+  // Texto e logo enviados pela Lotus em 08/09/2026. A chave é o slug da URL,
+  // /construtoras/auten: o nome do dashboard ("Auten Incorporadora") é
+  // canonicalizado para "Auten" em lib/construtoras.ts. Até 02/10/2026 a chave
+  // era 'auten-incorporadora', e o texto não aparecia na página.
+  auten: {
     logo: '/construtoras/auten.png',
     logoNegativo: '/construtoras/auten-negativo.png',
     paragrafos: [

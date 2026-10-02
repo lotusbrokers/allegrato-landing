@@ -21,6 +21,7 @@
 
 import { useEffect, useRef } from 'react';
 import { sendLead } from '@/lib/lead';
+import { SITE } from '@/lib/site';
 
 /* >>> CONFIGURE AQUI <<< — troque pelo WhatsApp da sua imobiliária */
 const WPP_NUMBER = '5511926143393'; // formato internacional, somente dígitos
@@ -1061,7 +1062,7 @@ export default function AutenJundiai() {
               <h4>Atendimento</h4>
               <a className="js-wpp" href="#" data-msg="Olá! Quero informações sobre o Auten Jundiaí.">WhatsApp de vendas</a>
               <a href="#contato">Receber material</a>
-              <p style={{ marginTop: '14px', color: '#8a7a66' }}><strong style={{ color: '#b9a892' }}>Lotus Brokers</strong><br />CRECI 21829-J<br />(11) 92614-3393<br />contato@lotusbrokers.com.br</p>
+              <p style={{ marginTop: '14px', color: '#8a7a66' }}><strong style={{ color: '#b9a892' }}>Lotus Brokers</strong><br />{SITE.creciPj}<br />(11) 92614-3393<br />contato@lotusbrokers.com.br</p>
             </div>
           </div>
           <p className="legal">O &quot;Auten Jundiaí&quot; é um empreendimento imobiliário aprovado pela Prefeitura Municipal de Jundiaí/SP, através da Lei nº 9.321 de 2019, pelo Processo de Aprovação SAEPRO 2025/355. Incorporação registrada no 1º Oficial de Registro de Imóveis de Jundiaí/SP, em conformidade com a Lei nº 4.591/64. Todas as imagens deste material são meramente ilustrativas, podendo sofrer alterações durante a compatibilização técnica. A vegetação que compõe o paisagismo é ilustrativa e representa o porte adulto de referência das espécies. O projeto será executado de acordo com o memorial descritivo.</p>

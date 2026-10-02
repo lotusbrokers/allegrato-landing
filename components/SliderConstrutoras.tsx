@@ -45,7 +45,7 @@ const SLIDES: Slide[] = [
   },
   {
     nome: 'Auten Incorporadora',
-    href: '/construtoras/auten-incorporadora',
+    href: '/construtoras/auten',
     img: '/construtoras/slides/auten-incorporadora.jpg',
     legenda: 'Empreendimento da Auten Incorporadora',
   },
