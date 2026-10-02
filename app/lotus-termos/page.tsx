@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import { CONSENT_INLINE_SCRIPT } from '@/lib/consent-inline';
-import { footerLegalLine } from '@/lib/site';
+import { SITE, footerLegalLine } from '@/lib/site';
+
+/** "CNPJ 67.767.385/0001-98" → "67.767.385/0001-98": no texto, o rótulo vem antes do valor. */
+const semRotulo = (valor: string) => valor.replace(/^\S+\s+/, '');
 
 // Metadata portado do <head> do fonte estático (lotus-termos/index.html).
 // TODO go-live: trocar canonical/og:url para o domínio final e remover noindex.
@@ -101,15 +104,15 @@ export default function LotusTermosPage() {
           empresa:
         </p>
         <p>
-          Razão social: [⬜]
+          Razão social: {SITE.razaoSocial}
           <br />
           Nome fantasia: Lotus Brokers
           <br />
-          CNPJ: [⬜]
+          CNPJ: {semRotulo(SITE.cnpj)}
           <br />
-          CRECI-PJ: [⬜]
+          CRECI-PJ: {semRotulo(SITE.creciPj)}
           <br />
-          Endereço: [⬜]
+          Endereço: {SITE.endereco}
           <br />
           Canal de atendimento:{' '}
           <a href="mailto:atendimento@lotusbrokers.com.br">
