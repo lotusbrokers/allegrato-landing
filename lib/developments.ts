@@ -54,5 +54,12 @@ export const developmentsFallback: DevelopmentCard[] = [
   { name: 'Best View Residence', location: 'Swiss Park · Campinas', stage: 'Lançamento', builder: 'F A Oliva', specs: '62–78 m² · 2 e 3 dorms com suíte', price: 'Consultar valor', exclusive: false, img: '/best-view-residence/a012.jpg', href: '/best-view-residence' },
   { name: 'Maitá Residencial', location: 'Vila Marlene · Jundiaí', stage: 'Em obras', builder: 'Mac Lucer', specs: '63–80 m² · 2 e 3 dorms com suíte', price: 'Consultar valor', exclusive: false, img: '/maita/a007.jpg', href: '/maita' },
   { name: 'Odeon Residencial', location: 'Portal do Paraíso II · Jundiaí', stage: 'Lançamento', builder: 'F A Oliva', specs: '95,85 e 112,3 m² · até 3 dorms', price: 'Consultar valor', exclusive: false, img: '/odeon/a011.jpg', href: '/odeon' },
+  // Vila Triunfo: landing publicada em 12/08/2026 (public/vila-triunfo) que
+  // nunca ganhou card. Sem linha no dashboard e fora desta lista, nenhuma
+  // página do site levava até ela. Dados tirados da própria página: Jardim
+  // Primavera, Itupeva; em construção; 2 dorms com suíte de 66 a 89,9 m²;
+  // realização F A Oliva. A foto é a mesma fachada que a landing carrega do
+  // site da F A Oliva.
+  { name: 'Vila Triunfo', location: 'Jardim Primavera · Itupeva', stage: 'Em obras', builder: 'F A Oliva', specs: '66–89,9 m² · 2 dorms com suíte · varanda grill', price: 'Consultar valor', exclusive: false, img: 'https://faoliva.com.br/wp-content/uploads/2023/12/09-Fachada-Diurna-1-scaled-1-1170x675.webp', href: '/vila-triunfo' },
   { name: 'SKY Videiras', location: 'Quintas das Videiras · Jundiaí', stage: 'Em obras', builder: 'SEBEL', specs: '56,96–83,31 m² · lazer no rooftop', price: 'Consultar valor', exclusive: false, img: '/sky-videiras/a001.jpg', href: '/sky-videiras' },
 ];
