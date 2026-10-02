@@ -4,25 +4,47 @@ import Script from 'next/script';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { CONSENT_EVENT, readConsent, type ConsentValue } from '@/lib/consent';
+import { DOMINIO_OFICIAL } from '@/lib/indexacao.mjs';
 
-// Medição do site (Parte 1 do briefing 8h): GTM + GA4 (via GTM) + Clarity.
-// IDs vêm de env NEXT_PUBLIC_*; sem ID o bloco simplesmente não renderiza,
-// então dev/preview ficam limpos e o deploy liga tudo só pelas envs.
+// Medição do site (Parte 1 do briefing 8h): GTM + GA4 + Clarity. O GA4 vai
+// direto pelo gtag.js desde 02/10/2026 (ver GA4_ID); antes ia pelo GTM.
+// IDs do GTM, Clarity e Pixel vêm de env NEXT_PUBLIC_*; sem ID o bloco
+// simplesmente não renderiza, então dev/preview ficam limpos e o deploy liga
+// tudo só pelas envs.
 //
 // LGPD / Consent Mode v2: o script inline abaixo roda antes do GTM e declara
 // analytics_storage/ad_storage = denied por padrão (ou granted, se já existe
 // cookie lotus_consent=all). CookieConsent faz o `consent update` no aceite.
 // Clarity e Meta Pixel não têm consent mode: só carregam com consentimento 'all'.
 //
-// GA4 em SPA: o GTM não vê a navegação client-side do Next. Cada troca de rota
-// faz push de `page_view` no dataLayer. Na tag GA4 Configuration do GTM, desligar
-// "Send a page view event when this configuration loads" e criar uma tag de
-// evento GA4 `page_view` disparada pelo Custom Event `page_view` (senão a
-// primeira página conta em dobro).
+// GA4 em SPA, no tempo em que ia pelo GTM: o GTM não vê a navegação client-side
+// do Next, então cada troca de rota faz push de `page_view` no dataLayer, que
+// dispara o evento GA4 `page_view` do GTM. Com o GA4 fora do GTM (ver GA4_ID),
+// esse push não alimenta mais nada e o PageViews pode sair.
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID;
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+
+// GA4 direto pelo gtag.js, pedido da Lotus em 02/10/2026: propriedade
+// G-ELYJJMHD5N. No Google, ela tem a G-QBVBX74XEY (a que o GTM carregava) como
+// tag conectada, e a Lotus decidiu manter assim: esta tag alimenta as duas,
+// inclusive nas landings estáticas. Por isso o GA4 sai do GTM (tag do Google
+// G-QBVBX74XEY e evento page_view); enquanto estiver lá, as páginas do Next
+// contam em dobro na G-QBVBX74XEY. Para conferir a ligação: a tag publicada em
+// googletagmanager.com/gtag/js?id=G-ELYJJMHD5N cita a G-QBVBX74XEY.
+// Vai no HTML como o snippet do Google (biblioteca no <head>, config logo depois
+// do consent default), e não por next/script, que só injeta depois da hidratação:
+// assim o "Testar" das instruções de instalação do GA4 encontra a tag na página.
+// O ID fica no código, e não em env, porque as landings estáticas de public/
+// (que não passam por este layout) usam a mesma tag, onde env não chega. Ao
+// trocar o ID, trocar aqui, em public/medicao.js e no <head> das landings.
+// Só mede no domínio oficial: fora dele a biblioteca carrega, mas sem o config
+// não envia nada (`next dev` e `next start` local não viram visita).
+// Troca de rota no cliente: o próprio GA4 conta a página vista, pela medição
+// otimizada do fluxo ("alterações de página com base no histórico", ligada).
+const GA4_ID = 'G-ELYJJMHD5N';
+const GA4_HOST = new URL(DOMINIO_OFICIAL).hostname;
 
 declare global {
   interface Window {
@@ -53,6 +75,14 @@ gtag('consent','default',{
   ad_personalization: 'denied',
   wait_for_update: 500
 });
+`;
+
+// gtag() e o consent default vêm do consentInit, que roda antes deste script.
+const ga4Config = `
+if (location.hostname === '${GA4_HOST}') {
+  gtag('js', new Date());
+  gtag('config', '${GA4_ID}');
+}
 `;
 
 function PageViews() {
@@ -113,18 +143,24 @@ fbq('init','${META_PIXEL_ID}');fbq('track','PageView');`}
 }
 
 export default function Analytics() {
-  if (!GTM_ID) return null;
   return (
     <>
       <script dangerouslySetInnerHTML={{ __html: consentInit }} />
-      <Script id="gtm" strategy="afterInteractive">
-        {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+      {/* O React leva este script async para o <head> no HTML do servidor. */}
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`} />
+      <script dangerouslySetInnerHTML={{ __html: ga4Config }} />
+      {GTM_ID && (
+        <>
+          <Script id="gtm" strategy="afterInteractive">
+            {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
 var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;
 j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`}
-      </Script>
-      <PageViews />
-      <Clarity />
-      <MetaPixel />
+          </Script>
+          <PageViews />
+          <Clarity />
+          <MetaPixel />
+        </>
+      )}
     </>
   );
 }
