@@ -20,6 +20,7 @@
 import React, { useCallback, useEffect, useState, type CSSProperties } from 'react';
 import { parseStyle, waHref } from '@/lib/dc-runtime';
 import { sendLead } from '@/lib/lead';
+import { SITE } from '@/lib/site';
 
 const WA_NUMBER = '5511926143393';
 const waMain = waHref(
@@ -1473,7 +1474,7 @@ export default function DoppioJundiai() {
               </div>
             </div>
             <p style={parseStyle('font-size:10.5px;line-height:1.7;color:rgba(240,230,214,.36);margin:26px 0 0;max-width:none')}>
-              Incorporação registrada no 1º Oficial de Registro de Imóveis de Jundiaí/SP. MARINO JUNDIAI EMPREENDIMENTO IMOBILIARIO SPE LTDA, CNPJ nº 51.854.681/0001-96. Imagens e perspectivas são meramente ilustrativas, podendo sofrer alteração sem aviso prévio, inclusive quanto à forma, à cor, à textura e ao tamanho. Os acabamentos, a quantidade de móveis, os equipamentos e os utensílios serão entregues conforme o memorial descritivo. O porte da vegetação na entrega do empreendimento será de acordo com o projeto paisagístico e poderá apresentar diferença de tamanho. Comercialização: REM Consultoria e Vendas, CRECI J-33208 e Mediterrâneo Negócios Imobiliários Ltda CRECI 032134-J. MATERIAL PRELIMINAR, SUJEITO A ALTERAÇÕES. Produzido em 05/2026.
+              Incorporação registrada no 1º Oficial de Registro de Imóveis de Jundiaí/SP. MARINO JUNDIAI EMPREENDIMENTO IMOBILIARIO SPE LTDA, CNPJ nº 51.854.681/0001-96. Imagens e perspectivas são meramente ilustrativas, podendo sofrer alteração sem aviso prévio, inclusive quanto à forma, à cor, à textura e ao tamanho. Os acabamentos, a quantidade de móveis, os equipamentos e os utensílios serão entregues conforme o memorial descritivo. O porte da vegetação na entrega do empreendimento será de acordo com o projeto paisagístico e poderá apresentar diferença de tamanho. Comercialização: {SITE.nome} · {SITE.creciPj}. MATERIAL PRELIMINAR, SUJEITO A ALTERAÇÕES. Produzido em 05/2026.
             </p>
             <div style={parseStyle('font-size:11px;color:rgba(240,230,214,.3);margin-top:20px')}>
               © 2026 Doppio Jundiaí · Realização Construtora Marino & REM · Página por Imobiliária Lotus Brokers.
