@@ -14,7 +14,10 @@ export const metadata: Metadata = {
     'Authoria by Tebas, apartamento Jundiaí, alto padrão Jundiaí, 4 suítes Jundiaí, 3 suítes, lançamento Jundiaí, Jardim Santa Teresa, Tebas, apartamento de luxo, imóvel Jundiaí',
   authors: [{ name: 'Tebas' }],
   robots: 'index, follow',
-  alternates: { canonical: 'https://authoria.com.br/' },
+  // Canonical na própria página desde 02/10/2026. Antes apontava para o site da
+  // construtora, e o Google tratava esta página como cópia daquela: ela não
+  // aparecia como página da Lotus. Decisão da Lotus: todas as landings no Google.
+  alternates: { canonical: 'https://www.lotusbrokers.com.br/authoria' },
   openGraph: {
     type: 'website',
     title: 'Authoria by Tebas | Alto padrão em Jundiaí, 3 e 4 suítes',
