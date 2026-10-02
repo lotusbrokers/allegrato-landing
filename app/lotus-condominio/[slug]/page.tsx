@@ -11,6 +11,7 @@ import {
 } from '@/lib/condominios';
 import { getImoveisDoCondominio } from '@/lib/imoveis';
 import { getLancamentosList, isListItemApresentavel, type LancamentoListItem } from '@/lib/lancamentos';
+import { descricaoComNome } from '@/lib/descricao-com-nome';
 
 // Rota dinâmica /lotus-condominio/[slug] — lê cada condomínio do Supabase.
 //
@@ -116,9 +117,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const cidade = cond.cidade || 'Jundiaí e Itupeva';
   const capa = (cond.fotos?.find((f) => f.isCapa) ?? cond.fotos?.[0])?.url;
   const title = `${cond.nome}, ${cidade}, guia do condomínio e imóveis | Lotus Brokers`;
-  const description =
+  // Com o nome na frente quando o texto do dashboard não o cita: fases do mesmo
+  // condomínio chegaram com a mesma descrição (ver lib/descricao-com-nome.ts).
+  const description = descricaoComNome(
     cond.descricao_site?.trim() ||
-    `Tudo sobre morar no ${cond.nome}, ${cidade}: estrutura, localização e imóveis disponíveis com o especialista da Lotus.`;
+      `Tudo sobre morar no ${cond.nome}, ${cidade}: estrutura, localização e imóveis disponíveis com o especialista da Lotus.`,
+    cond.nome,
+  );
   // Canonical sempre no endereço novo, mesmo quando se chegou pelo UUID: duas
   // URLs para o mesmo texto é o que o canonical existe para evitar.
   const url = `${SITE}/lotus-condominio/${slugCondominio(cond.nome)}`;
