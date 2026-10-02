@@ -17,23 +17,26 @@ export const metadata: Metadata = {
     'Gran Ville Santo Angelo, loteamento Itupeva, lotes Itupeva, bairro planejado, novo urbanismo, GP Desenvolvimento Urbano, lotes alto padrão, condomínio Itupeva, Jundiaí, Mata Atlântica',
   authors: [{ name: 'GP Desenvolvimento Urbano' }],
   robots: 'index, follow',
-  alternates: { canonical: 'https://granvillesantoangelo.com.br/' },
+  // Canonical na própria página desde 02/10/2026. Antes apontava para o site da
+  // construtora, e o Google tratava esta página como cópia daquela: ela não
+  // aparecia como página da Lotus. Decisão da Lotus: todas as landings no Google.
+  alternates: { canonical: 'https://www.lotusbrokers.com.br/gran-ville-santo-angelo' },
   openGraph: {
     type: 'website',
     locale: 'pt_BR',
-    siteName: 'Gran Ville Santo Angelo',
+    siteName: 'Lotus Brokers',
     title: 'Gran Ville Santo Angelo, Loteamento de Alto Padrão em Itupeva-SP',
     description:
       'O novo bairro planejado em Itupeva. 450 mil m², 200 mil m² de Mata Atlântica preservada, clube privativo e lotes a partir de 360 m².',
-    images: ['img/hero-portaria.jpg'],
-    url: 'https://granvillesantoangelo.com.br/',
+    images: ['/gran-ville-santo-angelo/a038.jpg'],
+    url: 'https://www.lotusbrokers.com.br/gran-ville-santo-angelo',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Gran Ville Santo Angelo, Itupeva-SP',
     description:
       'O novo bairro planejado em Itupeva. Novo urbanismo, clube privativo e Mata Atlântica preservada.',
-    images: ['img/hero-portaria.jpg'],
+    images: ['/gran-ville-santo-angelo/a038.jpg'],
   },
 };
 
