@@ -20,10 +20,16 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 const indexavel = siteIndexavel();
 
 // Verificação de propriedade no Google Search Console e no Bing Webmaster Tools
-// pelo método da meta tag: o token que cada painel mostra entra nas envs do
-// deploy e o <meta> só é emitido quando a env existe. Alternativa ao registro
-// TXT no DNS, que não depende de deploy. Lidas no build, como as demais.
-const verificacaoGoogle = process.env.GOOGLE_SITE_VERIFICATION?.trim();
+// pelo método da meta tag. O token do Google foi enviado pela Lotus em
+// 02/10/2026 e é público por natureza: vai no HTML de toda página. A env
+// GOOGLE_SITE_VERIFICATION, se existir no deploy, tem precedência, para trocar o
+// token sem mexer no código. O do Bing só entra pela env. Lidas no build.
+//
+// A tag verifica a propriedade "Prefixo do URL". A propriedade "Domínio" do
+// Search Console só aceita o registro TXT no DNS (hoje na Locaweb), com o mesmo
+// valor: google-site-verification=<token>.
+const TOKEN_GOOGLE = '2apuTfimrWRrWw9IY4vQTQgR7WzvE4Q1fcuR3DvMHbE';
+const verificacaoGoogle = process.env.GOOGLE_SITE_VERIFICATION?.trim() || TOKEN_GOOGLE;
 const verificacaoBing = process.env.BING_SITE_VERIFICATION?.trim();
 
 export const metadata: Metadata = {
