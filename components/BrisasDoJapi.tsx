@@ -24,6 +24,7 @@ import React, {
 import { p34, p49, p52, p66 } from '@/app/brisas-do-japi/plantas';
 import Link from 'next/link';
 import { sendLead } from '@/lib/lead';
+import { SITE } from '@/lib/site';
 import CtaSimulacao from './CtaSimulacao';
 
 /* ------------------------------------------------------------------ */
@@ -707,7 +708,7 @@ export default function BrisasDoJapi({
               </div>
             </div>
           </div>
-          <p style={parseStyle('font-size:11.5px;line-height:1.7;margin:28px 0 0;max-width:none;')}>Incorporação registrada no 1º Oficial de Registro de Imóveis de Jundiaí/SP. As imagens aqui apresentadas são de caráter meramente ilustrativo, tendo como finalidade a divulgação do empreendimento para fins comerciais e estão sujeitas a alterações. O projeto será executado de acordo com o Memorial Descritivo. A vegetação que compõe o paisagismo é ilustrativa, apresenta porte adulto de referência e, na entrega do empreendimento, apresentará diferença de tamanho, pois será entregue em forma de mudas, conforme o projeto. A construtora reserva-se no direito de alterar as especificações deste material publicitário, prevalecendo as condições informadas no ato da venda e estabelecidas em contrato. CRECISP: 28693-J.</p>
+          <p style={parseStyle('font-size:11.5px;line-height:1.7;margin:28px 0 0;max-width:none;')}>Incorporação registrada no 1º Oficial de Registro de Imóveis de Jundiaí/SP. As imagens aqui apresentadas são de caráter meramente ilustrativo, tendo como finalidade a divulgação do empreendimento para fins comerciais e estão sujeitas a alterações. O projeto será executado de acordo com o Memorial Descritivo. A vegetação que compõe o paisagismo é ilustrativa, apresenta porte adulto de referência e, na entrega do empreendimento, apresentará diferença de tamanho, pois será entregue em forma de mudas, conforme o projeto. A construtora reserva-se no direito de alterar as especificações deste material publicitário, prevalecendo as condições informadas no ato da venda e estabelecidas em contrato. Intermediação: {SITE.nome} · {SITE.creciPj}.</p>
           <div style={parseStyle('margin-top:26px;font-size:12.5px;color:rgba(232,240,239,.45);')}>Uma realização VVC Construtora · © 2026 · Todos os direitos reservados.</div>
         </div>
       </footer>
