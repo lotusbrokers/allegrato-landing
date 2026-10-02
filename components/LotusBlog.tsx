@@ -148,7 +148,7 @@ const NOISE_BG =
 
 const WHATSAPP_DEFAULT = '5511926143393';
 
-import { POSTS, categoriasComArtigo, hrefDoArtigo, type Post } from '@/lib/blog-posts';
+import { POSTS, categoriasComArtigo, hrefDoArtigo, relacionados, type Post } from '@/lib/blog-posts';
 
 /* Estilos de chip (strings literais do fonte). */
 const chipOn =
@@ -230,7 +230,7 @@ export default function LotusBlog({
     style: cat === c.id ? chipOn : chipOff,
   }));
 
-  const related = art ? posts.filter((p) => p.id !== art.id).slice(0, 3) : [];
+  const related = art ? relacionados(posts, art) : [];
 
   const newsNotDone = !newsDone;
 

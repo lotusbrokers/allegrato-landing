@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { CATEGORIAS_BLOG, POSTS, hrefDoArtigo } from './blog-posts.ts';
+import { CATEGORIAS_BLOG, POSTS, hrefDoArtigo, relacionados } from './blog-posts.ts';
 
 /**
  * Invariantes da lista de artigos.
@@ -73,4 +73,17 @@ test('o id de todo artigo serve de URL', () => {
     assert.match(p.id, /^[a-z0-9]+(?:-[a-z0-9]+)*$/, `"${p.id}" não serve de endereço: use minúsculas, números e hífens`);
     assert.equal(hrefDoArtigo(p.id), `/lotus-blog/${p.id}`);
   }
+});
+
+test('"Continue lendo" traz três outros artigos sem repetir, e todo artigo recebe link de pelo menos dois', () => {
+  const recebidos = new Map(POSTS.map((p) => [p.id, 0]));
+  for (const p of POSTS) {
+    const r = relacionados(POSTS, p);
+    assert.equal(r.length, Math.min(3, POSTS.length - 1), `${p.id}: ${r.length} relacionados`);
+    assert.ok(!r.some((x) => x.id === p.id), `${p.id} aparece nos próprios relacionados`);
+    assert.equal(new Set(r.map((x) => x.id)).size, r.length, `${p.id} tem relacionado repetido`);
+    for (const x of r) recebidos.set(x.id, (recebidos.get(x.id) ?? 0) + 1);
+  }
+  const poucos = [...recebidos].filter(([, n]) => n < 2).map(([id]) => id);
+  assert.deepEqual(poucos, [], 'artigos com menos de dois links: ' + poucos.join(', '));
 });

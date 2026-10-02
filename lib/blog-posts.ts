@@ -84,14 +84,120 @@ export function hrefDoArtigo(id: string): string {
   return `/lotus-blog/${id}`;
 }
 
+/**
+ * Os artigos de "Continue lendo", no fim de cada artigo.
+ *
+ * Até 02/10/2026 eram sempre os três mais recentes. Os mais antigos só
+ * recebiam link da listagem, e o Google os via como páginas soltas, que ele
+ * rastreia por último. Agora entram o vizinho de cada lado na ordem da lista e
+ * o artigo mais próximo da mesma categoria: todo artigo recebe link de pelo
+ * menos dois outros, e quem lê continua no assunto.
+ */
+export function relacionados(posts: Post[], atual: Post, quantos = 3): Post[] {
+  const i = posts.findIndex((p) => p.id === atual.id);
+  if (i < 0) return posts.filter((p) => p.id !== atual.id).slice(0, quantos);
+
+  const escolhidos: Post[] = [];
+  const inclui = (p: Post | undefined) => {
+    if (p && p.id !== atual.id && !escolhidos.includes(p)) escolhidos.push(p);
+  };
+  const vizinho = (passo: number) => posts[(((i + passo) % posts.length) + posts.length) % posts.length];
+  const mesmaCategoria = posts
+    .map((p, k) => ({ p, distancia: Math.abs(k - i) }))
+    .filter(({ p }) => p.cat === atual.cat && p.id !== atual.id)
+    .sort((a, b) => a.distancia - b.distancia)[0]?.p;
+
+  inclui(vizinho(1));
+  inclui(vizinho(-1));
+  inclui(mesmaCategoria);
+  for (let passo = 2; escolhidos.length < quantos && passo < posts.length; passo++) {
+    inclui(vizinho(passo));
+    inclui(vizinho(-passo));
+  }
+  return escolhidos.slice(0, quantos);
+}
+
 // Exportado para a home consumir os destaques (LotusHome importa e mostra os
 // três primeiros). Antes a home mantinha uma lista própria de posts escrita à
 // mão, que envelheceu: títulos que não existiam mais no blog e nenhuma capa.
 export const POSTS: Post[] = [
   /* ------------------------------------------------------------------
-   * Enviado pela Lotus em 29/09/2026, para sair no mesmo dia.
+   * Enviado pela Lotus em 01/10/2026, para sair no mesmo dia.
    *
    * Primeiro da lista, e por isso o novo destaque da capa do blog.
+   *
+   * NÚMEROS. Conferidos antes de publicar: o IPS Brasil 2026 saiu em
+   * 20/05/2026, com Jundiaí em 2º (71,79 pontos) e em 1º em Fundamentos do
+   * Bem-Estar (80,16), mais 82,53 e 52,69 nas outras duas dimensões. Os
+   * números de saúde, educação e saneamento são os que a Prefeitura divulgou
+   * com o resultado; as áreas verdes (5,5 a 6 milhões de m²) e o milhão de m²
+   * do Parque da Cidade com o Mundo das Crianças, da DAE, também conferem.
+   * Reproduzidos como a Lotus enviou.
+   *
+   * Ajustes de forma, os mesmos dos lotes anteriores: a meta description
+   * virando `excerpt` e a marca grafada "Lotus Brokers", sem acento, como
+   * no resto do site.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'jundiai-segunda-melhor-cidade-qualidade-de-vida', cat: 'Cidade', date: 'Out 2026', publicadoEm: '2026-10-01', read: '6 min', img: '/blog/jundiai-ips-2026.jpg', slot: 'blog-jundiai-ips-2026', title: 'Jundiaí é a 2ª melhor cidade do Brasil em qualidade de vida: entenda por que o município se destaca', excerpt: 'Jundiaí é a 2ª melhor cidade do Brasil em qualidade de vida, segundo o IPS 2026. Veja os indicadores de bem-estar, saúde, educação e infraestrutura.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'O IPS Brasil 2026, divulgado em maio, colocou Jundiaí em 2º lugar em qualidade de vida entre os 5.570 municípios do país, com 71,79 pontos, e em 1º na dimensão Fundamentos do Bem-Estar, com 80,16. Saúde, educação, saneamento e áreas verdes ajudam a explicar o resultado.',
+    body: [
+      { titulo: 'Jundiaí ganha destaque nacional em qualidade de vida' },
+      'Jundiaí acaba de conquistar mais um reconhecimento nacional que coloca o município em evidência quando o assunto é qualidade de vida no Brasil.',
+      'Segundo o Índice de Progresso Social (IPS) Brasil 2026, divulgado em maio, Jundiaí foi apontada como a 2ª melhor cidade do Brasil em qualidade de vida e alcançou a 1ª colocação nacional na dimensão “Fundamentos do Bem-Estar”.',
+      'O levantamento considera os 5.570 municípios brasileiros e utiliza 57 indicadores sociais e ambientais distribuídos em três grandes dimensões: Necessidades Humanas Básicas, Fundamentos do Bem-Estar e Oportunidades.',
+      'Para quem já mora na cidade ou está pesquisando onde morar em Jundiaí, o resultado chama atenção porque qualidade de vida envolve muito mais do que desenvolvimento econômico. Saúde, educação, saneamento, infraestrutura, meio ambiente e acesso a serviços também fazem parte dessa equação.',
+      { titulo: 'Jundiaí lidera o Brasil em Fundamentos do Bem-Estar' },
+      'Um dos principais destaques do município no levantamento foi justamente a dimensão relacionada aos Fundamentos do Bem-Estar.',
+      'Jundiaí alcançou 80,16 pontos nesse indicador e ficou em primeiro lugar nacional. No resultado geral do IPS, a cidade registrou 71,79 pontos.',
+      'O município também apresentou 82,53 pontos em Necessidades Humanas Básicas e 52,69 pontos em Oportunidades.',
+      'Esses números ajudam a mostrar que a avaliação considera diferentes aspectos da vida cotidiana da população, e não apenas indicadores econômicos.',
+      { titulo: 'Saúde é um dos pontos avaliados' },
+      'Entre os fatores que ajudam a explicar o desempenho de Jundiaí está a área da saúde.',
+      'De acordo com a Prefeitura, a cobertura da Atenção Primária passou de 46,3% em 2021 para 65,2% em 2025, ampliando o acesso da população aos serviços básicos de saúde.',
+      'O município também vem avançando na descentralização dos atendimentos, com novas unidades e equipamentos de saúde em diferentes regiões.',
+      'Para uma cidade que vem crescendo, a disponibilidade e a proximidade dos serviços públicos são fatores importantes quando se fala em qualidade de vida e planejamento urbano.',
+      { titulo: 'Educação também contribui para o resultado' },
+      'Outro indicador de destaque é a educação.',
+      'Jundiaí registra 97,98% de alfabetização entre a população com 15 anos ou mais e 95% entre crianças de até 8 anos, segundo os dados apresentados pela Prefeitura com base nos indicadores considerados no levantamento.',
+      'O desempenho reforça a importância da educação como um dos componentes relacionados ao desenvolvimento humano e às oportunidades oferecidas aos moradores.',
+      { titulo: 'Saneamento e infraestrutura fazem diferença' },
+      'Nem sempre os fatores que mais impactam a qualidade de vida são percebidos no dia a dia, mas o saneamento está entre eles.',
+      'Jundiaí apresenta 99,65% de cobertura de abastecimento de água, 99,19% de coleta e tratamento de esgoto e 100% de coleta de resíduos sólidos, de acordo com a Prefeitura.',
+      'A DAE Jundiaí também destaca que os investimentos em água e esgoto fazem parte de um planejamento para acompanhar o crescimento do município e garantir segurança hídrica e qualidade dos serviços.',
+      'Na prática, infraestrutura urbana, saneamento e serviços básicos são elementos fundamentais para quem busca uma cidade para viver, criar uma família ou investir em um imóvel.',
+      { titulo: 'Áreas verdes e contato com a natureza' },
+      'Outro diferencial de Jundiaí está relacionado ao meio ambiente.',
+      'Segundo informações divulgadas pela Prefeitura, o município possui entre 5,5 e 6 milhões de metros quadrados de áreas verdes urbanas, distribuídas entre parques, praças, jardins e avenidas arborizadas.',
+      'A cidade também conta com espaços de lazer e preservação ambiental, como o Parque da Cidade e o Mundo das Crianças, administrados pela DAE Jundiaí. Juntos, os dois espaços somam mais de 1 milhão de metros quadrados.',
+      'Para famílias que procuram onde morar em Jundiaí, a presença de áreas verdes e opções de lazer pode ser um fator relevante na escolha do bairro e do imóvel.',
+      { titulo: 'O que esse reconhecimento significa para quem quer morar em Jundiaí?' },
+      'O resultado do IPS ajuda a reforçar uma característica que vem colocando Jundiaí no radar de pessoas que procuram uma cidade para morar no interior de São Paulo.',
+      'A combinação entre infraestrutura, serviços, educação, saúde, saneamento, áreas verdes e oportunidades contribui para tornar o município uma alternativa para diferentes perfis de moradores.',
+      'Além disso, Jundiaí possui localização estratégica no estado de São Paulo, com acesso a importantes rodovias e proximidade da capital paulista e de outras cidades da região.',
+      'Por isso, para quem está avaliando uma mudança, a pergunta deixa de ser apenas “qual imóvel comprar?” e passa a incluir também “qual cidade oferece a estrutura que eu procuro para viver?”',
+      'Nesse contexto, os indicadores de qualidade de vida podem ser uma informação importante na tomada de decisão.',
+      { titulo: 'Qualidade de vida também influencia o mercado imobiliário' },
+      'O reconhecimento nacional também pode contribuir para aumentar a visibilidade de Jundiaí entre pessoas que pesquisam imóveis na cidade.',
+      'Quem procura um imóvel geralmente avalia diversos fatores: localização, preço, tamanho, condomínio, infraestrutura do bairro, acesso a serviços e mobilidade.',
+      'Mas existe um elemento que engloba todos eles: a qualidade de vida proporcionada pela região onde o imóvel está localizado.',
+      'Por isso, informações sobre desenvolvimento urbano, infraestrutura, educação, saúde, áreas verdes e serviços públicos podem ajudar compradores e investidores a compreender melhor o contexto de cada região da cidade.',
+      'Para o mercado imobiliário, esse tipo de indicador também ajuda a mostrar que a escolha de um imóvel está diretamente relacionada à escolha de um estilo de vida.',
+      { titulo: 'Jundiaí entre as cidades que se destacam no Brasil' },
+      'O resultado do IPS Brasil 2026 coloca Jundiaí em uma posição de destaque nacional.',
+      'A cidade alcançou 71,79 pontos no índice geral, ficou em 2º lugar entre os municípios brasileiros em qualidade de vida e liderou a dimensão de Fundamentos do Bem-Estar, com 80,16 pontos.',
+      'Mais do que uma posição em um ranking, os dados mostram a importância de analisar uma cidade a partir de diferentes aspectos que impactam diretamente a rotina de seus moradores.',
+      'Para quem busca comprar um imóvel, investir ou se mudar para Jundiaí, conhecer esses indicadores pode ser um passo importante antes de escolher o bairro e o tipo de imóvel.',
+      { titulo: 'Quer encontrar um imóvel em Jundiaí?' },
+      'Se você está pensando em morar em Jundiaí, encontrar um imóvel adequado envolve muito mais do que escolher metragem e número de quartos. É importante considerar localização, infraestrutura, acesso, perfil do bairro e o estilo de vida que você deseja.',
+      'A Lotus Brokers pode ajudar você a conhecer as opções disponíveis na cidade e encontrar imóveis de acordo com o seu perfil.',
+      'Conheça Jundiaí, descubra os bairros e encontre o imóvel ideal para o seu próximo capítulo.',
+    ],
+  },
+  /* ------------------------------------------------------------------
+   * Enviado pela Lotus em 29/09/2026, para sair no mesmo dia.
+   *
+   * Foi o destaque da capa do blog até 01/10/2026.
    *
    * É NOTÍCIA, e notícia envelhece: o texto fala do fim da greve da Caixa
    * como fato do dia. Os fatos foram conferidos na imprensa antes de publicar
