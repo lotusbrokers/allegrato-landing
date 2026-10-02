@@ -13,7 +13,10 @@ export const metadata: Metadata = {
   keywords:
     'apartamento à venda Jundiaí, lançamento Jundiaí, Vivarte Grand Alamedas, apartamento 2 e 3 dormitórios Jundiaí, Serra do Japi, minha casa minha vida Jundiaí, Grupo Diretiva, apartamento com lazer Jundiaí',
   robots: { index: true, follow: true },
-  alternates: { canonical: 'https://vivartegrand.com.br' },
+  // Canonical na própria página desde 02/10/2026. Antes apontava para o site da
+  // construtora, e o Google tratava esta página como cópia daquela: ela não
+  // aparecia como página da Lotus. Decisão da Lotus: todas as landings no Google.
+  alternates: { canonical: 'https://www.lotusbrokers.com.br/vivarte' },
   openGraph: {
     type: 'website',
     locale: 'pt_BR',

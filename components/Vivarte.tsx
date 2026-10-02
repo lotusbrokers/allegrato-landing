@@ -25,6 +25,7 @@ import React, {
   type ReactNode,
 } from 'react';
 import { sendLead } from '@/lib/lead';
+import { SITE } from '@/lib/site';
 
 /* ------------------------------------------------------------------ */
 /* Helpers                                                             */
@@ -96,7 +97,7 @@ function Hoverable<T extends keyof React.JSX.IntrinsicElements = 'div'>({
 const WHATSAPP_NUMBER_DEFAULT = '5511926143393';
 const WHATSAPP_DISPLAY_DEFAULT = '+55 11 92614-3393';
 const AGENCY_NAME_DEFAULT = 'Lotus Brokers';
-const CRECI_DEFAULT = '[CRECI]';
+const CRECI_DEFAULT = SITE.creciPj;
 
 type Amenity = { name: string; src: string; alt: string; desc: string };
 
