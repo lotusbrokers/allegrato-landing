@@ -195,3 +195,61 @@
   background: rgba(21, 36, 28, .06);
   border-color: rgba(21, 36, 28, .45);
 }
+
+/* ---- Acesso da Área do Corretor (components/AcessoAreaDoCorretor.tsx). ----
+   Faixa fina acima do cabeçalho (home e LotusHeader) e botão no rodapé da home.
+   A faixa existe porque a linha principal do topo já leva 7 links e 2 botões:
+   medido em 05/10/2026, um botão de texto a mais nela faz o cabeçalho quebrar
+   em 1280px (96 → 115px de altura). Em classe, e não inline, pelo hover.
+   A altura é fixa porque o hero da home desce o mesmo tanto (LotusHome, #topo). */
+:root { --lt-faixa-corretor-altura: 34px; }
+.lt-faixa-corretor {
+  height: var(--lt-faixa-corretor-altura);
+  max-height: var(--lt-faixa-corretor-altura);
+  overflow: hidden;
+  background: #101c15;
+  box-shadow: inset 0 -1px 0 rgba(205, 171, 110, .18);
+  transition: max-height .3s ease;
+}
+/* Na home a faixa fica dentro do cabeçalho fixo, translúcida sobre a foto do
+   hero, e recolhe quando a página rola (data-rolou, posto pelo script de
+   rolagem do LotusHome). Nas páginas internas ela fica fora do cabeçalho
+   grudado e simplesmente sai de vista ao rolar. */
+[data-header] .lt-faixa-corretor { background: rgba(10, 20, 15, .55); }
+[data-header][data-rolou] .lt-faixa-corretor { max-height: 0; }
+.lt-faixa-corretor-interno {
+  height: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.lt-botao-corretor {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 13px;
+  border: 1px solid rgba(205, 171, 110, .5);
+  border-radius: 40px;
+  color: #cdab6e;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.lt-botao-corretor:hover {
+  background: #cdab6e;
+  border-color: #cdab6e;
+  color: #15241c;
+}
+/* Versão do rodapé: mesma pílula do "Quero ser corretor Lotus" do topo. */
+.lt-botao-corretor-grande {
+  padding: 10px 19px;
+  font-size: 14.5px;
+}
+@media (max-width: 760px) {
+  .lt-faixa-corretor-interno { padding: 0 20px; }
+}

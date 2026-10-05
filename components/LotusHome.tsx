@@ -33,6 +33,7 @@ import type { ImovelBusca } from '@/lib/imoveis';
 import { FAQ_HOME } from '@/lib/home-faq';
 import { SQUADS } from '@/lib/squads';
 import MobileMenu from './MobileMenu';
+import { BotaoAreaDoCorretor, FaixaAreaDoCorretor } from './AcessoAreaDoCorretor';
 
 // Chat do Atendimento Rápido — chunk só carrega quando o usuário abre o widget.
 const AtendimentoChat = dynamic(() => import('./AtendimentoChat'), { ssr: false });
@@ -451,7 +452,10 @@ export default function LotusHome({
     const header = root.querySelector<HTMLElement>('[data-header]');
     const onScroll = () => {
       if (!header) return;
-      if (window.scrollY > 40) {
+      const rolou = window.scrollY > 40;
+      // Recolhe a faixa da Área do Corretor (regra em styles/base.css).
+      header.toggleAttribute('data-rolou', rolou);
+      if (rolou) {
         header.style.background = 'rgba(21,36,28,.85)';
         header.style.boxShadow = '0 1px 0 rgba(247,242,232,.08)';
       } else {
@@ -563,6 +567,7 @@ export default function LotusHome({
           'position:fixed;top:0;left:0;right:0;z-index:90;background:rgba(21,36,28,0);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:background .4s ease, box-shadow .4s ease;'
         )}
       >
+        <FaixaAreaDoCorretor />
         <div style={parseStyle('max-width:1280px;margin:0 auto;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;gap:32px;')}>
           <a href="#topo" style={parseStyle('display:flex;align-items:center;gap:12px;')}>
             <img {...logoLotus()} alt="Lotus Brokers" width={800} height={300} style={{ height: 34, width: 'auto', display: 'block' }} />
@@ -609,7 +614,8 @@ export default function LotusHome({
       </header>
 
       {/* ============ HERO ============ */}
-      <section id="topo" style={parseStyle('position:relative;min-height:680px;display:flex;align-items:flex-start;background:#1d3a2c;overflow:visible;')}>
+      {/* padding-top: a faixa da Área do Corretor deixa o cabeçalho fixo mais alto; o conteúdo desce o mesmo tanto e a foto continua do topo. */}
+      <section id="topo" style={parseStyle('position:relative;min-height:680px;display:flex;align-items:flex-start;background:#1d3a2c;overflow:visible;padding-top:var(--lt-faixa-corretor-altura);')}>
         {/* Hero = LCP da home: fetchPriority high para o browser priorizar o download. */}
         <img {...imagemOtimizada('/home-hero-jundiai.jpg')} sizes="100vw" alt="Vista aérea de Jundiaí ao amanhecer, Lotus Brokers" fetchPriority="high" decoding="sync" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%;')} />
         <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg, rgba(21,36,28,.55) 0%, rgba(21,36,28,.15) 38%, rgba(21,36,28,.78) 82%, rgba(21,36,28,.95) 100%);')}></div>
@@ -1315,6 +1321,9 @@ export default function LotusHome({
               </div>
               <p style={parseStyle("font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:19px;color:rgba(247,242,232,.85);line-height:1.35;max-width:300px;margin:0 0 20px;")}>Grandes histórias têm endereço.</p>
               <p style={parseStyle('font-size:13.5px;color:rgba(247,242,232,.55);line-height:1.6;margin:0;')}>Consultoria imobiliária para compra, venda, locação e investimento em imóveis de médio e alto padrão em Jundiaí, Itupeva e região.</p>
+              <div style={{ marginTop: 22 }}>
+                <BotaoAreaDoCorretor grande />
+              </div>
             </div>
             <div>
               <div style={parseStyle('font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#cdab6e;margin-bottom:18px;')}>A Lotus</div>

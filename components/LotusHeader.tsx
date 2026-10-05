@@ -20,6 +20,7 @@
 import Link from 'next/link';
 import React, { useState, type CSSProperties, type ReactNode } from 'react';
 import MobileMenu from './MobileMenu';
+import { FaixaAreaDoCorretor } from './AcessoAreaDoCorretor';
 import { logoLotus } from '@/lib/imagem-otimizada';
 
 const WHATSAPP_DEFAULT = '5511926143393';
@@ -222,33 +223,39 @@ export default function LotusHeader({
   const waLink = ctaHref ?? 'https://wa.me/' + String(whatsapp ?? WHATSAPP_DEFAULT);
 
   return (
-    <header style={S.header}>
-      <div style={S.inner(maxWidth)}>
-        <Link href="/" style={S.logo}>
-          <LotusMark />
-        </Link>
+    <>
+      {/* Fora do <header> de propósito: ele é sticky e a faixa sai de vista ao
+          rolar, sem deixar o cabeçalho grudado mais alto (as âncoras das páginas
+          contam com ~70px). O recuo repete o de S.inner. */}
+      <FaixaAreaDoCorretor maxWidth={maxWidth} lado={32} />
+      <header style={S.header}>
+        <div style={S.inner(maxWidth)}>
+          <Link href="/" style={S.logo}>
+            <LotusMark />
+          </Link>
 
-        <nav style={S.nav}>
-          {NAV_ITEMS.map((item) =>
-            item.key === active ? (
-              <span key={item.key} style={S.linkActive}>
-                {item.label}
-              </span>
-            ) : (
-              <NavLink key={item.key} label={item.label} href={item.href} />
-            )
-          )}
-        </nav>
+          <nav style={S.nav}>
+            {NAV_ITEMS.map((item) =>
+              item.key === active ? (
+                <span key={item.key} style={S.linkActive}>
+                  {item.label}
+                </span>
+              ) : (
+                <NavLink key={item.key} label={item.label} href={item.href} />
+              )
+            )}
+          </nav>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          {/* Fora do rightSlot de proposito: Busca e Imovel substituem o CTA
-              padrao pelo botao deles, e o convite ao corretor deve aparecer
-              nessas paginas tambem. */}
-          <BotaoCorretor />
-          {rightSlot ?? <CtaButton href={waLink} label={cta} />}
-          <MobileMenu whatsapp={whatsapp} cta={cta} ctaHref={ctaHref} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            {/* Fora do rightSlot de proposito: Busca e Imovel substituem o CTA
+                padrao pelo botao deles, e o convite ao corretor deve aparecer
+                nessas paginas tambem. */}
+            <BotaoCorretor />
+            {rightSlot ?? <CtaButton href={waLink} label={cta} />}
+            <MobileMenu whatsapp={whatsapp} cta={cta} ctaHref={ctaHref} />
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </>
   );
 }
