@@ -72,6 +72,13 @@ export const CORRECOES_DE_CADASTRO: Record<string, Correcao[]> = {
     { campo: 'bairro', de: 'Horto Florestal', para: 'Vila Galvão' },
     { campo: 'specs', de: '51–98 m² · 2 e 3 dorms', para: '71–98 m² · 2 e 3 dorms' },
   ],
+  // Tabela da Santa Angela válida a partir de 01/10/2026, enviada pela Lotus em
+  // 05/10/2026: 32 lotes, o menor de 250 m² (quadra P) por R$ 461.734,74. A
+  // metragem "a partir de 250 m²" continua certa.
+  'reserva-castanheira': [
+    { campo: 'preco_texto', de: 'a partir de R$ 460.582', para: 'a partir de R$ 461.734' },
+    { campo: 'preco_num', de: 460582, para: 461734.74 },
+  ],
 };
 
 const vazio = (v: unknown): boolean =>

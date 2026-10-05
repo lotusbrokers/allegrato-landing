@@ -45,6 +45,13 @@ test('nome, bairro e metragem do Maxx', () => {
   assert.equal(r.specs, '71–98 m² · 2 e 3 dorms');
 });
 
+test('Reserva Castanheira com a tabela de 01/10/2026', () => {
+  const r = corrigirCadastro(cadastro({ preco_texto: 'a partir de R$ 460.582', preco_num: 460582, specs: 'Lotes a partir de 250 m²' }), 'reserva-castanheira');
+  assert.equal(r.preco_texto, 'a partir de R$ 461.734');
+  assert.equal(r.preco_num, 461734.74);
+  assert.equal(r.specs, 'Lotes a partir de 250 m²');
+});
+
 test('número que chega como texto do banco ainda casa', () => {
   const r = corrigirCadastro(cadastro({ preco_num: '881875' as unknown as number }), 'altos-da-avenida');
   assert.equal(r.preco_num, 884223.72);
