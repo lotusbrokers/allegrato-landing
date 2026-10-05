@@ -1,0 +1,964 @@
+/*
+ * Área do Corretor. Mesma identidade do site: Fraunces nos títulos, Hanken
+ * Grotesk no texto, verde #15241c, dourado #cdab6e e creme #f7f2e8.
+ *
+ * Celular primeiro: o corretor usa no meio de um atendimento. Alvos de toque
+ * com 44px ou mais, campos com fonte de 16px (o iOS dá zoom abaixo disso) e
+ * vitrines que rolam de lado no celular e viram grade no computador.
+ */
+
+.raiz {
+  --verde: #15241c;
+  --verde-2: #1d3a2c;
+  --verde-3: #25543b;
+  --suave: #3f6249;
+  --ouro: #cdab6e;
+  --ouro-escuro: #a07a3c;
+  --creme: #f7f2e8;
+  --areia: #ece2cf;
+  --branco: #fff;
+  --raio: 14px;
+  --sombra: 0 1px 2px rgba(21, 36, 28, 0.06), 0 8px 24px rgba(21, 36, 28, 0.06);
+  min-height: 100vh;
+  background: var(--creme);
+  color: var(--verde);
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.raiz :focus-visible {
+  outline: 2px solid var(--ouro-escuro);
+  outline-offset: 2px;
+}
+
+/* Link solto no texto (ficha, avisos). Os de botão e cartão têm classe própria.
+   Sublinhado porque styles/base.css tira o sublinhado de todo link do site. */
+.raiz a:not([class]) {
+  color: var(--ouro-escuro);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* styles/base.css (das páginas portadas) põe 20px de padding lateral com
+   !important em todo <section> no celular. Aqui quem dá a margem é o .conteudo. */
+.raiz section {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.somenteLeitor {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------------- Cabeçalho ---------------- */
+
+.cabecalho {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--verde);
+  color: var(--creme);
+  border-bottom: 1px solid rgba(205, 171, 110, 0.25);
+}
+
+.cabecalhoInterno {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.marca img {
+  height: 30px;
+  width: auto;
+  display: block;
+}
+
+.rotuloArea {
+  padding-left: 10px;
+  border-left: 1px solid rgba(205, 171, 110, 0.35);
+  color: var(--ouro);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.navCabecalho {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.navCabecalho form {
+  margin: 0;
+}
+
+.botaoCabecalho {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(247, 242, 232, 0.18);
+  background: transparent;
+  color: var(--creme);
+  font: inherit;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.botaoCabecalho:hover {
+  border-color: var(--ouro);
+  color: var(--ouro);
+}
+
+.textoBotao {
+  display: none;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  background: var(--verde-3);
+  color: var(--ouro);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ---------------- Página ---------------- */
+
+.conteudo {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 20px 16px 64px;
+}
+
+.rodape {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 20px 16px 40px;
+  border-top: 1px solid var(--areia);
+  color: var(--suave);
+  font-size: 13px;
+}
+
+.saudacao {
+  padding: 8px 0 4px;
+}
+
+.ola {
+  margin: 0 0 6px;
+  color: var(--suave);
+  font-size: 15px;
+}
+
+.titulo {
+  margin: 0;
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(28px, 6vw, 42px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.subtitulo {
+  margin: 10px 0 0;
+  max-width: 660px;
+  color: var(--suave);
+}
+
+.texto {
+  margin: 0;
+  color: var(--suave);
+  white-space: pre-line;
+}
+
+/* ---------------- Busca ---------------- */
+
+.busca {
+  position: relative;
+  margin: 18px 0 4px;
+}
+
+.campoBusca {
+  width: 100%;
+  min-height: 54px;
+  padding: 0 18px 0 48px;
+  border-radius: 999px;
+  border: 1px solid var(--areia);
+  background: var(--branco);
+  box-shadow: var(--sombra);
+  color: var(--verde);
+  font: inherit;
+  font-size: 16px;
+}
+
+.iconeBusca {
+  position: absolute;
+  left: 18px;
+  top: 27px;
+  transform: translateY(-50%);
+  color: var(--ouro-escuro);
+  pointer-events: none;
+  display: flex;
+}
+
+.resultados {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 6px;
+  max-height: 60vh;
+  overflow: auto;
+  background: var(--branco);
+  border: 1px solid var(--areia);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+}
+
+.resultado {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.resultado:hover,
+.resultado:focus-visible {
+  background: var(--creme);
+}
+
+.tipoResultado {
+  flex: none;
+  width: 88px;
+  color: var(--ouro-escuro);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.resultadoTexto {
+  min-width: 0;
+}
+
+.resultadoTitulo {
+  display: block;
+  font-weight: 600;
+}
+
+.resultadoDetalhe {
+  display: block;
+  overflow: hidden;
+  color: var(--suave);
+  font-size: 13px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.semResultado {
+  margin: 8px 0 0;
+  padding: 12px 14px;
+  border-radius: var(--raio);
+  background: var(--branco);
+  border: 1px solid var(--areia);
+  color: var(--suave);
+  font-size: 14px;
+}
+
+/* ---------------- Seções ---------------- */
+
+.secao {
+  margin-top: 36px;
+}
+
+.cabecalhoSecao {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.tituloSecao {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 22px;
+}
+
+.tituloSecao svg {
+  color: var(--ouro-escuro);
+}
+
+.verTodos {
+  color: var(--ouro-escuro);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* ---------------- Atalhos ---------------- */
+
+.gradeAtalhos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.atalho {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 128px;
+  padding: 16px;
+  border-radius: var(--raio);
+  border: 1px solid var(--areia);
+  background: var(--branco);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.atalho:hover {
+  border-color: var(--ouro);
+  transform: translateY(-1px);
+}
+
+.iconeAtalho {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--creme);
+  color: var(--verde-3);
+}
+
+.nomeAtalho {
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.resumoAtalho {
+  color: var(--suave);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.contagem {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  color: var(--suave);
+  font-size: 12px;
+}
+
+.selo {
+  align-self: flex-start;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--areia);
+  color: var(--verde-2);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---------------- Cartões ---------------- */
+
+.trilho {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 80%;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scroll-snap-type: x mandatory;
+}
+
+.trilho > * {
+  scroll-snap-align: start;
+}
+
+.grade {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.cartao {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--raio);
+  border: 1px solid var(--areia);
+  background: var(--branco);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.15s;
+}
+
+.cartao:hover {
+  border-color: var(--ouro);
+}
+
+.cartaoImagem {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: linear-gradient(135deg, var(--verde-2), var(--verde-3));
+}
+
+.cartaoCorpo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px 16px;
+}
+
+.cartaoTitulo {
+  margin: 4px 0 0;
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1.2;
+}
+
+.cartaoDetalhe {
+  color: var(--suave);
+  font-size: 14px;
+}
+
+.cartaoPreco {
+  margin-top: auto;
+  padding-top: 8px;
+  font-weight: 600;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  color: var(--ouro-escuro);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---------------- Listas compactas ---------------- */
+
+.listaCompacta {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.itemCompacto {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--areia);
+  background: var(--branco);
+}
+
+.itemCompacto a {
+  flex: 1;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.itemCompacto:hover {
+  border-color: var(--ouro);
+}
+
+.vazio {
+  margin: 0;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px dashed var(--areia);
+  color: var(--suave);
+  font-size: 14px;
+}
+
+/* ---------------- Filtros ---------------- */
+
+.chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin: 18px 0 16px;
+  padding-bottom: 4px;
+}
+
+.chip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--areia);
+  background: var(--branco);
+  color: var(--verde);
+  font-size: 14px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.chipAtivo {
+  border-color: var(--verde);
+  background: var(--verde);
+  color: var(--creme);
+}
+
+/* ---------------- Detalhe ---------------- */
+
+.migalha {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  margin-bottom: 8px;
+  color: var(--suave);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.detalhe {
+  display: grid;
+  gap: 20px;
+}
+
+.galeria {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  gap: 8px;
+  overflow-x: auto;
+  border-radius: var(--raio);
+  scroll-snap-type: x mandatory;
+}
+
+.galeria img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--raio);
+  background: var(--areia);
+  scroll-snap-align: start;
+}
+
+.ficha {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 16px;
+  margin: 16px 0 0;
+  font-size: 15px;
+}
+
+.ficha dt {
+  color: var(--suave);
+}
+
+.ficha dd {
+  margin: 0;
+  font-weight: 500;
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 1 1 100%;
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid var(--areia);
+  background: var(--branco);
+  color: var(--verde);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.botao:hover {
+  border-color: var(--ouro);
+}
+
+.botaoPrimario {
+  border-color: var(--verde);
+  background: var(--verde);
+  color: var(--creme);
+}
+
+.botaoWhatsApp {
+  border-color: #1f7a4d;
+  background: #1f7a4d;
+  color: #fff;
+}
+
+.botaoFavorito[aria-pressed='true'] {
+  border-color: var(--ouro);
+  color: var(--ouro-escuro);
+}
+
+.botaoFavorito[aria-pressed='true'] svg {
+  fill: currentColor;
+}
+
+.aviso {
+  padding: 18px;
+  border-radius: var(--raio);
+  border: 1px solid var(--areia);
+  background: var(--branco);
+}
+
+.aviso h3 {
+  margin: 0 0 6px;
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 19px;
+}
+
+.aviso p {
+  margin: 0 0 10px;
+  color: var(--suave);
+  font-size: 15px;
+}
+
+.pastas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------------- Drive ---------------- */
+
+.trilha {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 8px;
+  margin-bottom: 4px;
+  color: var(--suave);
+  font-size: 14px;
+}
+
+.trilha a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  color: var(--suave);
+  text-decoration: none;
+}
+
+.trilha a:hover {
+  color: var(--ouro-escuro);
+}
+
+.listaArquivos {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.arquivo {
+  display: grid;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--areia);
+  background: var(--branco);
+  scroll-margin-top: 90px;
+}
+
+/* O arquivo aberto por busca ou favorito (#arquivo-<id>) aparece marcado. */
+.arquivo:target {
+  border-color: var(--ouro);
+  box-shadow: 0 0 0 3px rgba(205, 171, 110, 0.35);
+}
+
+.arquivoTexto {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  min-width: 0;
+}
+
+.tipoArquivo {
+  flex: none;
+  color: var(--ouro-escuro);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nomeArquivo {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.dataArquivo {
+  flex-basis: 100%;
+  color: var(--suave);
+  font-size: 13px;
+}
+
+.acoesCompactas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.botaoIcone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--areia);
+  background: var(--branco);
+  color: var(--verde);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.botaoIcone:hover {
+  border-color: var(--ouro);
+}
+
+.botaoIcone[aria-pressed='true'] {
+  border-color: var(--ouro);
+  color: var(--ouro-escuro);
+}
+
+.botaoIcone[aria-pressed='true'] svg {
+  fill: currentColor;
+}
+
+.rotuloAcao {
+  display: none;
+}
+
+/* ---------------- Entrada ---------------- */
+
+.entrada {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  background: radial-gradient(120% 80% at 50% 0%, var(--verde-2) 0%, var(--verde) 70%);
+}
+
+.cartaoEntrada {
+  width: 100%;
+  max-width: 420px;
+  padding: 28px 22px;
+  border-radius: 20px;
+  background: var(--creme);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.cartaoEntrada img {
+  display: block;
+  height: 34px;
+  width: auto;
+  margin: 0 auto 18px;
+  padding: 10px 14px;
+  box-sizing: content-box;
+  border-radius: 12px;
+  background: var(--verde);
+}
+
+.formulario {
+  display: grid;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.campo {
+  display: grid;
+  gap: 6px;
+}
+
+.rotulo {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.entradaTexto {
+  min-height: 50px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid var(--areia);
+  background: var(--branco);
+  color: var(--verde);
+  font: inherit;
+  font-size: 16px;
+}
+
+.erro {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #fbeaea;
+  color: #8a1f1f;
+  font-size: 14px;
+}
+
+.linksEntrada {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+  font-size: 14px;
+}
+
+.linksEntrada a {
+  color: var(--suave);
+}
+
+/* ---------------- Telas maiores ---------------- */
+
+@media (min-width: 640px) {
+  .grade {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .botao {
+    flex: 0 0 auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .cabecalhoInterno {
+    padding: 12px 24px;
+  }
+
+  .textoBotao {
+    display: inline;
+  }
+
+  .botaoCabecalho {
+    padding: 0 14px;
+  }
+
+  .conteudo {
+    padding: 32px 24px 80px;
+  }
+
+  .rodape {
+    padding: 24px 24px 48px;
+  }
+
+  .gradeAtalhos {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  /* Três cartões por vez, numa fileira só; os demais aparecem rolando para o lado. */
+  .trilho {
+    grid-auto-columns: calc((100% - 24px) / 3);
+  }
+
+  .listaCompacta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cartaoEntrada {
+    padding: 36px 32px;
+  }
+
+  .arquivo {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
+
+  .rotuloAcao {
+    display: inline;
+  }
+}
+
+@media (min-width: 900px) {
+  .detalhe {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: start;
+    gap: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grade {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
