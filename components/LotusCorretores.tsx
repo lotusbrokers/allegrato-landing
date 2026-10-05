@@ -479,6 +479,19 @@ const CONTEUDO_REAL: Record<string, { bio?: BlocoBio[]; foto?: string }> = {
       'Sou Samir Augusto, profissional com sólida experiência na área comercial, apaixonado por relacionamento com pessoas e por transformar objetivos em conquistas. Acredito que confiança, transparência e dedicação são essenciais para oferecer um atendimento de excelência. Meu compromisso é ajudar cada cliente a encontrar o imóvel ideal com segurança e tranquilidade.',
     ],
   },
+  // No banco o nome tem dois espaços entre "Danilo" e "Gardim"; normalizarNome
+  // colapsa isso, então a chave fica com espaço simples. Foto e texto enviados
+  // pela Lotus em 05/10/2026; a foto veio mais larga que alta e foi recortada
+  // em 4:5, centrada no rosto, como as demais.
+  'danilo gardim': {
+    foto: '/corretores/danilo-gardim.webp',
+    bio: [
+      'Atuando em Jundiaí e região com foco em vendas, captação de imóveis e atendimento exclusivo.',
+      'Minha trajetória profissional inclui mais de 10 anos como empreendedor e gestor de negócios, com experiência em relacionamento com clientes, negociações e desenvolvimento comercial.',
+      'No mercado imobiliário, busco oferecer um atendimento próximo e transparente, entendendo as necessidades de cada cliente e acompanhando todo o processo, desde a captação e apresentação do imóvel até a negociação e conclusão da venda.',
+      'Trazendo experiência à estrutura e ao trabalho da equipe para proporcionar um atendimento personalizado a proprietários e compradores, conduzindo cada negociação com ética, profissionalismo, transparência e dedicação.',
+    ],
+  },
 };
 
 /**
