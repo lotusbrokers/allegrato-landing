@@ -122,9 +122,88 @@ export function relacionados(posts: Post[], atual: Post, quantos = 3): Post[] {
 // mão, que envelheceu: títulos que não existiam mais no blog e nenhuma capa.
 export const POSTS: Post[] = [
   /* ------------------------------------------------------------------
-   * Enviado pela Lotus em 01/10/2026, para sair no mesmo dia.
+   * Enviado pela Lotus em 05/10/2026, para sair no mesmo dia.
    *
    * Primeiro da lista, e por isso o novo destaque da capa do blog.
+   *
+   * Sem números nem fontes a conferir: o texto só faz afirmações gerais sobre
+   * a cidade (vizinhança com Jundiaí, Campinas e São Paulo, Bandeirantes e
+   * Anhanguera, Viracopos), reproduzidas como a Lotus enviou.
+   *
+   * Ajustes de forma, os mesmos dos lotes anteriores: a meta description
+   * virando `excerpt` e a marca grafada "Lotus Brokers", sem acento, como
+   * no resto do site.
+   *
+   * Capa: a foto aérea enviada junto com o texto, 739x415 — o mesmo tamanho
+   * da capa do IPS, que já saiu em destaque sem perder nitidez.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'vantagens-de-morar-em-itupeva', cat: 'Cidade', date: 'Out 2026', publicadoEm: '2026-10-05', read: '7 min', img: '/blog/vantagens-morar-itupeva.jpg', slot: 'blog-vantagens-morar-itupeva', title: 'Vantagens de morar em Itupeva: qualidade de vida, segurança e infraestrutura', excerpt: 'Descubra as principais vantagens de morar em Itupeva, incluindo qualidade de vida, infraestrutura, localização, lazer e oportunidades no mercado imobiliário.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'Itupeva, na região de Jundiaí, combina a rotina de uma cidade do interior com acesso facilitado às rodovias dos Bandeirantes e Anhanguera e proximidade com Jundiaí, Campinas, São Paulo e o Aeroporto de Viracopos. A cidade reúne comércio, escolas, serviços de saúde, áreas verdes e atividade industrial e logística, além de condomínios, loteamentos e imóveis para diferentes perfis. Se vale a pena morar lá depende da rotina de cada família: antes de decidir, vale analisar bairro, deslocamentos, serviços, segurança e potencial de valorização.',
+    body: [
+      { titulo: 'Introdução' },
+      'Escolher uma cidade para morar envolve muito mais do que encontrar um imóvel. Qualidade de vida, segurança, infraestrutura, acesso a serviços, mobilidade e oportunidades de trabalho são fatores que fazem diferença na rotina e no planejamento de uma família.',
+      'Nesse cenário, Itupeva, no interior de São Paulo, vem ganhando espaço entre pessoas que buscam uma rotina mais tranquila sem abrir mão da proximidade com importantes centros urbanos.',
+      'Localizada na região de Jundiaí e próxima a importantes rodovias, Itupeva combina características de cidade do interior com uma estrutura urbana que vem acompanhando seu crescimento. O município também se destaca pela presença de condomínios, loteamentos e empreendimentos imobiliários voltados a diferentes perfis de moradores.',
+      'Mas afinal, quais são as principais vantagens de morar em Itupeva?',
+      { titulo: '1. Qualidade de vida' },
+      'Uma das principais razões que levam famílias a considerar Itupeva como opção de moradia é a busca por uma rotina com mais tranquilidade.',
+      'A cidade possui áreas verdes, espaços de lazer e uma ocupação urbana que permite encontrar regiões predominantemente residenciais, incluindo bairros e condomínios que oferecem uma experiência mais reservada.',
+      'Para quem sai de grandes centros urbanos, essa combinação pode representar uma mudança importante no dia a dia: menos sensação de metrópole e mais proximidade com espaços de convivência, natureza e lazer.',
+      'Além disso, a localização permite que o morador tenha acesso relativamente rápido a cidades maiores da região quando precisa de serviços, hospitais, comércio especializado ou outras estruturas.',
+      { titulo: '2. Segurança e tranquilidade' },
+      'A percepção de segurança é um dos fatores considerados por famílias na escolha de uma nova cidade.',
+      'Em Itupeva, existem diferentes perfis de bairros e empreendimentos residenciais, incluindo condomínios fechados que oferecem estruturas próprias de controle de acesso e áreas comuns.',
+      'É importante, porém, avaliar a segurança de acordo com a região específica do município. Antes de comprar um imóvel, vale conhecer o bairro em diferentes horários, conversar com moradores e analisar o entorno.',
+      { titulo: '3. Infraestrutura e serviços' },
+      'O crescimento populacional e imobiliário de Itupeva vem acompanhado da expansão de sua infraestrutura urbana.',
+      'A cidade conta com comércio, supermercados, restaurantes, escolas, serviços de saúde, academias e outros estabelecimentos que fazem parte da rotina dos moradores.',
+      'Outro ponto positivo é a proximidade com Jundiaí, que amplia o acesso a uma estrutura ainda maior de comércio, serviços, educação, saúde e entretenimento.',
+      'Para quem trabalha na região, essa localização pode ser especialmente interessante.',
+      { titulo: '4. Localização estratégica' },
+      'Um dos grandes diferenciais de Itupeva é sua localização.',
+      'O município está inserido em uma região estratégica do interior paulista e possui acesso facilitado a importantes rodovias, incluindo a Rodovia dos Bandeirantes e a Rodovia Anhanguera.',
+      'A proximidade com cidades como Jundiaí, Campinas e São Paulo também torna Itupeva uma alternativa para pessoas que desejam morar em uma cidade mais tranquila, mas precisam manter conexão com grandes centros.',
+      'Outro diferencial é a proximidade com o Aeroporto Internacional de Viracopos, em Campinas, o que pode facilitar viagens a trabalho e lazer.',
+      { titulo: '5. Lazer e contato com a natureza' },
+      'Para muitas famílias, morar bem também significa ter opções de lazer próximas de casa.',
+      'Itupeva possui áreas verdes, espaços públicos e opções de entretenimento que contribuem para uma rotina mais diversificada.',
+      'A região também conta com atrações de lazer e turismo que fazem parte da identidade do município e atraem visitantes de outras cidades.',
+      'Essa combinação entre natureza, espaços de lazer e proximidade com grandes centros é um dos fatores que ajudam a tornar a região interessante para quem procura qualidade de vida.',
+      { titulo: '6. Oportunidades de trabalho e desenvolvimento econômico' },
+      'O desenvolvimento econômico é outro fator que influencia diretamente a escolha de uma cidade para morar.',
+      'Itupeva possui atividade industrial, comercial e de serviços, além de estar inserida em uma das regiões economicamente mais relevantes do estado de São Paulo.',
+      'Sua localização logística favorece a instalação de empresas e atividades relacionadas à indústria, distribuição e comércio.',
+      'Para quem trabalha em Itupeva ou em cidades próximas, morar na própria região pode significar mais praticidade e redução do tempo gasto diariamente com deslocamentos.',
+      { titulo: '7. Mercado imobiliário em expansão' },
+      'O mercado imobiliário é um dos setores que merece atenção em Itupeva.',
+      'A cidade apresenta diferentes possibilidades para quem deseja comprar um imóvel, desde casas e apartamentos até condomínios fechados, loteamentos e imóveis de padrão mais elevado.',
+      'Essa diversidade permite atender diferentes momentos de vida e perfis de compradores.',
+      'Para quem pensa em investir, entretanto, é importante não olhar apenas para a valorização esperada. Localização, infraestrutura do bairro, liquidez, demanda por locação, padrão do empreendimento e perspectivas de desenvolvimento da região também devem fazer parte da análise.',
+      { titulo: '8. Itupeva para famílias' },
+      'Famílias que buscam uma cidade com ritmo mais tranquilo podem encontrar em Itupeva uma alternativa interessante.',
+      'A possibilidade de morar em bairros residenciais ou condomínios, ter acesso a escolas, comércio, serviços e áreas de lazer e, ao mesmo tempo, estar próximo de Jundiaí e Campinas cria uma combinação bastante atrativa.',
+      'Antes de tomar uma decisão, porém, é fundamental analisar a rotina da família: onde ficam escola e trabalho, quais serviços são utilizados com frequência e quanto tempo será necessário para os deslocamentos.',
+      { titulo: '9. Uma alternativa para quem quer sair dos grandes centros' },
+      'O movimento de pessoas buscando cidades do interior ganhou força nos últimos anos, principalmente entre famílias que passaram a valorizar mais espaço, tranquilidade e qualidade de vida.',
+      'Itupeva se encaixa nesse perfil por oferecer uma localização estratégica e uma estrutura que permite ao morador manter conexão com grandes centros sem necessariamente viver na dinâmica de uma metrópole.',
+      'Para quem trabalha de forma híbrida ou remota, essa característica pode ser ainda mais interessante.',
+      { titulo: '10. Vale a pena morar em Itupeva?' },
+      'A resposta depende do perfil de cada pessoa ou família, mas Itupeva reúne características que podem ser interessantes para quem procura qualidade de vida, localização estratégica e possibilidades no mercado imobiliário.',
+      'A cidade oferece diferentes opções de bairros e imóveis, além da proximidade com Jundiaí, Campinas e São Paulo.',
+      'Para escolher bem, o ideal é analisar não apenas o imóvel, mas todo o contexto ao redor: bairro, infraestrutura, acessos, serviços, escolas, comércio, segurança e potencial de valorização.',
+      { titulo: 'Conclusão' },
+      'Morar em Itupeva pode representar uma combinação entre tranquilidade, qualidade de vida, infraestrutura e conexão com importantes cidades do estado de São Paulo.',
+      'O crescimento urbano e imobiliário amplia as possibilidades para quem deseja comprar uma casa, apartamento, terreno ou imóvel em condomínio, seja para morar ou investir.',
+      'Mas cada escolha imobiliária precisa considerar as necessidades e objetivos de quem está comprando.',
+      'Se você está avaliando Itupeva como opção para morar ou investir, conhecer os bairros, comparar os imóveis disponíveis e entender o potencial de cada região é um passo importante antes de tomar uma decisão.',
+      'A Lotus Brokers pode ajudar você a encontrar oportunidades em Itupeva e região de acordo com o seu perfil e objetivo imobiliário.',
+    ],
+  },
+  /* ------------------------------------------------------------------
+   * Enviado pela Lotus em 01/10/2026, para sair no mesmo dia.
+   *
+   * Foi o destaque da capa do blog até 05/10/2026.
    *
    * NÚMEROS. Conferidos antes de publicar: o IPS Brasil 2026 saiu em
    * 20/05/2026, com Jundiaí em 2º (71,79 pontos) e em 1º em Fundamentos do
