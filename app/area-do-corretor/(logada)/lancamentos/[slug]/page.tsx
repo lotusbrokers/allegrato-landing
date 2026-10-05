@@ -84,7 +84,7 @@ export default async function LancamentoDaArea({ params }: Props) {
               </>
             )}
             <dt>Valor</dt>
-            <dd>{l.price ?? 'Sob consulta'}</dd>
+            <dd>{l.price ?? 'A consultar'}</dd>
           </dl>
 
           <div className={estilos.acoes}>

@@ -3,6 +3,7 @@ import { hrefForSlug, slugParaLanding, slugify } from './landings';
 import { developmentsFallback, type DevelopmentCard } from './developments';
 import { construtoraDoEmpreendimento, mapaDeConstrutoras } from './construtoras';
 import { corrigirCadastro } from './correcoes-cadastro';
+import { SEM_PRECO, semPrecoSobConsulta } from './preco-sob-consulta';
 
 // Reexportados por compatibilidade: a descoberta das landings mora em landings.ts
 // (ver o comentário de lá), mas `toCard`/`toListItem` continuam sendo o ponto de
@@ -50,10 +51,14 @@ export type LancamentoRow = {
 const slugDaLanding = (row: LancamentoRow) => slugParaLanding(row.landing_slug, row.nome);
 
 // Cadastro defasado no dashboard é corrigido antes de virar card — ver
-// lib/correcoes-cadastro.ts. Só os cards passam por aqui: getLancamentosRows
-// (diagnóstico) e getLancamentoParaLead seguem lendo a linha crua do banco.
-const comCadastroCorrigido = (row: LancamentoRow): LancamentoRow =>
-  corrigirCadastro(row, slugDaLanding(row));
+// lib/correcoes-cadastro.ts — e quem está com "valor a consultar" perde o
+// preço (lib/preco-sob-consulta.ts). Só os cards passam por aqui:
+// getLancamentosRows (diagnóstico) e getLancamentoParaLead seguem lendo a
+// linha crua do banco.
+const comCadastroCorrigido = (row: LancamentoRow): LancamentoRow => {
+  const slug = slugDaLanding(row);
+  return semPrecoSobConsulta(corrigirCadastro(row, slug), slug);
+};
 
 // Card rico — o shape que os cards de empreendimento (home + lançamentos) consomem.
 // Espelha os campos do array estático atual para manter o design idêntico.
@@ -89,7 +94,7 @@ export function toCard(row: LancamentoRow): LancamentoCard {
     stage: row.estagio ?? '',
     builder: construtoraDoEmpreendimento(row.nome, row.construtora),
     specs: row.specs ?? row.dormitorios ?? '',
-    price: row.preco_texto ?? 'Consultar valor',
+    price: precoOuNulo(row.preco_texto) ?? SEM_PRECO,
     exclusive: row.exclusivo ?? false,
     img: capa(row.fotos),
     href: hrefForSlug(slug),
@@ -127,11 +132,12 @@ export type LancamentoListItem = {
 };
 
 // Normaliza o preço da listagem para `string | null`. Além do campo vazio, trata
-// "Consultar valor" — texto de interface que o dash e o fallback curado gravaram
-// como se fosse valor. Concentrado aqui para o card não precisar conhecê-lo.
+// "Consultar valor" e "Valor a consultar" — texto de interface que o dash e o
+// fallback curado gravaram como se fosse valor. Concentrado aqui para o card não
+// precisar conhecê-lo; quem desenha mostra SEM_PRECO (lib/preco-sob-consulta.ts).
 function precoOuNulo(texto: string | null | undefined): string | null {
   const v = texto?.trim();
-  if (!v || v.toLowerCase() === 'consultar valor') return null;
+  if (!v || /^(consultar valor|valor a consultar)$/i.test(v)) return null;
   return v;
 }
 
@@ -404,7 +410,7 @@ export async function getLancamentos(): Promise<LancamentoCard[]> {
     stage: d.stage,
     builder: d.builder,
     specs: d.specs,
-    price: d.price,
+    price: precoOuNulo(d.price) ?? SEM_PRECO,
     exclusive: d.exclusive,
     img: d.img,
     href: d.href,

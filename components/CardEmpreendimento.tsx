@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { type LancamentoListItem } from '@/lib/lancamentos';
+import { SEM_PRECO } from '@/lib/preco-sob-consulta';
 
 /**
  * O card de empreendimento das páginas de construtora.
@@ -69,7 +70,7 @@ export default function CardEmpreendimento({ item }: { item: LancamentoListItem 
             paddingTop: 16,
           }}
         >
-          <div style={{ fontSize: 14, color: '#15241c', fontWeight: 600 }}>{item.price ?? 'Valor sob consulta'}</div>
+          <div style={{ fontSize: 14, color: '#15241c', fontWeight: 600 }}>{item.price ?? SEM_PRECO}</div>
           <span style={{ fontSize: 13, color: '#b18a4a', fontWeight: 600, whiteSpace: 'nowrap' }}>
             {item.href ? 'Ver este empreendimento →' : 'Falar com a Lotus →'}
           </span>

@@ -4,6 +4,7 @@ import type { ImovelBusca } from '@/lib/imoveis';
 import { imagemOtimizada } from '@/lib/imagem-otimizada';
 import { rotaDoImovel, rotaDoLancamento, type Destaque } from '@/lib/area-do-corretor/dados';
 import type { Secao } from '@/lib/area-do-corretor/secoes';
+import { SEM_PRECO } from '@/lib/preco-sob-consulta';
 import Icone, { type NomeDoIcone } from './Icone';
 import estilos from './area.module.css';
 
@@ -32,7 +33,7 @@ export function CartaoDestaque({ d }: { d: Destaque }) {
         <span className={estilos.selo}>{d.selo}</span>
         <h3 className={estilos.cartaoTitulo}>{d.titulo}</h3>
         {d.detalhe && <span className={estilos.cartaoDetalhe}>{d.detalhe}</span>}
-        <span className={estilos.cartaoPreco}>{d.preco ?? 'Valor sob consulta'}</span>
+        <span className={estilos.cartaoPreco}>{d.preco ?? SEM_PRECO}</span>
         <span className={estilos.cta}>
           Ver oportunidade <Icone nome="seta" tamanho={16} />
         </span>
@@ -52,7 +53,7 @@ export function CartaoLancamento({ l }: { l: LancamentoListItem }) {
         <span className={estilos.cartaoDetalhe}>{[l.builder, l.stage].filter(Boolean).join(' · ')}</span>
         {/* Metragem e quartos como estão no cadastro: é o texto que a busca da lista lê. */}
         {l.specs && <span className={estilos.cartaoDetalhe}>{l.specs}</span>}
-        <span className={estilos.cartaoPreco}>{l.price ?? 'Valor sob consulta'}</span>
+        <span className={estilos.cartaoPreco}>{l.price ?? SEM_PRECO}</span>
       </div>
     </Link>
   );

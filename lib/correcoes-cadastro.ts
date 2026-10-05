@@ -36,33 +36,21 @@ export type Correcao = {
  * nome é reescrito no dashboard — "Maxx Santa Ângela" segue sendo
  * maxx-santa-angela.
  *
- * Valores da tabela oficial da Santa Angela de setembro/2026, conferidos em
- * 29/09/2026 contra o que o dashboard publicava.
+ * Correções conferidas em 29/09/2026 contra o que o dashboard publicava. Os
+ * preços da tabela de setembro/2026 da Santa Angela (Vigóre, Portal dos Lagos,
+ * Resort Prime, Altos da Avenida, Allegrato) saíram em 05/10/2026: esses
+ * empreendimentos passaram a "valor a consultar" (lib/preco-sob-consulta.ts), e
+ * deixar o valor vencido aqui o faria voltar sozinho no dia em que algum saísse
+ * de lá. Ficaram as correções que não são de preço.
  */
 export const CORRECOES_DE_CADASTRO: Record<string, Correcao[]> = {
-  vigore: [
-    { campo: 'preco_texto', de: 'a partir de R$ 397.896', para: 'a partir de R$ 410.191' },
-    { campo: 'preco_num', de: 397896, para: 410191.2 },
-  ],
   'portal-dos-lagos': [
-    { campo: 'preco_texto', de: 'a partir de R$ 582.766', para: 'a partir de R$ 637.805' },
-    { campo: 'preco_num', de: 582766, para: 637805.49 },
     // O cadastro está sem estágio; o loteamento está entregue.
     { campo: 'estagio', de: null, para: 'Entregue' },
   ],
   'resort-prime': [
-    { campo: 'preco_texto', de: 'a partir de R$ 941.498', para: 'a partir de R$ 988.992' },
-    { campo: 'preco_num', de: 941498, para: 988992.74 },
     // O cadastro descrevia lotes; o Resort Prime é de apartamentos.
     { campo: 'specs', de: 'Lotes a partir de 110 m²', para: '68–112 m² · 2 e 3 dorms' },
-  ],
-  'altos-da-avenida': [
-    { campo: 'preco_texto', de: 'a partir de R$ 881.875', para: 'a partir de R$ 884.223' },
-    { campo: 'preco_num', de: 881875, para: 884223.72 },
-  ],
-  allegrato: [
-    { campo: 'preco_texto', de: 'a partir de R$ 358.182', para: 'a partir de R$ 365.345' },
-    { campo: 'preco_num', de: 358182, para: 365345.98 },
   ],
   'maxx-santa-angela': [
     // O nome oficial é sem acento (como na landing). O slug não muda: slugify

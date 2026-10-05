@@ -14,7 +14,7 @@ export type EmpItem = {
   type: string;
   priceNum: number;
   // null = preço não informado. O card decide o texto ("A partir de R$ …" ou
-  // "Valor sob consulta"); a camada de dados não carrega texto de interface.
+  // "Valor a consultar"); a camada de dados não carrega texto de interface.
   price: string | null;
   specs: string;
   exclusive: boolean;

@@ -25,6 +25,7 @@ import React, {
 } from 'react';
 import { empsFallback, EMP_IMG, type EmpItem } from '@/lib/lancamentos-list-fallback';
 import { opcoesDeFiltro, passaNosFiltros, SEM_FILTRO } from '@/lib/filtros-lancamentos';
+import { SEM_PRECO } from '@/lib/preco-sob-consulta';
 import AbasLancamentos from './AbasLancamentos';
 import Link from 'next/link';
 import LotusHeader from './LotusHeader';
@@ -434,14 +435,14 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
                       <div style={parseStyle('margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;border-top:1px solid rgba(21,36,28,.08);padding-top:16px;')}>
                         {/* Sem preço cadastrado, o rótulo "A partir de" some junto:
                             exibir os dois virava "a partir de Consultar valor".
-                            "Valor sob consulta" é mais largo que o texto anterior e
+                            "Valor a consultar" é mais largo que o texto anterior e
                             quebra em duas linhas nos cards de CTA longo ("Ver este
                             empreendimento"). Deixamos quebrar: forçar uma linha só
                             (nowrap) estoura o card, que é overflow:hidden, e corta o
                             texto no mobile. Encurtar o CTA resolve, depende da Lotus. */}
                         <div>
                           {e.price && <div style={parseStyle('font-size:11.5px;color:#8aa593;')}>A partir de</div>}
-                          <div style={parseStyle("font-family:'Fraunces',serif;font-size:20px;color:#1d3a2c;")}>{e.price ?? 'Valor sob consulta'}</div>
+                          <div style={parseStyle("font-family:'Fraunces',serif;font-size:20px;color:#1d3a2c;")}>{e.price ?? SEM_PRECO}</div>
                         </div>
                         <span style={parseStyle('color:#b18a4a;font-weight:600;font-size:14px;')}>{e.href ? 'Ver este empreendimento →' : 'Falar sobre este →'}</span>
                       </div>
