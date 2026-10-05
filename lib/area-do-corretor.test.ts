@@ -17,6 +17,8 @@ import {
   subpastaRepetida,
   tipoDeArquivo,
 } from './area-do-corretor/drive-regras.ts';
+import { filtrarLancamentos, lerFiltros, medidasDoLancamento, rotuloDeValor, temFiltro } from './area-do-corretor/filtros.ts';
+import { mapaDosLancamentos } from './area-do-corretor/secoes.ts';
 
 test('acesso: só os papéis de quem vende entram; financeiro e desconhecidos não', () => {
   for (const papel of ['owner', 'admin', 'team_leader', 'corretor']) assert.equal(temAcesso(papel), true, papel);
@@ -237,4 +239,75 @@ test('drive: lista de leads (dado de cliente) fica de fora; material de venda n�
   for (const nome of ['z. Leads Plantão', 'LEADS INSTAGRAM.xlsx', 'Lead - visitas setembro.csv']) assert.equal(ficaDeFora(nome), true, nome);
   // "lead" só como palavra inteira: não esconde o que apenas contém as letras.
   for (const nome of ['Prospecção e captação', 'Planilha de oportunidades', 'Leadership.pdf', 'Pleads.pdf']) assert.equal(ficaDeFora(nome), false, nome);
+});
+
+// Textos de especificação como estavam no cadastro da Dashboard em 05/10/2026.
+test('filtros: metragem e quartos saem do texto livre do cadastro', () => {
+  const casos: [string, [number, number] | null, [number, number] | null][] = [
+    ['55–64 m² · 2 dorms', [55, 64], [2, 2]],
+    ['68–112 m² · 2 e 3 dorms', [68, 112], [2, 3]],
+    ['53–85 m² · 2 ou 3 dorms', [53, 85], [2, 3]],
+    ['157–203 m² · 3 e 4 suítes', [157, 203], [3, 4]],
+    ['207 m² · 4 suítes · 4 vagas', [207, 207], [4, 4]],
+    ['66–89,9 m² · 2 dorms com suíte · varanda grill', [66, 89.9], [2, 2]],
+    ['56-71m 2 e 3 dorms', [56, 71], [2, 3]],
+    ['43,78 m² a 46,14', [43.78, 46.14], null],
+    ['69,79 e 113,95', [69.79, 113.95], null],
+    ['78,5 m²  e   108 m²', [78.5, 108], null],
+    ['26m² a 106', [26, 106], null],
+    ['Lotes de 420 a 908 m²', [420, 908], null],
+    ['Lotes a partir de 1.200 m2', [1200, 1200], null],
+    ['2 e 3 dorms com suíte', null, [2, 3]],
+    ['2 vagas por unidade', null, null],
+    ['Loteamento fechado', null, null],
+    ['', null, null],
+  ];
+  for (const [texto, area, quartos] of casos) {
+    const m = medidasDoLancamento(texto);
+    assert.deepEqual(m.area && [m.area.min, m.area.max], area, `área de "${texto}"`);
+    assert.deepEqual(m.quartos && [m.quartos.min, m.quartos.max], quartos, `quartos de "${texto}"`);
+  }
+});
+
+test('filtros: combinação E; quem não tem o dado filtrado fica de fora e é contado', () => {
+  const itens = [
+    { name: 'A', type: '', specs: '55–64 m² · 2 dorms', priceNum: 365_000 },
+    { name: 'B', type: '', specs: '83–111 m² · 2 e 3 dorms', priceNum: 1_019_707 },
+    { name: 'C', type: '', specs: '157–203 m² · 3 e 4 suítes', priceNum: 0 },
+    { name: 'D', type: '', specs: '128–264 m²', priceNum: 884_000 },
+  ];
+  const nomes = (r: { itens: { name: string }[] }) => r.itens.map((i) => i.name);
+  assert.deepEqual(nomes(filtrarLancamentos(itens, lerFiltros({}))), ['A', 'B', 'C', 'D']);
+  // 3+ quartos: B (2 e 3) e C (3 e 4) passam; D não tem quartos no texto.
+  assert.deepEqual(filtrarLancamentos(itens, lerFiltros({ quartos: '3' })), { itens: [itens[1], itens[2]], semDado: 1 });
+  // A partir de 90 m²: vale a maior unidade.
+  assert.deepEqual(nomes(filtrarLancamentos(itens, lerFiltros({ m2: '90' }))), ['B', 'C', 'D']);
+  // Até R$ 1 milhão: C, sem valor no cadastro, fica de fora e é contado.
+  assert.deepEqual(filtrarLancamentos(itens, lerFiltros({ valor: '1000000' })), { itens: [itens[0], itens[3]], semDado: 1 });
+  assert.deepEqual(nomes(filtrarLancamentos(itens, lerFiltros({ quartos: '3', valor: '1500000' }))), ['B']);
+});
+
+test('filtros: só valores das opções valem na URL', () => {
+  assert.deepEqual(lerFiltros({ quartos: '3', m2: '90', valor: '800000' }), { quartos: 3, m2: 90, valor: 800_000 });
+  assert.deepEqual(lerFiltros({ quartos: '9', m2: '85', valor: 'abc' }), { quartos: null, m2: null, valor: null });
+  assert.equal(temFiltro(lerFiltros({ quartos: '' })), false);
+  assert.equal(temFiltro(lerFiltros({ m2: '120' })), true);
+});
+
+test('filtros: rótulo do valor em mil e milhão', () => {
+  assert.equal(rotuloDeValor(400_000), '400 mil');
+  assert.equal(rotuloDeValor(1_000_000), '1 milhão');
+  assert.equal(rotuloDeValor(1_500_000), '1,5 milhão');
+  assert.equal(rotuloDeValor(2_000_000), '2 milhões');
+});
+
+test('mapa: aceita o ID ou o link inteiro do My Maps e recusa o resto', () => {
+  const id = 'AbCdEfGhIjKlMnOpQrStUvWxYz_-1234';
+  const esperado = { embed: `https://www.google.com/maps/d/embed?mid=${id}`, abrir: `https://www.google.com/maps/d/viewer?mid=${id}` };
+  assert.deepEqual(mapaDosLancamentos(id), esperado);
+  assert.deepEqual(mapaDosLancamentos(`https://www.google.com/maps/d/u/1/edit?mid=${id}&usp=sharing`), esperado);
+  // Sem `undefined` aqui: ele cairia no valor padrão, que lê a variável de ambiente.
+  for (const valor of ['', '   ', 'curto', 'x" onload="alert(1)', `${id}"><script>`]) {
+    assert.equal(mapaDosLancamentos(valor), null, String(valor));
+  }
 });

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { sair } from '@/app/area-do-corretor/acoes';
 import { ROTA_BASE } from '@/lib/area-do-corretor/acesso';
-import { URL_DASHBOARD } from '@/lib/area-do-corretor/secoes';
+import { URL_DASHBOARD, URL_EMAIL_LOTUS } from '@/lib/area-do-corretor/secoes';
 import type { Corretor } from '@/lib/area-do-corretor/sessao';
 import { logoLotus } from '@/lib/imagem-otimizada';
 import Icone from './Icone';
@@ -29,6 +29,10 @@ export default function Cabecalho({ corretor }: { corretor: Corretor }) {
           <a href={URL_DASHBOARD} target="_blank" rel="noopener" className={estilos.botaoCabecalho} title="Dashboard">
             <Icone nome="painel" />
             <span className={estilos.textoBotao}>Dashboard</span>
+          </a>
+          <a href={URL_EMAIL_LOTUS} target="_blank" rel="noopener" className={estilos.botaoCabecalho} title="E-mail Lotus">
+            <Icone nome="email" />
+            <span className={estilos.textoBotao}>E-mail</span>
           </a>
           <a href="/" className={estilos.botaoCabecalho} title="Site Lotus Brokers">
             <Icone nome="globo" />

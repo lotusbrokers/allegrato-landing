@@ -50,6 +50,8 @@ export function CartaoLancamento({ l }: { l: LancamentoListItem }) {
         <h3 className={estilos.cartaoTitulo}>{l.name}</h3>
         <span className={estilos.cartaoDetalhe}>{[l.neighborhood, l.city].filter(Boolean).join(' · ')}</span>
         <span className={estilos.cartaoDetalhe}>{[l.builder, l.stage].filter(Boolean).join(' · ')}</span>
+        {/* Metragem e quartos como estão no cadastro: é o texto que a busca da lista lê. */}
+        {l.specs && <span className={estilos.cartaoDetalhe}>{l.specs}</span>}
         <span className={estilos.cartaoPreco}>{l.price ?? 'Valor sob consulta'}</span>
       </div>
     </Link>

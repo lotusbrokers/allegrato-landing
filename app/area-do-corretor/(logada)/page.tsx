@@ -7,7 +7,7 @@ import { exigirCorretor } from '@/lib/area-do-corretor/sessao';
 import { catalogo, construtorasDoCatalogo, destaques, indiceDeBusca } from '@/lib/area-do-corretor/dados';
 import { driveConfigurado, indiceDoDrive, mapaDoDrive, rotaDaPasta, type MapaDoDrive } from '@/lib/area-do-corretor/drive';
 import { iconeDaPasta } from '@/lib/area-do-corretor/drive-regras';
-import { SECOES } from '@/lib/area-do-corretor/secoes';
+import { SECOES, mapaDosLancamentos } from '@/lib/area-do-corretor/secoes';
 import { ROTA_BASE, podeGerenciar } from '@/lib/area-do-corretor/acesso';
 import estilos from '@/components/area-do-corretor/area.module.css';
 
@@ -24,6 +24,7 @@ export default async function InicioDaArea() {
     construtoras: construtorasDoCatalogo(dados.lancamentos).length,
   };
   const indice = [...indiceDeBusca(dados), ...(mapa ? indiceDoDrive(mapa) : [])];
+  const mapaGoogle = mapaDosLancamentos();
 
   return (
     <>
@@ -100,6 +101,29 @@ export default async function InicioDaArea() {
         </div>
         <ListaSalva usuario={corretor.id} lista="recentes" vazio="O que você abrir por aqui aparece nesta lista." />
       </section>
+
+      {/* Antes das oportunidades (pedido da Lotus em 05/10/2026). Só aparece com MAPA_LANCAMENTOS_ID no ambiente. */}
+      {mapaGoogle && (
+        <section className={estilos.secao} aria-labelledby="mapa">
+          <div className={estilos.cabecalhoSecao}>
+            <h2 id="mapa" className={estilos.tituloSecao}>
+              <Icone nome="mapa" /> Mapa dos lançamentos
+            </h2>
+            <a href={mapaGoogle.abrir} target="_blank" rel="noopener" className={estilos.verTodos}>
+              Abrir no Google Maps
+            </a>
+          </div>
+          <div className={estilos.mapa}>
+            <iframe
+              src={mapaGoogle.embed}
+              title="Mapa dos lançamentos da Lotus no Google Maps"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </div>
+        </section>
+      )}
 
       {/* No fim da página (pedido da Lotus em 05/10/2026), numa fileira com três por vez. */}
       {oportunidades.length > 0 && (
