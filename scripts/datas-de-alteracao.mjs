@@ -71,7 +71,8 @@ const LANDINGS_HTML = [
 // rodapé não é uma alteração de conteúdo de cada landing.
 const MOLDURA = /^(RodapeLotus|AtalhosLanding|LightboxPlantas|LotusHeader|MobileMenu|CookieConsent|Analytics|PreloadHints|RodapeVoltarLancamentos|CtaSimulacao|ConsentimentoLgpd)$/;
 
-const PORTAL_ROUTE = /^(lotus-|construtoras$|api$|meus-dados$)/;
+// Mesma regra de lib/landings.ts (PORTAL_ROUTE): ao mexer em uma, mexer na outra.
+const PORTAL_ROUTE = /^(lotus-|construtoras$|api$|meus-dados$|area-do-corretor$)/;
 
 function existe(p) {
   return existsSync(join(RAIZ, p));

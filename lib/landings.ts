@@ -21,8 +21,10 @@ import { join } from 'node:path';
 
 // 'construtoras' entrou em 08/09/2026 e não tem o prefixo lotus-: sem estar
 // aqui, a varredura de app/ a trataria como landing de empreendimento, e
-// /construtoras viraria destino de card de lançamento.
-const PORTAL_ROUTE = /^(lotus-|construtoras$|api$|meus-dados$)/;
+// /construtoras viraria destino de card de lançamento. 'area-do-corretor'
+// (05/10/2026) pelo mesmo motivo, e com um agravante: é área logada, não pode
+// ir para o sitemap.
+const PORTAL_ROUTE = /^(lotus-|construtoras$|api$|meus-dados$|area-do-corretor$)/;
 
 /** Regra única de "este diretório de app/ é uma landing" — o teste reusa esta função. */
 export function isLandingDir(appDir: string, name: string): boolean {

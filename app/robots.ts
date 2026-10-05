@@ -7,8 +7,9 @@ import { siteIndexavel } from '@/lib/indexacao.mjs';
  * Existe sobretudo para declarar o sitemap: é assim que o Google sai de
  * "descobre página por página seguindo links" para "confere a lista toda".
  *
- * Bloqueios: /api (não é conteúdo) e /meus-dados (área do titular, LGPD, não
- * deve ser indexada). O resto é liberado — nada aqui é privado.
+ * Bloqueios: /api (não é conteúdo), /meus-dados (área do titular, LGPD, não
+ * deve ser indexada) e /area-do-corretor (área logada dos corretores, que
+ * também responde com noindex). O resto é liberado.
  *
  * Ambiente que não deve ser indexado (SITE_INDEXABLE=false, staging, preview —
  * ver lib/indexacao.mjs) bloqueia tudo e não anuncia sitemap.
@@ -21,7 +22,7 @@ export default function robots(): MetadataRoute.Robots {
     return { rules: [{ userAgent: '*', disallow: '/' }] };
   }
   return {
-    rules: [{ userAgent: '*', allow: '/', disallow: ['/api/', '/meus-dados'] }],
+    rules: [{ userAgent: '*', allow: '/', disallow: ['/api/', '/meus-dados', '/area-do-corretor'] }],
     sitemap: `${SITE}/sitemap.xml`,
     host: SITE,
   };
