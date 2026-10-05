@@ -66,6 +66,8 @@ export const NAV_ITEMS: { key: Exclude<LotusNavKey, null>; label: string; href: 
  */
 export const NAV_ITENS_LATERAIS: { key: string; label: string; href: string }[] = [
   { key: 'condominios', label: 'Condomínios', href: '/lotus-condominio' },
+  // Entrada dos corretores (login da Dashboard). As landings levam o mesmo link no RodapeLotus.
+  { key: 'area-do-corretor', label: 'Área do Corretor', href: '/area-do-corretor' },
 ];
 
 /* Estilos fixos (idênticos ao padrão interno atual). */
