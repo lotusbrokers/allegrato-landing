@@ -208,18 +208,15 @@ export default function Allegrato() {
           <p className="hero-sub">
             O apartamento mais completo do Medeiros para você sair do aluguel pagando pouco, lazer com tudo pronto e a segurança de um empreendimento realizado pela Santa Angela Construtora.
           </p>
+          {/* "Valor a consultar" desde 05/10/2026, a pedido da Lotus: a tabela de
+              setembro venceu e a nova só veio para o Reserva Castanheira. */}
           <div className="price-pill">
             <span>
-              A partir de
+              Valor
             </span>
             <b>
-              R$ 365.345,98*
+              a consultar
             </b>
-            <span className="dot">
-            </span>
-            <span>
-              *Valor referente à tabela de setembro/2026
-            </span>
           </div>
           <div className="hero-cta">
             <a className="btn btn-wa wa-link" href={waDefault} target="_blank" rel="noopener">

@@ -367,7 +367,9 @@ export default function ResortPrime() {
               <span className="hero__pill"><b>618</b> Unidades</span>
               <span className="hero__pill"><b>68 a 112</b> m²</span>
               <span className="hero__pill"><b>+20</b> itens de lazer</span>
-              <span className="hero__pill">A partir de <b>R$ 988.992,74</b>*</span>
+              {/* "Valor a consultar" desde 05/10/2026, a pedido da Lotus: a tabela de
+                  setembro venceu e a nova só veio para o Reserva Castanheira. */}
+              <span className="hero__pill">Valor <b>a consultar</b></span>
             </div>
           </div>
 
@@ -744,7 +746,6 @@ export default function ResortPrime() {
           <div className="footer__legal">
             <p>Imagens e perspectivas meramente ilustrativas. As informações constantes no Memorial de Incorporação e nos futuros Instrumentos de Compra e Venda prevalecerão sobre as divulgadas neste material. As tonalidades de cores, formas e texturas podem sofrer alterações. Móveis e utensílios são sugestões de decoração e não fazem parte do contrato de aquisição. A vegetação apresenta porte adulto de referência e será entregue conforme o Projeto Paisagístico. Material preliminar, sujeito a alteração sem aviso prévio.</p>
             <p>Incorporação registrada no 1º Oficial de Registro de Imóveis de Jundiaí/SP.</p>
-            <p>*Valor a partir de R$ 988.992,74, referente à tabela de setembro/2026, sujeito a alteração sem aviso prévio.</p>
           </div>
           <div className="footer__bar">
             <span>© 2026 Imobiliária Lotus Brokers. Página, divulgação e atendimento sob responsabilidade da Lotus Brokers, autorizada a comercializar este empreendimento. Realização: Santa Angela Construtora.</span>

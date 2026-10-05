@@ -69,11 +69,11 @@ const jsonLd = {
     { '@type': 'LocationFeatureSpecification', name: 'Espaço pet', value: true },
     { '@type': 'LocationFeatureSpecification', name: 'Playground', value: true },
   ],
+  // Sem preço: a Lotus pediu "valor a consultar" nas landings da Santa Angela
+  // (exceto o Reserva Castanheira) em 05/10/2026, quando a tabela de setembro venceu.
   makesOffer: {
     '@type': 'Offer',
-    priceCurrency: 'BRL',
-    price: '410191.20',
-    description: 'Apartamento Torre A, 53 m². Tabela setembro/2026.',
+    description: 'Apartamento Torre A, 53 m². Valor a consultar.',
     seller: { '@type': 'Organization', name: 'Construtora Santa Angela' },
     // Quem oferece e atende é a Lotus; a construtora segue como vendedora do imóvel.
     offeredBy: {

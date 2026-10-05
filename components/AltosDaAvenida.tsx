@@ -578,8 +578,10 @@ export default function AltosDaAvenida({
               <span style={parseStyle("font-family:'Barlow Semi Condensed',sans-serif; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#e6cdba;")}>Construtora Santa Angela</span>
             </div>
             <div style={parseStyle('flex:1; min-width:200px; padding:22px 8px; display:flex; flex-direction:column; gap:3px;')}>
-              <span style={parseStyle("font-family:'Cormorant Garamond',serif; font-size:30px; font-weight:600; color:#fff; line-height:1; white-space:nowrap;")}>R$ 884.223,72*</span>
-              <span style={parseStyle("font-family:'Barlow Semi Condensed',sans-serif; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#e6cdba;")}>A partir de · tabela set/2026</span>
+              {/* "Valor a consultar" desde 05/10/2026, a pedido da Lotus: a tabela de
+                  setembro venceu e a nova só veio para o Reserva Castanheira. */}
+              <span style={parseStyle("font-family:'Cormorant Garamond',serif; font-size:30px; font-weight:600; color:#fff; line-height:1; white-space:nowrap;")}>A consultar</span>
+              <span style={parseStyle("font-family:'Barlow Semi Condensed',sans-serif; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#e6cdba;")}>Valor</span>
             </div>
           </div>
         </div>
@@ -956,7 +958,7 @@ export default function AltosDaAvenida({
               </div>
             </div>
           </div>
-          <p style={parseStyle('margin:26px 0 0; font-size:11.5px; line-height:1.7; color:rgba(255,255,255,.42); max-width:1000px;')}>Imagens meramente ilustrativas, sujeitas a alteração. As tonalidades das cores, formas e texturas podem sofrer alterações. Os móveis e utensílios são sugestões de decoração e não fazem parte do contrato de aquisição. As medidas dos apartamentos são internas e de face a face. Incorporação registrada no 2º Oficial de Registro de Imóveis de Jundiaí/SP. Material informativo elaborado pela Imobiliária Lotus Brokers. *Valor a partir de R$ 884.223,72, referente à tabela de setembro/2026, sujeito a alteração sem aviso prévio.</p>
+          <p style={parseStyle('margin:26px 0 0; font-size:11.5px; line-height:1.7; color:rgba(255,255,255,.42); max-width:1000px;')}>Imagens meramente ilustrativas, sujeitas a alteração. As tonalidades das cores, formas e texturas podem sofrer alterações. Os móveis e utensílios são sugestões de decoração e não fazem parte do contrato de aquisição. As medidas dos apartamentos são internas e de face a face. Incorporação registrada no 2º Oficial de Registro de Imóveis de Jundiaí/SP. Material informativo elaborado pela Imobiliária Lotus Brokers.</p>
           <p style={parseStyle('margin:18px 0 0; font-size:12px; color:rgba(255,255,255,.5);')}>© 2026 Imobiliária Lotus Brokers · Página, divulgação e atendimento sob responsabilidade da Lotus Brokers, autorizada a comercializar este empreendimento. Realização: Santa Angela Construtora.</p>
         </div>
       </footer>

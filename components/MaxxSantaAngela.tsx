@@ -462,21 +462,20 @@ export default function MaxxSantaAngela({
               <Hoverable as="a" href="#lazer" baseStyle={parseStyle('display:inline-flex;align-items:center;gap:10px;color:#fff;font-weight:600;font-size:15px;padding:17px 30px;border-radius:46px;border:1px solid rgba(255,255,255,.5);transition:background .3s,border-color .3s')} hoverStyle={parseStyle('background:rgba(255,255,255,.12);border-color:#fff')}>Conhecer o empreendimento</Hoverable>
             </div>
             <div data-priceinline="" style={parseStyle('display:none;margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.25)')}>
-              <span style={parseStyle('font-size:11px;letter-spacing:.26em;font-weight:700;color:#E7D2A6')}>A PARTIR DE</span>
-              <div style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:34px;color:#fff;margin-top:4px;line-height:1;white-space:nowrap")}>R$ 815.071,24*</div>
-              <p style={parseStyle('font-size:13px;color:#F6F1E8;margin:10px 0 0;line-height:1.45;font-weight:600')}>Fale com a Lotus para conferir os valores das outras unidades.</p>
-              <p style={parseStyle('font-size:11.5px;color:#E3D8C6;margin:8px 0 0')}>*Torre B : 97m². Valor referente à tabela de setembro/2026.</p>
+              {/* "Valor a consultar" desde 05/10/2026, a pedido da Lotus: a tabela de
+                  setembro venceu e a nova só veio para o Reserva Castanheira. */}
+              <span style={parseStyle('font-size:11px;letter-spacing:.26em;font-weight:700;color:#E7D2A6')}>VALOR</span>
+              <div style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:34px;color:#fff;margin-top:4px;line-height:1;white-space:nowrap")}>A consultar</div>
+              <p style={parseStyle('font-size:13px;color:#F6F1E8;margin:10px 0 0;line-height:1.45;font-weight:600')}>Fale com a Lotus para conferir os valores.</p>
             </div>
           </div>
         </div>
         {showPriceVal && (
           <div data-reveal="" style={parseStyle('opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.16,1,.3,1) .25s,transform 1s cubic-bezier(.16,1,.3,1) .25s;position:absolute;right:32px;bottom:76px;background:rgba(251,248,243,.96);backdrop-filter:blur(6px);padding:24px 30px;border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.3);max-width:300px')} data-pricecard="">
-            <span style={parseStyle('font-size:11px;letter-spacing:.26em;font-weight:700;color:#9a8a72')}>A PARTIR DE</span>
-            {/* nowrap e clamp: com 38px fixos, "R$" caía numa linha e o número na
-                outra dentro do cartão. O valor precisa ser lido de uma vez. */}
-            <div style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,38px);color:#2B2521;margin-top:6px;line-height:1;white-space:nowrap")}>R$ 815.071<span style={parseStyle('font-size:.58em')}>,24*</span></div>
-            <p style={parseStyle('font-size:15px;color:#2B2521;margin:14px 0 0;line-height:1.45;font-weight:600')}>Fale com a Lotus para conferir os valores das outras unidades.</p>
-            <p style={parseStyle('font-size:11.5px;color:#8a7d6f;margin:10px 0 0;line-height:1.5')}>*Torre B : 97m². Valor referente à tabela de setembro/2026.</p>
+            <span style={parseStyle('font-size:11px;letter-spacing:.26em;font-weight:700;color:#9a8a72')}>VALOR</span>
+            {/* nowrap e clamp: o texto do cartão precisa ser lido de uma vez, sem quebrar. */}
+            <div style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,38px);color:#2B2521;margin-top:6px;line-height:1;white-space:nowrap")}>A consultar</div>
+            <p style={parseStyle('font-size:15px;color:#2B2521;margin:14px 0 0;line-height:1.45;font-weight:600')}>Fale com a Lotus para conferir os valores.</p>
           </div>
         )}
         <div style={parseStyle('position:absolute;left:50%;bottom:26px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.8);animation:mxFloat 2.6s ease-in-out infinite')}>
