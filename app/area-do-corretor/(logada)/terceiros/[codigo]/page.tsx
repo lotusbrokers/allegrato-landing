@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import Avatar from '@/components/area-do-corretor/Avatar';
 import Compartilhar from '@/components/area-do-corretor/Compartilhar';
 import { BotaoFavoritar, RegistraAcesso } from '@/components/area-do-corretor/Memoria';
 import Icone from '@/components/area-do-corretor/Icone';
 import { exigirCorretor } from '@/lib/area-do-corretor/sessao';
+import { captadorDoImovel } from '@/lib/area-do-corretor/captador';
 import { rotaDoImovel } from '@/lib/area-do-corretor/dados';
 import { linkDoImovel } from '@/lib/area-do-corretor/compartilhar';
 import { ROTA_BASE } from '@/lib/area-do-corretor/acesso';
@@ -31,6 +33,7 @@ export default async function ImovelDaArea({ params }: Props) {
   const { codigo } = await params;
   const imovel = await getImovel(codigo);
   if (!imovel) notFound();
+  const captador = await captadorDoImovel(imovel.id);
 
   const titulo = tituloDo(imovel);
   const local = [imovel.bairro, imovel.cidade].filter(Boolean).join(' · ');
@@ -98,6 +101,17 @@ export default async function ImovelDaArea({ params }: Props) {
                 </div>
               ))}
           </dl>
+
+          {/* Quem captou o imóvel (pedido da Lotus em 05/10/2026). Sem o dado, o bloco não aparece. */}
+          {captador && (
+            <div className={estilos.captador}>
+              <Avatar nome={captador.nome} foto={captador.foto} tamanho={56} />
+              <div>
+                <span className={estilos.captadorRotulo}>Corretor captador</span>
+                <span className={estilos.captadorNome}>{captador.nome}</span>
+              </div>
+            </div>
+          )}
 
           <div className={estilos.acoes}>
             <Compartilhar texto={`${titulo}${imovel.cidade ? `, ${imovel.cidade}` : ''}. ${valor}. Veja o anúncio:`} url={linkDoImovel(codigo)} />

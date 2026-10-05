@@ -17,7 +17,7 @@ import {
   subpastaRepetida,
   tipoDeArquivo,
 } from './area-do-corretor/drive-regras.ts';
-import { filtrarLancamentos, lerFiltros, medidasDoLancamento, rotuloDeValor, temFiltro } from './area-do-corretor/filtros.ts';
+import { filtrarImoveis, filtrarLancamentos, lerFiltros, medidasDoLancamento, rotuloDeValor, temFiltro } from './area-do-corretor/filtros.ts';
 import { mapaDosLancamentos } from './area-do-corretor/secoes.ts';
 
 test('acesso: só os papéis de quem vende entram; financeiro e desconhecidos não', () => {
@@ -285,6 +285,22 @@ test('filtros: combinação E; quem não tem o dado filtrado fica de fora e é c
   // Até R$ 1 milhão: C, sem valor no cadastro, fica de fora e é contado.
   assert.deepEqual(filtrarLancamentos(itens, lerFiltros({ valor: '1000000' })), { itens: [itens[0], itens[3]], semDado: 1 });
   assert.deepEqual(nomes(filtrarLancamentos(itens, lerFiltros({ quartos: '3', valor: '1500000' }))), ['B']);
+});
+
+test('filtros: imóveis de terceiros pelos números do cadastro; aluguel fora da busca por valor de venda', () => {
+  const imoveis = [
+    { codigo: 'AP1', beds: 2, area: 64, priceNum: 420_000, fin: 'comprar' as const },
+    { codigo: 'CA1', beds: 3, area: 180, priceNum: 1_350_000, fin: 'comprar' as const },
+    { codigo: 'TE1', beds: 0, area: 450, priceNum: 390_000, fin: 'comprar' as const },
+    { codigo: 'AP2', beds: 2, area: 70, priceNum: 3_500, fin: 'alugar' as const },
+  ];
+  const codigos = (r: { itens: { codigo: string }[] }) => r.itens.map((i) => i.codigo);
+  assert.deepEqual(codigos(filtrarImoveis(imoveis, lerFiltros({}))), ['AP1', 'CA1', 'TE1', 'AP2']);
+  // Terreno não tem quartos: fica de fora e é contado.
+  assert.deepEqual(filtrarImoveis(imoveis, lerFiltros({ quartos: '3' })), { itens: [imoveis[1]], semDado: 1 });
+  assert.deepEqual(codigos(filtrarImoveis(imoveis, lerFiltros({ m2: '150' }))), ['CA1', 'TE1']);
+  // Até R$ 600 mil: o aluguel de R$ 3.500/mês não passa por valor de venda.
+  assert.deepEqual(filtrarImoveis(imoveis, lerFiltros({ valor: '600000' })), { itens: [imoveis[0], imoveis[2]], semDado: 1 });
 });
 
 test('filtros: só valores das opções valem na URL', () => {
