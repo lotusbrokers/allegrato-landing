@@ -1,16 +1,19 @@
 'use client';
 
 import { useState } from 'react';
-import { linkWhatsApp } from '@/lib/area-do-corretor/compartilhar';
 import type { ItemSalvo } from '@/lib/area-do-corretor/memoria-local';
 import { BotaoFavoritar } from './Memoria';
 import Icone from './Icone';
 import estilos from './area.module.css';
 
 /**
- * Ações de um arquivo do Drive: abrir, baixar, mandar no WhatsApp, copiar o
- * link e favoritar. O link é o do próprio Drive, e quem consegue abri-lo é
- * decidido pelo compartilhamento lá ("qualquer pessoa com o link").
+ * Ações de um arquivo do Drive: abrir, baixar, copiar o link e favoritar. O
+ * link é o do próprio Drive, e quem consegue abri-lo é decidido pelo
+ * compartilhamento lá ("qualquer pessoa com o link").
+ *
+ * Sem botão de WhatsApp: ele mandava o link do Drive ao cliente, e a Lotus
+ * pediu para tirá-lo em 05/10/2026. Para o cliente, as fichas têm "Compartilhar
+ * no WhatsApp" com a página pública (Compartilhar.tsx).
  */
 export default function AcoesDoArquivo({
   usuario,
@@ -47,16 +50,6 @@ export default function AcoesDoArquivo({
           <span className={estilos.rotuloAcao}>Baixar</span>
         </a>
       )}
-      <a
-        href={linkWhatsApp(item.titulo, link)}
-        target="_blank"
-        rel="noopener"
-        className={estilos.botaoIcone}
-        title="Enviar pelo WhatsApp"
-      >
-        <Icone nome="whatsapp" tamanho={18} />
-        <span className={estilos.rotuloAcao}>WhatsApp</span>
-      </a>
       <button type="button" className={estilos.botaoIcone} onClick={copiar} title="Copiar link">
         <Icone nome="copiar" tamanho={18} />
         <span className={estilos.rotuloAcao}>{copiado ? 'Copiado' : 'Copiar link'}</span>
