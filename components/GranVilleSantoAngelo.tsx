@@ -799,8 +799,11 @@ export default function GranVilleSantoAngelo() {
                 src={`${IMG}/a044.jpg`}
                 alt="Mapa de localização do Gran Ville Santo Angelo em Itupeva-SP"
               />
+              {/* O mapa mostra o empreendimento, não a Central de Vendas da GP
+                  (Rod. Mario Tonolli, 415): endereço de vendas da construtora
+                  não aparece nas landings (auditoria P5, revisada em 06/10/2026). */}
               <iframe
-                src="https://www.google.com/maps?q=Rodovia+Mario+Tonolli,+415+-+Itupeva+-+SP&z=14&output=embed"
+                src="https://www.google.com/maps?q=Gran+Ville+Santo+Angelo,+Itupeva+-+SP&z=14&output=embed"
                 title="Mapa de localização do Gran Ville Santo Angelo em Itupeva-SP"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -808,7 +811,7 @@ export default function GranVilleSantoAngelo() {
               ></iframe>
               <a
                 className="loc__maplink"
-                href="https://www.google.com/maps/search/?api=1&query=Rodovia+Mario+Tonolli,+415+-+Itupeva+-+SP"
+                href="https://www.google.com/maps/search/?api=1&query=Gran+Ville+Santo+Angelo,+Itupeva+-+SP"
                 target="_blank"
                 rel="noopener"
               >
@@ -1857,8 +1860,7 @@ export default function GranVilleSantoAngelo() {
                 </button>
                 <div className="acc__a">
                   <p>
-                    Em Itupeva-SP, com acesso pela Rodovia Mario Tonolli. A
-                    Central de Vendas fica na Rodovia Mario Tonolli, 415. Jundiaí
+                    Em Itupeva-SP, com acesso pela Rodovia Mario Tonolli. Jundiaí
                     está a 24 km (35 min), Campinas a 53 km e São Paulo a 76 km.
                   </p>
                 </div>
@@ -1976,25 +1978,6 @@ export default function GranVilleSantoAngelo() {
                     >
                       (11) 92614-3393
                     </a>
-                  </div>
-                </div>
-                <div className="chan">
-                  <span className="chan__ic">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={1.7}
-                    >
-                      <path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z"></path>
-                      <circle cx="12" cy="10" r="2.5"></circle>
-                    </svg>
-                  </span>
-                  <div>
-                    <div className="chan__l">Central de Vendas</div>
-                    <div className="chan__v">
-                      Rod. Mario Tonolli, 415, Itupeva-SP
-                    </div>
                   </div>
                 </div>
                 <div className="chan">
@@ -2164,18 +2147,6 @@ export default function GranVilleSantoAngelo() {
               </a>
               <a href="#contato">Central de Vendas</a>
               <a href="#contato">Agende sua visita</a>
-              <span
-                style={{
-                  display: 'block',
-                  padding: '.4rem 0',
-                  fontSize: '.92rem',
-                  color: 'rgba(245,240,231,.55)',
-                }}
-              >
-                Rod. Mario Tonolli, 415
-                <br />
-                Itupeva, SP
-              </span>
             </div>
           </div>
           <p className="footer__legal">
