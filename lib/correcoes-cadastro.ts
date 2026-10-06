@@ -60,6 +60,9 @@ export const CORRECOES_DE_CADASTRO: Record<string, Correcao[]> = {
     { campo: 'bairro', de: 'Horto Florestal', para: 'Vila Galvão' },
     { campo: 'specs', de: '51–98 m² · 2 e 3 dorms', para: '71–98 m² · 2 e 3 dorms' },
   ],
+  // O site oficial da Tebas mostra o Authoria como "Pronto para morar" (conferido
+  // em 06/10/2026, cobrado na auditoria); a Dashboard ainda trazia a previsão.
+  authoria: [{ campo: 'estagio', de: 'Entrega prevista para julho de 2026', para: 'Pronto para morar' }],
   // Tabela da Santa Angela válida a partir de 01/10/2026, enviada pela Lotus em
   // 05/10/2026: 32 lotes, o menor de 250 m² (quadra P) por R$ 461.734,74. A
   // metragem "a partir de 250 m²" continua certa.

@@ -40,6 +40,11 @@ test('estágio vazio é preenchido; estágio informado é respeitado', () => {
   assert.equal(corrigirCadastro(cadastro({ estagio: 'Em obras' }), 'portal-dos-lagos').estagio, 'Em obras');
 });
 
+test('Authoria: previsão de entrega vencida vira "Pronto para morar"; outro estágio é respeitado', () => {
+  assert.equal(corrigirCadastro(cadastro({ estagio: 'Entrega prevista para julho de 2026' }), 'authoria').estagio, 'Pronto para morar');
+  assert.equal(corrigirCadastro(cadastro({ estagio: 'Entregue' }), 'authoria').estagio, 'Entregue');
+});
+
 test('nome, bairro e metragem do Maxx', () => {
   const r = corrigirCadastro(cadastro({ nome: 'Maxx Santa Ângela', bairro: 'Horto Florestal', specs: '51–98 m² · 2 e 3 dorms' }), 'maxx-santa-angela');
   assert.equal(r.nome, 'Maxx Santa Angela');

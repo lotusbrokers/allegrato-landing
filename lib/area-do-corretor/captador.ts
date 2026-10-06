@@ -8,8 +8,8 @@
  * com a sessão do corretor logado, sob a RLS da Dashboard, e só na área.
  *
  * Sem permissão, sem cadastro ou sem nome, devolve null e a ficha não mostra o
- * bloco: o resto da ficha não depende disto. Em 05/10/2026, 10 dos 23 imóveis
- * vinham de duas contas sem nome no perfil da Dashboard.
+ * bloco: o resto da ficha não depende disto. Em 05/10/2026, 9 dos 23 imóveis
+ * vinham de duas contas sem nome no perfil da Dashboard (8 de uma, 1 da outra).
  *
  * Foto: a do perfil da Dashboard; sem ela (o caso de todos em 05/10/2026), a
  * mesma que a página /lotus-corretores usa (lib/corretores-conteudo.ts).
