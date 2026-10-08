@@ -765,7 +765,7 @@ export default function Authoria() {
                 <span>Suítes</span>
               </div>
               <div className="sp">
-                <b>137,211</b>
+                <b>137–211</b>
                 <span>m² privativos</span>
               </div>
               <div className="sp">

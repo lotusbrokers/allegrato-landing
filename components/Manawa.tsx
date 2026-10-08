@@ -749,7 +749,7 @@ export default function Manawa() {
                 <label htmlFor="interesse">Tenho interesse em</label>
                 <select ref={interesseRef} id="interesse" name="interesse" defaultValue="2 dormitórios (65 m²)">
                   <option value="2 dormitórios (65 m²)">2 dormitórios, 65 m²</option>
-                  <option value="3 dormitórios">3 dormitórios, a partir de 84 m²</option>
+                  <option value="3 dormitórios">3 dormitórios, a partir de 94 m²</option>
                   <option value="3 dormitórios ampliado (102 m²)">3 dormitórios ampliado, 102 m²</option>
                   <option value="Ainda estou decidindo">Ainda estou decidindo</option>
                 </select>
