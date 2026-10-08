@@ -23,11 +23,29 @@ const nextConfig = {
   // X-Robots-Tag vale para toda resposta, inclusive as landings estáticas de
   // public/ e as páginas que declaram o próprio meta robots. No modo
   // indexável não emite nada: o padrão do robô já é indexar.
+  //
+  // Cache longo para public/<landing>/midia/: fotos, fontes e scripts das
+  // landings desempacotadas (scripts/desempacotar-landing.mjs). O nome de cada
+  // arquivo é o hash do próprio conteúdo, então uma URL nunca muda de conteúdo
+  // — sem isto o Next manda max-age=0 e o navegador confere cada foto de novo
+  // a cada visita.
   async headers() {
-    if (indexavel) return [];
-    return [{ source: '/:path*', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] }];
+    const midia = {
+      source: '/:landing/midia/:arquivo*',
+      headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+    };
+    if (indexavel) return [midia];
+    return [midia, { source: '/:path*', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] }];
   },
   images: {
+    // Quanto tempo vale a foto otimizada (/_next/image) antes de ser refeita.
+    // O padrão do Next 15 é 60 s: passado um minuto, toda foto pedida de novo
+    // era redimensionada outra vez, e o servidor (o mesmo do Dashboard) vivia
+    // ocupado com isso. Em 08/10/2026 as fotos da busca levavam até 12 s e
+    // pareciam sumidas. Vencido o prazo, o visitante recebe a versão guardada
+    // e a nova é feita por trás. Foto trocada no MESMO endereço leva até um
+    // dia para aparecer; para trocar já, use um nome de arquivo novo.
+    minimumCacheTTL: 86400,
     // As fotos vêm de hosts externos (watermark do dash, Storage Supabase, CDNs
     // usados nas landings). Liberamos os hosts conhecidos; ampliar conforme surgirem.
     remotePatterns: [
@@ -43,21 +61,22 @@ const nextConfig = {
   // cabeçalho de qualquer componente em components/). Estas vão ao ar como
   // HTML, servidas de public/<slug>/index.html numa URL limpa.
   //
-  // Duas famílias diferentes convivem aqui:
+  // Todas chegaram como bundle auto-extraível (formato dc-runtime, o mesmo das
+  // 23) ou, a Oásis, como HTML com as fotos coladas em data URI — de 0,7 a
+  // 9,6 MB por página, o que deixava o site inteiro lento. Foram DESEMPACOTADAS:
+  // fotos, fontes e scripts viraram arquivos em public/<slug>/midia/.
+  // Desempacotar em vez de portar preserva o layout exatamente como o cliente
+  // aprovou.
   //
-  // 1. Reserva Castanheira e Santorini chegaram como bundle auto-extraível
-  //    (formato dc-runtime, o mesmo das 23) e foram DESEMPACOTADAS: fotos e
-  //    fontes viraram arquivos, as variáveis de template viraram valor literal
-  //    e o estado do formulário virou um script curto. Desempacotar em vez de
-  //    portar preserva o layout exatamente como o cliente aprovou.
+  // - Reserva Castanheira e Santorini: desempacotadas à mão, antes do script.
+  // - As outras 11, em 06/10/2026, por scripts/desempacotar-landing.mjs (ver o
+  //   cabeçalho dele): mesmo texto, links e formulários do bundle, conferidos
+  //   página a página. Se uma landing chegar de novo como bundle, é só rodá-lo.
   //
-  // 2. Altissimi e Vila Triunfo continuam empacotadas, e Oásis é HTML comum.
-  //    As duas empacotadas montam a página em JavaScript e SUBSTITUEM document
-  //    inteiro no load, head e body: marcação ou <style> injetados no arquivo
-  //    não sobrevivem. Por isso a navegação do portal e o responsivo do
-  //    Altissimi entram por script, depois do load, com MutationObserver que
-  //    recoloca se o documento for trocado de novo. Ao desempacotá-las um dia,
-  //    remover esses injetores.
+  // Os scripts da Lotus no fim de cada página (rodapé, atalhos, correções)
+  // ainda observam o documento com MutationObserver, herança do tempo em que
+  // o bundle trocava o documento inteiro no load; em página comum são
+  // inofensivos e continuam idênticos aos de Santorini e Reserva Castanheira.
   //
   // O que elas NÃO herdam por não serem React: cabeçalho e rodapé do portal,
   // botão flutuante de volta para /lotus-lancamentos e o banner de cookies.
