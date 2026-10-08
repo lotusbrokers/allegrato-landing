@@ -122,9 +122,88 @@ export function relacionados(posts: Post[], atual: Post, quantos = 3): Post[] {
 // mão, que envelheceu: títulos que não existiam mais no blog e nenhuma capa.
 export const POSTS: Post[] = [
   /* ------------------------------------------------------------------
-   * Enviado pela Lotus em 05/10/2026, para sair no mesmo dia.
+   * Enviado pela Lotus em 08/10/2026, para sair no mesmo dia.
    *
    * Primeiro da lista, e por isso o novo destaque da capa do blog.
+   *
+   * É NOTÍCIA, com agenda. Datas, horários e locais conferidos no comunicado
+   * da Prefeitura de 07/10/2026 (jundiai.sp.gov.br/noticias/2026/10/07/
+   * outubro-rosa-jundiai-amplia-acoes-de-cuidado-e-prevencao-a-saude-da-mulher):
+   * todos conferem. Um ajuste de conteúdo: na caminhada do dia 16 a Prefeitura
+   * fala em "orientações sobre mamografia e coleta de Papanicolau"; o texto
+   * enviado separava os dois por vírgula, como se houvesse coleta durante a
+   * caminhada. Ficou a redação da Prefeitura.
+   *
+   * Ajustes de forma, os mesmos dos lotes anteriores: itens de lista sem ponto
+   * e vírgula. Não veio meta description: `excerpt` e `tldr` resumem o
+   * próprio texto, sem informação nova.
+   *
+   * Capa: a foto enviada junto com o texto (a caminhada do Outubro Rosa com a
+   * faixa da Prefeitura), 1240x775, recomprimida.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'outubro-rosa-jundiai-2026', cat: 'Cidade', date: 'Out 2026', publicadoEm: '2026-10-08', read: '5 min', img: '/blog/outubro-rosa-jundiai-2026.jpg', slot: 'blog-outubro-rosa-jundiai-2026', title: 'Outubro Rosa em Jundiaí: cidade amplia ações de cuidado e prevenção à saúde da mulher', excerpt: 'Confira a programação do Outubro Rosa 2026 em Jundiaí: rodas de conversa, caminhadas e ações de prevenção ao câncer de mama e do colo do útero.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'Em outubro de 2026, a Prefeitura de Jundiaí amplia as ações de prevenção e diagnóstico precoce do câncer de mama e do câncer do colo do útero. Algumas unidades abrem aos sábados para a coleta do Papanicolau, e UBSs e Clínicas da Família promovem rodas de conversa, caminhadas, práticas integrativas e atividades de bem-estar entre os dias 13 e 26. A Caminhada do Outubro Rosa no Parque da Cidade acontece em 22 de outubro. Para participar ou saber quais exames são indicados, procure a UBS ou Clínica da Família de referência.',
+    body: [
+      'Outubro chegou trazendo uma importante mobilização pela saúde da mulher em Jundiaí.',
+      'Durante o Outubro Rosa 2026, a cidade reforça as ações de conscientização, prevenção e diagnóstico precoce do câncer de mama e do câncer do colo do útero.',
+      'Além do trabalho realizado durante todo o ano nas Unidades Básicas de Saúde (UBSs) e Clínicas da Família, a programação de outubro contará com atividades especiais em diferentes regiões de Jundiaí.',
+      'Entre elas estão rodas de conversa, caminhadas, práticas integrativas, atividades físicas e ações de bem-estar.',
+      'Neste artigo, a Lotus Brokers reúne os principais destaques da programação divulgada pela Prefeitura de Jundiaí.',
+      { titulo: 'Outubro Rosa em Jundiaí reforça a importância da prevenção' },
+      'A Atenção Básica é a principal porta de entrada da rede municipal para os cuidados relacionados à saúde da mulher.',
+      'Nas unidades de referência, as pacientes podem receber orientações e passar por avaliações para que os exames adequados sejam indicados conforme fatores como idade, histórico e avaliação clínica.',
+      'Caso seja identificada alguma alteração ou suspeita, a paciente pode ser encaminhada para investigação e atendimento especializado.',
+      'A campanha do Outubro Rosa em Jundiaí amplia a visibilidade desse trabalho e reforça uma mensagem importante: cuidar da saúde deve fazer parte da rotina durante todo o ano.',
+      { titulo: 'Mamografia e prevenção do câncer de mama' },
+      'A mamografia possui papel importante na detecção precoce do câncer de mama.',
+      'Segundo as informações divulgadas pela Prefeitura de Jundiaí, quando há diagnóstico de câncer de mama, o tratamento oncológico é realizado no Hospital de Caridade São Vicente de Paulo (HSV).',
+      'A conduta é definida individualmente e pode envolver cirurgia, quimioterapia e radioterapia. Paralelamente, a paciente continua sendo acompanhada pela rede municipal de Saúde.',
+      'Para saber quais exames são indicados para cada caso, a orientação é procurar a UBS ou Clínica da Família de referência.',
+      { titulo: 'Outubro Rosa também chama atenção para o câncer do colo do útero' },
+      'A mobilização não se limita ao câncer de mama.',
+      'Durante o mês, algumas unidades de saúde terão abertura aos sábados para ampliar o acesso à coleta do exame Papanicolau, utilizado na prevenção e detecção precoce de alterações que podem levar ao câncer do colo do útero.',
+      'Além dos exames, diferentes regiões da cidade receberão atividades relacionadas à prevenção, informação, autoestima e bem-estar.',
+      { titulo: 'Programação do Outubro Rosa em Jundiaí 2026' },
+      'As ações acontecem em diferentes bairros e equipamentos públicos da cidade ao longo do mês de outubro.',
+      { titulo: 'UBS Maringá', nivel: 3 },
+      'No dia 13 de outubro, a partir das 7h30, o Centro Esportivo Siqueira Neto recebe uma roda de conversa com ginecologista, além de oficina com podóloga e café da manhã.',
+      { titulo: 'Novo Horizonte e Almerinda Chaves', nivel: 3 },
+      'No dia 16 de outubro, as Clínicas da Família I Novo Horizonte e II Almerinda Chaves promovem uma caminhada até o Parque do Cerrado.',
+      'A atividade contará com alongamento, orientações sobre mamografia e coleta de Papanicolau e roda de conversa.',
+      'Já no dia 19 de outubro, das 14h às 16h, o grupo de mulheres da Clínica da Família II Almerinda Chaves terá um encontro temático.',
+      { titulo: 'UBS Tulipas', nivel: 3 },
+      'A região das Tulipas contará com vários dias de programação:',
+      { itens: ['19 de outubro, às 9h: Movimento Rosa e atividade com fisioterapeuta', '20 de outubro, às 8h30: Lian Gong', '21 de outubro, às 13h30: Dia da Beleza', '22 de outubro, às 13h30: Show de Prêmios Outubro Rosa', '23 de outubro, às 14h: Desfile Miss Outubro Rosa'] },
+      { titulo: 'UBS Fazenda Grande', nivel: 3 },
+      'No dia 21 de outubro, a partir das 8h30, está prevista uma atividade sobre saúde da mulher no centro comunitário, com apoio da equipe de Assistência Farmacêutica.',
+      { titulo: 'UBS Corrupira', nivel: 3 },
+      'No dia 26 de outubro, a partir das 8h, acontece o Desfile da Autoestima, na Igreja Santa Brígida.',
+      'A programação prevê participação de cabeleireiro e cortes de cabelo gratuitos.',
+      { titulo: 'Ações na região rural de Jundiaí', nivel: 3 },
+      'O Consultório Avançado de Saúde, localizado no CREAM — Centro de Referência em Educação Ambiental, no bairro Santa Clara — também integra a programação.',
+      'No dia 22 de outubro, das 8h30 às 11h, haverá roda de conversa e auriculoterapia.',
+      'No dia 23, o atendimento será dedicado à saúde ginecológica, por ordem de chegada, com participação das equipes de enfermagem, médica e e-Multi.',
+      { titulo: 'Caminhada do Outubro Rosa no Parque da Cidade', nivel: 3 },
+      'Outro destaque da programação acontece no Parque da Cidade de Jundiaí.',
+      'No dia 22 de outubro, o espaço recebe a tradicional Caminhada do Outubro Rosa, reunindo participantes em uma iniciativa de conscientização, promoção da saúde e incentivo ao autocuidado.',
+      'A caminhada integra uma programação distribuída por diferentes regiões do município, facilitando a participação das mulheres nas ações realizadas ao longo do mês.',
+      { titulo: 'Como participar das ações do Outubro Rosa em Jundiaí?' },
+      'Quem deseja participar ou obter informações sobre exames e atividades deve procurar a UBS ou Clínica da Família de referência.',
+      'Como horários, disponibilidade e orientações podem variar conforme cada unidade, é importante confirmar previamente as informações diretamente com a rede municipal de Saúde.',
+      { titulo: 'Cuidar das pessoas também faz parte de uma cidade melhor' },
+      'Escolher uma cidade para viver vai muito além de encontrar um imóvel.',
+      'Saúde, infraestrutura, lazer, mobilidade, serviços públicos e qualidade de vida fazem parte da relação que construímos com o lugar onde moramos.',
+      'A mobilização do Outubro Rosa em Jundiaí é também uma oportunidade para conhecer iniciativas que acontecem nos bairros e aproximam a população dos serviços disponíveis na cidade.',
+      'A Lotus Brokers acredita que conhecer Jundiaí é também entender tudo aquilo que faz parte da vida de quem escolheu a cidade para morar.',
+      'Continue acompanhando nosso blog para descobrir notícias de Jundiaí, bairros, qualidade de vida, mercado imobiliário e tudo o que você precisa saber para viver e investir na região.',
+      'Fonte das informações: Prefeitura de Jundiaí — Assessoria de Imprensa. Programação e informações divulgadas em 7 de outubro de 2026.',
+    ],
+  },
+  /* ------------------------------------------------------------------
+   * Enviado pela Lotus em 05/10/2026, para sair no mesmo dia.
+   *
+   * Foi o destaque da capa do blog até 08/10/2026.
    *
    * Sem números nem fontes a conferir: o texto só faz afirmações gerais sobre
    * a cidade (vizinhança com Jundiaí, Campinas e São Paulo, Bandeirantes e
