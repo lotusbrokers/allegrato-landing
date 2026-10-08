@@ -1958,7 +1958,7 @@ export default function GranVilleSantoAngelo() {
                 Gran Ville Santo Angelo.
               </h2>
               <p className="lead">
-                Agende uma visita à Central de Vendas e conheça de perto o novo
+                Agende sua visita com a Lotus e conheça de perto o novo
                 bairro planejado de Itupeva. Consulte condições.
               </p>
               <div className="contact__chan">
@@ -2145,7 +2145,7 @@ export default function GranVilleSantoAngelo() {
               >
                 WhatsApp (11) 92614-3393
               </a>
-              <a href="#contato">Central de Vendas</a>
+              <a href="#contato">Fale com a Lotus</a>
               <a href="#contato">Agende sua visita</a>
             </div>
           </div>
