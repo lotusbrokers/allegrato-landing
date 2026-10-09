@@ -122,9 +122,130 @@ export function relacionados(posts: Post[], atual: Post, quantos = 3): Post[] {
 // mão, que envelheceu: títulos que não existiam mais no blog e nenhuma capa.
 export const POSTS: Post[] = [
   /* ------------------------------------------------------------------
-   * Enviado pela Lotus em 08/10/2026, para sair no mesmo dia.
+   * Enviado pela Lotus em 09/10/2026, para sair no mesmo dia.
    *
    * Primeiro da lista, e por isso o novo destaque da capa do blog.
+   *
+   * NÚMEROS. O texto cita "o levantamento analisado" sem dizer qual. Os de
+   * população conferem com o Censo do IBGE (2010 a 2022: SC 21,8%, MT 20,5%,
+   * GO 17,5%, Brasil 6,5%). Os de valorização por cidade (jan/2018 a
+   * ago/2026, Itapema 166% contra 55% de inflação) e o "5,1 vezes / 15,7
+   * vezes em 20 anos" não foram achados numa fonte pública em 09/10/2026:
+   * ficam como a Lotus enviou, com as ressalvas do próprio texto ("teria
+   * registrado", "segundo os números apresentados no material analisado").
+   *
+   * Ajustes de forma, os mesmos dos lotes anteriores: as duas listas de
+   * cidades e de perguntas viraram itens. Não veio meta description:
+   * `excerpt` e `tldr` resumem o próprio texto, sem informação nova.
+   *
+   * Capa: a foto enviada junto com o texto (o centro de Jundiaí com a
+   * Catedral), 735x425.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'investir-em-imoveis-vale-a-pena', cat: 'Mercado', date: 'Out 2026', publicadoEm: '2026-10-09', read: '8 min', img: '/blog/investir-em-imoveis-vale-a-pena.jpg', slot: 'blog-investir-em-imoveis-vale-a-pena', title: 'Investir em imóveis vale a pena? Entenda por que localização e estratégia fazem toda a diferença', excerpt: 'Investir em imóveis vale a pena? Entenda por que localização, demanda, aluguel e estratégia importam mais do que as médias nacionais na hora de decidir.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'O mercado imobiliário brasileiro é local: cidades, bairros e até imóveis a poucas quadras de distância valorizam de formas diferentes. No levantamento citado, Itapema (SC) teria valorizado cerca de 166% no metro quadrado entre janeiro de 2018 e agosto de 2026, contra cerca de 55% de inflação, e seis das dez cidades da lista são catarinenses. Migração, emprego, infraestrutura e qualidade de vida ajudam a explicar esses movimentos, e a renda de aluguel muda a conta do investimento. Por isso, a pergunta certa não é se imóvel vale a pena, mas onde, como e em qual imóvel investir.',
+    body: [
+      'Quando o assunto é investimento, uma afirmação aparece com frequência: “imóvel, no máximo, acompanha a inflação.”',
+      'Mas será que analisar o mercado imobiliário brasileiro dessa maneira faz sentido?',
+      'O problema dessa conclusão está em tratar um mercado extremamente regional como se ele fosse uniforme.',
+      'O comportamento dos imóveis em Santa Catarina não é necessariamente igual ao de São Paulo. Dentro de uma mesma cidade, bairros podem apresentar desempenhos completamente diferentes. E, em alguns casos, até imóveis separados por poucas quadras podem ter trajetórias distintas de valorização.',
+      'Por isso, talvez a pergunta correta não seja simplesmente:',
+      '“Vale a pena investir em imóveis?”',
+      'Mas sim:',
+      '“Onde, como e em qual imóvel vale a pena investir?”',
+      'Essa mudança de perspectiva faz toda a diferença.',
+      { titulo: 'O Brasil não possui um único mercado imobiliário' },
+      'Uma das maiores armadilhas ao analisar imóveis é observar apenas médias nacionais.',
+      'O mercado imobiliário é essencialmente local.',
+      'Oferta de terrenos, geração de empregos, infraestrutura, segurança, crescimento populacional, novos empreendimentos, mobilidade urbana e qualidade de vida são alguns dos fatores capazes de alterar significativamente a demanda de determinada região.',
+      'Os números apresentados no levantamento analisado ajudam a ilustrar essa diferença.',
+      'Entre janeiro de 2018 e agosto de 2026, Itapema, em Santa Catarina, teria registrado valorização de aproximadamente 166% no preço do metro quadrado, enquanto a inflação acumulada apresentada para o mesmo período foi de aproximadamente 55%.',
+      'Outras cidades também aparecem com resultados expressivos no levantamento:',
+      { itens: ['Vila Velha: 162%', 'Vitória: 144%', 'Itajaí: 136%', 'São José (SC): 135%', 'Balneário Camboriú: 122%', 'São José dos Campos: 110%', 'Blumenau: 105%', 'Goiânia: 104%', 'Florianópolis: 102%'] },
+      'Um detalhe chama atenção: seis das dez cidades mencionadas estão em Santa Catarina.',
+      'Isso não significa que qualquer imóvel adquirido nessas cidades necessariamente apresentou essa valorização. Significa que existem mercados que, durante determinados ciclos, podem avançar muito acima das médias nacionais.',
+      'E é justamente aí que começa a importância de uma análise imobiliária mais estratégica.',
+      { titulo: 'Valorização não acontece de maneira uniforme dentro da cidade' },
+      'Escolher uma cidade em crescimento ainda não é suficiente.',
+      'Dentro dela, existem bairros, avenidas e microrregiões que concentram desenvolvimento imobiliário, enquanto outras áreas podem permanecer praticamente estagnadas.',
+      'Imagine duas pessoas comprando imóveis na mesma cidade.',
+      'Uma escolhe uma região que começa a receber novos empreendimentos, comércio, infraestrutura e moradores. A outra compra alguns quilômetros adiante, em uma área onde a demanda permanece estável.',
+      'Anos depois, os resultados podem ser completamente diferentes.',
+      'É por isso que médias precisam ser interpretadas com cuidado.',
+      'Uma cidade pode apresentar forte valorização média sem que todos os imóveis tenham acompanhado esse movimento.',
+      'Da mesma maneira, uma cidade com desempenho médio mais fraco pode esconder bairros e avenidas que tiveram excelente valorização.',
+      'No mercado imobiliário, localização não significa apenas escolher uma boa cidade. Significa entender a dinâmica de cada bairro, rua e região.',
+      { titulo: 'Migração populacional pode ajudar a explicar parte desse movimento' },
+      'Outro fator importante apresentado na análise é o deslocamento da população brasileira.',
+      'As pessoas não escolhem uma cidade apenas pelo preço dos imóveis.',
+      'Elas procuram emprego, segurança, qualidade de vida, infraestrutura e melhores oportunidades.',
+      'O levantamento citado aponta crescimento populacional entre 2010 e 2022 de aproximadamente:',
+      '21,8% em Santa Catarina, 20,5% em Mato Grosso e 17,5% em Goiás, diante de um crescimento nacional de aproximadamente 6,5%.',
+      'Quando uma região começa a receber novos moradores, surge uma consequência natural: mais pessoas precisam morar, trabalhar, consumir e utilizar serviços naquele local.',
+      'Isso pode aumentar a demanda imobiliária.',
+      'E quando a oferta não acompanha esse crescimento na mesma velocidade, existe potencial de pressão sobre preços e aluguéis.',
+      'É uma lógica relativamente simples:',
+      'mais atratividade → mais moradores → mais demanda → maior pressão sobre o mercado imobiliário.',
+      'Por isso, acompanhar movimentos demográficos pode ser tão importante quanto observar apenas o preço atual do metro quadrado.',
+      { titulo: 'Segurança, emprego e qualidade de vida entram na conta' },
+      'A valorização imobiliária também está diretamente relacionada à percepção de futuro de uma região.',
+      'Cidades capazes de combinar desenvolvimento econômico, geração de empregos, infraestrutura e qualidade de vida tendem a ganhar atratividade.',
+      'Depois da expansão do trabalho remoto, outro elemento ganhou ainda mais relevância: a possibilidade de escolher onde morar sem necessariamente estar próximo dos maiores centros corporativos do país.',
+      'Com isso, cidades litorâneas, municípios do interior e regiões que oferecem melhor equilíbrio entre trabalho e qualidade de vida passaram a disputar moradores que anteriormente estavam concentrados nas grandes capitais.',
+      'Para quem pensa em adquirir um imóvel com visão patrimonial, acompanhar essas transformações pode revelar oportunidades antes que elas estejam completamente refletidas nos preços.',
+      { titulo: 'E o aluguel? Ele muda a conta do investimento' },
+      'Outro erro comum é analisar apenas quanto o imóvel valorizou.',
+      'Um imóvel destinado a investimento pode gerar retorno por duas frentes:',
+      'valorização patrimonial + renda de aluguel.',
+      'Segundo os números apresentados no material analisado, considerando um horizonte de 20 anos, o imóvel médio brasileiro teria multiplicado seu preço em aproximadamente 5,1 vezes.',
+      'Quando o cálculo incorpora também a renda proveniente de aluguel, o resultado apresentado chega a aproximadamente 15,7 vezes.',
+      'Naturalmente, essa conta não significa que todo proprietário obterá esse desempenho.',
+      'Um investimento imobiliário envolve custos e riscos que precisam entrar na análise: vacância, condomínio, impostos, manutenção, reformas, administração e liquidez são alguns deles.',
+      'Ainda assim, ignorar completamente a renda gerada pelo aluguel pode produzir uma comparação incompleta.',
+      'Para avaliar um imóvel como investimento, portanto, é importante analisar tanto o potencial de valorização quanto sua capacidade de geração de renda.',
+      { titulo: 'Imóvel também exige estratégia' },
+      'Existe uma percepção de que comprar imóveis é um investimento simples: basta adquirir uma propriedade, esperar alguns anos e vender mais caro.',
+      'Na prática, não funciona dessa maneira.',
+      'Uma boa decisão exige perguntas como:',
+      { itens: ['A população dessa região está crescendo?', 'Existem novos empregos sendo criados?', 'Há investimentos em infraestrutura?', 'Novos empreendimentos estão chegando?', 'Existe demanda consistente por aluguel?', 'Qual é a oferta futura de imóveis semelhantes?', 'O preço atual já incorporou toda a expectativa de crescimento?', 'Qual é o perfil de comprador ou locatário daquela região?'] },
+      'Essas perguntas ajudam a transformar uma compra baseada apenas em percepção em uma decisão patrimonial mais consciente.',
+      { titulo: 'Comprar na planta também exige atenção' },
+      'Imóveis na planta podem apresentar oportunidades interessantes, principalmente em regiões que estão passando por expansão imobiliária.',
+      'Mas potencial de valorização não elimina risco.',
+      'Antes de comprar, é fundamental analisar a construtora, seu histórico de entregas, a documentação do empreendimento, condições contratuais, localização, padrão do projeto e demanda futura.',
+      'Comprar antecipadamente pode permitir participar de uma fase inicial de valorização.',
+      'Por outro lado, uma escolha inadequada de empreendimento ou incorporadora pode comprometer completamente a estratégia.',
+      'Por isso, preço de lançamento nunca deveria ser o único critério de decisão.',
+      { titulo: 'Apartamentos não valorizam para sempre da mesma maneira' },
+      'Outro ponto relevante é o ciclo de vida do imóvel.',
+      'Empreendimentos novos costumam possuir vantagens comerciais importantes: arquitetura atualizada, áreas comuns modernas, tecnologia, eficiência e menor necessidade inicial de manutenção.',
+      'Com o passar dos anos, entretanto, novos projetos surgem e passam a competir pela mesma demanda.',
+      'Além disso, custos de manutenção e condomínio podem aumentar.',
+      'Isso significa que manter um imóvel durante muito tempo não garante automaticamente o melhor retorno possível.',
+      'Em alguns casos, pode fazer sentido realizar o ganho patrimonial e buscar uma nova oportunidade.',
+      'Novamente, a decisão depende de estratégia — não de uma regra universal.',
+      { titulo: 'Afinal, imóvel é um bom investimento?' },
+      'A resposta mais responsável é:',
+      'depende do imóvel.',
+      'Existem cidades que tiveram valorização significativamente superior à inflação e outras que ficaram abaixo dela.',
+      'Existem bairros extraordinários dentro de cidades com desempenho médio e imóveis ruins dentro de mercados altamente valorizados.',
+      'Por isso, dizer simplesmente que “imóvel sempre valoriza” é tão perigoso quanto afirmar que “imóvel nunca é um bom investimento”.',
+      'O patrimônio imobiliário pode cumprir diferentes funções: moradia, preservação patrimonial, geração de renda, diversificação ou valorização de capital.',
+      'O que determina a qualidade da decisão é a combinação entre objetivo, localização, preço de entrada, demanda, horizonte de investimento e estratégia.',
+      { titulo: 'A melhor oportunidade começa com informação' },
+      'Comprar um imóvel é uma decisão financeira importante — e muitas vezes também emocional.',
+      'Por isso, informação de qualidade faz diferença.',
+      'Mais do que procurar simplesmente o imóvel mais bonito ou o menor preço por metro quadrado, vale entender o que está acontecendo ao redor daquela propriedade.',
+      { itens: ['Para onde as pessoas estão indo?', 'Onde estão surgindo empregos e infraestrutura?', 'Quais regiões estão recebendo novos investimentos?', 'Onde existe demanda real por moradia?'] },
+      'É essa leitura que ajuda a identificar não apenas um imóvel, mas uma oportunidade patrimonial.',
+      'Na Lotus Brokers, acreditamos que cada decisão imobiliária merece análise, conhecimento e planejamento. Nosso papel é transformar dados e conhecimento de mercado em escolhas mais claras, seguras e estratégicas para cada cliente.',
+      'Está pensando em comprar um imóvel para morar, investir ou diversificar seu patrimônio? Fale com um consultor da Lotus Brokers e conheça oportunidades alinhadas aos seus objetivos.',
+    ],
+  },
+  /* ------------------------------------------------------------------
+   * Enviado pela Lotus em 08/10/2026, para sair no mesmo dia.
+   *
+   * Foi o destaque da capa do blog até 09/10/2026.
    *
    * É NOTÍCIA, com agenda. Datas, horários e locais conferidos no comunicado
    * da Prefeitura de 07/10/2026 (jundiai.sp.gov.br/noticias/2026/10/07/
