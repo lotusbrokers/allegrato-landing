@@ -639,7 +639,7 @@ export default function Manawa() {
                 <span className="ic"><IconPin /></span>
                 <div>
                   <b>Empreendimento</b>
-                  <span>Rua Aristides Mariotti, 336<br />Recanto Quarto Centenário · Jundiaí / SP · 13211-740</span>
+                  <span>Rua Aristides Mariotti, 336<br /><a href="/lotus-bairro/recanto-quarto-centenario" style={{ textDecoration: 'underline', textDecorationColor: 'var(--gold)', textUnderlineOffset: '3px' }}>Recanto Quarto Centenário</a> · Jundiaí / SP · 13211-740</span>
                 </div>
               </div>
               <div className="addr">
