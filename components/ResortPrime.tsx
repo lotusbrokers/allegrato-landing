@@ -431,7 +431,7 @@ export default function ResortPrime() {
             <img src="/resort-prime/a009.jpg" alt="Vista aérea do Resort Prime Santa Angela no bairro Engordadouro" />
             <div className="loc__addr">
               <span className="pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg></span>
-              <div><b>Av. Caetano Gornati</b><span>Engordadouro, Jundiaí / SP</span></div>
+              <div><b>Av. Caetano Gornati</b><span><a href="/lotus-bairro/engordadouro" style={{ textDecoration: 'underline', textDecorationColor: 'var(--terra)', textUnderlineOffset: '3px' }}>Engordadouro</a>, Jundiaí / SP</span></div>
             </div>
           </div>
           <div className="loc__copy">

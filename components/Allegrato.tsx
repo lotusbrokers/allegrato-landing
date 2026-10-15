@@ -703,7 +703,7 @@ export default function Allegrato() {
                 <b>
                   Av. Juvenal Arantes, 1240
                 </b>
-                {' '}· Bairro Medeiros, Jundiaí/SP
+                {' '}· <a href="/lotus-bairro/medeiros" style={parseStyle('text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px')}>Bairro Medeiros</a>, Jundiaí/SP
                 <br />
                 <span style={parseStyle('font-size:.85rem')} className="muted">
                   A ~50 min da capital · próximo à Serra do Japi
