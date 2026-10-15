@@ -122,9 +122,95 @@ export function relacionados(posts: Post[], atual: Post, quantos = 3): Post[] {
 // mão, que envelheceu: títulos que não existiam mais no blog e nenhuma capa.
 export const POSTS: Post[] = [
   /* ------------------------------------------------------------------
-   * Enviado pela Lotus em 09/10/2026, para sair no mesmo dia.
+   * Enviado pela Lotus em 15/10/2026, para sair no mesmo dia.
    *
    * Primeiro da lista, e por isso o novo destaque da capa do blog.
+   *
+   * CONFERIDO em 15/10/2026, e publicado como veio. As regras de pessoa
+   * física batem com a LC 214/2025 no Planalto: art. 251, § 1º, II e III, e
+   * §§ 2º e 3º (mais de 3 imóveis distintos mantidos há menos de 5 anos;
+   * mais de 1 construído pelo próprio alienante nos 5 anos anteriores; no
+   * próprio ano, a operação que passa do limite). O fato gerador bate com o
+   * art. 254, I e II, e § 1º (promessa, carta de reserva com princípio de
+   * pagamento). As datas da NF-e ABI (1º/12/2026, e 1º/01/2027 no Simples
+   * Nacional) batem com o Ato Conjunto RFB/CGIBS nº 4, de 30/07/2026, nas
+   * publicações que o reproduzem.
+   *
+   * Ajustes de forma, os mesmos dos lotes anteriores: a lista de perguntas
+   * virou itens. Não veio meta description: `excerpt` e `tldr` resumem o
+   * próprio texto, sem informação nova.
+   *
+   * Capa: a foto enviada junto com o texto (a mão com as chaves e o chaveiro
+   * de casinha), recortada na horizontal, 736x460, na faixa da mão.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'nova-nota-fiscal-venda-de-imoveis', cat: 'Documentação', date: 'Out 2026', publicadoEm: '2026-10-15', read: '6 min', img: '/blog/nova-nota-fiscal-venda-de-imoveis.jpg', slot: 'blog-nova-nota-fiscal-venda-de-imoveis', title: 'Nova nota fiscal para venda de imóveis: entenda o que muda a partir de dezembro de 2026', excerpt: 'A NF-e ABI passa a ser obrigatória em 1º de dezembro de 2026. Entenda por que isso não obriga toda pessoa física a emitir nota ao vender um imóvel.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'A partir de 1º de dezembro de 2026, a NF-e ABI (Nota Fiscal Eletrônica de Alienação de Bens Imóveis, modelo 77) passa a ser obrigatória, conforme o Ato Conjunto RFB/CGIBS nº 4/2026; para optantes pelo Simples Nacional, o cronograma começa em 1º de janeiro de 2027. Isso não significa que toda pessoa física terá que emitir nota ao vender um imóvel: a venda eventual de um imóvel do próprio patrimônio não a torna, por si só, contribuinte do IBS e da CBS. A atenção é para quem compra, constrói e vende com frequência, como na alienação de mais de três imóveis mantidos há menos de cinco anos, e para quem negocia imóveis na planta, já que o fato gerador pode ocorrer na promessa ou na carta de reserva, antes da escritura.',
+    body: [
+      'A partir de 1º de dezembro de 2026, entra em vigor uma importante mudança para determinadas operações do mercado imobiliário brasileiro: a obrigatoriedade da Nota Fiscal Eletrônica de Alienação de Bens Imóveis (NF-e ABI), modelo 77.',
+      'A novidade faz parte da implementação da Reforma Tributária e já começou a gerar dúvidas — principalmente entre proprietários que pretendem vender um imóvel.',
+      'Mas é importante esclarecer uma coisa desde o início:',
+      'isso não significa que toda pessoa física terá que emitir nota fiscal sempre que vender um imóvel.',
+      'A nova obrigação precisa ser analisada de acordo com quem está realizando a operação e, no caso das pessoas físicas, com a frequência e as características das negociações.',
+      { titulo: 'O que é a NF-e ABI?' },
+      'A NF-e ABI é a Nota Fiscal Eletrônica de Alienação de Bens Imóveis, modelo 77, criada para documentar eletronicamente operações imobiliárias dentro das novas regras do IBS e da CBS.',
+      'O Ato Conjunto RFB/CGIBS nº 4/2026 estabeleceu 1º de dezembro de 2026 como data de início da obrigatoriedade de emissão desse documento fiscal. Para contribuintes optantes pelo Simples Nacional, o cronograma previsto no ato começa em 1º de janeiro de 2027.',
+      'Ou seja, existe uma mudança real no mercado — mas ela não deve ser interpretada como uma obrigação automática para qualquer proprietário que decida vender sua casa ou apartamento.',
+      { titulo: 'Pessoa física terá que emitir nota fiscal ao vender um imóvel?' },
+      'Não necessariamente.',
+      'Uma pessoa que vende, de maneira eventual, um imóvel de seu patrimônio não passa automaticamente a ser tratada como contribuinte do regime regular do IBS e da CBS apenas por causa dessa venda.',
+      'A legislação estabelece critérios específicos para identificar quando as operações realizadas por uma pessoa física passam a ter características suficientes para enquadrá-la no regime.',
+      'Um dos casos envolve a alienação ou cessão de direitos sobre mais de três imóveis distintos, desde que esses imóveis estejam no patrimônio da pessoa há menos de cinco anos.',
+      'Também existe uma regra específica para imóveis construídos pelo próprio vendedor: a alienação de mais de um imóvel construído pelo próprio alienante nos cinco anos anteriores pode gerar o enquadramento previsto na legislação.',
+      'Além disso, a legislação contém regras para determinar o enquadramento no próprio ano-calendário. Na hipótese envolvendo mais de três imóveis, por exemplo, a pessoa física pode passar a ser considerada contribuinte a partir da quarta operação e nas operações posteriores, observados os demais requisitos legais.',
+      'Em outras palavras: frequência, quantidade de imóveis, tempo de propriedade e origem do imóvel importam.',
+      'Por isso, a frase “vendeu um imóvel, precisa emitir nota” simplifica demais uma regra que é consideravelmente mais específica.',
+      { titulo: 'Vender o apartamento onde você mora não significa automaticamente ter que emitir nota' },
+      'Esse é provavelmente o ponto mais importante para o proprietário comum.',
+      'Imagine uma pessoa que comprou um apartamento para morar e, alguns anos depois, decide vendê-lo para adquirir outro imóvel.',
+      'A existência da NF-e ABI, por si só, não transforma essa pessoa automaticamente em um contribuinte habitual do IBS e da CBS.',
+      'As novas regras buscam alcançar, entre outras situações previstas na legislação, pessoas físicas que realizam operações imobiliárias com características de atividade econômica recorrente.',
+      'Por isso, é necessário separar dois cenários muito diferentes:',
+      'vender eventualmente um imóvel do patrimônio pessoal não é a mesma coisa que comprar, construir e negociar imóveis repetidamente.',
+      { titulo: 'Atenção para quem compra e vende imóveis com frequência' },
+      'É justamente aqui que a mudança merece maior atenção.',
+      'Investidores que compram imóveis para revenda, pessoas que negociam várias unidades em períodos relativamente curtos ou quem constrói imóveis para posteriormente comercializá-los precisa acompanhar cuidadosamente os critérios estabelecidos pela legislação.',
+      'Um exemplo importante está na quarta operação.',
+      'Se forem atendidos os requisitos previstos para alienações de imóveis mantidos no patrimônio por menos de cinco anos, a quarta operação no mesmo ano-calendário pode provocar o enquadramento da pessoa física no regime regular para essa operação e para as posteriores.',
+      'Da mesma forma, quem vende imóveis que construiu precisa observar a regra específica aplicável a esse tipo de operação.',
+      'Por isso, olhar apenas para a próxima venda pode não ser suficiente.',
+      'É preciso analisar o histórico das operações.',
+      { titulo: 'E quem compra imóvel na planta para depois repassar?' },
+      'Esse grupo merece atenção especial.',
+      'A legislação não considera necessariamente que uma alienação ocorre somente quando finalmente é assinada a escritura no cartório.',
+      'Para fins do IBS e da CBS, o fato gerador na alienação ocorre no ato de alienação. E a própria lei amplia esse conceito para alcançar situações como a celebração de contrato de alienação, inclusive por meio de instrumento de promessa, carta de reserva com princípio de pagamento ou outro documento representativo de compromisso.',
+      'Nas cessões ou atos onerosos que transfiram ou constituam direitos reais sobre imóveis, a legislação também estabelece regras próprias para o momento da ocorrência do fato gerador.',
+      'Isso torna especialmente importante a análise de operações envolvendo imóveis na planta, cessões e negociações realizadas antes da entrega das chaves.',
+      'Esperar a escritura para começar a avaliar os efeitos tributários pode ser tarde demais.',
+      { titulo: 'A nota fiscal começa em dezembro, mas a preparação deve começar antes' },
+      'O Ato Conjunto RFB/CGIBS nº 4/2026 estabeleceu o início da obrigatoriedade da NF-e ABI, modelo 77, em 1º de dezembro de 2026, ressalvadas regras específicas, como o cronograma aplicável aos optantes pelo Simples Nacional.',
+      'A mudança integra a adaptação das obrigações fiscais à nova estrutura criada pela Reforma Tributária, especialmente em relação ao IBS e à CBS.',
+      'Para quem realiza operações imobiliárias recorrentes, portanto, o melhor momento para verificar o enquadramento não é depois de uma venda.',
+      'É antes da próxima negociação.',
+      { titulo: 'Vai vender um imóvel? Faça estas perguntas primeiro' },
+      'Antes de concluir que a nova regra se aplica — ou não — ao seu caso, vale levantar algumas informações:',
+      { itens: ['Quantos imóveis você alienou recentemente?', 'Há quanto tempo cada imóvel estava no seu patrimônio?', 'Algum deles foi construído por você?', 'Você realiza compra e venda de imóveis de maneira recorrente?', 'Existe cessão de direitos ou negociação de imóvel ainda na planta?', 'Você pode atingir os critérios de enquadramento como contribuinte do IBS e da CBS?'] },
+      'Essas respostas ajudam a identificar situações que merecem uma análise tributária individualizada.',
+      { titulo: 'O que muda para quem está pensando em comprar ou vender?' },
+      'A principal mensagem é simples: não há motivo para pânico, mas há motivo para informação.',
+      'A criação da NF-e ABI representa uma mudança relevante na formalização e documentação fiscal de determinadas operações imobiliárias. Porém, transformar essa novidade em “todo mundo terá que emitir nota fiscal para vender imóvel” é incorreto.',
+      'Para o proprietário que realiza uma venda eventual, a análise é uma.',
+      'Para quem compra, constrói, vende ou transfere imóveis repetidamente, pode ser completamente diferente.',
+      'E, com as novas regras entrando em operação, entender essa diferença antes de negociar passa a ser ainda mais importante.',
+      'Na Lotus Brokers, acreditamos que uma boa decisão imobiliária começa com informação de qualidade. Se você está pensando em comprar, vender ou investir em imóveis, conte com especialistas para conduzir cada etapa da negociação com segurança e clareza.',
+      'Informação também faz parte de um bom negócio.',
+      'Este conteúdo possui caráter exclusivamente informativo e não substitui orientação contábil, jurídica ou tributária individualizada. O enquadramento depende das características de cada operação e a regulamentação da Reforma Tributária continua em implementação.',
+    ],
+  },
+  /* ------------------------------------------------------------------
+   * Enviado pela Lotus em 09/10/2026, para sair no mesmo dia.
+   *
+   * Foi o destaque da capa do blog até 15/10/2026.
    *
    * NÚMEROS. O texto cita "o levantamento analisado" sem dizer qual. Os de
    * população conferem com o Censo do IBGE (2010 a 2022: SC 21,8%, MT 20,5%,
