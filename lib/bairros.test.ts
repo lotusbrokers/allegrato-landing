@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { existsSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { BAIRROS } from './bairros.ts';
+import { BAIRROS, bairroSlugsIndexaveis } from './bairros.ts';
 
 /**
  * O erro possível aqui é de digitação: um caminho de foto que não existe em
@@ -33,5 +33,28 @@ test('a foto de cada bairro é a do próprio bairro, e não a de outro', () => {
       `/bairros/${b.slug}.jpg`,
       `${b.slug} aponta para "${b.heroImg}", que é de outro bairro`
     );
+  }
+});
+
+/**
+ * As landings apontam para o guia do bairro delas com o slug escrito à mão
+ * (componente ou HTML em public/). Errar o slug não dá 404:
+ * /lotus-bairro/<inexistente> responde 200, e o link vira página vazia para o
+ * Google. Apontar para guia com `publicado: false` manda o visitante para uma
+ * página noindex. Os dois casos só aparecem aqui.
+ */
+test('todo link fixo para guia de bairro aponta para um guia publicado', () => {
+  const raiz = process.cwd();
+  const arquivos = [
+    ...readdirSync(join(raiz, 'components')).filter((n) => n.endsWith('.tsx')).map((n) => join(raiz, 'components', n)),
+    ...readdirSync(join(raiz, 'public'), { withFileTypes: true })
+      .filter((e) => e.isDirectory() && existsSync(join(raiz, 'public', e.name, 'index.html')))
+      .map((e) => join(raiz, 'public', e.name, 'index.html')),
+  ];
+  const publicados = new Set(bairroSlugsIndexaveis());
+  for (const arquivo of arquivos) {
+    for (const [, slug] of readFileSync(arquivo, 'utf8').matchAll(/href="\/lotus-bairro\/([a-z0-9-]+)"/g)) {
+      assert.ok(publicados.has(slug), `${arquivo} aponta para /lotus-bairro/${slug}, que não é um guia publicado`);
+    }
   }
 });
