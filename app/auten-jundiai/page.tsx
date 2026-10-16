@@ -21,7 +21,6 @@ export const metadata: Metadata = {
     'Rua do Retiro',
   ],
   authors: [{ name: 'Auten Incorporadora, Grupo Cataguá' }],
-  robots: { index: true, follow: true },
   alternates: { canonical: 'https://www.lotusbrokers.com.br/auten-jundiai' },
   openGraph: {
     type: 'website',
