@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     title: 'Avelã Vila Residencial, Itupeva/SP',
     description:
       'A beleza do campo no coração da cidade. Apartamentos de 66 a 87 m² com lazer completo em Itupeva/SP.',
+    images: ['https://www.lotusbrokers.com.br/avela/compartilhar.jpg'],
   },
 };
 
