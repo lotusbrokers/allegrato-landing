@@ -12,7 +12,6 @@ export const metadata: Metadata = {
     'Vistta Castanho: loteamento fechado com lotes a partir de 126 m² no bairro do Castanho, Jundiaí, entre São Paulo e Campinas. Clube completo, lago, portaria inteligente e natureza. Fale com um corretor.',
   keywords:
     'Vistta Castanho, loteamento fechado Jundiaí, lotes Castanho Jundiaí, terrenos condomínio fechado Jundiaí, comprar lote Jundiaí, Vistta Castanho Applausi',
-  robots: 'index, follow',
   alternates: { canonical: 'https://www.lotusbrokers.com.br/vistta-castanho' },
   openGraph: {
     type: 'website',
@@ -38,7 +37,7 @@ const jsonLd = {
   name: 'Vistta Castanho',
   description:
     'Loteamento fechado com lotes a partir de 126 m² no bairro do Castanho, em Jundiaí, SP. Clube completo, lago, paisagismo multiespécies e portaria inteligente.',
-  image: 'assets/img/hero-lago.jpg',
+  image: 'https://www.lotusbrokers.com.br/vistta-castanho/a008.jpg',
   address: {
     '@type': 'PostalAddress',
     streetAddress:

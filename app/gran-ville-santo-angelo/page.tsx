@@ -16,7 +16,6 @@ export const metadata: Metadata = {
   keywords:
     'Gran Ville Santo Angelo, loteamento Itupeva, lotes Itupeva, bairro planejado, novo urbanismo, GP Desenvolvimento Urbano, lotes alto padrão, condomínio Itupeva, Jundiaí, Mata Atlântica',
   authors: [{ name: 'GP Desenvolvimento Urbano' }],
-  robots: 'index, follow',
   // Canonical na própria página desde 02/10/2026. Antes apontava para o site da
   // construtora, e o Google tratava esta página como cópia daquela: ela não
   // aparecia como página da Lotus. Decisão da Lotus: todas as landings no Google.

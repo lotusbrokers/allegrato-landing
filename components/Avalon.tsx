@@ -638,7 +638,7 @@ export default function Avalon() {
           <div className="loc-grid">
             <div data-reveal>
               <p className="addr">
-                📍 Rua Maria José Maia de Toledo, Vila Hortolândia, Jundiaí/SP
+                📍 Rua Maria José Maia de Toledo, <a href="/lotus-bairro/vila-hortolandia" style={{ textDecoration: 'underline', textUnderlineOffset: '3px' }}>Vila Hortolândia</a>, Jundiaí/SP
               </p>
               <ul className="poi">
                 <li>

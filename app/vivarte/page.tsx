@@ -12,7 +12,6 @@ export const metadata: Metadata = {
     'Vivarte Grand Alamedas: apartamentos de 2 e 3 dormitórios em Jundiaí, com vista para a Serra do Japi, ampla varanda e mais de 30 itens de lazer. Lançamento Grupo Diretiva. Agende sua visita.',
   keywords:
     'apartamento à venda Jundiaí, lançamento Jundiaí, Vivarte Grand Alamedas, apartamento 2 e 3 dormitórios Jundiaí, Serra do Japi, minha casa minha vida Jundiaí, Grupo Diretiva, apartamento com lazer Jundiaí',
-  robots: { index: true, follow: true },
   // Canonical na própria página desde 02/10/2026. Antes apontava para o site da
   // construtora, e o Google tratava esta página como cópia daquela: ela não
   // aparecia como página da Lotus. Decisão da Lotus: todas as landings no Google.

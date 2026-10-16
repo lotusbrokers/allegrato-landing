@@ -13,7 +13,6 @@ export const metadata: Metadata = {
   keywords:
     'Authoria by Tebas, apartamento Jundiaí, alto padrão Jundiaí, 4 suítes Jundiaí, 3 suítes, lançamento Jundiaí, Jardim Santa Teresa, Tebas, apartamento de luxo, imóvel Jundiaí',
   authors: [{ name: 'Tebas' }],
-  robots: 'index, follow',
   // Canonical na própria página desde 02/10/2026. Antes apontava para o site da
   // construtora, e o Google tratava esta página como cópia daquela: ela não
   // aparecia como página da Lotus. Decisão da Lotus: todas as landings no Google.

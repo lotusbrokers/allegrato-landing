@@ -423,7 +423,7 @@ export default function BrisasDoJapi({
         <div data-reveal="">
           <div style={parseStyle('color:#b88f3f;font-size:13px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;margin-bottom:18px;')}>O empreendimento</div>
           <h2 style={parseStyle("font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(30px,4.2vw,52px);line-height:1.08;letter-spacing:-.02em;margin:0 0 22px;color:#152730;")}>Um bairro tranquilo, perto de tudo e com vista para a serra</h2>
-          <p style={parseStyle('font-size:17px;line-height:1.7;color:#4c5a61;margin:0 0 18px;')}>O Brisas do Japi é o novo projeto da VVC Construtora no Bairro Medeiros, em Jundiaí. Cada detalhe foi pensado para aproveitar a excelente área de 29.000m² no centro do bairro, um lugar tranquilo e perto de escolas, supermercados, restaurantes e posto de saúde.</p>
+          <p style={parseStyle('font-size:17px;line-height:1.7;color:#4c5a61;margin:0 0 18px;')}>O Brisas do Japi é o novo projeto da VVC Construtora no <a href="/lotus-bairro/medeiros" style={parseStyle('color:inherit;text-decoration:underline;text-decoration-color:#c8a45c;text-underline-offset:3px')}>Bairro Medeiros</a>, em Jundiaí. Cada detalhe foi pensado para aproveitar a excelente área de 29.000m² no centro do bairro, um lugar tranquilo e perto de escolas, supermercados, restaurantes e posto de saúde.</p>
           <p style={parseStyle('font-size:17px;line-height:1.7;color:#4c5a61;margin:0;')}>Todos os apartamentos possuem varanda para você desfrutar a brisa que vem da Serra do Japi. E com o Novo Minha Casa Minha Vida, ficou ainda mais fácil realizar o seu sonho.</p>
         </div>
         <div data-reveal="" data-reveal-delay="120" style={parseStyle('position:relative;')}>
