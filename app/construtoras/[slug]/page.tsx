@@ -7,6 +7,7 @@ import CardEmpreendimento from '@/components/CardEmpreendimento';
 import { getLancamentosList, isListItemApresentavel, type LancamentoListItem } from '@/lib/lancamentos';
 import { agruparPorConstrutora, comCuradasSemLancamento, construtoraPorSlug } from '@/lib/construtoras-paginas';
 import { conteudoDaConstrutora, curadasSemLancamento, logoClaroDaConstrutora } from '@/lib/construtoras-conteudo';
+import { IMAGEM_COMPARTILHAMENTO } from '@/lib/site';
 
 export const revalidate = 3600;
 
@@ -75,7 +76,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       url,
       title: `${c.nome} | Lotus Brokers`,
       description: descricao,
-      images: c.capa ? [c.capa.img] : undefined,
+      images: [c.capa?.img ?? IMAGEM_COMPARTILHAMENTO],
     },
     twitter: { card: 'summary_large_image' },
   };

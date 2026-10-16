@@ -7,6 +7,7 @@ import SliderConstrutoras from '@/components/SliderConstrutoras';
 import { getLancamentosList, isListItemApresentavel } from '@/lib/lancamentos';
 import { agruparPorConstrutora, comCuradasSemLancamento } from '@/lib/construtoras-paginas';
 import { curadasSemLancamento, logoClaroDaConstrutora } from '@/lib/construtoras-conteudo';
+import { IMAGEM_COMPARTILHAMENTO } from '@/lib/site';
 
 // Mesmo ISR das demais rotas do portal.
 export const revalidate = 3600;
@@ -23,6 +24,7 @@ export const metadata: Metadata = {
     title: 'Construtoras parceiras da Lotus Brokers',
     description:
       'As construtoras por trás dos empreendimentos que a Lotus acompanha em Jundiaí, Itupeva e região.',
+    images: [IMAGEM_COMPARTILHAMENTO],
   },
   twitter: { card: 'summary_large_image' },
 };
