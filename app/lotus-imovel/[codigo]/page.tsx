@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import LotusImovel from '@/components/LotusImovel';
 import { getImovel, getImoveisCards, type ImovelRow } from '@/lib/imoveis';
+import { getCondominio } from '@/lib/condominios';
+import { condominioDoImovel } from '@/lib/condominio-do-imovel';
 import { resumoDescricao } from '@/lib/resumo-imovel';
 import { tituloDaPdp } from '@/lib/titulo-imovel';
 
@@ -152,7 +154,13 @@ export default async function LotusImovelPage({ params }: Params) {
   const imovel = await getImovel(codigo);
   if (!imovel) notFound();
 
-  const relacionados = await getImoveisCards(codigo);
+  // O condomínio vem junto dos relacionados, sem somar uma ida ao banco no
+  // tempo da página. getCondominio devolve null para condomínio não publicado
+  // ou se a leitura falhar; aí a seção do condomínio simplesmente não aparece.
+  const [relacionados, condominio] = await Promise.all([
+    getImoveisCards(codigo),
+    imovel.condominio_id ? getCondominio(imovel.condominio_id) : null,
+  ]);
   const jsonLd = buildJsonLd(imovel, codigo);
 
   return (
@@ -164,7 +172,11 @@ export default async function LotusImovelPage({ params }: Params) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(obj) }}
         />
       ))}
-      <LotusImovel data={imovel} relacionados={relacionados} />
+      <LotusImovel
+        data={imovel}
+        relacionados={relacionados}
+        condominio={condominioDoImovel(condominio)}
+      />
     </>
   );
 }
