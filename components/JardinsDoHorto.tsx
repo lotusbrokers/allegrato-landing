@@ -533,7 +533,7 @@ export default function JardinsDoHorto({
               <span style={parseStyle('color:#C75D40; font-size:22px; line-height:1.2;')}>◍</span>
               <div>
                 <div style={parseStyle('font-weight:700; font-size:15px;')}>Rua Irineu de Toledo, nº 225</div>
-                <div style={parseStyle('color:#6c6459; font-size:14px; margin-top:3px;')}>Horto Florestal · Jundiaí / SP</div>
+                <div style={parseStyle('color:#6c6459; font-size:14px; margin-top:3px;')}><a href="/lotus-bairro/horto-florestal" style={parseStyle('color:inherit;text-decoration:underline;text-decoration-color:#C75D40;text-underline-offset:3px')}>Horto Florestal</a> · Jundiaí / SP</div>
               </div>
             </div>
             <div style={parseStyle('display:flex; flex-wrap:wrap; gap:10px;')}>

@@ -13,7 +13,6 @@ export const metadata: Metadata = {
   title: 'Portal dos Lagos, loteamento da Santa Angela em Jundiaí | Imobiliária Lotus Brokers',
   description:
     'Portal dos Lagos, loteamento residencial da Santa Angela Construtora em Jundiaí/SP, a 45 min de São Paulo: clube completo, portaria blindada e infraestrutura premium. Atendimento pela Imobiliária Lotus Brokers, autorizada a comercializar os empreendimentos da Santa Angela.',
-  robots: { index: true, follow: true },
   alternates: {
     // Era imobiliariajapi.com.br — apontava o canonical para o domínio antigo,
     // dizendo ao Google que a versão oficial desta página vive fora do site.

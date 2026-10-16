@@ -7,7 +7,6 @@ import RodapeLotus from '@/components/RodapeLotus';
 
 // Metadata portada do <head> de resort-prime/index.html (paridade de SEO com o estático).
 export const metadata: Metadata = {
-  robots: { index: true, follow: true },
   title:
     'Resort Prime Santa Angela, lazer de resort em Jundiaí | Imobiliária Lotus Brokers',
   description:
@@ -18,6 +17,7 @@ export const metadata: Metadata = {
     title: 'Resort Prime Santa Angela, Jundiaí | Lotus Brokers',
     description:
       'Resort Prime, da Santa Angela Construtora, em Jundiaí: 4 torres, apartamentos de 68 a 112m², lazer completo estilo resort, Academia Céltica e Club Prime. Atendimento pela Imobiliária Lotus Brokers, autorizada a comercializar os empreendimentos da Santa Angela.',
+    images: ['https://www.lotusbrokers.com.br/resort-prime/compartilhar.jpg'],
   },
 };
 

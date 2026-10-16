@@ -11,7 +11,6 @@ export const viewport: Viewport = {
 
 // Metadata portada do <helmet> de maxx-santa-angela/index.html (paridade de SEO).
 export const metadata: Metadata = {
-  robots: { index: true, follow: true },
   // Sem canonical próprio a página herdava o da home (app/layout.tsx) e o Google
   // podia tratá-la como cópia da home.
   alternates: { canonical: 'https://www.lotusbrokers.com.br/maxx-santa-angela' },

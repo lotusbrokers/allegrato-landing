@@ -26,7 +26,6 @@ export const metadata: Metadata = {
     'lazer completo',
     'Avenida Nami Azém',
   ],
-  robots: { index: true, follow: true },
   alternates: { canonical: 'https://www.lotusbrokers.com.br/vigore' },
   openGraph: {
     type: 'website',
@@ -35,6 +34,7 @@ export const metadata: Metadata = {
     title: 'Residencial Vigóre, no Colônia, Jundiaí | Lotus Brokers',
     description:
       'Apartamentos de 53 a 54 m² com lazer completo no bairro Colônia. 3 torres, 280 unidades. Atendimento pela Imobiliária Lotus Brokers.',
+    images: ['https://www.lotusbrokers.com.br/vigore/compartilhar.jpg'],
   },
   twitter: { card: 'summary_large_image' },
 };
