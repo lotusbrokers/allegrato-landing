@@ -6,12 +6,26 @@ import { resumoDescricao } from '@/lib/resumo-imovel';
 import { tituloDaPdp } from '@/lib/titulo-imovel';
 
 // Rota dinâmica /lotus-imovel/[codigo] — lê cada imóvel do Supabase.
-// ISR sob demanda: a página é renderizada no primeiro acesso (em runtime, onde
-// as env vars do Supabase existem) e cacheada por 1h. Não pré-renderizamos no
-// build (`generateStaticParams`) porque o ambiente de build não recebe as env
-// vars do Supabase, e os dados mudam com frequência — prerender de tudo no build
-// não agrega aqui.
+// ISR sob demanda: a página é renderizada no primeiro acesso e cacheada por 1h.
+// Nenhum código é pré-renderizado no build: os dados mudam com frequência e
+// prerender de tudo no build não agrega aqui.
 export const revalidate = 3600;
+
+/**
+ * Lista vazia de propósito: é ela que liga o cache acima.
+ *
+ * Sem generateStaticParams, a rota dinâmica é renderizada a cada visita, e o
+ * `revalidate` não tem efeito: até 16/10/2026 as páginas de imóvel saíam com
+ * Cache-Control no-store, enquanto bairro, condomínio, artigo e construtora,
+ * que declaram a função, saíam do cache. Cada acesso do Google virava consulta
+ * ao Supabase, e banco fora do ar derrubava a página. Com a lista vazia, cada
+ * imóvel é gerado no primeiro acesso e servido do cache por 1h, inclusive quando
+ * o banco oscila; código que não existe continua dando 404 (dynamicParams fica
+ * no padrão, true).
+ */
+export function generateStaticParams(): { codigo: string }[] {
+  return [];
+}
 
 const SITE = 'https://www.lotusbrokers.com.br';
 
