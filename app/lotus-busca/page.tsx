@@ -29,19 +29,9 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image' },
 };
 
-// JSON-LD portados do <helmet> estático (WebSite com SearchAction, ItemList).
-const websiteLd = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'Lotus Brokers',
-  url: 'https://www.lotusbrokers.com.br',
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: 'https://www.lotusbrokers.com.br/comprar?q={query}',
-    'query-input': 'required name=query',
-  },
-};
-
+// JSON-LD: só o ItemList. O WebSite que vinha do estático saiu em 16/10/2026: a
+// busca dele apontava para /comprar, endereço que não existe, e o WebSite do
+// site agora mora na home, que é onde o Google o procura.
 export default async function LotusBuscaPage() {
   const imoveis = await getImoveisBusca();
 
@@ -58,10 +48,6 @@ export default async function LotusBuscaPage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}

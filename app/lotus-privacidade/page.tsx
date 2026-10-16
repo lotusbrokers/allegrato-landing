@@ -167,7 +167,7 @@ export default function LotusPrivacidadePage() {
         <h2>13. Cookies</h2>
         <p>
           Para saber como usamos cookies e como você pode gerenciá-los, consulte nossa{' '}
-          <a href="../lotus-cookies/">Política de Cookies</a>.
+          <a href="/lotus-cookies">Política de Cookies</a>.
         </p>
         <h2>14. Contato do DPO</h2>
         <p>
@@ -192,9 +192,9 @@ export default function LotusPrivacidadePage() {
         <div className="fbar">
           <div>{footerLegalLine()}</div>
           <div style={{ display: 'flex', gap: '16px' }}>
-            <a href="../lotus-privacidade/">Privacidade</a>
-            <a href="../lotus-termos/">Termos</a>
-            <a href="../lotus-cookies/">Cookies</a>
+            <a href="/lotus-privacidade">Privacidade</a>
+            <a href="/lotus-termos">Termos</a>
+            <a href="/lotus-cookies">Cookies</a>
             <a href="/meus-dados">Meus dados</a>
           </div>
         </div>
@@ -231,7 +231,7 @@ export default function LotusPrivacidadePage() {
         >
           Usamos cookies para melhorar sua experiência e entender o uso do site. Aceite todos ou
           recuse os não-essenciais.{' '}
-          <a href="../lotus-cookies/" style={{ color: '#cdab6e', textDecoration: 'underline' }}>
+          <a href="/lotus-cookies" style={{ color: '#cdab6e', textDecoration: 'underline' }}>
             Política de Cookies
           </a>
           .

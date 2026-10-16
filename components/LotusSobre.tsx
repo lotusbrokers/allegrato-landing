@@ -216,9 +216,9 @@ const WHATSAPP_DEFAULT = '5511926143393';
 
 /** Endereço do escritório — fonte única do mapa, do texto e do "Como chegar". */
 const ENDERECO_ESCRITORIO = {
-  linha1: 'Av. José Luiz Sereno, 655 · sala 5',
+  linha1: 'Av. Luiz José Sereno, 655 · sala 5',
   linha2: 'Jardim Ermida II · Jundiaí · SP',
-  busca: 'Avenida José Luiz Sereno, 655, Jardim Ermida II, Jundiaí, SP',
+  busca: 'Avenida Luiz José Sereno, 655, Jardim Ermida II, Jundiaí, SP',
 };
 
 // Manifesto da Lotus. `destaque` = as frases que ganham o corpo serifado maior;
@@ -674,9 +674,9 @@ export default function LotusSobre({
             <div>
               <div style={parseStyle('font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#cdab6e;margin-bottom:18px;')}>Políticas</div>
               <div style={parseStyle('display:flex;flex-direction:column;gap:12px;font-size:14.5px;color:rgba(247,242,232,.72);')}>
-                <Hoverable as="a" href="../lotus-privacidade/" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Privacidade (LGPD)</Hoverable>
-                <Hoverable as="a" href="../lotus-termos/" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Termos de uso</Hoverable>
-                <Hoverable as="a" href="../lotus-cookies/" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Cookies</Hoverable>
+                <Hoverable as="a" href="/lotus-privacidade" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Privacidade (LGPD)</Hoverable>
+                <Hoverable as="a" href="/lotus-termos" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Termos de uso</Hoverable>
+                <Hoverable as="a" href="/lotus-cookies" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Cookies</Hoverable>
               </div>
             </div>
           </div>

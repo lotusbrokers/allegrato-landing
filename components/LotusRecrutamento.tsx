@@ -195,7 +195,7 @@ function CookieBanner() {
       }}
     >
       <p style={parseStyle('margin:0 0 12px;font-size:13.5px;line-height:1.5;color:rgba(247,242,232,.85);')}>
-        Usamos cookies para melhorar sua experiência e entender o uso do site. Aceite todos ou recuse os não-essenciais. <a href="../lotus-cookies/" style={parseStyle('color:#cdab6e;text-decoration:underline;')}>Política de Cookies</a>.
+        Usamos cookies para melhorar sua experiência e entender o uso do site. Aceite todos ou recuse os não-essenciais. <a href="/lotus-cookies" style={parseStyle('color:#cdab6e;text-decoration:underline;')}>Política de Cookies</a>.
       </p>
       <div style={parseStyle('display:flex;gap:10px;flex-wrap:wrap;')}>
         <button id="lotus-cookie-accept" type="button" onClick={() => setConsent('all')} style={parseStyle('background:#b18a4a;color:#15241c;font-weight:700;font-size:13.5px;border:none;padding:10px 18px;border-radius:30px;cursor:pointer;')}>Aceitar todos</button>
@@ -591,9 +591,9 @@ export default function LotusRecrutamento({
             <div>
               <div style={parseStyle('font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#cdab6e;margin-bottom:18px;')}>Políticas</div>
               <div style={parseStyle('display:flex;flex-direction:column;gap:12px;font-size:14.5px;color:rgba(247,242,232,.72);')}>
-                <Hoverable as="a" href="../lotus-privacidade/" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Privacidade (LGPD)</Hoverable>
-                <Hoverable as="a" href="../lotus-termos/" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Termos de uso</Hoverable>
-                <Hoverable as="a" href="../lotus-cookies/" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Cookies</Hoverable>
+                <Hoverable as="a" href="/lotus-privacidade" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Privacidade (LGPD)</Hoverable>
+                <Hoverable as="a" href="/lotus-termos" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Termos de uso</Hoverable>
+                <Hoverable as="a" href="/lotus-cookies" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Cookies</Hoverable>
               </div>
             </div>
           </div>

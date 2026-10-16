@@ -162,8 +162,8 @@ export default function LotusTermosPage() {
         <p>
           O tratamento de dados pessoais realizado pela Lotus Brokers segue a
           Lei Geral de Proteção de Dados (LGPD). A{' '}
-          <a href="../lotus-privacidade/">Política de Privacidade</a> e a{' '}
-          <a href="../lotus-cookies/">Política de Cookies</a> integram estes
+          <a href="/lotus-privacidade">Política de Privacidade</a> e a{' '}
+          <a href="/lotus-cookies">Política de Cookies</a> integram estes
           Termos de Uso.
         </p>
 
@@ -274,9 +274,9 @@ export default function LotusTermosPage() {
             {footerLegalLine()}
           </div>
           <div style={{ display: 'flex', gap: 16 }}>
-            <a href="../lotus-privacidade/">Privacidade</a>
-            <a href="../lotus-termos/">Termos</a>
-            <a href="../lotus-cookies/">Cookies</a>
+            <a href="/lotus-privacidade">Privacidade</a>
+            <a href="/lotus-termos">Termos</a>
+            <a href="/lotus-cookies">Cookies</a>
             <a href="/meus-dados">Meus dados</a>
           </div>
         </div>
@@ -314,7 +314,7 @@ export default function LotusTermosPage() {
           Usamos cookies para melhorar sua experiência e entender o uso do site.
           Aceite todos ou recuse os não-essenciais.{' '}
           <a
-            href="../lotus-cookies/"
+            href="/lotus-cookies"
             style={{ color: '#cdab6e', textDecoration: 'underline' }}
           >
             Política de Cookies

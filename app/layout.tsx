@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { SITE } from '@/lib/site';
-import { siteIndexavel } from '@/lib/indexacao.mjs';
+import { IMAGEM_COMPARTILHAMENTO, PERFIL_GOOGLE, REDES_SOCIAIS, SITE } from '@/lib/site';
+import { DOMINIO_OFICIAL, siteIndexavel } from '@/lib/indexacao.mjs';
 import './globals.css';
 import CookieConsent from '@/components/CookieConsent';
 import Analytics, { AnalyticsNoScript } from '@/components/Analytics';
@@ -34,7 +34,9 @@ const verificacaoBing = process.env.BING_SITE_VERIFICATION?.trim();
 
 export const metadata: Metadata = {
   ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
-  robots: indexavel ? { index: true, follow: true } : { index: false, follow: false },
+  // max-image-preview:large autoriza foto grande na busca e no Discover; sem
+  // ela, o Google mostra miniatura. Até 16/10/2026 só o Manawa declarava.
+  robots: indexavel ? { index: true, follow: true, 'max-image-preview': 'large' } : { index: false, follow: false },
   verification: {
     ...(verificacaoGoogle ? { google: verificacaoGoogle } : {}),
     ...(verificacaoBing ? { other: { 'msvalidate.01': verificacaoBing } } : {}),
@@ -51,23 +53,31 @@ export const metadata: Metadata = {
     title: 'Lotus Brokers, Imóveis em Jundiaí e Itupeva',
     description:
       'Imobiliária moderna de Jundiaí e Itupeva, com atendimento de excelência. Lançamentos e revenda com especialistas de cada bairro.',
-    images: [
-      'https://www.lotusbrokers.com.br/home-hero-jundiai.jpg',
-    ],
+    images: [IMAGEM_COMPARTILHAMENTO],
   },
   twitter: { card: 'summary_large_image' },
 };
 
 // JSON-LD RealEstateAgent (portado do estático).
 //
-// legalName, taxID e o endereço de rua entram porque o Google usa esses campos
-// para casar o site com a empresa no Knowledge Panel e no perfil local. São
-// invisíveis ao visitante: indexação, não conteúdo de página.
+// legalName, taxID, endereço, telefone, ponto no mapa, horário e perfis
+// (sameAs) entram porque o Google usa esses campos para casar o site com a
+// empresa no Knowledge Panel e no Perfil da Empresa. Tudo aqui tem de bater com
+// o perfil: endereço, telefone e horário saem de lib/site.ts, conferidos nele.
+// São invisíveis ao visitante: indexação, não conteúdo de página.
+//
+// O @id deixa outras marcações apontarem para esta mesma empresa (o WebSite da
+// home a cita como publisher) em vez de repetir os dados.
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'RealEstateAgent',
+  '@id': `${DOMINIO_OFICIAL}/#imobiliaria`,
   name: SITE.nome,
   legalName: SITE.razaoSocial,
+  url: `${DOMINIO_OFICIAL}/`,
+  logo: `${DOMINIO_OFICIAL}/logo-lotus-dourado.png`,
+  image: IMAGEM_COMPARTILHAMENTO,
+  telephone: SITE.telefone,
   // O prefixo "CNPJ " é rótulo de interface; o schema quer só o número.
   taxID: SITE.cnpj.replace(/\D/g, ''),
   description:
@@ -75,11 +85,21 @@ const jsonLd = {
   areaServed: ['Jundiaí', 'Itupeva', 'Vinhedo', 'Valinhos', 'Indaiatuba'],
   address: {
     '@type': 'PostalAddress',
-    addressRegion: 'SP',
-    addressCountry: 'BR',
+    streetAddress: `${SITE.logradouro}, ${SITE.bairro}`,
     addressLocality: 'Jundiaí',
-    streetAddress: 'Av. José Luiz Sereno, 655, sala 5, Jardim Ermida II',
+    addressRegion: 'SP',
+    postalCode: SITE.cep,
+    addressCountry: 'BR',
   },
+  geo: { '@type': 'GeoCoordinates', latitude: PERFIL_GOOGLE.latitude, longitude: PERFIL_GOOGLE.longitude },
+  hasMap: PERFIL_GOOGLE.url,
+  openingHoursSpecification: PERFIL_GOOGLE.horario.map((h) => ({
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: h.dias,
+    opens: h.abre,
+    closes: h.fecha,
+  })),
+  sameAs: [PERFIL_GOOGLE.url, ...REDES_SOCIAIS],
   slogan: 'Grandes histórias têm endereço.',
 };
 

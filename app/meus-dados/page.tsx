@@ -1,8 +1,7 @@
 'use client';
 
 // ponytail: Client Component (form usa useState) -> nao pode export const metadata.
-// Sem SEO dedicado nesta rota; aceitavel pois e uma pagina de utilidade (exercicio de direitos),
-// nao uma pagina de aquisicao/organica.
+// A metadata (titulo proprio e noindex) fica em ./layout.tsx.
 import { useState } from 'react';
 import { footerLegalLine } from '@/lib/site';
 import { buildMeusDadosMailto } from '@/lib/meus-dados-mailto';
@@ -246,9 +245,9 @@ export default function MeusDadosPage() {
         <div className="fbar">
           <div>{footerLegalLine()}</div>
           <div style={{ display: 'flex', gap: '16px' }}>
-            <a href="../lotus-privacidade/">Privacidade</a>
-            <a href="../lotus-termos/">Termos</a>
-            <a href="../lotus-cookies/">Cookies</a>
+            <a href="/lotus-privacidade">Privacidade</a>
+            <a href="/lotus-termos">Termos</a>
+            <a href="/lotus-cookies">Cookies</a>
             <a href="/meus-dados">Meus dados</a>
           </div>
         </div>
