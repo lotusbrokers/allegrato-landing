@@ -1,4 +1,5 @@
 import { supabase, TENANT_ID } from './supabase';
+import { slugCondominio } from './slug-condominio';
 
 // Camada de dados dos CONDOMÍNIOS do Portal.
 // Fonte: view pública portal_condominios (Supabase, leitura anônima, RLS por
@@ -115,27 +116,9 @@ export function isCondominioApresentavel(c: CondominioCard): boolean {
   return Boolean(c.capa) && c.enderecoCompleto;
 }
 
-/**
- * Slug do condomínio, derivado do nome.
- *
- * Derivado e não guardado: a view não tem coluna de slug, e criar uma seria uma
- * segunda fonte da verdade para divergir do nome. Nome corrigido no dashboard,
- * URL acompanha.
- *
- * Os 49 cadastros de hoje geram 49 slugs distintos — conferido antes de trocar
- * as URLs. Se um dia dois condomínios colidirem, resolveSlug devolve o primeiro
- * em ordem alfabética de id, de forma estável, e o outro fica inalcançável por
- * slug: o sinal disso é o segundo sumir da listagem com a URL do primeiro.
- * Nesse dia, desempatar aqui (sufixo de bairro é o caminho natural).
- */
-export function slugCondominio(nome: string): string {
-  return nome
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
+// Mora em ./slug-condominio (sem Supabase) para a página do imóvel e o teste
+// usarem; segue exportada daqui para quem já importa de lib/condominios.
+export { slugCondominio };
 
 export function toCard(row: CondominioRow): CondominioCard {
   return {

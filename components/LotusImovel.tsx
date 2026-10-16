@@ -31,7 +31,9 @@ import React, {
   type ReactNode,
 } from 'react';
 import { formatValor, type ImovelRow, type ImovelCard } from '@/lib/imoveis';
+import type { CondominioDoImovel } from '@/lib/condominio-do-imovel';
 import LotusHeader from './LotusHeader';
+import LightboxFotos from './LightboxFotos';
 
 /* ------------------------------------------------------------------ */
 /* Helpers                                                             */
@@ -257,10 +259,13 @@ function buildFaq(data: ImovelRow) {
 export default function LotusImovel({
   data,
   relacionados,
+  condominio,
   whatsapp = WHATSAPP_DEFAULT,
 }: {
   data: ImovelRow;
   relacionados: ImovelCard[];
+  /** Seção "O condomínio <nome>". null = imóvel sem condomínio publicado com fotos. */
+  condominio: CondominioDoImovel | null;
   whatsapp?: string;
 }) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -354,6 +359,9 @@ export default function LotusImovel({
   const valorInicial = Math.min(5000000, Math.max(500000, data.valor_venda || 2450000));
   const [valor, setValor] = useState(valorInicial);
   const [openFaq, setOpenFaq] = useState(0);
+  // Foto do condomínio aberta em tela cheia (null = fechada). Separado do
+  // lightbox da unidade: são duas galerias, cada uma com as suas fotos.
+  const [fotoCondominioAberta, setFotoCondominioAberta] = useState<number | null>(null);
 
   // fmt(n) do estático
   const fmt = (n: number) => 'R$ ' + Math.round(n).toLocaleString('pt-BR');
@@ -447,6 +455,9 @@ export default function LotusImovel({
           <a href="#galeria" style={parseStyle('font-size:13px;font-weight:600;color:#1d3a2c;background:#ece2cf;padding:7px 14px;border-radius:30px;')}>Fotos</a>
           {(data.tour_virtual || data.link_video) && (
             <Hoverable as="a" href="#tour" baseStyle={parseStyle('font-size:13px;font-weight:600;color:#3f6249;padding:7px 14px;border-radius:30px;')} hoverStyle={parseStyle('background:#ece2cf')}>{data.tour_virtual ? 'Tour 3D' : 'Vídeo'}</Hoverable>
+          )}
+          {condominio && (
+            <Hoverable as="a" href="#condominio" baseStyle={parseStyle('font-size:13px;font-weight:600;color:#3f6249;padding:7px 14px;border-radius:30px;')} hoverStyle={parseStyle('background:#ece2cf')}>Condomínio</Hoverable>
           )}
           <Hoverable as="a" href="#mapa" baseStyle={parseStyle('font-size:13px;font-weight:600;color:#3f6249;padding:7px 14px;border-radius:30px;')} hoverStyle={parseStyle('background:#ece2cf')}>Mapa</Hoverable>
         </div>
@@ -558,6 +569,42 @@ export default function LotusImovel({
                 <div style={parseStyle('width:74px;height:74px;border-radius:50%;background:rgba(247,242,232,.92);display:flex;align-items:center;justify-content:center;')}><svg width="26" height="26" viewBox="0 0 24 24" fill="#1d3a2c"><path d="M8 5v14l11-7z"></path></svg></div>
               </div>
             </a>
+          </div>
+        </section>
+      )}
+
+      {/* CONDOMÍNIO, só para imóvel de condomínio publicado e com fotos (regra
+          em lib/condominio-do-imovel). Fica abaixo da dobra: fotos em lazy, sem
+          disputar o LCP com a galeria do topo, que continua só com a unidade. */}
+      {condominio && (
+        <section id="condominio" style={parseStyle('background:#ece2cf;padding:80px 32px;')}>
+          <div style={parseStyle('max-width:1280px;margin:0 auto;')}>
+            <div style={parseStyle('display:flex;align-items:flex-end;justify-content:space-between;gap:16px 32px;flex-wrap:wrap;margin-bottom:28px;')}>
+              <div>
+                <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b18a4a;margin-bottom:14px;')}>Condomínio</div>
+                <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(26px,3vw,36px);color:#15241c;margin:0;line-height:1.1;")}>{condominio.titulo}</h2>
+              </div>
+              <Link href={`/lotus-condominio/${condominio.slug}`} style={parseStyle('display:inline-flex;align-items:center;gap:8px;color:#1d3a2c;font-weight:600;font-size:14.5px;border-bottom:1.5px solid #b18a4a;padding-bottom:3px;')}>Ver o condomínio <span>→</span></Link>
+            </div>
+            <div data-condominio-fotos="" style={parseStyle('display:grid;grid-template-columns:repeat(4,1fr);gap:10px;')}>
+              {condominio.fotos.slice(0, 4).map((f, i) => {
+                const restantes = condominio.fotos.length - 4;
+                return (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setFotoCondominioAberta(i)}
+                    aria-label={`Ampliar foto ${i + 1} de ${condominio.nome}`}
+                    style={parseStyle('position:relative;aspect-ratio:4/3;border:none;padding:0;border-radius:14px;overflow:hidden;cursor:zoom-in;background:#3f6249;')}
+                  >
+                    <ImageSlot src={f.url} sizes="(max-width: 760px) 50vw, 320px" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={f.legenda || `${condominio.nome}, foto ${i + 1}`} />
+                    {i === 3 && restantes > 0 && (
+                      <span style={parseStyle('position:absolute;inset:0;background:rgba(21,36,28,.55);display:flex;align-items:center;justify-content:center;color:#f7f2e8;font-weight:600;font-size:15px;')}>+ {restantes} foto{restantes > 1 ? 's' : ''}</span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </section>
       )}
@@ -710,6 +757,16 @@ export default function LotusImovel({
           <a href="#agendar" style={parseStyle('background:#b18a4a;color:#15241c;font-weight:600;font-size:14.5px;padding:0 22px;border-radius:11px;display:flex;align-items:center;')}>Agendar visita</a>
         </div>
       </div>
+
+      {/* Galeria do condomínio: montada só enquanto aberta, como na página dele. */}
+      {condominio && fotoCondominioAberta !== null && (
+        <LightboxFotos
+          fotos={condominio.fotos}
+          indiceInicial={fotoCondominioAberta}
+          titulo={condominio.nome}
+          onFechar={() => setFotoCondominioAberta(null)}
+        />
+      )}
 
       {/* LIGHTBOX */}
       {/* Os três controles levam z-index porque vêm antes da foto no HTML: sem
