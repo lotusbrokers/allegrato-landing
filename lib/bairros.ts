@@ -13,6 +13,7 @@
  * cidades aparecem no array BAIRROS. Para publicar uma cidade nova basta somar
  * os bairros dela aqui.
  */
+import { bairroDoGuia } from './bairros-taxonomia';
 
 export type BairroFaq = { q: string; a: string };
 export type BairroGuideItem = { num: string; title: string; text: string };
@@ -920,4 +921,24 @@ export function bairrosVizinhos(slug: string): Bairro[] {
   const atual = getBairro(slug);
   if (!atual) return [];
   return BAIRROS.filter((b) => b.slug !== slug && b.cidade === atual.cidade).slice(0, 4);
+}
+
+const semAcento = (s: string) => s.normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+
+/**
+ * O guia de bairro de um endereço do cadastro (bairro e cidade como o
+ * dashboard grava), ou null.
+ *
+ * Passa pelo mapa de pertencimento (sub-bairro → guia, ver
+ * lib/bairros-taxonomia) e confere a cidade: o "Centro" de um imóvel em
+ * Jundiaí não pode levar ao guia do Centro de Itupeva. Sem cidade informada,
+ * vale só o nome.
+ *
+ * Usado pela página do imóvel, pela do condomínio e pelo guia, para listar os
+ * lançamentos do bairro: as três apontam para o mesmo guia pela mesma regra.
+ */
+export function guiaDoBairro(bairro: string | null | undefined, cidade?: string | null): Bairro | null {
+  const candidatos = cidade?.trim() ? BAIRROS.filter((b) => semAcento(b.cidade) === semAcento(cidade)) : BAIRROS;
+  const nome = bairroDoGuia(bairro, candidatos.map((b) => b.nome));
+  return nome ? candidatos.find((b) => b.nome === nome) ?? null : null;
 }

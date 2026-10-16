@@ -2,7 +2,20 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { BAIRROS, bairroSlugsIndexaveis } from './bairros.ts';
+import { BAIRROS, bairroSlugsIndexaveis, guiaDoBairro } from './bairros.ts';
+
+test('o guia do bairro confere o nome, o pertencimento e a cidade', () => {
+  assert.equal(guiaDoBairro('Medeiros', 'Jundiaí')?.slug, 'medeiros');
+  // Parte do bairro do guia, como o cadastro grava.
+  assert.equal(guiaDoBairro('Bonfiglioli', 'Jundiaí')?.slug, 'vianelo-bonfiglioli');
+  assert.equal(guiaDoBairro('Jardim Ermida II', 'Jundiaí')?.slug, 'eloy-chaves');
+  // Cidade sem acento também vale.
+  assert.equal(guiaDoBairro('Recanto Quarto Centenário', 'Jundiai')?.slug, 'recanto-quarto-centenario');
+  // O guia do Centro é o de Itupeva: o Centro de Jundiaí não tem guia.
+  assert.equal(guiaDoBairro('Centro', 'Itupeva')?.slug, 'centro-itupeva');
+  assert.equal(guiaDoBairro('Centro', 'Jundiaí'), null);
+  assert.equal(guiaDoBairro('', 'Jundiaí'), null);
+});
 
 /**
  * O erro possível aqui é de digitação: um caminho de foto que não existe em

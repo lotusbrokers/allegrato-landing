@@ -22,11 +22,24 @@
  * registros antigos. A assinatura das funções não muda.
  */
 
-/** sub-bairro (como vem no cadastro) -> bairro do guia (nome em lib/bairros.ts) */
+/**
+ * sub-bairro (como vem no cadastro, sem acento e em minúsculas) -> bairro do
+ * guia (nome em lib/bairros.ts).
+ *
+ * Bonfiglioli, Jardim Bonfiglioli e Vianelo entraram em 16/10/2026: o próprio
+ * guia diz que o Vianelo Bonfiglioli é "formado pela união entre o Vianelo e o
+ * Jardim Bonfiglioli", e o cadastro grava só uma das partes (o Santorini está
+ * como "Bonfiglioli"). Recanto IV Centenário é o outro nome do Recanto Quarto
+ * Centenário, como responde o FAQ do guia.
+ */
 const PERTENCE_A: Record<string, string> = {
   'jardim ermida i': 'Eloy Chaves',
   'jardim ermida ii': 'Eloy Chaves',
   'vila sereno': 'Eloy Chaves',
+  bonfiglioli: 'Vianelo Bonfiglioli',
+  'jardim bonfiglioli': 'Vianelo Bonfiglioli',
+  vianelo: 'Vianelo Bonfiglioli',
+  'recanto iv centenario': 'Recanto Quarto Centenário',
 };
 
 const chave = (s: string) =>

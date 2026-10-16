@@ -1,8 +1,13 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import LotusBairro from '@/components/LotusBairro';
-import { getBairro, bairroSlugs, bairrosVizinhos, type Bairro } from '@/lib/bairros';
+import { getBairro, bairroSlugs, bairrosVizinhos, guiaDoBairro, type Bairro } from '@/lib/bairros';
+import { nomesDoBairro } from '@/lib/bairros-taxonomia';
 import { getImoveisPorBairro } from '@/lib/imoveis';
+import { getLancamentosList } from '@/lib/lancamentos';
+import { POSTS, hrefDoArtigo } from '@/lib/blog-posts';
+import { publicados } from '@/lib/blog-agenda';
+import { IMAGEM_COMPARTILHAMENTO } from '@/lib/site';
 
 // Guias de bairro são conteúdo estático (lib/bairros) — dá pra pré-renderizar
 // todos no build. Os imóveis do bairro vêm do banco em runtime; por isso ISR
@@ -40,6 +45,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       url,
       title: `Morar em ${bairro.nome}, ${bairro.cidade}, o guia da Lotus`,
       description,
+      // Declarar openGraph aqui substitui o do layout inteiro, imagem inclusive:
+      // sem esta linha o link do guia saía sem foto no WhatsApp.
+      images: [bairro.heroImg ? `${SITE}${bairro.heroImg}` : IMAGEM_COMPARTILHAMENTO],
     },
     twitter: { card: 'summary_large_image' },
   };
@@ -80,6 +88,43 @@ function buildJsonLd(bairro: Bairro, slug: string) {
   return [place, faq, breadcrumb];
 }
 
+/**
+ * Lançamentos com página própria cujo bairro, no cadastro (já corrigido por
+ * lib/correcoes-cadastro), é o deste guia. Até 16/10/2026 nenhum guia apontava
+ * para os lançamentos do bairro, e as landings, que são as páginas que vendem,
+ * não recebiam link dos guias. Banco fora do ar não derruba o guia: a seção
+ * só não aparece.
+ */
+async function lancamentosDoBairro(slug: string) {
+  const lista = await getLancamentosList().catch((e) => {
+    console.error('[bairro] lançamentos indisponíveis:', e);
+    return [];
+  });
+  return lista
+    .filter((l) => l.href && guiaDoBairro(l.neighborhood, l.city)?.slug === slug)
+    .map((l) => ({ nome: l.name, href: l.href as string, construtora: l.builder }));
+}
+
+const normalizar = (s: string) => s.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+/**
+ * Até 3 artigos do blog para "Leituras sobre a região": primeiro os que citam
+ * o bairro (ou um sub-bairro dele) no título ou no texto, depois os mais
+ * recentes. Até 16/10/2026 essa lista era fixa no componente, com três títulos
+ * que levavam à home, e um deles nem existia no blog.
+ */
+function leiturasDoBairro(bairro: Bairro) {
+  const nomes = nomesDoBairro(bairro.nome).map(normalizar);
+  const cita = (texto: string) => nomes.some((n) => new RegExp(`(^|[^a-z0-9])${n}([^a-z0-9]|$)`).test(texto));
+  const textoDo = (p: (typeof POSTS)[number]) =>
+    normalizar([p.title, p.excerpt, ...p.body.map((b) => (typeof b === 'string' ? b : [b.titulo, ...(b.itens ?? [])].join(' ')))].join(' '));
+  const lista = publicados(POSTS);
+  const citam = lista.filter((p) => cita(textoDo(p)));
+  return [...citam, ...lista.filter((p) => !citam.includes(p))]
+    .slice(0, 3)
+    .map((p) => ({ href: hrefDoArtigo(p.id), img: p.img, cat: p.cat, title: p.title, slot: p.slot }));
+}
+
 export default async function LotusBairroSlugPage({ params }: Params) {
   const { slug } = await params;
   const bairro = getBairro(slug);
@@ -102,7 +147,13 @@ export default async function LotusBairroSlugPage({ params }: Params) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(obj) }}
         />
       ))}
-      <LotusBairro bairro={bairro} imoveis={imoveis} vizinhos={vizinhos} />
+      <LotusBairro
+        bairro={bairro}
+        imoveis={imoveis}
+        vizinhos={vizinhos}
+        lancamentos={await lancamentosDoBairro(slug)}
+        leituras={leiturasDoBairro(bairro)}
+      />
     </>
   );
 }

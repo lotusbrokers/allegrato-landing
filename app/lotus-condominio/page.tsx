@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import LotusCondominios from '@/components/LotusCondominios';
 import { getCondominiosCards, isCondominioApresentavel } from '@/lib/condominios';
+import { IMAGEM_COMPARTILHAMENTO } from '@/lib/site';
 
 /**
  * Índice /lotus-condominio — lista os condomínios publicados no dashboard.
@@ -30,6 +31,7 @@ export const metadata: Metadata = {
     title: 'Condomínios de Jundiaí e Itupeva, por dentro',
     description:
       'Fotos, estrutura, lazer e localização de cada condomínio acompanhado pela Lotus.',
+    images: [IMAGEM_COMPARTILHAMENTO],
   },
   twitter: { card: 'summary_large_image' },
 };

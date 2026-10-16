@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import LotusBairrosIndex from '@/components/LotusBairrosIndex';
 import { listBairros } from '@/lib/bairros';
+import { IMAGEM_COMPARTILHAMENTO } from '@/lib/site';
 
 // Domínio vem da env (NEXT_PUBLIC_SITE_URL) — não hard-codar.
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.lotusbrokers.com.br';
@@ -17,6 +18,7 @@ export const metadata: Metadata = {
     title: 'Bairros de Jundiaí e Itupeva, guias da Lotus',
     description:
       'Escolha o bairro certo, não só o imóvel certo. Guias por bairro de Jundiaí e Itupeva.',
+    images: [IMAGEM_COMPARTILHAMENTO],
   },
   twitter: { card: 'summary_large_image' },
 };

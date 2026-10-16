@@ -2,10 +2,9 @@
 import { footerLegalLine } from '@/lib/site';
 import { imagemOtimizada, logoLotus } from '@/lib/imagem-otimizada';
 import { demonstrativoDe, temAreaDeTerreno } from '@/lib/tipologia';
-import { bairroDoGuia } from '@/lib/bairros-taxonomia';
 import CtaSimulacao from './CtaSimulacao';
 import MapaEmbed from './MapaEmbed';
-import { listBairros } from '@/lib/bairros';
+import { guiaDoBairro } from '@/lib/bairros';
 
 /**
  * LotusImovel — porte 1:1 de lotus-imovel/index.html (mecanismo dc-runtime) para React,
@@ -313,13 +312,7 @@ export default function LotusImovel({
    * do nível acima ("Eloy Chaves"), então a ligação passa pelo mapa de
    * pertencimento. Sem guia correspondente o breadcrumb segue para a busca,
    * como antes: melhor um link genérico do que um link quebrado. */
-  const nomeDoGuia = bairroDoGuia(
-    data.bairro,
-    listBairros().map((b) => b.nome),
-  );
-  const guiaBairro = nomeDoGuia
-    ? listBairros().find((b) => b.nome === nomeDoGuia) ?? null
-    : null;
+  const guiaBairro = guiaDoBairro(data.bairro, data.cidade);
   const hrefBairro = guiaBairro ? `/lotus-bairro/${guiaBairro.slug}` : '/lotus-busca';
 
   // Descrição: usa a do banco; se vazia, texto genérico curto e honesto.
@@ -542,7 +535,7 @@ export default function LotusImovel({
                     <input type="text" required placeholder="Seu nome" style={parseStyle('border:1px solid rgba(21,36,28,.16);border-radius:9px;padding:11px 13px;font-size:14px;outline:none;')} />
                     <input type="text" required placeholder="WhatsApp" style={parseStyle('border:1px solid rgba(21,36,28,.16);border-radius:9px;padding:11px 13px;font-size:14px;outline:none;')} />
                     <input type="date" style={parseStyle('border:1px solid rgba(21,36,28,.16);border-radius:9px;padding:11px 13px;font-size:14px;outline:none;color:#3f6249;')} />
-                    <label style={parseStyle('display:flex;gap:8px;align-items:flex-start;font-size:11.5px;color:#3f6249;line-height:1.4;margin:2px 0;cursor:pointer;')}><input type="checkbox" required style={parseStyle('margin-top:2px;flex-shrink:0;')} /><span>Autorizo a Lotus a entrar em contato comigo, conforme a <a href="../lotus-privacidade/" target="_blank" rel="noopener" style={parseStyle('color:#b18a4a;text-decoration:underline;')}>Política de Privacidade</a>.</span></label>
+                    <label style={parseStyle('display:flex;gap:8px;align-items:flex-start;font-size:11.5px;color:#3f6249;line-height:1.4;margin:2px 0;cursor:pointer;')}><input type="checkbox" required style={parseStyle('margin-top:2px;flex-shrink:0;')} /><span>Autorizo a Lotus a entrar em contato comigo, conforme a <a href="/lotus-privacidade" target="_blank" rel="noopener" style={parseStyle('color:#b18a4a;text-decoration:underline;')}>Política de Privacidade</a>.</span></label>
                     <button type="submit" style={parseStyle('background:#1d3a2c;color:#f7f2e8;font-weight:600;font-size:14.5px;padding:13px;border:none;border-radius:10px;cursor:pointer;')}>Quero agendar a visita</button>
                     <p style={parseStyle('font-size:11px;color:#8aa593;margin:2px 0 0;line-height:1.4;')}>Você fala com gente que conhece esse imóvel e esse bairro. Ao enviar, concorda com a Política de Privacidade (LGPD).</p>
                   </form>
@@ -683,9 +676,9 @@ export default function LotusImovel({
             <div>
               <div style={parseStyle('font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#cdab6e;margin-bottom:18px;')}>Políticas</div>
               <div style={parseStyle('display:flex;flex-direction:column;gap:12px;font-size:14.5px;color:rgba(247,242,232,.72);')}>
-                <Hoverable as="a" href="../lotus-privacidade/" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Privacidade (LGPD)</Hoverable>
-                <Hoverable as="a" href="../lotus-termos/" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Termos de uso</Hoverable>
-                <Hoverable as="a" href="../lotus-cookies/" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Cookies</Hoverable>
+                <Hoverable as="a" href="/lotus-privacidade" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Privacidade (LGPD)</Hoverable>
+                <Hoverable as="a" href="/lotus-termos" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Termos de uso</Hoverable>
+                <Hoverable as="a" href="/lotus-cookies" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Cookies</Hoverable>
               </div>
             </div>
           </div>

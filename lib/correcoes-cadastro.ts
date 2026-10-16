@@ -70,6 +70,12 @@ export const CORRECOES_DE_CADASTRO: Record<string, Correcao[]> = {
     { campo: 'preco_texto', de: 'a partir de R$ 460.582', para: 'a partir de R$ 461.734' },
     { campo: 'preco_num', de: 460582, para: 461734.74 },
   ],
+  // O Altissimi (Rua Aristides Mariotti, 142) fica no Recanto Quarto
+  // Centenário: é o bairro do CEP 13211-740 nos Correios (a rua até o nº 729) e
+  // o que a landing e a página do condomínio dizem. A Dashboard trazia "Retiro"
+  // (conferido em 16/10/2026). O Manawa, na mesma rua, não vem da Dashboard: o
+  // card dele é o de lib/developments.ts, corrigido lá.
+  altissimi: [{ campo: 'bairro', de: 'Retiro', para: 'Recanto Quarto Centenário' }],
 };
 
 const vazio = (v: unknown): boolean =>

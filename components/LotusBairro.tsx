@@ -190,12 +190,6 @@ const WHATSAPP_DEFAULT = '5511926143393';
 // (compat). Em produção o bairro vem do servidor (lib/bairros).
 const BAIRRO_FALLBACK: Bairro = getBairro('eloy-chaves')!;
 
-const posts = [
-  { slot: 'b-post-1', img: '/vistta-castanho/a007.jpg', cat: 'Cidade', title: 'Onde morar em Jundiaí em 2026: 5 bairros em ascensão' },
-  { slot: 'b-post-2', img: '/terrace-serra-do-japi/a026.jpg', cat: 'Mercado', title: 'Quanto custa o m² em cada bairro de Jundiaí' },
-  { slot: 'b-post-3', img: '/gran-ville-santo-angelo/a038.jpg', cat: 'Região', title: 'Serra do Japi: o que ter por perto muda no seu dia' },
-];
-
 /* ------------------------------------------------------------------ */
 /* Componente                                                          */
 /* ------------------------------------------------------------------ */
@@ -205,6 +199,8 @@ export default function LotusBairro({
   bairro = BAIRRO_FALLBACK,
   imoveis = [],
   vizinhos = [],
+  lancamentos = [],
+  leituras = [],
 }: {
   whatsapp?: string;
   /** Guia do bairro (lib/bairros). Default = Eloy Chaves (compat). */
@@ -213,6 +209,10 @@ export default function LotusBairro({
   imoveis?: ImovelBusca[];
   /** Bairros vizinhos (mesma cidade) para o rodapé de navegação. */
   vizinhos?: { name: string; note: string; slug: string }[];
+  /** Lançamentos do bairro com página própria (a rota filtra pelo cadastro). Vazio esconde a seção. */
+  lancamentos?: { nome: string; href: string; construtora: string }[];
+  /** Artigos do blog para "Leituras sobre a região" (a rota escolhe; até 3). */
+  leituras?: { href: string; img: string; cat: string; title: string; slot: string }[];
 }) {
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -461,6 +461,23 @@ export default function LotusBairro({
         </div>
       </section>
 
+      {/* LANÇAMENTOS NO BAIRRO: as landings recebem link do guia (ver lancamentosDoBairro na rota). */}
+      {lancamentos.length > 0 && (
+        <section style={parseStyle('background:#f7f2e8;padding:0 32px 90px;')}>
+          <div style={parseStyle('max-width:1200px;margin:0 auto;')}>
+            <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(22px,2.6vw,30px);color:#15241c;margin:0 0 22px;")}>Lançamentos em {nomeBairro}</h2>
+            <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));column-gap:48px;')}>
+              {lancamentos.map((l) => (
+                <Hoverable key={l.href} as="a" href={l.href} target="_top" baseStyle={parseStyle('display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid rgba(21,36,28,.1);transition:color .2s;')} hoverStyle={parseStyle('color:#b18a4a')}>
+                  <span style={parseStyle('font-size:16px;font-weight:500;')}>{l.nome}</span>
+                  <span style={parseStyle('font-size:13px;color:#8aa593;')}>{l.construtora ? `${l.construtora} →` : '→'}</span>
+                </Hoverable>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* AVALIAÇÃO / CAPTAÇÃO */}
       <section style={parseStyle('background:#ece2cf;padding:80px 32px;')}>
         <div style={parseStyle('max-width:880px;margin:0 auto;text-align:center;')}>
@@ -495,10 +512,9 @@ export default function LotusBairro({
           <div>
             <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(22px,2.6vw,30px);color:#15241c;margin:0 0 22px;")}>Leituras sobre a região</h2>
             <div style={parseStyle('display:flex;flex-direction:column;gap:14px;')}>
-              {/* sc-for list=posts as=p (3) */}
-              {posts.map((p, i) => (
-                <Hoverable key={i} as="a" href="/" target="_top" baseStyle={parseStyle('display:flex;gap:16px;align-items:center;background:#fff;border-radius:14px;padding:16px;box-shadow:0 14px 36px -32px rgba(21,36,28,.34);transition:transform .25s ease;')} hoverStyle={parseStyle('transform:translateY(-2px)')}>
-                  <div style={parseStyle('width:74px;height:60px;border-radius:10px;background:#1d3a2c;flex-shrink:0;overflow:hidden;position:relative;')}><ImageSlot id={p.slot} src={p.img} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt="post" /></div>
+              {leituras.map((p) => (
+                <Hoverable key={p.href} as="a" href={p.href} target="_top" baseStyle={parseStyle('display:flex;gap:16px;align-items:center;background:#fff;border-radius:14px;padding:16px;box-shadow:0 14px 36px -32px rgba(21,36,28,.34);transition:transform .25s ease;')} hoverStyle={parseStyle('transform:translateY(-2px)')}>
+                  <div style={parseStyle('width:74px;height:60px;border-radius:10px;background:#1d3a2c;flex-shrink:0;overflow:hidden;position:relative;')}><ImageSlot id={p.slot} src={p.img || undefined} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={p.title} /></div>
                   <div>
                     <div style={parseStyle('font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#b18a4a;margin-bottom:4px;')}>{p.cat}</div>
                     <div style={parseStyle("font-family:'Fraunces',serif;font-size:16px;color:#15241c;line-height:1.15;")}>{p.title}</div>
@@ -553,9 +569,9 @@ export default function LotusBairro({
             <div>
               <div style={parseStyle('font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#cdab6e;margin-bottom:18px;')}>Políticas</div>
               <div style={parseStyle('display:flex;flex-direction:column;gap:12px;font-size:14.5px;color:rgba(247,242,232,.72);')}>
-                <Hoverable as="a" href="../lotus-privacidade/" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Privacidade (LGPD)</Hoverable>
-                <Hoverable as="a" href="../lotus-termos/" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Termos de uso</Hoverable>
-                <Hoverable as="a" href="../lotus-cookies/" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Cookies</Hoverable>
+                <Hoverable as="a" href="/lotus-privacidade" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Privacidade (LGPD)</Hoverable>
+                <Hoverable as="a" href="/lotus-termos" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Termos de uso</Hoverable>
+                <Hoverable as="a" href="/lotus-cookies" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Cookies</Hoverable>
               </div>
             </div>
           </div>

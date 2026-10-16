@@ -308,6 +308,7 @@ export default function LotusCondominio({
   relacionados,
   imoveis = [],
   lancamentos = [],
+  guiaBairro = null,
   whatsapp = WHATSAPP_DEFAULT,
 }: {
   data: CondominioRow;
@@ -324,6 +325,8 @@ export default function LotusCondominio({
    * costuma comparar o que está sendo lançado por perto.
    */
   lancamentos?: LancamentoListItem[];
+  /** Guia do bairro do condomínio, quando existe (ver guiaDoBairro). */
+  guiaBairro?: { nome: string; slug: string } | null;
   whatsapp?: string;
 }) {
   // state do Component dc: { openFaq: 0, leadDone: false }
@@ -590,7 +593,7 @@ export default function LotusCondominio({
             ) : (
               <p style={parseStyle('font-size:15px;color:rgba(247,242,232,.8);font-weight:300;line-height:1.6;margin:0 0 26px;')}>Localização privilegiada em {cidade}. Fale com o especialista da Lotus para conhecer a estrutura de lazer e o entorno do condomínio.</p>
             )}
-            <a target="_top" href="/lotus-bairro" style={parseStyle('display:inline-flex;align-items:center;gap:8px;color:#cdab6e;font-weight:600;font-size:14.5px;border-bottom:1.5px solid #b18a4a;padding-bottom:3px;')}>Conhecer a região de {cidade} <span>→</span></a>
+            <a target="_top" href={guiaBairro ? `/lotus-bairro/${guiaBairro.slug}` : '/lotus-bairro'} style={parseStyle('display:inline-flex;align-items:center;gap:8px;color:#cdab6e;font-weight:600;font-size:14.5px;border-bottom:1.5px solid #b18a4a;padding-bottom:3px;')}>{guiaBairro ? `Conhecer o bairro ${guiaBairro.nome}` : `Conhecer a região de ${cidade}`} <span>→</span></a>
           </div>
         </div>
       </section>
@@ -802,9 +805,9 @@ export default function LotusCondominio({
             <div>
               <div style={parseStyle('font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#cdab6e;margin-bottom:18px;')}>Políticas</div>
               <div style={parseStyle('display:flex;flex-direction:column;gap:12px;font-size:14.5px;color:rgba(247,242,232,.72);')}>
-                <Hoverable as="a" href="../lotus-privacidade/" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Privacidade (LGPD)</Hoverable>
-                <Hoverable as="a" href="../lotus-termos/" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Termos de uso</Hoverable>
-                <Hoverable as="a" href="../lotus-cookies/" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Cookies</Hoverable>
+                <Hoverable as="a" href="/lotus-privacidade" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Privacidade (LGPD)</Hoverable>
+                <Hoverable as="a" href="/lotus-termos" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Termos de uso</Hoverable>
+                <Hoverable as="a" href="/lotus-cookies" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Cookies</Hoverable>
               </div>
             </div>
           </div>

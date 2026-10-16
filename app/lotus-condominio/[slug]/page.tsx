@@ -12,6 +12,8 @@ import {
 import { getImoveisDoCondominio } from '@/lib/imoveis';
 import { getLancamentosList, isListItemApresentavel, type LancamentoListItem } from '@/lib/lancamentos';
 import { descricaoComNome } from '@/lib/descricao-com-nome';
+import { resumoDescricao } from '@/lib/resumo-imovel';
+import { guiaDoBairro } from '@/lib/bairros';
 
 // Rota dinâmica /lotus-condominio/[slug] — lê cada condomínio do Supabase.
 //
@@ -119,10 +121,18 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const title = `${cond.nome}, ${cidade}, guia do condomínio e imóveis | Lotus Brokers`;
   // Com o nome na frente quando o texto do dashboard não o cita: fases do mesmo
   // condomínio chegaram com a mesma descrição (ver lib/descricao-com-nome.ts).
-  const description = descricaoComNome(
-    cond.descricao_site?.trim() ||
-      `Tudo sobre morar no ${cond.nome}, ${cidade}: estrutura, localização e imóveis disponíveis com o especialista da Lotus.`,
-    cond.nome,
+  //
+  // Resumida: o texto do dashboard chega inteiro (o do Altissimi tinha 1.469
+  // caracteres, com listas e emojis) e o Google mostra cerca de 155. O corte é em
+  // fim de frase, como na página de imóvel. O emoji sai só daqui, da descrição
+  // de busca e de compartilhamento; a página mostra o texto como foi cadastrado.
+  const description = resumoDescricao(
+    descricaoComNome(
+      cond.descricao_site?.trim() ||
+        `Tudo sobre morar no ${cond.nome}, ${cidade}: estrutura, localização e imóveis disponíveis com o especialista da Lotus.`,
+      cond.nome,
+    ).replace(/[\p{Extended_Pictographic}\u{FE0F}]/gu, ''),
+    155,
   );
   // Canonical sempre no endereço novo, mesmo quando se chegou pelo UUID: duas
   // URLs para o mesmo texto é o que o canonical existe para evitar.
@@ -202,6 +212,17 @@ function buildJsonLd(cond: CondominioRow, slug: string) {
   return [apartmentComplex, faq, breadcrumb];
 }
 
+/**
+ * O guia do bairro do condomínio, para o link "Conhecer o bairro". Até
+ * 16/10/2026 o link levava à lista geral de bairros: nenhuma página de
+ * condomínio apontava para o guia do próprio bairro. A regra é a mesma da página
+ * do imóvel (lib/bairros.ts, guiaDoBairro); sem guia, o link segue para a lista.
+ */
+function guiaDoCondominio(cond: CondominioRow): { nome: string; slug: string } | null {
+  const guia = guiaDoBairro(cond.bairro, cond.cidade);
+  return guia ? { nome: guia.nome, slug: guia.slug } : null;
+}
+
 export default async function LotusCondominioPage({ params }: Params) {
   const { slug } = await params;
   const { cond, redirecionarPara } = await resolver(slug);
@@ -255,6 +276,7 @@ export default async function LotusCondominioPage({ params }: Params) {
         relacionados={relacionados}
         imoveis={imoveis}
         lancamentos={lancamentos}
+        guiaBairro={guiaDoCondominio(cond)}
       />
     </>
   );

@@ -10,6 +10,13 @@ test('sub-bairro encontra o bairro do guia', () => {
   assert.equal(bairroDoGuia('Vila Sereno', GUIAS), 'Eloy Chaves');
 });
 
+test('as partes do Vianelo Bonfiglioli encontram o guia dele', () => {
+  // O cadastro grava "Bonfiglioli" ou "Jardim Bonfiglioli"; o guia é dos dois.
+  assert.equal(bairroDoGuia('Bonfiglioli', GUIAS), 'Vianelo Bonfiglioli');
+  assert.equal(bairroDoGuia('Jardim Bonfiglioli', GUIAS), 'Vianelo Bonfiglioli');
+  assert.equal(bairroDoGuia('Vianelo', GUIAS), 'Vianelo Bonfiglioli');
+});
+
 test('bairro que já é nível de guia responde por si mesmo', () => {
   assert.equal(bairroDoGuia('Eloy Chaves', GUIAS), 'Eloy Chaves');
   assert.equal(bairroDoGuia('Medeiros', GUIAS), 'Medeiros');
