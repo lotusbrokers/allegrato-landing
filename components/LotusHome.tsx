@@ -25,7 +25,7 @@ import React, {
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { developmentsFallback, type DevelopmentCard } from '@/lib/developments';
-import { POSTS, hrefDoArtigo, type Post } from '@/lib/blog-posts';
+import type { PostResumo } from '@/lib/blog-posts';
 import ConsentimentoLgpd from './ConsentimentoLgpd';
 import CarrosselCards from './CarrosselCards';
 import type { CondominioCard } from '@/lib/condominios';
@@ -287,9 +287,10 @@ function labelImoveis(n: number | undefined): string {
 
 
 // Destaques do blog — os três artigos mais recentes, vindos da mesma fonte que
-// alimenta /lotus-blog. Manter uma lista própria aqui era o que fazia a home
-// exibir títulos que já não existiam e nenhuma capa.
-const postsFallback = POSTS.slice(0, 3);
+// alimenta /lotus-blog (a rota manda; ver app/page.tsx). Manter uma lista própria
+// aqui era o que fazia a home exibir títulos que já não existiam e nenhuma capa.
+// Chegam só com os dados do card: até 16/10/2026 este componente importava a
+// lista de artigos inteira, com o texto de todos, para mostrar três.
 
 /**
  * Quantos lançamentos a home mostra em destaque.
@@ -341,8 +342,8 @@ export default function LotusHome({
   // Imóveis aprovados por slug de bairro (contados no servidor). Ausente → sem contagem.
   bairroCounts?: Record<string, number>;
   // Destaques do blog ja filtrados por data de publicacao (a rota decide a
-  // hora, ver lib/blog-agenda). Ausente -> os tres primeiros da lista.
-  posts?: Post[];
+  // hora, ver lib/blog-agenda), so com os dados do card. Ausente -> sem cards.
+  posts?: PostResumo[];
   // Imóveis prontos da vitrine "Oportunidades da semana", já na ordem dos selos
   // do dashboard (ver oportunidadesDaSemana em lib/imoveis). Vazio → seção some.
   oportunidades?: ImovelBusca[];
@@ -355,7 +356,7 @@ export default function LotusHome({
   // Fonte efetiva: Supabase se veio conteúdo apresentável; senão o array curado.
   const devs: DevelopmentCard[] =
     developments && developments.length > 0 ? developments : developmentsFallback;
-  const artigos: Post[] = posts && posts.length > 0 ? posts : postsFallback;
+  const artigos: PostResumo[] = posts ?? [];
   // state (espelha o `state` do dc-runtime)
   const [liaOpen, setLiaOpen] = useState(false);
   /* Busca da home. Antes os selects não guardavam estado e o botão navegava
@@ -1091,7 +1092,7 @@ export default function LotusHome({
           <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:26px;margin-bottom:64px;')}>
             {/* hint-placeholder-count: 3 */}
             {artigos.map((p) => (
-              <Hoverable key={p.id} as="a" href={hrefDoArtigo(p.id)} data-reveal="" baseStyle={parseStyle('cursor:pointer;display:flex;flex-direction:column;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 18px 44px -30px rgba(21,36,28,.32);transition:transform .35s ease, box-shadow .35s ease;')} hoverStyle={parseStyle('transform:translateY(-5px);box-shadow:0 30px 60px -32px rgba(21,36,28,.42)')}>
+              <Hoverable key={p.id} as="a" href={p.href} data-reveal="" baseStyle={parseStyle('cursor:pointer;display:flex;flex-direction:column;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 18px 44px -30px rgba(21,36,28,.32);transition:transform .35s ease, box-shadow .35s ease;')} hoverStyle={parseStyle('transform:translateY(-5px);box-shadow:0 30px 60px -32px rgba(21,36,28,.42)')}>
                 <div style={parseStyle('position:relative;aspect-ratio:16/10;background:#3f6249;')}>
                   <ImageSlot id={p.slot} src={p.img} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={p.title} />
                   <span style={parseStyle('position:absolute;top:14px;left:14px;background:rgba(247,242,232,.94);color:#1d3a2c;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 11px;border-radius:30px;')}>{p.cat}</span>
@@ -1340,9 +1341,9 @@ export default function LotusHome({
             <div>
               <div style={parseStyle('font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#cdab6e;margin-bottom:18px;')}>Políticas</div>
               <div style={parseStyle('display:flex;flex-direction:column;gap:12px;font-size:14.5px;color:rgba(247,242,232,.72);')}>
-                <Hoverable as="a" href="../lotus-privacidade/" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Privacidade (LGPD)</Hoverable>
-                <Hoverable as="a" href="../lotus-termos/" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Termos de uso</Hoverable>
-                <Hoverable as="a" href="../lotus-cookies/" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Cookies</Hoverable>
+                <Hoverable as="a" href="/lotus-privacidade" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Privacidade (LGPD)</Hoverable>
+                <Hoverable as="a" href="/lotus-termos" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Termos de uso</Hoverable>
+                <Hoverable as="a" href="/lotus-cookies" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Cookies</Hoverable>
               </div>
             </div>
           </div>

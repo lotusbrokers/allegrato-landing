@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import LotusBlog from '@/components/LotusBlog';
-import { POSTS, hrefDoArtigo, type Post } from '@/lib/blog-posts';
+import { POSTS, categoriasComArtigo, hrefDoArtigo, resumoDoPost, type Post } from '@/lib/blog-posts';
 import { publicados } from '@/lib/blog-agenda';
+import { IMAGEM_COMPARTILHAMENTO } from '@/lib/site';
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.lotusbrokers.com.br';
 
@@ -31,6 +32,7 @@ export const metadata: Metadata = {
     title: 'Blog Lotus: notícias da cidade e do mercado imobiliário',
     description:
       'Notícias de Jundiaí e Itupeva, mercado imobiliário e a vida na região da Serra do Japi, por quem vive aqui.',
+    images: [IMAGEM_COMPARTILHAMENTO],
   },
 };
 
@@ -69,7 +71,8 @@ export default function LotusBlogPage() {
         // "<" escapado: nenhum texto de artigo pode fechar o <script> antes da hora.
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd(posts)).replace(/</g, '\\u003c') }}
       />
-      <LotusBlog posts={posts} />
+      {/* Só os dados dos cards: o texto dos artigos não vai para a listagem. */}
+      <LotusBlog posts={posts.map(resumoDoPost)} categorias={categoriasComArtigo(posts)} />
     </>
   );
 }

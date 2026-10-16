@@ -1,8 +1,21 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import LotusBlog from '@/components/LotusBlog';
-import { POSTS, hrefDoArtigo, type Post } from '@/lib/blog-posts';
+import {
+  POSTS,
+  hrefDoArtigo,
+  relacionados,
+  resumoDoPost,
+  type BairrosDoBloco,
+  type BlocoArtigo,
+  type LinkArtigo,
+  type Post,
+} from '@/lib/blog-posts';
 import { publicados } from '@/lib/blog-agenda';
+import { BAIRROS } from '@/lib/bairros';
+import { getImoveisBusca } from '@/lib/imoveis';
+import { getLancamentosList } from '@/lib/lancamentos';
+import { prepararCorpo, type AlvoDeLink } from '@/lib/texto-com-links';
 
 /**
  * Página própria de cada artigo do blog: /lotus-blog/<id>.
@@ -101,17 +114,93 @@ function jsonLd(post: Post) {
 // antes da hora. O JSON continua o mesmo para quem o lê.
 const paraScript = (obj: unknown) => JSON.stringify(obj).replace(/</g, '\\u003c');
 
+/**
+ * Guias de bairro que viram link na primeira vez que o artigo cita o bairro.
+ *
+ * Ficam de fora os nomes que também são palavra comum ou bairro de outra
+ * cidade: o "Centro" do guia é o de Itupeva, e "Retiro", "Aeroporto" e
+ * "Jardim Primavera" aparecem no texto com outro sentido. Bonfiglioli e
+ * Vianelo, as duas partes do Vianelo Bonfiglioli, levam ao guia dele, e o
+ * Recanto IV Centenário é o outro nome do Recanto Quarto Centenário.
+ */
+const NOMES_AMBIGUOS = new Set(['Centro', 'Retiro', 'Aeroporto', 'Jardim Primavera']);
+const OUTROS_NOMES: Record<string, string[]> = {
+  'vianelo-bonfiglioli': ['Bonfiglioli', 'Vianelo'],
+  'recanto-quarto-centenario': ['Recanto IV Centenário'],
+};
+
+function alvosDosGuias(): AlvoDeLink[] {
+  return BAIRROS.filter((b) => b.publicado && !NOMES_AMBIGUOS.has(b.nome)).flatMap((b) =>
+    [b.nome, ...(OUTROS_NOMES[b.slug] ?? [])].map((nome) => ({ nome, href: `/lotus-bairro/${b.slug}` })),
+  );
+}
+
+const normalizar = (s: string) => s.normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+const posicaoNoBloco = (sel: BairrosDoBloco, bairro: string) => sel.bairros.findIndex((b) => normalizar(b) === normalizar(bairro));
+const estaNoBloco = (sel: BairrosDoBloco, bairro: string, cidade: string) =>
+  normalizar(cidade) === normalizar(sel.cidade) && posicaoNoBloco(sel, bairro) >= 0;
+
+/**
+ * Troca os blocos de imóveis e lançamentos por listas de links com o que está
+ * anunciado agora nos bairros pedidos, na ordem em que os bairros foram
+ * escritos (o mais perto primeiro). Sem anúncio, o bloco some; banco fora do
+ * ar também só some com o bloco, sem derrubar o artigo.
+ */
+async function comAnuncios(corpo: BlocoArtigo[]): Promise<BlocoArtigo[]> {
+  const precisa = corpo.some((b) => typeof b !== 'string' && (b.imoveisNosBairros || b.lancamentosNosBairros));
+  if (!precisa) return corpo;
+  const [imoveis, lancamentos] = await Promise.all([
+    getImoveisBusca().catch((e) => {
+      console.error('[blog] imóveis indisponíveis:', e);
+      return [];
+    }),
+    getLancamentosList().catch((e) => {
+      console.error('[blog] lançamentos indisponíveis:', e);
+      return [];
+    }),
+  ]);
+  return corpo.flatMap((bloco): BlocoArtigo[] => {
+    if (typeof bloco === 'string' || !(bloco.imoveisNosBairros || bloco.lancamentosNosBairros)) return [bloco];
+    const links: LinkArtigo[] = [];
+    const selImoveis = bloco.imoveisNosBairros;
+    if (selImoveis) {
+      links.push(
+        ...imoveis
+          .filter((im) => im.fin === 'comprar' && estaNoBloco(selImoveis, im.neighborhood, im.city))
+          .sort((a, b) => posicaoNoBloco(selImoveis, a.neighborhood) - posicaoNoBloco(selImoveis, b.neighborhood))
+          .map((im) => ({ texto: `${im.type} em ${im.neighborhood}`, href: `/lotus-imovel/${im.codigo}`, detalhe: im.price })),
+      );
+    }
+    const selLancamentos = bloco.lancamentosNosBairros;
+    if (selLancamentos) {
+      links.push(
+        ...lancamentos
+          .filter((l) => l.href && estaNoBloco(selLancamentos, l.neighborhood, l.city))
+          .sort((a, b) => posicaoNoBloco(selLancamentos, a.neighborhood) - posicaoNoBloco(selLancamentos, b.neighborhood))
+          .map((l) => ({ texto: l.name, href: l.href as string, detalhe: `lançamento, ${l.neighborhood}` })),
+      );
+    }
+    return links.length ? [{ titulo: bloco.titulo, nivel: bloco.nivel, links }] : [];
+  });
+}
+
 export default async function LotusBlogArtigoPage({ params }: Params) {
   const { slug } = await params;
   const post = artigoNoAr(slug);
   if (!post) notFound();
+
+  // Só o que a página desenha vai para o componente de cliente: o artigo aberto
+  // e os três relacionados. Até 16/10/2026 iam os 26 artigos inteiros.
+  const corpo = prepararCorpo(await comAnuncios(post.body), alvosDosGuias());
+  const artigo = { ...resumoDoPost(post), tldr: post.tldr, corpo };
+  const outros = relacionados(publicados(POSTS), post).map(resumoDoPost);
 
   return (
     <>
       {jsonLd(post).map((obj, i) => (
         <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: paraScript(obj) }} />
       ))}
-      <LotusBlog posts={publicados(POSTS)} artigo={post} />
+      <LotusBlog artigo={artigo} relacionados={outros} />
     </>
   );
 }

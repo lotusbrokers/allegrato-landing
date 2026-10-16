@@ -148,7 +148,8 @@ const NOISE_BG =
 
 const WHATSAPP_DEFAULT = '5511926143393';
 
-import { POSTS, categoriasComArtigo, hrefDoArtigo, relacionados, type Post } from '@/lib/blog-posts';
+import type { PostResumo } from '@/lib/blog-posts';
+import type { BlocoPronto, Pedaco } from '@/lib/texto-com-links';
 
 /* Estilos de chip (strings literais do fonte). */
 const chipOn =
@@ -160,6 +161,34 @@ const chipOff =
 function LotusMark({ size }: { size: number }) {
   return (
     <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" style={{ height: 34, width: 'auto', display: 'block' }} />
+  );
+}
+
+/* Link dentro do texto do artigo: sublinhado em dourado, para se distinguir do
+   texto corrido sem mudar a cor da página. Link para fora abre em outra aba. */
+function LinkDoTexto({ href, children }: { href: string; children: React.ReactNode }) {
+  const externo = /^https?:\/\//.test(href);
+  return (
+    <a
+      href={href}
+      {...(externo ? { target: '_blank', rel: 'noopener' } : {})}
+      style={parseStyle('color:#1d3a2c;font-weight:500;text-decoration:underline;text-decoration-color:#b18a4a;text-underline-offset:3px;')}
+    >
+      {children}
+    </a>
+  );
+}
+
+/** Pedaços do texto (lib/texto-com-links) desenhados: texto puro ou link. */
+function comLinks(pedacos: Pedaco[]) {
+  return pedacos.map((p, i) =>
+    typeof p === 'string' ? (
+      p
+    ) : (
+      <LinkDoTexto key={i} href={p.href}>
+        {p.texto}
+      </LinkDoTexto>
+    ),
   );
 }
 
@@ -178,7 +207,11 @@ function LotusMark({ size }: { size: number }) {
  * sozinho numa busca nem ser compartilhado por link. Agora cada artigo é uma
  * página de verdade, e os cartões são links comuns.
  *
- * `posts` chega pronto da rota, ja filtrado por data de publicacao.
+ * `posts` chega pronto da rota, ja filtrado por data de publicacao, e só com
+ * os dados dos cards (PostResumo). O artigo chega com o corpo já preparado
+ * (lib/texto-com-links): os links do texto e as listas de imóveis foram
+ * resolvidos no servidor. Até 16/10/2026 este componente importava a lista de
+ * artigos inteira, e cada página do blog levava os textos de todos.
  *
  * O filtro NAO roda aqui dentro de proposito: este e um componente de
  * cliente, e chamar new Date() durante a renderizacao faria o servidor e o
@@ -186,21 +219,26 @@ function LotusMark({ size }: { size: number }) {
  * agendado isso da divergencia de hidratacao — a pagina do servidor com um
  * artigo a menos que a do cliente. Quem decide a hora e a rota, no servidor.
  *
- * O padrao POSTS existe para quem renderizar o componente solto (Storybook,
- * teste, pagina futura) nao receber uma tela vazia.
- *
  * Os dados estruturados (JSON-LD) saíram daqui: eram escritos por um efeito
  * no navegador, então não existiam no HTML que o servidor entrega. Agora cada
  * rota os escreve no servidor.
  */
 export default function LotusBlog({
   whatsapp = WHATSAPP_DEFAULT,
-  posts = POSTS,
+  posts = [],
+  categorias = [],
   artigo,
+  relacionados = [],
 }: {
   whatsapp?: string;
-  posts?: Post[];
-  artigo?: Post;
+  /** Índice: os artigos publicados, só com os dados dos cards. */
+  posts?: PostResumo[];
+  /** Índice: categorias que têm artigo publicado, na ordem da barra. */
+  categorias?: { id: string; label: string }[];
+  /** Artigo: os dados do card, o resumo e o corpo já preparado. */
+  artigo?: PostResumo & { tldr: string; corpo: BlocoPronto[] };
+  /** Artigo: os do "Continue lendo". */
+  relacionados?: PostResumo[];
 } = {}) {
   const [cat, setCat] = useState<string>('all');
   const [newsDone, setNewsDone] = useState<boolean>(false);
@@ -220,17 +258,17 @@ export default function LotusBlog({
   const isIndex = !art;
 
   const featured = posts[0];
-  const rest = posts.filter((p) => (cat === 'all' ? p.id !== featured.id : p.cat === cat));
+  const rest = featured ? posts.filter((p) => (cat === 'all' ? p.id !== featured.id : p.cat === cat)) : [];
   // A barra mostra só categoria que tem artigo: chip que leva a uma tela vazia
   // o visitante lê como defeito. Categoria nova entra sozinha quando o primeiro
   // artigo dela sai.
-  const cats = categoriasComArtigo(posts).map((c) => ({
+  const cats = categorias.map((c) => ({
     label: c.label,
     select: () => setCat(c.id),
     style: cat === c.id ? chipOn : chipOff,
   }));
 
-  const related = art ? relacionados(posts, art) : [];
+  const related = relacionados;
 
   const newsNotDone = !newsDone;
 
@@ -240,7 +278,7 @@ export default function LotusBlog({
       <LotusHeader active="blog" whatsapp={whatsapp} />
 
       {/* ============ ÍNDICE ============ */}
-      {isIndex && (
+      {isIndex && featured && (
         <div>
           {/* hero */}
           <section style={parseStyle('background:#1d3a2c;position:relative;overflow:hidden;')}>
@@ -256,7 +294,7 @@ export default function LotusBlog({
           <section style={parseStyle('max-width:1200px;margin:0 auto;padding:48px 32px 0;')}>
             <Hoverable
               as="a"
-              href={hrefDoArtigo(featured.id)}
+              href={featured.href}
               baseStyle={parseStyle('display:grid;grid-template-columns:1.3fr 1fr;gap:0;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 24px 60px -38px rgba(21,36,28,.5);cursor:pointer;transition:transform .3s ease;')}
               hoverStyle={parseStyle('transform:translateY(-3px)')}
             >
@@ -285,7 +323,7 @@ export default function LotusBlog({
                 <Hoverable
                   key={p.id}
                   as="a"
-                  href={hrefDoArtigo(p.id)}
+                  href={p.href}
                   baseStyle={parseStyle('display:flex;flex-direction:column;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 16px 40px -32px rgba(21,36,28,.34);cursor:pointer;transition:transform .3s ease, box-shadow .3s ease;')}
                   hoverStyle={parseStyle('transform:translateY(-4px);box-shadow:0 28px 56px -34px rgba(21,36,28,.46)')}
                 >
@@ -355,9 +393,9 @@ export default function LotusBlog({
               <div style={parseStyle('font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#cdab6e;margin-bottom:8px;')}>Resumo</div>
               <p style={parseStyle('font-size:15px;color:rgba(247,242,232,.85);font-weight:300;line-height:1.6;margin:0;')}>{art.tldr}</p>
             </div>
-            {art.body.map((bloco, i) =>
-              typeof bloco === 'string' ? (
-                <p key={i} style={parseStyle('font-size:17px;color:#3f6249;font-weight:300;line-height:1.75;margin:0 0 22px;')}>{bloco}</p>
+            {art.corpo.map((bloco, i) =>
+              'paragrafo' in bloco ? (
+                <p key={i} style={parseStyle('font-size:17px;color:#3f6249;font-weight:300;line-height:1.75;margin:0 0 22px;')}>{comLinks(bloco.paragrafo)}</p>
               ) : (
                 <div key={i}>
                   {bloco.titulo &&
@@ -369,7 +407,17 @@ export default function LotusBlog({
                   {bloco.itens && (
                     <ul style={parseStyle('margin:0 0 22px;padding-left:22px;display:grid;gap:9px;')}>
                       {bloco.itens.map((item, j) => (
-                        <li key={j} style={parseStyle('font-size:17px;color:#3f6249;font-weight:300;line-height:1.6;')}>{item}</li>
+                        <li key={j} style={parseStyle('font-size:17px;color:#3f6249;font-weight:300;line-height:1.6;')}>{comLinks(item)}</li>
+                      ))}
+                    </ul>
+                  )}
+                  {bloco.links && (
+                    <ul style={parseStyle('margin:0 0 22px;padding-left:22px;display:grid;gap:9px;')}>
+                      {bloco.links.map((l) => (
+                        <li key={l.href} style={parseStyle('font-size:17px;color:#3f6249;font-weight:300;line-height:1.6;')}>
+                          <LinkDoTexto href={l.href}>{l.texto}</LinkDoTexto>
+                          {l.detalhe ? ` · ${l.detalhe}` : ''}
+                        </li>
                       ))}
                     </ul>
                   )}
@@ -394,7 +442,7 @@ export default function LotusBlog({
                   <Hoverable
                     key={r.id}
                     as="a"
-                    href={hrefDoArtigo(r.id)}
+                    href={r.href}
                     baseStyle={parseStyle('display:flex;gap:16px;align-items:center;background:#f7f2e8;border-radius:14px;padding:16px;cursor:pointer;transition:transform .25s ease;')}
                     hoverStyle={parseStyle('transform:translateY(-2px)')}
                   >

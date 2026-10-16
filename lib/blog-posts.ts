@@ -15,12 +15,37 @@
  * lib/blog-agenda), então o próximo agendado pode ficar no topo desde já.
  */
 
+/** Link de uma lista de links do artigo. `detalhe` sai ao lado, em texto comum. */
+export type LinkArtigo = { texto: string; href: string; detalhe?: string };
+
 /**
  * Bloco do corpo do artigo. `string` é um parágrafo — forma curta, usada pela
  * maioria. A variante em objeto cobre artigos com seção e lista; sem ela, uma
  * lista de itens viraria um parágrafo corrido.
+ *
+ * Parágrafo e item de lista aceitam link no meio do texto, no formato
+ * `[texto](endereço)` (ver lib/texto-com-links). `links` é uma lista em que
+ * cada item é um link.
+ *
+ * `imoveisNosBairros` e `lancamentosNosBairros` levam a cidade e os nomes de
+ * bairro como o cadastro grava: a rota do artigo troca o bloco pelos imóveis à
+ * venda e pelos lançamentos com página nesses bairros NO MOMENTO em que gera a
+ * página. Imóvel vendido sai sozinho do artigo; sem nenhum anúncio, o bloco
+ * some. A cidade evita que o "Centro" de Itupeva entre numa agenda de Jundiaí.
+ * Criado para o Sextou em Jundiaí (16/10/2026): os imóveis perto dos eventos.
  */
-type BlocoArtigo = string | { titulo?: string; itens?: string[]; nivel?: 2 | 3 };
+export type BairrosDoBloco = { cidade: string; bairros: string[] };
+
+export type BlocoArtigo =
+  | string
+  | {
+      titulo?: string;
+      itens?: string[];
+      nivel?: 2 | 3;
+      links?: LinkArtigo[];
+      imoveisNosBairros?: BairrosDoBloco;
+      lancamentosNosBairros?: BairrosDoBloco;
+    };
 
 export type Post = {
   id: string;
@@ -56,6 +81,9 @@ export type Post = {
  */
 export const CATEGORIAS_BLOG: { id: string; label: string }[] = [
   { id: 'all', label: 'Todos' },
+  // Série semanal criada em 16/10/2026, pedido da Lotus: a agenda do fim de
+  // semana, publicada às sextas. O id é o que o card mostra; o rótulo, o filtro.
+  { id: 'Sextou em Jundiaí', label: 'Sextou em Jundiaí | Agenda Lotus' },
   { id: 'Cidade', label: 'Cidade' },
   { id: 'Mercado', label: 'Mercado' },
   { id: 'Guia', label: 'Guias' },
@@ -82,6 +110,20 @@ export function categoriasComArtigo(publicados: Post[]): { id: string; label: st
  */
 export function hrefDoArtigo(id: string): string {
   return `/lotus-blog/${id}`;
+}
+
+/**
+ * O que um card de artigo precisa: tudo menos o texto. Listagem, "Continue
+ * lendo", a home e os guias de bairro recebem isto.
+ *
+ * Até 16/10/2026 essas telas recebiam os artigos inteiros, e cada página do
+ * blog levava os 26 textos no HTML (cerca de 240 KB) para mostrar um.
+ */
+export type PostResumo = Omit<Post, 'tldr' | 'body'> & { href: string };
+
+export function resumoDoPost(p: Post): PostResumo {
+  const { tldr: _tldr, body: _body, ...resto } = p;
+  return { ...resto, href: hrefDoArtigo(p.id) };
 }
 
 /**
@@ -122,9 +164,74 @@ export function relacionados(posts: Post[], atual: Post, quantos = 3): Post[] {
 // mão, que envelheceu: títulos que não existiam mais no blog e nenhuma capa.
 export const POSTS: Post[] = [
   /* ------------------------------------------------------------------
-   * Enviado pela Lotus em 15/10/2026, para sair no mesmo dia.
+   * Enviado pela Lotus em 16/10/2026 (documento "Sextou em Jundiaí Agenda
+   * Lotus edição de 16 a 18 de outubro"), para sair no mesmo dia. Primeira
+   * edição da série semanal: categoria "Sextou em Jundiaí".
    *
    * Primeiro da lista, e por isso o novo destaque da capa do blog.
+   *
+   * CONFERIDO em 16/10/2026 nas quatro notícias da Prefeitura que o documento
+   * cita (jundiai.sp.gov.br/noticias, de 13 a 15/10/2026): datas, horários,
+   * endereços, gratuidade, retirada de ingresso da Osesp (10h30, bilheteria ou
+   * Sympla), periodicidade da feira, idade mínima e salas das oficinas. Tudo
+   * confere.
+   *
+   * Do documento, só o "Texto do post" entrou: metadados, fontes e checklist
+   * são instruções para quem publica. Ajustes de forma:
+   *  - os "(inserir link)" ganharam os links reais: Sympla, formulários e site
+   *    da Cultura (os que vieram no próprio documento), a equipe da Lotus
+   *    (/lotus-corretores) e o WhatsApp (11) 92614-3393;
+   *  - "Veja imóveis à venda no Centro / na Vila Arens" virou as duas listas
+   *    automáticas abaixo, pedido da Lotus: imóveis à venda e lançamentos nos
+   *    bairros até cerca de 2 km dos eventos (distância em linha reta medida no
+   *    OpenStreetMap em 16/10). Centro e Vila Arens sozinhos não tinham imóvel
+   *    anunciado nesse dia;
+   *  - o item de WhatsApp da lista saiu: o fecho do texto repete o contato e a
+   *    página já tem o botão de WhatsApp logo abaixo;
+   *  - "A Lotus Imobiliária" virou "A Lotus Brokers", o nome da marca.
+   * O mapa com os quatro locais, pedido no checklist, não entrou: depende de um
+   * mapa salvo na conta Google da Lotus.
+   *
+   * Capa: a foto enviada junto (a Catedral à noite), recortada para 736x460.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'sextou-em-jundiai-16-a-18-de-outubro', cat: 'Sextou em Jundiaí', date: 'Out 2026', publicadoEm: '2026-10-16', read: '4 min', img: '/blog/sextou-em-jundiai-16-a-18-de-outubro.jpg', slot: 'blog-sextou-em-jundiai-16-a-18-de-outubro', title: 'Sextou em Jundiaí: o que fazer no fim de semana de 16 a 18 de outubro', excerpt: 'Osesp gratuita no Polytheama, Feira de Artes e Antiguidades na Praça da Matriz e espetáculo infantil na Vila Arens. Veja a agenda completa do fim de semana em Jundiaí.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'De 16 a 18 de outubro, a agenda de Jundiaí tem programação gratuita: o Coro Itinerante da Osesp no Teatro Polytheama na sexta, às 20h, com ingresso retirado na bilheteria ou no Sympla; a Feira de Artes Plásticas e Antiguidades na Praça da Matriz no domingo, das 9h às 14h; e o espetáculo infantil “Folia dos Bichos”, da Cia. Jovem de Dança, na Fábrica das Infâncias Japy, na Vila Arens, no domingo às 10h30. De 17 a 24 de outubro, o 37º Encontro de Corais oferece oficinas gratuitas com inscrição obrigatória.',
+    body: [
+      'O fim de semana chegou, e a agenda de Jundiaí está cheia de programação gratuita: música erudita hoje à noite, feira de antiguidades e arte no domingo de manhã e teatro de dança para a criançada. Separamos tudo em um só lugar para você planejar o roteiro, com horário, endereço e o que você precisa saber antes de sair de casa.',
+      { titulo: 'Sexta-feira (16): Coro Itinerante da Osesp no Teatro Polytheama' },
+      'A noite de hoje começa com música de concerto. O Teatro Polytheama recebe, às 20h, uma apresentação gratuita do Coro Itinerante da Osesp, a Orquestra Sinfônica do Estado de São Paulo. A iniciativa leva a música erudita a cidades do interior paulista desde 2008 e, segundo a Prefeitura, já passou por quase 70 municípios.',
+      'Atenção ao ingresso: é gratuito, mas precisa ser retirado. A retirada começa às 10h30 de hoje, na bilheteria do teatro ou pela plataforma Sympla.',
+      { itens: ['Quando: sexta-feira, 16 de outubro, das 20h às 21h', 'Onde: Teatro Polytheama', 'Quanto: gratuito, com retirada de ingresso', 'Ingressos: [Sympla do Teatro Polytheama](https://site.bileto.sympla.com.br/teatropolytheama/)'] },
+      { titulo: 'Domingo (18) de manhã: Feira de Artes Plásticas e Antiguidades, na Praça da Matriz' },
+      'Se você gosta de garimpar, o domingo começa no Centro. A Praça Governador Pedro de Toledo, a Praça da Matriz, recebe mais uma edição da Feira de Artes Plásticas e Antiguidades, promovida pela Secretaria Municipal de Cultura. Há obras de arte, brinquedos antigos, discos, antiguidades e peças de coleção, e o passeio funciona bem para ir em família ou com amigos.',
+      'A feira acontece uma vez por mês, no terceiro domingo, e a edição de novembro será a última do ano. Artistas e expositores interessados em participar podem se inscrever pelo [formulário on-line](https://docs.google.com/forms/d/e/1FAIpQLSdKN8nGEkhDUPjk_f_PCrFS7UnwZLsPPN3jSpc2LhpJLPJ-jQ/viewform).',
+      { itens: ['Quando: domingo, 18 de outubro, das 9h às 14h', 'Onde: Praça Governador Pedro de Toledo (Praça da Matriz), Rua Barão de Jundiaí, 762, Centro', 'Quanto: entrada gratuita'] },
+      { titulo: 'Domingo (18) às 10h30: “Folia dos Bichos” na Fábrica das Infâncias Japy' },
+      'Para quem tem criança em casa, a dica é o espetáculo infantil “Folia dos Bichos”, da Cia. Jovem de Dança, na Vila Arens. A montagem mistura dança, música e cor em uma viagem pelo universo dos animais, inspirada em “O Carnaval dos Animais”, de Saint-Saëns, e fala de amizade, aceitação e respeito às diferenças. A classificação é livre.',
+      { itens: ['Quando: domingo, 18 de outubro, às 10h30', 'Onde: Fábrica das Infâncias Japy, Rua Lacerda Franco, 175, Vila Arens', 'Quanto: entrada gratuita'] },
+      'Dica Lotus: a feira e o espetáculo acontecem na manhã de domingo, em regiões diferentes da cidade. Dá para encaixar os dois com um bom planejamento: espetáculo às 10h30 na Vila Arens e feira até as 14h no Centro.',
+      { titulo: 'Para colocar na agenda: 37º Encontro de Corais de Jundiaí (17 a 24 de outubro)' },
+      'A programação musical continua durante toda a próxima semana. O 37º Encontro de Corais acontece de 17 a 24 de outubro e traz duas oficinas gratuitas para maiores de 16 anos, com vagas limitadas e inscrição obrigatória, ambas no Centro das Artes Prefeito Pedro Fávaro (Rua Barão de Jundiaí, 1.093, Centro):',
+      { itens: ['Regência Coral: 19 de outubro, das 19h às 21h, na Sala Glória Rocha, com o regente Cadmo Fausto. [Inscreva-se aqui](https://docs.google.com/forms/d/e/1FAIpQLScECwH3c-A7kktD97b05lF2FXrHpwvvuDZyxbnYycZVZqL74g/viewform).', 'Voz e Movimento: 24 de outubro, das 13h às 15h, na Sala Josette Feres, com o regente Luís Guilherme Anselmi. [Inscreva-se aqui](https://docs.google.com/forms/d/e/1FAIpQLSeKKzgEm1VGEBBNfttSvJ7P4UKyJFR5dMO4_d6srNbpN8YHdQ/viewform).'] },
+      'A programação completa está no [site da Cultura de Jundiaí](https://cultura.jundiai.sp.gov.br/encontrodecorais).',
+      { titulo: 'Resumo rápido do fim de semana' },
+      { itens: ['Sexta, 16/10, 20h: Coro Itinerante da Osesp, no Teatro Polytheama (retirar ingresso)', 'Domingo, 18/10, 9h às 14h: Feira de Artes Plásticas e Antiguidades, na Praça da Matriz', 'Domingo, 18/10, 10h30: “Folia dos Bichos”, na Fábrica das Infâncias Japy', '17 a 24/10: 37º Encontro de Corais, com oficinas gratuitas mediante inscrição'] },
+      { titulo: 'Jundiaí tem vida cultural o ano inteiro, e isso pesa na hora de escolher onde morar' },
+      'Um Centro com feira, teatro e programação gratuita, e bairros como a Vila Arens com espaços voltados às famílias, mostram como a cidade combina qualidade de vida e opções de lazer ao alcance de casa. Para quem está pensando em mudar para Jundiaí, morar perto desses equipamentos faz diferença no dia a dia.',
+      'A Lotus Brokers conhece cada região da cidade e pode ajudar você a encontrar o imóvel certo perto do que você mais valoriza.',
+      { titulo: 'Imóveis à venda perto dos eventos', nivel: 3, imoveisNosBairros: { cidade: 'Jundiaí', bairros: ['Centro', 'Vila Arens', 'Anhangabaú', 'Ponte de São João', 'Vila Municipal', 'Jardim Pacaembu', 'Jardim Ana Maria', 'Vila Rio Branco', 'Jardim Messina', 'Jardim Bonfiglioli', 'Bonfiglioli', 'Parque União'] } },
+      { titulo: 'Lançamentos perto dos eventos', nivel: 3, lancamentosNosBairros: { cidade: 'Jundiaí', bairros: ['Centro', 'Vila Arens', 'Anhangabaú', 'Ponte de São João', 'Vila Municipal', 'Jardim Pacaembu', 'Jardim Ana Maria', 'Vila Rio Branco', 'Jardim Messina', 'Jardim Bonfiglioli', 'Bonfiglioli', 'Parque União'] } },
+      { links: [{ texto: 'Veja todos os imóveis à venda', href: '/lotus-busca' }] },
+      'Quer viver perto de tudo isso? Na hora de escolher o bairro, vale conversar com quem conhece a cidade por dentro. A [equipe da Lotus Brokers](/lotus-corretores) ajuda você a comparar regiões, entender o dia a dia de cada uma e encontrar o imóvel que combina com o seu ritmo, seja para morar ou investir em Jundiaí.',
+      'Fale com a Lotus Brokers pelo WhatsApp: [(11) 92614-3393](https://wa.me/5511926143393).',
+      'Volte toda sexta-feira para conferir a próxima edição do Sextou em Jundiaí | Agenda Lotus.',
+    ],
+  },
+  /* ------------------------------------------------------------------
+   * Enviado pela Lotus em 15/10/2026, para sair no mesmo dia.
+   *
+   * Foi o destaque da capa do blog até 16/10/2026.
    *
    * CONFERIDO em 15/10/2026, e publicado como veio. As regras de pessoa
    * física batem com a LC 214/2025 no Planalto: art. 251, § 1º, II e III, e

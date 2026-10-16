@@ -4,7 +4,7 @@ import { getLancamentos, isApresentavel, type LancamentoCard } from '@/lib/lanca
 import { getImoveisBusca, oportunidadesDaSemana } from '@/lib/imoveis';
 import { getCondominiosCards, isCondominioApresentavel } from '@/lib/condominios';
 import { BAIRROS } from '@/lib/bairros';
-import { POSTS } from '@/lib/blog-posts';
+import { POSTS, resumoDoPost } from '@/lib/blog-posts';
 import { publicados } from '@/lib/blog-agenda';
 import { nomesDoBairro } from '@/lib/bairros-taxonomia';
 import { FAQ_HOME } from '@/lib/home-faq';
@@ -32,7 +32,29 @@ function faqJsonLd() {
       name: f.q,
       acceptedAnswer: { '@type': 'Answer', text: f.a },
     })),
-    isPartOf: { '@type': 'WebSite', url: SITE },
+    isPartOf: { '@id': `${SITE}/#site` },
+  };
+}
+
+/**
+ * WebSite de primeiro nível, na home: é daqui que o Google tira o nome do site
+ * que aparece acima do endereço nos resultados. Até 16/10/2026 ele só existia
+ * aninhado no FAQPage, sem nome, e numa cópia na /lotus-busca com uma busca
+ * apontando para /comprar, endereço que não existe.
+ *
+ * Os nomes alternativos são os que a própria Lotus usa nos títulos das páginas.
+ * O publisher aponta para o RealEstateAgent do layout pelo @id.
+ */
+function siteJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE}/#site`,
+    name: 'Lotus Brokers',
+    alternateName: ['Imobiliária Lotus Brokers', 'Lotus Brokers Imobiliária'],
+    url: `${SITE}/`,
+    inLanguage: 'pt-BR',
+    publisher: { '@id': `${SITE}/#imobiliaria` },
   };
 }
 
@@ -171,7 +193,7 @@ export default async function LotusHomePage() {
 
   // Os tres destaques do blog saem da MESMA fonte de /lotus-blog e respeitam o
   // agendamento: artigo marcado para amanha nao pode vazar na home hoje.
-  const destaques = publicados(POSTS).slice(0, 3);
+  const destaques = publicados(POSTS).slice(0, 3).map(resumoDoPost);
 
   // "Oportunidades da semana": sai da lista de imóveis que JÁ foi buscada acima
   // para a contagem por bairro — nenhuma ida extra ao banco. Só exclusivos, e
@@ -194,6 +216,7 @@ export default async function LotusHomePage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd()) }} />
       {/* "<" escapado: nenhum texto de resposta pode fechar o <script> antes da hora. */}
       <script
         type="application/ld+json"
