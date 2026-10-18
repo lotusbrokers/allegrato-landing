@@ -35,6 +35,7 @@ import { galeriaDoImovel, type CondominioDoImovel } from '@/lib/condominio-do-im
 import LotusHeader from './LotusHeader';
 import LightboxFotos from './LightboxFotos';
 import { codigoDestaAba, trechoDoCorretor } from '@/lib/corretor-do-link';
+import { leadDoPortal, sendLead } from '@/lib/lead';
 
 /* ------------------------------------------------------------------ */
 /* Helpers                                                             */
@@ -363,6 +364,7 @@ export default function LotusImovel({
   const valorInicial = Math.min(5000000, Math.max(500000, data.valor_venda || 2450000));
   const [valor, setValor] = useState(valorInicial);
   const [openFaq, setOpenFaq] = useState(0);
+  const [form, setForm] = useState({ nome: '', whats: '', data: '' });
 
   // Corretor que mandou o link (?c=, ver lib/corretor-do-link). Lido só aqui,
   // no navegador: ler searchParams no servidor tiraria a página do cache. Até
@@ -417,6 +419,19 @@ export default function LotusImovel({
   const saveLabel = saved ? 'Salvo' : 'Salvar';
   const submitForm = (e: React.FormEvent) => {
     if (e && e.preventDefault) e.preventDefault();
+    sendLead(
+      leadDoPortal(
+        'imovel',
+        {
+          name: form.nome,
+          phone: form.whats,
+          interest: `${data.codigo_imovel} · ${titulo}`,
+          // "2026-10-20" do <input type="date"> vira "20/10/2026" para quem atende.
+          detalhes: form.data ? [`Visita desejada em ${form.data.split('-').reverse().join('/')}`] : [],
+        },
+        codigoDoCorretor,
+      ),
+    );
     setFormDone(true);
   };
   const openLightbox = (idx: number) => {
@@ -543,9 +558,9 @@ export default function LotusImovel({
               {!formDone && (
                 <>
                   <form onSubmit={submitForm} style={parseStyle('display:flex;flex-direction:column;gap:9px;')}>
-                    <input type="text" required placeholder="Seu nome" style={parseStyle('border:1px solid rgba(21,36,28,.16);border-radius:9px;padding:11px 13px;font-size:14px;outline:none;')} />
-                    <input type="text" required placeholder="WhatsApp" style={parseStyle('border:1px solid rgba(21,36,28,.16);border-radius:9px;padding:11px 13px;font-size:14px;outline:none;')} />
-                    <input type="date" style={parseStyle('border:1px solid rgba(21,36,28,.16);border-radius:9px;padding:11px 13px;font-size:14px;outline:none;color:#3f6249;')} />
+                    <input type="text" required placeholder="Seu nome" value={form.nome} onChange={(e) => setForm({ ...form, nome: e.target.value })} style={parseStyle('border:1px solid rgba(21,36,28,.16);border-radius:9px;padding:11px 13px;font-size:14px;outline:none;')} />
+                    <input type="text" required placeholder="WhatsApp" value={form.whats} onChange={(e) => setForm({ ...form, whats: e.target.value })} style={parseStyle('border:1px solid rgba(21,36,28,.16);border-radius:9px;padding:11px 13px;font-size:14px;outline:none;')} />
+                    <input type="date" value={form.data} onChange={(e) => setForm({ ...form, data: e.target.value })} style={parseStyle('border:1px solid rgba(21,36,28,.16);border-radius:9px;padding:11px 13px;font-size:14px;outline:none;color:#3f6249;')} />
                     <label style={parseStyle('display:flex;gap:8px;align-items:flex-start;font-size:11.5px;color:#3f6249;line-height:1.4;margin:2px 0;cursor:pointer;')}><input type="checkbox" required style={parseStyle('margin-top:2px;flex-shrink:0;')} /><span>Autorizo a Lotus a entrar em contato comigo, conforme a <a href="/lotus-privacidade" target="_blank" rel="noopener" style={parseStyle('color:#b18a4a;text-decoration:underline;')}>Política de Privacidade</a>.</span></label>
                     <button type="submit" style={parseStyle('background:#1d3a2c;color:#f7f2e8;font-weight:600;font-size:14.5px;padding:13px;border:none;border-radius:10px;cursor:pointer;')}>Quero agendar a visita</button>
                     <p style={parseStyle('font-size:11px;color:#8aa593;margin:2px 0 0;line-height:1.4;')}>Você fala com gente que conhece esse imóvel e esse bairro. Ao enviar, concorda com a Política de Privacidade (LGPD).</p>

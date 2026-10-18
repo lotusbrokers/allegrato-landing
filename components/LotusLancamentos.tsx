@@ -30,6 +30,8 @@ import AbasLancamentos from './AbasLancamentos';
 import Link from 'next/link';
 import LotusHeader from './LotusHeader';
 import ConsentimentoLgpd from './ConsentimentoLgpd';
+import { codigoDestaAba } from '@/lib/corretor-do-link';
+import { leadDoPortal, sendLead } from '@/lib/lead';
 
 /* ------------------------------------------------------------------ */
 /* Helpers                                                             */
@@ -213,6 +215,7 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
   const [sortKey, setSortKey] = useState(ORDEM_PADRAO);
   const [openFaq, setOpenFaq] = useState(0);
   const [leadDone, setLeadDone] = useState(false);
+  const [form, setForm] = useState({ nome: '', email: '', telefone: '' });
   const [newsDone, setNewsDone] = useState(false);
 
   // waLink: mesma lógica exata do renderVals.
@@ -267,6 +270,13 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
 
   const submitLead = (e: React.FormEvent) => {
     if (e && e.preventDefault) e.preventDefault();
+    sendLead(
+      leadDoPortal(
+        'lancamentos',
+        { name: form.nome, phone: form.telefone, email: form.email, interest: 'Lançamentos em Jundiaí e região' },
+        codigoDestaAba(),
+      ),
+    );
     setLeadDone(true);
   };
   const submitNews = (e: React.FormEvent) => {
@@ -527,10 +537,10 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
             {leadNotDone && (
               <>
                 <form onSubmit={submitLead} style={parseStyle('display:flex;flex-direction:column;gap:13px;')}>
-                  <input className="lt-field" type="text" required placeholder="Seu nome" style={parseStyle('width:100%;border:1px solid rgba(247,242,232,.2);background:rgba(247,242,232,.06);color:#f7f2e8;border-radius:11px;')} />
+                  <input className="lt-field" type="text" required placeholder="Seu nome" value={form.nome} onChange={(e) => setForm({ ...form, nome: e.target.value })} style={parseStyle('width:100%;border:1px solid rgba(247,242,232,.2);background:rgba(247,242,232,.06);color:#f7f2e8;border-radius:11px;')} />
                   <div style={parseStyle('display:grid;grid-template-columns:1fr 1fr;gap:12px;')}>
-                    <input className="lt-field" type="email" required placeholder="E-mail" style={parseStyle('width:100%;border:1px solid rgba(247,242,232,.2);background:rgba(247,242,232,.06);color:#f7f2e8;border-radius:11px;')} />
-                    <input className="lt-field" type="text" required placeholder="Telefone / WhatsApp" style={parseStyle('width:100%;border:1px solid rgba(247,242,232,.2);background:rgba(247,242,232,.06);color:#f7f2e8;border-radius:11px;')} />
+                    <input className="lt-field" type="email" required placeholder="E-mail" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} style={parseStyle('width:100%;border:1px solid rgba(247,242,232,.2);background:rgba(247,242,232,.06);color:#f7f2e8;border-radius:11px;')} />
+                    <input className="lt-field" type="text" required placeholder="Telefone / WhatsApp" value={form.telefone} onChange={(e) => setForm({ ...form, telefone: e.target.value })} style={parseStyle('width:100%;border:1px solid rgba(247,242,232,.2);background:rgba(247,242,232,.06);color:#f7f2e8;border-radius:11px;')} />
                   </div>
                   <label style={parseStyle('display:flex;align-items:flex-start;gap:9px;font-size:12px;color:rgba(247,242,232,.7);line-height:1.45;cursor:pointer;')}>
                     <input type="checkbox" required style={parseStyle('margin-top:2px;width:16px;height:16px;accent-color:#b18a4a;')} />

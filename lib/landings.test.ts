@@ -27,7 +27,13 @@ for (const slug of [
 // Rotas do portal não são landings de empreendimento — um lançamento chamado
 // "Lotus Busca" não pode sequestrar a página de busca. A Área do Corretor, além
 // disso, é logada: como landing, entraria no sitemap.
-for (const slug of ['lotus-busca', 'lotus-home', 'meus-dados', 'api', 'area-do-corretor']) {
+// lotus-imovel, -condominio, -lancamentos e -corretores também: são o source dos
+// formulários dessas páginas (leadDoPortal), e como landing o lead delas ganharia
+// a marca de lançamento na rota /api/lead.
+for (const slug of [
+  'lotus-busca', 'lotus-home', 'meus-dados', 'api', 'area-do-corretor',
+  'lotus-imovel', 'lotus-condominio', 'lotus-lancamentos', 'lotus-corretores',
+]) {
   assert.equal(hrefForSlug(slug), null, `${slug} não é landing`);
 }
 

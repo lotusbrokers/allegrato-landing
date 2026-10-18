@@ -23,6 +23,8 @@ import React, {
   type CSSProperties,
   type ReactNode,
 } from 'react';
+import { codigoDestaAba } from '@/lib/corretor-do-link';
+import { leadDoPortal, sendLead } from '@/lib/lead';
 
 /* ------------------------------------------------------------------ */
 /* Helpers                                                             */
@@ -333,6 +335,7 @@ export default function LotusCorretores({
   const [fName, setFName] = useState('');
   const [openFaq, setOpenFaq] = useState(0);
   const [formDone, setFormDone] = useState(false);
+  const [form, setForm] = useState({ nome: '', whats: '', assunto: 'Quero comprar' });
 
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -395,6 +398,22 @@ export default function LotusCorretores({
 
   const submitForm = (e: React.FormEvent) => {
     if (e && e.preventDefault) e.preventDefault();
+    // O formulário só aparece no perfil, então `sel` existe aqui; o guard é para o tipo.
+    if (!sel) return;
+    // "Alexandra  Niero": o cadastro tem espaço duplo em vários nomes.
+    const escolhido = sel.name.trim().replace(/\s+/g, ' ');
+    sendLead(
+      leadDoPortal(
+        'corretores',
+        {
+          name: form.nome,
+          phone: form.whats,
+          interest: `Contato com ${escolhido}`,
+          detalhes: [`Corretor escolhido: ${escolhido}`, form.assunto],
+        },
+        codigoDestaAba(),
+      ),
+    );
     setFormDone(true);
   };
 
@@ -648,9 +667,9 @@ export default function LotusCorretores({
                 {notDone && (
                   <>
                     <form onSubmit={submitForm} style={parseStyle('display:flex;flex-direction:column;gap:11px;')}>
-                      <input type="text" required placeholder="Seu nome" style={parseStyle('border:1px solid rgba(21,36,28,.16);border-radius:10px;padding:12px 13px;font-size:14px;outline:none;')} />
-                      <input type="text" required placeholder="WhatsApp" style={parseStyle('border:1px solid rgba(21,36,28,.16);border-radius:10px;padding:12px 13px;font-size:14px;outline:none;')} />
-                      <select className="lt-field" style={parseStyle('border-radius:10px;width:100%;')}><option>Quero comprar</option><option>Quero vender</option><option>Quero alugar</option><option>Outro assunto</option></select>
+                      <input type="text" required placeholder="Seu nome" value={form.nome} onChange={(e) => setForm({ ...form, nome: e.target.value })} style={parseStyle('border:1px solid rgba(21,36,28,.16);border-radius:10px;padding:12px 13px;font-size:14px;outline:none;')} />
+                      <input type="text" required placeholder="WhatsApp" value={form.whats} onChange={(e) => setForm({ ...form, whats: e.target.value })} style={parseStyle('border:1px solid rgba(21,36,28,.16);border-radius:10px;padding:12px 13px;font-size:14px;outline:none;')} />
+                      <select className="lt-field" value={form.assunto} onChange={(e) => setForm({ ...form, assunto: e.target.value })} style={parseStyle('border-radius:10px;width:100%;')}><option>Quero comprar</option><option>Quero vender</option><option>Quero alugar</option><option>Outro assunto</option></select>
                       <label style={parseStyle('display:flex;align-items:flex-start;gap:8px;font-size:11.5px;color:#3f6249;line-height:1.45;cursor:pointer;')}><input type="checkbox" required style={parseStyle('margin-top:2px;width:15px;height:15px;accent-color:#1d3a2c;')} />Concordo com a Política de Privacidade (LGPD).</label>
                       <button type="submit" style={parseStyle('background:#1d3a2c;color:#f7f2e8;font-weight:600;font-size:14.5px;padding:13px;border:none;border-radius:10px;cursor:pointer;')}>Enviar mensagem</button>
                     </form>

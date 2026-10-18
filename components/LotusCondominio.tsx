@@ -33,6 +33,8 @@ import React, {
 import type { CondominioRow, CondominioCard } from '@/lib/condominios';
 import type { ImovelBusca } from '@/lib/imoveis';
 import type { LancamentoListItem } from '@/lib/lancamentos';
+import { codigoDestaAba } from '@/lib/corretor-do-link';
+import { leadDoPortal, sendLead } from '@/lib/lead';
 
 /* ------------------------------------------------------------------ */
 /* Helpers                                                             */
@@ -339,6 +341,7 @@ export default function LotusCondominio({
    */
   const [fotoAberta, setFotoAberta] = useState<number | null>(null);
   const [leadDone, setLeadDone] = useState(false);
+  const [form, setForm] = useState({ nome: '', email: '', telefone: '' });
   const rootRef = useRef<HTMLDivElement>(null);
 
   /* ---- Valores derivados do condomínio (banco) ---- */
@@ -426,6 +429,9 @@ export default function LotusCondominio({
 
   const submitLead = (e: FormEvent<HTMLFormElement>) => {
     if (e && e.preventDefault) e.preventDefault();
+    sendLead(
+      leadDoPortal('condominio', { name: form.nome, phone: form.telefone, email: form.email, interest: nome }, codigoDestaAba()),
+    );
     setLeadDone(true);
   };
 
@@ -696,10 +702,10 @@ export default function LotusCondominio({
             {leadNotDone && (
               <>
                 <form onSubmit={submitLead} style={parseStyle('display:flex;flex-direction:column;gap:13px;')}>
-                  <input type="text" required placeholder="Seu nome" style={parseStyle('width:100%;border:1px solid rgba(21,36,28,.16);background:#fff;color:#15241c;font-size:15px;padding:13px 14px;border-radius:11px;outline:none;')} />
+                  <input type="text" required placeholder="Seu nome" value={form.nome} onChange={(e) => setForm({ ...form, nome: e.target.value })} style={parseStyle('width:100%;border:1px solid rgba(21,36,28,.16);background:#fff;color:#15241c;font-size:15px;padding:13px 14px;border-radius:11px;outline:none;')} />
                   <div style={parseStyle('display:grid;grid-template-columns:1fr 1fr;gap:12px;')}>
-                    <input type="email" required placeholder="E-mail" style={parseStyle('width:100%;border:1px solid rgba(21,36,28,.16);background:#fff;color:#15241c;font-size:15px;padding:13px 14px;border-radius:11px;outline:none;')} />
-                    <input type="text" required placeholder="Telefone / WhatsApp" style={parseStyle('width:100%;border:1px solid rgba(21,36,28,.16);background:#fff;color:#15241c;font-size:15px;padding:13px 14px;border-radius:11px;outline:none;')} />
+                    <input type="email" required placeholder="E-mail" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} style={parseStyle('width:100%;border:1px solid rgba(21,36,28,.16);background:#fff;color:#15241c;font-size:15px;padding:13px 14px;border-radius:11px;outline:none;')} />
+                    <input type="text" required placeholder="Telefone / WhatsApp" value={form.telefone} onChange={(e) => setForm({ ...form, telefone: e.target.value })} style={parseStyle('width:100%;border:1px solid rgba(21,36,28,.16);background:#fff;color:#15241c;font-size:15px;padding:13px 14px;border-radius:11px;outline:none;')} />
                   </div>
                   <label style={parseStyle('display:flex;align-items:flex-start;gap:9px;font-size:12px;color:#3f6249;line-height:1.45;cursor:pointer;')}>
                     <input type="checkbox" required style={parseStyle('margin-top:2px;width:16px;height:16px;accent-color:#1d3a2c;')} />

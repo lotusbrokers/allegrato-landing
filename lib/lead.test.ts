@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { toE164, leadId, buildLeadPayload, consentimentoValido } from './lead.ts';
+import { toE164, leadId, buildLeadPayload, consentimentoValido, leadDoPortal } from './lead.ts';
 
 /* ---------- toE164 ---------- */
 // celular com DDD, com máscara
@@ -128,5 +128,68 @@ assert.equal(consentimentoValido(false, '2026-09-30T12:00:00.000Z'), false, 'des
 assert.equal(consentimentoValido('true', '2026-09-30T12:00:00.000Z'), false, 'só booleano verdadeiro');
 assert.equal(consentimentoValido(true, 'não-é-data'), false, 'precisa de instante legível');
 assert.equal(consentimentoValido(true, undefined), false, 'precisa do instante');
+
+/* ---------- leadDoPortal (formulários de imóvel, condomínio, lançamentos e corretores) ---------- */
+const agora = new Date('2026-10-18T15:00:00.000Z');
+const CONSENTIMENTO = 'Consentimento LGPD: sim, em 2026-10-18T15:00:00.000Z.';
+
+// imóvel, vindo pelo link de um corretor
+const imovel = buildLeadPayload(
+  leadDoPortal(
+    'imovel',
+    { name: 'Ana', phone: '(11) 99999-8888', interest: 'AP677 · Apartamento de 3 suítes em Anhangabaú', detalhes: ['Visita desejada em 20/10/2026'] },
+    'k7m2qx',
+    agora,
+  ),
+);
+assert.equal(imovel.data.source, 'landing_lotus-imovel');
+assert.equal(imovel.data.interest, 'AP677 · Apartamento de 3 suítes em Anhangabaú');
+assert.equal(imovel.data.phone, '+5511999998888');
+assert.equal(imovel.data.message, `Visita desejada em 20/10/2026 · código do corretor: k7m2qx · ${CONSENTIMENTO}`);
+assert.equal(/código do corretor:\s*([a-z2-9]{6})/i.exec(imovel.data.message)?.[1], 'k7m2qx', 'a Lia acha o código');
+assert.ok(!('portal' in imovel.data), 'não é lançamento: buildLeadPayload não marca nada');
+
+// imóvel sem link de corretor e sem data: só o consentimento
+const imovelSemNada = buildLeadPayload(
+  leadDoPortal('imovel', { name: 'Ana', phone: '11999998888', interest: 'AP677 · Casa' }, null, agora),
+);
+assert.equal(imovelSemNada.data.message, CONSENTIMENTO);
+
+// condomínio, com e-mail
+const condominio = buildLeadPayload(
+  leadDoPortal('condominio', { name: 'Bia', phone: '11999998888', email: 'bia@exemplo.com', interest: 'Condomínio Reserva da Serra' }, 'k7m2qx', agora),
+);
+assert.equal(condominio.data.source, 'landing_lotus-condominio');
+assert.equal(condominio.data.email, 'bia@exemplo.com');
+assert.equal(condominio.data.message, `código do corretor: k7m2qx · ${CONSENTIMENTO}`);
+
+// lançamentos, sem código
+const lancamentos = buildLeadPayload(
+  leadDoPortal('lancamentos', { name: 'Caio', phone: '11999998888', email: 'caio@exemplo.com', interest: 'Lançamentos em Jundiaí e região' }, null, agora),
+);
+assert.equal(lancamentos.data.source, 'landing_lotus-lancamentos');
+assert.equal(lancamentos.data.message, CONSENTIMENTO);
+
+// corretores: o corretor escolhido na tela e o assunto entram no message
+const corretores = buildLeadPayload(
+  leadDoPortal(
+    'corretores',
+    { name: 'Davi', phone: '11999998888', interest: 'Contato com Mariana Mamede', detalhes: ['Corretor escolhido: Mariana Mamede', 'Quero vender'] },
+    'k7m2qx',
+    agora,
+  ),
+);
+assert.equal(corretores.data.source, 'landing_lotus-corretores');
+assert.equal(
+  corretores.data.message,
+  `Corretor escolhido: Mariana Mamede · Quero vender · código do corretor: k7m2qx · ${CONSENTIMENTO}`,
+);
+
+// os quatro passam na regra de consentimento da rota e no formato de source dela
+for (const p of [imovel, condominio, lancamentos, corretores]) {
+  assert.match(p.data.source, /^landing_[a-z0-9-]{1,48}$/);
+}
+const declarado = leadDoPortal('imovel', { name: 'Ana', phone: '1', interest: 'x' }, null, agora);
+assert.equal(consentimentoValido(declarado.consent, declarado.consentAt), true);
 
 console.log('ok');

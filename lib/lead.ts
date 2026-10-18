@@ -10,6 +10,7 @@
  * usa é a rota — o cliente manda os campos crus e o servidor deriva o resto,
  * porque chave de deduplicação não se aceita de entrada não confiável.
  */
+import { marcadorDoCorretor } from './corretor-do-link';
 
 export type Lead = {
   name?: string;
@@ -114,6 +115,34 @@ export function buildLeadPayload(lead: Lead): {
   if (message) data.message = message;
 
   return { event: 'lead.created', data };
+}
+
+/**
+ * Lead dos formulários das páginas do portal: imóvel, condomínio, lançamentos
+ * e corretores. Até 18/10/2026 os quatro só mostravam "Recebido!" e não
+ * mandavam nada; quem preenchia sumia.
+ *
+ * `source` é "landing_lotus-<página>": passa no SOURCE_RE da rota e não é
+ * landing de lançamento (rota lotus-*), então o lead não ganha marca de
+ * lançamento. O código do corretor que mandou o link vai no `message`, com o
+ * mesmo marcador do WhatsApp, e o consentimento vai declarado porque o checkbox
+ * dos quatro é obrigatório.
+ */
+export function leadDoPortal(
+  pagina: 'imovel' | 'condominio' | 'lancamentos' | 'corretores',
+  campos: Pick<Lead, 'name' | 'phone' | 'email' | 'interest'> & { detalhes?: string[] },
+  codigoDoCorretor: string | null,
+  agora = new Date(),
+): Lead {
+  const { detalhes = [], ...resto } = campos;
+  const marcador = codigoDoCorretor ? marcadorDoCorretor(codigoDoCorretor) : '';
+  return {
+    ...resto,
+    source: `landing_lotus-${pagina}`,
+    message: [...detalhes, marcador].filter(Boolean).join(' · '),
+    consent: true,
+    consentAt: agora.toISOString(),
+  };
 }
 
 /* ------------------------------------------------------------------ */
