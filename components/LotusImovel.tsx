@@ -24,6 +24,7 @@ import { guiaDoBairro } from '@/lib/bairros';
 
 import Link from 'next/link';
 import React, {
+  useEffect,
   useRef,
   useState,
   type CSSProperties,
@@ -33,6 +34,7 @@ import { formatValor, type ImovelRow, type ImovelCard } from '@/lib/imoveis';
 import { galeriaDoImovel, type CondominioDoImovel } from '@/lib/condominio-do-imovel';
 import LotusHeader from './LotusHeader';
 import LightboxFotos from './LightboxFotos';
+import { codigoDestaAba, trechoDoCorretor } from '@/lib/corretor-do-link';
 
 /* ------------------------------------------------------------------ */
 /* Helpers                                                             */
@@ -362,6 +364,30 @@ export default function LotusImovel({
   const [valor, setValor] = useState(valorInicial);
   const [openFaq, setOpenFaq] = useState(0);
 
+  // Corretor que mandou o link (?c=, ver lib/corretor-do-link). Lido só aqui,
+  // no navegador: ler searchParams no servidor tiraria a página do cache. Até
+  // a leitura, painel e WhatsApp ficam como sempre.
+  const [codigoDoCorretor, setCodigoDoCorretor] = useState<string | null>(null);
+  const [corretor, setCorretor] = useState<{ nome: string; foto: string | null } | null>(null);
+  useEffect(() => {
+    const codigo = codigoDestaAba();
+    if (!codigo) return;
+    setCodigoDoCorretor(codigo);
+    let ativo = true;
+    // Import sob demanda: a leitura dos corretores e os textos deles
+    // (lib/corretores-conteudo) só descem para quem chegou por um link de
+    // corretor. Sem o nome, o código segue no texto do WhatsApp.
+    import('@/lib/brokers')
+      .then(({ getBrokerDoLink }) => getBrokerDoLink(codigo))
+      .then((b) => {
+        if (ativo) setCorretor(b);
+      })
+      .catch(() => {});
+    return () => {
+      ativo = false;
+    };
+  }, []);
+
   // fmt(n) do estático
   const fmt = (n: number) => 'R$ ' + Math.round(n).toLocaleString('pt-BR');
 
@@ -371,7 +397,9 @@ export default function LotusImovel({
     String(whatsapp ?? WHATSAPP_DEFAULT) +
     '?text=' +
     encodeURIComponent(
-      `Vim pela página do imóvel ${data.codigo_imovel} (${titulo}) e quero agendar uma visita.`,
+      `Vim pela página do imóvel ${data.codigo_imovel} (${titulo}) e quero agendar uma visita${
+        codigoDoCorretor ? trechoDoCorretor(codigoDoCorretor, corretor?.nome) : ''
+      }.`,
     );
 
 
@@ -403,6 +431,7 @@ export default function LotusImovel({
       {/* HEADER */}
       <LotusHeader
         whatsapp={whatsapp}
+        ctaHref={waLink}
         rightSlot={
           <div style={parseStyle('display:flex;align-items:center;gap:14px;')}>
             <button onClick={toggleSave} style={parseStyle('display:inline-flex;align-items:center;gap:7px;background:none;border:none;color:rgba(247,242,232,.85);font-size:14px;font-weight:500;cursor:pointer;')}>
@@ -491,9 +520,9 @@ export default function LotusImovel({
         {/* STICKY PANEL */}
         <div data-sticky-panel="" style={parseStyle('position:sticky;top:88px;background:#fff;border-radius:20px;box-shadow:0 24px 60px -34px rgba(21,36,28,.45);overflow:hidden;')}>
           <div style={parseStyle('padding:24px 24px 20px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(21,36,28,.08);')}>
-            <div style={parseStyle('width:56px;height:56px;border-radius:50%;background:#1d3a2c;flex-shrink:0;overflow:hidden;position:relative;')}><ImageSlot id="imovel-corretor" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt="Especialista Lotus" /></div>
+            <div style={parseStyle('width:56px;height:56px;border-radius:50%;background:#1d3a2c;flex-shrink:0;overflow:hidden;position:relative;')}><ImageSlot id="imovel-corretor" src={corretor?.foto ?? undefined} sizes="56px" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={corretor?.nome ?? 'Especialista Lotus'} /></div>
             <div>
-              <div style={parseStyle('font-size:15.5px;font-weight:600;color:#15241c;')}>Especialista Lotus</div>
+              <div style={parseStyle('font-size:15.5px;font-weight:600;color:#15241c;')}>{corretor?.nome ?? 'Especialista Lotus'}</div>
               <div style={parseStyle('font-size:12.5px;color:#3f6249;')}>Especialista em {bairro}</div>
               {/* CRECI 000001-F e a nota 5,0 eram placeholders inventados;
                   removidos até haver dado real do corretor responsável. */}

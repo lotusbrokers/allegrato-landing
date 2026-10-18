@@ -14,8 +14,14 @@ export function urlPublica(caminho: string): string {
   return new URL(caminho, DOMINIO_OFICIAL).toString();
 }
 
-export function linkDoImovel(codigo: string): string {
-  return urlPublica(`/lotus-imovel/${encodeURIComponent(codigo)}`);
+/**
+ * Com o código do corretor logado, o link leva `?c=`: quem chegar por ele à
+ * Lia chega identificado como cliente desse corretor (ver lib/corretor-do-link).
+ */
+export function linkDoImovel(codigo: string, codigoDoCorretor?: string | null): string {
+  const url = new URL(`/lotus-imovel/${encodeURIComponent(codigo)}`, DOMINIO_OFICIAL);
+  if (codigoDoCorretor) url.searchParams.set('c', codigoDoCorretor);
+  return url.toString();
 }
 
 export function linkDaConstrutora(slug: string): string {

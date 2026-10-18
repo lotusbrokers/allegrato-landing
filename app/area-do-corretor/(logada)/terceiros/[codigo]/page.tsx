@@ -5,7 +5,7 @@ import Avatar from '@/components/area-do-corretor/Avatar';
 import Compartilhar from '@/components/area-do-corretor/Compartilhar';
 import { BotaoFavoritar, RegistraAcesso } from '@/components/area-do-corretor/Memoria';
 import Icone from '@/components/area-do-corretor/Icone';
-import { exigirCorretor } from '@/lib/area-do-corretor/sessao';
+import { codigoDoLink, exigirCorretor } from '@/lib/area-do-corretor/sessao';
 import { captadorDoImovel } from '@/lib/area-do-corretor/captador';
 import { rotaDoImovel } from '@/lib/area-do-corretor/dados';
 import { linkDoImovel } from '@/lib/area-do-corretor/compartilhar';
@@ -33,7 +33,7 @@ export default async function ImovelDaArea({ params }: Props) {
   const { codigo } = await params;
   const imovel = await getImovel(codigo);
   if (!imovel) notFound();
-  const captador = await captadorDoImovel(imovel.id);
+  const [captador, codigoDoCorretor] = await Promise.all([captadorDoImovel(imovel.id), codigoDoLink(corretor.id)]);
 
   const titulo = tituloDo(imovel);
   const local = [imovel.bairro, imovel.cidade].filter(Boolean).join(' · ');
@@ -114,7 +114,7 @@ export default async function ImovelDaArea({ params }: Props) {
           )}
 
           <div className={estilos.acoes}>
-            <Compartilhar texto={`${titulo}${imovel.cidade ? `, ${imovel.cidade}` : ''}. ${valor}. Veja o anúncio:`} url={linkDoImovel(codigo)} />
+            <Compartilhar texto={`${titulo}${imovel.cidade ? `, ${imovel.cidade}` : ''}. ${valor}. Veja o anúncio:`} url={linkDoImovel(codigo, codigoDoCorretor)} />
             <BotaoFavoritar usuario={corretor.id} item={item} />
           </div>
 

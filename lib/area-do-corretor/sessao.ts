@@ -58,6 +58,27 @@ async function perfilDe(supabase: Cliente, usuarioId: string): Promise<{ nome: s
   return { nome: data?.full_name?.trim() || null, foto: data?.avatar_url || null };
 }
 
+/**
+ * Código do corretor para o link do imóvel (`?c=`): `tenant_memberships.codigo_link`
+ * da Lotus, lido com a sessão dele. A coluna vem da migration 20261146 da Dash;
+ * antes dela, ou com erro, devolve null e o link sai sem o código, como antes.
+ */
+export async function codigoDoLink(usuarioId: string): Promise<string | null> {
+  const supabase = await clienteDaSessao();
+  const { data, error } = await supabase
+    .from('tenant_memberships')
+    .select('codigo_link')
+    .eq('user_id', usuarioId)
+    .eq('tenant_id', TENANT_ID)
+    .limit(1)
+    .maybeSingle();
+  if (error) {
+    console.error('[area-do-corretor] código do link indisponível:', error.message);
+    return null;
+  }
+  return (data?.codigo_link as string | null | undefined) || null;
+}
+
 export type Corretor = {
   id: string;
   email: string;

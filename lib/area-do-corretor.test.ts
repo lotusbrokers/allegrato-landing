@@ -88,6 +88,9 @@ test('busca: todos os termos precisam aparecer; vazio não traz nada', () => {
 
 test('compartilhar: links públicos no domínio oficial e texto do WhatsApp codificado', () => {
   assert.equal(linkDoImovel('AP 12/3'), 'https://www.lotusbrokers.com.br/lotus-imovel/AP%2012%2F3');
+  // Com o código do corretor logado, o link leva ?c=; sem ele, sai como antes.
+  assert.equal(linkDoImovel('AP677', 'k7m2qx'), 'https://www.lotusbrokers.com.br/lotus-imovel/AP677?c=k7m2qx');
+  assert.equal(linkDoImovel('AP677', null), 'https://www.lotusbrokers.com.br/lotus-imovel/AP677');
   assert.equal(linkDoLancamento('/gioviale'), 'https://www.lotusbrokers.com.br/gioviale');
   // Sem landing própria, a vitrine de lançamentos, e não uma página que não existe.
   assert.equal(linkDoLancamento(null), 'https://www.lotusbrokers.com.br/lotus-lancamentos');

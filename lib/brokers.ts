@@ -1,4 +1,5 @@
 import { supabase, TENANT_ID } from './supabase';
+import { conteudoRealDe } from './corretores-conteudo';
 
 // Camada de dados dos CORRETORES do Portal.
 // Fonte: view pública portal_brokers = tenant_memberships (quem é corretor:
@@ -118,4 +119,31 @@ export async function getBrokers(): Promise<Broker[]> {
   // A ordenação por nome vinha do `.order('name')`; refaz porque os extras
   // entrariam sempre no fim.
   return [...doBanco, ...extras].sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
+}
+
+/**
+ * Nome e foto de quem mandou o link do imóvel (`?c=`), para o painel da página.
+ *
+ * `codigo_link` entra em portal_brokers pela migration 20261146 da Dash. Antes
+ * dela, com erro, com código de quem não está na view (a Diretoria não está) ou
+ * de quem a Lotus tirou do site, devolve null: o painel fica genérico e o código
+ * segue no texto do WhatsApp, porque quem resolve o corretor é a Dash.
+ * A foto tem a mesma reserva da página de corretores.
+ */
+export async function getBrokerDoLink(codigo: string): Promise<{ nome: string; foto: string | null } | null> {
+  const { data, error } = await supabase
+    .from('portal_brokers')
+    .select('name, photo_url')
+    .eq('tenant_id', TENANT_ID)
+    .eq('codigo_link', codigo)
+    .maybeSingle();
+  if (error) {
+    console.error('[getBrokerDoLink] erro Supabase:', error.message);
+    return null;
+  }
+  const row = data as Pick<BrokerRow, 'name' | 'photo_url'> | null;
+  // "Mariana  Mamede": o cadastro tem espaço duplo em vários nomes.
+  const nome = row?.name?.trim().replace(/\s+/g, ' ');
+  if (!nome || OCULTOS.has(chaveNome(nome))) return null;
+  return { nome, foto: row?.photo_url || conteudoRealDe(nome)?.foto || null };
 }
