@@ -21,8 +21,6 @@
   [data-escritorio-grid] > *{min-width:0 !important;}
   /* /lotus-imovel — conteúdo + sidebar "Agendar visita" (1fr 380px) */
   [data-pdp-grid]{grid-template-columns:1fr !important;}
-  /* /lotus-imovel — fotos do condomínio: 4 por linha viram 2 */
-  [data-condominio-fotos]{grid-template-columns:repeat(2,1fr) !important;}
   /* /lotus-sobre — dois CTAs "Quer vender / Procurando um imóvel" lado a lado */
   div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr !important;}
   /* Header: o CTA dourado é redundante no mobile (já está dentro do drawer do

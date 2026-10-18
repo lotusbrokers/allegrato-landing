@@ -14,9 +14,10 @@
  * no celular. Dá a volta nas pontas: depois da última vem a primeira, o que
  * evita a seta morta que faz a pessoa achar que travou.
  *
- * A página do imóvel tem um lightbox equivalente escrito dentro dela. Não foi
- * migrado junto porque funciona e a troca não foi pedida; quando for, é este o
- * componente para onde ele vai.
+ * A página do imóvel também usa este componente desde 18/10, com as fotos da
+ * unidade e, depois delas, as do condomínio. O lightbox que ela tinha escrito
+ * dentro montava todas as fotos de uma vez, e com as do condomínio o navegador
+ * baixaria até 84 ao abrir; aqui só a foto atual está na tela.
  */
 
 import React, { useCallback, useEffect, useRef, useState, type CSSProperties } from 'react';
