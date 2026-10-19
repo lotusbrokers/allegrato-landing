@@ -6,7 +6,7 @@ import Compartilhar from '@/components/area-do-corretor/Compartilhar';
 import { BotaoFavoritar, RegistraAcesso } from '@/components/area-do-corretor/Memoria';
 import Icone from '@/components/area-do-corretor/Icone';
 import { codigoDoLink, exigirCorretor } from '@/lib/area-do-corretor/sessao';
-import { captadorDoImovel } from '@/lib/area-do-corretor/captador';
+import { getCaptadorDoImovel } from '@/lib/brokers';
 import { rotaDoImovel } from '@/lib/area-do-corretor/dados';
 import { linkDoImovel } from '@/lib/area-do-corretor/compartilhar';
 import { ROTA_BASE } from '@/lib/area-do-corretor/acesso';
@@ -33,7 +33,9 @@ export default async function ImovelDaArea({ params }: Props) {
   const { codigo } = await params;
   const imovel = await getImovel(codigo);
   if (!imovel) notFound();
-  const [captador, codigoDoCorretor] = await Promise.all([captadorDoImovel(imovel.id), codigoDoLink(corretor.id)]);
+  // O captador é o mesmo do cartão da página pública (captador_id, não quem
+  // cadastrou: em 19/10/2026, 15 dos 30 imóveis do site tinham os dois diferentes).
+  const [captador, codigoDoCorretor] = await Promise.all([getCaptadorDoImovel(codigo), codigoDoLink(corretor.id)]);
 
   const titulo = tituloDo(imovel);
   const local = [imovel.bairro, imovel.cidade].filter(Boolean).join(' · ');

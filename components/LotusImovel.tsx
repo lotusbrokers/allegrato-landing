@@ -34,7 +34,7 @@ import { formatValor, type ImovelRow, type ImovelCard } from '@/lib/imoveis';
 import { galeriaDoImovel, type CondominioDoImovel } from '@/lib/condominio-do-imovel';
 import LotusHeader from './LotusHeader';
 import LightboxFotos from './LightboxFotos';
-import { codigoDestaAba, trechoDoCorretor } from '@/lib/corretor-do-link';
+import { codigoDestaAba, quemApareceNoCartao, trechoDoCorretor, type PessoaDoCartao } from '@/lib/corretor-do-link';
 import { leadDoPortal, sendLead } from '@/lib/lead';
 
 /* ------------------------------------------------------------------ */
@@ -262,6 +262,7 @@ export default function LotusImovel({
   data,
   relacionados,
   condominio,
+  captador,
   whatsapp = WHATSAPP_DEFAULT,
 }: {
   data: ImovelRow;
@@ -271,6 +272,8 @@ export default function LotusImovel({
    * null = imóvel sem condomínio publicado com fotos.
    */
   condominio: CondominioDoImovel | null;
+  /** Quem captou o imóvel, para o cartão sem link de corretor. null = genérico. */
+  captador: PessoaDoCartao | null;
   whatsapp?: string;
 }) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -368,9 +371,10 @@ export default function LotusImovel({
 
   // Corretor que mandou o link (?c=, ver lib/corretor-do-link). Lido só aqui,
   // no navegador: ler searchParams no servidor tiraria a página do cache. Até
-  // a leitura, painel e WhatsApp ficam como sempre.
+  // a leitura, o painel mostra o captador e o WhatsApp vai sem código.
   const [codigoDoCorretor, setCodigoDoCorretor] = useState<string | null>(null);
-  const [corretor, setCorretor] = useState<{ nome: string; foto: string | null } | null>(null);
+  const [corretor, setCorretor] = useState<PessoaDoCartao | null>(null);
+  const pessoaDoCartao = quemApareceNoCartao(corretor, captador);
   useEffect(() => {
     const codigo = codigoDestaAba();
     if (!codigo) return;
@@ -535,9 +539,9 @@ export default function LotusImovel({
         {/* STICKY PANEL */}
         <div data-sticky-panel="" style={parseStyle('position:sticky;top:88px;background:#fff;border-radius:20px;box-shadow:0 24px 60px -34px rgba(21,36,28,.45);overflow:hidden;')}>
           <div style={parseStyle('padding:24px 24px 20px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(21,36,28,.08);')}>
-            <div style={parseStyle('width:56px;height:56px;border-radius:50%;background:#1d3a2c;flex-shrink:0;overflow:hidden;position:relative;')}><ImageSlot id="imovel-corretor" src={corretor?.foto ?? undefined} sizes="56px" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={corretor?.nome ?? 'Especialista Lotus'} /></div>
+            <div style={parseStyle('width:56px;height:56px;border-radius:50%;background:#1d3a2c;flex-shrink:0;overflow:hidden;position:relative;')}><ImageSlot id="imovel-corretor" src={pessoaDoCartao.foto ?? undefined} sizes="56px" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={pessoaDoCartao.nome} /></div>
             <div>
-              <div style={parseStyle('font-size:15.5px;font-weight:600;color:#15241c;')}>{corretor?.nome ?? 'Especialista Lotus'}</div>
+              <div style={parseStyle('font-size:15.5px;font-weight:600;color:#15241c;')}>{pessoaDoCartao.nome}</div>
               <div style={parseStyle('font-size:12.5px;color:#3f6249;')}>Especialista em {bairro}</div>
               {/* CRECI 000001-F e a nota 5,0 eram placeholders inventados;
                   removidos até haver dado real do corretor responsável. */}

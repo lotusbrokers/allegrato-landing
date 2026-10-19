@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import LotusImovel from '@/components/LotusImovel';
 import { getImovel, getImoveisCards, type ImovelRow } from '@/lib/imoveis';
+import { getCaptadorDoImovel } from '@/lib/brokers';
 import { getCondominio } from '@/lib/condominios';
 import { condominioDoImovel } from '@/lib/condominio-do-imovel';
 import { resumoDescricao } from '@/lib/resumo-imovel';
@@ -168,12 +169,16 @@ export default async function LotusImovelPage({ params }: Params) {
   const imovel = await getImovel(codigo);
   if (!imovel) notFound();
 
-  // O condomínio vem junto dos relacionados, sem somar uma ida ao banco no
-  // tempo da página. getCondominio devolve null para condomínio não publicado
-  // ou se a leitura falhar; aí a seção do condomínio simplesmente não aparece.
-  const [relacionados, condominio] = await Promise.all([
+  // O condomínio e o captador vêm junto dos relacionados, sem somar uma ida ao
+  // banco no tempo da página. getCondominio devolve null para condomínio não
+  // publicado ou se a leitura falhar; aí a seção do condomínio simplesmente não
+  // aparece. O captador sai no HTML em cache (o cartão não pisca nem consulta o
+  // banco por visita); sem ele, o cartão fica no genérico. Uma troca de
+  // captador aparece na próxima revalidação, em até 1h.
+  const [relacionados, condominio, captador] = await Promise.all([
     getImoveisCards(codigo),
     imovel.condominio_id ? getCondominio(imovel.condominio_id) : null,
+    getCaptadorDoImovel(codigo),
   ]);
   const jsonLd = buildJsonLd(imovel, codigo);
 
@@ -190,6 +195,7 @@ export default async function LotusImovelPage({ params }: Params) {
         data={imovel}
         relacionados={relacionados}
         condominio={condominioDoImovel(condominio)}
+        captador={captador}
       />
     </>
   );

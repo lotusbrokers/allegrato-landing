@@ -1,5 +1,6 @@
 import { supabase, TENANT_ID } from './supabase';
 import { conteudoRealDe } from './corretores-conteudo';
+import type { PessoaDoCartao } from './corretor-do-link';
 
 // Camada de dados dos CORRETORES do Portal.
 // Fonte: view pública portal_brokers = tenant_memberships (quem é corretor:
@@ -122,15 +123,27 @@ export async function getBrokers(): Promise<Broker[]> {
 }
 
 /**
+ * Uma linha de portal_brokers como o cartão do imóvel a mostra. Sem linha, sem
+ * nome ou de quem a Lotus tirou do site, null: quem chama mostra o genérico.
+ * A foto tem a mesma reserva da página de corretores.
+ */
+function pessoaDoSite(row: Pick<BrokerRow, 'name' | 'photo_url'> | null): PessoaDoCartao | null {
+  // "Mariana  Mamede": o cadastro tem espaço duplo em vários nomes.
+  const nome = row?.name?.trim().replace(/\s+/g, ' ');
+  if (!nome || OCULTOS.has(chaveNome(nome))) return null;
+  return { nome, foto: row?.photo_url || conteudoRealDe(nome)?.foto || null };
+}
+
+/**
  * Nome e foto de quem mandou o link do imóvel (`?c=`), para o painel da página.
  *
  * `codigo_link` entra em portal_brokers pela migration 20261146 da Dash. Antes
  * dela, com erro, com código de quem não está na view (a Diretoria não está) ou
- * de quem a Lotus tirou do site, devolve null: o painel fica genérico e o código
- * segue no texto do WhatsApp, porque quem resolve o corretor é a Dash.
- * A foto tem a mesma reserva da página de corretores.
+ * de quem a Lotus tirou do site, devolve null: o painel fica com o captador (ou
+ * o genérico) e o código segue no texto do WhatsApp, porque quem resolve o
+ * corretor é a Dash.
  */
-export async function getBrokerDoLink(codigo: string): Promise<{ nome: string; foto: string | null } | null> {
+export async function getBrokerDoLink(codigo: string): Promise<PessoaDoCartao | null> {
   const { data, error } = await supabase
     .from('portal_brokers')
     .select('name, photo_url')
@@ -141,9 +154,42 @@ export async function getBrokerDoLink(codigo: string): Promise<{ nome: string; f
     console.error('[getBrokerDoLink] erro Supabase:', error.message);
     return null;
   }
-  const row = data as Pick<BrokerRow, 'name' | 'photo_url'> | null;
-  // "Mariana  Mamede": o cadastro tem espaço duplo em vários nomes.
-  const nome = row?.name?.trim().replace(/\s+/g, ' ');
-  if (!nome || OCULTOS.has(chaveNome(nome))) return null;
-  return { nome, foto: row?.photo_url || conteudoRealDe(nome)?.foto || null };
+  return pessoaDoSite(data as Pick<BrokerRow, 'name' | 'photo_url'> | null);
+}
+
+/**
+ * Nome e foto de quem captou o imóvel: o cartão da página do imóvel sem link de
+ * corretor e o "Corretor captador" da Área do Corretor.
+ *
+ * `portal_imoveis.captador_id` entra pela migration 20261176 da Dash. A leitura
+ * fica fora do SELECT_FULL de propósito: sem a coluna (antes da migration), só
+ * esta consulta falha e devolve null, e a página do imóvel continua de pé. Com
+ * erro, sem captador, com captador fora de portal_brokers (Diretoria,
+ * ex-membro) ou oculto, também null. O 2º captador não aparece.
+ */
+export async function getCaptadorDoImovel(codigoImovel: string): Promise<PessoaDoCartao | null> {
+  const { data: imovel, error } = await supabase
+    .from('portal_imoveis')
+    .select('captador_id')
+    .eq('tenant_id', TENANT_ID)
+    .eq('codigo_imovel', codigoImovel)
+    .maybeSingle();
+  if (error) {
+    console.error('[getCaptadorDoImovel] erro Supabase:', error.message);
+    return null;
+  }
+  const captadorId = (imovel as { captador_id: string | null } | null)?.captador_id;
+  if (!captadorId) return null;
+
+  const { data, error: erroDoCaptador } = await supabase
+    .from('portal_brokers')
+    .select('name, photo_url')
+    .eq('tenant_id', TENANT_ID)
+    .eq('id', captadorId)
+    .maybeSingle();
+  if (erroDoCaptador) {
+    console.error('[getCaptadorDoImovel] erro Supabase:', erroDoCaptador.message);
+    return null;
+  }
+  return pessoaDoSite(data as Pick<BrokerRow, 'name' | 'photo_url'> | null);
 }

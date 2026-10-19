@@ -57,6 +57,22 @@ export function codigoDestaAba(): string | null {
   return codigoDaVisita(window.location.search, storage);
 }
 
+/** Nome e foto de quem aparece no cartão lateral da página do imóvel. */
+export type PessoaDoCartao = { nome: string; foto: string | null };
+
+export const GENERICO_DO_CARTAO: PessoaDoCartao = { nome: 'Especialista Lotus', foto: null };
+
+/**
+ * Quem o cartão mostra: o corretor que mandou o link (?c=); sem ele, ou com um
+ * código que não resolve, quem captou o imóvel; sem os dois, o genérico. O
+ * captador é quem recebe o lead do catálogo depois da Lia (decisão do dono,
+ * 19/10/2026). Só o rosto muda: o texto do WhatsApp sem ?c= continua sem
+ * código, para a Lia não tratar o captador como "corretor do link".
+ */
+export function quemApareceNoCartao(doLink: PessoaDoCartao | null, captador: PessoaDoCartao | null): PessoaDoCartao {
+  return doLink ?? captador ?? GENERICO_DO_CARTAO;
+}
+
 /** O texto que a Lia procura. Não mudar sem combinar com ela. */
 export function marcadorDoCorretor(codigo: string): string {
   return `código do corretor: ${codigo}`;

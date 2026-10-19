@@ -1,6 +1,13 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { CHAVE_DO_CODIGO, codigoDaUrl, codigoDaVisita, trechoDoCorretor } from './corretor-do-link.ts';
+import {
+  CHAVE_DO_CODIGO,
+  GENERICO_DO_CARTAO,
+  codigoDaUrl,
+  codigoDaVisita,
+  quemApareceNoCartao,
+  trechoDoCorretor,
+} from './corretor-do-link.ts';
 
 function memoria(inicial: Record<string, string> = {}) {
   const dados = new Map(Object.entries(inicial));
@@ -61,4 +68,13 @@ test('trechoDoCorretor: com e sem o nome, sempre com o marcador que a Lia procur
   // o padrão que a Parte C pede à Lia acha o código no texto
   const lia = /código do corretor:\s*([a-z2-9]{6})/i;
   assert.equal(lia.exec(trechoDoCorretor('k7m2qx'))?.[1], 'k7m2qx');
+});
+
+test('quemApareceNoCartao: o corretor do link, depois o captador, depois o genérico', () => {
+  const mariana = { nome: 'Mariana Mamede', foto: '/corretores/mariana-mamede.jpg' };
+  const gabriele = { nome: 'Gabriele Fávaro', foto: '/corretores/gabriele-favaro.jpg' };
+  assert.deepEqual(quemApareceNoCartao(mariana, gabriele), mariana, 'o link vence o captador');
+  assert.deepEqual(quemApareceNoCartao(null, gabriele), gabriele, 'sem ?c=, ou com um código que não resolve');
+  assert.deepEqual(quemApareceNoCartao(null, null), GENERICO_DO_CARTAO);
+  assert.deepEqual(GENERICO_DO_CARTAO, { nome: 'Especialista Lotus', foto: null });
 });
