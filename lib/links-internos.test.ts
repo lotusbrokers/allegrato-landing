@@ -19,12 +19,31 @@ function arquivos(dir: string): string[] {
   });
 }
 
-test('nenhum link interno fixo é relativo nem termina com barra', () => {
+function fontesDoSite(): string[] {
   const raiz = process.cwd();
+  return [...arquivos(join(raiz, 'app')), ...arquivos(join(raiz, 'components'))];
+}
+
+test('nenhum link interno fixo é relativo nem termina com barra', () => {
   const problemas: string[] = [];
-  for (const arquivo of [...arquivos(join(raiz, 'app')), ...arquivos(join(raiz, 'components'))]) {
+  for (const arquivo of fontesDoSite()) {
     for (const [, href] of readFileSync(arquivo, 'utf8').matchAll(/href="([^"]*)"/g)) {
       if (href.startsWith('../') || /^\/[^?#]*[^/]\/$/.test(href)) problemas.push(`${arquivo}: ${href}`);
+    }
+  }
+  assert.deepEqual(problemas, []);
+});
+
+/**
+ * Até 19/10/2026, o "Seja um corretor" do rodapé da home levava a /lotus-sobre;
+ * nas demais páginas o mesmo link já ia para o recrutamento.
+ */
+test('todo link "Seja um corretor" leva à página de recrutamento', () => {
+  const problemas: string[] = [];
+  for (const arquivo of fontesDoSite()) {
+    const texto = readFileSync(arquivo, 'utf8');
+    for (const [, href] of texto.matchAll(/href="([^"]*)"[^<>]*>\s*Seja um corretor\s*</g)) {
+      if (href !== '/lotus-recrutamento') problemas.push(`${arquivo}: ${href}`);
     }
   }
   assert.deepEqual(problemas, []);
