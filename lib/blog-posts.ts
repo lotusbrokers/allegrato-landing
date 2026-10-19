@@ -164,11 +164,119 @@ export function relacionados(posts: Post[], atual: Post, quantos = 3): Post[] {
 // mão, que envelheceu: títulos que não existiam mais no blog e nenhuma capa.
 export const POSTS: Post[] = [
   /* ------------------------------------------------------------------
+   * Enviado pela Lotus em 19/10/2026 (documento "Como financiar a compra do
+   * seu primeiro imóvel"), com a foto da capa. Primeiro da lista, e por isso o
+   * novo destaque da capa do blog.
+   *
+   * CONFERIDO em 19/10/2026:
+   *  - Minha Casa Minha Vida: faixas de renda (R$ 3.200, R$ 5.000, R$ 9.600 e
+   *    R$ 13.000), tetos de imóvel (R$ 210 mil a R$ 275 mil nas faixas 1 e 2,
+   *    R$ 400 mil na 3, R$ 600 mil na 4), juros a partir de 4% ao ano e prazo
+   *    de 35 anos, na página do programa no Ministério das Cidades (atualizada
+   *    em 28/06/2026) e na Portaria MCID nº 333/2026 (DOU de 01/04/2026; a
+   *    Caixa passou a operar as condições novas em 22/04). "Até 90%" é a cota
+   *    máxima do CMN no SAC para imóvel novo (página da Classe Média,
+   *    07/07/2026); no usado do Sul e do Sudeste, a faixa 4 financia até 60%.
+   *  - Subsídio: o Ministério diz "até R$ 65 mil na Região Norte e até R$ 55 mil
+   *    nas demais regiões". O texto dizia só R$ 55 mil e ganhou o valor da
+   *    Região Norte entre parênteses.
+   *  - SBPE na Caixa: cota de 80% no SAC (70% na Price) desde 13/10/2025 e teto
+   *    do SFH de R$ 2,25 milhões (Caixa Notícias de 10/10/2025); prazo de 420
+   *    meses. A taxa de 11,19% ao ano + TR é a mais citada nos levantamentos de
+   *    2026, e o texto já a atribui ao mercado.
+   *  - FGTS: três anos de trabalho sob o regime, imóvel residencial urbano para
+   *    moradia própria, sem financiamento ativo no SFH nem imóvel no município
+   *    (Caixa e Manual da Moradia Própria de 02/12/2025).
+   *  - Exemplo SAC x Price refeito (R$ 320 mil, 420 meses, 11,19% ao ano
+   *    efetivos): o SAC começa em R$ 3.603 e soma R$ 918 mil; a Price fica em
+   *    R$ 2.912 por mês e soma R$ 1,22 milhão. Confere.
+   *  - Sem fonte primária: "até quatro participantes" na composição de renda.
+   *    Ficou como veio, com o "na maioria dos bancos" do próprio texto.
+   *
+   * Ajustes de forma:
+   *  - os destaques em negrito no início de parágrafo viraram subtítulos;
+   *  - a tabela SAC x Price virou uma lista de três itens, com os mesmos números
+   *    (o blog não desenha tabela);
+   *  - "[inserir link, WhatsApp ou telefone da Lotus Brokers]" virou o WhatsApp
+   *    da Lotus;
+   *  - o "Não sou advogado nem consultor financeiro" do aviso final saiu, porque
+   *    quem fala no blog é a Lotus.
+   *
+   * Capa: a foto enviada junto (as chaves e a casa), recortada em 16:10.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'como-financiar-o-primeiro-imovel', cat: 'Guia', date: 'Out 2026', publicadoEm: '2026-10-19', read: '7 min', img: '/blog/como-financiar-o-primeiro-imovel.jpg', slot: 'blog-como-financiar-o-primeiro-imovel', title: 'Como financiar a compra do seu primeiro imóvel', excerpt: 'Minha Casa Minha Vida ou SBPE, entrada, FGTS, SAC ou Price e CET: as regras e os números de outubro de 2026 para financiar o primeiro imóvel.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'Quem financia o primeiro imóvel em 2026 tem duas portas: o Minha Casa Minha Vida, para famílias com renda bruta de até R$ 13 mil por mês, com juros a partir de cerca de 4% ao ano e subsídio nas faixas 1 e 2; e o financiamento comum (SBPE), em que a Caixa financia até 80% do imóvel em até 35 anos. A parcela fica limitada a 30% da renda bruta familiar, e vale reservar de 4% a 5% do valor do imóvel para ITBI, cartório e avaliação, além da entrada. Compare o CET entre os bancos e prefira o SAC se a primeira parcela couber no orçamento.',
+    body: [
+      'Guia prático com as regras e os números vigentes em outubro de 2026. Taxas e limites mudam com frequência: confirme sempre com o banco antes de fechar negócio.',
+      'Comprar o primeiro imóvel é, para a maioria das pessoas, a maior decisão financeira da vida. A boa notícia é que o crédito imobiliário brasileiro oferece caminhos para diferentes rendas, inclusive com subsídio do governo. A má notícia é que o jogo tem muitas regras, e errar nelas custa dezenas de milhares de reais ao longo de 30 anos. Este guia organiza o essencial.',
+      { titulo: '1. Entenda as duas grandes portas de entrada' },
+      'Hoje, quem financia o primeiro imóvel costuma cair em uma de duas linhas.',
+      { titulo: 'Minha Casa Minha Vida (MCMV)', nivel: 3 },
+      'É o programa federal operado principalmente pela Caixa, com juros menores e, nas faixas de menor renda, subsídio na entrada. Desde as mudanças que entraram em vigor em abril de 2026, o programa tem quatro faixas de renda familiar bruta mensal:',
+      { itens: ['Faixa 1: até R$ 3.200', 'Faixa 2: até R$ 5.000', 'Faixa 3: até R$ 9.600', 'Faixa 4: até R$ 13.000'] },
+      'O subsídio, que pode chegar a R$ 55 mil (R$ 65 mil na Região Norte), vale para as faixas 1 e 2 e depende de renda, cidade e valor do imóvel. As faixas 3 e 4 não têm subsídio: a vantagem delas são os juros abaixo dos praticados no mercado. Os tetos de valor do imóvel variam por faixa e pelo porte do município; segundo divulgação do setor, ficam em torno de R$ 210 mil a R$ 275 mil nas faixas 1 e 2, até R$ 400 mil na faixa 3 e até R$ 600 mil na faixa 4. O programa pode financiar até 90% do imóvel, e os juros partem de cerca de 4% ao ano nas faixas mais baixas.',
+      { titulo: 'Financiamento comum (SBPE)', nivel: 3 },
+      'Atende qualquer renda, mas cobra juros maiores e não tem subsídio. Na Caixa, financia até 80% do valor de avaliação, para imóveis de até R$ 2,25 milhões, com prazo de até 35 anos (420 meses). Levantamentos de mercado de meados de 2026 indicam taxas de balcão a partir de aproximadamente 11,19% ao ano mais TR na Caixa, que tende a ter a menor taxa de balcão; outros bancos costumam cobrar mais, mas podem oferecer condições melhores para quem tem conta-salário ou relacionamento.',
+      { titulo: 'Como escolher', nivel: 3 },
+      'Se a sua renda familiar cabe em alguma faixa do MCMV e o imóvel que você quer está dentro do teto, comece por ele. Se o imóvel passa do teto ou a renda está acima de R$ 13 mil, o SBPE é o caminho.',
+      { titulo: '2. Junte a entrada (e saiba que ela não é o único custo)' },
+      'No financiamento comum, a entrada mínima é de 20%. No MCMV pode cair para 10%, e o subsídio ajuda a cobri-la. A entrada pode vir de economias, de venda de outro bem ou do FGTS.',
+      { titulo: 'Uso do FGTS', nivel: 3 },
+      'O saldo pode entrar na entrada, abater parcelas ou amortizar o saldo devedor. As regras costumam exigir pelo menos três anos de trabalho sob o regime do FGTS, que o imóvel seja residencial, urbano e para moradia própria, e que você não tenha outro imóvel residencial financiado pelo sistema ou na mesma cidade. Confirme os detalhes no momento da simulação.',
+      { titulo: 'Custos além da entrada', nivel: 3 },
+      'Reserve uma margem para despesas que quase todo comprador subestima:',
+      { itens: ['ITBI (imposto municipal sobre a transmissão do imóvel; a alíquota varia por cidade)', 'Escritura e registro em cartório', 'Taxa de avaliação do imóvel pelo banco', 'Mudança, reformas e móveis'] },
+      'Uma regra prática é guardar algo entre 4% e 5% do valor do imóvel para esses custos, além da entrada. Confirme os valores reais na prefeitura e no cartório da sua cidade.',
+      { titulo: '3. Descubra quanto você consegue pagar' },
+      'Os bancos limitam a parcela a 30% da renda bruta familiar. Isso é um teto de aprovação, não uma recomendação de conforto. Antes de simular, faça a conta do seu orçamento real: aluguel que você deixa de pagar, condomínio, IPTU, manutenção e imprevistos.',
+      'É possível somar a renda de cônjuge, companheiro ou familiar (até quatro participantes na maioria dos bancos) para aumentar o valor aprovado. Lembre que todos os participantes respondem pela dívida e precisam ter o nome limpo.',
+      { titulo: '4. SAC ou Price: a escolha que mexe no custo total' },
+      'Existem dois sistemas de amortização principais.',
+      { itens: ['SAC: as parcelas começam mais altas e diminuem ao longo do tempo. Paga-se bem menos juros no total.', 'Price: as parcelas são fixas (antes da correção pela TR), começam menores e o custo final é maior.'] },
+      'Um exemplo ilustrativo, sem contar TR e seguros: imóvel de R$ 400 mil, entrada de 20% (R$ 80 mil), financiamento de R$ 320 mil em 35 anos a 11,19% ao ano.',
+      { itens: ['Primeira parcela: cerca de R$ 3.600 no SAC e cerca de R$ 2.900 na Price', 'Total aproximado pago: cerca de R$ 920 mil no SAC e cerca de R$ 1,22 milhão na Price', 'Renda mínima pela regra dos 30%: cerca de R$ 12.000 no SAC e cerca de R$ 9.700 na Price'] },
+      'A Price "cabe" em uma renda menor, mas custa cerca de R$ 300 mil a mais ao fim do contrato. Se a sua renda permite a parcela inicial do SAC, ele costuma ser a opção mais barata. Se não permite, a Price pode ser a porta de entrada, com a estratégia de amortizar o saldo devedor sempre que possível.',
+      { titulo: '5. Olhe o CET, não só a taxa de juros' },
+      'A taxa nominal é só uma parte da conta. O Custo Efetivo Total (CET) inclui juros, seguros obrigatórios (morte e invalidez permanente, e danos físicos ao imóvel), tarifas e a TR. Peça o CET por escrito a cada banco e compare essa cifra, não o anúncio de juros.',
+      { titulo: '6. Passo a passo da contratação' },
+      {
+        itens: [
+          'Organize suas finanças: consulte CPF no Serasa/SPC, regularize pendências e junte comprovantes de renda.',
+          'Simule em mais de um banco: Caixa, Banco do Brasil, Itaú, Bradesco e Santander têm condições diferentes. Leve a melhor proposta para os outros e negocie.',
+          'Escolha o imóvel: prefira unidades com documentação regular. Para imóvel pronto, peça matrícula atualizada, certidões e, no caso de apartamento, declaração de quitação de condomínio.',
+          'Peça a avaliação do banco: o financiamento é calculado sobre o menor valor entre o preço de venda e a avaliação.',
+          'Aprovação de crédito e assinatura do contrato.',
+          'Registro em cartório: só depois do registro o imóvel é seu de fato e o banco libera o pagamento ao vendedor.',
+        ],
+      },
+      { titulo: '7. Erros comuns de quem compra o primeiro imóvel' },
+      {
+        itens: [
+          'Comprometer toda a margem de 30% da renda e ficar sem folga para imprevistos.',
+          'Esquecer os custos de ITBI, cartório e mudança.',
+          'Fechar com o primeiro banco que aprovou, sem comparar CET.',
+          'Ignorar a possibilidade de portabilidade: se as taxas caírem, você pode transferir o financiamento para outro banco com juros menores.',
+          'Não usar amortizações extras. Pagar parcelas adiantadas ou usar o FGTS para reduzir o saldo devedor corta juros de forma significativa.',
+        ],
+      },
+      { titulo: '8. Vale esperar as taxas caírem?' },
+      'Alguns analistas projetam queda gradual dos juros imobiliários nos próximos meses, mas ninguém sabe ao certo. Uma estratégia razoável é comprar quando você tiver entrada e orçamento confortáveis, e contar com a portabilidade e a amortização extra para aproveitar uma eventual queda de taxas depois. Esperar por tempo indeterminado também tem custo: o aluguel continua saindo e os preços dos imóveis podem subir.',
+      { titulo: 'Resumo' },
+      'Comece descobrindo se a sua renda se encaixa no MCMV. Junte a entrada e uma reserva para os custos extras. Simule em vários bancos comparando o CET. Prefira o SAC se a parcela inicial couber no orçamento. E trate o limite de 30% da renda como teto, não como meta.',
+      { titulo: 'Dê o próximo passo com a Lotus Brokers' },
+      'Saber as regras é metade do caminho; a outra metade é simular, comparar bancos e conduzir a papelada sem tropeçar. A Lotus Brokers pode ajudar você a descobrir quanto consegue financiar, qual linha faz mais sentido para o seu perfil e como chegar ao melhor CET.',
+      'Fale com a Lotus Brokers e peça sua simulação gratuita: [(11) 92614-3393](https://wa.me/5511926143393).',
+      'Tenha em mãos a renda familiar bruta, o valor que pretende dar de entrada e o saldo do FGTS, se for usá-lo. Com esses três números, a conversa já sai com um cenário real.',
+      'Este texto tem caráter informativo e não substitui a análise de um profissional. Antes de assinar, confirme taxas, regras e condições diretamente com o banco e, se possível, peça a um advogado ou corretor de confiança que revise o contrato.',
+    ],
+  },
+  /* ------------------------------------------------------------------
    * Enviado pela Lotus em 16/10/2026 (documento "Sextou em Jundiaí Agenda
    * Lotus edição de 16 a 18 de outubro"), para sair no mesmo dia. Primeira
    * edição da série semanal: categoria "Sextou em Jundiaí".
    *
-   * Primeiro da lista, e por isso o novo destaque da capa do blog.
+   * Foi o destaque da capa do blog até 19/10/2026.
    *
    * CONFERIDO em 16/10/2026 nas quatro notícias da Prefeitura que o documento
    * cita (jundiai.sp.gov.br/noticias, de 13 a 15/10/2026): datas, horários,
