@@ -1,0 +1,177 @@
+/*
+ * /lotus-recrutamento — estilos do arquivo Seja-Corretor-Lotus.html, enviado
+ * pela Lotus em 19/10/2026.
+ *
+ * Todo seletor fica dentro de .recru. O CSS de uma rota continua carregado
+ * depois que o visitante navega para outra página do portal (o Next não
+ * descarrega a folha), então regras soltas do arquivo, como
+ * `section{padding:92px 0}` ou `header{position:sticky}`, passariam a valer no
+ * site inteiro. O prefixo soma o mesmo peso a todas as regras e mantém a ordem
+ * de precedência do arquivo.
+ *
+ * As variáveis do :root do arquivo moram em .recru. A Fraunces vem do next/font
+ * (page.tsx): a do portal (styles/fonts.css) vai só até o peso 500, e os
+ * títulos daqui são 600.
+ */
+.recru{
+  --green:#15241c; --green-2:#1d3a2c; --green-3:#2b5240;
+  --gold:#b18a4a; --gold-2:#c9a362; --gold-soft:#e9dcc4;
+  --ink:#1b241f; --body:#39463f; --muted:#6c7a71; --line:#e4e8e3;
+  --paper:#f5f3ed; --paper-2:#ece8df; --white:#fff;
+  --serif:var(--font-fraunces,'Fraunces'),Georgia,serif; --sans:'Hanken Grotesk',system-ui,sans-serif;
+  font-family:var(--sans);color:var(--body);background:var(--white);line-height:1.7;-webkit-font-smoothing:antialiased;
+}
+.recru *{margin:0;padding:0;box-sizing:border-box}
+.recru img{max-width:100%;display:block}
+.recru a{color:inherit;text-decoration:none}
+.recru .wrap{width:100%;max-width:1160px;margin:0 auto;padding:0 24px}
+.recru section{padding:92px 0}
+.recru .eyebrow{font-size:.78rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:18px}
+.recru h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.9rem,4vw,2.9rem);line-height:1.12;letter-spacing:-.01em;color:var(--ink)}
+.recru .lead{color:var(--muted);font-size:1.1rem;max-width:62ch;margin-top:18px}
+.recru .btn{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:.96rem;padding:16px 32px;border-radius:100px;transition:.22s;cursor:pointer;border:none;font-family:var(--sans)}
+.recru .btn-gold{background:var(--gold);color:var(--green)}
+.recru .btn-gold:hover{background:var(--gold-2);transform:translateY(-2px)}
+.recru .btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.5)}
+.recru .btn-ghost:hover{background:rgba(255,255,255,.1);border-color:#fff}
+
+.recru header{position:sticky;top:0;z-index:50;background:rgba(21,36,28,.94);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+.recru nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.recru .logo{font-family:var(--serif);color:#fff;font-size:1.35rem;font-weight:600;letter-spacing:.02em;line-height:1}
+.recru .logo small{display:block;font-family:var(--sans);font-size:.56rem;letter-spacing:.34em;color:var(--gold);font-weight:700;margin-top:3px;text-transform:uppercase}
+.recru .navlinks{display:flex;gap:28px;align-items:center}
+.recru .navlinks a{color:rgba(255,255,255,.85);font-size:.9rem;font-weight:500}
+.recru .navlinks a:hover{color:var(--gold-2)}
+.recru .navlinks .btn{padding:10px 20px}
+.recru .burger{display:none;background:none;border:none;color:#fff;font-size:1.6rem;cursor:pointer}
+
+.recru .hero{position:relative;background:radial-gradient(130% 120% at 80% 0%,#24402f 0%,var(--green-2) 45%,var(--green) 100%);color:#fff;overflow:hidden;padding:0}
+.recru .hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(177,138,74,.22),transparent 70%)}
+.recru .hero .wrap{position:relative;z-index:2;padding:86px 24px 90px}
+.recru .hero-inner{max-width:780px}
+.recru .hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.5rem,6vw,4.4rem);line-height:1.04;letter-spacing:-.02em;margin:8px 0 10px}
+.recru .hero h1 em{font-style:italic;color:var(--gold-2)}
+.recru .hero-sub{color:rgba(255,255,255,.88);font-size:1.2rem;max-width:58ch;margin:22px 0 32px}
+.recru .hero-cta{display:flex;flex-wrap:wrap;gap:14px}
+.recru .hero-mini{margin-top:20px;font-size:.9rem;color:rgba(255,255,255,.6)}
+
+.recru .stats{background:var(--green-2);color:#fff;padding:0;border-top:1px solid rgba(255,255,255,.08)}
+.recru .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding-top:44px;padding-bottom:44px}
+.recru .stat{text-align:center;border-right:1px solid rgba(255,255,255,.12)}
+.recru .stat:last-child{border-right:none}
+.recru .stat b{font-family:var(--serif);display:block;font-size:2.3rem;color:var(--gold-2);font-weight:600;line-height:1}
+.recru .stat span{display:block;margin-top:7px;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+
+.recru .dor{background:var(--green);color:#fff}
+.recru .dor .wrap{max-width:820px;text-align:center}
+.recru .dor h2{color:#fff}
+.recru .dor p{color:rgba(255,255,255,.8);font-size:1.14rem;margin-top:18px}
+.recru .dor .punch{font-family:var(--serif);font-size:clamp(1.5rem,3.5vw,2.1rem);color:var(--gold-2);font-style:italic;margin-top:28px;line-height:1.25}
+
+.recru .ganha{background:var(--paper)}
+.recru .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:46px}
+.recru .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px}
+.recru .card .ic{width:46px;height:46px;border-radius:12px;background:var(--gold-soft);display:flex;align-items:center;justify-content:center;font-size:1.35rem;margin-bottom:16px}
+.recru .card h3{font-family:var(--serif);font-size:1.25rem;font-weight:600;color:var(--green-2);margin-bottom:8px}
+.recru .card p{color:var(--muted);font-size:.96rem}
+
+.recru .como{background:var(--white)}
+.recru .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:46px}
+.recru .step{position:relative;padding-top:18px;border-top:2px solid var(--gold)}
+.recru .step b{font-family:var(--serif);font-size:1.8rem;color:var(--gold);display:block;line-height:1}
+.recru .step h4{font-size:1.05rem;color:var(--ink);margin:8px 0 6px;font-weight:700}
+.recru .step p{color:var(--muted);font-size:.93rem}
+
+.recru .cultura{background:var(--green-2);color:#fff}
+.recru .cultura h2{color:#fff}
+.recru .cultura .lead{color:rgba(255,255,255,.82)}
+.recru .cultura ul{list-style:none;margin-top:22px;display:grid;gap:13px}
+.recru .cultura li{display:flex;gap:12px;color:rgba(255,255,255,.92)}
+.recru .cultura li::before{content:"✦";color:var(--gold-2)}
+
+.recru .contato{background:linear-gradient(135deg,#12201a,#214535);color:#fff}
+.recru .contato-grid{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
+.recru .contato h2{color:#fff}
+.recru .contato .lead{color:rgba(255,255,255,.82)}
+.recru .benef{list-style:none;margin-top:24px;display:grid;gap:13px}
+.recru .benef li{display:flex;gap:12px;align-items:center;color:rgba(255,255,255,.92)}
+.recru .benef li::before{content:"✓";color:var(--green);background:var(--gold);width:23px;height:23px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:800;flex-shrink:0}
+.recru .form-card{background:#fff;border-radius:20px;padding:34px;color:var(--ink);box-shadow:0 30px 60px rgba(0,0,0,.32)}
+.recru .form-card h3{font-family:var(--serif);font-size:1.5rem;font-weight:600;margin-bottom:6px;color:var(--green-2)}
+.recru .form-card p.sm{font-size:.86rem;color:var(--muted);margin-bottom:20px}
+.recru .field{margin-bottom:15px}
+.recru .field label{display:block;font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:7px}
+.recru .field input,.recru .field select{width:100%;padding:13px 15px;border:1.5px solid var(--line);border-radius:10px;font-family:var(--sans);font-size:.97rem;background:#fff;transition:.2s}
+.recru .field input:focus,.recru .field select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft)}
+.recru .form-card .btn{width:100%;justify-content:center;margin-top:6px}
+.recru .consent{font-size:.72rem;color:var(--muted);margin-top:13px;text-align:center}
+.recru .ok-msg{display:none;text-align:center;padding:18px 0}
+.recru .ok-msg.show{display:block}
+.recru .ok-msg .big{font-family:var(--serif);font-size:1.6rem;color:var(--green-2);margin-bottom:8px}
+
+.recru .faq{background:var(--paper)}
+.recru .faq-item{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-top:14px}
+.recru .faq-item h4{font-family:var(--serif);font-size:1.12rem;color:var(--green-2);margin-bottom:6px}
+.recru .faq-item p{color:var(--muted);font-size:.96rem}
+
+.recru footer{background:#0f1a14;color:rgba(255,255,255,.6);padding:50px 0 36px;font-size:.85rem}
+.recru .foot-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:26px;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,.1)}
+.recru .foot-logo{font-family:var(--serif);color:#fff;font-size:1.4rem;font-weight:600}
+.recru .foot-logo small{display:block;font-family:var(--sans);font-size:.6rem;letter-spacing:.32em;color:var(--gold-2);margin-top:4px;text-transform:uppercase}
+.recru .legal{margin-top:22px;font-size:.74rem;line-height:1.7;color:rgba(255,255,255,.44);max-width:90ch}
+
+.recru .wa-float{position:fixed;bottom:24px;right:24px;z-index:60;background:#25D366;color:#fff;padding:14px 22px;border-radius:100px;font-weight:700;display:flex;align-items:center;gap:10px;box-shadow:0 10px 30px rgba(37,211,102,.4);transition:.25s;font-size:.95rem}
+.recru .wa-float:hover{transform:translateY(-3px)}
+.recru .wa-float svg{width:22px;height:22px;fill:#fff}
+
+/* Efeito de entrada. O arquivo escondia todo [data-reveal] desde o primeiro
+   pixel e só o mostrava pelo script. Aqui o componente marca .in no que já
+   está na tela e só então liga .revelar: o topo sai visível do HTML e a página
+   não fica em branco sem JavaScript (ver components/LotusRecrutamento.tsx). */
+.recru [data-reveal]{transition:opacity .7s,transform .7s}
+.recru.revelar [data-reveal]{opacity:0;transform:translateY(26px)}
+/* Esconder é instantâneo (fora da tela, sem fade de saída ao carregar); a
+   transição fica só para a entrada. */
+.recru.revelar [data-reveal]:not(.in){transition:none}
+.recru.revelar [data-reveal].in{opacity:1;transform:none}
+
+/* Pesos da Fraunces como o arquivo os mostrava. Ele carregava só 500, 600 e
+   itálico 500, e o navegador trocava o peso pedido pelo mais próximo que havia
+   (o 700 do <b> e do <h4> virava 600; o 400 do parágrafo, 500). A fonte daqui é
+   variável e teria todos os pesos: estas regras fixam o que o arquivo exibia. */
+.recru .dor .punch,.recru .ok-msg .big{font-weight:500}
+.recru .step b,.recru .faq-item h4{font-weight:600}
+
+/* Acréscimos ao arquivo. */
+/* As âncoras do menu param logo abaixo do cabeçalho fixo, de 70px. */
+.recru section[id]{scroll-margin-top:70px}
+/* Links do aviso do formulário e da linha legal do rodapé. */
+.recru .consent a,.recru .legal a{text-decoration:underline;text-underline-offset:2px}
+/* Botão do cabeçalho: `.navlinks a` vencia a cor do botão (texto claro no
+   dourado) e, no hover, o texto ficava dourado sobre o fundo dourado e sumia. */
+.recru .navlinks .btn-gold,.recru .navlinks .btn-gold:hover{color:var(--green)}
+
+@media(max-width:920px){
+  .recru .cards{grid-template-columns:1fr 1fr}
+  .recru .steps{grid-template-columns:1fr 1fr}
+  .recru .contato-grid{grid-template-columns:1fr;gap:34px}
+  .recru .stats .wrap{grid-template-columns:1fr 1fr;gap:30px}
+  .recru .stat:nth-child(2){border-right:none}
+  .recru .navlinks{display:none}
+  .recru .burger{display:block}
+  .recru .navlinks.open{display:flex;position:absolute;top:70px;left:0;right:0;flex-direction:column;background:var(--green);padding:22px;gap:16px}
+  .recru section{padding:66px 0}
+}
+@media(max-width:760px){
+  /* styles/base.css põe 20px de cada lado em toda <section> no celular, com
+     !important. Aqui o respiro lateral é o do .wrap (24px), como no arquivo. */
+  .recru section{padding-left:0 !important;padding-right:0 !important}
+  /* styles/base.css também esconde toda `header nav` no celular (no portal, o
+     menu vira gaveta). Aqui a <nav> é a barra inteira: marca e botão do menu. */
+  .recru header nav.wrap{display:flex !important}
+}
+@media(max-width:560px){.recru .cards,.recru .steps{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){
+  .recru *{animation:none!important;transition:none!important}
+  .recru.revelar [data-reveal]{opacity:1;transform:none}
+}

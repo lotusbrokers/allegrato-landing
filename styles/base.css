@@ -35,8 +35,9 @@
      corretor do condomínio). A foto tem largura fixa de 130–180px: num celular
      de 360px sobravam ~36px para o texto na /lotus-sobre, o que espremia a bio
      numa coluna de uma palavra por linha. Empilha.
-     A timeline de /lotus-recrutamento também usa `auto 1fr`, mas com bolinha de
-     48px — por isso a regra é por atributo e não pelo style inline. */
+     A timeline da versão anterior de /lotus-recrutamento (até 19/10/2026) também
+     usava `auto 1fr`, com bolinha de 48px — por isso a regra é por atributo e
+     não pelo style inline. */
   [data-retrato-grid]{grid-template-columns:1fr !important;}
   [data-retrato-grid] > *{min-width:0 !important;}
 }

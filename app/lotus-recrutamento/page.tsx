@@ -1,31 +1,44 @@
 import type { Metadata } from 'next';
+import { Fraunces } from 'next/font/google';
+import './recrutamento.css';
 import LotusRecrutamento from '@/components/LotusRecrutamento';
+import { PERGUNTAS_RECRUTAMENTO } from '@/lib/recrutamento';
+import { IMAGEM_COMPARTILHAMENTO } from '@/lib/site';
 
-// Metadata portada do <helmet> de lotus-recrutamento/index.html (paridade de SEO).
-// TODO go-live: trocar canonical/og:url para o domínio final, remover noindex e publicar sitemap.
+// Página nova em 19/10/2026 (Seja-Corretor-Lotus.html): título e descrição são
+// os do arquivo.
+//
+// A Fraunces do portal (styles/fonts.css) vai só até o peso 500, e os títulos
+// desta página são 600, com eixo óptico, como o arquivo pedia ao Google Fonts.
+// next/font auto-hospeda a fonte (sem request a terceiro); a variável alimenta
+// --serif em recrutamento.css.
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  style: ['normal', 'italic'],
+  axes: ['opsz'],
+  variable: '--font-fraunces',
+  display: 'swap',
+});
+
+const URL_DA_PAGINA = 'https://www.lotusbrokers.com.br/lotus-recrutamento';
+
 export const metadata: Metadata = {
-  title:
-    'Seja um corretor Lotus em Jundiaí e Itupeva: carreira | Lotus Brokers',
+  title: 'Seja um Corretor Lotus em Jundiaí e Itupeva: carreira | Lotus Brokers',
   description:
-    'Carreira de corretor na Lotus: comissão transparente, mentoria, segurança jurídica e marketing que faz o especialista voar. Em Jundiaí e Itupeva.',
-  alternates: {
-    canonical: 'https://www.lotusbrokers.com.br/lotus-recrutamento',
-  },
+    'Carreira de corretor de imóveis na Lotus Brokers, em Jundiaí e Itupeva. Comissão até 60%, mentoria e formação de especialista, estrutura que te tira do operacional. Com ou sem experiência.',
+  alternates: { canonical: URL_DA_PAGINA },
   openGraph: {
     siteName: 'Lotus Brokers',
     type: 'website',
-    url: 'https://www.lotusbrokers.com.br/lotus-recrutamento',
+    url: URL_DA_PAGINA,
     title: 'Seja um corretor Lotus, carreira de especialista',
     description:
       'Vendedor de imóveis é commodity. Especialista é escolha. Construa sua carreira com estrutura, mentoria e marketing premium.',
-    images: [
-      'https://www.lotusbrokers.com.br/home-hero-jundiai.jpg',
-    ],
+    images: [IMAGEM_COMPARTILHAMENTO],
   },
   twitter: { card: 'summary_large_image' },
 };
 
-// JSON-LD portados do estático (<helmet>): JobPosting + FAQPage.
 const jobPostingLd = {
   '@context': 'https://schema.org',
   '@type': 'JobPosting',
@@ -46,40 +59,20 @@ const jobPostingLd = {
   datePosted: '2026-01-01',
 };
 
+// Mesmas perguntas da página (lib/recrutamento.ts).
 const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'Como ser corretor em Jundiaí?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Você precisa de registro no CRECI (ou estar em curso). Na Lotus, candidatos passam por um processo seletivo de 4 etapas e uma trilha de onboarding de 90 dias com mentoria e estrutura de apoio.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'A Lotus está contratando?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Sim, a Lotus mantém vagas abertas por squad e cidade em Jundiaí e Itupeva, além de um banco de talentos para quando não há vaga na sua especialidade.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Qual a comissão na Lotus?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'A Lotus trabalha com comissão transparente de até 60%, conforme squad, performance e modelo de atuação. Os detalhes são apresentados no processo seletivo.',
-      },
-    },
-  ],
+  mainEntity: PERGUNTAS_RECRUTAMENTO.map((f) => ({
+    '@type': 'Question',
+    name: f.pergunta,
+    acceptedAnswer: { '@type': 'Answer', text: f.resposta },
+  })),
 };
 
 export default function LotusRecrutamentoPage() {
   return (
-    <>
+    <div className={fraunces.variable}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPostingLd) }}
@@ -89,6 +82,6 @@ export default function LotusRecrutamentoPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
       />
       <LotusRecrutamento />
-    </>
+    </div>
   );
 }
