@@ -47,14 +47,22 @@ export const ROTA_BASE = '/area-do-corretor';
 export const ROTA_ENTRADA = `${ROTA_BASE}/entrar`;
 
 /**
+ * Área do Gestor (19/10/2026): mesma conta e mesma tela de entrada; só para quem
+ * gerencia (podeGerenciar). Ver lib/area-do-gestor/.
+ */
+export const ROTA_GESTOR = '/area-do-gestor';
+
+/**
  * Para onde mandar depois do login. O `volta` chega pela URL, então só vale um
- * caminho da própria área: qualquer outra coisa (outro site, "//host", a própria
- * tela de entrada) cai na home da área. Sem isto, um link malicioso usaria o
- * login da Lotus para levar o corretor a uma página falsa.
+ * caminho de uma das áreas: qualquer outra coisa (outro site, "//host", a
+ * própria tela de entrada) cai na home da Área do Corretor. Sem isto, um link
+ * malicioso usaria o login da Lotus para levar o corretor a uma página falsa.
  */
 export function destinoSeguro(volta: string | null | undefined): string {
-  if (!volta || !volta.startsWith(ROTA_BASE) || volta.includes('\\')) return ROTA_BASE;
-  const resto = volta.slice(ROTA_BASE.length);
+  if (!volta || volta.includes('\\')) return ROTA_BASE;
+  const area = [ROTA_BASE, ROTA_GESTOR].find((rota) => volta.startsWith(rota));
+  if (!area) return ROTA_BASE;
+  const resto = volta.slice(area.length);
   if (resto && !/^[/?#]/.test(resto)) return ROTA_BASE; // "/area-do-corretorX" não é a área
   if (volta === ROTA_ENTRADA || volta.startsWith(`${ROTA_ENTRADA}?`) || volta.startsWith(`${ROTA_ENTRADA}/`)) return ROTA_BASE;
   return volta;

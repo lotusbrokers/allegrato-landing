@@ -15,7 +15,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { createServerClient } from '@supabase/ssr';
 import { TENANT_ID } from '@/lib/supabase';
-import { melhorPapel, ROTA_ENTRADA, type PapelComAcesso } from './acesso';
+import { melhorPapel, podeGerenciar, ROTA_BASE, ROTA_ENTRADA, type PapelComAcesso } from './acesso';
 
 export async function clienteDaSessao() {
   const loja = await cookies();
@@ -122,4 +122,14 @@ export async function exigirCorretor(): Promise<Corretor> {
   const situacao = await situacaoAtual();
   if (situacao.tipo === 'corretor') return situacao.corretor;
   redirect(ROTA_ENTRADA);
+}
+
+/**
+ * Para cada página da Área do Gestor: só owner e admin (podeGerenciar). Quem
+ * entrou com outro papel volta para a Área do Corretor, que é a dele.
+ */
+export async function exigirGestor(): Promise<Corretor> {
+  const corretor = await exigirCorretor();
+  if (!podeGerenciar(corretor.papel)) redirect(ROTA_BASE);
+  return corretor;
 }

@@ -23,8 +23,8 @@ import { join } from 'node:path';
 // aqui, a varredura de app/ a trataria como landing de empreendimento, e
 // /construtoras viraria destino de card de lançamento. 'area-do-corretor'
 // (05/10/2026) pelo mesmo motivo, e com um agravante: é área logada, não pode
-// ir para o sitemap.
-const PORTAL_ROUTE = /^(lotus-|construtoras$|api$|meus-dados$|area-do-corretor$)/;
+// ir para o sitemap. 'area-do-gestor' (19/10/2026) idem.
+const PORTAL_ROUTE = /^(lotus-|construtoras$|api$|meus-dados$|area-do-corretor$|area-do-gestor$)/;
 
 /** Regra única de "este diretório de app/ é uma landing" — o teste reusa esta função. */
 export function isLandingDir(appDir: string, name: string): boolean {

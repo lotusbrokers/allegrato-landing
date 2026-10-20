@@ -60,6 +60,14 @@ test('acesso: depois do login só volta para dentro da área', () => {
   }
 });
 
+test('acesso: o login também devolve para a Área do Gestor, e só para ela', () => {
+  assert.equal(destinoSeguro('/area-do-gestor'), '/area-do-gestor');
+  assert.equal(destinoSeguro('/area-do-gestor/drive/diretoria'), '/area-do-gestor/drive/diretoria');
+  for (const ruim of ['/area-do-gestor-falsa', '/area-do-gestorX', '//golpe.example.com/area-do-gestor', '/area-do-gestor\\..\\golpe']) {
+    assert.equal(destinoSeguro(ruim), ROTA_BASE, ruim);
+  }
+});
+
 const indice: ItemDeBusca[] = [
   { tipo: 'secao', titulo: 'Marketing', detalhe: 'Posts, stories, reels e campanhas', href: '/area-do-corretor/marketing', termos: 'posts stories reels whatsapp' },
   { tipo: 'lancamento', titulo: 'Reserva di Medeiros', detalhe: 'Medeiros · Jundiaí · MRV', href: '/a/1', termos: '2 dorms lancamento' },

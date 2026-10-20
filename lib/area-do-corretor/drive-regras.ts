@@ -10,6 +10,11 @@
  */
 import { normalizar } from './busca';
 
+/** IDs do Drive só têm letras, números, - e _. O ID entra na consulta: nada fora disso passa. */
+export function idValido(id: string): boolean {
+  return /^[A-Za-z0-9_-]{10,100}$/.test(id);
+}
+
 /** Credencial não circula por link: arquivo com nome assim não aparece na área nem na busca. */
 export function arquivoSensivel(nome: string): boolean {
   return /senha|password|credencia/.test(normalizar(nome));

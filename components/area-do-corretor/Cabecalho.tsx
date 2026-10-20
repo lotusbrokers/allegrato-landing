@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { sair } from '@/app/area-do-corretor/acoes';
-import { ROTA_BASE } from '@/lib/area-do-corretor/acesso';
+import { podeGerenciar, ROTA_BASE, ROTA_GESTOR } from '@/lib/area-do-corretor/acesso';
 import { URL_DASHBOARD, URL_EMAIL_LOTUS } from '@/lib/area-do-corretor/secoes';
 import type { Corretor } from '@/lib/area-do-corretor/sessao';
 import { logoLotus } from '@/lib/imagem-otimizada';
@@ -8,20 +8,39 @@ import Avatar from './Avatar';
 import Icone from './Icone';
 import estilos from './area.module.css';
 
-/** No celular os botões viram só ícone; o texto aparece a partir de 768px. */
-export default function Cabecalho({ corretor }: { corretor: Corretor }) {
+/**
+ * Cabeçalho das duas áreas logadas: a do Corretor e a do Gestor, que é a mesma
+ * conta com papel de gestão. No celular os botões viram só ícone; o texto
+ * aparece a partir de 768px.
+ */
+export default function Cabecalho({ corretor, area = 'corretor' }: { corretor: Corretor; area?: 'corretor' | 'gestor' }) {
   const logo = logoLotus();
+  const naGestao = area === 'gestor';
+  const rotulo = naGestao ? 'Área do Gestor' : 'Área do Corretor';
   return (
     <header className={estilos.cabecalho}>
       <div className={estilos.cabecalhoInterno}>
-        <Link href={ROTA_BASE} className={estilos.marca} aria-label="Área do Corretor, início">
+        <Link href={naGestao ? ROTA_GESTOR : ROTA_BASE} className={estilos.marca} aria-label={`${rotulo}, início`}>
           <img src={logo.src} srcSet={logo.srcSet} sizes={logo.sizes} alt="Lotus Brokers" width={80} height={30} />
-          <span className={estilos.rotuloArea}>Área do Corretor</span>
+          <span className={estilos.rotuloArea}>{rotulo}</span>
         </Link>
 
         {/* lt-mobile-nav: styles/base.css esconde todo `header nav` abaixo de 760px
             (é o menu de desktop das páginas portadas); aqui a nav é a do celular também. */}
         <nav className={`${estilos.navCabecalho} lt-mobile-nav`} aria-label="Conta e atalhos">
+          {naGestao ? (
+            <Link href={ROTA_BASE} className={estilos.botaoCabecalho} title="Área do Corretor">
+              <Icone nome="casa" />
+              <span className={estilos.textoBotao}>Corretor</span>
+            </Link>
+          ) : (
+            podeGerenciar(corretor.papel) && (
+              <Link href={ROTA_GESTOR} className={estilos.botaoCabecalho} title="Área do Gestor">
+                <Icone nome="ferramenta" />
+                <span className={estilos.textoBotao}>Gestão</span>
+              </Link>
+            )
+          )}
           <a href={URL_DASHBOARD} target="_blank" rel="noopener" className={estilos.botaoCabecalho} title="Dashboard">
             <Icone nome="painel" />
             <span className={estilos.textoBotao}>Dashboard</span>
@@ -30,7 +49,7 @@ export default function Cabecalho({ corretor }: { corretor: Corretor }) {
             <Icone nome="email" />
             <span className={estilos.textoBotao}>E-mail</span>
           </a>
-          <a href="/" className={estilos.botaoCabecalho} title="Site Lotus Brokers">
+          <a href="/" className={`${estilos.botaoCabecalho} ${estilos.botaoSite}`} title="Site Lotus Brokers">
             <Icone nome="globo" />
             <span className={estilos.textoBotao}>Site</span>
           </a>

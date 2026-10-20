@@ -1,6 +1,8 @@
 /**
  * Materiais da Área do Corretor, lidos da pasta do Google Drive da Lotus
  * ("1. Corretores"), que a equipe organiza direto no Drive (decisão de 05/10/2026).
+ * A Área do Gestor (19/10/2026) usa a mesma leitura, com as pastas dela como
+ * raiz (lib/area-do-gestor/pastas.ts).
  *
  * Só no servidor: a chave de API (GOOGLE_DRIVE_API_KEY) nunca vai ao navegador,
  * e a pasta (GOOGLE_DRIVE_PASTA_ID) fica em variável de ambiente porque este
@@ -15,6 +17,7 @@ import { ROTA_BASE } from './acesso';
 import type { ItemDeBusca } from './busca';
 import {
   ficaDeFora,
+  idValido,
   maisParecido,
   nomeLimpo,
   ordemDaPasta,
@@ -36,8 +39,13 @@ const VERSAO_DA_GUARDA = 'v3';
 /** Chave de API do Google: "AIza" + 35 letras, números, - ou _. */
 const FORMATO_DA_CHAVE = /^AIza[A-Za-z0-9_-]{35}$/;
 
+function chaveDaApi(): string | null {
+  return process.env.GOOGLE_DRIVE_API_KEY?.trim() || null;
+}
+
+/** A chave e a pasta dos corretores ("1. Corretores"), raiz da Área do Corretor. */
 function configuracao(): { chave: string; raiz: string } | null {
-  const chave = process.env.GOOGLE_DRIVE_API_KEY?.trim();
+  const chave = chaveDaApi();
   const raiz = process.env.GOOGLE_DRIVE_PASTA_ID?.trim();
   return chave && raiz ? { chave, raiz } : null;
 }
@@ -46,9 +54,12 @@ export function driveConfigurado(): boolean {
   return configuracao() !== null;
 }
 
-/** IDs do Drive só têm letras, números, - e _. O ID entra na consulta: nada fora disso passa. */
-export function idValido(id: string): boolean {
-  return /^[A-Za-z0-9_-]{10,100}$/.test(id);
+/**
+ * Só a chave. A Área do Gestor lê outras pastas (lib/area-do-gestor/pastas.ts)
+ * com a mesma chave, e não depende da pasta dos corretores.
+ */
+export function chaveDoDriveConfigurada(): boolean {
+  return chaveDaApi() !== null;
 }
 
 export type ItemDoDrive = {
@@ -93,8 +104,8 @@ function paraItem(b: ItemBruto): ItemDoDrive {
 }
 
 async function buscarConteudo(pastaId: string): Promise<ItemDoDrive[]> {
-  const config = configuracao();
-  if (!config) throw new Error('[area-do-corretor] Google Drive não configurado');
+  const chave = chaveDaApi();
+  if (!chave) throw new Error('[area-do-corretor] Google Drive não configurado');
   if (!idValido(pastaId)) throw new Error('[area-do-corretor] id de pasta inválido');
 
   const itens: ItemDoDrive[] = [];
@@ -107,7 +118,7 @@ async function buscarConteudo(pastaId: string): Promise<ItemDoDrive[]> {
       orderBy: 'folder,name_natural',
       supportsAllDrives: 'true',
       includeItemsFromAllDrives: 'true',
-      key: config.chave,
+      key: chave,
     });
     if (pagina) parametros.set('pageToken', pagina);
     const resposta = await fetch(`${API}?${parametros}`);
@@ -117,8 +128,8 @@ async function buscarConteudo(pastaId: string): Promise<ItemDoDrive[]> {
       const motivo = [corpo?.error?.errors?.[0]?.reason, corpo?.error?.message].filter(Boolean).join(': ');
       // Chave recusada: diz se o formato bate (AIza + 35 caracteres), sem mostrar a chave. O engano
       // mais comum é colar junto aspas, < > ou espaço, no .env.local ou no Easypanel.
-      const dica = /api key not valid/i.test(motivo) && !FORMATO_DA_CHAVE.test(config.chave)
-        ? ` — GOOGLE_DRIVE_API_KEY não tem o formato de chave do Google (começa com AIza, 39 caracteres; tem ${config.chave.length})`
+      const dica = /api key not valid/i.test(motivo) && !FORMATO_DA_CHAVE.test(chave)
+        ? ` — GOOGLE_DRIVE_API_KEY não tem o formato de chave do Google (começa com AIza, 39 caracteres; tem ${chave.length})`
         : '';
       throw new Error(`[area-do-corretor] Drive respondeu ${resposta.status} para a pasta ${pastaId}${motivo ? ` (${motivo})` : ''}${dica}`);
     }
@@ -138,28 +149,34 @@ export function conteudoDaPasta(pastaId: string): Promise<ItemDoDrive[]> {
   })();
 }
 
-/** Rota da área para uma pasta, pelos IDs desde a raiz (sem a raiz). */
-export function rotaDaPasta(caminho: string[]): string {
-  return caminho.length ? `${ROTA_BASE}/drive/${caminho.join('/')}` : `${ROTA_BASE}/drive`;
+/**
+ * Rota de uma pasta, pelos IDs desde a raiz (sem a raiz). `base` é a página da
+ * raiz: a dos materiais dos corretores ou a de uma pasta da Área do Gestor.
+ */
+export function rotaDaPasta(caminho: string[], base = `${ROTA_BASE}/drive`): string {
+  return caminho.length ? `${base}/${caminho.join('/')}` : base;
 }
 
 export type PastaNoCaminho = { id: string; nome: string; href: string };
 
 /**
- * Confere que cada ID do caminho é subpasta do anterior, a partir da raiz da
- * Lotus, e devolve a trilha com os nomes. Assim a rota só abre pastas que estão
- * dentro de "1. Corretores" — nunca uma pasta pública qualquer do Drive.
- * Devolve null se algum passo não confere.
+ * Confere que cada ID do caminho é subpasta do anterior, a partir da raiz, e
+ * devolve a trilha com os nomes. Assim a rota só abre pastas que estão dentro
+ * da raiz ("1. Corretores", ou a pasta da gestão) — nunca uma pasta pública
+ * qualquer do Drive. Devolve null se algum passo não confere.
  */
-export async function trilhaDaPasta(caminho: string[]): Promise<PastaNoCaminho[] | null> {
-  const config = configuracao();
-  if (!config || !caminho.every(idValido)) return null;
+export async function trilhaDaPasta(
+  caminho: string[],
+  raiz = configuracao()?.raiz,
+  base?: string,
+): Promise<PastaNoCaminho[] | null> {
+  if (!raiz || !chaveDaApi() || !caminho.every(idValido)) return null;
   const trilha: PastaNoCaminho[] = [];
-  let atual = config.raiz;
+  let atual = raiz;
   for (let i = 0; i < caminho.length; i++) {
     const filha = (await conteudoDaPasta(atual)).find((item) => item.pasta && item.id === caminho[i]);
     if (!filha) return null;
-    trilha.push({ id: filha.id, nome: filha.nome, href: rotaDaPasta(caminho.slice(0, i + 1)) });
+    trilha.push({ id: filha.id, nome: filha.nome, href: rotaDaPasta(caminho.slice(0, i + 1), base) });
     atual = filha.id;
   }
   return trilha;

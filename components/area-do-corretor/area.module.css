@@ -110,7 +110,7 @@
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 
 .navCabecalho form {
@@ -142,6 +142,22 @@
 
 .textoBotao {
   display: none;
+}
+
+/* Abaixo de 420px o atalho para o site sai e o espaço entre os botões encolhe:
+   com o botão de troca de área dos gestores (19/10/2026), seis botões não cabiam
+   num celular de 375px e passavam por cima da marca. O site é o atalho menos
+   usado numa área interna. */
+.botaoSite {
+  display: none;
+}
+@media (min-width: 420px) {
+  .navCabecalho {
+    gap: 6px;
+  }
+  .botaoSite {
+    display: inline-flex;
+  }
 }
 
 .avatar {

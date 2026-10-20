@@ -3,8 +3,9 @@ import { createServerClient } from '@supabase/ssr';
 import { ROTA_ENTRADA } from '@/lib/area-do-corretor/acesso';
 
 /**
- * Porteiro da Área do Corretor (ver o matcher: o resto do site não passa por
- * aqui e continua estático).
+ * Porteiro da Área do Corretor e da Área do Gestor, que usam a mesma conta e a
+ * mesma tela de entrada (ver o matcher: o resto do site não passa por aqui e
+ * continua estático).
  *
  * - Renova a sessão do Supabase quando o token vence. Server Component não grava
  *   cookie; sem esta renovação o corretor seria deslogado a cada hora.
@@ -58,5 +59,5 @@ function privada(resposta: NextResponse): NextResponse {
 }
 
 export const config = {
-  matcher: ['/area-do-corretor', '/area-do-corretor/:path*'],
+  matcher: ['/area-do-corretor', '/area-do-corretor/:path*', '/area-do-gestor', '/area-do-gestor/:path*'],
 };

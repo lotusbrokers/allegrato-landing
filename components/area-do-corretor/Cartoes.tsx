@@ -105,6 +105,19 @@ export function Atalho({
   );
 }
 
+/** Cartão que leva para fora da área (uma tela da Dashboard), em outra aba. */
+export function AtalhoExterno({ titulo, resumo, href, icone }: { titulo: string; resumo?: string; href: string; icone: NomeDoIcone }) {
+  return (
+    <a href={href} target="_blank" rel="noopener" className={estilos.atalho}>
+      <span className={estilos.iconeAtalho}>
+        <Icone nome={icone} />
+      </span>
+      <span className={estilos.nomeAtalho}>{titulo}</span>
+      {resumo && <span className={estilos.resumoAtalho}>{resumo}</span>}
+    </a>
+  );
+}
+
 export function AtalhoDaSecao({ secao, contagem }: { secao: Secao; contagem?: number }) {
   return <Atalho titulo={secao.titulo} resumo={secao.resumo} href={secao.href} icone={secao.icone} contagem={contagem} />;
 }

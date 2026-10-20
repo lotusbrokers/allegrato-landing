@@ -72,7 +72,7 @@ const LANDINGS_HTML = [
 const MOLDURA = /^(RodapeLotus|AtalhosLanding|LightboxPlantas|LotusHeader|MobileMenu|CookieConsent|Analytics|PreloadHints|RodapeVoltarLancamentos|CtaSimulacao|ConsentimentoLgpd)$/;
 
 // Mesma regra de lib/landings.ts (PORTAL_ROUTE): ao mexer em uma, mexer na outra.
-const PORTAL_ROUTE = /^(lotus-|construtoras$|api$|meus-dados$|area-do-corretor$)/;
+const PORTAL_ROUTE = /^(lotus-|construtoras$|api$|meus-dados$|area-do-corretor$|area-do-gestor$)/;
 
 function existe(p) {
   return existsSync(join(RAIZ, p));
