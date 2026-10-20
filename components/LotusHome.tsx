@@ -1323,8 +1323,9 @@ export default function LotusHome({
                 <Hoverable as="a" href="#sobre" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Sobre nós</Hoverable>
                 <Hoverable as="a" href="/lotus-corretores" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Corretores</Hoverable>
                 <Hoverable as="a" href="/lotus-recrutamento" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Seja um corretor</Hoverable>
-                {/* Entrada dos corretores, no mesmo lugar do rodapé das landings (RodapeLotus). */}
+                {/* Entrada dos corretores e dos gestores, no mesmo lugar do rodapé das landings (RodapeLotus). */}
                 <Hoverable as="a" href="/area-do-corretor" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Área do Corretor</Hoverable>
+                <Hoverable as="a" href="/area-do-gestor" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Área do Gestor</Hoverable>
                 <Hoverable as="a" href={waLink} target="_blank" rel="noopener" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Contato</Hoverable>
               </div>
             </div>

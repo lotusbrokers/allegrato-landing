@@ -54,6 +54,7 @@ const COLUNAS: { titulo: string; links: { rotulo: string; href: string }[] }[] =
       { rotulo: 'Corretores', href: '/lotus-corretores' },
       { rotulo: 'Seja um corretor', href: '/lotus-recrutamento' },
       { rotulo: 'Área do Corretor', href: '/area-do-corretor' },
+      { rotulo: 'Área do Gestor', href: '/area-do-gestor' },
     ],
   },
   {
