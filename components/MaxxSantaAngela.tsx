@@ -192,13 +192,13 @@ const nearby = [
 const plantas = [
   {
     label: '71 m²',
-    img: '/maxx-santa-angela/71-suite-1.png',
+    img: '/maxx-santa-angela/midia/e46d689cc0772331.webp',
     tour: 'https://favarojr.com/st3/',
     desc: 'Planta inteligente com suíte, perfeita para o seu primeiro lar ou para morar com mais conforto.',
   },
   {
     label: '82 m²',
-    img: '/maxx-santa-angela/82-1.png',
+    img: '/maxx-santa-angela/midia/dcc3de7da447fbe7.webp',
     tour: 'https://my.matterport.com/show/?m=GuAJLRVnAkm',
     desc: 'Mais espaço para a família, com ambientes generosos e bem distribuídos.',
   },
@@ -446,7 +446,7 @@ export default function MaxxSantaAngela({
       {/* ============ HERO ============ */}
       <header id="topo" style={parseStyle('position:relative;min-height:680px;height:90vh;max-height:900px;display:flex;align-items:flex-end;overflow:hidden;background:#1c1813')}>
         <div style={parseStyle('position:absolute;inset:0;overflow:hidden')}>
-          <img src="/maxx-santa-angela/capa-max-old.jpg" alt="Perspectiva das torres do Maxx Santa Angela" style={parseStyle('width:100%;height:100%;object-fit:cover;animation:mxKen 18s ease-out forwards')} />
+          <img src="/maxx-santa-angela/midia/6b77b37773185412.webp" alt="Perspectiva das torres do Maxx Santa Angela" style={parseStyle('width:100%;height:100%;object-fit:cover;animation:mxKen 18s ease-out forwards')} />
         </div>
         <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,17,13,.42) 0%,rgba(20,17,13,0) 26%,rgba(20,17,13,.12) 58%,rgba(20,17,13,.74) 100%)')}></div>
         <div style={parseStyle('position:relative;width:100%;max-width:1240px;margin:0 auto;padding:0 32px 76px;color:#fff')}>
@@ -506,7 +506,7 @@ export default function MaxxSantaAngela({
           </div>
           <div data-reveal="" style={parseStyle('opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.16,1,.3,1) .15s,transform .9s cubic-bezier(.16,1,.3,1) .15s;position:relative')}>
             <div style={parseStyle('position:relative;border-radius:20px;overflow:hidden;box-shadow:0 30px 70px rgba(43,37,33,.22);aspect-ratio:4/5')}>
-              <img src="/maxx-santa-angela/adg04956-hdr-3-scaled.jpg" alt="Áreas comuns do Maxx Santa Angela" style={parseStyle('width:100%;height:100%;object-fit:cover')} />
+              <img src="/maxx-santa-angela/midia/8d7b3fc05f173560.webp" alt="Áreas comuns do Maxx Santa Angela" style={parseStyle('width:100%;height:100%;object-fit:cover')} />
             </div>
             <div style={parseStyle('position:absolute;left:-26px;bottom:-26px;background:#3FA39C;color:#fff;padding:22px 26px;border-radius:16px;box-shadow:0 18px 44px rgba(63,163,156,.35);max-width:200px')}>
               <div style={parseStyle("font-family:'Plus Jakarta Sans',sans-serif;font-size:30px;font-weight:700;line-height:1")}>3 torres</div>
@@ -702,7 +702,7 @@ export default function MaxxSantaAngela({
       <section style={parseStyle('position:relative;padding:clamp(56px,6vw,84px) 32px;background:#33291f;color:#F6F1E8;overflow:hidden')}>
         <div style={parseStyle('max-width:1100px;margin:0 auto;text-align:center')} data-reveal="">
           <div data-reveal="" style={parseStyle('opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)')}>
-            <img src="/construtoras/santa-angela-negativo.png" alt="Santa Angela Construtora, realizadora do empreendimento" style={parseStyle('height:58px;width:auto;margin:0 auto 30px;display:block;opacity:.96')} />
+            <img loading="lazy" src="/construtoras/santa-angela-negativo.png" alt="Santa Angela Construtora, realizadora do empreendimento" style={parseStyle('height:58px;width:auto;margin:0 auto 30px;display:block;opacity:.96')} />
             <span style={parseStyle('font-size:11.5px;letter-spacing:.32em;font-weight:700;color:#D9B877')}>REALIZAÇÃO</span>
             <p style={parseStyle('font-size:15px;line-height:1.7;color:#cabfae;margin:18px auto 0;max-width:560px')}>Empreendimento realizado pela Santa Angela Construtora. <a href="/construtoras/santa-angela" target="_top" style={parseStyle('color:#D9B877;text-decoration:underline')}>Conheça a construtora</a>.</p>
           </div>
@@ -803,7 +803,7 @@ export default function MaxxSantaAngela({
       {/* ============ LIGHTBOX ============ */}
       {lightboxSrc && (
         <div onClick={closeLightbox} style={parseStyle('position:fixed;inset:0;z-index:90;background:rgba(20,17,13,.92);display:flex;align-items:center;justify-content:center;padding:40px;cursor:zoom-out')}>
-          <img src={lightboxSrc} alt="Área comum do Maxx Santa Angela" style={parseStyle('max-width:92%;max-height:88vh;object-fit:contain;border-radius:8px;box-shadow:0 30px 80px rgba(0,0,0,.5)')} />
+          <img loading="lazy" src={lightboxSrc} alt="Área comum do Maxx Santa Angela" style={parseStyle('max-width:92%;max-height:88vh;object-fit:contain;border-radius:8px;box-shadow:0 30px 80px rgba(0,0,0,.5)')} />
           <button onClick={closeLightbox} aria-label="Fechar" style={parseStyle('position:absolute;top:26px;right:30px;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.14);border:none;color:#fff;font-size:24px;font-weight:300')}>×</button>
         </div>
       )}

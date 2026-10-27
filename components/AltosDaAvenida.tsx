@@ -133,10 +133,10 @@ type Planta = {
 };
 
 const PLANTAS: Planta[] = [
-  { m: '58', dorms: '2 dormitórios', desc: 'Planta inteligente e funcional, com estar integrado à cozinha e varanda, perfeita para quem busca o primeiro lar com a qualidade Santa Angela.', features: ['2 dormitórios', 'Varanda', 'Estar integrado'], img: A + 'assets/planta_58.jpg' },
-  { m: '68', dorms: '2 dormitórios, sendo 1 suíte', desc: 'Mais espaço e conforto, com suíte, varanda e ambientes amplos e bem distribuídos para o dia a dia da família.', features: ['1 suíte', 'Varanda', 'Lavabo'], img: A + 'assets/planta_68.jpg' },
-  { m: '96', dorms: '3 dormitórios, sendo 1 suíte', desc: 'Três dormitórios, lavabo e varanda gourmet integrada ao living, espaço de sobra para receber e viver bem.', features: ['1 suíte', 'Varanda gourmet', 'Lavabo'], img: A + 'assets/planta_96.jpg' },
-  { m: '105', dorms: '3 dormitórios + home office', desc: 'A planta mais completa: suíte com closet, home office e varanda gourmet. Pensada para quem não abre mão de espaço e sofisticação.', features: ['Suíte c/ closet', 'Home office', 'Varanda gourmet'], img: A + 'assets/planta_105.jpg' },
+  { m: '58', dorms: '2 dormitórios', desc: 'Planta inteligente e funcional, com estar integrado à cozinha e varanda, perfeita para quem busca o primeiro lar com a qualidade Santa Angela.', features: ['2 dormitórios', 'Varanda', 'Estar integrado'], img: A + 'midia/53850484aeb806c1.webp' },
+  { m: '68', dorms: '2 dormitórios, sendo 1 suíte', desc: 'Mais espaço e conforto, com suíte, varanda e ambientes amplos e bem distribuídos para o dia a dia da família.', features: ['1 suíte', 'Varanda', 'Lavabo'], img: A + 'midia/7c5f46151ed502f8.webp' },
+  { m: '96', dorms: '3 dormitórios, sendo 1 suíte', desc: 'Três dormitórios, lavabo e varanda gourmet integrada ao living, espaço de sobra para receber e viver bem.', features: ['1 suíte', 'Varanda gourmet', 'Lavabo'], img: A + 'midia/f2ff5542d7ae37b5.webp' },
+  { m: '105', dorms: '3 dormitórios + home office', desc: 'A planta mais completa: suíte com closet, home office e varanda gourmet. Pensada para quem não abre mão de espaço e sofisticação.', features: ['Suíte c/ closet', 'Home office', 'Varanda gourmet'], img: A + 'midia/fc30ee8ac301bda8.webp' },
 ];
 
 type GalleryItem = {
@@ -149,17 +149,17 @@ type GalleryItem = {
 };
 
 const GAL: GalleryItem[] = [
-  { img: A + 'assets/piscina.jpg', title: 'Piscina adulto e infantil', tag: 'Lazer', alt: 'Piscina do Altos da Avenida', colSpan: 6, rowSpan: 2 },
-  { img: A + 'assets/quadra.jpg', title: 'Quadra poliesportiva', tag: 'Esporte', alt: 'Quadra poliesportiva', colSpan: 3, rowSpan: 1 },
-  { img: A + 'assets/playground.jpg', title: 'Playground', tag: 'Crianças', alt: 'Playground', colSpan: 3, rowSpan: 1 },
-  { img: A + 'assets/salao_festas.jpg', title: 'Salão de festas', tag: 'Convivência', alt: 'Salão de festas', colSpan: 3, rowSpan: 1 },
-  { img: A + 'assets/gourmet.jpg', title: 'Espaço gourmet', tag: 'Convivência', alt: 'Espaço gourmet com vista', colSpan: 3, rowSpan: 1 },
-  { img: A + 'assets/academia.jpg', title: 'Academia', tag: 'Fitness', alt: 'Academia equipada', colSpan: 4, rowSpan: 1 },
-  { img: A + 'assets/salao_jogos.jpg', title: 'Salão de jogos', tag: 'Diversão', alt: 'Salão de jogos', colSpan: 4, rowSpan: 1 },
-  { img: A + 'assets/gamer.jpg', title: 'Espaço gamer', tag: 'Diversão', alt: 'Espaço gamer', colSpan: 4, rowSpan: 1 },
-  { img: A + 'assets/coworking.jpg', title: 'Coworking & estudo', tag: 'Trabalho', alt: 'Espaço coworking e estudo', colSpan: 4, rowSpan: 1 },
-  { img: A + 'assets/lounge.jpg', title: 'Lounge & convivência', tag: 'Relax', alt: 'Lounge de convivência', colSpan: 4, rowSpan: 1 },
-  { img: A + 'assets/brinquedoteca.jpg', title: 'Brinquedoteca', tag: 'Crianças', alt: 'Brinquedoteca', colSpan: 4, rowSpan: 1 },
+  { img: A + 'midia/c0f9e65c4bc67007.webp', title: 'Piscina adulto e infantil', tag: 'Lazer', alt: 'Piscina do Altos da Avenida', colSpan: 6, rowSpan: 2 },
+  { img: A + 'midia/0a22dbd29b7ca519.webp', title: 'Quadra poliesportiva', tag: 'Esporte', alt: 'Quadra poliesportiva', colSpan: 3, rowSpan: 1 },
+  { img: A + 'midia/57326b76e7e498bb.webp', title: 'Playground', tag: 'Crianças', alt: 'Playground', colSpan: 3, rowSpan: 1 },
+  { img: A + 'midia/8f7888ea41a02f2c.webp', title: 'Salão de festas', tag: 'Convivência', alt: 'Salão de festas', colSpan: 3, rowSpan: 1 },
+  { img: A + 'midia/8508394a29c9917b.webp', title: 'Espaço gourmet', tag: 'Convivência', alt: 'Espaço gourmet com vista', colSpan: 3, rowSpan: 1 },
+  { img: A + 'midia/da75fdb96f670f44.webp', title: 'Academia', tag: 'Fitness', alt: 'Academia equipada', colSpan: 4, rowSpan: 1 },
+  { img: A + 'midia/fa1ec6f442d4cd83.webp', title: 'Salão de jogos', tag: 'Diversão', alt: 'Salão de jogos', colSpan: 4, rowSpan: 1 },
+  { img: A + 'midia/ae51bba13017e7cf.webp', title: 'Espaço gamer', tag: 'Diversão', alt: 'Espaço gamer', colSpan: 4, rowSpan: 1 },
+  { img: A + 'midia/c50515766a7ee21a.webp', title: 'Coworking & estudo', tag: 'Trabalho', alt: 'Espaço coworking e estudo', colSpan: 4, rowSpan: 1 },
+  { img: A + 'midia/69da76b6e578bb39.webp', title: 'Lounge & convivência', tag: 'Relax', alt: 'Lounge de convivência', colSpan: 4, rowSpan: 1 },
+  { img: A + 'midia/0c16944499be68fd.webp', title: 'Brinquedoteca', tag: 'Crianças', alt: 'Brinquedoteca', colSpan: 4, rowSpan: 1 },
 ];
 
 const AMEN = ['Piscina adulto e infantil', 'Salão de festas', '2 churrasqueiras', 'Academia', 'Fitness externo', 'Espaço bem-estar', 'Coworking', 'Salão de jogos', 'Espaço gamer', 'Quadra poliesportiva', 'Playground 6 a 10 anos', 'Espaço baby', 'Espaço pet', 'Vestiários', 'Áreas comuns decoradas', 'Espaços de convivência'];
@@ -532,7 +532,7 @@ export default function AltosDaAvenida({
           acompanha a altura do cabeçalho — ver [data-hero-inner] no CSS. */}
       <section id="topo" data-screen-label="Hero" style={parseStyle('position:relative; min-height:clamp(680px,90vh,900px); display:flex; flex-direction:column; justify-content:center; overflow:hidden;')}>
         <div style={parseStyle('position:absolute; inset:0; z-index:0;')}>
-          <img {...imagemOtimizada(A + 'a005.png')} sizes="100vw" fetchPriority="high" alt="Piscina do Altos da Avenida ao entardecer" style={parseStyle('width:100%; height:100%; object-fit:cover; animation:adKenBurns 22s ease-in-out infinite alternate;')} />
+          <img {...imagemOtimizada(A + 'midia/af13a855f6f9a8bf.webp')} sizes="100vw" fetchPriority="high" alt="Piscina do Altos da Avenida ao entardecer" style={parseStyle('width:100%; height:100%; object-fit:cover; animation:adKenBurns 22s ease-in-out infinite alternate;')} />
         </div>
         <div style={parseStyle('position:absolute; inset:0; z-index:1; background:linear-gradient(105deg,rgba(13,33,25,.86) 0%,rgba(13,33,25,.6) 38%,rgba(13,33,25,.18) 70%,rgba(189,106,69,.12) 100%);')}></div>
         <div style={parseStyle('position:absolute; inset:0; z-index:1; background:linear-gradient(0deg,rgba(13,33,25,.7) 0%,rgba(13,33,25,0) 35%);')}></div>
@@ -605,7 +605,7 @@ export default function AltosDaAvenida({
           </div>
           <div data-reveal="" data-reveal-delay="120" style={parseStyle('position:relative;')}>
             <div style={parseStyle('position:relative; border-radius:4px; overflow:hidden; box-shadow:0 40px 80px rgba(23,63,49,.28);')}>
-              <img src={A + 'a002.png'} alt="Vista das torres do Altos da Avenida" style={parseStyle('width:100%; height:560px; object-fit:cover;')} />
+              <img loading="lazy" src={A + 'midia/86432b761f3a806c.webp'} alt="Vista das torres do Altos da Avenida" style={parseStyle('width:100%; height:560px; object-fit:cover;')} />
             </div>
             <div style={parseStyle('position:absolute; bottom:-26px; left:-26px; background:#173f31; color:#fff; padding:26px 30px; border-radius:4px; max-width:240px; box-shadow:0 24px 50px rgba(23,63,49,.35);')}>
               <span style={parseStyle("font-family:'Sacramento',cursive; font-size:34px; color:#e9b896; line-height:.9; display:block;")}>alto astral</span>
@@ -693,7 +693,7 @@ export default function AltosDaAvenida({
           {/* full amenity list */}
           <div data-reveal="" style={parseStyle('margin-top:60px; background:#fff; border-radius:4px; padding:clamp(32px,4vw,52px); box-shadow:0 24px 60px rgba(23,63,49,.08);')}>
             <div style={parseStyle('display:flex; align-items:center; gap:14px; margin-bottom:30px;')}>
-              <img src={A + 'a001.png'} alt="" style={parseStyle('height:0; width:0; opacity:0;')} />
+              <img loading="lazy" src={A + 'a001.png'} alt="" style={parseStyle('height:0; width:0; opacity:0;')} />
               <span style={parseStyle("font-family:'Barlow Semi Condensed',sans-serif; font-size:13px; letter-spacing:.26em; text-transform:uppercase; color:#173f31;")}>Tudo isso e muito mais</span>
               <span style={parseStyle('flex:1; height:1px; background:linear-gradient(90deg,#cdbfa7,transparent);')}></span>
             </div>
@@ -754,7 +754,7 @@ export default function AltosDaAvenida({
               baseStyle={parseStyle('position:relative; display:flex; align-items:center; justify-content:center; min-height:560px; background:#f6f1e8; border:1px solid #ece3d3; border-radius:6px; padding:24px; cursor:zoom-in; overflow:hidden;')}
               hoverStyle={{}}
             >
-              <img
+              <img loading="lazy"
                 src={activePlanta.img}
                 alt={'Planta do apartamento de ' + activePlanta.m + 'm² do Altos da Avenida'}
                 style={{ ...parseStyle('max-height:660px; width:auto; max-width:100%; object-fit:contain; transition:opacity .4s, transform .6s cubic-bezier(.16,1,.3,1);'), opacity: plantaFade }}
@@ -821,7 +821,7 @@ export default function AltosDaAvenida({
         <div style={parseStyle('max-width:1340px; margin:0 auto; display:grid; grid-template-columns:.85fr 1.15fr; gap:clamp(40px,6vw,80px); align-items:center;')} data-grid-2="">
           <div data-reveal="" style={parseStyle('position:relative;')}>
             <div style={parseStyle('border-radius:6px; overflow:hidden; box-shadow:0 30px 70px rgba(0,0,0,.4);')}>
-              <img src={A + 'a004.png'} alt="Família realizando o sonho da casa própria" style={parseStyle('width:100%; height:520px; object-fit:contain; object-position:bottom; background:linear-gradient(160deg,#1f5240,#15281e);')} />
+              <img loading="lazy" src={A + 'midia/889249603a17bbb4.webp'} alt="Família realizando o sonho da casa própria" style={parseStyle('width:100%; height:520px; object-fit:contain; object-position:bottom; background:linear-gradient(160deg,#1f5240,#15281e);')} />
             </div>
           </div>
           <div>
@@ -914,10 +914,10 @@ export default function AltosDaAvenida({
 
       {/* ============ FINAL CTA ============ */}
       <section data-screen-label="CTA Final" style={parseStyle('position:relative; padding:clamp(70px,11vh,130px) clamp(20px,4vw,64px); overflow:hidden; background:#173f31;')}>
-        <div style={parseStyle('position:absolute; inset:0; z-index:0; opacity:.22;')}><img src={A + 'a003.png'} alt="" style={parseStyle('width:100%; height:100%; object-fit:cover;')} /></div>
+        <div style={parseStyle('position:absolute; inset:0; z-index:0; opacity:.22;')}><img loading="lazy" src={A + 'midia/af13a855f6f9a8bf.webp'} alt="" style={parseStyle('width:100%; height:100%; object-fit:cover;')} /></div>
         <div style={parseStyle('position:absolute; inset:0; z-index:1; background:linear-gradient(180deg,rgba(21,40,30,.85),rgba(21,40,30,.92));')}></div>
         <div style={parseStyle('position:relative; z-index:2; max-width:760px; margin:0 auto; text-align:center;')}>
-          <img data-reveal="" src={A + 'a001.png'} alt="Altos da Avenida" style={parseStyle('height:60px; margin:0 auto 30px;')} />
+          <img loading="lazy" data-reveal="" src={A + 'a001.png'} alt="Altos da Avenida" style={parseStyle('height:60px; margin:0 auto 30px;')} />
           <h2 data-reveal="" data-reveal-delay="80" style={parseStyle("margin:0; font-family:'Cormorant Garamond',serif; font-size:clamp(36px,5.5vw,72px); font-weight:600; color:#fff; line-height:1.02;")}>Os seus Altos momentos<br />começam aqui</h2>
           <p data-reveal="" data-reveal-delay="140" style={parseStyle('margin:22px auto 0; font-size:18px; line-height:1.7; color:rgba(255,255,255,.82); max-width:520px;')}>Apartamentos de 58 a 105m² em Jundiaí. Agende sua visita com a Imobiliária Lotus Brokers.</p>
           <Hoverable as="a" data-reveal="" data-reveal-delay="200" href={waLink} target="_blank" rel="noopener" baseStyle={parseStyle("display:inline-flex; align-items:center; gap:12px; margin-top:36px; font-family:'Barlow Semi Condensed',sans-serif; font-size:17px; letter-spacing:.08em; text-transform:uppercase; color:#fff; text-decoration:none; background:#bd6a45; padding:19px 42px; border-radius:48px; box-shadow:0 16px 40px rgba(189,106,69,.45); transition:transform .3s, box-shadow .3s;")} hoverStyle={parseStyle('transform:translateY(-3px); box-shadow:0 22px 50px rgba(189,106,69,.6);')}>
@@ -932,7 +932,7 @@ export default function AltosDaAvenida({
         <div style={parseStyle('max-width:1340px; margin:0 auto;')}>
           <div style={parseStyle('display:flex; flex-wrap:wrap; gap:40px; justify-content:space-between; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,.1);')}>
             <div style={parseStyle('max-width:320px;')}>
-              <img src={A + 'a001.png'} alt="Altos da Avenida" style={parseStyle('height:44px; margin-bottom:18px;')} />
+              <img loading="lazy" src={A + 'a001.png'} alt="Altos da Avenida" style={parseStyle('height:44px; margin-bottom:18px;')} />
               <p style={parseStyle('margin:0; font-size:14px; line-height:1.7;')}>Apartamentos de 58 a 105m² na Avenida Samuel Martins, Jardim do Lago, Jundiaí/SP. Um empreendimento Construtora Santa Angela.</p>
             </div>
             <div>
@@ -954,7 +954,7 @@ export default function AltosDaAvenida({
               <div style={parseStyle('margin-top:18px; background:#fff; border-radius:6px; padding:10px 14px; display:inline-block;')}>
                 {/* Era A + 'a000.jpg', que é o logo da Japi Lançamentos — sobrou
                     do material antigo e estava rotulado como Lotus. */}
-                <img src="/logo-lotus-verde.png" alt="Imobiliária Lotus Brokers" style={parseStyle('height:38px;')} />
+                <img loading="lazy" src="/logo-lotus-verde.png" alt="Imobiliária Lotus Brokers" style={parseStyle('height:38px;')} />
               </div>
             </div>
           </div>
@@ -984,7 +984,7 @@ export default function AltosDaAvenida({
           </>
         )}
         <figure onClick={stopProp} style={parseStyle('margin:0; max-width:1100px; max-height:88vh; display:flex; flex-direction:column; align-items:center; gap:18px;')}>
-          {lb && <img src={lb.src} alt={lb.alt} style={parseStyle('max-width:100%; max-height:78vh; width:auto; object-fit:contain; border-radius:6px; box-shadow:0 40px 90px rgba(0,0,0,.5); background:#fff;')} />}
+          {lb && <img loading="lazy" src={lb.src} alt={lb.alt} style={parseStyle('max-width:100%; max-height:78vh; width:auto; object-fit:contain; border-radius:6px; box-shadow:0 40px 90px rgba(0,0,0,.5); background:#fff;')} />}
           <figcaption style={parseStyle("font-family:'Cormorant Garamond',serif; font-size:24px; color:#fff; text-align:center;")}>{lb ? lb.alt : ''}</figcaption>
         </figure>
       </div>
@@ -998,13 +998,13 @@ export default function AltosDaAvenida({
 }
 
 /**
- * Imagem da galeria com hover scale (style-hover do estático no <img> interno).
+ * Imagem da galeria com hover scale (style-hover do estático no <img loading="lazy"> interno).
  * Isolada para poder ter seu próprio estado de hover independente do botão.
  */
 function GalleryImg({ src, alt }: { src: string; alt: string }) {
   const [hover, setHover] = useState(false);
   return (
-    <img
+    <img loading="lazy"
       src={src}
       alt={alt}
       onMouseEnter={() => setHover(true)}

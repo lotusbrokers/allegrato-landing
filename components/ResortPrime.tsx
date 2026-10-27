@@ -352,7 +352,7 @@ export default function ResortPrime() {
       {/* ===================== Hero ===================== */}
       <section className="hero" id="topo" data-screen-label="Hero">
         <div className="hero__bg">
-          <img src="/resort-prime/a012.jpg" alt="Piscina do Resort Prime Santa Angela ao pôr do sol" />
+          <img src="/resort-prime/midia/6a84a2e8535f0fd6.webp" alt="Piscina do Resort Prime Santa Angela ao pôr do sol" />
         </div>
         <div className="wrap hero__inner">
           <div className="hero__copy">
@@ -428,7 +428,7 @@ export default function ResortPrime() {
       <section className="section section--cream" id="localizacao" data-screen-label="Localização">
         <div className="wrap loc">
           <div className="loc__media reveal">
-            <img src="/resort-prime/a009.jpg" alt="Vista aérea do Resort Prime Santa Angela no bairro Engordadouro" />
+            <img loading="lazy" src="/resort-prime/midia/aac1b8423dc19bf6.webp" alt="Vista aérea do Resort Prime Santa Angela no bairro Engordadouro" />
             <div className="loc__addr">
               <span className="pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg></span>
               <div><b>Av. Caetano Gornati</b><span><a href="/lotus-bairro/engordadouro" style={{ textDecoration: 'underline', textDecorationColor: 'var(--terra)', textUnderlineOffset: '3px' }}>Engordadouro</a>, Jundiaí / SP</span></div>
@@ -458,40 +458,40 @@ export default function ResortPrime() {
           </div>
 
           <div className="gallery reveal d1">
-            <div className="gcell g-w2 g-h2" data-lb="images/pool-day.jpg" data-cap="Piscina adulto e infantil">
-              <img src="/resort-prime/a020.jpg" alt="Piscina do Resort Prime" />
+            <div className="gcell g-w2 g-h2" data-lb="midia/f24fd18bb902c879.webp" data-cap="Piscina adulto e infantil">
+              <img loading="lazy" src="/resort-prime/midia/f24fd18bb902c879.webp" alt="Piscina do Resort Prime" />
               <span className="gcell__cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 12s3-2 5-2 4 2 6 2 4-2 5-2 4 2 4 2M2 18s3-2 5-2 4 2 6 2 4-2 5-2 4 2 4 2"></path></svg>Piscina adulto e infantil</span>
             </div>
-            <div className="gcell" data-lb="images/court-sport.jpg" data-cap="Quadra poliesportiva">
-              <img src="/resort-prime/a018.jpg" alt="Quadra poliesportiva" />
+            <div className="gcell" data-lb="midia/f20a9a5cc65d8650.webp" data-cap="Quadra poliesportiva">
+              <img loading="lazy" src="/resort-prime/midia/f20a9a5cc65d8650.webp" alt="Quadra poliesportiva" />
               <span className="gcell__cap">Quadra poliesportiva</span>
             </div>
-            <div className="gcell" data-lb="images/beach-tennis.jpg" data-cap="Quadra de Beach Tennis">
-              <img src="/resort-prime/a008.jpg" alt="Quadra de Beach Tennis" />
+            <div className="gcell" data-lb="midia/28521ec995eecf35.webp" data-cap="Quadra de Beach Tennis">
+              <img loading="lazy" src="/resort-prime/midia/28521ec995eecf35.webp" alt="Quadra de Beach Tennis" />
               <span className="gcell__cap">Beach Tennis</span>
             </div>
-            <div className="gcell g-w2" data-lb="images/walking-track.jpg" data-cap="Pista de caminhada">
-              <img src="/resort-prime/a016.jpg" alt="Pista de caminhada" />
+            <div className="gcell g-w2" data-lb="midia/4bf8caded34c4482.webp" data-cap="Pista de caminhada">
+              <img loading="lazy" src="/resort-prime/midia/4bf8caded34c4482.webp" alt="Pista de caminhada" />
               <span className="gcell__cap">Pista de caminhada</span>
             </div>
-            <div className="gcell" data-lb="images/playground.jpg" data-cap="Playground">
-              <img src="/resort-prime/a011.jpg" alt="Playground" />
+            <div className="gcell" data-lb="midia/18d690708a3e82cf.webp" data-cap="Playground">
+              <img loading="lazy" src="/resort-prime/midia/18d690708a3e82cf.webp" alt="Playground" />
               <span className="gcell__cap">Playground</span>
             </div>
-            <div className="gcell" data-lb="images/pet.jpg" data-cap="Espaço Pet">
-              <img src="/resort-prime/a015.jpg" alt="Espaço Pet" />
+            <div className="gcell" data-lb="midia/e401cb2bac9f5d69.webp" data-cap="Espaço Pet">
+              <img loading="lazy" src="/resort-prime/midia/e401cb2bac9f5d69.webp" alt="Espaço Pet" />
               <span className="gcell__cap">Espaço Pet</span>
             </div>
-            <div className="gcell g-w2" data-lb="images/pool-gourmet-play.jpg" data-cap="Espaço gourmet e convivência">
-              <img src="/resort-prime/a017.jpg" alt="Espaço gourmet e piscina" />
+            <div className="gcell g-w2" data-lb="midia/de7d8b50e2bb3607.webp" data-cap="Espaço gourmet e convivência">
+              <img loading="lazy" src="/resort-prime/midia/de7d8b50e2bb3607.webp" alt="Espaço gourmet e piscina" />
               <span className="gcell__cap">Espaço gourmet &amp; convivência</span>
             </div>
-            <div className="gcell" data-lb="images/fitness-ext.jpg" data-cap="Fitness externo">
-              <img src="/resort-prime/a014.jpg" alt="Fitness externo" />
+            <div className="gcell" data-lb="midia/4baef26bd51d915f.webp" data-cap="Fitness externo">
+              <img loading="lazy" src="/resort-prime/midia/4baef26bd51d915f.webp" alt="Fitness externo" />
               <span className="gcell__cap">Fitness externo</span>
             </div>
-            <div className="gcell" data-lb="images/kids-play.jpg" data-cap="Brinquedoteca">
-              <img src="/resort-prime/a006.jpg" alt="Brinquedoteca" />
+            <div className="gcell" data-lb="midia/bfb5327a81c9dd5d.webp" data-cap="Brinquedoteca">
+              <img loading="lazy" src="/resort-prime/midia/bfb5327a81c9dd5d.webp" alt="Brinquedoteca" />
               <span className="gcell__cap">Brinquedoteca</span>
             </div>
           </div>
@@ -529,9 +529,9 @@ export default function ResortPrime() {
         <div className="wrap split">
           <div className="split__media reveal">
             <div className="media-stack">
-              <img className="m1" src="/resort-prime/a005.jpg" alt="Academia do Resort Prime" data-lb="images/gym.jpg" data-cap="Academia Céltica" />
-              <img src="/resort-prime/a004.jpg" alt="Espaço pilates e yoga" data-lb="images/pilates.jpg" data-cap="Espaço Pilates e Yoga" />
-              <img src="/resort-prime/a002.jpg" alt="Piscina coberta aquecida" data-lb="images/indoor-pool.jpg" data-cap="Piscina coberta aquecida" />
+              <img loading="lazy" className="m1" src="/resort-prime/midia/b3e74fcec5bc80a2.webp" alt="Academia do Resort Prime" data-lb="midia/b3e74fcec5bc80a2.webp" data-cap="Academia Céltica" />
+              <img loading="lazy" src="/resort-prime/midia/2bda7db6c99643da.webp" alt="Espaço pilates e yoga" data-lb="midia/2bda7db6c99643da.webp" data-cap="Espaço Pilates e Yoga" />
+              <img loading="lazy" src="/resort-prime/midia/f494de5abc3b05a7.webp" alt="Piscina coberta aquecida" data-lb="midia/f494de5abc3b05a7.webp" data-cap="Piscina coberta aquecida" />
             </div>
           </div>
           <div className="split__copy">
@@ -555,9 +555,9 @@ export default function ResortPrime() {
         <div className="wrap split split--rev">
           <div className="split__media reveal">
             <div className="media-stack">
-              <img className="m1" src="/resort-prime/a013.jpg" alt="Club Prime, piscina privativa" data-lb="images/club-pool.jpg" data-cap="Club Prime, Piscina privativa" />
-              <img src="/resort-prime/a022.jpg" alt="Club Prime, área gourmet" data-lb="images/gourmet-pool.jpg" data-cap="Club Prime, Espaço Gourmet" />
-              <img src="/resort-prime/a017.jpg" alt="Club Prime, lazer" data-lb="images/pool-gourmet-play.jpg" data-cap="Club Prime, Lazer e convivência" />
+              <img loading="lazy" className="m1" src="/resort-prime/a013.jpg" alt="Club Prime, piscina privativa" data-lb="images/club-pool.jpg" data-cap="Club Prime, Piscina privativa" />
+              <img loading="lazy" src="/resort-prime/midia/969b415380637387.webp" alt="Club Prime, área gourmet" data-lb="midia/969b415380637387.webp" data-cap="Club Prime, Espaço Gourmet" />
+              <img loading="lazy" src="/resort-prime/midia/de7d8b50e2bb3607.webp" alt="Club Prime, lazer" data-lb="midia/de7d8b50e2bb3607.webp" data-cap="Club Prime, Lazer e convivência" />
             </div>
           </div>
           <div className="split__copy">
@@ -584,33 +584,33 @@ export default function ResortPrime() {
               <a href="#agende" className="btn btn-primary reveal d2" style={{ marginTop: '24px' }}>Quero ver as plantas disponíveis</a>
             </div>
             <div className="plans-top__media reveal d1">
-              <img src="/resort-prime/a007.jpg" alt="Apartamento decorado do Resort Prime Santa Angela" data-lb="images/decor-dining.jpg" data-cap="Apartamento decorado, perspectiva ilustrada" />
+              <img loading="lazy" src="/resort-prime/midia/4c2c7f9e40c7a6a1.webp" alt="Apartamento decorado do Resort Prime Santa Angela" data-lb="midia/4c2c7f9e40c7a6a1.webp" data-cap="Apartamento decorado, perspectiva ilustrada" />
             </div>
           </div>
 
           <div className="plan-grid">
             <div className="plan-figure reveal" data-lb="images/plan-94.png" data-cap="Planta, 94 m²">
-              <div className="plan-figure__img"><img src="/resort-prime/a024.png" alt="Planta humanizada do apartamento de 94 m²" /></div>
+              <div className="plan-figure__img"><img loading="lazy" src="/resort-prime/midia/5715e792710bab5f.webp" alt="Planta humanizada do apartamento de 94 m²" /></div>
               <div className="plan-figure__cap"><span className="m">94<sup>m²</sup></span><span className="z"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 21h18M5 21V7l7-4 7 4v14"></path></svg>Torres A e B</span></div>
             </div>
             <div className="plan-figure reveal d1" data-lb="images/plan-101.png" data-cap="Planta, 101 m²">
-              <div className="plan-figure__img"><img src="/resort-prime/a025.png" alt="Planta humanizada do apartamento de 101 m²" /></div>
+              <div className="plan-figure__img"><img loading="lazy" src="/resort-prime/midia/ec23fc3398f48b82.webp" alt="Planta humanizada do apartamento de 101 m²" /></div>
               <div className="plan-figure__cap"><span className="m">101<sup>m²</sup></span><span className="z"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 21h18M5 21V7l7-4 7 4v14"></path></svg>Torres A e B</span></div>
             </div>
             <div className="plan-figure reveal d2" data-lb="images/plan-109.png" data-cap="Planta, 109 m²">
-              <div className="plan-figure__img"><img src="/resort-prime/a023.png" alt="Planta humanizada do apartamento de 109 m²" /></div>
+              <div className="plan-figure__img"><img loading="lazy" src="/resort-prime/midia/cbc00bca016afb16.webp" alt="Planta humanizada do apartamento de 109 m²" /></div>
               <div className="plan-figure__cap"><span className="m">109<sup>m²</sup></span><span className="z"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 21h18M5 21V7l7-4 7 4v14"></path></svg>Torres A e B</span></div>
             </div>
             <div className="plan-figure reveal" data-lb="images/plan-112.png" data-cap="Planta, 112 m²">
-              <div className="plan-figure__img"><img src="/resort-prime/a026.png" alt="Planta humanizada do apartamento de 112 m²" /></div>
+              <div className="plan-figure__img"><img loading="lazy" src="/resort-prime/midia/263a1eff929a4aef.webp" alt="Planta humanizada do apartamento de 112 m²" /></div>
               <div className="plan-figure__cap"><span className="m">112<sup>m²</sup></span><span className="z"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 21h18M5 21V7l7-4 7 4v14"></path></svg>Torres A e B</span></div>
             </div>
             <div className="plan-figure reveal d1" data-lb="images/plan-68.png" data-cap="Planta, 68 m²">
-              <div className="plan-figure__img"><img src="/resort-prime/a019.png" alt="Planta humanizada do apartamento de 68 m²" /></div>
+              <div className="plan-figure__img"><img loading="lazy" src="/resort-prime/midia/4217040e47651c62.webp" alt="Planta humanizada do apartamento de 68 m²" /></div>
               <div className="plan-figure__cap"><span className="m">68<sup>m²</sup></span><span className="z"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 21h18M5 21V7l7-4 7 4v14"></path></svg>Torres C e D</span></div>
             </div>
             <div className="plan-figure reveal d2" data-lb="images/plan-110.png" data-cap="Planta, 110 m²">
-              <div className="plan-figure__img"><img src="/resort-prime/a021.png" alt="Planta humanizada do apartamento de 110 m²" /></div>
+              <div className="plan-figure__img"><img loading="lazy" src="/resort-prime/midia/db5f4ebb5a4f33ff.webp" alt="Planta humanizada do apartamento de 110 m²" /></div>
               <div className="plan-figure__cap"><span className="m">110<sup>m²</sup></span><span className="z"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 21h18M5 21V7l7-4 7 4v14"></path></svg>Torres C e D</span></div>
             </div>
           </div>
@@ -660,7 +660,7 @@ export default function ResortPrime() {
 
       {/* ===================== CTA final ===================== */}
       <section className="cta" id="agende" data-screen-label="Agende">
-        <div className="cta__bg"><img src="/resort-prime/a010.jpg" alt="Fachada do Resort Prime Santa Angela" /></div>
+        <div className="cta__bg"><img loading="lazy" src="/resort-prime/a010.jpg" alt="Fachada do Resort Prime Santa Angela" /></div>
         <div className="wrap cta__inner">
           <div className="cta__copy">
             <span className="eyebrow reveal" style={{ color: 'var(--terra-soft)' }}>Projeto Prime · Lazer de Resort</span>
@@ -719,7 +719,7 @@ export default function ResortPrime() {
         <div className="wrap">
           <div className="footer__top">
             <div>
-              <span className="logo-img"><img src="/resort-prime/a000.png" alt="Santa Angela Construtora" /></span>
+              <span className="logo-img"><img loading="lazy" src="/resort-prime/a000.png" alt="Santa Angela Construtora" /></span>
               <p style={{ marginTop: '16px' }}>Resort Prime Santa Angela, o lugar onde sua família encontra o equilíbrio perfeito entre lazer, conforto e exclusividade, todos os dias.</p>
             </div>
             <div>
@@ -737,7 +737,7 @@ export default function ResortPrime() {
               <ul className="footer__links">
                 <li><a href="https://wa.me/5511926143393" target="_blank" rel="noopener">WhatsApp: +55 11 92614-3393</a></li>
                 <li style={{ marginTop: 10 }}>
-                  <img src="/logo-lotus-dourado.png" alt="Imobiliária Lotus Brokers" style={{ height: 40, width: 'auto', display: 'block' }} />
+                  <img loading="lazy" src="/logo-lotus-dourado.png" alt="Imobiliária Lotus Brokers" style={{ height: 40, width: 'auto', display: 'block' }} />
                 </li>
                 <li>Atendimento pela Imobiliária Lotus Brokers</li>
               </ul>
@@ -763,7 +763,7 @@ export default function ResortPrime() {
       <div className="lightbox" id="lightbox">
         <button className="lightbox__close" aria-label="Fechar">×</button>
         <button className="lightbox__nav prev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m15 18-6-6 6-6"></path></svg></button>
-        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Imagem ampliada" />
+        <img loading="lazy" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Imagem ampliada" />
         <button className="lightbox__nav next" aria-label="Próxima"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m9 18 6-6-6-6"></path></svg></button>
         <span className="lightbox__cap"></span>
       </div>

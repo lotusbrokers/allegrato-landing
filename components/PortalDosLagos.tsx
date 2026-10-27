@@ -329,7 +329,7 @@ export default function PortalDosLagos() {
 
       {/* ============ HERO ============ */}
       <section className="hero" id="hero">
-        <div className="hero__bg" id="heroBg" style={{ backgroundImage: 'url("/portal-dos-lagos/a001.jpg")' }}></div>
+        <div className="hero__bg" id="heroBg" style={{ backgroundImage: 'url("/portal-dos-lagos/midia/697fbf7e8f50e62f.webp")' }}></div>
         <div className="hero__inner">
           <div className="hero__lockup reveal in">
             <div className="lockup">
@@ -389,8 +389,8 @@ export default function PortalDosLagos() {
             <a className="btn" href="#lazer" style={{ marginTop: '30px' }}>Conhecer a estrutura <span className="ar">→</span></a>
           </div>
           <div className="split__media frame-stack reveal" data-d="1">
-            <img src="/portal-dos-lagos/a003.jpg" alt="Espaço fitness do Portal dos Lagos" />
-            <img className="f2" src="/portal-dos-lagos/a004.jpg" alt="Salão de festas" />
+            <img loading="lazy" src="/portal-dos-lagos/midia/a1fcb865a9e73f39.webp" alt="Espaço fitness do Portal dos Lagos" />
+            <img loading="lazy" className="f2" src="/portal-dos-lagos/midia/c31100baa7a802d7.webp" alt="Salão de festas" />
             <span className="tag">Obra entregue</span>
           </div>
         </div>
@@ -401,7 +401,7 @@ export default function PortalDosLagos() {
         <div className="wrap">
           <div className="split split--rev">
             <div className="split__media reveal">
-              <img src="/portal-dos-lagos/a005.jpg" alt="Portaria do Portal dos Lagos" style={{ aspectRatio: '3/3.4' }} />
+              <img loading="lazy" src="/portal-dos-lagos/midia/17248cd1aa6e51f0.webp" alt="Portaria do Portal dos Lagos" style={{ aspectRatio: '3/3.4' }} />
               <span className="tag">Jundiaí · SP</span>
             </div>
             <div className="copy reveal" data-d="1">
@@ -419,7 +419,7 @@ export default function PortalDosLagos() {
           </div>
           <figure className="map-card reveal" data-d="1">
             <figcaption>Entorno do empreendimento · colégios, vinícolas e comércio próximos</figcaption>
-            <img src="/portal-dos-lagos/a006.jpg" alt="Mapa de localização do Portal dos Lagos e pontos de interesse no entorno" />
+            <img loading="lazy" src="/portal-dos-lagos/a006.jpg" alt="Mapa de localização do Portal dos Lagos e pontos de interesse no entorno" />
           </figure>
         </div>
       </section>
@@ -434,24 +434,24 @@ export default function PortalDosLagos() {
           </div>
 
           <div className="amen-gallery reveal" data-d="1">
-            <figure className="g-a" data-full="img/real-salao3.jpg" data-cap="Salão de Festas">
-              <img src="/portal-dos-lagos/a007.jpg" alt="Salão de festas" />
+            <figure className="g-a" data-full="midia/c7a1da0e9ac76732.webp" data-cap="Salão de Festas">
+              <img loading="lazy" src="/portal-dos-lagos/midia/c7a1da0e9ac76732.webp" alt="Salão de festas" />
               <figcaption><span>Convívio</span>Salão de Festas</figcaption>
             </figure>
-            <figure className="g-b" data-full="img/real-fitness.jpg" data-cap="Espaço Fitness">
-              <img src="/portal-dos-lagos/a003.jpg" alt="Espaço fitness" />
+            <figure className="g-b" data-full="midia/a1fcb865a9e73f39.webp" data-cap="Espaço Fitness">
+              <img loading="lazy" src="/portal-dos-lagos/midia/a1fcb865a9e73f39.webp" alt="Espaço fitness" />
               <figcaption><span>Bem-estar</span>Espaço Fitness</figcaption>
             </figure>
-            <figure className="g-c" data-full="img/real-praca.jpg" data-cap="Praças e Jardins">
-              <img src="/portal-dos-lagos/a008.jpg" alt="Praças e jardins" />
+            <figure className="g-c" data-full="midia/df5a094c71b7d118.webp" data-cap="Praças e Jardins">
+              <img loading="lazy" src="/portal-dos-lagos/midia/df5a094c71b7d118.webp" alt="Praças e jardins" />
               <figcaption><span>Natureza</span>Praças &amp; Jardins</figcaption>
             </figure>
-            <figure className="g-d" data-full="img/real-convivencia.jpg" data-cap="Áreas de Convivência">
-              <img src="/portal-dos-lagos/a009.jpg" alt="Áreas de convivência" />
+            <figure className="g-d" data-full="midia/8c7c2dd82029e216.webp" data-cap="Áreas de Convivência">
+              <img loading="lazy" src="/portal-dos-lagos/midia/8c7c2dd82029e216.webp" alt="Áreas de convivência" />
               <figcaption><span>Lazer</span>Convivência</figcaption>
             </figure>
-            <figure className="g-d" data-full="img/real-salao2.jpg" data-cap="Salão · Lounge">
-              <img src="/portal-dos-lagos/a010.jpg" alt="Lounge do salão de festas" />
+            <figure className="g-d" data-full="midia/8771f30d738e4134.webp" data-cap="Salão · Lounge">
+              <img loading="lazy" src="/portal-dos-lagos/midia/8771f30d738e4134.webp" alt="Lounge do salão de festas" />
               <figcaption><span>Eventos</span>Salão · Lounge</figcaption>
             </figure>
           </div>
@@ -485,7 +485,7 @@ export default function PortalDosLagos() {
 
       {/* ============ DIFERENCIAIS ============ */}
       <section className="section diff" id="diferenciais">
-        <div className="diff__bg" style={{ backgroundImage: 'url("/portal-dos-lagos/a011.jpg")' }}></div>
+        <div className="diff__bg" style={{ backgroundImage: 'url("/portal-dos-lagos/midia/f436b89a03867e28.webp")' }}></div>
         <div className="wrap">
           <div className="center reveal" style={{ maxWidth: '760px', marginInline: 'auto' }}>
             <p className="eyebrow center on-dark">Diferenciais</p>
@@ -515,7 +515,7 @@ export default function PortalDosLagos() {
           </div>
           <div className="cred-cards">
             <article className="cred reveal" data-d="1">
-              <img src="/portal-dos-lagos/a008.jpg" alt="Paisagismo das praças e jardins" />
+              <img loading="lazy" src="/portal-dos-lagos/midia/df5a094c71b7d118.webp" alt="Paisagismo das praças e jardins" />
               <div className="cred__b">
                 <p className="cred__role">Paisagismo</p>
                 <p className="cred__name">Marcelo Novaes <b>Arquitetura Paisagística</b></p>
@@ -523,7 +523,7 @@ export default function PortalDosLagos() {
               </div>
             </article>
             <article className="cred reveal" data-d="2">
-              <img src="/portal-dos-lagos/a004.jpg" alt="Decoração das áreas comuns" />
+              <img loading="lazy" src="/portal-dos-lagos/midia/c31100baa7a802d7.webp" alt="Decoração das áreas comuns" />
               <div className="cred__b">
                 <p className="cred__role">Decoração · Linha Paralela</p>
                 <p className="cred__name">Caroline Barreto</p>
@@ -543,12 +543,12 @@ export default function PortalDosLagos() {
             <p className="lede mx-auto" style={{ marginTop: '14px' }}>Imagens ilustrativas do empreendimento e de suas áreas de lazer.</p>
           </div>
           <div className="amen-gallery reveal" data-d="1" id="galGrid">
-            <figure className="g-a" data-full="img/real-portaria-wide.jpg" data-cap="Portaria principal"><img src="/portal-dos-lagos/a012.jpg" alt="Portaria" /><figcaption><span>Acesso</span>Portaria principal</figcaption></figure>
-            <figure className="g-c" data-full="img/real-fitness.jpg" data-cap="Espaço Fitness"><img src="/portal-dos-lagos/a003.jpg" alt="Espaço fitness" /><figcaption><span>Bem-estar</span>Espaço Fitness</figcaption></figure>
-            <figure className="g-c" data-full="img/real-salao.jpg" data-cap="Salão de Festas"><img src="/portal-dos-lagos/a004.jpg" alt="Salão de festas" /><figcaption><span>Convívio</span>Salão de Festas</figcaption></figure>
-            <figure className="g-d" data-full="img/real-convivencia.jpg" data-cap="Convivência"><img src="/portal-dos-lagos/a009.jpg" alt="Convivência" /><figcaption><span>Lazer</span>Convivência</figcaption></figure>
-            <figure className="g-d" data-full="img/real-praca.jpg" data-cap="Praças e jardins"><img src="/portal-dos-lagos/a008.jpg" alt="Praças" /><figcaption><span>Natureza</span>Praças &amp; Jardins</figcaption></figure>
-            <figure className="g-d" data-full="img/real-portaria-acesso.jpg" data-cap="Entrada do condomínio"><img src="/portal-dos-lagos/a005.jpg" alt="Entrada" /><figcaption><span>Chegada</span>Entrada do condomínio</figcaption></figure>
+            <figure className="g-a" data-full="midia/8a7f8fe37e7274c6.webp" data-cap="Portaria principal"><img loading="lazy" src="/portal-dos-lagos/midia/8a7f8fe37e7274c6.webp" alt="Portaria" /><figcaption><span>Acesso</span>Portaria principal</figcaption></figure>
+            <figure className="g-c" data-full="midia/a1fcb865a9e73f39.webp" data-cap="Espaço Fitness"><img loading="lazy" src="/portal-dos-lagos/midia/a1fcb865a9e73f39.webp" alt="Espaço fitness" /><figcaption><span>Bem-estar</span>Espaço Fitness</figcaption></figure>
+            <figure className="g-c" data-full="midia/c31100baa7a802d7.webp" data-cap="Salão de Festas"><img loading="lazy" src="/portal-dos-lagos/midia/c31100baa7a802d7.webp" alt="Salão de festas" /><figcaption><span>Convívio</span>Salão de Festas</figcaption></figure>
+            <figure className="g-d" data-full="midia/8c7c2dd82029e216.webp" data-cap="Convivência"><img loading="lazy" src="/portal-dos-lagos/midia/8c7c2dd82029e216.webp" alt="Convivência" /><figcaption><span>Lazer</span>Convivência</figcaption></figure>
+            <figure className="g-d" data-full="midia/df5a094c71b7d118.webp" data-cap="Praças e jardins"><img loading="lazy" src="/portal-dos-lagos/midia/df5a094c71b7d118.webp" alt="Praças" /><figcaption><span>Natureza</span>Praças &amp; Jardins</figcaption></figure>
+            <figure className="g-d" data-full="midia/17248cd1aa6e51f0.webp" data-cap="Entrada do condomínio"><img loading="lazy" src="/portal-dos-lagos/midia/17248cd1aa6e51f0.webp" alt="Entrada" /><figcaption><span>Chegada</span>Entrada do condomínio</figcaption></figure>
           </div>
         </div>
       </section>
@@ -648,7 +648,7 @@ export default function PortalDosLagos() {
         <div className="wrap">
           <div className="footer__top">
             <div>
-              <img
+              <img loading="lazy"
                 src="/portal-dos-lagos/logo.png"
                 alt="Portal dos Lagos"
                 style={{ height: 54, width: 'auto', display: 'block', marginBottom: 18 }}
@@ -700,7 +700,7 @@ export default function PortalDosLagos() {
       <div className="lb" id="lb">
         <button className="lb__close" id="lbClose" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6 6 18M6 6l12 12"></path></svg></button>
         <button className="lb__nav prev" id="lbPrev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18 9 12l6-6"></path></svg></button>
-        <img id="lbImg" alt="" />
+        <img loading="lazy" id="lbImg" alt="" />
         <button className="lb__nav next" id="lbNext" aria-label="Próxima"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m9 18 6-6-6-6"></path></svg></button>
         <div className="lb__cap" id="lbCap"></div>
       </div>

@@ -778,7 +778,7 @@ export default function Vigore() {
           <div
             id="vg-hero-bg"
             style={parseStyle(
-              `position:absolute;inset:0;background:url("${IMG}a44.jpg") center 38%/cover no-repeat;animation:vgKen 18s ease-out forwards`
+              `position:absolute;inset:0;background:url("${IMG}midia/b0bf30dff84fb3e4.webp") center 38%/cover no-repeat;animation:vgKen 18s ease-out forwards`
             )}
           ></div>
         </div>
@@ -1094,7 +1094,7 @@ export default function Vigore() {
                 'position:relative;border-radius:20px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(40,20,5,.4)'
               )}
             >
-              <img
+              <img loading="lazy"
                 src={`${IMG}a18.jpg`}
                 alt="Fachada do Residencial Vigóre"
                 style={parseStyle(
@@ -1185,7 +1185,7 @@ export default function Vigore() {
               'position:relative;border-radius:22px;overflow:hidden;cursor:pointer;margin-bottom:22px;opacity:0;transform:translateY(34px);transition:all .9s cubic-bezier(.16,.84,.44,1) .1s'
             )}
           >
-            <img
+            <img loading="lazy"
               className="vg-zoom"
               src={`${IMG}a11.jpg`}
               alt="Vista aérea da área de lazer do Residencial Vigóre"
@@ -1234,9 +1234,9 @@ export default function Vigore() {
             )}
           >
             <AmenityCard
-              lb={`${IMG}a03.jpg`}
+              lb={`${IMG}midia/f518687e7b8561cb.webp`}
               cap="Salão de festas com espaço gourmet"
-              img={`${IMG}a03.jpg`}
+              img={`${IMG}midia/f518687e7b8561cb.webp`}
               alt="Salão de festas do Residencial Vigóre"
               tag="Convivência"
               title="Salão de Festas"
@@ -1266,9 +1266,9 @@ export default function Vigore() {
               title="Churrasqueiras"
             />
             <AmenityCard
-              lb={`${IMG}a05.jpg`}
+              lb={`${IMG}midia/6a148fd0430f49ad.webp`}
               cap="Espaço fitness (Torre A)"
-              img={`${IMG}a05.jpg`}
+              img={`${IMG}midia/6a148fd0430f49ad.webp`}
               alt="Espaço fitness"
               tag="Torre A"
               title="Espaço Fitness"
@@ -1290,9 +1290,9 @@ export default function Vigore() {
               title="Espaço Pet"
             />
             <AmenityCard
-              lb={`${IMG}a08.jpg`}
+              lb={`${IMG}midia/315d531ce115ddcd.webp`}
               cap="Brinquedoteca (Torre C)"
-              img={`${IMG}a08.jpg`}
+              img={`${IMG}midia/315d531ce115ddcd.webp`}
               alt="Brinquedoteca"
               tag="Torre C"
               title="Brinquedoteca"
@@ -1358,7 +1358,7 @@ export default function Vigore() {
               <button
                 className="vg-plan"
                 data-plan="0"
-                data-img="a00.jpg"
+                data-img="midia/aa21e8ce724143c9.webp"
                 data-area="53,27 m²"
                 data-name="Planta Final 01"
                 style={parseStyle(
@@ -1489,15 +1489,15 @@ export default function Vigore() {
                 </span>
               </div>
               <div
-                data-lb={`${IMG}a00.jpg`}
+                data-lb={`${IMG}midia/aa21e8ce724143c9.webp`}
                 data-cap="Planta tipo, 2 dormitórios (perspectiva ilustrativa)"
                 style={parseStyle(
                   'cursor:pointer;border-radius:12px;overflow:hidden;background:#f3eee6'
                 )}
               >
-                <img
+                <img loading="lazy"
                   id="vg-plan-img"
-                  src={`${IMG}a00.jpg`}
+                  src={`${IMG}midia/aa21e8ce724143c9.webp`}
                   alt="Planta do apartamento de 2 dormitórios, 53,27 m², final 01"
                   style={parseStyle('width:100%;object-fit:contain')}
                 />
@@ -1619,7 +1619,7 @@ export default function Vigore() {
                 'display:block;position:relative;border-radius:20px;overflow:hidden;cursor:pointer;text-decoration:none;box-shadow:0 40px 80px -34px rgba(0,0,0,.6);opacity:0;transform:translateY(34px) scale(.98);transition:all 1s cubic-bezier(.16,.84,.44,1) .1s'
               )}
             >
-              <img
+              <img loading="lazy"
                 className="vg-zoom"
                 src={`${IMG}a02.jpg`}
                 alt="Mapa da localização do Residencial Vigóre no bairro Colônia, Jundiaí"
@@ -1755,11 +1755,11 @@ export default function Vigore() {
           </div>
           <div style={parseStyle('columns:3;column-gap:18px')}>
             <GalleryCard lb={`${IMG}a18.jpg`} cap="Fachada ao entardecer" img={`${IMG}a18.jpg`} alt="Fachada ao entardecer" />
-            <GalleryCard lb={`${IMG}a16.jpg`} cap="Hall das torres" img={`${IMG}a16.jpg`} alt="Hall das torres" />
-            <GalleryCard lb={`${IMG}a06.jpg`} cap="Salão de festas e espaço gourmet" img={`${IMG}a06.jpg`} alt="Salão de festas e espaço gourmet" />
-            <GalleryCard lb={`${IMG}a21.jpg`} cap="Voo de pássaro" img={`${IMG}a21.jpg`} alt="Voo de pássaro" />
+            <GalleryCard lb={`${IMG}midia/ab0d1da5968eacdb.webp`} cap="Hall das torres" img={`${IMG}midia/ab0d1da5968eacdb.webp`} alt="Hall das torres" />
+            <GalleryCard lb={`${IMG}midia/d9cdebbb8863cf59.webp`} cap="Salão de festas e espaço gourmet" img={`${IMG}midia/d9cdebbb8863cf59.webp`} alt="Salão de festas e espaço gourmet" />
+            <GalleryCard lb={`${IMG}midia/9d09f3974fb0ba33.webp`} cap="Voo de pássaro" img={`${IMG}midia/9d09f3974fb0ba33.webp`} alt="Voo de pássaro" />
             <GalleryCard lb={`${IMG}a12.jpg`} cap="Deck das piscinas" img={`${IMG}a12.jpg`} alt="Deck das piscinas" />
-            <GalleryCard lb={`${IMG}a13.jpg`} cap="Lavanderia compartilhada" img={`${IMG}a13.jpg`} alt="Lavanderia compartilhada" />
+            <GalleryCard lb={`${IMG}midia/cc87188c90a7c4ae.webp`} cap="Lavanderia compartilhada" img={`${IMG}midia/cc87188c90a7c4ae.webp`} alt="Lavanderia compartilhada" />
             <GalleryCard lb={`${IMG}a19.jpg`} cap="Praça de encontros" img={`${IMG}a19.jpg`} alt="Praça de encontros" />
             <GalleryCard lb={`${IMG}a14.jpg`} cap="Mini mercado (Torre B)" img={`${IMG}a14.jpg`} alt="Mini mercado (Torre B)" />
             <GalleryCard lb={`${IMG}a07.jpg`} cap="Acesso e fachada" img={`${IMG}a07.jpg`} alt="Acesso e fachada" />
@@ -1781,7 +1781,7 @@ export default function Vigore() {
               'display:flex;flex-direction:column;align-items:center;gap:9px;margin:0 auto 30px;opacity:0;transform:translateY(24px);transition:all .8s cubic-bezier(.16,.84,.44,1)'
             )}
           >
-            <img
+            <img loading="lazy"
               src="/construtoras/santa-angela.png"
               alt="Santa Angela Construtora"
               style={parseStyle(
@@ -1814,7 +1814,7 @@ export default function Vigore() {
       >
         <div
           style={parseStyle(
-            `position:absolute;inset:0;z-index:0;background:url("${IMG}a21.jpg") center/cover no-repeat;opacity:.22`
+            `position:absolute;inset:0;z-index:0;background:url("${IMG}midia/9d09f3974fb0ba33.webp") center/cover no-repeat;opacity:.22`
           )}
         ></div>
         <div
@@ -1971,7 +1971,7 @@ export default function Vigore() {
             )}
           >
             <div style={parseStyle('max-width:340px')}>
-              <img
+              <img loading="lazy"
                 src={LOGO_WEBP}
                 alt="Residencial Vigóre"
                 style={parseStyle('height:38px;width:auto;margin-bottom:18px')}
@@ -2134,7 +2134,7 @@ function AmenityCard({
         'position:relative;border-radius:16px;overflow:hidden;cursor:pointer;aspect-ratio:3/3.7;background:#211a13;opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.16,.84,.44,1),transform .8s cubic-bezier(.16,.84,.44,1)'
       )}
     >
-      <img
+      <img loading="lazy"
         className="vg-zoom"
         src={img}
         alt={alt}
@@ -2187,7 +2187,7 @@ function GalleryCard({
         'break-inside:avoid;margin-bottom:18px;border-radius:14px;overflow:hidden;cursor:pointer;position:relative;opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.16,.84,.44,1),transform .8s cubic-bezier(.16,.84,.44,1)'
       )}
     >
-      <img
+      <img loading="lazy"
         className="vg-zoom"
         src={img}
         alt={alt}

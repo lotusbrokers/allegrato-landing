@@ -10,7 +10,7 @@
  *
  * Diferenças conscientes em relação ao fonte:
  *  - O hack de resolução do hero via blob do bundler saiu: em Next o asset tem
- *    caminho estável (/allegrato/a012.jpg), então o <img> aponta direto.
+ *    caminho estável (/allegrato/midia/b53059be91accbb1.webp), então o <img> aponta direto.
  *  - O lightbox usa o src real do <img> de cada tile; o `data-img` do fonte
  *    apontava para caminhos relativos que não existem fora do bundle.
  */
@@ -146,7 +146,7 @@ export default function Allegrato() {
       {/* ============ HEADER ============ */}
       <header className="site-header on-dark" id="header">
         <a href="#top" aria-label="Allegrato Residencial">
-          <img className="logo" src="/allegrato/a001.png" alt="Allegrato Residencial" />
+          <img className="logo" src="/allegrato/midia/37d90750a2548708.webp" alt="Allegrato Residencial" />
         </a>
         <nav className="nav">
           <a href="#lazer">
@@ -196,7 +196,7 @@ export default function Allegrato() {
       {/* ============ HERO ============ */}
       <section className="hero" id="hero">
         <div className="hero-bg">
-          <img id="heroImg" src="/allegrato/a012.jpg" alt="Lazer do Allegrato Residencial ao entardecer" />
+          <img id="heroImg" src="/allegrato/midia/b53059be91accbb1.webp" alt="Lazer do Allegrato Residencial ao entardecer" />
         </div>
         <div className="hero-inner">
           <span className="eyebrow">
@@ -339,7 +339,7 @@ export default function Allegrato() {
           </div>
           <div className="gal">
             <div className="tile big c-8 reveal" data-img="assets/piscinas-aerea.jpg" data-cap="Piscinas adulto e infantil">
-              <img src="/allegrato/a013.jpg" alt="Piscinas adulto e infantil" />
+              <img loading="lazy" src="/allegrato/midia/99f2d7719bd9b105.webp" alt="Piscinas adulto e infantil" />
               <div className="cap">
                 <div>
                   <div className="t">
@@ -358,7 +358,7 @@ export default function Allegrato() {
               </div>
             </div>
             <div className="tile big c-4 reveal d1" data-img="assets/espaco-pet.jpg" data-cap="Espaço Pet">
-              <img src="/allegrato/a014.jpg" alt="Espaço Pet" />
+              <img loading="lazy" src="/allegrato/midia/06937ed2fb7814dd.webp" alt="Espaço Pet" />
               <div className="cap">
                 <div>
                   <div className="t">
@@ -377,7 +377,7 @@ export default function Allegrato() {
               </div>
             </div>
             <div className="tile med c-4 reveal" data-img="assets/quadra-playground.jpg" data-cap="Playground & Quadra">
-              <img src="/allegrato/a010.jpg" alt="Playground e quadra" />
+              <img loading="lazy" src="/allegrato/midia/fce41032c7f80fee.webp" alt="Playground e quadra" />
               <div className="cap">
                 <div>
                   <div className="t">
@@ -396,7 +396,7 @@ export default function Allegrato() {
               </div>
             </div>
             <div className="tile med c-4 reveal d1" data-img="assets/pista-caminhada.jpg" data-cap="Pista de caminhada">
-              <img src="/allegrato/a011.jpg" alt="Pista de caminhada" />
+              <img loading="lazy" src="/allegrato/midia/91bb587999f33d31.webp" alt="Pista de caminhada" />
               <div className="cap">
                 <div>
                   <div className="t">
@@ -415,7 +415,7 @@ export default function Allegrato() {
               </div>
             </div>
             <div className="tile med c-4 reveal d2" data-img="assets/piscina-por-do-sol.jpg" data-cap="Piscina ao entardecer">
-              <img src="/allegrato/a006.jpg" alt="Piscina ao entardecer" />
+              <img loading="lazy" src="/allegrato/midia/2132ba1d46aa4be7.webp" alt="Piscina ao entardecer" />
               <div className="cap">
                 <div>
                   <div className="t">
@@ -434,7 +434,7 @@ export default function Allegrato() {
               </div>
             </div>
             <div className="tile med c-7 reveal" data-img="assets/gourmet-salao.jpg" data-cap="Salão de Festas & Espaço Gourmet">
-              <img src="/allegrato/a005.jpg" alt="Salão de festas e espaço gourmet" />
+              <img loading="lazy" src="/allegrato/midia/2adbb93c56f2d44c.webp" alt="Salão de festas e espaço gourmet" />
               <div className="cap">
                 <div>
                   <div className="t">
@@ -453,7 +453,7 @@ export default function Allegrato() {
               </div>
             </div>
             <div className="tile med c-5 reveal d1" data-img="assets/quadra.jpg" data-cap="Quadra recreativa">
-              <img src="/allegrato/a009.jpg" alt="Quadra recreativa" />
+              <img loading="lazy" src="/allegrato/midia/c2a076cb21cd165e.webp" alt="Quadra recreativa" />
               <div className="cap">
                 <div>
                   <div className="t">
@@ -1167,7 +1167,7 @@ export default function Allegrato() {
       {/* ============ LEAD CTA ============ */}
       <section className="lead-cta block" id="contato">
         <div className="bg">
-          <img src="/allegrato/a008.jpg" alt="" />
+          <img loading="lazy" src="/allegrato/midia/ec80a67efac5d823.webp" alt="" />
         </div>
         <div className="wrap">
           <div className="col-l reveal">
@@ -1309,7 +1309,7 @@ export default function Allegrato() {
         <div className="wrap">
           <div className="foot-top">
             <div>
-              <img className="alle" src="/allegrato/a001.png" alt="Allegrato Residencial" />
+              <img loading="lazy" className="alle" src="/allegrato/midia/37d90750a2548708.webp" alt="Allegrato Residencial" />
               <p>
                 <strong style={parseStyle('color:#fff')}>Esta página é da Imobiliária Lotus Brokers.</strong>
                 <br />
@@ -1416,7 +1416,7 @@ export default function Allegrato() {
             </path>
           </svg>
         </button>
-        <img id="lbImg" src={lbItem?.src || undefined} alt={lbItem?.cap || ''} />
+        <img loading="lazy" id="lbImg" src={lbItem?.src || undefined} alt={lbItem?.cap || ''} />
         <button
           className="nav-btn next"
           id="lbNext"

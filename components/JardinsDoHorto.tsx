@@ -118,17 +118,17 @@ const IMG = '/jardins-do-horto/';
 // gallery: no estático, o script resolve g.img via window.__resources (aNNN.jpg),
 // aplicado já no componentDidMount. Aqui usamos os valores já resolvidos.
 const gallery = [
-  { img: IMG + 'a013.jpg', tag: 'Lazer', cap: 'Piscina Adulto e Infantil', col: 7, row: 2 },
-  { img: IMG + 'a010.jpg', tag: 'Convivência', cap: 'Salão de Festas', col: 5, row: 2 },
+  { img: IMG + 'midia/8c794976481cad02.webp', tag: 'Lazer', cap: 'Piscina Adulto e Infantil', col: 7, row: 2 },
+  { img: IMG + 'midia/94a4a34b3325c0e4.webp', tag: 'Convivência', cap: 'Salão de Festas', col: 5, row: 2 },
   { img: IMG + 'a011.jpg', tag: 'Bem-estar', cap: 'Academia · Céltica & Movement', col: 5, row: 2 },
   { img: IMG + 'a008.jpg', tag: 'Convivência', cap: 'Espaço Gourmet', col: 4, row: 2 },
-  { img: IMG + 'a015.jpg', tag: 'Família', cap: 'Playground · Rubber Brasil', col: 3, row: 2 },
-  { img: IMG + 'a017.jpg', tag: 'Chegada', cap: 'Portaria', col: 4, row: 2 },
-  { img: IMG + 'a009.jpg', tag: 'Família', cap: 'Espaço Teen & Lounge', col: 4, row: 2 },
-  { img: IMG + 'a014.jpg', tag: 'Paisagismo', cap: 'Alameda & Pista de Cooper', col: 4, row: 2 },
-  { img: IMG + 'a018.jpg', tag: 'Conveniência', cap: 'Mini Mercado', col: 4, row: 2 },
-  { img: IMG + 'a016.jpg', tag: 'Vista', cap: 'Vista aérea do lazer', col: 8, row: 2 },
-  { img: IMG + 'a012.jpg', tag: 'Convivência', cap: 'Hall de Entrada', col: 4, row: 2 },
+  { img: IMG + 'midia/3cdb83d60f301d2f.webp', tag: 'Família', cap: 'Playground · Rubber Brasil', col: 3, row: 2 },
+  { img: IMG + 'midia/1a902ff9e7698d88.webp', tag: 'Chegada', cap: 'Portaria', col: 4, row: 2 },
+  { img: IMG + 'midia/d8f3c057983ba44d.webp', tag: 'Família', cap: 'Espaço Teen & Lounge', col: 4, row: 2 },
+  { img: IMG + 'midia/b268f50b4b61fd2b.webp', tag: 'Paisagismo', cap: 'Alameda & Pista de Cooper', col: 4, row: 2 },
+  { img: IMG + 'midia/92678888c4b2e2d0.webp', tag: 'Conveniência', cap: 'Mini Mercado', col: 4, row: 2 },
+  { img: IMG + 'midia/d56f6473644195a9.webp', tag: 'Vista', cap: 'Vista aérea do lazer', col: 8, row: 2 },
+  { img: IMG + 'midia/e5831c98369d429f.webp', tag: 'Convivência', cap: 'Hall de Entrada', col: 4, row: 2 },
 ];
 
 const stats = [
@@ -451,7 +451,7 @@ export default function JardinsDoHorto({
 
       {/* ============ HERO ============ */}
       <section id="topo" data-screen-label="Hero" style={parseStyle('position:relative; min-height:680px; height:90vh; max-height:900px; display:flex; align-items:flex-end; overflow:hidden; background:#1C1A17;')}>
-        <img data-hero-img="" src={IMG + 'a004.jpg'} alt="Fachada do Jardins do Horto ao pôr do sol, duas torres no Horto Florestal, Jundiaí" style={parseStyle('position:absolute; top:-6%; left:0; width:100%; height:112%; object-fit:cover; will-change:transform; transform:scale(1.12);')} />
+        <img data-hero-img="" src={IMG + 'midia/6538abbb84e5cffe.webp'} alt="Fachada do Jardins do Horto ao pôr do sol, duas torres no Horto Florestal, Jundiaí" style={parseStyle('position:absolute; top:-6%; left:0; width:100%; height:112%; object-fit:cover; will-change:transform; transform:scale(1.12);')} />
         <div style={parseStyle('position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,17,14,.62) 0%, rgba(20,17,14,.22) 34%, rgba(20,17,14,.30) 60%, rgba(20,17,14,.92) 100%);')}></div>
         <div style={parseStyle('position:absolute; inset:0; background:linear-gradient(96deg, rgba(20,17,14,.66) 0%, rgba(20,17,14,.30) 38%, rgba(20,17,14,0) 66%);')}></div>
         <div style={parseStyle('position:absolute; top:0; left:0; right:0; height:200px; background:linear-gradient(180deg, rgba(15,12,10,.6) 0%, rgba(15,12,10,0) 100%);')}></div>
@@ -480,7 +480,7 @@ export default function JardinsDoHorto({
 
       {/* ============ MANIFESTO ============ */}
       <section id="empreendimento" data-screen-label="Empreendimento" style={parseStyle('position:relative; background:#F4EEE4; padding:clamp(80px,11vw,150px) 32px;')}>
-        <img src={IMG + 'a002.png'} alt="" aria-hidden="true" style={parseStyle('position:absolute; top:40px; right:6%; width:clamp(120px,16vw,230px); opacity:.5; animation:jh-float 7s ease-in-out infinite; pointer-events:none;')} />
+        <img loading="lazy" src={IMG + 'midia/b10a1e4e62071418.webp'} alt="" aria-hidden="true" style={parseStyle('position:absolute; top:40px; right:6%; width:clamp(120px,16vw,230px); opacity:.5; animation:jh-float 7s ease-in-out infinite; pointer-events:none;')} />
         <div style={parseStyle('max-width:1040px; margin:0 auto; position:relative;')}>
           <div data-reveal="" style={parseStyle('opacity:0; transform:translateY(30px); transition:opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1);')}>
             <div style={parseStyle('font-size:13px; letter-spacing:.24em; text-transform:uppercase; font-weight:600; color:#C75D40; margin-bottom:24px;')}>O Empreendimento</div>
@@ -544,7 +544,7 @@ export default function JardinsDoHorto({
           </div>
           <div data-reveal="" style={parseStyle('opacity:0; transform:translateY(30px) scale(.98); transition:opacity 1s ease, transform 1s cubic-bezier(.22,1,.36,1); position:relative;')}>
             <div style={parseStyle('position:relative; border-radius:20px; overflow:hidden; box-shadow:0 40px 80px -40px rgba(32,29,25,.45);')}>
-              <img src={IMG + 'a005.jpg'} alt="Vista aérea de Jundiaí e do bairro Horto Florestal" loading="lazy" style={parseStyle('width:100%; display:block; aspect-ratio:4/3; object-fit:cover;')} />
+              <img src={IMG + 'midia/a373ae87af21db90.webp'} alt="Vista aérea de Jundiaí e do bairro Horto Florestal" loading="lazy" style={parseStyle('width:100%; display:block; aspect-ratio:4/3; object-fit:cover;')} />
               <div style={parseStyle('position:absolute; left:18px; bottom:18px; background:rgba(28,26,23,.78); backdrop-filter:blur(6px); color:#fff; padding:10px 16px; border-radius:100px; font-size:13px; font-weight:600;')}>Vista aérea · Jundiaí / SP</div>
             </div>
           </div>
@@ -565,7 +565,7 @@ export default function JardinsDoHorto({
 
           <div data-panel="72" data-reveal="" style={parseStyle('opacity:0; transform:translateY(30px); transition:opacity .9s ease, transform .9s ease; display:grid; grid-template-columns:1.25fr .75fr; gap:clamp(28px,4vw,56px); align-items:center; margin-top:46px;')} data-planta-grid="">
             <div style={parseStyle('background:#FBF7F0; border:1px solid rgba(32,29,25,.08); border-radius:20px; padding:26px; box-shadow:0 30px 60px -40px rgba(32,29,25,.4);')}>
-              <img src={IMG + 'a006.png'} alt="Planta humanizada do apartamento de 72m² (2 dormitórios), Jardins do Horto" loading="lazy" style={parseStyle('width:100%; display:block;')} />
+              <img src={IMG + 'midia/4f176eaae1532bef.webp'} alt="Planta humanizada do apartamento de 72m² (2 dormitórios), Jardins do Horto" loading="lazy" style={parseStyle('width:100%; display:block;')} />
             </div>
             <div>
               <div style={parseStyle("font-family:'Cormorant Garamond',serif; font-size:clamp(44px,6vw,72px); line-height:1; color:#201D19;")}>72<span style={parseStyle('font-size:.42em; vertical-align:super; color:#C75D40;')}>m²</span></div>
@@ -584,7 +584,7 @@ export default function JardinsDoHorto({
 
           <div data-panel="95" data-reveal="" style={parseStyle('opacity:0; transform:translateY(30px); transition:opacity .9s ease, transform .9s ease; display:none; grid-template-columns:1.25fr .75fr; gap:clamp(28px,4vw,56px); align-items:center; margin-top:46px;')}>
             <div style={parseStyle('background:#FBF7F0; border:1px solid rgba(32,29,25,.08); border-radius:20px; padding:26px; box-shadow:0 30px 60px -40px rgba(32,29,25,.4);')}>
-              <img src={IMG + 'a007.png'} alt="Planta humanizada do apartamento de 95m² (3 dormitórios), Jardins do Horto" loading="lazy" style={parseStyle('width:100%; display:block;')} />
+              <img src={IMG + 'midia/8df072a5ca3e08e0.webp'} alt="Planta humanizada do apartamento de 95m² (3 dormitórios), Jardins do Horto" loading="lazy" style={parseStyle('width:100%; display:block;')} />
             </div>
             <div>
               <div style={parseStyle("font-family:'Cormorant Garamond',serif; font-size:clamp(44px,6vw,72px); line-height:1; color:#201D19;")}>95<span style={parseStyle('font-size:.42em; vertical-align:super; color:#C75D40;')}>m²</span></div>
@@ -765,7 +765,7 @@ export default function JardinsDoHorto({
         <div style={parseStyle('max-width:1340px; margin:0 auto;')}>
           <div style={parseStyle('display:flex; flex-wrap:wrap; gap:36px; justify-content:space-between; align-items:flex-start; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,.1);')}>
             <div style={parseStyle('max-width:340px;')}>
-              <img src={IMG + 'a001.png'} alt="Jardins do Horto" style={parseStyle('height:48px; margin-bottom:18px;')} />
+              <img loading="lazy" src={IMG + 'a001.png'} alt="Jardins do Horto" style={parseStyle('height:48px; margin-bottom:18px;')} />
               <p style={parseStyle('font-size:14px; line-height:1.65; margin:0;')}><strong style={parseStyle('color:#fff;')}>Esta página é da Imobiliária Lotus Brokers.</strong><br />Divulgação e atendimento pela Lotus, imobiliária autorizada a comercializar o Jardins do Horto, no Horto Florestal, Jundiaí/SP.</p>
             </div>
             <div>
@@ -785,7 +785,7 @@ export default function JardinsDoHorto({
                   ("sua imobiliária", "contato@suaimobiliaria.com.br"). O efeito
                   applyContact continua sobrescrevendo se alguém passar as props,
                   mas o padrão agora é o correto em vez do genérico. */}
-              <img
+              <img loading="lazy"
                 src="/logo-lotus-dourado.png"
                 alt="Lotus Brokers"
                 style={parseStyle('height:44px; width:auto; display:block; margin-bottom:14px;')}
@@ -818,7 +818,7 @@ export default function JardinsDoHorto({
             <button onClick={closeLb} aria-label="Fechar" style={parseStyle('background:rgba(255,255,255,.12); border:0; color:#fff; width:44px; height:44px; border-radius:50%; font-size:24px; cursor:pointer;')}>×</button>
           </div>
           <button onClick={lbPrev} aria-label="Anterior" style={parseStyle('position:absolute; left:18px; top:50%; transform:translateY(-50%); background:rgba(255,255,255,.12); border:0; color:#fff; width:50px; height:50px; border-radius:50%; font-size:22px; cursor:pointer;')}>‹</button>
-          {g && g.img && <img src={g.img} alt={g.cap} style={parseStyle('max-width:min(1100px,92vw); max-height:78vh; object-fit:contain; border-radius:10px; box-shadow:0 30px 80px -20px rgba(0,0,0,.7);')} />}
+          {g && g.img && <img loading="lazy" src={g.img} alt={g.cap} style={parseStyle('max-width:min(1100px,92vw); max-height:78vh; object-fit:contain; border-radius:10px; box-shadow:0 30px 80px -20px rgba(0,0,0,.7);')} />}
           <button onClick={lbNext} aria-label="Próxima" style={parseStyle('position:absolute; right:18px; top:50%; transform:translateY(-50%); background:rgba(255,255,255,.12); border:0; color:#fff; width:50px; height:50px; border-radius:50%; font-size:22px; cursor:pointer;')}>›</button>
           <div style={parseStyle('margin-top:20px; text-align:center;')}>
             <div style={parseStyle('color:#F09080; font-size:12px; font-weight:700; letter-spacing:.2em; text-transform:uppercase;')}>{g ? g.tag : ''}</div>
@@ -830,7 +830,7 @@ export default function JardinsDoHorto({
   );
 }
 
-/** Imagem da galeria com hover (scale) — style-hover do <img> dentro do botão. */
+/** Imagem da galeria com hover (scale) — style-hover do <img loading="lazy"> dentro do botão. */
 function HoverImg({ src, cap }: { src: string; cap: string }) {
   const [hover, setHover] = useState(false);
   return (
