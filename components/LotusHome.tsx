@@ -620,8 +620,12 @@ export default function LotusHome({
         <div style={parseStyle('position:relative;z-index:2;width:100%;max-width:1280px;margin:0 auto;padding:150px 40px 80px;')}>
           <div style={parseStyle('max-width:760px;')}>
             <div style={parseStyle('background:linear-gradient(135deg,rgba(11,22,16,.9),rgba(21,36,28,.6) 58%,rgba(21,36,28,.24));backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);border:1px solid rgba(205,171,110,.18);border-radius:24px;padding:38px 42px 34px;max-width:780px;box-shadow:0 36px 80px -44px rgba(0,0,0,.65);margin-bottom:40px;')}>
-              <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#cdab6e;margin-bottom:20px;')}>Jundiaí · Itupeva · Interior de São Paulo</div>
               <h1 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(42px,6vw,78px);line-height:1.02;letter-spacing:-.02em;color:#f7f2e8;margin:0 0 26px;")}>
+                {/* "Imobiliária em Jundiaí e Itupeva" no H1 (auditoria de SEO de
+                    19/10/2026): entra como a linha pequena de cima, com o desenho
+                    da antiga "Jundiaí · Itupeva · Interior de São Paulo", e a
+                    frase da marca segue igual. O topo não muda de aparência. */}
+                <span style={parseStyle("display:block;font-family:'Hanken Grotesk',system-ui,sans-serif;font-size:13px;font-weight:600;line-height:normal;letter-spacing:.2em;text-transform:uppercase;color:#cdab6e;margin-bottom:20px;")}>Imobiliária em Jundiaí e Itupeva</span>{' '}
                 {/* O espaço antes do <br /> é de propósito: sem ele o texto lido
                     por leitor de tela e o copiado saem "históriastêm". */}
                 Grandes histórias{' '}<br /><em style={parseStyle('font-style:italic;font-weight:300;color:#cdab6e;')}>têm endereço</em>
@@ -639,9 +643,9 @@ export default function LotusHome({
                 <div style={parseStyle('padding:18px;')}>
                   <div style={parseStyle('display:flex;gap:8px;margin-bottom:14px;')}>
                     {/* Só "Comprar". A opção "Alugar" saiu da home a pedido da
-                        Lotus: a vitrine da primeira página é de compra. O par
-                        continua existindo em /lotus-busca, que é onde a locação
-                        é de fato pesquisável.
+                        Lotus: a vitrine da primeira página é de compra. Em
+                        27/10/2026 saiu também de /lotus-busca: a Lotus não
+                        trabalha com locação.
                         Vira <span> e não <button> porque não há mais escolha a
                         fazer: um botão que não alterna nada convida um clique
                         que não faz nada. */}
@@ -1185,10 +1189,10 @@ export default function LotusHome({
         <div style={parseStyle('max-width:1040px;margin:0 auto;display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:start;')}>
           <div data-reveal="">
             <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b18a4a;margin-bottom:18px;')}>Perguntas frequentes</div>
-            <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(28px,3.4vw,42px);line-height:1.08;letter-spacing:-.02em;margin:0 0 24px;color:#15241c;")}>A Lotus, em poucas palavras.</h2>
+            <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(28px,3.4vw,42px);line-height:1.08;letter-spacing:-.02em;margin:0 0 24px;color:#15241c;")}>Imobiliária em Jundiaí: a Lotus em poucas palavras.</h2>
             <div style={parseStyle('background:#1d3a2c;border-radius:16px;padding:26px 28px;')}>
               <div style={parseStyle('font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#cdab6e;margin-bottom:12px;')}>Em resumo</div>
-              <p style={parseStyle('font-size:15.5px;color:rgba(247,242,232,.85);font-weight:300;line-height:1.6;margin:0;')}>A Lotus Brokers é uma consultoria imobiliária de Jundiaí e Itupeva, especializada em compra, venda, locação e investimentos. Unimos conhecimento regional, estratégia e acompanhamento próximo e personalizado para conduzir cada decisão com clareza e segurança.</p>
+              <p style={parseStyle('font-size:15.5px;color:rgba(247,242,232,.85);font-weight:300;line-height:1.6;margin:0;')}>A Lotus Brokers é uma consultoria imobiliária de Jundiaí e Itupeva, especializada em compra, venda e investimentos. Unimos conhecimento regional, estratégia e acompanhamento próximo e personalizado para conduzir cada decisão com clareza e segurança.</p>
             </div>
           </div>
           <div data-reveal="" style={parseStyle('display:flex;flex-direction:column;')}>
@@ -1319,7 +1323,7 @@ export default function LotusHome({
                 <img {...logoLotus()} alt="Lotus Brokers" width={800} height={300} loading="lazy" style={{ height: 34, width: 'auto', display: 'block' }} />
               </div>
               <p style={parseStyle("font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:19px;color:rgba(247,242,232,.85);line-height:1.35;max-width:300px;margin:0 0 20px;")}>Grandes histórias têm endereço.</p>
-              <p style={parseStyle('font-size:13.5px;color:rgba(247,242,232,.55);line-height:1.6;margin:0;')}>Consultoria imobiliária para compra, venda, locação e investimento em imóveis de médio e alto padrão em Jundiaí, Itupeva e região.</p>
+              <p style={parseStyle('font-size:13.5px;color:rgba(247,242,232,.55);line-height:1.6;margin:0;')}>Consultoria imobiliária para compra, venda e investimento em imóveis de médio e alto padrão em Jundiaí, Itupeva e região.</p>
             </div>
             <div>
               <div style={parseStyle('font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#cdab6e;margin-bottom:18px;')}>A Lotus</div>

@@ -41,16 +41,19 @@ export const metadata: Metadata = {
     ...(verificacaoGoogle ? { google: verificacaoGoogle } : {}),
     ...(verificacaoBing ? { other: { 'msvalidate.01': verificacaoBing } } : {}),
   },
-  title: 'Imóveis, lançamentos e bairros em Jundiaí e Itupeva | Lotus Brokers',
+  // Título e descrição da home (as outras páginas declaram os seus). O termo
+  // "imobiliária em Jundiaí" vem primeiro desde 27/10/2026, pedido da auditoria
+  // de SEO de 19/10/2026: a home não aparecia para a busca principal da Lotus.
+  title: 'Imobiliária em Jundiaí e Itupeva | Lotus Brokers',
   description:
-    'Lotus Brokers, imobiliária moderna de Jundiaí e Itupeva, voltada para um atendimento de excelência. Lançamentos, casas, apartamentos e terrenos com especialistas que conhecem cada bairro.',
+    'Imobiliária em Jundiaí e Itupeva. A Lotus Brokers reúne lançamentos, casas e apartamentos com especialistas que conhecem cada bairro. Avaliação grátis do seu imóvel.',
   alternates: { canonical: 'https://www.lotusbrokers.com.br/' },
   openGraph: {
     siteName: 'Lotus Brokers',
     type: 'website',
     url: 'https://www.lotusbrokers.com.br/',
     locale: 'pt_BR',
-    title: 'Lotus Brokers, Imóveis em Jundiaí e Itupeva',
+    title: 'Lotus Brokers, imobiliária em Jundiaí e Itupeva',
     description:
       'Imobiliária moderna de Jundiaí e Itupeva, com atendimento de excelência. Lançamentos e revenda com especialistas de cada bairro.',
     images: [IMAGEM_COMPARTILHAMENTO],
