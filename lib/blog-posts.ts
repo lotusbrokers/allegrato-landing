@@ -164,9 +164,53 @@ export function relacionados(posts: Post[], atual: Post, quantos = 3): Post[] {
 // mão, que envelheceu: títulos que não existiam mais no blog e nenhuma capa.
 export const POSTS: Post[] = [
   /* ------------------------------------------------------------------
+   * Enviado pela Lotus em 27/10/2026, para sair no mesmo dia. Primeiro da
+   * lista, e por isso o novo destaque da capa do blog.
+   *
+   * CONFERIDO em 27/10/2026 na matéria da Tribuna de Jundiaí (23/10/2026), a
+   * fonte que o próprio texto indica, e na notícia da Prefeitura do mesmo dia
+   * (jundiai.sp.gov.br/noticias/?p=390147): edição 2026 do IDSC, do Instituto
+   * Cidades Sustentáveis; 2º lugar entre os municípios de 100 mil a 500 mil
+   * habitantes, atrás de São Caetano do Sul; 62,16 pontos; 96º entre os 5.570
+   * municípios; 41 das 169 metas dos ODS. Tudo confere.
+   *
+   * Ajustes de forma:
+   *  - a meta description sugerida virou `excerpt`, e o subtítulo entrou no
+   *    resumo (`tldr`);
+   *  - "Acesse a matéria completa no site da Tribuna de Jundiaí" ganhou o link
+   *    da matéria;
+   *  - o título SEO sugerido ("Jundiaí é a 2ª cidade mais sustentável do Brasil
+   *    em 2026") não entrou. Sem "entre municípios de 100 a 500 mil
+   *    habitantes", a frase diz que Jundiaí é a 2ª do país, e no ranking geral
+   *    ela é a 96ª. A página usa o título do texto;
+   *  - palavras-chave e tags não têm onde entrar: o blog usa categoria, e esta
+   *    é "Cidade".
+   *
+   * Capa: a foto enviada era uma miniatura de 235x124 e ficaria borrada. A
+   * Lotus escolheu a vista aérea do topo da home (home-hero-jundiai.jpg),
+   * recortada em 16:10.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'jundiai-ranking-cidades-sustentaveis-2026', cat: 'Cidade', date: 'Out 2026', publicadoEm: '2026-10-27', read: '2 min', img: '/blog/jundiai-idsc-2026.jpg', slot: 'blog-jundiai-idsc-2026', title: 'Jundiaí é a 2ª cidade mais sustentável do Brasil entre municípios de 100 a 500 mil habitantes', excerpt: 'Jundiaí conquista o 2º lugar no ranking de sustentabilidade de 2026 entre cidades de 100 a 500 mil habitantes, com 62,16 pontos no IDSC.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'Na edição de 2026 do Índice de Desenvolvimento Sustentável das Cidades (IDSC), divulgada em outubro pelo Instituto Cidades Sustentáveis, Jundiaí ficou em 2º lugar entre os municípios de 100 mil a 500 mil habitantes, com 62,16 pontos, atrás apenas de São Caetano do Sul. Entre os 5.570 municípios do país, a cidade ocupa a 96ª posição e alcançou 41 metas dos Objetivos de Desenvolvimento Sustentável (ODS) da ONU.',
+    body: [
+      'Jundiaí tem motivos para comemorar. A cidade conquistou o segundo lugar no ranking nacional de sustentabilidade de 2026 na categoria de municípios com população entre 100 mil e 500 mil habitantes, ficando atrás apenas de São Caetano do Sul.',
+      { titulo: 'Os números do ranking' },
+      'Com 62,16 pontos no Índice de Desenvolvimento Sustentável das Cidades (IDSC), Jundiaí também aparece na 96ª posição na classificação geral, que reúne todos os 5.570 municípios brasileiros. O município ainda alcançou 41 metas dos Objetivos de Desenvolvimento Sustentável (ODS) da ONU.',
+      { titulo: 'O que é o IDSC?' },
+      'O índice é divulgado pelo Instituto Cidades Sustentáveis e avalia o desempenho dos municípios em indicadores ligados aos 17 ODS, a agenda global criada pela ONU para promover o desenvolvimento sustentável. Entre as áreas analisadas estão:',
+      { itens: ['Saúde', 'Educação', 'Saneamento', 'Meio ambiente'] },
+      { titulo: 'Por que isso importa?' },
+      'Um resultado como esse vai além do prestígio de uma boa posição. Ele reflete a qualidade de vida oferecida à população e indica que a cidade vem avançando em frentes essenciais, como acesso a serviços básicos, cuidado com o meio ambiente e investimento em pessoas. Para moradores, empresas e investidores, é um sinal de que Jundiaí caminha na direção de um desenvolvimento mais equilibrado e duradouro.',
+      { titulo: 'Leia a matéria completa' },
+      'Quer saber mais detalhes sobre o ranking e o desempenho de Jundiaí? Acesse a [matéria completa no site da Tribuna de Jundiaí](https://tribunadejundiai.com.br/cidades/jundiai/jundiai-segundo-lugar-ranking-sustentabilidade-2026/) e acompanhe nossas atualizações sobre a cidade.',
+    ],
+  },
+  /* ------------------------------------------------------------------
    * Enviado pela Lotus em 19/10/2026 (documento "Como financiar a compra do
-   * seu primeiro imóvel"), com a foto da capa. Primeiro da lista, e por isso o
-   * novo destaque da capa do blog.
+   * seu primeiro imóvel"), com a foto da capa.
+   *
+   * Foi o destaque da capa do blog até 27/10/2026.
    *
    * CONFERIDO em 19/10/2026:
    *  - Minha Casa Minha Vida: faixas de renda (R$ 3.200, R$ 5.000, R$ 9.600 e
