@@ -384,7 +384,7 @@ export default function VisttaCastanho() {
       <section className="hero" id="inicio">
         <div className="hero-media" data-parallax="0.12">
           <img
-            src="/vistta-castanho/a008.jpg"
+            src="/vistta-castanho/midia/9fbc349b84f3229a.webp"
             alt="Lago ao pôr do sol no loteamento Vistta Castanho em Jundiaí"
           />
         </div>
@@ -596,8 +596,8 @@ export default function VisttaCastanho() {
           </div>
           <div className="about-figure reveal d2">
             <div className="ph clip-up">
-              <img
-                src="/vistta-castanho/a007.jpg"
+              <img loading="lazy"
+                src="/vistta-castanho/midia/738e772bb03b065c.webp"
                 alt="Vista aérea da região do Castanho em Jundiaí ao pôr do sol"
               />
             </div>
@@ -738,7 +738,7 @@ export default function VisttaCastanho() {
           </div>
           <div className="video-frame reveal d1">
             <div className="video-poster">
-              <img
+              <img loading="lazy"
                 src="/vistta-castanho/a006.jpg"
                 alt="Casal à beira do lago no Vistta Castanho ao pôr do sol"
               />
@@ -769,7 +769,7 @@ export default function VisttaCastanho() {
               data-full="assets/img/piscina.jpg"
               data-cap="Piscina com terraço &amp; fitness externo"
             >
-              <img
+              <img loading="lazy"
                 src="/vistta-castanho/a005.jpg"
                 alt="Piscina com terraço no clube do Vistta Castanho"
               />
@@ -786,7 +786,7 @@ export default function VisttaCastanho() {
               data-full="assets/img/salao.jpg"
               data-cap="Salão de festas decorado e equipado"
             >
-              <img
+              <img loading="lazy"
                 src="/vistta-castanho/a000.jpg"
                 alt="Salão de festas decorado e equipado do clube"
               />
@@ -801,7 +801,7 @@ export default function VisttaCastanho() {
               data-full="assets/img/brinquedoteca.jpg"
               data-cap="Brinquedoteca iluminada e lúdica"
             >
-              <img src="/vistta-castanho/a001.jpg" alt="Brinquedoteca iluminada e lúdica" />
+              <img loading="lazy" src="/vistta-castanho/a001.jpg" alt="Brinquedoteca iluminada e lúdica" />
               <span className="plus">+</span>
               <div className="cap">
                 <div className="t">Brinquedoteca</div>
@@ -810,11 +810,11 @@ export default function VisttaCastanho() {
             </div>
             <div
               className="tile t-w7 reveal d1"
-              data-full="assets/img/paisagismo.jpg"
+              data-full="midia/12295588692cf13a.webp"
               data-cap="Deck e paisagismo multiespécies à beira d'água"
             >
-              <img
-                src="/vistta-castanho/a010.jpg"
+              <img loading="lazy"
+                src="/vistta-castanho/midia/12295588692cf13a.webp"
                 alt="Deck de madeira e paisagismo florido à beira da água"
               />
               <span className="plus">+</span>
@@ -828,7 +828,7 @@ export default function VisttaCastanho() {
               data-full="assets/img/pet.jpg"
               data-cap="Espaço pet: playground para cachorros e pracinha"
             >
-              <img
+              <img loading="lazy"
                 src="/vistta-castanho/a002.jpg"
                 alt="Espaço pet com cachorro brincando na grama"
               />
@@ -842,11 +842,11 @@ export default function VisttaCastanho() {
             </div>
             <div
               className="tile t-w6 reveal d2"
-              data-full="assets/img/portaria.jpg"
+              data-full="midia/d74ce58cfa611336.webp"
               data-cap="Portaria inteligente com controle de acesso"
             >
-              <img
-                src="/vistta-castanho/a009.jpg"
+              <img loading="lazy"
+                src="/vistta-castanho/midia/d74ce58cfa611336.webp"
                 alt="Portaria inteligente do loteamento Vistta Castanho"
               />
               <span className="plus">+</span>
@@ -862,7 +862,7 @@ export default function VisttaCastanho() {
       {/* ===================== NATUREZA FULLBLEED ===================== */}
       <section className="fullbleed" id="natureza">
         <div className="bg" data-parallax="0.1">
-          <img
+          <img loading="lazy"
             src="/vistta-castanho/a004.jpg"
             alt="Família à beira do lago no Vistta Castanho"
           />
@@ -1133,7 +1133,7 @@ export default function VisttaCastanho() {
         <button className="lb-nav lb-prev" aria-label="Anterior">
           ‹
         </button>
-        <img alt="Vistta Castanho" />
+        <img loading="lazy" alt="Vistta Castanho" />
         <button className="lb-nav lb-next" aria-label="Próximo">
           ›
         </button>

@@ -118,7 +118,7 @@ const amenityData: Amenity[] = [
   { name: 'Pet Place', src: 'a016.jpg', alt: 'Perspectiva ilustrada do pet place', desc: 'Pet place para o lazer também do seu melhor amigo.' },
   { name: 'Sauna', src: 'a012.jpg', alt: 'Perspectiva ilustrada da sauna', desc: 'Sauna com espaço de descanso para o seu bem-estar.' },
   { name: 'Boulevard', src: 'a015.jpg', alt: 'Perspectiva ilustrada do boulevard', desc: 'Um boulevard arborizado conecta cada ambiente em caminhos de convivência.' },
-  { name: 'Portaria', src: 'a003.jpg', alt: 'Perspectiva ilustrada da portaria', desc: 'Chegada imponente, com portaria e hall social que anunciam o padrão do empreendimento.' },
+  { name: 'Portaria', src: 'midia/3072b417a570f682.webp', alt: 'Perspectiva ilustrada da portaria', desc: 'Chegada imponente, com portaria e hall social que anunciam o padrão do empreendimento.' },
 ];
 
 const faqData: Array<{ q: string; a: string }> = [
@@ -391,7 +391,7 @@ export default function Vivarte({
       {/* ============ HERO ============ */}
       <section id="topo" data-screen-label="Hero" style={parseStyle('position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:#0E1A13;')}>
         <div ref={heroBgRef} style={parseStyle('position:absolute;inset:-7% 0;will-change:transform;')}>
-          <img src="/vivarte/a003.jpg" alt="Perspectiva ilustrada da portaria do Vivarte Grand Alamedas em Jundiaí" style={parseStyle('width:100%;height:100%;object-fit:cover;animation:kb 22s ease-in-out infinite alternate;')} />
+          <img src="/vivarte/midia/3072b417a570f682.webp" alt="Perspectiva ilustrada da portaria do Vivarte Grand Alamedas em Jundiaí" style={parseStyle('width:100%;height:100%;object-fit:cover;animation:kb 22s ease-in-out infinite alternate;')} />
         </div>
         <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,26,19,.55) 0%,rgba(14,26,19,.18) 32%,rgba(14,26,19,.62) 74%,rgba(14,26,19,.92) 100%);')}></div>
         <div style={parseStyle('position:absolute;inset:0;background:radial-gradient(120% 80% at 15% 90%,rgba(14,26,19,.7),transparent 60%);')}></div>
@@ -418,10 +418,10 @@ export default function Vivarte({
         <div style={parseStyle('max-width:1320px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(40px,6vw,90px);align-items:center;')}>
           <div data-reveal="" style={parseStyle('position:relative;')}>
             <div style={parseStyle('position:relative;border-radius:3px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(27,24,19,.45);')}>
-              <img src="/vivarte/a004.jpg" alt="Viver cercado pela natureza no Vivarte Grand Alamedas" style={parseStyle('width:100%;height:clamp(380px,56vh,620px);object-fit:cover;object-position:20% 25%;display:block;')} />
+              <img loading="lazy" src="/vivarte/a004.jpg" alt="Viver cercado pela natureza no Vivarte Grand Alamedas" style={parseStyle('width:100%;height:clamp(380px,56vh,620px);object-fit:cover;object-position:20% 25%;display:block;')} />
             </div>
             <div style={parseStyle('position:absolute;bottom:-34px;right:-10px;width:clamp(150px,18vw,210px);height:clamp(150px,18vw,210px);border-radius:3px;overflow:hidden;border:8px solid #F6F1E6;box-shadow:0 30px 60px -30px rgba(27,24,19,.5);animation:floaty 7s ease-in-out infinite;')}>
-              <img src="/vivarte/a000.jpg" alt="Natureza e paisagismo" style={parseStyle('width:100%;height:100%;object-fit:cover;')} />
+              <img loading="lazy" src="/vivarte/a000.jpg" alt="Natureza e paisagismo" style={parseStyle('width:100%;height:100%;object-fit:cover;')} />
             </div>
           </div>
           <div>
@@ -482,7 +482,7 @@ export default function Vivarte({
           >
             <div data-reveal="" style={parseStyle('position:relative;border-radius:3px;overflow:hidden;min-height:clamp(420px,62vh,680px);background:#0E1A13;box-shadow:0 50px 90px -50px rgba(0,0,0,.8);')}>
               {amenityData.map((a, i) => (
-                <img
+                <img loading="lazy"
                   key={i}
                   src={`/vivarte/${a.src}`}
                   alt={a.alt}
@@ -568,8 +568,8 @@ export default function Vivarte({
               hoverStyle={parseStyle('box-shadow:0 55px 95px -38px rgba(27,24,19,.55);transform:translateY(-3px);')}
             >
               <span style={parseStyle('position:absolute;top:14px;right:14px;z-index:3;display:inline-flex;align-items:center;gap:7px;background:#1B2E22;color:#F6F1E6;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;border-radius:40px;pointer-events:none;')}>⤢ Ampliar planta</span>
-              <img src="/vivarte/a006.jpg" alt="Planta de 2 dormitórios, 65,18m², Vivarte Grand Alamedas" style={parseStyle('position:absolute;inset:clamp(20px,3vw,42px);width:calc(100% - clamp(40px,6vw,84px));height:calc(100% - clamp(40px,6vw,84px));object-fit:contain;opacity:' + plan2Op + ';transition:opacity .7s ease;')} />
-              <img src="/vivarte/a005.jpg" alt="Planta de 3 dormitórios, 78,35m², Vivarte Grand Alamedas" style={parseStyle('position:absolute;inset:clamp(20px,3vw,42px);width:calc(100% - clamp(40px,6vw,84px));height:calc(100% - clamp(40px,6vw,84px));object-fit:contain;opacity:' + plan3Op + ';transition:opacity .7s ease;')} />
+              <img loading="lazy" src="/vivarte/a006.jpg" alt="Planta de 2 dormitórios, 65,18m², Vivarte Grand Alamedas" style={parseStyle('position:absolute;inset:clamp(20px,3vw,42px);width:calc(100% - clamp(40px,6vw,84px));height:calc(100% - clamp(40px,6vw,84px));object-fit:contain;opacity:' + plan2Op + ';transition:opacity .7s ease;')} />
+              <img loading="lazy" src="/vivarte/a005.jpg" alt="Planta de 3 dormitórios, 78,35m², Vivarte Grand Alamedas" style={parseStyle('position:absolute;inset:clamp(20px,3vw,42px);width:calc(100% - clamp(40px,6vw,84px));height:calc(100% - clamp(40px,6vw,84px));object-fit:contain;opacity:' + plan3Op + ';transition:opacity .7s ease;')} />
             </Hoverable>
             <div>
               {!is3 && (
@@ -628,7 +628,7 @@ export default function Vivarte({
           </div>
           <div data-reveal="" style={parseStyle('display:flex;flex-direction:column;gap:18px;')}>
             <div style={parseStyle('border-radius:3px;overflow:hidden;box-shadow:0 40px 80px -45px rgba(0,0,0,.7);')}>
-              <img src="/vivarte/a007.jpg" alt="Vista aérea do Vivarte Grand Alamedas e da Serra do Japi em Jundiaí" style={parseStyle('width:100%;height:clamp(220px,32vh,320px);object-fit:cover;display:block;')} />
+              <img loading="lazy" src="/vivarte/a007.jpg" alt="Vista aérea do Vivarte Grand Alamedas e da Serra do Japi em Jundiaí" style={parseStyle('width:100%;height:clamp(220px,32vh,320px);object-fit:cover;display:block;')} />
             </div>
             <div style={parseStyle('border-radius:3px;overflow:hidden;height:clamp(240px,34vh,340px);box-shadow:0 40px 80px -45px rgba(0,0,0,.7);')}>
               <iframe title="Mapa do Vivarte Grand Alamedas em Jundiaí" src="https://www.google.com/maps?q=Av.%20Juvenal%20Arantes%2C%20Jundia%C3%AD%20-%20SP&output=embed" style={parseStyle('width:100%;height:100%;border:0;filter:saturate(.9);')} loading="lazy"></iframe>
@@ -640,7 +640,7 @@ export default function Vivarte({
       {/* ============ DIRETIVA ============ */}
       <section id="diretiva" data-screen-label="Sobre a Diretiva" style={parseStyle('position:relative;background:#0E1A13;padding:clamp(80px,13vh,160px) clamp(20px,5vw,72px);overflow:hidden;')}>
         <div style={parseStyle('position:absolute;inset:0;opacity:.16;')}>
-          <img src="/vivarte/a002.jpg" alt="" style={parseStyle('width:100%;height:100%;object-fit:cover;')} />
+          <img loading="lazy" src="/vivarte/a002.jpg" alt="" style={parseStyle('width:100%;height:100%;object-fit:cover;')} />
         </div>
         <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(90deg,#0E1A13 30%,rgba(14,26,19,.6));')}></div>
         <div style={parseStyle('position:relative;z-index:2;max-width:1320px;margin:0 auto;')}>
@@ -674,7 +674,7 @@ export default function Vivarte({
       {/* ============ CONTATO ============ */}
       <section id="contato" data-screen-label="Contato" style={parseStyle('position:relative;background:#0E1A13;padding:clamp(80px,12vh,150px) clamp(20px,5vw,72px);overflow:hidden;')}>
         <div style={parseStyle('position:absolute;inset:0;')}>
-          <img src="/vivarte/a001.jpg" alt="" style={parseStyle('width:100%;height:100%;object-fit:cover;')} />
+          <img loading="lazy" src="/vivarte/a001.jpg" alt="" style={parseStyle('width:100%;height:100%;object-fit:cover;')} />
           <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,26,19,.78),rgba(14,26,19,.92));')}></div>
         </div>
         <div style={parseStyle('position:relative;z-index:2;max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(36px,5vw,64px);align-items:center;')}>
@@ -806,7 +806,7 @@ export default function Vivarte({
             <div>
               <div style={parseStyle('font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#93A074;margin-bottom:18px;')}>Corretor parceiro</div>
               <div style={parseStyle('border:1px dashed rgba(246,241,230,.28);border-radius:3px;padding:18px;display:flex;flex-direction:column;gap:10px;align-items:flex-start;')}>
-                <img src="/logo-lotus-dourado.png" alt={agencyName} style={{ height: 40, width: 'auto', display: 'block' }} />
+                <img loading="lazy" src="/logo-lotus-dourado.png" alt={agencyName} style={{ height: 40, width: 'auto', display: 'block' }} />
                 <span style={parseStyle('font-size:.85rem;color:rgba(246,241,230,.5);')}>{creci}</span>
               </div>
             </div>
@@ -822,7 +822,7 @@ export default function Vivarte({
       {zoom && (
         <div onClick={onCloseZoom} style={parseStyle('position:fixed;inset:0;z-index:200;background:rgba(10,20,14,.93);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);display:flex;align-items:center;justify-content:center;padding:clamp(18px,4vw,60px);cursor:zoom-out;animation:fadeIn .3s ease;')}>
           <div onClick={onContentClick} style={parseStyle('position:relative;max-width:1120px;width:100%;background:#fff;border-radius:4px;padding:clamp(20px,3vw,40px);box-shadow:0 60px 140px -40px rgba(0,0,0,.85);cursor:default;animation:zoomIn .35s cubic-bezier(.16,.84,.44,1);')}>
-            <img src={`/vivarte/${zoom}`} alt="Planta ampliada do Vivarte Grand Alamedas" style={parseStyle('width:100%;height:auto;max-height:78vh;object-fit:contain;display:block;')} />
+            <img loading="lazy" src={`/vivarte/${zoom}`} alt="Planta ampliada do Vivarte Grand Alamedas" style={parseStyle('width:100%;height:auto;max-height:78vh;object-fit:contain;display:block;')} />
             <div style={parseStyle("text-align:center;font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#1B2E22;margin-top:14px;")}>{zoomLabel}</div>
             <Hoverable as="button" onClick={onCloseZoom} aria-label="Fechar" baseStyle={parseStyle('all:unset;cursor:pointer;position:absolute;top:-16px;right:-16px;width:46px;height:46px;border-radius:50%;background:#1B2E22;color:#F6F1E6;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 12px 28px -8px rgba(0,0,0,.6);transition:background .3s;')} hoverStyle={parseStyle('background:#A9743F;')}>×</Hoverable>
           </div>

@@ -241,7 +241,7 @@ export default function SkyVideiras() {
               <br />
               iniciadas!
             </div>
-            <img style={parseStyle('width:100%;border-radius:16px;box-shadow:0 20px 46px rgba(14,42,68,.28)')} src="/sky-videiras/a003.jpg" alt="Fachada do SKY Videiras ao entardecer" />
+            <img loading="lazy" style={parseStyle('width:100%;border-radius:16px;box-shadow:0 20px 46px rgba(14,42,68,.28)')} src="/sky-videiras/midia/c295c8d4205610a2.webp" alt="Fachada do SKY Videiras ao entardecer" />
           </div>
         </div>
       </section>
@@ -339,7 +339,7 @@ export default function SkyVideiras() {
             </button>
           </div>
           <div className={'planta-panel' + (planta === 0 ? ' active' : '')}>
-            <img className="planta-img" src="/sky-videiras/a004.jpg" alt="Planta Tipo A 56,96 m²" />
+            <img loading="lazy" className="planta-img" src="/sky-videiras/a004.jpg" alt="Planta Tipo A 56,96 m²" />
             <div className="planta-meta">
               <p className="tname">
                 Tipo A
@@ -367,7 +367,7 @@ export default function SkyVideiras() {
             </div>
           </div>
           <div className={'planta-panel' + (planta === 1 ? ' active' : '')}>
-            <img className="planta-img" src="/sky-videiras/a005.jpg" alt="Planta Tipo D 71,91 m²" />
+            <img loading="lazy" className="planta-img" src="/sky-videiras/a005.jpg" alt="Planta Tipo D 71,91 m²" />
             <div className="planta-meta">
               <p className="tname">
                 Tipo D
@@ -395,7 +395,7 @@ export default function SkyVideiras() {
             </div>
           </div>
           <div className={'planta-panel' + (planta === 2 ? ' active' : '')}>
-            <img className="planta-img" src="/sky-videiras/a006.jpg" alt="Planta Tipo C 72,63 m²" />
+            <img loading="lazy" className="planta-img" src="/sky-videiras/a006.jpg" alt="Planta Tipo C 72,63 m²" />
             <div className="planta-meta">
               <p className="tname">
                 Tipo C
@@ -423,7 +423,7 @@ export default function SkyVideiras() {
             </div>
           </div>
           <div className={'planta-panel' + (planta === 3 ? ' active' : '')}>
-            <img className="planta-img" src="/sky-videiras/a007.jpg" alt="Planta Tipo C ampliado 72,63 m²" />
+            <img loading="lazy" className="planta-img" src="/sky-videiras/a007.jpg" alt="Planta Tipo C ampliado 72,63 m²" />
             <div className="planta-meta">
               <p className="tname">
                 Tipo C · sala ampliada
@@ -451,7 +451,7 @@ export default function SkyVideiras() {
             </div>
           </div>
           <div className={'planta-panel' + (planta === 4 ? ' active' : '')}>
-            <img className="planta-img" src="/sky-videiras/a008.jpg" alt="Planta Tipo B 83,31 m²" />
+            <img loading="lazy" className="planta-img" src="/sky-videiras/a008.jpg" alt="Planta Tipo B 83,31 m²" />
             <div className="planta-meta">
               <p className="tname">
                 Tipo B · a maior
@@ -498,42 +498,42 @@ export default function SkyVideiras() {
             </p>
           </div>
           <div className="lazer-grid">
-            <div style={parseStyle("background-image:url('/sky-videiras/a009.jpg')")} className="lz big">
+            <div style={parseStyle("background-image:url('/sky-videiras/midia/9335a80b945f229e.webp')")} className="lz big">
               <span>
                 Piscina adulto & infantil
               </span>
             </div>
-            <div style={parseStyle("background-image:url('/sky-videiras/a001.jpg')")} className="lz">
+            <div style={parseStyle("background-image:url('/sky-videiras/midia/32f22e595aefe26f.webp')")} className="lz">
               <span>
                 Solarium
               </span>
             </div>
-            <div style={parseStyle("background-image:url('/sky-videiras/a010.jpg')")} className="lz">
+            <div style={parseStyle("background-image:url('/sky-videiras/midia/60c1faa4bf143ff9.webp')")} className="lz">
               <span>
                 Fire Place
               </span>
             </div>
-            <div style={parseStyle("background-image:url('/sky-videiras/a011.jpg')")} className="lz">
+            <div style={parseStyle("background-image:url('/sky-videiras/midia/26ef6640c10ae3d7.webp')")} className="lz">
               <span>
                 Salão de festas
               </span>
             </div>
-            <div style={parseStyle("background-image:url('/sky-videiras/a012.jpg')")} className="lz">
+            <div style={parseStyle("background-image:url('/sky-videiras/midia/585fe6d1b8e22787.webp')")} className="lz">
               <span>
                 Espaço gourmet
               </span>
             </div>
-            <div style={parseStyle("background-image:url('/sky-videiras/a013.jpg')")} className="lz">
+            <div style={parseStyle("background-image:url('/sky-videiras/midia/a33f15e25ab84a70.webp')")} className="lz">
               <span>
                 Playground
               </span>
             </div>
-            <div style={parseStyle("background-image:url('/sky-videiras/a014.jpg')")} className="lz">
+            <div style={parseStyle("background-image:url('/sky-videiras/midia/5e0c56a67bb6e532.webp')")} className="lz">
               <span>
                 Pet Place
               </span>
             </div>
-            <div style={parseStyle("background-image:url('/sky-videiras/a015.jpg')")} className="lz big">
+            <div style={parseStyle("background-image:url('/sky-videiras/midia/3810034a11a108cc.webp')")} className="lz big">
               <span>
                 Ambientes decorados
               </span>
@@ -724,7 +724,7 @@ export default function SkyVideiras() {
                 </span>
               </div>
             </div>
-            <img style={parseStyle('width:100%;border-radius:16px;margin-top:30px;box-shadow:0 16px 34px rgba(0,0,0,.3)')} src="/sky-videiras/a016.jpg" alt="Serra do Japi ao entardecer, vista do SKY Videiras" />
+            <img loading="lazy" style={parseStyle('width:100%;border-radius:16px;margin-top:30px;box-shadow:0 16px 34px rgba(0,0,0,.3)')} src="/sky-videiras/midia/31526c597f1cc757.webp" alt="Serra do Japi ao entardecer, vista do SKY Videiras" />
           </div>
         </div>
       </section>
@@ -836,7 +836,7 @@ export default function SkyVideiras() {
         <div className="wrap">
           <div className="foot-top">
             <div className="foot-logo">
-              <img style={parseStyle('height:58px;width:auto;filter:brightness(0) invert(1)')} src="/sky-videiras/a002.png" alt="SKY Videiras" />
+              <img loading="lazy" style={parseStyle('height:58px;width:auto;filter:brightness(0) invert(1)')} src="/sky-videiras/a002.png" alt="SKY Videiras" />
             </div>
             <div style={parseStyle('text-align:right')}>
               <p style={parseStyle('color:#fff;font-weight:600')}>

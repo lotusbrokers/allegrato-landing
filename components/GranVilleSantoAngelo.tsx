@@ -576,14 +576,14 @@ export default function GranVilleSantoAngelo() {
           >
             <img
               className="brand__logo brand__logo--cream"
-              src={`${IMG}/a001.png`}
+              src={`${IMG}/midia/a07e3e5cd3a25917.webp`}
               alt="Gran Ville Santo Angelo"
               width={743}
               height={604}
             />
             <img
               className="brand__logo brand__logo--color"
-              src={`${IMG}/a009.png`}
+              src={`${IMG}/midia/f169714c420776c5.webp`}
               alt=""
               aria-hidden="true"
               width={743}
@@ -623,7 +623,7 @@ export default function GranVilleSantoAngelo() {
       <div className="mobile-menu" aria-hidden="true">
         <img
           className="mobile-menu__logo"
-          src={`${IMG}/a001.png`}
+          src={`${IMG}/midia/a07e3e5cd3a25917.webp`}
           alt="Gran Ville Santo Angelo"
         />
         <a href="#essencia">Essência</a>
@@ -639,7 +639,7 @@ export default function GranVilleSantoAngelo() {
       <section className="hero" id="inicio">
         <div className="hero__bg">
           <img
-            src={`${IMG}/a038.jpg`}
+            src={`${IMG}/midia/820ace37c355f079.webp`}
             alt="Perspectiva ilustrada da portaria do Gran Ville Santo Angelo"
             fetchPriority="high"
           />
@@ -738,14 +738,14 @@ export default function GranVilleSantoAngelo() {
             </div>
             <div className="convite-stack">
               <div className="manifesto__media reveal-img" data-plx="0.05">
-                <img
-                  src={`${IMG}/a042.jpg`}
+                <img loading="lazy"
+                  src={`${IMG}/midia/3d954a51b8bdf990.webp`}
                   alt="Caminho na Mata Atlântica preservada do empreendimento"
                 />
               </div>
               <div className="c2 reveal d2">
-                <img
-                  src={`${IMG}/a006.jpg`}
+                <img loading="lazy"
+                  src={`${IMG}/midia/b43e53d49a3754eb.webp`}
                   alt="Bem-estar e contato com a natureza no Gran Ville Santo Angelo"
                 />
               </div>
@@ -794,9 +794,9 @@ export default function GranVilleSantoAngelo() {
           </div>
           <div className="loc__grid">
             <div className="loc__map reveal">
-              <img
+              <img loading="lazy"
                 className="loc__fallback"
-                src={`${IMG}/a044.jpg`}
+                src={`${IMG}/midia/a6e2ea4ac0595699.webp`}
                 alt="Mapa de localização do Gran Ville Santo Angelo em Itupeva-SP"
               />
               {/* O mapa mostra o empreendimento, não a Central de Vendas da GP
@@ -1056,7 +1056,7 @@ export default function GranVilleSantoAngelo() {
         <div className="wrap">
           <div className="split">
             <div className="split__media reveal-img" data-plx="0.05">
-              <img
+              <img loading="lazy"
                 src={`${IMG}/a008.jpg`}
                 alt="Arquitetura com madeira, tijolos e pedras, integrada à natureza"
               />
@@ -1100,8 +1100,8 @@ export default function GranVilleSantoAngelo() {
                 data-lb-t="Casa Pôr do Sol"
                 data-lb-s="Planta humanizada"
               >
-                <img
-                  src={`${IMG}/a004.jpg`}
+                <img loading="lazy"
+                  src={`${IMG}/midia/d1957b7c881f78c7.webp`}
                   alt="Planta humanizada da Casa Pôr do Sol"
                 />
                 <span className="planta__l">Casa Pôr do Sol</span>
@@ -1112,8 +1112,8 @@ export default function GranVilleSantoAngelo() {
                 data-lb-t="Casa Suspensa"
                 data-lb-s="Planta humanizada"
               >
-                <img
-                  src={`${IMG}/a005.jpg`}
+                <img loading="lazy"
+                  src={`${IMG}/midia/e5e3fd78d7e1e602.webp`}
                   alt="Planta humanizada da Casa Suspensa"
                 />
                 <span className="planta__l">Casa Suspensa</span>
@@ -1124,8 +1124,8 @@ export default function GranVilleSantoAngelo() {
                 data-lb-t="Casa Jardim"
                 data-lb-s="Planta humanizada"
               >
-                <img
-                  src={`${IMG}/a003.jpg`}
+                <img loading="lazy"
+                  src={`${IMG}/midia/407fdb1ac2097f75.webp`}
                   alt="Planta humanizada da Casa Jardim"
                 />
                 <span className="planta__l">Casa Jardim</span>
@@ -1136,8 +1136,8 @@ export default function GranVilleSantoAngelo() {
                 data-lb-t="Casa Cristal"
                 data-lb-s="Planta humanizada"
               >
-                <img
-                  src={`${IMG}/a002.jpg`}
+                <img loading="lazy"
+                  src={`${IMG}/midia/2fb2468d8d07f8db.webp`}
                   alt="Planta humanizada da Casa Cristal"
                 />
                 <span className="planta__l">Casa Cristal</span>
@@ -1154,19 +1154,19 @@ export default function GranVilleSantoAngelo() {
             <div className="reveal-img" data-plx="0.04">
               <div className="media-cluster">
                 <div className="mc tall">
-                  <img
-                    src={`${IMG}/a043.jpg`}
+                  <img loading="lazy"
+                    src={`${IMG}/midia/230de2ad9a08ea29.webp`}
                     alt="Caminhos de passeio com paisagismo de espécies nativas"
                   />
                 </div>
                 <div className="mc sm">
-                  <img
-                    src={`${IMG}/a032.jpg`}
+                  <img loading="lazy"
+                    src={`${IMG}/midia/e3378df44c8886bc.webp`}
                     alt="Revitalização do córrego e suas margens"
                   />
                 </div>
                 <div className="mc sm">
-                  <img
+                  <img loading="lazy"
                     src={`${IMG}/a000.jpg`}
                     alt="Mata Atlântica preservada no empreendimento"
                   />
@@ -1216,8 +1216,8 @@ export default function GranVilleSantoAngelo() {
           </div>
           <div className="plan__grid">
             <div className="plan__map reveal-img">
-              <img
-                src={`${IMG}/a020.jpg`}
+              <img loading="lazy"
+                src={`${IMG}/midia/1db60c2ce6b8971f.webp`}
                 alt="Mapa de implantação do Gran Ville Santo Angelo"
               />
             </div>
@@ -1295,12 +1295,12 @@ export default function GranVilleSantoAngelo() {
             <div
               className="gcard"
               data-cat="agua"
-              data-lb="img/pool-1.jpg"
+              data-lb="midia/4e4280d61cf824c8.webp"
               data-lb-t="Piscinas"
               data-lb-s="Clube privativo"
             >
-              <img
-                src={`${IMG}/a014.jpg`}
+              <img loading="lazy"
+                src={`${IMG}/midia/4e4280d61cf824c8.webp`}
                 alt="Perspectiva ilustrada da piscina do clube privativo"
               />
               <div className="gcard__plus">
@@ -1316,12 +1316,12 @@ export default function GranVilleSantoAngelo() {
             <div
               className="gcard"
               data-cat="agua"
-              data-lb="img/pool-2.jpg"
+              data-lb="midia/df534ebfcbedf8c4.webp"
               data-lb-t="Solário &amp; lazer"
               data-lb-s="Clube privativo"
             >
-              <img
-                src={`${IMG}/a024.jpg`}
+              <img loading="lazy"
+                src={`${IMG}/midia/df534ebfcbedf8c4.webp`}
                 alt="Perspectiva da área de piscina e solário"
               />
               <div className="gcard__plus">
@@ -1337,12 +1337,12 @@ export default function GranVilleSantoAngelo() {
             <div
               className="gcard"
               data-cat="fitness"
-              data-lb="img/gym.jpg"
+              data-lb="midia/1bfd1c742ffa3864.webp"
               data-lb-t="Academia completa"
               data-lb-s="Fitness"
             >
-              <img
-                src={`${IMG}/a012.jpg`}
+              <img loading="lazy"
+                src={`${IMG}/midia/1bfd1c742ffa3864.webp`}
                 alt="Perspectiva ilustrada da academia completa"
               />
               <div className="gcard__plus">
@@ -1358,11 +1358,11 @@ export default function GranVilleSantoAngelo() {
             <div
               className="gcard"
               data-cat="agua"
-              data-lb="img/spa.jpg"
+              data-lb="midia/f62f353a896a3fb9.webp"
               data-lb-t="Spa"
               data-lb-s="Para respirar e relaxar"
             >
-              <img src={`${IMG}/a011.jpg`} alt="Perspectiva ilustrada do spa" />
+              <img loading="lazy" src={`${IMG}/midia/f62f353a896a3fb9.webp`} alt="Perspectiva ilustrada do spa" />
               <div className="gcard__plus">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth={2}>
                   <path d="M12 5v14M5 12h14"></path>
@@ -1376,11 +1376,11 @@ export default function GranVilleSantoAngelo() {
             <div
               className="gcard"
               data-cat="agua"
-              data-lb="img/sauna.jpg"
+              data-lb="midia/279893159322fb30.webp"
               data-lb-t="Saunas seca &amp; molhada"
               data-lb-s="Bem-estar"
             >
-              <img src={`${IMG}/a029.jpg`} alt="Perspectiva ilustrada da sauna" />
+              <img loading="lazy" src={`${IMG}/midia/279893159322fb30.webp`} alt="Perspectiva ilustrada da sauna" />
               <div className="gcard__plus">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth={2}>
                   <path d="M12 5v14M5 12h14"></path>
@@ -1394,12 +1394,12 @@ export default function GranVilleSantoAngelo() {
             <div
               className="gcard"
               data-cat="convivio"
-              data-lb="img/salao-festas.jpg"
+              data-lb="midia/e6758f834dda0091.webp"
               data-lb-t="Salão de festas"
               data-lb-s="Grandes comemorações"
             >
-              <img
-                src={`${IMG}/a021.jpg`}
+              <img loading="lazy"
+                src={`${IMG}/midia/e6758f834dda0091.webp`}
                 alt="Perspectiva ilustrada do salão de festas"
               />
               <div className="gcard__plus">
@@ -1415,12 +1415,12 @@ export default function GranVilleSantoAngelo() {
             <div
               className="gcard"
               data-cat="convivio"
-              data-lb="img/salao-dining.jpg"
+              data-lb="midia/8b207df471b9ae14.webp"
               data-lb-t="Espaço gourmet"
               data-lb-s="Convívio"
             >
-              <img
-                src={`${IMG}/a007.jpg`}
+              <img loading="lazy"
+                src={`${IMG}/midia/8b207df471b9ae14.webp`}
                 alt="Perspectiva interna do salão de festas"
               />
               <div className="gcard__plus">
@@ -1436,12 +1436,12 @@ export default function GranVilleSantoAngelo() {
             <div
               className="gcard"
               data-cat="convivio"
-              data-lb="img/quiosque.jpg"
+              data-lb="midia/d3f36c9cf98b1612.webp"
               data-lb-t="Quiosques"
               data-lb-s="Churrasqueira &amp; forno de pizza"
             >
-              <img
-                src={`${IMG}/a040.jpg`}
+              <img loading="lazy"
+                src={`${IMG}/midia/d3f36c9cf98b1612.webp`}
                 alt="Perspectiva dos quiosques com churrasqueira"
               />
               <div className="gcard__plus">
@@ -1457,12 +1457,12 @@ export default function GranVilleSantoAngelo() {
             <div
               className="gcard"
               data-cat="convivio"
-              data-lb="img/automercado.jpg"
+              data-lb="midia/fc44debcd9cde22c.webp"
               data-lb-t="Automercado"
               data-lb-s="Conveniência no bairro"
             >
-              <img
-                src={`${IMG}/a035.jpg`}
+              <img loading="lazy"
+                src={`${IMG}/midia/fc44debcd9cde22c.webp`}
                 alt="Perspectiva ilustrada do automercado"
               />
               <div className="gcard__plus">
@@ -1478,12 +1478,12 @@ export default function GranVilleSantoAngelo() {
             <div
               className="gcard"
               data-cat="familia"
-              data-lb="img/playground.jpg"
+              data-lb="midia/0ed41a6b54ac71ef.webp"
               data-lb-t="Playground"
               data-lb-s="Complexo lúdico"
             >
-              <img
-                src={`${IMG}/a041.jpg`}
+              <img loading="lazy"
+                src={`${IMG}/midia/0ed41a6b54ac71ef.webp`}
                 alt="Perspectiva ilustrada do playground"
               />
               <div className="gcard__plus">
@@ -1499,12 +1499,12 @@ export default function GranVilleSantoAngelo() {
             <div
               className="gcard"
               data-cat="familia"
-              data-lb="img/petplace.jpg"
+              data-lb="midia/54dd7705b184b4e4.webp"
               data-lb-t="Pet place"
               data-lb-s="Para o seu melhor amigo"
             >
-              <img
-                src={`${IMG}/a037.jpg`}
+              <img loading="lazy"
+                src={`${IMG}/midia/54dd7705b184b4e4.webp`}
                 alt="Perspectiva ilustrada do pet place"
               />
               <div className="gcard__plus">
@@ -1520,11 +1520,11 @@ export default function GranVilleSantoAngelo() {
             <div
               className="gcard"
               data-cat="familia"
-              data-lb="img/horta.jpg"
+              data-lb="midia/462356cbe6f383d2.webp"
               data-lb-t="Horta coletiva"
               data-lb-s="Plantar, regar e colher"
             >
-              <img src={`${IMG}/a016.jpg`} alt="Horta coletiva Santo Angelo" />
+              <img loading="lazy" src={`${IMG}/midia/462356cbe6f383d2.webp`} alt="Horta coletiva Santo Angelo" />
               <div className="gcard__plus">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth={2}>
                   <path d="M12 5v14M5 12h14"></path>
@@ -1538,12 +1538,12 @@ export default function GranVilleSantoAngelo() {
             <div
               className="gcard"
               data-cat="fitness"
-              data-lb="img/deck-academia.jpg"
+              data-lb="midia/0297d8610a80a872.webp"
               data-lb-t="Deck &amp; fitness ao ar livre"
               data-lb-s="Fitness"
             >
-              <img
-                src={`${IMG}/a036.jpg`}
+              <img loading="lazy"
+                src={`${IMG}/midia/0297d8610a80a872.webp`}
                 alt="Perspectiva do deck e academia ao ar livre"
               />
               <div className="gcard__plus">
@@ -1577,15 +1577,15 @@ export default function GranVilleSantoAngelo() {
             <div className="carousel__viewport">
               <div className="carousel__track">
                 <div className="scard">
-                  <img src={`${IMG}/a030.jpg`} alt="Quadra poliesportiva" />
+                  <img loading="lazy" src={`${IMG}/midia/b93b8fd0068da17b.webp`} alt="Quadra poliesportiva" />
                   <div className="scard__c">
                     <span className="n">02 UNIDADES</span>
                     <h3>Quadras poliesportivas</h3>
                   </div>
                 </div>
                 <div className="scard">
-                  <img
-                    src={`${IMG}/a033.jpg`}
+                  <img loading="lazy"
+                    src={`${IMG}/midia/d0af01f9c778ac72.webp`}
                     alt="Campo de futebol society com grama sintética"
                   />
                   <div className="scard__c">
@@ -1594,8 +1594,8 @@ export default function GranVilleSantoAngelo() {
                   </div>
                 </div>
                 <div className="scard">
-                  <img
-                    src={`${IMG}/a019.jpg`}
+                  <img loading="lazy"
+                    src={`${IMG}/midia/6fc4114ca725a577.webp`}
                     alt="Quadras de areia para beach tennis e volley"
                   />
                   <div className="scard__c">
@@ -1604,8 +1604,8 @@ export default function GranVilleSantoAngelo() {
                   </div>
                 </div>
                 <div className="scard">
-                  <img
-                    src={`${IMG}/a039.jpg`}
+                  <img loading="lazy"
+                    src={`${IMG}/midia/cef3be36fbbf3b1c.webp`}
                     alt="Vista aérea do complexo esportivo"
                   />
                   <div className="scard__c">
@@ -1660,14 +1660,14 @@ export default function GranVilleSantoAngelo() {
           </div>
           <div className="casas__grid">
             <article className="casa">
-              <img
+              <img loading="lazy"
                 className="main"
-                src={`${IMG}/a015.jpg`}
+                src={`${IMG}/midia/c980fcdf6805ac98.webp`}
                 alt="Casa Pôr do Sol, projeto de referência"
               />
-              <img
+              <img loading="lazy"
                 className="alt"
-                src={`${IMG}/a025.jpg`}
+                src={`${IMG}/midia/416f2fff3487b992.webp`}
                 alt="Casa Pôr do Sol, área de piscina"
               />
               <span className="casa__lote">Lote 04 · Quadra M</span>
@@ -1680,14 +1680,14 @@ export default function GranVilleSantoAngelo() {
               </div>
             </article>
             <article className="casa">
-              <img
+              <img loading="lazy"
                 className="main"
-                src={`${IMG}/a028.jpg`}
+                src={`${IMG}/midia/45d5a7f1dd9db929.webp`}
                 alt="Casa Suspensa, projeto de referência"
               />
-              <img
+              <img loading="lazy"
                 className="alt"
-                src={`${IMG}/a022.jpg`}
+                src={`${IMG}/midia/818d03269439f563.webp`}
                 alt="Casa Suspensa, área de piscina"
               />
               <span className="casa__lote">Lote 03 · Quadra M</span>
@@ -1698,14 +1698,14 @@ export default function GranVilleSantoAngelo() {
               </div>
             </article>
             <article className="casa">
-              <img
+              <img loading="lazy"
                 className="main"
-                src={`${IMG}/a023.jpg`}
+                src={`${IMG}/midia/fabe927e2a5e2109.webp`}
                 alt="Casa Luz, projeto de referência"
               />
-              <img
+              <img loading="lazy"
                 className="alt"
-                src={`${IMG}/a018.jpg`}
+                src={`${IMG}/midia/82adadba57765192.webp`}
                 alt="Casa Luz, área de piscina"
               />
               <span className="casa__lote">Lote 16 · Quadra H</span>
@@ -1718,14 +1718,14 @@ export default function GranVilleSantoAngelo() {
               </div>
             </article>
             <article className="casa">
-              <img
+              <img loading="lazy"
                 className="main"
-                src={`${IMG}/a026.jpg`}
+                src={`${IMG}/midia/f58901a8e347d477.webp`}
                 alt="Casa Jardim, projeto de referência"
               />
-              <img
+              <img loading="lazy"
                 className="alt"
-                src={`${IMG}/a031.jpg`}
+                src={`${IMG}/midia/950c5ea5e3b771a0.webp`}
                 alt="Casa Jardim, área de piscina"
               />
               <span className="casa__lote">Lote 31 · Quadra E</span>
@@ -1738,14 +1738,14 @@ export default function GranVilleSantoAngelo() {
               </div>
             </article>
             <article className="casa">
-              <img
+              <img loading="lazy"
                 className="main"
-                src={`${IMG}/a034.jpg`}
+                src={`${IMG}/midia/99720796b0aa41b6.webp`}
                 alt="Casa Cristal, projeto de referência"
               />
-              <img
+              <img loading="lazy"
                 className="alt"
-                src={`${IMG}/a027.jpg`}
+                src={`${IMG}/midia/b20cf5ea0d953c57.webp`}
                 alt="Casa Cristal, área de piscina"
               />
               <span className="casa__lote">Lote 26 · Quadra R</span>
@@ -1756,14 +1756,14 @@ export default function GranVilleSantoAngelo() {
               </div>
             </article>
             <article className="casa">
-              <img
+              <img loading="lazy"
                 className="main"
-                src={`${IMG}/a013.jpg`}
+                src={`${IMG}/midia/5802ecfec4d6b110.webp`}
                 alt="Casa Valentina, projeto de referência"
               />
-              <img
+              <img loading="lazy"
                 className="alt"
-                src={`${IMG}/a017.jpg`}
+                src={`${IMG}/midia/74e14936d4337adc.webp`}
                 alt="Casa Valentina, área de piscina"
               />
               <span className="casa__lote">Lotes 15 e 16 · Quadra N</span>
@@ -1785,8 +1785,8 @@ export default function GranVilleSantoAngelo() {
           <div className="gp__grid">
             <div className="reveal-img">
               <div className="gp__media">
-                <img
-                  src={`${IMG}/a010.jpg`}
+                <img loading="lazy"
+                  src={`${IMG}/midia/d627779b29ab7ade.webp`}
                   alt="Foto real de empreendimento entregue pela GP Desenvolvimento Urbano"
                 />
                 <span className="cap">Foto real · Gran Ville São Venâncio</span>
@@ -1943,7 +1943,7 @@ export default function GranVilleSantoAngelo() {
       {/* ====================== CONTATO ====================== */}
       <section className="section contact" id="contato">
         <div className="contact__bg">
-          <img src={`${IMG}/a045.jpg`} alt="" />
+          <img loading="lazy" src={`${IMG}/midia/184e1fd922cc11ad.webp`} alt="" />
         </div>
         <div className="wrap">
           <div className="contact__grid">
@@ -2107,9 +2107,9 @@ export default function GranVilleSantoAngelo() {
                 href="#inicio"
                 aria-label="Gran Ville Santo Angelo"
               >
-                <img
+                <img loading="lazy"
                   className="footer__logo"
-                  src={`${IMG}/a001.png`}
+                  src={`${IMG}/midia/a07e3e5cd3a25917.webp`}
                   alt="Gran Ville Santo Angelo"
                   width={743}
                   height={604}
@@ -2225,7 +2225,7 @@ export default function GranVilleSantoAngelo() {
           </svg>
         </button>
         <div className="lightbox__img">
-          <img
+          <img loading="lazy"
             src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
             alt="Imagem ampliada"
           />
