@@ -61,7 +61,7 @@ const COLUNAS: { titulo: string; links: { rotulo: string; href: string }[] }[] =
     titulo: 'Serviços',
     links: [
       { rotulo: 'Lançamentos', href: '/lotus-lancamentos' },
-      { rotulo: 'Comprar & alugar', href: '/lotus-busca' },
+      { rotulo: 'Comprar', href: '/lotus-busca' },
       { rotulo: 'Anunciar imóvel', href: '/lotus-anunciar' },
       { rotulo: 'Bairros', href: '/lotus-bairro' },
       { rotulo: 'Blog', href: '/lotus-blog' },
