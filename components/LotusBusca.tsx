@@ -177,7 +177,6 @@ export default function LotusBusca({
   imoveis?: ImovelBusca[];
 } = {}) {
   // state (espelha o `state` do dc-runtime)
-  const [finalidade, setFinalidade] = useState<'comprar' | 'alugar'>('comprar');
   const [chips, setChips] = useState<Chip[]>([]);
   const [sortKey, setSortKey] = useState('rel');
   const [favs, setFavs] = useState<Record<string, boolean>>({});
@@ -226,8 +225,6 @@ export default function LotusBusca({
     const q = ((searchRef.current && searchRef.current.value) || '').toLowerCase();
     if (!q.trim()) return;
     const newChips: Chip[] = [];
-    let fin = finalidade;
-    if (/alug|locaç/.test(q)) fin = 'alugar';
     const beds = q.match(/(\d+)\s*(suíte|suite|dorm|quarto)/);
     if (beds) newChips.push({ id: 'beds', kind: 'beds', val: parseInt(beds[1], 10), label: beds[1] + '+ dorm.' });
     const pm = q.match(/(\d+[.,]?\d*)\s*(mi|milh)/);
@@ -248,7 +245,6 @@ export default function LotusBusca({
     const t = types.find((p) => q.includes(p[0]));
     if (t) newChips.push({ id: 'type', kind: 'type', val: t[1], label: t[1] });
     setChips(newChips);
-    setFinalidade(fin);
     setSelectedId(null);
   };
 
@@ -285,7 +281,6 @@ export default function LotusBusca({
         label: 'até ' + formatValor(parseInt(max, 10)),
       });
     }
-    if (p.get('fin') === 'alugar') setFinalidade('alugar');
     if (novos.length) setChips(novos);
 
     // Texto livre chega pela outra aba da home; aí a interpretação faz sentido.
@@ -310,7 +305,8 @@ export default function LotusBusca({
     return c ? c.val : 'any';
   };
 
-  let list = imoveis.filter((r) => r.fin === finalidade);
+  // Só compra: a Lotus não trabalha com locação (ver o seletor "Comprar" lá embaixo).
+  let list = imoveis.filter((r) => r.fin === 'comprar');
   chips.forEach((c) => {
     if (c.kind === 'beds') list = list.filter((r) => r.beds >= c.val);
     else if (c.kind === 'priceMax') list = list.filter((r) => r.priceNum <= c.val);
@@ -354,9 +350,6 @@ export default function LotusBusca({
   const selected = selRaw ? { ...selRaw, specs: mkSpecs(selRaw) } : null;
   const favCount = Object.values(favs).filter(Boolean).length;
 
-  const finCompraStyle = finalidade === 'comprar' ? segOn : segOff;
-  const finAlugaStyle = finalidade === 'alugar' ? segOn : segOff;
-
   const vCity = (() => {
     const c = chips.find((x) => x.kind === 'loc');
     return c ? c.val : 'any';
@@ -393,14 +386,6 @@ export default function LotusBusca({
   const hasResults = list.length > 0;
   const noResults = list.length === 0;
 
-  const setCompra = () => {
-    setFinalidade('comprar');
-    setSelectedId(null);
-  };
-  const setAluga = () => {
-    setFinalidade('alugar');
-    setSelectedId(null);
-  };
   const onSort = (e: React.ChangeEvent<HTMLSelectElement>) => setSortKey(e.target.value);
   const closeSelected = () => setSelectedId(null);
 
@@ -440,14 +425,13 @@ export default function LotusBusca({
   /** Rótulo legível da busca atual, a partir dos filtros ativos. */
   const rotuloDaBusca = () => {
     const partes = chips.map((c) => c.label);
-    partes.unshift(finalidade === 'alugar' ? 'Alugar' : 'Comprar');
+    partes.unshift('Comprar');
     return partes.join(' · ');
   };
 
   /** Query da busca atual, para reabrir depois no mesmo estado. */
   const queryDaBusca = () => {
     const p = new URLSearchParams();
-    if (finalidade === 'alugar') p.set('fin', 'alugar');
     for (const c of chips) {
       if (c.kind === 'type') p.set('tipo', String(c.val));
       else if (c.kind === 'loc') p.set('bairro', String(c.val));
@@ -508,8 +492,16 @@ export default function LotusBusca({
           {/* filters row */}
           <div style={parseStyle('display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:14px;')}>
             <div style={parseStyle('display:inline-flex;background:#ece2cf;border-radius:30px;padding:3px;')}>
-              <button onClick={setCompra} style={parseStyle(finCompraStyle)}>Comprar</button>
-              <button onClick={setAluga} style={parseStyle(finAlugaStyle)}>Alugar</button>
+              {/* Até 27/10/2026 era "Comprar | Alugar". A Lotus não trabalha com
+                  locação e a busca não tinha nenhum imóvel para alugar: "Alugar"
+                  levava a uma lista vazia. No lugar, o caminho de quem quer
+                  anunciar (pedido da Lotus). "Comprar" vira <span>, como na home:
+                  não há mais o que alternar, e um botão que não faz nada convida
+                  um clique à toa. */}
+              <span style={parseStyle(segOn + 'cursor:default;')}>Comprar</span>
+              <Hoverable as="a" href="/lotus-anunciar" baseStyle={parseStyle(segOff + 'display:inline-block;')} hoverStyle={parseStyle('color:#15241c')}>
+                Anuncie seu imóvel
+              </Hoverable>
             </div>
             <select onChange={onCity} value={vCity} style={parseStyle('border:1px solid rgba(21,36,28,.16);background:#fff;color:#15241c;font-size:13.5px;padding:9px 32px 9px 13px;border-radius:30px;cursor:pointer;')}>
               <option value="any">Cidade</option><option value="jundiaí">Jundiaí</option><option value="itupeva">Itupeva</option><option value="vinhedo">Vinhedo</option>

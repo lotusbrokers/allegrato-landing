@@ -8,18 +8,19 @@ const SITE = 'https://www.lotusbrokers.com.br';
 // imóvel). Os dados vêm do Supabase em runtime, não no build.
 export const revalidate = 3600;
 
-// Metadata portada do <helmet> de lotus-busca (paridade de SEO com o estático).
-// TODO go-live: trocar canonical/og:url para o domínio final, remover noindex e publicar sitemap/robots.
+// Metadata portada do <helmet> de lotus-busca. "Alugar" saiu do título e da
+// descrição em 27/10/2026: a Lotus não trabalha com locação, e a busca virou só
+// de compra (o seletor da página leva quem quer anunciar a /lotus-anunciar).
 export const metadata: Metadata = {
-  title: 'Comprar e alugar imóveis em Jundiaí e Itupeva | Lotus Brokers',
+  title: 'Comprar imóveis em Jundiaí e Itupeva | Lotus Brokers',
   description:
-    'Busque imóveis à venda e para alugar em Jundiaí, Itupeva e região com a Lotus Brokers. Descreva o imóvel que você procura e o especialista do bairro caça pra você.',
+    'Busque imóveis à venda em Jundiaí, Itupeva e região com a Lotus Brokers. Descreva o imóvel que você procura e o especialista do bairro caça pra você.',
   alternates: { canonical: 'https://www.lotusbrokers.com.br/lotus-busca' },
   openGraph: {
     siteName: 'Lotus Brokers',
     type: 'website',
     url: 'https://www.lotusbrokers.com.br/lotus-busca',
-    title: 'Comprar e alugar imóveis em Jundiaí e Itupeva, Lotus Brokers',
+    title: 'Comprar imóveis em Jundiaí e Itupeva, Lotus Brokers',
     description:
       'Casas, apartamentos, coberturas e terrenos em Jundiaí, Itupeva e região, curados pelo especialista do bairro.',
     images: [
