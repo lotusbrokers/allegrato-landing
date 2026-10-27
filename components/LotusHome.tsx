@@ -194,17 +194,19 @@ const reviewsData = [
 const guias = [
   { tag: 'Comprar', title: 'Como comprar um imóvel em Jundiaí', desc: 'Da pré-aprovação à escritura: o passo a passo sem susto.', read: '8 min' },
   { tag: 'Financiamento', title: 'Como conseguir a aprovação do financiamento', desc: 'Renda, score e documentação, o que os bancos olham.', read: '7 min' },
-  { tag: 'Alugar', title: 'Documentos necessários para alugar', desc: 'Fiador, seguro-fiança ou caução: qual escolher.', read: '5 min' },
+  // Era "Alugar · Documentos necessários para alugar" até 27/10/2026: a Lotus não
+  // trabalha com locação. O texto vem da própria /lotus-anunciar.
+  { tag: 'Anunciar', title: 'Como anunciar o seu imóvel', desc: 'Avaliação sem custo e um especialista do seu bairro, do anúncio à chave.', read: '5 min' },
   { tag: 'Vender', title: 'Quanto vale o meu imóvel? Como avaliar', desc: 'O que pesa no preço e como não deixar dinheiro na mesa.', read: '6 min' },
   { tag: 'Custos', title: 'ITBI, escritura e registro: o que pagar', desc: 'Todos os custos da compra, em uma conta só.', read: '4 min' },
   { tag: 'Região', title: 'Morar em Itupeva vale a pena?', desc: 'Serra, condomínios e rotina: o guia honesto da cidade.', read: '6 min' },
 ];
 
+// Sem os "para alugar" desde 27/10/2026: a Lotus não trabalha com locação.
 const possibilities = [
-  'Apartamentos à venda', 'Apartamentos para alugar', 'Apartamentos novos', 'Coberturas à venda',
-  'Casas à venda', 'Casas para alugar', 'Casas em condomínio', 'Sobrados à venda',
-  'Terrenos à venda', 'Terrenos para alugar', 'Áreas à venda', 'Chácaras à venda',
-  'Salas comerciais', 'Lojas para alugar', 'Galpões à venda', 'Galpões para alugar',
+  'Apartamentos à venda', 'Apartamentos novos', 'Coberturas à venda', 'Casas à venda',
+  'Casas em condomínio', 'Sobrados à venda', 'Terrenos à venda', 'Áreas à venda',
+  'Chácaras à venda', 'Salas comerciais', 'Lojas à venda', 'Galpões à venda',
 ];
 
 const popularBairros = [
@@ -759,7 +761,7 @@ export default function LotusHome({
               <ImageSlot src="/gran-ville-santo-angelo/a025.jpg" id="lotus-motor-b" sizes="(max-width: 900px) 100vw, 50vw" alt="Casa com piscina em condomínio fechado, imóvel selecionado pela Lotus" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} />
               <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,.1),rgba(21,36,28,.85));')}></div>
               <div style={parseStyle('position:absolute;left:0;right:0;bottom:0;padding:36px;')}>
-                <div style={parseStyle('font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#cdab6e;margin-bottom:12px;')}>Comprar &amp; alugar</div>
+                <div style={parseStyle('font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#cdab6e;margin-bottom:12px;')}>Comprar</div>
                 <h3 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:30px;color:#f7f2e8;margin:0 0 10px;line-height:1.08;")}>Imóveis selecionados para o seu momento</h3>
                 <p style={parseStyle('font-size:15.5px;color:rgba(247,242,232,.78);margin:0 0 18px;font-weight:300;line-height:1.5;')}>Busca orientada, conhecimento regional e uma seleção coerente com o que realmente importa para você.</p>
                 <span style={parseStyle('display:inline-flex;align-items:center;gap:8px;color:#cdab6e;font-weight:600;font-size:15px;')}>Explorar a busca <span style={parseStyle('font-size:18px;')}>→</span></span>
@@ -1168,7 +1170,7 @@ export default function LotusHome({
       <section id="anunciar" style={parseStyle('content-visibility:auto;contain-intrinsic-size:auto 800px;background:#3f6249;padding:110px 40px;position:relative;overflow:hidden;')}>
         <div style={{ position: 'absolute', inset: 0, opacity: 0.05, mixBlendMode: 'overlay', pointerEvents: 'none', backgroundImage: NOISE_BG }}></div>
         <div data-reveal="" style={parseStyle('max-width:880px;margin:0 auto;text-align:center;position:relative;')}>
-          <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#cdab6e;margin-bottom:20px;')}>Quer vender ou alugar?</div>
+          <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#cdab6e;margin-bottom:20px;')}>Quer vender seu imóvel?</div>
           <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(30px,4.4vw,52px);line-height:1.05;letter-spacing:-.02em;margin:0 0 22px;color:#f7f2e8;")}>Seu imóvel merece uma estratégia à altura e um especialista para conduzi-la.</h2>
           <p style={parseStyle('font-size:18px;color:rgba(247,242,232,.78);font-weight:300;line-height:1.55;max-width:600px;margin:0 auto 36px;')}>Avaliação responsável, apresentação cuidadosa, estratégia de divulgação e acompanhamento especializado do início ao fim.</p>
           <div style={parseStyle('display:flex;flex-wrap:wrap;gap:14px;justify-content:center;')}>
@@ -1219,7 +1221,7 @@ export default function LotusHome({
               <div style={parseStyle('width:56px;height:56px;border-radius:14px;background:#ece2cf;display:flex;align-items:center;justify-content:center;margin-bottom:26px;')}>
                 <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1d3a2c" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><circle cx="7.5" cy="15.5" r="4.5"></circle><path d="m10.8 12.2 9.2-9.2"></path><path d="m16 7 2.5 2.5"></path><path d="m18.5 4.5 2.5 2.5"></path></svg>
               </div>
-              <h3 style={parseStyle("font-family:'Fraunces',serif;font-weight:400;font-size:26px;line-height:1.08;color:#15241c;margin:0 0 14px;")}>Venda ou alugue com a Lotus</h3>
+              <h3 style={parseStyle("font-family:'Fraunces',serif;font-weight:400;font-size:26px;line-height:1.08;color:#15241c;margin:0 0 14px;")}>Anuncie seu imóvel na Lotus</h3>
               <p style={parseStyle('font-size:15px;color:#3f6249;font-weight:300;line-height:1.55;margin:0 0 28px;')}>Avaliação sem custo e processo transparente, do anúncio à chave, com um especialista do seu bairro.</p>
               <Link href="/lotus-anunciar" style={parseStyle('margin-top:auto;display:inline-flex;align-items:center;justify-content:space-between;gap:8px;color:#1d3a2c;font-weight:600;font-size:15px;border-bottom:1.5px solid #b18a4a;padding-bottom:6px;')}>Anunciar meu imóvel <span style={parseStyle('font-size:18px;')}>→</span></Link>
             </div>
@@ -1231,11 +1233,13 @@ export default function LotusHome({
               <p style={parseStyle('font-size:15px;color:#3f6249;font-weight:300;line-height:1.55;margin:0 0 28px;')}>Imóveis curados pelo especialista do bairro, com o valor certo pra sua família, sem catálogo de volume.</p>
               <Link href="/lotus-busca" style={parseStyle('margin-top:auto;display:inline-flex;align-items:center;justify-content:space-between;gap:8px;color:#1d3a2c;font-weight:600;font-size:15px;border-bottom:1.5px solid #b18a4a;padding-bottom:6px;')}>Ver imóveis <span style={parseStyle('font-size:18px;')}>→</span></Link>
             </div>
+            {/* Era "Quer alugar?" até 27/10/2026: a Lotus não trabalha com locação.
+                O texto e o WhatsApp continuam valendo para quem não achou o imóvel. */}
             <div data-reveal="" style={parseStyle('background:#f7f2e8;border-radius:20px;padding:42px 38px;box-shadow:0 18px 44px -30px rgba(0,0,0,.4);display:flex;flex-direction:column;')}>
               <div style={parseStyle('width:56px;height:56px;border-radius:14px;background:#ece2cf;display:flex;align-items:center;justify-content:center;margin-bottom:26px;')}>
                 <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1d3a2c" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M2 22h20"></path><path d="M10 6h4M10 10h4M10 14h4M10 18h4"></path></svg>
               </div>
-              <h3 style={parseStyle("font-family:'Fraunces',serif;font-weight:400;font-size:26px;line-height:1.08;color:#15241c;margin:0 0 14px;")}>Quer alugar?</h3>
+              <h3 style={parseStyle("font-family:'Fraunces',serif;font-weight:400;font-size:26px;line-height:1.08;color:#15241c;margin:0 0 14px;")}>Não achou o que procura?</h3>
               <p style={parseStyle('font-size:15px;color:#3f6249;font-weight:300;line-height:1.55;margin:0 0 28px;')}>As melhores opções da região, com quem conhece cada rua. Conta pra gente o que você precisa.</p>
               <a href={waLink} target="_blank" rel="noopener" style={parseStyle('margin-top:auto;display:inline-flex;align-items:center;justify-content:space-between;gap:8px;color:#1d3a2c;font-weight:600;font-size:15px;border-bottom:1.5px solid #b18a4a;padding-bottom:6px;')}>Falar com um especialista <span style={parseStyle('font-size:18px;')}>→</span></a>
             </div>
@@ -1257,7 +1261,7 @@ export default function LotusHome({
               <span style={parseStyle('height:1px;flex:1;background:rgba(21,36,28,.12);')}></span>
             </div>
             <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px 24px;')}>
-              {/* hint-placeholder-count: 16 */}
+              {/* hint-placeholder-count: 12 */}
               {possibilities.map((x, i) => (
                 <Hoverable key={i} as="a" href="#comprar" baseStyle={parseStyle('font-size:14.5px;color:#3f6249;transition:color .2s;')} hoverStyle={parseStyle('color:#b18a4a')}>{x}</Hoverable>
               ))}
@@ -1332,7 +1336,7 @@ export default function LotusHome({
             <div>
               <div style={parseStyle('font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#cdab6e;margin-bottom:18px;')}>Serviços</div>
               <div style={parseStyle('display:flex;flex-direction:column;gap:12px;font-size:14.5px;color:rgba(247,242,232,.72);')}>
-                <Hoverable as="a" href="/lotus-busca" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Comprar &amp; alugar</Hoverable>
+                <Hoverable as="a" href="/lotus-busca" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Comprar</Hoverable>
                 <Hoverable as="a" href="/lotus-lancamentos" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Lançamentos</Hoverable>
                 <Hoverable as="a" href="/lotus-anunciar" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Anunciar imóvel</Hoverable>
                 <Hoverable as="a" href="/lotus-bairro" target="_top" baseStyle={parseStyle('transition:color .2s;')} hoverStyle={parseStyle('color:#cdab6e')}>Bairros</Hoverable>
