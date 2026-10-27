@@ -35,6 +35,7 @@ import { galeriaDoImovel, type CondominioDoImovel } from '@/lib/condominio-do-im
 import LotusHeader from './LotusHeader';
 import LightboxFotos from './LightboxFotos';
 import { codigoDestaAba, quemApareceNoCartao, trechoDoCorretor, type PessoaDoCartao } from '@/lib/corretor-do-link';
+import { especialistaNoCartaoDoImovel } from '@/lib/especialidades';
 import { leadDoPortal, sendLead } from '@/lib/lead';
 
 /* ------------------------------------------------------------------ */
@@ -542,7 +543,8 @@ export default function LotusImovel({
             <div style={parseStyle('width:56px;height:56px;border-radius:50%;background:#1d3a2c;flex-shrink:0;overflow:hidden;position:relative;')}><ImageSlot id="imovel-corretor" src={pessoaDoCartao.foto ?? undefined} sizes="56px" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={pessoaDoCartao.nome} /></div>
             <div>
               <div style={parseStyle('font-size:15.5px;font-weight:600;color:#15241c;')}>{pessoaDoCartao.nome}</div>
-              <div style={parseStyle('font-size:12.5px;color:#3f6249;')}>Especialista em {bairro}</div>
+              {/* As especialidades de quem aparece (até 3); sem nenhuma, e no genérico, o bairro. */}
+              <div style={parseStyle('font-size:12.5px;color:#3f6249;')}>Especialista em {especialistaNoCartaoDoImovel(pessoaDoCartao.especialidades, bairro)}</div>
               {/* CRECI 000001-F e a nota 5,0 eram placeholders inventados;
                   removidos até haver dado real do corretor responsável. */}
             </div>

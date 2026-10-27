@@ -40,11 +40,15 @@ function cenario(r: Record<string, Resposta>) {
 test('getCaptadorDoImovel: lê captador_id numa consulta própria e o nome em portal_brokers', async () => {
   cenario({
     portal_imoveis: { status: 200, corpo: [{ captador_id: 'id-da-gabriele' }] },
-    portal_brokers: { status: 200, corpo: [{ name: 'Gabriele  Fávaro', photo_url: null }] },
+    portal_brokers: {
+      status: 200,
+      corpo: [{ name: 'Gabriele  Fávaro', photo_url: null, especialidades: ['Casa', 'Alto padrão', 'Permuta'] }],
+    },
   });
   assert.deepEqual(await brokers.getCaptadorDoImovel('CA0063'), {
     nome: 'Gabriele Fávaro',
     foto: '/corretores/gabriele-favaro.jpg',
+    especialidades: ['Casa', 'Alto padrão', 'Permuta'],
   });
   const [imovel, broker] = pedidos;
   assert.equal(imovel.pathname, '/rest/v1/portal_imoveis');
@@ -52,6 +56,7 @@ test('getCaptadorDoImovel: lê captador_id numa consulta própria e o nome em po
   assert.equal(imovel.searchParams.get('codigo_imovel'), 'eq.CA0063');
   assert.equal(imovel.searchParams.get('tenant_id'), 'eq.lotus');
   assert.equal(broker.pathname, '/rest/v1/portal_brokers');
+  assert.equal(broker.searchParams.get('select'), 'name,photo_url,especialidades');
   assert.equal(broker.searchParams.get('id'), 'eq.id-da-gabriele');
   assert.equal(broker.searchParams.get('tenant_id'), 'eq.lotus');
 });
@@ -59,9 +64,13 @@ test('getCaptadorDoImovel: lê captador_id numa consulta própria e o nome em po
 test('getCaptadorDoImovel: a foto do banco vence a local', async () => {
   cenario({
     portal_imoveis: { status: 200, corpo: [{ captador_id: 'id-da-gabriele' }] },
-    portal_brokers: { status: 200, corpo: [{ name: 'Gabriele Fávaro', photo_url: 'https://cdn/gabi.jpg' }] },
+    portal_brokers: { status: 200, corpo: [{ name: 'Gabriele Fávaro', photo_url: 'https://cdn/gabi.jpg', especialidades: null }] },
   });
-  assert.deepEqual(await brokers.getCaptadorDoImovel('CA0063'), { nome: 'Gabriele Fávaro', foto: 'https://cdn/gabi.jpg' });
+  assert.deepEqual(await brokers.getCaptadorDoImovel('CA0063'), {
+    nome: 'Gabriele Fávaro',
+    foto: 'https://cdn/gabi.jpg',
+    especialidades: null,
+  });
 });
 
 test('getCaptadorDoImovel: o captador oculto cai no genérico', async () => {
@@ -106,10 +115,58 @@ test('getCaptadorDoImovel: a falha da leitura devolve null (o site antes da migr
 });
 
 test('getBrokerDoLink: a mesma limpeza do nome e o mesmo oculto', async () => {
-  cenario({ portal_brokers: { status: 200, corpo: [{ name: 'Mariana  Mamede', photo_url: null }] } });
-  assert.deepEqual(await brokers.getBrokerDoLink('k7m2qx'), { nome: 'Mariana Mamede', foto: '/corretores/mariana-mamede.jpg' });
+  cenario({ portal_brokers: { status: 200, corpo: [{ name: 'Mariana  Mamede', photo_url: null, especialidades: ['Apartamento'] }] } });
+  assert.deepEqual(await brokers.getBrokerDoLink('k7m2qx'), {
+    nome: 'Mariana Mamede',
+    foto: '/corretores/mariana-mamede.jpg',
+    especialidades: ['Apartamento'],
+  });
+  assert.equal(pedidos[0].searchParams.get('select'), 'name,photo_url,especialidades');
   assert.equal(pedidos[0].searchParams.get('codigo_link'), 'eq.k7m2qx');
 
   cenario({ portal_brokers: { status: 200, corpo: [{ name: 'Alex  Xavier da Silva', photo_url: null }] } });
   assert.equal(await brokers.getBrokerDoLink('k7m2qx'), null);
+});
+
+test('getBrokerDoLink: a falha da leitura devolve null (o site antes da migration 20261311)', async (t) => {
+  const erros = t.mock.method(console, 'error', () => {});
+  cenario({
+    portal_brokers: {
+      status: 400,
+      corpo: { code: '42703', message: 'column portal_brokers.especialidades does not exist', details: null, hint: null },
+    },
+  });
+  assert.equal(await brokers.getBrokerDoLink('k7m2qx'), null);
+  assert.match(String(erros.mock.calls[0]?.arguments[1]), /especialidades does not exist/);
+});
+
+test('getBrokers: pede especialidades e as entrega como vieram; os EXTRAS ficam sem', async () => {
+  cenario({
+    portal_brokers: {
+      status: 200,
+      corpo: [
+        { id: 'id-da-gabriele', name: 'Gabriele Fávaro', photo_url: null, creci: '242152-F', imoveis_ativos: 12, especialidades: ['Casa', 'Permuta'] },
+        { id: 'id-da-lara', name: 'Lara Matos', photo_url: null, creci: '382.076 - F', imoveis_ativos: 6, especialidades: null },
+      ],
+    },
+  });
+  const lista = await brokers.getBrokers();
+  assert.equal(pedidos[0].searchParams.get('select'), 'id,name,photo_url,creci,imoveis_ativos,especialidades');
+  const porNome = Object.fromEntries(lista.map((b) => [b.name, b.especialidades]));
+  assert.deepEqual(porNome['Gabriele Fávaro'], ['Casa', 'Permuta']);
+  assert.equal(porNome['Lara Matos'], null);
+  assert.equal(porNome['Mariana Mamede'], null, 'quem só está nos EXTRAS não tem especialidade');
+});
+
+test('getBrokers: a falha da leitura cai nos EXTRAS, todos sem especialidade', async (t) => {
+  t.mock.method(console, 'error', () => {});
+  cenario({
+    portal_brokers: {
+      status: 400,
+      corpo: { code: '42703', message: 'column portal_brokers.especialidades does not exist', details: null, hint: null },
+    },
+  });
+  const lista = await brokers.getBrokers();
+  assert.ok(lista.length > 0, 'a página não fica sem ninguém');
+  assert.ok(lista.every((b) => b.especialidades === null));
 });

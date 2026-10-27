@@ -6,7 +6,8 @@ import type { PessoaDoCartao } from './corretor-do-link';
 // Fonte: view pública portal_brokers = tenant_memberships (quem é corretor:
 // role + tenant) JOIN user_profiles (nome/foto). Leitura anônima; a view expõe
 // só id/name/photo_url — PII (email/phone) fica de fora por grant de coluna.
-// Ver supabase/migrations/0002_portal_brokers_view.sql.
+// Ver supabase/migrations/0002_portal_brokers_view.sql. As especialidades
+// (até 5, NULL = nenhuma) entram pela migration 20261311 da Dash.
 
 export type Broker = {
   id: string;
@@ -14,6 +15,7 @@ export type Broker = {
   photoUrl: string | null;
   creci: string | null;
   imoveisAtivos: number;
+  especialidades: string[] | null;
 };
 
 type BrokerRow = {
@@ -22,6 +24,7 @@ type BrokerRow = {
   photo_url: string | null;
   creci: string | null;
   imoveis_ativos: number;
+  especialidades: string[] | null;
 };
 
 /**
@@ -65,16 +68,16 @@ const OCULTOS = new Set(['reginaldo barbosa faleiros', 'samir said', 'alex xavie
 // Restaurado o acesso, o banco volta a mandar sozinho (quem já existe lá é
 // descartado daqui pelo nome) e esta lista deve ser esvaziada.
 const EXTRAS: Broker[] = [
-  { id: 'alexandra-niero', name: 'Alexandra Niero', photoUrl: null, creci: '272.515-F', imoveisAtivos: 0 },
-  { id: 'fabio-goncalves', name: 'Fábio Gonçalves', photoUrl: null, creci: '319294-F', imoveisAtivos: 0 },
-  { id: 'fernanda-souza', name: 'Fernanda Souza', photoUrl: null, creci: '219893', imoveisAtivos: 0 },
-  { id: 'flavia-ceolin', name: 'Flavia Ceolin', photoUrl: null, creci: '324927', imoveisAtivos: 0 },
-  { id: 'gabriele-favaro', name: 'Gabriele Fávaro', photoUrl: null, creci: '242152-F', imoveisAtivos: 0 },
-  { id: 'gisele-alves', name: 'Gisele Alves', photoUrl: null, creci: '328459', imoveisAtivos: 0 },
-  { id: 'humberto-martinez', name: 'Humberto Martinez', photoUrl: null, creci: '302852', imoveisAtivos: 0 },
-  { id: 'lara-matos', name: 'Lara Matos', photoUrl: null, creci: '382.076 - F', imoveisAtivos: 0 },
-  { id: 'marcos-lafratta', name: 'Marcos Lafratta', photoUrl: null, creci: '335323-F', imoveisAtivos: 0 },
-  { id: 'mariana-mamede', name: 'Mariana Mamede', photoUrl: null, creci: '251592 F', imoveisAtivos: 0 },
+  { id: 'alexandra-niero', name: 'Alexandra Niero', photoUrl: null, creci: '272.515-F', imoveisAtivos: 0, especialidades: null },
+  { id: 'fabio-goncalves', name: 'Fábio Gonçalves', photoUrl: null, creci: '319294-F', imoveisAtivos: 0, especialidades: null },
+  { id: 'fernanda-souza', name: 'Fernanda Souza', photoUrl: null, creci: '219893', imoveisAtivos: 0, especialidades: null },
+  { id: 'flavia-ceolin', name: 'Flavia Ceolin', photoUrl: null, creci: '324927', imoveisAtivos: 0, especialidades: null },
+  { id: 'gabriele-favaro', name: 'Gabriele Fávaro', photoUrl: null, creci: '242152-F', imoveisAtivos: 0, especialidades: null },
+  { id: 'gisele-alves', name: 'Gisele Alves', photoUrl: null, creci: '328459', imoveisAtivos: 0, especialidades: null },
+  { id: 'humberto-martinez', name: 'Humberto Martinez', photoUrl: null, creci: '302852', imoveisAtivos: 0, especialidades: null },
+  { id: 'lara-matos', name: 'Lara Matos', photoUrl: null, creci: '382.076 - F', imoveisAtivos: 0, especialidades: null },
+  { id: 'marcos-lafratta', name: 'Marcos Lafratta', photoUrl: null, creci: '335323-F', imoveisAtivos: 0, especialidades: null },
+  { id: 'mariana-mamede', name: 'Mariana Mamede', photoUrl: null, creci: '251592 F', imoveisAtivos: 0, especialidades: null },
 ];
 
 const chaveNome = (nome: string) => nome.normalize('NFC').toLowerCase().trim().replace(/\s+/g, ' ');
@@ -88,7 +91,7 @@ const semOcultos = (itens: Broker[]) => itens.filter((b) => !OCULTOS.has(chaveNo
 export async function getBrokers(): Promise<Broker[]> {
   const { data, error } = await supabase
     .from('portal_brokers')
-    .select('id, name, photo_url, creci, imoveis_ativos')
+    .select('id, name, photo_url, creci, imoveis_ativos, especialidades')
     .eq('tenant_id', TENANT_ID)
     .order('name');
 
@@ -108,6 +111,7 @@ export async function getBrokers(): Promise<Broker[]> {
       photoUrl: r.photo_url,
       creci: r.creci,
       imoveisAtivos: r.imoveis_ativos ?? 0,
+      especialidades: r.especialidades,
     }))
     .filter((b) => !OCULTOS.has(chaveNome(b.name)));
 
@@ -122,16 +126,19 @@ export async function getBrokers(): Promise<Broker[]> {
   return [...doBanco, ...extras].sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
 }
 
+type LinhaDoCartao = Pick<BrokerRow, 'name' | 'photo_url' | 'especialidades'>;
+const COLUNAS_DO_CARTAO = 'name, photo_url, especialidades';
+
 /**
  * Uma linha de portal_brokers como o cartão do imóvel a mostra. Sem linha, sem
  * nome ou de quem a Lotus tirou do site, null: quem chama mostra o genérico.
  * A foto tem a mesma reserva da página de corretores.
  */
-function pessoaDoSite(row: Pick<BrokerRow, 'name' | 'photo_url'> | null): PessoaDoCartao | null {
+function pessoaDoSite(row: LinhaDoCartao | null): PessoaDoCartao | null {
   // "Mariana  Mamede": o cadastro tem espaço duplo em vários nomes.
   const nome = row?.name?.trim().replace(/\s+/g, ' ');
   if (!nome || OCULTOS.has(chaveNome(nome))) return null;
-  return { nome, foto: row?.photo_url || conteudoRealDe(nome)?.foto || null };
+  return { nome, foto: row?.photo_url || conteudoRealDe(nome)?.foto || null, especialidades: row?.especialidades ?? null };
 }
 
 /**
@@ -146,7 +153,7 @@ function pessoaDoSite(row: Pick<BrokerRow, 'name' | 'photo_url'> | null): Pessoa
 export async function getBrokerDoLink(codigo: string): Promise<PessoaDoCartao | null> {
   const { data, error } = await supabase
     .from('portal_brokers')
-    .select('name, photo_url')
+    .select(COLUNAS_DO_CARTAO)
     .eq('tenant_id', TENANT_ID)
     .eq('codigo_link', codigo)
     .maybeSingle();
@@ -154,7 +161,7 @@ export async function getBrokerDoLink(codigo: string): Promise<PessoaDoCartao | 
     console.error('[getBrokerDoLink] erro Supabase:', error.message);
     return null;
   }
-  return pessoaDoSite(data as Pick<BrokerRow, 'name' | 'photo_url'> | null);
+  return pessoaDoSite(data as LinhaDoCartao | null);
 }
 
 /**
@@ -183,7 +190,7 @@ export async function getCaptadorDoImovel(codigoImovel: string): Promise<PessoaD
 
   const { data, error: erroDoCaptador } = await supabase
     .from('portal_brokers')
-    .select('name, photo_url')
+    .select(COLUNAS_DO_CARTAO)
     .eq('tenant_id', TENANT_ID)
     .eq('id', captadorId)
     .maybeSingle();
@@ -191,5 +198,5 @@ export async function getCaptadorDoImovel(codigoImovel: string): Promise<PessoaD
     console.error('[getCaptadorDoImovel] erro Supabase:', erroDoCaptador.message);
     return null;
   }
-  return pessoaDoSite(data as Pick<BrokerRow, 'name' | 'photo_url'> | null);
+  return pessoaDoSite(data as LinhaDoCartao | null);
 }

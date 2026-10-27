@@ -57,10 +57,13 @@ export function codigoDestaAba(): string | null {
   return codigoDaVisita(window.location.search, storage);
 }
 
-/** Nome e foto de quem aparece no cartão lateral da página do imóvel. */
-export type PessoaDoCartao = { nome: string; foto: string | null };
+/**
+ * Nome, foto e especialidades (portal_brokers, NULL = nenhuma) de quem aparece
+ * no cartão lateral da página do imóvel.
+ */
+export type PessoaDoCartao = { nome: string; foto: string | null; especialidades: string[] | null };
 
-export const GENERICO_DO_CARTAO: PessoaDoCartao = { nome: 'Especialista Lotus', foto: null };
+export const GENERICO_DO_CARTAO: PessoaDoCartao = { nome: 'Especialista Lotus', foto: null, especialidades: null };
 
 /**
  * Quem o cartão mostra: o corretor que mandou o link (?c=); sem ele, ou com um

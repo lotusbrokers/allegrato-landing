@@ -2,6 +2,7 @@
 import { footerLegalLine } from '@/lib/site';
 import { SQUADS, nomesDosSquads } from '@/lib/squads';
 import { conteudoRealDe } from '@/lib/corretores-conteudo';
+import { especialidadesDoSite, especialistaEm } from '@/lib/especialidades';
 
 /**
  * LotusCorretores — porte 1:1 de lotus-corretores/index.html (mecanismo dc-runtime) para React.
@@ -220,6 +221,8 @@ type Broker = {
   slot: string;
   /** Foto real (portal_brokers.photo_url). Sem foto => avatar de iniciais. */
   photoUrl?: string | null;
+  /** portal_brokers.especialidades, como gravadas na Dash. null = nenhuma: vale `area`. */
+  especialidades: string[] | null;
 };
 
 // VAZIO DE PROPÓSITO — não repovoar.
@@ -283,6 +286,7 @@ function realToBroker(b: {
   photoUrl: string | null;
   creci: string | null;
   imoveisAtivos: number;
+  especialidades: string[] | null;
 }): Broker {
   return {
     id: b.id,
@@ -297,6 +301,7 @@ function realToBroker(b: {
     // O banco tem prioridade: o override local só entra quando photo_url é
     // nulo. Assim, publicar a foto no dashboard desativa o override sozinho.
     photoUrl: b.photoUrl ?? conteudoRealDe(b.name)?.foto ?? null,
+    especialidades: b.especialidades,
   };
 }
 
@@ -320,7 +325,7 @@ export default function LotusCorretores({
 }: {
   whatsapp?: string;
   /** Corretores reais (portal_brokers). Vazio/undefined => fallback demo. */
-  brokers?: { id: string; name: string; photoUrl: string | null; creci: string | null; imoveisAtivos: number }[];
+  brokers?: { id: string; name: string; photoUrl: string | null; creci: string | null; imoveisAtivos: number; especialidades: string[] | null }[];
 } = {}) {
   // Fonte dos corretores: banco (se veio algum) ou fallback demo.
   const doBanco: Broker[] =
@@ -378,8 +383,10 @@ export default function LotusCorretores({
     wa,
     bio: conteudoRealDe(raw.name)?.bio ?? bioFor(raw),
     // `area` já traz a cidade e `squad` é fixo em "Especialista" — repetir os
-    // dois viraria chip duplicado.
-    chips: [raw.area, 'Casas', 'Apartamentos', 'Avaliação gratuita'],
+    // dois viraria chip duplicado. Depois da cidade, as especialidades reais
+    // (até 5); sem nenhuma, só a cidade. "Casas", "Apartamentos" e "Avaliação
+    // gratuita" eram iguais para todos e saíram em 27/10.
+    chips: [raw.area, ...especialidadesDoSite(raw.especialidades)],
   };
 
   // A pergunta "Quem é o melhor corretor para X?" saiu junto com sua resposta:
@@ -516,7 +523,7 @@ export default function LotusCorretores({
                           <div style={parseStyle('font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#b18a4a;margin-bottom:7px;')}>{b.squad}</div>
                         )}
                         <h3 style={parseStyle("font-family:'Fraunces',serif;font-weight:400;font-size:20px;color:#15241c;margin:0 0 4px;line-height:1.05;")}>{b.name}</h3>
-                        <div style={parseStyle('font-size:13px;color:#3f6249;')}>Especialista em {b.area}</div>
+                        <div style={parseStyle('font-size:13px;color:#3f6249;')}>Especialista em {especialistaEm(b.especialidades, b.area)}</div>
                         {linhaCredenciais(b.creci, imoveisAtivosLabel(b.active)) && (
                           <div style={parseStyle('font-size:12px;color:#8aa593;margin-top:4px;')}>{linhaCredenciais(b.creci, imoveisAtivosLabel(b.active))}</div>
                         )}
@@ -588,7 +595,7 @@ export default function LotusCorretores({
                 </div>
               )}
               {/* A cidade saiu: `area` já a contém ("Jundiaí e Itupeva · Jundiaí"). */}
-              <p style={parseStyle('font-size:15.5px;color:#3f6249;font-weight:300;line-height:1.55;margin:0 0 22px;')}>Especialista em <strong style={parseStyle('color:#15241c;font-weight:600;')}>{sel.area}</strong>{imoveisAtivosLabel(sel.active) ? ' · ' + imoveisAtivosLabel(sel.active) : ''}.</p>
+              <p style={parseStyle('font-size:15.5px;color:#3f6249;font-weight:300;line-height:1.55;margin:0 0 22px;')}>Especialista em <strong style={parseStyle('color:#15241c;font-weight:600;')}>{especialistaEm(sel.especialidades, sel.area)}</strong>{imoveisAtivosLabel(sel.active) ? ' · ' + imoveisAtivosLabel(sel.active) : ''}.</p>
               <div style={parseStyle('display:flex;flex-wrap:wrap;gap:10px;')}>
                 <a href={sel.wa} target="_blank" rel="noopener" style={parseStyle('display:inline-flex;align-items:center;gap:8px;background:#25543b;color:#f7f2e8;font-weight:600;font-size:14.5px;padding:13px 22px;border-radius:11px;')}><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Z"></path></svg>Falar no WhatsApp</a>
                 <Hoverable as="a" href="#agenda" baseStyle={parseStyle('display:inline-flex;align-items:center;gap:8px;background:#b18a4a;color:#15241c;font-weight:600;font-size:14.5px;padding:13px 22px;border-radius:11px;transition:background .2s;')} hoverStyle={parseStyle('background:#cdab6e')}>Agendar conversa</Hoverable>
