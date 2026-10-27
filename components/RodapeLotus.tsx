@@ -193,7 +193,7 @@ export default function RodapeLotus({ tema = TEMA_PADRAO }: { tema?: TemaRodape 
             Grandes histórias têm endereço.
           </p>
           <p style={{ fontSize: 13.5, lineHeight: 1.6, margin: '0 0 20px', maxWidth: 340 }}>
-            Consultoria imobiliária para compra, venda, locação e investimento em imóveis de médio e
+            Consultoria imobiliária para compra, venda e investimento em imóveis de médio e
             alto padrão em Jundiaí, Itupeva e região.
           </p>
           {/* CTA de volta para a listagem. Mora aqui, e não numa faixa própria,

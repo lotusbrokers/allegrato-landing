@@ -669,7 +669,7 @@ export default function LotusCorretores({
                     <form onSubmit={submitForm} style={parseStyle('display:flex;flex-direction:column;gap:11px;')}>
                       <input type="text" required placeholder="Seu nome" value={form.nome} onChange={(e) => setForm({ ...form, nome: e.target.value })} style={parseStyle('border:1px solid rgba(21,36,28,.16);border-radius:10px;padding:12px 13px;font-size:14px;outline:none;')} />
                       <input type="text" required placeholder="WhatsApp" value={form.whats} onChange={(e) => setForm({ ...form, whats: e.target.value })} style={parseStyle('border:1px solid rgba(21,36,28,.16);border-radius:10px;padding:12px 13px;font-size:14px;outline:none;')} />
-                      <select className="lt-field" value={form.assunto} onChange={(e) => setForm({ ...form, assunto: e.target.value })} style={parseStyle('border-radius:10px;width:100%;')}><option>Quero comprar</option><option>Quero vender</option><option>Quero alugar</option><option>Outro assunto</option></select>
+                      <select className="lt-field" value={form.assunto} onChange={(e) => setForm({ ...form, assunto: e.target.value })} style={parseStyle('border-radius:10px;width:100%;')}><option>Quero comprar</option><option>Quero vender</option><option>Outro assunto</option></select>
                       <label style={parseStyle('display:flex;align-items:flex-start;gap:8px;font-size:11.5px;color:#3f6249;line-height:1.45;cursor:pointer;')}><input type="checkbox" required style={parseStyle('margin-top:2px;width:15px;height:15px;accent-color:#1d3a2c;')} />Concordo com a Política de Privacidade (LGPD).</label>
                       <button type="submit" style={parseStyle('background:#1d3a2c;color:#f7f2e8;font-weight:600;font-size:14.5px;padding:13px;border:none;border-radius:10px;cursor:pointer;')}>Enviar mensagem</button>
                     </form>
@@ -709,7 +709,7 @@ export default function LotusCorretores({
                 <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" style={{ height: 34, width: 'auto', display: 'block' }} />
               </div>
               <p style={parseStyle("font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:19px;color:rgba(247,242,232,.85);line-height:1.35;max-width:300px;margin:0 0 18px;")}>Grandes histórias têm endereço.</p>
-              <p style={parseStyle('font-size:13.5px;color:rgba(247,242,232,.55);line-height:1.6;margin:0;')}>Consultoria imobiliária para compra, venda, locação e investimento em imóveis de médio e alto padrão em Jundiaí, Itupeva e região.</p>
+              <p style={parseStyle('font-size:13.5px;color:rgba(247,242,232,.55);line-height:1.6;margin:0;')}>Consultoria imobiliária para compra, venda e investimento em imóveis de médio e alto padrão em Jundiaí, Itupeva e região.</p>
             </div>
             <div>
               <div style={parseStyle('font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#cdab6e;margin-bottom:18px;')}>A Lotus</div>
