@@ -527,7 +527,7 @@ export default function TerraceSerraDoJapi() {
       <section className="hero" id="topo" data-screen-label="Hero">
         <div className="hero__media">
           <img
-            src={`${IMG}/a026.jpg`}
+            src={`${IMG}/midia/27fb567f808f519e.webp`}
             alt="Perspectiva ilustrada das três torres do Terrace Serra do Japi em Jundiaí"
           />
         </div>
@@ -588,8 +588,8 @@ export default function TerraceSerraDoJapi() {
           <div className="split img-left">
             <figure className="media-fig">
               <div className="img-reveal media-tall">
-                <img
-                  src={`${IMG}/a024.jpg`}
+                <img loading="lazy"
+                  src={`${IMG}/midia/044d729e6e710162.webp`}
                   alt="Vista aérea da Serra do Japi, exuberante remanescente de Mata Atlântica no interior de São Paulo"
                 />
               </div>
@@ -647,8 +647,8 @@ export default function TerraceSerraDoJapi() {
             </div>
             <figure className="media-fig reveal d2">
               <div className="img-reveal media-wide">
-                <img
-                  src={`${IMG}/a041.jpg`}
+                <img loading="lazy"
+                  src={`${IMG}/midia/2aa027a560c34383.webp`}
                   alt="Vista aérea da cidade de Jundiaí, interior de São Paulo"
                 />
               </div>
@@ -765,12 +765,12 @@ export default function TerraceSerraDoJapi() {
                 <div
                   className="img-reveal media-wide"
                   data-lb=""
-                  data-full="web/renders/fachada-2.jpg"
+                  data-full="midia/359a6a8b195db893.webp"
                   data-name="Entrada do Terrace Serra do Japi"
                   data-cat="O empreendimento"
                 >
-                  <img
-                    src={`${IMG}/a040.jpg`}
+                  <img loading="lazy"
+                    src={`${IMG}/midia/359a6a8b195db893.webp`}
                     alt="Perspectiva ilustrada da entrada e portaria do Terrace Serra do Japi"
                   />
                   <button className="amenity__zoom" aria-label="Ampliar">
@@ -786,12 +786,12 @@ export default function TerraceSerraDoJapi() {
                 <div
                   className="img-reveal"
                   data-lb=""
-                  data-full="web/renders/fachada-1.jpg"
+                  data-full="midia/27fb567f808f519e.webp"
                   data-name="As três torres"
                   data-cat="O empreendimento"
                 >
                   <img
-                    src={`${IMG}/a026.jpg`}
+                    src={`${IMG}/midia/27fb567f808f519e.webp`}
                     alt="Perspectiva ilustrada das três torres do Terrace Serra do Japi"
                     loading="lazy"
                   />
@@ -805,12 +805,12 @@ export default function TerraceSerraDoJapi() {
                 <div
                   className="img-reveal"
                   data-lb=""
-                  data-full="web/renders/fachada-detalhe.jpg"
+                  data-full="midia/ebc9c503655fa0ce.webp"
                   data-name="Detalhe da fachada"
                   data-cat="O empreendimento"
                 >
                   <img
-                    src={`${IMG}/a032.jpg`}
+                    src={`${IMG}/midia/ebc9c503655fa0ce.webp`}
                     alt="Perspectiva ilustrada do detalhe da fachada"
                     loading="lazy"
                   />
@@ -951,12 +951,12 @@ export default function TerraceSerraDoJapi() {
                 <article
                   className="amenity"
                   data-lb=""
-                  data-full="web/renders/fitness.jpg"
+                  data-full="midia/e485abf0e3036e95.webp"
                   data-name="Espaço Fitness"
                   data-cat="Saúde &amp; bem-estar"
                 >
                   <img
-                    src={`${IMG}/a012.jpg`}
+                    src={`${IMG}/midia/e485abf0e3036e95.webp`}
                     alt="Perspectiva ilustrada do espaço fitness"
                     loading="lazy"
                   />
@@ -979,12 +979,12 @@ export default function TerraceSerraDoJapi() {
                 <article
                   className="amenity"
                   data-lb=""
-                  data-full="web/renders/pilates.jpg"
+                  data-full="midia/2009cb69e2650f37.webp"
                   data-name="Sala de Pilates"
                   data-cat="Saúde &amp; bem-estar"
                 >
                   <img
-                    src={`${IMG}/a000.jpg`}
+                    src={`${IMG}/midia/2009cb69e2650f37.webp`}
                     alt="Perspectiva ilustrada da sala de pilates"
                     loading="lazy"
                   />
@@ -1004,12 +1004,12 @@ export default function TerraceSerraDoJapi() {
                 <article
                   className="amenity"
                   data-lb=""
-                  data-full="web/renders/piscina-1.jpg"
+                  data-full="midia/6a4fef628895fa37.webp"
                   data-name="Piscina &amp; Vista para a Serra"
                   data-cat="Saúde &amp; bem-estar"
                 >
                   <img
-                    src={`${IMG}/a035.jpg`}
+                    src={`${IMG}/midia/6a4fef628895fa37.webp`}
                     alt="Perspectiva ilustrada da piscina com vista para a Serra do Japi"
                     loading="lazy"
                   />
@@ -1031,12 +1031,12 @@ export default function TerraceSerraDoJapi() {
                 <article
                   className="amenity"
                   data-lb=""
-                  data-full="web/renders/piscina-3.jpg"
+                  data-full="midia/3b786b1eea8040f1.webp"
                   data-name="Piscina com raia de 25 m"
                   data-cat="Saúde &amp; bem-estar"
                 >
                   <img
-                    src={`${IMG}/a034.jpg`}
+                    src={`${IMG}/midia/3b786b1eea8040f1.webp`}
                     alt="Perspectiva ilustrada da piscina com raia de 25 metros"
                     loading="lazy"
                   />
@@ -1058,12 +1058,12 @@ export default function TerraceSerraDoJapi() {
                 <article
                   className="amenity"
                   data-lb=""
-                  data-full="web/renders/beach.jpg"
+                  data-full="midia/0c0b82cddbb3d32a.webp"
                   data-name="Quadra de Beach Tennis"
                   data-cat="Saúde &amp; bem-estar"
                 >
                   <img
-                    src={`${IMG}/a038.jpg`}
+                    src={`${IMG}/midia/0c0b82cddbb3d32a.webp`}
                     alt="Perspectiva ilustrada da quadra de beach tennis"
                     loading="lazy"
                   />
@@ -1117,12 +1117,12 @@ export default function TerraceSerraDoJapi() {
                 <article
                   className="amenity"
                   data-lb=""
-                  data-full="web/renders/gourmet.jpg"
+                  data-full="midia/4bbe0b9434cc5217.webp"
                   data-name="Espaço Gourmet"
                   data-cat="Receber &amp; desfrutar"
                 >
                   <img
-                    src={`${IMG}/a017.jpg`}
+                    src={`${IMG}/midia/4bbe0b9434cc5217.webp`}
                     alt="Perspectiva ilustrada do espaço gourmet"
                     loading="lazy"
                   />
@@ -1144,12 +1144,12 @@ export default function TerraceSerraDoJapi() {
                 <article
                   className="amenity"
                   data-lb=""
-                  data-full="web/renders/festas.jpg"
+                  data-full="midia/15a72a1fff9d7ec4.webp"
                   data-name="Salão de Festas"
                   data-cat="Receber &amp; desfrutar"
                 >
                   <img
-                    src={`${IMG}/a030.jpg`}
+                    src={`${IMG}/midia/15a72a1fff9d7ec4.webp`}
                     alt="Perspectiva ilustrada do salão de festas"
                     loading="lazy"
                   />
@@ -1169,12 +1169,12 @@ export default function TerraceSerraDoJapi() {
                 <article
                   className="amenity"
                   data-lb=""
-                  data-full="web/renders/family.jpg"
+                  data-full="midia/1adcae61c30ea8e3.webp"
                   data-name="Family Club"
                   data-cat="Receber &amp; desfrutar"
                 >
                   <img
-                    src={`${IMG}/a031.jpg`}
+                    src={`${IMG}/midia/1adcae61c30ea8e3.webp`}
                     alt="Perspectiva ilustrada do family club"
                     loading="lazy"
                   />
@@ -1196,12 +1196,12 @@ export default function TerraceSerraDoJapi() {
                 <article
                   className="amenity"
                   data-lb=""
-                  data-full="web/renders/churrasqueira.jpg"
+                  data-full="midia/ac0790526f0af2ff.webp"
                   data-name="Churrasqueira"
                   data-cat="Receber &amp; desfrutar"
                 >
                   <img
-                    src={`${IMG}/a020.jpg`}
+                    src={`${IMG}/midia/ac0790526f0af2ff.webp`}
                     alt="Perspectiva ilustrada da churrasqueira"
                     loading="lazy"
                   />
@@ -1223,12 +1223,12 @@ export default function TerraceSerraDoJapi() {
                 <article
                   className="amenity"
                   data-lb=""
-                  data-full="web/renders/jogos.jpg"
+                  data-full="midia/47c8cf4a05c1e1cd.webp"
                   data-name="Salão de Jogos"
                   data-cat="Receber &amp; desfrutar"
                 >
                   <img
-                    src={`${IMG}/a021.jpg`}
+                    src={`${IMG}/midia/47c8cf4a05c1e1cd.webp`}
                     alt="Perspectiva ilustrada do salão de jogos"
                     loading="lazy"
                   />
@@ -1248,12 +1248,12 @@ export default function TerraceSerraDoJapi() {
                 <article
                   className="amenity"
                   data-lb=""
-                  data-full="web/renders/piscina-4.jpg"
+                  data-full="midia/6ce82f115402d047.webp"
                   data-name="Bar da Piscina"
                   data-cat="Receber &amp; desfrutar"
                 >
                   <img
-                    src={`${IMG}/a037.jpg`}
+                    src={`${IMG}/midia/6ce82f115402d047.webp`}
                     alt="Perspectiva ilustrada do bar da piscina"
                     loading="lazy"
                   />
@@ -1280,12 +1280,12 @@ export default function TerraceSerraDoJapi() {
                 <article
                   className="amenity"
                   data-lb=""
-                  data-full="web/renders/sauna.jpg"
+                  data-full="midia/e9acf8b477768722.webp"
                   data-name="Sauna"
                   data-cat="Para relaxar"
                 >
                   <img
-                    src={`${IMG}/a036.jpg`}
+                    src={`${IMG}/midia/e9acf8b477768722.webp`}
                     alt="Perspectiva ilustrada da sauna"
                     loading="lazy"
                   />
@@ -1307,12 +1307,12 @@ export default function TerraceSerraDoJapi() {
                 <article
                   className="amenity"
                   data-lb=""
-                  data-full="web/renders/massagem.jpg"
+                  data-full="midia/6d02aceb1b95d9e1.webp"
                   data-name="Salão de Massagem e Repouso"
                   data-cat="Para relaxar"
                 >
                   <img
-                    src={`${IMG}/a011.jpg`}
+                    src={`${IMG}/midia/6d02aceb1b95d9e1.webp`}
                     alt="Perspectiva ilustrada da sala de massagem e repouso"
                     loading="lazy"
                   />
@@ -1334,12 +1334,12 @@ export default function TerraceSerraDoJapi() {
                 <article
                   className="amenity"
                   data-lb=""
-                  data-full="web/renders/piscina-2.jpg"
+                  data-full="midia/485bdd3eaa5f3033.webp"
                   data-name="SPA com Hidromassagem"
                   data-cat="Para relaxar"
                 >
                   <img
-                    src={`${IMG}/a042.jpg`}
+                    src={`${IMG}/midia/485bdd3eaa5f3033.webp`}
                     alt="Perspectiva ilustrada do SPA com hidromassagem"
                     loading="lazy"
                   />
@@ -1366,12 +1366,12 @@ export default function TerraceSerraDoJapi() {
                 <article
                   className="amenity"
                   data-lb=""
-                  data-full="web/renders/playground.jpg"
+                  data-full="midia/fc157628c31ea597.webp"
                   data-name="Playground"
                   data-cat="Família &amp; praticidade"
                 >
                   <img
-                    src={`${IMG}/a039.jpg`}
+                    src={`${IMG}/midia/fc157628c31ea597.webp`}
                     alt="Perspectiva ilustrada do playground"
                     loading="lazy"
                   />
@@ -1391,12 +1391,12 @@ export default function TerraceSerraDoJapi() {
                 <article
                   className="amenity"
                   data-lb=""
-                  data-full="web/renders/brinquedoteca.jpg"
+                  data-full="midia/a494b617c2efda1b.webp"
                   data-name="Brinquedoteca"
                   data-cat="Família &amp; praticidade"
                 >
                   <img
-                    src={`${IMG}/a029.jpg`}
+                    src={`${IMG}/midia/a494b617c2efda1b.webp`}
                     alt="Perspectiva ilustrada da brinquedoteca"
                     loading="lazy"
                   />
@@ -1445,12 +1445,12 @@ export default function TerraceSerraDoJapi() {
                 <article
                   className="amenity"
                   data-lb=""
-                  data-full="web/renders/coworking.jpg"
+                  data-full="midia/57b15931f98256f8.webp"
                   data-name="Coworking"
                   data-cat="Família &amp; praticidade"
                 >
                   <img
-                    src={`${IMG}/a023.jpg`}
+                    src={`${IMG}/midia/57b15931f98256f8.webp`}
                     alt="Perspectiva ilustrada do coworking"
                     loading="lazy"
                   />
@@ -1472,12 +1472,12 @@ export default function TerraceSerraDoJapi() {
                 <article
                   className="amenity"
                   data-lb=""
-                  data-full="web/renders/delivery.jpg"
+                  data-full="midia/23a5049e0c8465b2.webp"
                   data-name="Espaço Delivery"
                   data-cat="Família &amp; praticidade"
                 >
                   <img
-                    src={`${IMG}/a022.jpg`}
+                    src={`${IMG}/midia/23a5049e0c8465b2.webp`}
                     alt="Perspectiva ilustrada do espaço delivery"
                     loading="lazy"
                   />
@@ -1499,12 +1499,12 @@ export default function TerraceSerraDoJapi() {
                 <article
                   className="amenity"
                   data-lb=""
-                  data-full="web/renders/mercado.jpg"
+                  data-full="midia/21b2d1257cc74013.webp"
                   data-name="Mercado Conveniência"
                   data-cat="Família &amp; praticidade"
                 >
                   <img
-                    src={`${IMG}/a025.jpg`}
+                    src={`${IMG}/midia/21b2d1257cc74013.webp`}
                     alt="Perspectiva ilustrada do mercado conveniência"
                     loading="lazy"
                   />
@@ -1578,7 +1578,7 @@ export default function TerraceSerraDoJapi() {
                     data-name="Torre 1 · 157 m², Opção A"
                     data-cat="Plantas"
                   >
-                    <img
+                    <img loading="lazy"
                       src={`${IMG}/a014.jpg`}
                       alt="Planta da Torre 1, 157 m², opção A"
                     />
@@ -1598,7 +1598,7 @@ export default function TerraceSerraDoJapi() {
                     data-name="Torre 1 · 157 m², Opção B"
                     data-cat="Plantas"
                   >
-                    <img
+                    <img loading="lazy"
                       src={`${IMG}/a008.jpg`}
                       alt="Planta da Torre 1, 157 m², opção B"
                     />
@@ -1622,7 +1622,7 @@ export default function TerraceSerraDoJapi() {
                     data-name="Torre 2 · 203 m², Opção A"
                     data-cat="Plantas"
                   >
-                    <img
+                    <img loading="lazy"
                       src={`${IMG}/a015.jpg`}
                       alt="Planta da Torre 2, 203 m², opção A"
                     />
@@ -1643,7 +1643,7 @@ export default function TerraceSerraDoJapi() {
                     data-name="Torre 2 · 203 m², Opção B"
                     data-cat="Plantas"
                   >
-                    <img
+                    <img loading="lazy"
                       src={`${IMG}/a013.jpg`}
                       alt="Planta da Torre 2, 203 m², opção B"
                     />
@@ -1668,7 +1668,7 @@ export default function TerraceSerraDoJapi() {
                     data-name="Torre 3 · 173 m², Opção A"
                     data-cat="Plantas"
                   >
-                    <img
+                    <img loading="lazy"
                       src={`${IMG}/a009.jpg`}
                       alt="Planta da Torre 3, 173 m², opção A"
                     />
@@ -1688,7 +1688,7 @@ export default function TerraceSerraDoJapi() {
                     data-name="Torre 3 · 173 m², Opção B"
                     data-cat="Plantas"
                   >
-                    <img
+                    <img loading="lazy"
                       src={`${IMG}/a003.jpg`}
                       alt="Planta da Torre 3, 173 m², opção B"
                     />
@@ -1716,7 +1716,7 @@ export default function TerraceSerraDoJapi() {
                 data-name="Varanda gourmet"
                 data-cat="Apartamentos"
               >
-                <img
+                <img loading="lazy"
                   src={`${IMG}/a045.jpg`}
                   alt="Perspectiva ilustrada da varanda gourmet com vista"
                 />
@@ -1782,12 +1782,12 @@ export default function TerraceSerraDoJapi() {
                 <div
                   className="roleta__media"
                   data-lb=""
-                  data-full="web/renders/living-1.jpg"
+                  data-full="midia/83cc7ddfc0a82273.webp"
                   data-name="Living Integrado"
                   data-cat="Apartamentos"
                 >
                   <img
-                    src={`${IMG}/a018.jpg`}
+                    src={`${IMG}/midia/83cc7ddfc0a82273.webp`}
                     alt="Perspectiva ilustrada do living integrado com vista"
                     loading="lazy"
                   />
@@ -1807,12 +1807,12 @@ export default function TerraceSerraDoJapi() {
                 <div
                   className="roleta__media"
                   data-lb=""
-                  data-full="web/renders/living-2.jpg"
+                  data-full="midia/2ac78177a816dc6e.webp"
                   data-name="Living &amp; Varanda"
                   data-cat="Apartamentos"
                 >
                   <img
-                    src={`${IMG}/a027.jpg`}
+                    src={`${IMG}/midia/2ac78177a816dc6e.webp`}
                     alt="Perspectiva ilustrada do living com varanda"
                     loading="lazy"
                   />
@@ -1832,12 +1832,12 @@ export default function TerraceSerraDoJapi() {
                 <div
                   className="roleta__media"
                   data-lb=""
-                  data-full="web/renders/living-3.jpg"
+                  data-full="midia/6601e50204a5eccb.webp"
                   data-name="Living Ampliado"
                   data-cat="Apartamentos"
                 >
                   <img
-                    src={`${IMG}/a033.jpg`}
+                    src={`${IMG}/midia/6601e50204a5eccb.webp`}
                     alt="Perspectiva ilustrada do living ampliado"
                     loading="lazy"
                   />
@@ -1857,12 +1857,12 @@ export default function TerraceSerraDoJapi() {
                 <div
                   className="roleta__media"
                   data-lb=""
-                  data-full="web/renders/living-4.jpg"
+                  data-full="midia/3ee9333d6e403455.webp"
                   data-name="Cozinha Integrada"
                   data-cat="Apartamentos"
                 >
                   <img
-                    src={`${IMG}/a016.jpg`}
+                    src={`${IMG}/midia/3ee9333d6e403455.webp`}
                     alt="Perspectiva ilustrada da cozinha integrada ao living"
                     loading="lazy"
                   />
@@ -1882,12 +1882,12 @@ export default function TerraceSerraDoJapi() {
                 <div
                   className="roleta__media"
                   data-lb=""
-                  data-full="web/renders/suite-1.jpg"
+                  data-full="midia/3465f6fa92154ec2.webp"
                   data-name="Suíte Master"
                   data-cat="Apartamentos"
                 >
                   <img
-                    src={`${IMG}/a028.jpg`}
+                    src={`${IMG}/midia/3465f6fa92154ec2.webp`}
                     alt="Perspectiva ilustrada da suíte master com closet"
                     loading="lazy"
                   />
@@ -1907,12 +1907,12 @@ export default function TerraceSerraDoJapi() {
                 <div
                   className="roleta__media"
                   data-lb=""
-                  data-full="web/renders/suite-2.jpg"
+                  data-full="midia/8373eec2cb13341e.webp"
                   data-name="Suíte com Closet"
                   data-cat="Apartamentos"
                 >
                   <img
-                    src={`${IMG}/a019.jpg`}
+                    src={`${IMG}/midia/8373eec2cb13341e.webp`}
                     alt="Perspectiva ilustrada da suíte com closet"
                     loading="lazy"
                   />
@@ -2048,7 +2048,7 @@ export default function TerraceSerraDoJapi() {
           <div className="team">
             <article className="member reveal d1">
               <div className="photo">
-                <img
+                <img loading="lazy"
                   src={`${IMG}/a002.jpg`}
                   alt="Fernando Rivaben, arquiteto responsável pelas torres"
                 />
@@ -2063,7 +2063,7 @@ export default function TerraceSerraDoJapi() {
             </article>
             <article className="member reveal d2">
               <div className="photo">
-                <img
+                <img loading="lazy"
                   src={`${IMG}/a007.jpg`}
                   alt="Martha Gavião, arquiteta paisagista responsável pelo paisagismo"
                 />
@@ -2077,7 +2077,7 @@ export default function TerraceSerraDoJapi() {
             </article>
             <article className="member reveal d3">
               <div className="photo">
-                <img
+                <img loading="lazy"
                   src={`${IMG}/a001.jpg`}
                   alt="Nivaldo J. Callegari, arquiteto responsável pelo projeto arquitetônico"
                 />
@@ -2091,7 +2091,7 @@ export default function TerraceSerraDoJapi() {
             </article>
             <article className="member reveal d4">
               <div className="photo">
-                <img
+                <img loading="lazy"
                   src={`${IMG}/a006.jpg`}
                   alt="Luiza e Thaisa Bohrer, responsáveis pela decoração das áreas comuns"
                 />
@@ -2157,20 +2157,20 @@ export default function TerraceSerraDoJapi() {
             </div>
             <div className="auten-collage reveal d2">
               <figure className="ac-tall">
-                <img
+                <img loading="lazy"
                   src={`${IMG}/a004.jpg`}
                   alt="Família aproveitando momentos em casa"
                 />
               </figure>
               <figure className="ac-sm">
-                <img
-                  src={`${IMG}/a028.jpg`}
+                <img loading="lazy"
+                  src={`${IMG}/midia/3465f6fa92154ec2.webp`}
                   alt="Perspectiva ilustrada da suíte master"
                 />
               </figure>
               <figure className="ac-sm">
-                <img
-                  src={`${IMG}/a018.jpg`}
+                <img loading="lazy"
+                  src={`${IMG}/midia/83cc7ddfc0a82273.webp`}
                   alt="Perspectiva ilustrada do living integrado"
                 />
               </figure>
@@ -2186,13 +2186,13 @@ export default function TerraceSerraDoJapi() {
             <div
               className="cta-media img-reveal"
               data-lb=""
-              data-full="web/renders/piscina-1.jpg"
+              data-full="midia/6a4fef628895fa37.webp"
               data-name="Piscina com vista para a Serra do Japi"
               data-cat="Lazer"
               style={{ cursor: 'pointer' }}
             >
-              <img
-                src={`${IMG}/a035.jpg`}
+              <img loading="lazy"
+                src={`${IMG}/midia/6a4fef628895fa37.webp`}
                 alt="Perspectiva ilustrada da piscina com vista para a Serra do Japi"
               />
               <div className="cta-media__scrim"></div>
@@ -2306,7 +2306,7 @@ export default function TerraceSerraDoJapi() {
         <div className="container">
           <div className="footer__top">
             <div>
-              <img
+              <img loading="lazy"
                 className="footer__logo"
                 src={`${IMG}/a010.png`}
                 alt="Terrace Serra do Japi"

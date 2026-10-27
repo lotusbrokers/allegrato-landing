@@ -263,10 +263,10 @@ export default function AutenJundiai() {
         }) as string[];
       }
       return [
-        'assets/opt/planta-128.jpg',
-        'assets/opt/planta-131.jpg',
-        'assets/opt/planta-188.jpg',
-        'assets/opt/planta-264.jpg',
+        'midia/2cf71c2bfc532fe6.webp',
+        'midia/51ff2ca267f4016f.webp',
+        'midia/e47fccc74c5fe63f.webp',
+        'midia/858754b9a737edaf.webp',
       ];
     })();
 
@@ -589,7 +589,7 @@ export default function AutenJundiai() {
       {/* ============ HERO ============ */}
       <main id="topo">
         <section className="hero" aria-label="Auten Jundiaí">
-          <div className="hero-bg"><img src={IMG('a023.jpg')} alt="Fachada do Auten Jundiaí, com as duas torres e brises de madeira" fetchPriority="high" /></div>
+          <div className="hero-bg"><img src={IMG('midia/b6c5a93f8211fcfb.webp')} alt="Fachada do Auten Jundiaí, com as duas torres e brises de madeira" fetchPriority="high" /></div>
           <div className="hero-scrim"></div>
           <div className="hero-texture"></div>
           <div className="wrap">
@@ -687,8 +687,8 @@ export default function AutenJundiai() {
           </div>
           <div className="facade-slot" data-reveal="">
             <div className="facade-anim js-facade">
-              <img className="fa-img fa-day" src={IMG('a023.jpg')} alt="Fachada do Auten Jundiaí durante o dia" loading="lazy" />
-              <img className="fa-img fa-night" src={IMG('a020.jpg')} alt="Fachada noturna iluminada do Auten Jundiaí com paisagismo e entrada social" loading="lazy" />
+              <img className="fa-img fa-day" src={IMG('midia/b6c5a93f8211fcfb.webp')} alt="Fachada do Auten Jundiaí durante o dia" loading="lazy" />
+              <img className="fa-img fa-night" src={IMG('midia/9a891ec909b416e8.webp')} alt="Fachada noturna iluminada do Auten Jundiaí com paisagismo e entrada social" loading="lazy" />
               <div className="facade-toggle" role="group" aria-label="Alternar vistas da fachada">
                 <button type="button" className="ft-btn js-fa-day active" aria-pressed="true">Vista 1</button>
                 <button type="button" className="ft-btn js-fa-night" aria-pressed="false">Vista 2</button>
@@ -707,7 +707,7 @@ export default function AutenJundiai() {
             <h2 className="display" style={{ maxWidth: '20ch' }}>Conheça o Auten Jundiaí por dentro.</h2>
           </div>
           <div className="video-frame js-video" data-yt="PNTlc1Rxq7E" data-reveal="">
-            <img src={IMG('a000.jpg')} alt="Vídeo de apresentação do Auten Jundiaí" loading="lazy" />
+            <img src={IMG('midia/ab6029df9672ba05.webp')} alt="Vídeo de apresentação do Auten Jundiaí" loading="lazy" />
             <div className="scrim"></div>
             <button className="play" aria-label="Reproduzir vídeo">
               <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
@@ -770,43 +770,43 @@ export default function AutenJundiai() {
 
           <div className="lazer-gallery">
             <figure className="lz lz-a" data-reveal="">
-              <img src={IMG('a002.jpg')} alt="Complexo de piscinas aquecidas do Auten Jundiaí com deck de madeira e paisagismo" loading="lazy" />
+              <img src={IMG('midia/c4cb307b88447859.webp')} alt="Complexo de piscinas aquecidas do Auten Jundiaí com deck de madeira e paisagismo" loading="lazy" />
               <figcaption className="cap"><div className="t">Complexo de piscinas</div><div className="s">Piscina adulto aquecida com raia de 25 m</div></figcaption>
             </figure>
             <figure className="lz lz-b" data-reveal="">
-              <img src={IMG('a007.jpg')} alt="Family Club do Auten Jundiaí com lounge, bar e área de convívio" loading="lazy" />
+              <img src={IMG('midia/86c72f518816b84d.webp')} alt="Family Club do Auten Jundiaí com lounge, bar e área de convívio" loading="lazy" />
               <figcaption className="cap"><div className="t">Family Club</div><div className="s">Convívio, lounge e bar</div></figcaption>
             </figure>
             <figure className="lz lz-c" data-reveal="">
-              <img src={IMG('a019.jpg')} alt="Fire place do Auten Jundiaí com lareira e estar externo" loading="lazy" />
+              <img src={IMG('midia/f6910e4193f319dc.webp')} alt="Fire place do Auten Jundiaí com lareira e estar externo" loading="lazy" />
               <figcaption className="cap"><div className="t">Fire place</div><div className="s">Estar externo ao ar livre</div></figcaption>
             </figure>
             <figure className="lz lz-d" data-reveal="">
-              <img src={IMG('a003.jpg')} alt="Salão de festas do Auten Jundiaí com cozinha independente" loading="lazy" />
+              <img src={IMG('midia/ce426ea55e7dfd21.webp')} alt="Salão de festas do Auten Jundiaí com cozinha independente" loading="lazy" />
               <figcaption className="cap"><div className="t">Salão de festas</div><div className="s">Capacidade para 45 pessoas, com cozinha e lavabo</div></figcaption>
             </figure>
             <figure className="lz lz-w4" data-reveal="">
-              <img src={IMG('a005.jpg')} alt="Espaço wellness com sala de yoga" loading="lazy" />
+              <img src={IMG('midia/f0b4953d1d02109e.webp')} alt="Espaço wellness com sala de yoga" loading="lazy" />
               <figcaption className="cap"><div className="t">Espaço wellness</div><div className="s">Sala de yoga e massagem</div></figcaption>
             </figure>
             <figure className="lz lz-w4" data-reveal="">
-              <img src={IMG('a010.jpg')} alt="Academia do Auten Jundiaí equipada" loading="lazy" />
+              <img src={IMG('midia/b828e66c14d0e0a9.webp')} alt="Academia do Auten Jundiaí equipada" loading="lazy" />
               <figcaption className="cap"><div className="t">Fitness</div><div className="s">Equipado e integrado ao paisagismo</div></figcaption>
             </figure>
             <figure className="lz lz-w4" data-reveal="">
-              <img src={IMG('a026.jpg')} alt="Coworking do Auten Jundiaí" loading="lazy" />
+              <img src={IMG('midia/3720267e4d873f4e.webp')} alt="Coworking do Auten Jundiaí" loading="lazy" />
               <figcaption className="cap"><div className="t">Coworking</div><div className="s">Ambiente para home office</div></figcaption>
             </figure>
             <figure className="lz lz-w6" data-reveal="">
-              <img src={IMG('a018.jpg')} alt="Praça central com espelho d'água e pergolado" loading="lazy" />
+              <img src={IMG('midia/abd73f6819e11790.webp')} alt="Praça central com espelho d'água e pergolado" loading="lazy" />
               <figcaption className="cap"><div className="t">Praça central</div><div className="s">Espelho d&apos;água e paisagismo assinado</div></figcaption>
             </figure>
             <figure className="lz lz-w6" data-reveal="">
-              <img src={IMG('a013.jpg')} alt="Quadra recreativa do Auten Jundiaí" loading="lazy" />
+              <img src={IMG('midia/9937fb7f4fc1149f.webp')} alt="Quadra recreativa do Auten Jundiaí" loading="lazy" />
               <figcaption className="cap"><div className="t">Quadra recreativa</div><div className="s">Esporte e lazer ao ar livre</div></figcaption>
             </figure>
             <figure className="lz lz-w4" data-reveal="">
-              <img src={IMG('a012.jpg')} alt="Playground do Auten Jundiaí" loading="lazy" />
+              <img src={IMG('midia/0ff940204a25c3f1.webp')} alt="Playground do Auten Jundiaí" loading="lazy" />
               <figcaption className="cap"><div className="t">Playground</div><div className="s">Diversão para as crianças</div></figcaption>
             </figure>
             <figure className="lz lz-w4" data-reveal="">
@@ -814,7 +814,7 @@ export default function AutenJundiai() {
               <figcaption className="cap"><div className="t">Sala de jogos</div><div className="s">Bilhar, games e convívio</div></figcaption>
             </figure>
             <figure className="lz lz-w4" data-reveal="">
-              <img src={IMG('a016.jpg')} alt="Pet care do Auten Jundiaí" loading="lazy" />
+              <img src={IMG('midia/4a3cd9136441b6ae.webp')} alt="Pet care do Auten Jundiaí" loading="lazy" />
               <figcaption className="cap"><div className="t">Pet care</div><div className="s">Cuidado e banho para os pets</div></figcaption>
             </figure>
           </div>
@@ -858,22 +858,22 @@ export default function AutenJundiai() {
           </div>
           <div className="int-grid">
             <figure className="int int-wide" data-reveal="">
-              <img src={IMG('a011.jpg')} alt="Living ampliado e integrado de apartamento do Auten Jundiaí" loading="lazy" />
+              <img src={IMG('midia/6c6573c2faeb8e00.webp')} alt="Living ampliado e integrado de apartamento do Auten Jundiaí" loading="lazy" />
               <div className="ovl"></div>
               <figcaption className="cap"><div className="t">Living ampliado</div><div className="s">Ambientes integrados com iluminação natural</div></figcaption>
             </figure>
             <figure className="int int-tall" data-reveal="">
-              <img src={IMG('a009.jpg')} alt="Suíte master com closet do Auten Jundiaí" loading="lazy" />
+              <img src={IMG('midia/7d7c11da272d153d.webp')} alt="Suíte master com closet do Auten Jundiaí" loading="lazy" />
               <div className="ovl"></div>
               <figcaption className="cap"><div className="t">Suíte master</div><div className="s">Closet e banheiro com duas cubas</div></figcaption>
             </figure>
             <figure className="int int-half" data-reveal="">
-              <img src={IMG('a008.jpg')} alt="Cozinha de apartamento do Auten Jundiaí" loading="lazy" />
+              <img src={IMG('midia/f81e5dab3717cb3f.webp')} alt="Cozinha de apartamento do Auten Jundiaí" loading="lazy" />
               <div className="ovl"></div>
               <figcaption className="cap"><div className="t">Cozinha</div><div className="s">Infraestrutura para lava-louças e ar-condicionado</div></figcaption>
             </figure>
             <figure className="int int-half" data-reveal="">
-              <img src={IMG('a014.jpg')} alt="Varanda gourmet com churrasqueira do Auten Jundiaí" loading="lazy" />
+              <img src={IMG('midia/f8c9e86834382e21.webp')} alt="Varanda gourmet com churrasqueira do Auten Jundiaí" loading="lazy" />
               <div className="ovl"></div>
               <figcaption className="cap"><div className="t">Varanda gourmet</div><div className="s">Churrasqueira a carvão e bancada de apoio</div></figcaption>
             </figure>
@@ -889,7 +889,7 @@ export default function AutenJundiai() {
             <h2 className="display" style={{ maxWidth: '18ch' }}>Cada espaço pensado para o seu dia a dia.</h2>
           </div>
           <div className="implant-frame" data-reveal="">
-            <img src={IMG('a017.jpg')} alt="Implantação do pavimento térreo do Auten Jundiaí com a localização das 27 áreas comuns" loading="lazy" />
+            <img src={IMG('midia/408e7cb75cb4f6e4.webp')} alt="Implantação do pavimento térreo do Auten Jundiaí com a localização das 27 áreas comuns" loading="lazy" />
           </div>
           <p className="implant-cap">Implantação ilustrativa do pavimento térreo. Imagem meramente ilustrativa.</p>
         </div>
@@ -913,7 +913,7 @@ export default function AutenJundiai() {
           <div className="tipo-panel" data-reveal="">
             <div className="tipo-planta">
               <button className="planta-card js-planta-zoom" type="button" aria-label="Ampliar planta">
-                <img className="js-planta" src={IMG('a025.jpg')} alt="Planta da residência suspensa de 128,51 m² com 3 suítes" loading="lazy" />
+                <img className="js-planta" src={IMG('midia/2cf71c2bfc532fe6.webp')} alt="Planta da residência suspensa de 128,51 m² com 3 suítes" loading="lazy" />
                 <span className="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"></path></svg> Ampliar planta</span>
               </button>
               <div className="planta-cap js-planta-cap">Planta ilustrativa · 128,51 m² · Opção 1</div>
@@ -933,7 +933,7 @@ export default function AutenJundiai() {
             <h2 className="display" style={{ maxWidth: '20ch' }}>No coração do Anhangabaú, perto de tudo.</h2>
           </div>
           <figure className="local-aerial" data-reveal="">
-            <img src={IMG('a024.jpg')} alt="Vista aérea de Jundiaí mostrando a implantação do Auten Jundiaí no bairro Anhangabaú" loading="lazy" />
+            <img src={IMG('midia/c15639412f5d393f.webp')} alt="Vista aérea de Jundiaí mostrando a implantação do Auten Jundiaí no bairro Anhangabaú" loading="lazy" />
             <figcaption className="tagline"><span className="big">Entre São Paulo e Campinas, no bairro nobre do Anhangabaú.</span></figcaption>
           </figure>
           <div className="local-grid">
@@ -1046,7 +1046,7 @@ export default function AutenJundiai() {
           <div className="footer-top">
             <div>
               <div className="brand-lockup" style={{ marginBottom: '18px' }}>
-                <img src={IMG('a006.png')} alt="Auten Jundiaí" style={{ height: '34px', width: 'auto', display: 'block' }} />
+                <img loading="lazy" src={IMG('a006.png')} alt="Auten Jundiaí" style={{ height: '34px', width: 'auto', display: 'block' }} />
               </div>
               <p style={{ maxWidth: '34ch', color: '#b9a892' }}>Residências suspensas de alto padrão no Anhangabaú, Jundiaí/SP. Até 4 suítes, até 4 vagas e mais de 20 itens de lazer.</p>
             </div>
@@ -1089,7 +1089,7 @@ export default function AutenJundiai() {
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 5l7 7-7 7"></path></svg>
         </button>
         <figure className="lightbox-inner">
-          <img id="lightbox-img" alt="Imagem ampliada do Auten Jundiaí" />
+          <img loading="lazy" id="lightbox-img" alt="Imagem ampliada do Auten Jundiaí" />
           <figcaption id="lightbox-cap"></figcaption>
           <div className="lightbox-count" id="lightbox-count"></div>
         </figure>
@@ -1097,10 +1097,10 @@ export default function AutenJundiai() {
 
       {/* imagens das plantas (pré-carregadas p/ navegação e exportação standalone) */}
       <div id="planta-sources" hidden aria-hidden="true">
-        <img src={IMG('a025.jpg')} alt="" />
-        <img src={IMG('a021.jpg')} alt="" />
-        <img src={IMG('a022.jpg')} alt="" />
-        <img src={IMG('a015.jpg')} alt="" />
+        <img loading="lazy" src={IMG('midia/2cf71c2bfc532fe6.webp')} alt="" />
+        <img loading="lazy" src={IMG('midia/51ff2ca267f4016f.webp')} alt="" />
+        <img loading="lazy" src={IMG('midia/e47fccc74c5fe63f.webp')} alt="" />
+        <img loading="lazy" src={IMG('midia/858754b9a737edaf.webp')} alt="" />
       </div>
     </div>
   );
