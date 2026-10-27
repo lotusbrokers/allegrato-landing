@@ -973,7 +973,7 @@ export default function Authoria() {
                 data-c="Planta humanizada"
               >
                 <img
-                  src="/authoria/a023.png"
+                  src="/authoria/midia/bf4ca2a20fe6b72e.webp"
                   alt="Planta do apartamento de 137,39 m² com 3 suítes"
                   loading="lazy"
                 />
@@ -1023,7 +1023,7 @@ export default function Authoria() {
                 data-c="Planta humanizada"
               >
                 <img
-                  src="/authoria/a025.png"
+                  src="/authoria/midia/b5ca1886f3efaf38.webp"
                   alt="Planta do apartamento de 211,91 m² com 4 suítes"
                   loading="lazy"
                 />
@@ -1713,7 +1713,7 @@ export default function Authoria() {
         <div className="wrap">
           <div className="ft-top">
             <div className="ft-logo">
-              <img src="/authoria/a003.png" alt="Authoria by Tebas" className="ft-logo-img" />
+              <img loading="lazy" src="/authoria/a003.png" alt="Authoria by Tebas" className="ft-logo-img" />
               <p>
                 Um encontro raro entre exclusividade, natureza e arquitetura. Realização e construção
                 Tebas. Vendas e atendimento exclusivos{' '}

@@ -138,18 +138,18 @@ const lazerNames = [
 const lazer = lazerNames.map((name, i) => ({ name, n: (i + 1 < 10 ? '0' : '') + (i + 1) }));
 
 const galleryRaw = [
-  { label: 'Fachada', f: B + 'FACHADA01.jpg' },
-  { label: 'Piscina com raia de 25m', f: G + 'PISCINA.jpg' },
-  { label: 'Beach Tennis', f: G + 'BEACHTENNIS.jpg' },
-  { label: 'Salão de Festas', f: G + 'SALAODEFESTAS-01.jpg' },
-  { label: 'Academia', f: G + 'academia.jpg' },
-  { label: 'Coworking', f: G + 'coworking.jpg' },
-  { label: 'Quadra Recreativa', f: G + 'quadra.jpg' },
-  { label: 'Quiosque Churrasqueira', f: G + 'QUIOSQUECHURRASQUEIRA.jpg' },
-  { label: 'Salão de Jogos', f: G + 'salaodejogos.jpg' },
-  { label: 'Garagem Coberta', f: G + 'GARAGEMCOBERTATORRE.jpg' },
-  { label: 'Hall de Entrada', f: B + 'HALLDEENTRADA.jpg' },
-  { label: 'Apartamento Decorado', f: B + 'QUARTO02.jpg' },
+  { label: 'Fachada', f: B + 'midia/5679a11013157e2e.webp' },
+  { label: 'Piscina com raia de 25m', f: G + 'midia/b31f4a0d2cbfa98f.webp' },
+  { label: 'Beach Tennis', f: G + 'midia/154a293f000fe74a.webp' },
+  { label: 'Salão de Festas', f: G + 'midia/72be98aa8acb4637.webp' },
+  { label: 'Academia', f: G + 'midia/a0c0c0b0835d052b.webp' },
+  { label: 'Coworking', f: G + 'midia/4772ae254f99cddc.webp' },
+  { label: 'Quadra Recreativa', f: G + 'midia/d9c8d19cf8b8ac84.webp' },
+  { label: 'Quiosque Churrasqueira', f: G + 'midia/64542fe1ef7c43b0.webp' },
+  { label: 'Salão de Jogos', f: G + 'midia/a7a4df13b0ef07c7.webp' },
+  { label: 'Garagem Coberta', f: G + 'midia/24fe2a0bf3d3bcec.webp' },
+  { label: 'Hall de Entrada', f: B + 'midia/e8081e1cbe383109.webp' },
+  { label: 'Apartamento Decorado', f: B + 'midia/fb5a44819fc5f886.webp' },
 ];
 
 const locPoints = [
@@ -428,7 +428,7 @@ export default function BrisasDoJapi({
         </div>
         <div data-reveal="" data-reveal-delay="120" style={parseStyle('position:relative;')}>
           <div style={parseStyle('border-radius:18px;overflow:hidden;box-shadow:0 30px 70px rgba(16,52,62,.22);aspect-ratio:4/5;')}>
-            <img src="https://vvcconstrutora.com.br/images/brisas-banner/fotoinsercao.jpg" alt="Vista aérea do Condomínio Brisas do Japi no Bairro Medeiros, Jundiaí" style={parseStyle('width:100%;height:100%;object-fit:cover;display:block;')} />
+            <img loading="lazy" src="https://vvcconstrutora.com.br/images/brisas-banner/fotoinsercao.jpg" alt="Vista aérea do Condomínio Brisas do Japi no Bairro Medeiros, Jundiaí" style={parseStyle('width:100%;height:100%;object-fit:cover;display:block;')} />
           </div>
           <div style={parseStyle('position:absolute;bottom:-22px;left:-22px;background:#c8a45c;color:#152730;padding:18px 24px;border-radius:14px;box-shadow:0 16px 36px rgba(200,164,92,.4);max-width:200px;')}>
             <div style={parseStyle("font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:700;line-height:1.1;")}>Vista da Serra do Japi</div>
@@ -478,7 +478,7 @@ export default function BrisasDoJapi({
               <p style={parseStyle('font-size:17px;line-height:1.65;color:rgba(232,240,239,.78);margin:0;max-width:52ch;')}>Lazer e comodidade são capítulos à parte no Brisas do Japi. Tudo para atender as necessidades modernas de moradia e convivência.</p>
             </div>
             <div data-reveal="" data-reveal-delay="100" style={parseStyle('border-radius:16px;overflow:hidden;box-shadow:0 26px 60px rgba(0,0,0,.3);aspect-ratio:16/10;')}>
-              <img src="https://vvcconstrutora.com.br/images/brisas-galeria/PISCINA.jpg" alt="Piscina adulto com prainha e raia de 25 metros no Brisas do Japi" style={parseStyle('width:100%;height:100%;object-fit:cover;display:block;')} />
+              <img loading="lazy" src="https://vvcconstrutora.com.br/images/brisas-galeria/PISCINA.jpg" alt="Piscina adulto com prainha e raia de 25 metros no Brisas do Japi" style={parseStyle('width:100%;height:100%;object-fit:cover;display:block;')} />
             </div>
           </div>
           <div data-reveal="" style={parseStyle('display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:rgba(232,240,239,.13);border:1px solid rgba(232,240,239,.13);border-radius:16px;overflow:hidden;')}>
@@ -523,7 +523,7 @@ export default function BrisasDoJapi({
           <button onClick={nextImg} style={parseStyle('position:absolute;right:clamp(12px,3vw,40px);top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3);color:#fff;width:52px;height:52px;border-radius:50%;font-size:24px;cursor:pointer;')}>›</button>
           <div onClick={stop} style={parseStyle('max-width:1100px;width:100%;text-align:center;')}>
             {lightboxOpen && cur.src && (
-              <img src={cur.src} alt={cur.label || ''} style={{ maxWidth: '100%', maxHeight: '76vh', borderRadius: '12px', boxShadow: '0 30px 80px rgba(0,0,0,.5)', objectFit: 'contain' }} />
+              <img loading="lazy" src={cur.src} alt={cur.label || ''} style={{ maxWidth: '100%', maxHeight: '76vh', borderRadius: '12px', boxShadow: '0 30px 80px rgba(0,0,0,.5)', objectFit: 'contain' }} />
             )}
             <div style={parseStyle('display:flex;align-items:center;justify-content:center;gap:14px;margin-top:20px;color:#eef1ef;')}>
               <span style={parseStyle("font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:600;")}>{curLabel}</span>
@@ -540,7 +540,7 @@ export default function BrisasDoJapi({
           <div onClick={stop} style={parseStyle('text-align:center;max-width:1080px;width:100%;')}>
             <div style={parseStyle('background:#fff;border-radius:16px;padding:clamp(16px,2vw,30px);box-shadow:0 40px 90px rgba(0,0,0,.5);')}>
               {z && (
-                <img src={z.src} alt={z.label || ''} style={{ maxWidth: '100%', maxHeight: '72vh', objectFit: 'contain', display: 'block', margin: '0 auto' }} />
+                <img loading="lazy" src={z.src} alt={z.label || ''} style={{ maxWidth: '100%', maxHeight: '72vh', objectFit: 'contain', display: 'block', margin: '0 auto' }} />
               )}
             </div>
             <div style={parseStyle("margin-top:18px;color:#eef1ef;font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:600;")}>{zoomLabel}</div>
@@ -606,10 +606,10 @@ export default function BrisasDoJapi({
             </div>
           </div>
           <div data-reveal="" data-reveal-delay="120" style={parseStyle('background:#fff;border:1px solid rgba(16,52,62,.1);border-radius:18px;padding:46px;text-align:center;box-shadow:0 20px 50px rgba(16,52,62,.08);')}>
-            <img src="/brisas-do-japi/a000.png" alt="Logo Condomínio Brisas do Japi" style={parseStyle('height:92px;width:auto;margin:0 auto 6px;display:block;')} />
+            <img loading="lazy" src="/brisas-do-japi/a000.png" alt="Logo Condomínio Brisas do Japi" style={parseStyle('height:92px;width:auto;margin:0 auto 6px;display:block;')} />
             <p style={parseStyle('font-size:12.5px;color:#8a949b;letter-spacing:.06em;text-transform:uppercase;margin:0 0 26px;')}>Jundiaí · Bairro Medeiros</p>
             <div style={parseStyle('height:1px;background:rgba(16,52,62,.1);margin:0 0 26px;')}></div>
-            <img src="https://vvcconstrutora.com.br/images/vvc-logo.png" alt="Logo VVC Construtora" style={parseStyle('height:38px;width:auto;margin-bottom:14px;')} />
+            <img loading="lazy" src="https://vvcconstrutora.com.br/images/vvc-logo.png" alt="Logo VVC Construtora" style={parseStyle('height:38px;width:auto;margin-bottom:14px;')} />
             <p style={parseStyle('font-size:14px;color:#5a6870;line-height:1.6;margin:0 0 6px;')}>Uma realização <strong style={parseStyle('color:#152730;')}>VVC Construtora</strong></p>
             <p style={parseStyle('font-size:14px;color:#8a949b;line-height:1.6;margin:0;')}>Anunciado por <strong style={parseStyle('color:#123c47;')}>{agency}</strong></p>
           </div>
@@ -704,7 +704,7 @@ export default function BrisasDoJapi({
               <a href={heroCta} target="_blank" rel="noopener" style={parseStyle('color:#c8a45c;text-decoration:none;font-weight:700;font-size:16px;')}>Falar no WhatsApp</a>
               <div style={parseStyle('font-size:13.5px;line-height:1.6;margin:16px 0 0;')}>
                 Anunciado por
-                <img src="/logo-lotus-dourado.png" alt={agency} style={{ height: 38, width: 'auto', display: 'block', marginTop: 8 }} />
+                <img loading="lazy" src="/logo-lotus-dourado.png" alt={agency} style={{ height: 38, width: 'auto', display: 'block', marginTop: 8 }} />
               </div>
             </div>
           </div>

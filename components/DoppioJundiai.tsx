@@ -31,9 +31,9 @@ const waMain = waHref(
 /** Títulos do galleryData na ordem dos data-idx; o src vem do tile correspondente. */
 const GALLERY: Array<{ src: string; title: string }> = [
   { src: '/doppio-jundiai/a003.jpg', title: 'Piscina' },
-  { src: '/doppio-jundiai/a013.jpg', title: 'Salão de Festas' },
-  { src: '/doppio-jundiai/a009.jpg', title: 'Espaço Gourmet' },
-  { src: '/doppio-jundiai/a016.jpg', title: 'Fitness · TechnoGym' },
+  { src: '/doppio-jundiai/midia/269226ec6b731f08.webp', title: 'Salão de Festas' },
+  { src: '/doppio-jundiai/midia/d8a38c4a5b83c65e.webp', title: 'Espaço Gourmet' },
+  { src: '/doppio-jundiai/midia/4bcc1a719b1f3c05.webp', title: 'Fitness · TechnoGym' },
   { src: '/doppio-jundiai/a012.jpg', title: 'SPA · Espaço Massagem' },
   { src: '/doppio-jundiai/a004.jpg', title: 'Sauna Úmida' },
   { src: '/doppio-jundiai/a011.jpg', title: 'Club House' },
@@ -422,7 +422,7 @@ export default function DoppioJundiai() {
         {/* HERO */}
         <section style={parseStyle('position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;background:#140c06')} id="topo">
           <div style={parseStyle('position:absolute;inset:0;overflow:hidden')}>
-            <img style={parseStyle('width:100%;height:100%;object-fit:cover;object-position:72% center;transform:scale(1.12);animation:kenburns 22s ease-out forwards;will-change:transform')} id="lp-hero-img" src="/doppio-jundiai/a015.jpg" alt="Doppio Jundiaí ao entardecer, em Campos Elísios, perspectiva artística preliminar" />
+            <img style={parseStyle('width:100%;height:100%;object-fit:cover;object-position:72% center;transform:scale(1.12);animation:kenburns 22s ease-out forwards;will-change:transform')} id="lp-hero-img" src="/doppio-jundiai/midia/861562a30a34a09c.webp" alt="Doppio Jundiaí ao entardecer, em Campos Elísios, perspectiva artística preliminar" />
           </div>
           <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(to right,rgba(18,11,6,.86) 0%,rgba(18,11,6,.62) 26%,rgba(18,11,6,.22) 48%,transparent 64%)')}>
           </div>
@@ -590,7 +590,7 @@ export default function DoppioJundiai() {
               </div>
               <div style={parseStyle('position:relative')} data-reveal="right">
                 <div style={parseStyle('position:relative;overflow:hidden;border-radius:4px;box-shadow:0 40px 90px -40px rgba(0,0,0,.8)')}>
-                  <img style={parseStyle('width:100%;height:clamp(420px,62vh,640px);object-fit:cover')} src="/doppio-jundiai/a017.jpg" alt="Living com pé-direito duplo de 5,60 m, perspectiva artística preliminar" loading="lazy" />
+                  <img style={parseStyle('width:100%;height:clamp(420px,62vh,640px);object-fit:cover')} src="/doppio-jundiai/midia/6748d6a3499b65cd.webp" alt="Living com pé-direito duplo de 5,60 m, perspectiva artística preliminar" loading="lazy" />
                   <div style={parseStyle("position:absolute;left:22px;bottom:20px;font-family:'Jost',sans-serif;text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:#f3ece0;background:rgba(20,12,6,.5);backdrop-filter:blur(6px);padding:9px 16px;border-radius:30px;border:1px solid rgba(231,205,156,.25)")}>
                     Living · pé-direito duplo 5,60 m
                   </div>
@@ -619,7 +619,7 @@ export default function DoppioJundiai() {
             <div className="g3">
               <div style={parseStyle('background:#fff;border:1px solid rgba(40,26,14,.08);border-radius:10px;overflow:hidden;display:flex;flex-direction:column')} data-reveal="" className="dif-card">
                 <div style={parseStyle('position:relative;height:196px;overflow:hidden')}>
-                  <img style={parseStyle('width:100%;height:100%;object-fit:cover')} src="/doppio-jundiai/a018.jpg" alt="Acesso e fachada do Doppio Jundiaí, perspectiva preliminar" loading="lazy" />
+                  <img style={parseStyle('width:100%;height:100%;object-fit:cover')} src="/doppio-jundiai/midia/a1c9609202096602.webp" alt="Acesso e fachada do Doppio Jundiaí, perspectiva preliminar" loading="lazy" />
                   <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(to top,rgba(18,10,5,.9),rgba(18,10,5,.05) 62%)')}>
                   </div>
                   <div style={parseStyle("position:absolute;top:16px;left:16px;width:42px;height:42px;border-radius:50%;background:rgba(243,236,224,.94);display:grid;place-items:center;font-family:'Jost',sans-serif;color:#a8763c;font-size:14px;letter-spacing:.05em")}>
@@ -715,7 +715,7 @@ export default function DoppioJundiai() {
               </div>
               <div style={parseStyle('background:#fff;border:1px solid rgba(40,26,14,.08);border-radius:10px;overflow:hidden;display:flex;flex-direction:column')} data-reveal="" className="dif-card">
                 <div style={parseStyle('position:relative;height:196px;overflow:hidden')}>
-                  <img style={parseStyle('width:100%;height:100%;object-fit:cover')} src="/doppio-jundiai/a017.jpg" alt="Living com pé-direito duplo de 5,60 m, perspectiva preliminar" loading="lazy" />
+                  <img style={parseStyle('width:100%;height:100%;object-fit:cover')} src="/doppio-jundiai/midia/6748d6a3499b65cd.webp" alt="Living com pé-direito duplo de 5,60 m, perspectiva preliminar" loading="lazy" />
                   <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(to top,rgba(18,10,5,.9),rgba(18,10,5,.05) 62%)')}>
                   </div>
                   <div style={parseStyle("position:absolute;top:16px;left:16px;width:42px;height:42px;border-radius:50%;background:rgba(243,236,224,.94);display:grid;place-items:center;font-family:'Jost',sans-serif;color:#a8763c;font-size:14px;letter-spacing:.05em")}>
@@ -864,7 +864,7 @@ export default function DoppioJundiai() {
                 </div>
               </div>
               <div className="tile" data-lightbox="" data-idx="1">
-                <img src="/doppio-jundiai/a013.jpg" alt="Salão de festas" loading="lazy" />
+                <img src="/doppio-jundiai/midia/269226ec6b731f08.webp" alt="Salão de festas" loading="lazy" />
                 <div className="cap">
                   Salão de Festas
                   <span className="plus">
@@ -873,7 +873,7 @@ export default function DoppioJundiai() {
                 </div>
               </div>
               <div className="tile" data-lightbox="" data-idx="2">
-                <img src="/doppio-jundiai/a009.jpg" alt="Espaço gourmet" loading="lazy" />
+                <img src="/doppio-jundiai/midia/d8a38c4a5b83c65e.webp" alt="Espaço gourmet" loading="lazy" />
                 <div className="cap">
                   Espaço Gourmet
                   <span className="plus">
@@ -882,7 +882,7 @@ export default function DoppioJundiai() {
                 </div>
               </div>
               <div className="tile big" data-lightbox="" data-idx="3">
-                <img src="/doppio-jundiai/a016.jpg" alt="Fitness TechnoGym" loading="lazy" />
+                <img src="/doppio-jundiai/midia/4bcc1a719b1f3c05.webp" alt="Fitness TechnoGym" loading="lazy" />
                 <div className="cap">
                   Fitness · TechnoGym
                   <span className="plus">
@@ -1184,7 +1184,7 @@ export default function DoppioJundiai() {
           <div className="container">
             <div className="g2">
               <div style={parseStyle('overflow:hidden;border-radius:4px;box-shadow:0 40px 90px -45px rgba(0,0,0,.6)')} data-reveal="left">
-                <img style={parseStyle('width:100%;height:clamp(380px,56vh,560px);object-fit:cover')} src="/doppio-jundiai/a018.jpg" alt="Porte cochère do Doppio Jundiaí, perspectiva artística preliminar" loading="lazy" />
+                <img style={parseStyle('width:100%;height:clamp(380px,56vh,560px);object-fit:cover')} src="/doppio-jundiai/midia/a1c9609202096602.webp" alt="Porte cochère do Doppio Jundiaí, perspectiva artística preliminar" loading="lazy" />
               </div>
               <div data-reveal="right">
                 <div style={parseStyle("font-family:'Jost',sans-serif;text-transform:uppercase;letter-spacing:.34em;font-size:12px;color:#a8763c;margin-bottom:24px")}>
@@ -1335,7 +1335,7 @@ export default function DoppioJundiai() {
         </section>
         {/* CONTATO */}
         <section style={parseStyle('position:relative;padding:clamp(80px,12vh,150px) 0;overflow:hidden;background:#140c06')} id="contato">
-          <img style={parseStyle('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.22')} src="/doppio-jundiai/a002.jpg" alt="" aria-hidden="true" />
+          <img loading="lazy" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.22')} src="/doppio-jundiai/midia/67b6c228e5207d1b.webp" alt="" aria-hidden="true" />
           <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(120deg,rgba(20,12,6,.96),rgba(20,12,6,.78))')}>
           </div>
           <div style={parseStyle('position:relative;z-index:2')} className="container">
@@ -1428,7 +1428,7 @@ export default function DoppioJundiai() {
           <div className="container">
             <div style={parseStyle('display:flex;flex-wrap:wrap;justify-content:space-between;gap:34px;align-items:flex-start;padding-bottom:40px;border-bottom:1px solid rgba(231,205,156,.1)')}>
               <div style={parseStyle('max-width:300px')}>
-                <img style={parseStyle('height:40px;width:auto;margin-bottom:18px')} src="/doppio-jundiai/a005.png" alt="Doppio Jundiaí" />
+                <img loading="lazy" style={parseStyle('height:40px;width:auto;margin-bottom:18px')} src="/doppio-jundiai/a005.png" alt="Doppio Jundiaí" />
                 <p style={parseStyle('font-size:13.5px;line-height:1.7;color:rgba(240,230,214,.55);margin:0')}>
                   O ícone de sofisticação no Jardim Campos Elísios. Living com pé-direito duplo de 5,60 m.
                 </p>

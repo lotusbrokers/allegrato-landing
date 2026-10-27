@@ -389,7 +389,7 @@ export default function ForestHouses() {
         {/* ====================== HERO ====================== */}
         <section className="hero" data-screen-label="Hero" id="hero">
           <div className="hero__media" data-parallax="0.18">
-            <img src="/forest-houses/a002.jpg" alt="Fachada das casas do Forest Houses ao entardecer, arquitetura moderna em branco e madeira" fetchPriority="high" />
+            <img src="/forest-houses/midia/79b77253ef627749.webp" alt="Fachada das casas do Forest Houses ao entardecer, arquitetura moderna em branco e madeira" fetchPriority="high" />
           </div>
           <div className="container hero__inner">
             <p className="eyebrow hero__eyebrow" data-reveal="" style={{ '--d': '80ms' } as React.CSSProperties}>Casas em condomínio · Louveira / SP</p>
@@ -523,18 +523,18 @@ export default function ForestHouses() {
                 <span className="zoom">{zoomIco}</span>
                 <span className="tile__cap"><span className="k">Tipo 1 · 147m²</span><span className="t">Fachada frontal</span></span>
               </button>
-              <button className="tile" data-span="4" data-reveal="" style={{ '--d': '90ms' } as React.CSSProperties} data-img="/forest-houses/a001.jpg" data-cap="Fachada de fundo" aria-label="Ampliar fachada de fundo">
-                <img src="/forest-houses/a001.jpg" alt="Fachada de fundo com sacadas amplas" loading="lazy" />
+              <button className="tile" data-span="4" data-reveal="" style={{ '--d': '90ms' } as React.CSSProperties} data-img="/forest-houses/midia/79b77253ef627749.webp" data-cap="Fachada de fundo" aria-label="Ampliar fachada de fundo">
+                <img src="/forest-houses/midia/79b77253ef627749.webp" alt="Fachada de fundo com sacadas amplas" loading="lazy" />
                 <span className="zoom">{zoomIco}</span>
                 <span className="tile__cap"><span className="k">Sacadas</span><span className="t">Fachada de fundo</span></span>
               </button>
-              <button className="tile" data-span="4" data-reveal="" style={{ '--d': '160ms' } as React.CSSProperties} data-img="/forest-houses/a009.jpg" data-cap="Perspectiva do condomínio" aria-label="Ampliar perspectiva aérea">
-                <img src="/forest-houses/a009.jpg" alt="Perspectiva aérea do condomínio Forest Houses entre áreas verdes" loading="lazy" />
+              <button className="tile" data-span="4" data-reveal="" style={{ '--d': '160ms' } as React.CSSProperties} data-img="/forest-houses/midia/6555e8a4019ff592.webp" data-cap="Perspectiva do condomínio" aria-label="Ampliar perspectiva aérea">
+                <img src="/forest-houses/midia/6555e8a4019ff592.webp" alt="Perspectiva aérea do condomínio Forest Houses entre áreas verdes" loading="lazy" />
                 <span className="zoom">{zoomIco}</span>
                 <span className="tile__cap"><span className="k">Vista aérea</span><span className="t">Implantação no verde</span></span>
               </button>
-              <button className="tile" data-span="4" data-reveal="" data-img="/forest-houses/a007.jpg" data-cap="Ponto de carga elétrica na garagem" aria-label="Ampliar ponto de carga elétrica">
-                <img src="/forest-houses/a007.jpg" alt="Morador carregando carro elétrico no ponto de recarga da garagem do Forest Houses" loading="lazy" />
+              <button className="tile" data-span="4" data-reveal="" data-img="/forest-houses/midia/f91af5e826fbf706.webp" data-cap="Ponto de carga elétrica na garagem" aria-label="Ampliar ponto de carga elétrica">
+                <img src="/forest-houses/midia/f91af5e826fbf706.webp" alt="Morador carregando carro elétrico no ponto de recarga da garagem do Forest Houses" loading="lazy" />
                 <span className="zoom">{zoomIco}</span>
                 <span className="tile__cap"><span className="k">Garagem</span><span className="t">Ponto de carga elétrica</span></span>
               </button>
@@ -543,8 +543,8 @@ export default function ForestHouses() {
                 <span className="zoom">{zoomIco}</span>
                 <span className="tile__cap"><span className="k">Implantação</span><span className="t">Vista geral</span></span>
               </button>
-              <button className="tile" data-span="4" data-reveal="" style={{ '--d': '160ms' } as React.CSSProperties} data-img="/forest-houses/a011.jpg" data-cap="Portaria" aria-label="Ampliar portaria">
-                <img src="/forest-houses/a011.jpg" alt="Portaria do condomínio Forest Houses ao entardecer" loading="lazy" />
+              <button className="tile" data-span="4" data-reveal="" style={{ '--d': '160ms' } as React.CSSProperties} data-img="/forest-houses/midia/12be2d6616b60e51.webp" data-cap="Portaria" aria-label="Ampliar portaria">
+                <img src="/forest-houses/midia/12be2d6616b60e51.webp" alt="Portaria do condomínio Forest Houses ao entardecer" loading="lazy" />
                 <span className="zoom">{zoomIco}</span>
                 <span className="tile__cap"><span className="k">Acesso · Segurança</span><span className="t">Portaria</span></span>
               </button>
@@ -563,7 +563,7 @@ export default function ForestHouses() {
                 <div style={{ marginTop: '30px' }}><a href="#plantas" className="textlink">Conhecer as plantas <span className="ar">→</span></a></div>
               </div>
               <div className="frame" data-reveal="" style={{ '--d': '120ms' } as React.CSSProperties}>
-                <img src="/forest-houses/a005.jpg" alt="Sala de estar e jantar integradas do Forest Houses, com sofá branco e iluminação linear" loading="lazy" />
+                <img src="/forest-houses/midia/f58798e2561e20e6.webp" alt="Sala de estar e jantar integradas do Forest Houses, com sofá branco e iluminação linear" loading="lazy" />
               </div>
             </div>
 
@@ -596,15 +596,15 @@ export default function ForestHouses() {
               </div>
               <div className="plans__viewer">
                 <div className="plans__panel active" data-panel="terreo">
-                  <button className="plan-fig" data-img="/forest-houses/a008.jpg" data-cap="Planta piso térreo, Tipo 1" aria-label="Ampliar planta do piso térreo">
-                    <img src="/forest-houses/a008.jpg" alt="Planta do piso térreo da casa Tipo 1 do Forest Houses" loading="lazy" />
+                  <button className="plan-fig" data-img="/forest-houses/midia/a12b51ef72b3873c.webp" data-cap="Planta piso térreo, Tipo 1" aria-label="Ampliar planta do piso térreo">
+                    <img src="/forest-houses/midia/a12b51ef72b3873c.webp" alt="Planta do piso térreo da casa Tipo 1 do Forest Houses" loading="lazy" />
                     <span className="plan-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M11 8v6M8 11h6" /><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg> Ampliar</span>
                   </button>
                   <div className="cap"><span>Planta piso térreo, Tipo 1</span><span>Clique para ampliar</span></div>
                 </div>
                 <div className="plans__panel" data-panel="superior">
-                  <button className="plan-fig" data-img="/forest-houses/a006.jpg" data-cap="Planta piso superior, 3 suítes" aria-label="Ampliar planta do piso superior">
-                    <img src="/forest-houses/a006.jpg" alt="Planta do piso superior com 3 suítes" loading="lazy" />
+                  <button className="plan-fig" data-img="/forest-houses/midia/32b66186b79f8a23.webp" data-cap="Planta piso superior, 3 suítes" aria-label="Ampliar planta do piso superior">
+                    <img src="/forest-houses/midia/32b66186b79f8a23.webp" alt="Planta do piso superior com 3 suítes" loading="lazy" />
                     <span className="plan-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M11 8v6M8 11h6" /><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg> Ampliar</span>
                   </button>
                   <div className="cap"><span>Planta piso superior, 3 suítes</span><span>Clique para ampliar</span></div>
@@ -644,13 +644,13 @@ export default function ForestHouses() {
 
             <div className="lazer__media">
               <div className="frame wide" data-reveal="">
-                <img src="/forest-houses/a010.jpg" alt="Piscinas e área de lazer do Forest Houses ao entardecer" loading="lazy" />
+                <img src="/forest-houses/midia/01a3a8f71eff9d0a.webp" alt="Piscinas e área de lazer do Forest Houses ao entardecer" loading="lazy" />
               </div>
               <div className="frame" data-reveal="" style={{ '--d': '120ms' } as React.CSSProperties}>
-                <img src="/forest-houses/a004.jpg" alt="Brinquedoteca colorida do condomínio" loading="lazy" />
+                <img src="/forest-houses/midia/42840741fd922040.webp" alt="Brinquedoteca colorida do condomínio" loading="lazy" />
               </div>
               <div className="frame" data-reveal="" style={{ '--d': '220ms' } as React.CSSProperties}>
-                <img src="/forest-houses/a011.jpg" alt="Acesso e portaria do condomínio" loading="lazy" />
+                <img src="/forest-houses/midia/12be2d6616b60e51.webp" alt="Acesso e portaria do condomínio" loading="lazy" />
               </div>
             </div>
 
