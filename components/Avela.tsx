@@ -189,22 +189,22 @@ const distances: Array<{ t: string; p: string }> = [
 
 // Amenities (ordem e imagens exatas do markup).
 const amenities: Array<{ img: string; cap: string }> = [
-  { img: 'a012.jpg', cap: 'Piscina adulto e infantil' },
-  { img: 'a000.jpg', cap: 'Churrasqueira' },
-  { img: 'a001.jpg', cap: 'Salão de festas' },
-  { img: 'a016.jpg', cap: 'Casa de campo' },
-  { img: 'a008.jpg', cap: 'Academia' },
-  { img: 'a013.jpg', cap: 'Quadra recreativa' },
-  { img: 'a005.jpg', cap: 'Playground' },
-  { img: 'a004.jpg', cap: 'Pet place' },
-  { img: 'a015.jpg', cap: 'Brinquedoteca' },
-  { img: 'a003.jpg', cap: 'Praça de alongamento' },
-  { img: 'a002.jpg', cap: 'Garden privativo' },
-  { img: 'a010.jpg', cap: 'Portaria' },
+  { img: 'midia/24c4992692548ade.webp', cap: 'Piscina adulto e infantil' },
+  { img: 'midia/791bb5bf74aec786.webp', cap: 'Churrasqueira' },
+  { img: 'midia/76626e2280aba310.webp', cap: 'Salão de festas' },
+  { img: 'midia/e0b9d143a37cb9d8.webp', cap: 'Casa de campo' },
+  { img: 'midia/57184d89633db28a.webp', cap: 'Academia' },
+  { img: 'midia/87240634ade91298.webp', cap: 'Quadra recreativa' },
+  { img: 'midia/ac9705d620d6339b.webp', cap: 'Playground' },
+  { img: 'midia/ee3634338ad11b65.webp', cap: 'Pet place' },
+  { img: 'midia/e52516e483647e2b.webp', cap: 'Brinquedoteca' },
+  { img: 'midia/a3367153ec7715b5.webp', cap: 'Praça de alongamento' },
+  { img: 'midia/310de566f6d61e1c.webp', cap: 'Garden privativo' },
+  { img: 'midia/7223b47a170b7baf.webp', cap: 'Portaria' },
 ];
 
 // Plantas: imagem por índice de plano (ordem exata do markup sc-if).
-const planImgs = ['a019.jpg', 'a018.jpg', 'a020.jpg', 'a011.jpg'];
+const planImgs = ['midia/cca31b38a2f19b70.webp', 'midia/96efad9f12a7124f.webp', 'midia/656fab8edc9b82a0.webp', 'midia/41de2d9c78775aa8.webp'];
 
 /* Strings de estilo literais reusadas (do renderVals). */
 const S = {
@@ -454,7 +454,7 @@ export default function Avela({
       <header style={parseStyle(headerStyle)}>
         <div style={parseStyle('max-width:1240px;margin:0 auto;padding:0 26px;height:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;')}>
           <a href="#topo" style={parseStyle('display:flex;align-items:center;gap:0;text-decoration:none;flex-shrink:0;')}>
-            <img src="/avela/a006.png" alt="Avelã Vila Residencial" style={parseStyle(logoStyle)} />
+            <img src="/avela/midia/073ce0aa39ed1522.webp" alt="Avelã Vila Residencial" style={parseStyle(logoStyle)} />
           </a>
           {isDesktop && (
             <nav style={parseStyle('display:flex;align-items:center;gap:30px;')}>
@@ -502,7 +502,7 @@ export default function Avela({
       {/* ============ HERO ============ */}
       <section id="topo" style={parseStyle('position:relative;min-height:680px;height:90vh;max-height:900px;display:flex;align-items:flex-end;overflow:hidden;')}>
         <div style={parseStyle('position:absolute;inset:0;animation:avHeroBg 2.4s cubic-bezier(.16,.84,.3,1) both;')}>
-          <img src="/avela/a007.jpg" alt="Fachada do Avelã Vila Residencial" style={parseStyle('width:100%;height:100%;object-fit:cover;object-position:center 38%;')} />
+          <img src="/avela/midia/f7bc6f12d44a5d45.webp" alt="Fachada do Avelã Vila Residencial" style={parseStyle('width:100%;height:100%;object-fit:cover;object-position:center 38%;')} />
         </div>
         <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,28,38,.42) 0%,rgba(20,28,38,0) 26%,rgba(18,22,18,.12) 55%,rgba(22,20,14,.82) 100%);')}></div>
         <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(95deg,rgba(20,22,16,.55) 0%,rgba(20,22,16,.12) 42%,rgba(20,22,16,0) 70%);')}></div>
@@ -601,7 +601,7 @@ export default function Avela({
           </div>
           <div data-reveal="right" style={parseStyle('position:relative;')}>
             <div style={parseStyle('position:relative;border-radius:22px;overflow:hidden;box-shadow:0 40px 70px -30px rgba(43,40,32,.5);aspect-ratio:4/3.2;')}>
-              <img src="/avela/a017.jpg" alt="Casa de Campo do Avelã, cercada de natureza" style={parseStyle('width:100%;height:100%;object-fit:cover;')} />
+              <img loading="lazy" src="/avela/midia/9e742fbb0c59ffdd.webp" alt="Casa de Campo do Avelã, cercada de natureza" style={parseStyle('width:100%;height:100%;object-fit:cover;')} />
             </div>
             <div style={parseStyle('position:absolute;bottom:-26px;left:-22px;background:#fff;border-radius:16px;padding:18px 24px;box-shadow:0 24px 44px -18px rgba(43,40,32,.4);display:flex;align-items:center;gap:14px;')}>
               <span style={parseStyle("font-family:'Playfair Display',serif;font-style:italic;font-size:34px;color:#DD8A2A;line-height:1;")}>16</span>
@@ -664,7 +664,7 @@ export default function Avela({
             <div style={parseStyle('position:relative;background:#FBF8F1;border:1px solid rgba(43,40,32,.08);border-radius:20px;padding:clamp(18px,3vw,34px);box-shadow:0 30px 60px -34px rgba(43,40,32,.4);')}>
               {PLANS.map((p, i) =>
                 i === plan ? (
-                  <img
+                  <img loading="lazy"
                     key={i}
                     onClick={openPlanImg}
                     src={`/avela/${planImgs[i]}`}
@@ -720,7 +720,7 @@ export default function Avela({
 
           <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(34px,5vw,64px);align-items:start;')}>
             <div data-reveal="left" style={parseStyle('border-radius:18px;overflow:hidden;box-shadow:0 34px 60px -30px rgba(0,0,0,.7);background:#cfcdbe;')}>
-              <img src="/avela/a014.jpg" alt="Mapa de localização do Avelã em Itupeva" style={parseStyle('width:100%;height:auto;')} />
+              <img loading="lazy" src="/avela/midia/120e84c153266513.webp" alt="Mapa de localização do Avelã em Itupeva" style={parseStyle('width:100%;height:auto;')} />
             </div>
             <div data-reveal="right">
               <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:4px 28px;')}>
@@ -749,7 +749,7 @@ export default function Avela({
       {/* ============ CONTATO / FORM ============ */}
       <section id="contato" style={parseStyle('position:relative;padding:clamp(80px,10vw,130px) 26px;overflow:hidden;')}>
         <div style={parseStyle('position:absolute;inset:0;')}>
-          <img src="/avela/a009.jpg" alt="" aria-hidden="true" style={parseStyle('width:100%;height:100%;object-fit:cover;object-position:center 30%;')} />
+          <img loading="lazy" src="/avela/midia/9268595b87c276c7.webp" alt="" aria-hidden="true" style={parseStyle('width:100%;height:100%;object-fit:cover;object-position:center 30%;')} />
           <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(110deg,rgba(43,40,32,.94) 0%,rgba(43,40,32,.86) 42%,rgba(43,40,32,.55) 100%);')}></div>
         </div>
         <div style={parseStyle('position:relative;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:clamp(36px,5vw,70px);align-items:center;')}>
@@ -851,7 +851,7 @@ export default function Avela({
         <div style={parseStyle('max-width:1240px;margin:0 auto;')}>
           <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:40px;align-items:start;padding-bottom:42px;border-bottom:1px solid rgba(246,242,233,.12);')}>
             <div>
-              <img src="/avela/a006.png" alt="Avelã Vila Residencial" style={parseStyle('height:84px;width:auto;background:#F6F2E9;border-radius:12px;padding:10px 14px;margin-bottom:16px;')} />
+              <img loading="lazy" src="/avela/midia/073ce0aa39ed1522.webp" alt="Avelã Vila Residencial" style={parseStyle('height:84px;width:auto;background:#F6F2E9;border-radius:12px;padding:10px 14px;margin-bottom:16px;')} />
               <p style={parseStyle("font-family:'Playfair Display',serif;font-style:italic;font-size:18px;color:#E59B3E;margin:0;")}>A beleza do campo no coração da cidade.</p>
             </div>
             <div>
@@ -890,7 +890,7 @@ export default function Avela({
       {/* Lightbox */}
       {lightbox.open && (
         <div onClick={closeLightbox} style={parseStyle('position:fixed;inset:0;z-index:120;background:rgba(18,16,12,.92);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:max(24px,4vw);animation:avFade .25s ease;cursor:zoom-out;')}>
-          <img src={lightbox.src} alt={lightbox.alt} style={parseStyle('max-width:94vw;max-height:88vh;width:auto;height:auto;border-radius:12px;box-shadow:0 50px 100px rgba(0,0,0,.7);animation:avPop .32s cubic-bezier(.16,.84,.3,1);')} />
+          <img loading="lazy" src={lightbox.src} alt={lightbox.alt} style={parseStyle('max-width:94vw;max-height:88vh;width:auto;height:auto;border-radius:12px;box-shadow:0 50px 100px rgba(0,0,0,.7);animation:avPop .32s cubic-bezier(.16,.84,.3,1);')} />
           <Hoverable
             as="button"
             onClick={closeLightbox}

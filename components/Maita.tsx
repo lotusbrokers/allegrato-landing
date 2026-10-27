@@ -30,7 +30,7 @@ const PLANTS: Plant[] = [
   {
     t: '2 Dormitórios · 1 Suíte',
     m: '63,45',
-    img: '/maita/a014.png',
+    img: '/maita/midia/811551784e48c2fc.webp',
     specs: [
       ['Configuração', '2 dormitórios (1 suíte)'],
       ['Área privativa', '63,45 m²'],
@@ -82,15 +82,15 @@ const TAB_LABELS: Array<[string, string]> = [
 
 type GalItem = { src: string; alt: string; lbl: string; cap: string };
 const GALLERY: GalItem[] = [
-  { src: '/maita/a007.jpg', alt: 'Fachada do Maitá Residencial', lbl: 'Fachada', cap: 'Fachada · imagem ilustrativa' },
-  { src: '/maita/a003.jpg', alt: 'Piscina', lbl: 'Piscina', cap: 'Piscina adulto e infantil · imagem ilustrativa' },
+  { src: '/maita/midia/255677a95718436d.webp', alt: 'Fachada do Maitá Residencial', lbl: 'Fachada', cap: 'Fachada · imagem ilustrativa' },
+  { src: '/maita/midia/fd7091bef83696cb.webp', alt: 'Piscina', lbl: 'Piscina', cap: 'Piscina adulto e infantil · imagem ilustrativa' },
   { src: '/maita/a005.jpg', alt: 'Hall de entrada', lbl: 'Hall de entrada', cap: 'Hall de entrada · imagem ilustrativa' },
   { src: '/maita/a006.jpg', alt: 'Espaço gourmet', lbl: 'Espaço gourmet', cap: 'Espaço gourmet com piscina · imagem ilustrativa' },
-  { src: '/maita/a009.jpg', alt: 'Varanda gourmet garden', lbl: 'Garden', cap: 'Varanda gourmet garden · imagem ilustrativa' },
+  { src: '/maita/midia/f61dc2763de0066d.webp', alt: 'Varanda gourmet garden', lbl: 'Garden', cap: 'Varanda gourmet garden · imagem ilustrativa' },
   { src: '/maita/a008.jpg', alt: 'Academia', lbl: 'Academia', cap: 'Academia · imagem ilustrativa' },
-  { src: '/maita/a001.jpg', alt: 'Quadra recreativa', lbl: 'Quadra recreativa', cap: 'Quadra recreativa · imagem ilustrativa' },
+  { src: '/maita/midia/27e45024149063ec.webp', alt: 'Quadra recreativa', lbl: 'Quadra recreativa', cap: 'Quadra recreativa · imagem ilustrativa' },
   { src: '/maita/a012.jpg', alt: 'Salão de festas', lbl: 'Salão de festas', cap: 'Salão de festas · imagem ilustrativa' },
-  { src: '/maita/a011.jpg', alt: 'Playground', lbl: 'Playground', cap: 'Playground · imagem ilustrativa' },
+  { src: '/maita/midia/a0cbbc52d9c83e45.webp', alt: 'Playground', lbl: 'Playground', cap: 'Playground · imagem ilustrativa' },
 ];
 
 const WaGlyph = () => (
@@ -437,7 +437,7 @@ export default function Maita() {
           </div>
           <aside className="hero__card" data-px="-30">
             <div className="frame">
-              <img src="/maita/a007.jpg" alt="Fachada do Maitá Residencial, imagem ilustrativa" />
+              <img src="/maita/midia/255677a95718436d.webp" alt="Fachada do Maitá Residencial, imagem ilustrativa" />
               <span className="tag">
                 Fachada · Imagem ilustrativa
               </span>
@@ -504,10 +504,10 @@ export default function Maita() {
         <div className="wrap about__grid">
           <div className="about__media" data-reveal="scale">
             <div className="main" data-px="26">
-              <img src="/maita/a007.jpg" alt="Fachada do Maitá Residencial" />
+              <img loading="lazy" src="/maita/midia/255677a95718436d.webp" alt="Fachada do Maitá Residencial" />
             </div>
             <div className="float">
-              <img src="/maita/a005.jpg" alt="Hall de entrada do Maitá Residencial" />
+              <img loading="lazy" src="/maita/a005.jpg" alt="Hall de entrada do Maitá Residencial" />
             </div>
             <div className="stamp">
               <span>
@@ -629,7 +629,7 @@ export default function Maita() {
           </div>
           <div className="lazer__feature">
             <div className="tile t-lg" data-reveal="clip">
-              <img src="/maita/a003.jpg" alt="Piscina adulto e infantil do Maitá Residencial" />
+              <img loading="lazy" src="/maita/midia/fd7091bef83696cb.webp" alt="Piscina adulto e infantil do Maitá Residencial" />
               <div className="cap">
                 <h3>
                   Piscina adulto e infantil
@@ -640,7 +640,7 @@ export default function Maita() {
               </div>
             </div>
             <div style={parseStyle('--d:100')} className="tile t-md" data-reveal="clip" data-d="100">
-              <img src="/maita/a006.jpg" alt="Espaço gourmet com piscina privativa" />
+              <img loading="lazy" src="/maita/a006.jpg" alt="Espaço gourmet com piscina privativa" />
               <div className="cap">
                 <h3>
                   Espaço gourmet
@@ -653,7 +653,7 @@ export default function Maita() {
           </div>
           <div className="lazer__feature">
             <div className="tile t-4" data-reveal="clip">
-              <img src="/maita/a008.jpg" alt="Academia do Maitá Residencial" />
+              <img loading="lazy" src="/maita/a008.jpg" alt="Academia do Maitá Residencial" />
               <div className="cap">
                 <h3>
                   Academia
@@ -661,7 +661,7 @@ export default function Maita() {
               </div>
             </div>
             <div style={parseStyle('--d:100')} className="tile t-4" data-reveal="clip" data-d="100">
-              <img src="/maita/a001.jpg" alt="Quadra recreativa demarcada" />
+              <img loading="lazy" src="/maita/midia/27e45024149063ec.webp" alt="Quadra recreativa demarcada" />
               <div className="cap">
                 <h3>
                   Quadra recreativa
@@ -669,7 +669,7 @@ export default function Maita() {
               </div>
             </div>
             <div style={parseStyle('--d:200')} className="tile t-4" data-reveal="clip" data-d="200">
-              <img src="/maita/a012.jpg" alt="Salão de festas" />
+              <img loading="lazy" src="/maita/a012.jpg" alt="Salão de festas" />
               <div className="cap">
                 <h3>
                   Salão de festas
@@ -679,7 +679,7 @@ export default function Maita() {
           </div>
           <div className="lazer__feature">
             <div className="tile t-3" data-reveal="clip">
-              <img src="/maita/a011.jpg" alt="Playground" />
+              <img loading="lazy" src="/maita/midia/a0cbbc52d9c83e45.webp" alt="Playground" />
               <div className="cap">
                 <h3>
                   Playground
@@ -687,7 +687,7 @@ export default function Maita() {
               </div>
             </div>
             <div style={parseStyle('--d:80')} className="tile t-3" data-reveal="clip" data-d="80">
-              <img src="/maita/a015.jpg" alt="Brinquedoteca" />
+              <img loading="lazy" src="/maita/a015.jpg" alt="Brinquedoteca" />
               <div className="cap">
                 <h3>
                   Brinquedoteca
@@ -695,7 +695,7 @@ export default function Maita() {
               </div>
             </div>
             <div style={parseStyle('--d:160')} className="tile t-3" data-reveal="clip" data-d="160">
-              <img src="/maita/a002.jpg" alt="Coworking" />
+              <img loading="lazy" src="/maita/a002.jpg" alt="Coworking" />
               <div className="cap">
                 <h3>
                   Coworking
@@ -703,7 +703,7 @@ export default function Maita() {
               </div>
             </div>
             <div style={parseStyle('--d:240')} className="tile t-3" data-reveal="clip" data-d="240">
-              <img src="/maita/a010.jpg" alt="Churrasqueira" />
+              <img loading="lazy" src="/maita/midia/4122df43c6c74dc7.webp" alt="Churrasqueira" />
               <div className="cap">
                 <h3>
                   Churrasqueira
@@ -833,7 +833,7 @@ export default function Maita() {
           <div className="plantas__panel">
             <div className="plantas__img" data-reveal="scale">
               {planta.img ? (
-                <img
+                <img loading="lazy"
                   key={planta.img}
                   id="plantaImg"
                   className="fade-swap"
@@ -922,7 +922,7 @@ export default function Maita() {
                   }
                 }}
               >
-                <img src={g.src} alt={g.alt} />
+                <img loading="lazy" src={g.src} alt={g.alt} />
                 <span className="lbl">
                   {g.lbl}
                 </span>
@@ -1301,7 +1301,7 @@ export default function Maita() {
         <div className="wrap">
           <div className="footer__grid">
             <div>
-              <img className="footer__logo" src="/maita/a013.png" alt="Maitá Residencial" />
+              <img loading="lazy" className="footer__logo" src="/maita/a013.png" alt="Maitá Residencial" />
               <p style={parseStyle('max-width:38ch')}>
                 Maitá Residencial, apartamentos de 2 e 3 dormitórios em Jundiaí/SP. Comercialização{' '}
                 <strong>
@@ -1418,7 +1418,7 @@ export default function Maita() {
         >
           ‹
         </button>
-        <img
+        <img loading="lazy"
           src={lbIdx !== null ? GALLERY[lbIdx].src : 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='}
           alt={lbIdx !== null ? GALLERY[lbIdx].alt : ''}
         />

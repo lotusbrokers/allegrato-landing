@@ -365,7 +365,7 @@ export default function Manawa() {
       {/* ============ HERO ============ */}
       <section className="hero" id="topo">
         <div className="hero-bg">
-          <img src="/manawa/a005.png" alt="Fachada do Manawa Residencial em Jundiaí, duas torres residenciais" />
+          <img src="/manawa/midia/60c382a7fd0e145e.webp" alt="Fachada do Manawa Residencial em Jundiaí, duas torres residenciais" />
         </div>
         <div className="wrap hero-inner">
           <div className="hero-card">
@@ -531,7 +531,7 @@ export default function Manawa() {
           <div className="plan-figs reveal">
             <figure className="plan-fig" data-plan="0" onClick={() => openLightbox(PLAN_OFFSET + 0)}>
               <div className="plan-fig-img">
-                <img src="/manawa/a002.png" alt="Planta 102,79 m², 3 dormitórios com suíte e escritório, Torre A, Manawa Residencial" />
+                <img loading="lazy" src="/manawa/a002.png" alt="Planta 102,79 m², 3 dormitórios com suíte e escritório, Torre A, Manawa Residencial" />
               </div>
               <figcaption>
                 <div className="pf-m">102,79 m²</div>
@@ -541,7 +541,7 @@ export default function Manawa() {
             </figure>
             <figure className="plan-fig" data-plan="1" onClick={() => openLightbox(PLAN_OFFSET + 1)}>
               <div className="plan-fig-img">
-                <img src="/manawa/a000.png" alt="Planta 94,62 m², 3 dormitórios com suíte, Torre B, Manawa Residencial" />
+                <img loading="lazy" src="/manawa/a000.png" alt="Planta 94,62 m², 3 dormitórios com suíte, Torre B, Manawa Residencial" />
               </div>
               <figcaption>
                 <div className="pf-m">94,62 m²</div>
@@ -551,7 +551,7 @@ export default function Manawa() {
             </figure>
             <figure className="plan-fig" data-plan="2" onClick={() => openLightbox(PLAN_OFFSET + 2)}>
               <div className="plan-fig-img">
-                <img src="/manawa/a001.png" alt="Planta 76,27 m², 2 suítes com lavabo, Torre A, Manawa Residencial" />
+                <img loading="lazy" src="/manawa/a001.png" alt="Planta 76,27 m², 2 suítes com lavabo, Torre A, Manawa Residencial" />
               </div>
               <figcaption>
                 <div className="pf-m">76,27 m²</div>
@@ -561,7 +561,7 @@ export default function Manawa() {
             </figure>
             <figure className="plan-fig" data-plan="3" onClick={() => openLightbox(PLAN_OFFSET + 3)}>
               <div className="plan-fig-img">
-                <img src="/manawa/a004.png" alt="Planta 65,96 m², 2 dormitórios com suíte, Torre B, Manawa Residencial" />
+                <img loading="lazy" src="/manawa/a004.png" alt="Planta 65,96 m², 2 dormitórios com suíte, Torre B, Manawa Residencial" />
               </div>
               <figcaption>
                 <div className="pf-m">65,96 m²</div>
@@ -829,7 +829,7 @@ export default function Manawa() {
       >
         <button className="lb-close" id="lbClose" aria-label="Fechar" onClick={() => setLbOpen(false)}>×</button>
         <button className="lb-nav prev" id="lbPrev" aria-label="Anterior" onClick={() => step(-1)}>‹</button>
-        <img id="lbImg" alt={LB_ITEMS[lbCur].cap} src={LB_ITEMS[lbCur].src} referrerPolicy="no-referrer" />
+        <img loading="lazy" id="lbImg" alt={LB_ITEMS[lbCur].cap} src={LB_ITEMS[lbCur].src} referrerPolicy="no-referrer" />
         <div className="lb-cap" id="lbCap">{LB_ITEMS[lbCur].cap}</div>
         <button className="lb-nav next" id="lbNext" aria-label="Próxima" onClick={() => step(1)}>›</button>
       </div>
