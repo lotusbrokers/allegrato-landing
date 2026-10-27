@@ -25,21 +25,21 @@ const wa = (msg: string) => waHref(WA_NUMBER, msg);
 const IMG: Record<string, string> = {
   'p04-0.jpg': '/best-view-residence/a002.jpg',
   'p07-0.jpg': '/best-view-residence/a014.jpg',
-  'p08-0.jpg': '/best-view-residence/a007.jpg',
+  'p08-0.jpg': '/best-view-residence/midia/db181484b5af48ed.webp',
   'p08-1.jpg': '/best-view-residence/a021.jpg',
   'p08-2.jpg': '/best-view-residence/a020.jpg',
   'p09-0.jpg': '/best-view-residence/a008.jpg',
   'p09-1.jpg': '/best-view-residence/a010.jpg',
   'p09-2.jpg': '/best-view-residence/a016.jpg',
-  'p10-0.jpg': '/best-view-residence/a011.jpg',
+  'p10-0.jpg': '/best-view-residence/midia/01f7a81409edd41a.webp',
   'p10-1.jpg': '/best-view-residence/a009.jpg',
   'p10-2.jpg': '/best-view-residence/a015.jpg',
   'p11-1.jpg': '/best-view-residence/a019.jpg',
   'p12-0.jpg': '/best-view-residence/a005.jpg',
-  'p13-0.png': '/best-view-residence/a017.png',
-  'p14-0.png': '/best-view-residence/a013.png',
-  'p15-0.png': '/best-view-residence/a018.png',
-  'p16-0.png': '/best-view-residence/a022.png',
+  'p13-0.png': '/best-view-residence/midia/f6a90402d21cc13f.webp',
+  'p14-0.png': '/best-view-residence/midia/cca509973ef59925.webp',
+  'p15-0.png': '/best-view-residence/midia/4974d3eab0bf1581.webp',
+  'p16-0.png': '/best-view-residence/midia/236363cfe6361c46.webp',
   'p17-0.jpg': '/best-view-residence/a012.jpg',
 };
 
@@ -472,7 +472,7 @@ export default function BestViewResidence() {
             <figure style={parseStyle('margin: 0; position: relative; animation: rvIn 1.2s ease both; animation-timeline: view(); animation-range: entry 0% entry 50%;')}>
               <div style={parseStyle('position: absolute; top: -26px; right: -26px; bottom: 26px; left: 26px; background: rgba(162,163,126,.32); z-index: 0;')} aria-hidden="true">
               </div>
-              <img style={parseStyle('position: relative; z-index: 1; width: 100%; display: block; object-fit: cover; aspect-ratio: 4/3; box-shadow: 0 40px 80px -30px rgba(0,0,0,.6);')} src="/best-view-residence/a002.jpg" alt="Perspectiva artística da fachada e portaria do Best View Residence ao anoitecer" />
+              <img loading="lazy" style={parseStyle('position: relative; z-index: 1; width: 100%; display: block; object-fit: cover; aspect-ratio: 4/3; box-shadow: 0 40px 80px -30px rgba(0,0,0,.6);')} src="/best-view-residence/a002.jpg" alt="Perspectiva artística da fachada e portaria do Best View Residence ao anoitecer" />
               <figcaption style={parseStyle('position: relative; z-index: 1; margin-top: 10px; font-size: 11px; letter-spacing: .08em; color: #9b8b83;')}>
                 Perspectiva artística da fachada e portaria
               </figcaption>
@@ -503,7 +503,7 @@ export default function BestViewResidence() {
             <div style={parseStyle('display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 210px; gap: 14px;')}>
               {lazerCards.map((card, i) => (<React.Fragment key={i}>
                 <Hoverable as="figure" baseStyle={card.figStyle} hoverStyle={parseStyle('transform: translateY(-3px);')} onClick={card.open} role="button" tabIndex={0} aria-label={card.aria}>
-                  <img style={parseStyle('position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.7,.2,1);')} src={card.src} alt={card.alt} />
+                  <img loading="lazy" style={parseStyle('position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.7,.2,1);')} src={card.src} alt={card.alt} />
                   <span style={parseStyle('position: absolute; inset: 0; background: linear-gradient(180deg, rgba(36,24,25,0) 45%, rgba(36,24,25,.88) 100%);')} aria-hidden="true">
                   </span>
                   <figcaption style={parseStyle('position: absolute; left: 18px; right: 18px; bottom: 15px; display: flex; align-items: center; justify-content: space-between; gap: 10px;')}>
@@ -559,7 +559,7 @@ export default function BestViewResidence() {
                   </svg>
                   {' '}AMPLIAR{' '}
                 </span>
-                <img style={parseStyle('width: 100%; display: block;')} src={planImg} alt={planImgAlt} />
+                <img loading="lazy" style={parseStyle('width: 100%; display: block;')} src={planImg} alt={planImgAlt} />
                 <figcaption style={parseStyle('margin-top: 12px; font-size: 10.5px; letter-spacing: .05em; line-height: 1.6; color: #6b5a52;')}>
                   Ilustração artística. Móveis, utensílios e itens de decoração são meramente ilustrativos e não fazem parte do Memorial Descritivo.
                 </figcaption>
@@ -611,7 +611,7 @@ export default function BestViewResidence() {
             <div style={parseStyle('display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 60px);')}>
               <div style={parseStyle('animation: rvUp 1s cubic-bezier(.2,.7,.2,1) both; animation-timeline: view(); animation-range: entry 0% entry 45%;')}>
                 <figure style={parseStyle('position: relative; margin: 0 0 22px; overflow: hidden; height: 220px;')}>
-                  <img style={parseStyle('position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%;')} src="/best-view-residence/a001.jpg" alt="Perspectiva artística da fachada do Best View Residence" />
+                  <img loading="lazy" style={parseStyle('position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%;')} src="/best-view-residence/a001.jpg" alt="Perspectiva artística da fachada do Best View Residence" />
                   <span style={parseStyle('position: absolute; inset: 0; background: linear-gradient(180deg, rgba(36,24,25,.05) 40%, rgba(36,24,25,.85) 100%);')} aria-hidden="true">
                   </span>
                   <figcaption style={parseStyle('position: absolute; left: 20px; bottom: 16px; font-size: 13px; font-weight: 700; letter-spacing: .3em; color: #E9D7A8;')}>
@@ -639,7 +639,7 @@ export default function BestViewResidence() {
               </div>
               <div style={parseStyle('animation: rvUp 1s .12s cubic-bezier(.2,.7,.2,1) both; animation-timeline: view(); animation-range: entry 0% entry 45%;')}>
                 <figure style={parseStyle('position: relative; margin: 0 0 22px; overflow: hidden; height: 220px;')}>
-                  <img style={parseStyle('position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 65%;')} src="/best-view-residence/a005.jpg" alt="Perspectiva artística do boulevard central do condomínio" />
+                  <img loading="lazy" style={parseStyle('position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 65%;')} src="/best-view-residence/a005.jpg" alt="Perspectiva artística do boulevard central do condomínio" />
                   <span style={parseStyle('position: absolute; inset: 0; background: linear-gradient(180deg, rgba(36,24,25,.05) 40%, rgba(36,24,25,.85) 100%);')} aria-hidden="true">
                   </span>
                   <figcaption style={parseStyle('position: absolute; left: 20px; bottom: 16px; font-size: 13px; font-weight: 700; letter-spacing: .3em; color: #E9D7A8;')}>
@@ -673,7 +673,7 @@ export default function BestViewResidence() {
         </section>
         {/* ===================== LOCALIZAÇÃO ===================== */}
         <section style={parseStyle('position: relative; overflow: hidden; isolation: isolate; padding: 150px 0;')} id="localizacao" data-screen-label="Localização">
-          <img style={parseStyle('position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2;')} src="/best-view-residence/a006.jpg" alt="Imagem aérea da região do Swiss Park, em Campinas" />
+          <img loading="lazy" style={parseStyle('position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2;')} src="/best-view-residence/a006.jpg" alt="Imagem aérea da região do Swiss Park, em Campinas" />
           <div style={parseStyle('position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(36,24,25,.95) 0%, rgba(36,24,25,.78) 46%, rgba(36,24,25,.25) 100%);')} aria-hidden="true">
           </div>
           <div style={parseStyle('max-width: 1240px; margin: 0 auto; padding: 0 28px;')}>
@@ -744,7 +744,7 @@ export default function BestViewResidence() {
               </dl>
             </div>
             <figure style={parseStyle('margin: 0; position: sticky; top: 110px; animation: rvIn 1.2s ease both; animation-timeline: view(); animation-range: entry 0% entry 45%;')}>
-              <img style={parseStyle('width: 100%; display: block; box-shadow: 0 40px 80px -30px rgba(0,0,0,.55);')} src="/best-view-residence/a004.jpg" alt="Ilustração artística da implantação do Best View Residence: 4 torres, lazer central e acesso pela Av. Dermival Bernardes Siqueira" />
+              <img loading="lazy" style={parseStyle('width: 100%; display: block; box-shadow: 0 40px 80px -30px rgba(0,0,0,.55);')} src="/best-view-residence/a004.jpg" alt="Ilustração artística da implantação do Best View Residence: 4 torres, lazer central e acesso pela Av. Dermival Bernardes Siqueira" />
               <figcaption style={parseStyle('margin-top: 10px; font-size: 11px; letter-spacing: .08em; color: #9b8b83;')}>
                 Ilustração artística da implantação
               </figcaption>
@@ -753,7 +753,7 @@ export default function BestViewResidence() {
         </section>
         {/* ===================== F A OLIVA ===================== */}
         <section style={parseStyle('position: relative; overflow: hidden; isolation: isolate; padding: 130px 0;')} id="construtora" data-screen-label="Construtora">
-          <img style={parseStyle('position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2;')} src="/best-view-residence/a003.jpg" alt="Perspectiva artística da fachada do Best View Residence vista da rua" />
+          <img loading="lazy" style={parseStyle('position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2;')} src="/best-view-residence/a003.jpg" alt="Perspectiva artística da fachada do Best View Residence vista da rua" />
           <div style={parseStyle('position: absolute; inset: 0; z-index: -1; background: rgba(30,20,21,.9);')} aria-hidden="true">
           </div>
           <div style={parseStyle('max-width: 1240px; margin: 0 auto; padding: 0 28px;')}>
@@ -979,7 +979,7 @@ export default function BestViewResidence() {
         {lightboxOpen && (<>
           <div style={parseStyle('position: fixed; inset: 0; z-index: 80; background: rgba(20,13,14,.94); display: grid; place-items: center; padding: 40px; animation: rvIn .25s ease both; cursor: zoom-out;')} role="dialog" aria-modal="true" aria-label={lightboxTitulo} onClick={fecharLightbox}>
             <figure style={parseStyle('margin: 0; max-width: min(1100px, 92vw);')}>
-              <img style={parseStyle('width: 100%; max-height: 78vh; object-fit: contain; display: block; box-shadow: 0 60px 120px -40px rgba(0,0,0,.8); background: {{ lightboxBg }};')} src={lightboxSrc} alt={lightboxAlt} />
+              <img loading="lazy" style={parseStyle('width: 100%; max-height: 78vh; object-fit: contain; display: block; box-shadow: 0 60px 120px -40px rgba(0,0,0,.8); background: {{ lightboxBg }};')} src={lightboxSrc} alt={lightboxAlt} />
               <figcaption style={parseStyle('display: flex; justify-content: space-between; align-items: center; gap: 20px; margin-top: 16px;')}>
                 <span style={parseStyle('font-weight: 700; font-size: 17px; color: #F4EFE7;')}>
                   {lightboxTitulo}

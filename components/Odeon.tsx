@@ -45,7 +45,7 @@ const DIF_TEXTOS = [
 
 const PLANTAS = {
   '95': {
-    img: '/odeon/a009.jpg',
+    img: '/odeon/midia/01f1fb876ee1b4da.webp',
     alt: 'Planta do apartamento de 95,85 m², apto. + box: 100 m²',
     area: '95,85',
     sub: 'Apto. + box: 100 m²',
@@ -58,7 +58,7 @@ const PLANTAS = {
     ],
   },
   '112': {
-    img: '/odeon/a003.jpg',
+    img: '/odeon/midia/04ba13230ed71b0e.webp',
     alt: 'Planta do apartamento de 112,3 m², apto. + box: 116 m²',
     area: '112,3',
     sub: 'Apto. + box: 116 m²',
@@ -75,18 +75,18 @@ const PLANTAS = {
 // Fotos do decorado: ids do `window.__resources` resolvidos pelo ext_resources
 // do bundle (ver scratchpad/odeon/resources.json).
 const GALERIA: Array<{ src: string; label: string; unidade: string; un: string }> = [
-  { src: '/odeon/a012.jpg', label: 'Sala de estar', unidade: '95,85 m²', un: '95' },
-  { src: '/odeon/a017.jpg', label: 'Sala de jantar', unidade: '95,85 m²', un: '95' },
-  { src: '/odeon/a014.jpg', label: 'Suíte', unidade: '95,85 m²', un: '95' },
-  { src: '/odeon/a015.jpg', label: 'Dormitório', unidade: '95,85 m²', un: '95' },
-  { src: '/odeon/a020.jpg', label: 'Varanda gourmet', unidade: '95,85 m²', un: '95' },
-  { src: '/odeon/a016.jpg', label: 'Cozinha e living', unidade: '112,3 m²', un: '112' },
-  { src: '/odeon/a018.jpg', label: 'Sala de estar', unidade: '112,3 m²', un: '112' },
-  { src: '/odeon/a019.jpg', label: 'Sala de jantar', unidade: '112,3 m²', un: '112' },
-  { src: '/odeon/a004.jpg', label: 'Cozinha', unidade: '112,3 m²', un: '112' },
-  { src: '/odeon/a006.jpg', label: 'Suíte', unidade: '112,3 m²', un: '112' },
-  { src: '/odeon/a013.jpg', label: 'Dormitório', unidade: '112,3 m²', un: '112' },
-  { src: '/odeon/a007.jpg', label: 'Varanda gourmet', unidade: '112,3 m²', un: '112' },
+  { src: '/odeon/midia/eeba65c4f73a63a0.webp', label: 'Sala de estar', unidade: '95,85 m²', un: '95' },
+  { src: '/odeon/midia/2579392f271f8749.webp', label: 'Sala de jantar', unidade: '95,85 m²', un: '95' },
+  { src: '/odeon/midia/1ef3103347f9e472.webp', label: 'Suíte', unidade: '95,85 m²', un: '95' },
+  { src: '/odeon/midia/95c181fb98a86a7f.webp', label: 'Dormitório', unidade: '95,85 m²', un: '95' },
+  { src: '/odeon/midia/bfc9f81acdb76553.webp', label: 'Varanda gourmet', unidade: '95,85 m²', un: '95' },
+  { src: '/odeon/midia/355c98bda4c3a574.webp', label: 'Cozinha e living', unidade: '112,3 m²', un: '112' },
+  { src: '/odeon/midia/c41a71e3fdaeb016.webp', label: 'Sala de estar', unidade: '112,3 m²', un: '112' },
+  { src: '/odeon/midia/38c79568c0d0644d.webp', label: 'Sala de jantar', unidade: '112,3 m²', un: '112' },
+  { src: '/odeon/midia/eefb7ea6e4e59df0.webp', label: 'Cozinha', unidade: '112,3 m²', un: '112' },
+  { src: '/odeon/midia/30e63c8741e8f4a1.webp', label: 'Suíte', unidade: '112,3 m²', un: '112' },
+  { src: '/odeon/midia/3098aa192fba2544.webp', label: 'Dormitório', unidade: '112,3 m²', un: '112' },
+  { src: '/odeon/midia/c5b2f0deb9684b54.webp', label: 'Varanda gourmet', unidade: '112,3 m²', un: '112' },
 ];
 
 const PLANTAS_LB = [
@@ -447,7 +447,7 @@ export default function Odeon() {
             </div>
           </div>
           <div style={parseStyle('position: relative; flex: 1; min-height: clamp(420px, 54svh, 640px); overflow: hidden;')}>
-            <img style={parseStyle('position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 62%; animation: odn-heroken 2.8s cubic-bezier(.2,.6,.2,1) both;')} src="/odeon/a008.jpg" alt="Perspectiva artística do lounge externo do Odeon Residencial ao entardecer" />
+            <img style={parseStyle('position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 62%; animation: odn-heroken 2.8s cubic-bezier(.2,.6,.2,1) both;')} src="/odeon/midia/acc57a202255961e.webp" alt="Perspectiva artística do lounge externo do Odeon Residencial ao entardecer" />
             <div style={parseStyle('position: absolute; inset: 0; background: linear-gradient(180deg, rgba(30,39,56,0) 55%, rgba(30,39,56,.55) 100%);')}>
             </div>
             <div style={parseStyle('position: absolute; left: 0; right: 0; bottom: 48px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; animation: odn-fadeup .9s .6s cubic-bezier(.2,.6,.2,1) both;')}>
@@ -508,7 +508,7 @@ export default function Odeon() {
               </figcaption>
             </Hoverable>
             <figure style={parseStyle('grid-column: span 5; margin: 0; position: relative; overflow: hidden; border-radius: 3px; aspect-ratio: auto;')} data-reveal="true">
-              <Hoverable as="img" baseStyle={parseStyle('width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.6,.2,1);')} hoverStyle={{ transform: 'scale(1.045)' }} src="/odeon/a001.jpg" alt="Academia com pilates do Odeon Residencial" loading="lazy" />
+              <Hoverable as="img" baseStyle={parseStyle('width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.6,.2,1);')} hoverStyle={{ transform: 'scale(1.045)' }} src="/odeon/midia/0830f1b7677b753b.webp" alt="Academia com pilates do Odeon Residencial" loading="lazy" />
               <figcaption style={parseStyle('position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 26px 20px; background: linear-gradient(transparent, rgba(30,39,56,.78)); color: #fff; font-size: 16px; font-weight: 500; letter-spacing: 0.04em;')}>
                 Academia com pilates{' '}
                 <span style={parseStyle('display: block; font-size: 11px; font-weight: 400; color: rgba(255,255,255,.6); margin-top: 4px;')}>
@@ -517,7 +517,7 @@ export default function Odeon() {
               </figcaption>
             </figure>
             <figure style={parseStyle('grid-column: span 5; margin: 0; position: relative; overflow: hidden; border-radius: 3px;')} data-reveal="true">
-              <Hoverable as="img" baseStyle={parseStyle('width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.6,.2,1);')} hoverStyle={{ transform: 'scale(1.045)' }} src="/odeon/a002.jpg" alt="Brinquedoteca do Odeon Residencial" loading="lazy" />
+              <Hoverable as="img" baseStyle={parseStyle('width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.6,.2,1);')} hoverStyle={{ transform: 'scale(1.045)' }} src="/odeon/midia/8f8fc6dc1f7734d1.webp" alt="Brinquedoteca do Odeon Residencial" loading="lazy" />
               <figcaption style={parseStyle('position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 26px 20px; background: linear-gradient(transparent, rgba(30,39,56,.78)); color: #fff; font-size: 16px; font-weight: 500; letter-spacing: 0.04em;')}>
                 Brinquedoteca{' '}
                 <span style={parseStyle('display: block; font-size: 11px; font-weight: 400; color: rgba(255,255,255,.6); margin-top: 4px;')}>
@@ -558,7 +558,7 @@ export default function Odeon() {
             </div>
             <div style={parseStyle('display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 22px;')}>
               <figure style={parseStyle('margin: 0; position: relative; overflow: hidden; border-radius: 3px; aspect-ratio: 4/3;')} data-reveal="true">
-                <Hoverable as="img" baseStyle={parseStyle('width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.6,.2,1);')} hoverStyle={{ transform: 'scale(1.045)' }} src="/odeon/a007.jpg" alt="Varanda gourmet integrada à cozinha, decorado de 112,3 m²" loading="lazy" />
+                <Hoverable as="img" baseStyle={parseStyle('width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.6,.2,1);')} hoverStyle={{ transform: 'scale(1.045)' }} src="/odeon/midia/c5b2f0deb9684b54.webp" alt="Varanda gourmet integrada à cozinha, decorado de 112,3 m²" loading="lazy" />
                 <figcaption style={parseStyle('position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 22px 18px; background: linear-gradient(transparent, rgba(30,39,56,.78)); color: #fff; font-size: 15px; font-weight: 500;')}>
                   Varanda gourmet integrada{' '}
                   <span style={parseStyle('display: block; font-size: 11px; font-weight: 400; color: rgba(255,255,255,.6); margin-top: 4px;')}>
@@ -567,7 +567,7 @@ export default function Odeon() {
                 </figcaption>
               </figure>
               <figure style={parseStyle('margin: 0; position: relative; overflow: hidden; border-radius: 3px; aspect-ratio: 4/3;')} data-reveal="true">
-                <Hoverable as="img" baseStyle={parseStyle('width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.6,.2,1);')} hoverStyle={{ transform: 'scale(1.045)' }} src="/odeon/a004.jpg" alt="Cozinha com ilha e cuba dupla, decorado de 112,3 m²" loading="lazy" />
+                <Hoverable as="img" baseStyle={parseStyle('width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.6,.2,1);')} hoverStyle={{ transform: 'scale(1.045)' }} src="/odeon/midia/eefb7ea6e4e59df0.webp" alt="Cozinha com ilha e cuba dupla, decorado de 112,3 m²" loading="lazy" />
                 <figcaption style={parseStyle('position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 22px 18px; background: linear-gradient(transparent, rgba(30,39,56,.78)); color: #fff; font-size: 15px; font-weight: 500;')}>
                   Cozinha com ilha e cuba dupla{' '}
                   <span style={parseStyle('display: block; font-size: 11px; font-weight: 400; color: rgba(255,255,255,.6); margin-top: 4px;')}>
@@ -576,7 +576,7 @@ export default function Odeon() {
                 </figcaption>
               </figure>
               <figure style={parseStyle('margin: 0; position: relative; overflow: hidden; border-radius: 3px; aspect-ratio: 4/3;')} data-reveal="true">
-                <Hoverable as="img" baseStyle={parseStyle('width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.6,.2,1);')} hoverStyle={{ transform: 'scale(1.045)' }} src="/odeon/a006.jpg" alt="Suíte com closet, decorado de 112,3 m²" loading="lazy" />
+                <Hoverable as="img" baseStyle={parseStyle('width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.6,.2,1);')} hoverStyle={{ transform: 'scale(1.045)' }} src="/odeon/midia/30e63c8741e8f4a1.webp" alt="Suíte com closet, decorado de 112,3 m²" loading="lazy" />
                 <figcaption style={parseStyle('position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 22px 18px; background: linear-gradient(transparent, rgba(30,39,56,.78)); color: #fff; font-size: 15px; font-weight: 500;')}>
                   Suíte com closet{' '}
                   <span style={parseStyle('display: block; font-size: 11px; font-weight: 400; color: rgba(255,255,255,.6); margin-top: 4px;')}>
@@ -643,10 +643,10 @@ export default function Odeon() {
             <div style={parseStyle('display: grid; grid-template-columns: 1.35fr 1fr; gap: 48px; align-items: center;')}>
               <figure style={parseStyle('margin: 0; background: #fff; border-radius: 3px; padding: 18px; position: relative; cursor: zoom-in;')} data-reveal="true" onClick={abrirPlantaLightbox} role="button" aria-label="Ampliar planta">
                 {planta95Ativa && (<>
-                  <img style={parseStyle('width: 100%; display: block; border-radius: 2px;')} src="/odeon/a009.jpg" alt="Planta do apartamento de 95,85 m² do Odeon Residencial" />
+                  <img loading="lazy" style={parseStyle('width: 100%; display: block; border-radius: 2px;')} src="/odeon/midia/01f1fb876ee1b4da.webp" alt="Planta do apartamento de 95,85 m² do Odeon Residencial" />
                 </>)}
                 {planta112Ativa && (<>
-                  <img style={parseStyle('width: 100%; display: block; border-radius: 2px;')} src="/odeon/a003.jpg" alt="Planta do apartamento de 112,3 m² do Odeon Residencial" />
+                  <img loading="lazy" style={parseStyle('width: 100%; display: block; border-radius: 2px;')} src="/odeon/midia/04ba13230ed71b0e.webp" alt="Planta do apartamento de 112,3 m² do Odeon Residencial" />
                 </>)}
                 <span style={parseStyle('position: absolute; right: 26px; bottom: 26px; background: #2E3B4E; color: #fff; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 9px 16px; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px;')}>
                   ⤢ Ampliar planta
@@ -818,7 +818,7 @@ export default function Odeon() {
               </div>
               <div style={parseStyle('display: grid; gap: 16px;')} data-reveal="true">
                 <figure style={parseStyle('margin: 0; position: relative; overflow: hidden; border-radius: 3px;')}>
-                  <Hoverable as="img" baseStyle={parseStyle('width: 100%; display: block; transition: transform .8s cubic-bezier(.2,.6,.2,1);')} hoverStyle={{ transform: 'scale(1.04)' }} src="/odeon/a011.jpg" alt="Foto aérea da região do Odeon em Jundiaí" loading="lazy" />
+                  <Hoverable as="img" baseStyle={parseStyle('width: 100%; display: block; transition: transform .8s cubic-bezier(.2,.6,.2,1);')} hoverStyle={{ transform: 'scale(1.04)' }} src="/odeon/midia/655813f93ac93fed.webp" alt="Foto aérea da região do Odeon em Jundiaí" loading="lazy" />
                   <figcaption style={parseStyle('position: absolute; left: 0; right: 0; bottom: 0; padding: 36px 20px 16px; background: linear-gradient(transparent, rgba(30,39,56,.7)); color: #fff; font-size: 14px; font-weight: 500;')}>
                     Foto aérea do local
                   </figcaption>

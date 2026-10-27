@@ -58,7 +58,7 @@ export default function Avalon() {
       <header>
         <nav className="wrap">
           <a href="#topo" className="logo">
-            <img style={parseStyle('height:56px;width:auto;border-radius:6px')} src="/avalon/a002.png" alt="Avalon Residencial" />
+            <img style={parseStyle('height:56px;width:auto;border-radius:6px')} src="/avalon/midia/442377a20349359c.webp" alt="Avalon Residencial" />
           </a>
           <div className={'navlinks' + (navOpen ? ' open' : '')} id="nav" onClick={() => setNavOpen(false)}>
             <a href="#residencial">
@@ -236,7 +236,7 @@ export default function Avalon() {
             </ul>
           </div>
           <div data-reveal>
-            <img style={parseStyle('width:100%;border-radius:16px;box-shadow:0 20px 46px rgba(43,38,34,.3)')} src="/avalon/a001.jpg" alt="Fachada do Avalon Residencial ao entardecer" />
+            <img loading="lazy" style={parseStyle('width:100%;border-radius:16px;box-shadow:0 20px 46px rgba(43,38,34,.3)')} src="/avalon/midia/f4a946b8ba3c6644.webp" alt="Fachada do Avalon Residencial ao entardecer" />
           </div>
         </div>
       </section>
@@ -356,7 +356,7 @@ export default function Avalon() {
             </button>
           </div>
           <div className={'planta-panel' + (planta === 0 ? ' active' : '')}>
-            <img className="planta-img" src="/avalon/a003.jpg" alt="Planta 78,5 m² · 2 dormitórios" />
+            <img loading="lazy" className="planta-img" src="/avalon/midia/fb1027e136536a26.webp" alt="Planta 78,5 m² · 2 dormitórios" />
             <div className="planta-meta">
               <p className="tname">
                 Opção de unidade
@@ -384,7 +384,7 @@ export default function Avalon() {
             </div>
           </div>
           <div className={'planta-panel' + (planta === 1 ? ' active' : '')}>
-            <img className="planta-img" src="/avalon/a004.jpg" alt="Planta 108 m² · 2 suítes" />
+            <img loading="lazy" className="planta-img" src="/avalon/midia/7cbb250e48c1f73d.webp" alt="Planta 108 m² · 2 suítes" />
             <div className="planta-meta">
               <p className="tname">
                 Opção de unidade · 105 m²
@@ -412,7 +412,7 @@ export default function Avalon() {
             </div>
           </div>
           <div className={'planta-panel' + (planta === 2 ? ' active' : '')}>
-            <img className="planta-img" src="/avalon/a005.jpg" alt="Planta 108 m² · 3 suítes" />
+            <img loading="lazy" className="planta-img" src="/avalon/midia/9729b5185ea08b79.webp" alt="Planta 108 m² · 3 suítes" />
             <div className="planta-meta">
               <p className="tname">
                 Opção de unidade · 105 m²
@@ -440,7 +440,7 @@ export default function Avalon() {
             </div>
           </div>
           <div className={'planta-panel' + (planta === 3 ? ' active' : '')}>
-            <img className="planta-img" src="/avalon/a006.jpg" alt="Unidade Garden 106 m²" />
+            <img loading="lazy" className="planta-img" src="/avalon/midia/39c9c684f6e6fef8.webp" alt="Unidade Garden 106 m²" />
             <div className="planta-meta">
               <p className="tname">
                 Unidade Garden · Blocos 2 e 3
@@ -468,7 +468,7 @@ export default function Avalon() {
             </div>
           </div>
           <div className={'planta-panel' + (planta === 4 ? ' active' : '')}>
-            <img className="planta-img" src="/avalon/a007.jpg" alt="Unidade Garden 146 m²" />
+            <img loading="lazy" className="planta-img" src="/avalon/midia/ea639f7c09c3a1b0.webp" alt="Unidade Garden 146 m²" />
             <div className="planta-meta">
               <p className="tname">
                 Unidade Garden · Bloco 1
@@ -512,32 +512,32 @@ export default function Avalon() {
             </h2>
           </div>
           <div className="lazer-grid">
-            <div style={parseStyle("background-image:url('/avalon/a008.jpg')")} className="lz big">
+            <div style={parseStyle("background-image:url('/avalon/midia/9e0d8be61ec0b356.webp')")} className="lz big">
               <span>
                 Piscina coberta e aquecida
               </span>
             </div>
-            <div style={parseStyle("background-image:url('/avalon/a009.jpg')")} className="lz">
+            <div style={parseStyle("background-image:url('/avalon/midia/a44f8d3e5fbefe25.webp')")} className="lz">
               <span>
                 Beach Tennis
               </span>
             </div>
-            <div style={parseStyle("background-image:url('/avalon/a010.jpg')")} className="lz">
+            <div style={parseStyle("background-image:url('/avalon/midia/2d449f97c28ee981.webp')")} className="lz">
               <span>
                 Quadra recreativa
               </span>
             </div>
-            <div style={parseStyle("background-image:url('/avalon/a011.jpg')")} className="lz">
+            <div style={parseStyle("background-image:url('/avalon/midia/8b9850f1bb1358bf.webp')")} className="lz">
               <span>
                 Academia
               </span>
             </div>
-            <div style={parseStyle("background-image:url('/avalon/a012.jpg')")} className="lz">
+            <div style={parseStyle("background-image:url('/avalon/midia/88576fc67a28ad55.webp')")} className="lz">
               <span>
                 Churrasqueira Gourmet
               </span>
             </div>
-            <div style={parseStyle("background-image:url('/avalon/a013.jpg')")} className="lz">
+            <div style={parseStyle("background-image:url('/avalon/midia/d96eef8ee11f37f5.webp')")} className="lz">
               <span>
                 Salão de festas
               </span>
@@ -547,17 +547,17 @@ export default function Avalon() {
                 Coworking
               </span>
             </div>
-            <div style={parseStyle("background-image:url('/avalon/a015.jpg')")} className="lz">
+            <div style={parseStyle("background-image:url('/avalon/midia/d7c72c651ec34fcf.webp')")} className="lz">
               <span>
                 Brinquedoteca
               </span>
             </div>
-            <div style={parseStyle("background-image:url('/avalon/a016.jpg')")} className="lz">
+            <div style={parseStyle("background-image:url('/avalon/midia/e740453b2218eadd.webp')")} className="lz">
               <span>
                 Redário
               </span>
             </div>
-            <div style={parseStyle("background-image:url('/avalon/a017.jpg')")} className="lz big">
+            <div style={parseStyle("background-image:url('/avalon/midia/0ac42f32c85d0029.webp')")} className="lz big">
               <span>
                 Espaço Pet
               </span>
@@ -662,7 +662,7 @@ export default function Avalon() {
               </a>
             </div>
             <div data-reveal>
-              <img style={parseStyle('width:100%;border-radius:16px;box-shadow:0 16px 34px rgba(43,38,34,.22)')} src="/avalon/a018.jpg" alt="Vista aérea de Jundiaí, região do Avalon Residencial" />
+              <img loading="lazy" style={parseStyle('width:100%;border-radius:16px;box-shadow:0 16px 34px rgba(43,38,34,.22)')} src="/avalon/a018.jpg" alt="Vista aérea de Jundiaí, região do Avalon Residencial" />
             </div>
           </div>
         </div>
@@ -714,7 +714,7 @@ export default function Avalon() {
                 </span>
               </div>
             </div>
-            <img style={parseStyle('width:100%;border-radius:16px;margin-top:30px;box-shadow:0 16px 34px rgba(43,38,34,.18)')} src="/avalon/a018.jpg" alt="Vista aérea da região do Avalon Residencial, da F A Oliva" />
+            <img loading="lazy" style={parseStyle('width:100%;border-radius:16px;margin-top:30px;box-shadow:0 16px 34px rgba(43,38,34,.18)')} src="/avalon/a018.jpg" alt="Vista aérea da região do Avalon Residencial, da F A Oliva" />
           </div>
         </div>
       </section>
@@ -916,7 +916,7 @@ export default function Avalon() {
         <div className="wrap">
           <div className="foot-top">
             <div className="foot-logo">
-              <img style={parseStyle('height:70px;width:auto;border-radius:8px')} src="/avalon/a002.png" alt="Avalon Residencial" />
+              <img loading="lazy" style={parseStyle('height:70px;width:auto;border-radius:8px')} src="/avalon/midia/442377a20349359c.webp" alt="Avalon Residencial" />
             </div>
             <div style={parseStyle('text-align:right')}>
               <p style={parseStyle('color:#fff;font-weight:600')}>

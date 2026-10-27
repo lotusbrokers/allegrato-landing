@@ -33,7 +33,7 @@ nav{display:flex;align-items:center;justify-content:space-between;height:72px}
 .navlinks .btn{padding:11px 22px}
 .burger{display:none;background:none;border:none;color:#fff;font-size:1.6rem;cursor:pointer}
 
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;background:linear-gradient(180deg,rgba(30,26,22,.55),rgba(30,26,22,.82)),url('/avalon/a001.jpg') center/cover;overflow:hidden}
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;background:linear-gradient(180deg,rgba(30,26,22,.55),rgba(30,26,22,.82)),url('/avalon/midia/f4a946b8ba3c6644.webp') center/cover;overflow:hidden}
 .hero .wrap{position:relative;z-index:2}
 .hero-inner{max-width:760px}
 .hero h1{font-family:var(--serif);color:#fff;font-size:clamp(2.6rem,7vw,5rem);line-height:1.02;font-weight:700;letter-spacing:-.02em;margin:6px 0 8px}
