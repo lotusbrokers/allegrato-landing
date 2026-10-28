@@ -1,6 +1,6 @@
 {
   "rotas": {
-    "/": "2026-10-27T17:46:29.000Z",
+    "/": "2026-10-28T13:55:03.000Z",
     "/allegrato": "2026-10-27T17:46:38.000Z",
     "/altissimi": "2026-10-27T17:46:57.000Z",
     "/altos-da-avenida": "2026-10-27T17:46:38.000Z",
@@ -36,7 +36,7 @@
     "/gran-ville-santo-angelo": "2026-10-27T17:46:54.000Z",
     "/jardins-do-horto": "2026-10-27T17:46:38.000Z",
     "/lago-samambaia": "2026-10-16T14:45:20.000Z",
-    "/lotus-anunciar": "2026-10-27T17:46:31.000Z",
+    "/lotus-anunciar": "2026-10-28T13:55:03.000Z",
     "/lotus-bairro": "2026-10-16T14:45:11.000Z",
     "/lotus-bairro/aeroporto": "2026-09-08T19:12:11.000Z",
     "/lotus-bairro/caxambu": "2026-08-10T17:17:45.000Z",
@@ -60,12 +60,12 @@
     "/lotus-bairro/vianelo-bonfiglioli": "2026-08-10T17:17:45.000Z",
     "/lotus-bairro/vila-hortolandia": "2026-09-08T19:12:11.000Z",
     "/lotus-blog": "2026-10-27T17:46:31.000Z",
-    "/lotus-busca": "2026-10-27T14:29:33.000Z",
+    "/lotus-busca": "2026-10-28T13:55:01.000Z",
     "/lotus-condominio": "2026-10-16T14:45:11.000Z",
     "/lotus-cookies": "2026-09-28T14:16:16.000Z",
-    "/lotus-corretores": "2026-10-27T17:46:31.000Z",
-    "/lotus-faq": "2026-10-27T17:46:31.000Z",
-    "/lotus-lancamentos": "2026-10-27T17:46:31.000Z",
+    "/lotus-corretores": "2026-10-27T20:03:08.000Z",
+    "/lotus-faq": "2026-10-28T13:55:03.000Z",
+    "/lotus-lancamentos": "2026-10-28T13:55:03.000Z",
     "/lotus-privacidade": "2026-10-16T14:45:08.000Z",
     "/lotus-recrutamento": "2026-10-19T18:17:21.000Z",
     "/lotus-sobre": "2026-10-27T17:46:31.000Z",
@@ -90,7 +90,7 @@
     "/vivarte": "2026-10-27T17:46:54.000Z"
   },
   "grupos": {
-    "bairros": "2026-10-27T17:46:31.000Z",
+    "bairros": "2026-10-28T13:55:03.000Z",
     "construtoras": "2026-10-16T14:45:15.000Z"
   }
 }
