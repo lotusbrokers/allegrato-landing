@@ -1,4 +1,5 @@
 import { siteIndexavel } from './lib/indexacao.mjs';
+import { redirecionamentosDoJapi } from './lib/redirecionamento-japi.mjs';
 
 // Indexação por ambiente — a mesma regra de app/layout.tsx (meta robots) e
 // app/robots.ts (robots.txt). Lida no build: mudar SITE_INDEXABLE pede deploy.
@@ -18,6 +19,9 @@ const nextConfig = {
         destination: 'https://www.lotusbrokers.com.br/:path*',
         permanent: true,
       },
+      // Domínio antigo da Japi Lançamentos (site Wix até 27/10/2026): cada
+      // endereço vai para o equivalente no portal. Ver lib/redirecionamento-japi.mjs.
+      ...redirecionamentosDoJapi(),
     ];
   },
   // X-Robots-Tag vale para toda resposta, inclusive as landings estáticas de
