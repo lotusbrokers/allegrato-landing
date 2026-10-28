@@ -343,14 +343,23 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
           <AbasLancamentos ativa="empreendimentos" />
           {/* filtros */}
           <div style={parseStyle('display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px;')}>
-            <div style={parseStyle('display:flex;flex-wrap:wrap;gap:10px;align-items:center;')}>
+            {/* O <select> assume a largura da opção mais longa, e os rótulos vêm
+                do Dashboard: o estágio "Entrega prevista para 1ª Fase Agosto/25
+                ENTREGUE 2ª Fase Fevereiro/26 3ª Fase Agosto/2026" deixava o
+                seletor com 649px e a página rolava de lado no celular (medido a
+                375px em 27/10/2026). Por isso max-width:100% em cada seletor do
+                grupo e min-width:0 no grupo, que é item flex da barra e, sem
+                isso, não encolhe abaixo do seletor mais largo. Uma regra sem a
+                outra não resolve. Opção escolhida que não cabe aparece cortada
+                no seletor. */}
+            <div style={parseStyle('display:flex;flex-wrap:wrap;gap:10px;align-items:center;min-width:0;')}>
               {/* Todos os seletores seguem a mesma regra da construtora, que ja
                   era assim: a opcao existe porque existe imovel para ela, e o
                   seletor inteiro some quando nenhum imovel tem aquele dado.
                   Antes as opcoes eram fixas e nao batiam com o banco — ver o
                   cabecalho de lib/filtros-lancamentos.ts. */}
               {opcoes.cidades.length > 1 && (
-                <select className="lt-field" aria-label="Filtrar por cidade" value={fCity} onChange={(e) => setFCity(e.target.value)}>
+                <select className="lt-field" aria-label="Filtrar por cidade" value={fCity} onChange={(e) => setFCity(e.target.value)} style={parseStyle('max-width:100%;')}>
                   <option value={SEM_FILTRO}>Todas as cidades</option>
                   {opcoes.cidades.map((c) => (
                     <option key={c} value={c}>{c}</option>
@@ -358,7 +367,7 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
                 </select>
               )}
               {opcoes.estagios.length > 1 && (
-                <select className="lt-field" aria-label="Filtrar por estágio da obra" value={fStage} onChange={(e) => setFStage(e.target.value)}>
+                <select className="lt-field" aria-label="Filtrar por estágio da obra" value={fStage} onChange={(e) => setFStage(e.target.value)} style={parseStyle('max-width:100%;')}>
                   <option value={SEM_FILTRO}>Todos os estágios</option>
                   {opcoes.estagios.map((e2) => (
                     <option key={e2} value={e2}>{e2}</option>
@@ -366,7 +375,7 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
                 </select>
               )}
               {opcoes.tipologias.length > 1 && (
-                <select className="lt-field" aria-label="Filtrar por tipologia" value={fType} onChange={(e) => setFType(e.target.value)}>
+                <select className="lt-field" aria-label="Filtrar por tipologia" value={fType} onChange={(e) => setFType(e.target.value)} style={parseStyle('max-width:100%;')}>
                   <option value={SEM_FILTRO}>Todas as tipologias</option>
                   {opcoes.tipologias.map((t) => (
                     <option key={t} value={t}>{t}</option>
@@ -374,7 +383,7 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
                 </select>
               )}
               {opcoes.temPreco && (
-                <select className="lt-field" aria-label="Filtrar por valor" value={fPrice} onChange={(e) => setFPrice(e.target.value)}>
+                <select className="lt-field" aria-label="Filtrar por valor" value={fPrice} onChange={(e) => setFPrice(e.target.value)} style={parseStyle('max-width:100%;')}>
                   <option value={SEM_FILTRO}>Qualquer valor</option>
                   <option value="600000">Até R$ 600 mil</option>
                   <option value="900000">Até R$ 900 mil</option>
@@ -391,6 +400,7 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
                   aria-label="Filtrar por construtora"
                   value={fBuilder}
                   onChange={(e) => setFBuilder(e.target.value)}
+                  style={parseStyle('max-width:100%;')}
                 >
                   <option value="any">Todas as construtoras</option>
                   {construtoras.map((c) => (
