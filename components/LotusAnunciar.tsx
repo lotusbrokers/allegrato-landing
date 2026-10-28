@@ -1,6 +1,7 @@
 'use client';
 import { footerLegalLine } from '@/lib/site';
 import { sendLead } from '@/lib/lead';
+import { FAQ_ANUNCIAR } from '@/lib/anunciar-faq';
 
 /**
  * LotusAnunciar — porte 1:1 de lotus-anunciar/index.html (mecanismo dc-runtime) para React.
@@ -222,13 +223,6 @@ const depo = [
   { initial: 'J', name: 'João P.', where: 'vendeu em Itupeva', text: 'Tinha tentado sozinho por meses. Com a Lotus, em duas semanas já tinha proposta. Especialista que conhece o bairro faz toda a diferença.' },
 ];
 
-const faqBase = [
-  { q: 'Quanto a Lotus cobra?', a: 'A comissão segue a tabela do CRECI-SP e só é cobrada quando o imóvel é vendido. Avaliação é gratuita e sem compromisso.' },
-  { q: 'A avaliação é de graça?', a: 'Sim. A estimativa online é imediata e a avaliação presencial com o especialista também não tem custo.' },
-  { q: 'Preciso dar exclusividade?', a: 'A Gestão Exclusiva rende mais (foco, marketing e boletim), mas a decisão é sua. O especialista explica as opções com transparência.' },
-  { q: 'Quanto tempo leva para vender?', a: 'Depende do imóvel e do preço, mas com avaliação certa e marketing premium a venda costuma ser bem mais rápida que um anúncio genérico.' },
-];
-
 /* Lotus SVG (idêntico ao fonte, reutilizado no header e footer, tamanho variável). */
 function LotusMark({ size }: { size: number }) {
   return (
@@ -347,8 +341,9 @@ export default function LotusAnunciar({
     setStep(1);
   };
 
-  // FAQs derivadas (open/sign/toggle) — lógica exata do fonte.
-  const faqs = faqBase.map((x, i) => ({
+  // FAQs derivadas (open/sign/toggle) — lógica exata do fonte. As perguntas
+  // moram em lib/anunciar-faq.ts, de onde a rota também monta o FAQPage.
+  const faqs = FAQ_ANUNCIAR.map((x, i) => ({
     q: x.q,
     a: x.a,
     open: openFaq === i,
@@ -675,15 +670,13 @@ export default function LotusAnunciar({
             {/* hint-placeholder-count:4 */}
             {faqs.map((fq, i) => (
               <div key={i} style={parseStyle('border-bottom:1px solid rgba(21,36,28,.12);')}>
-                <button onClick={fq.toggle} style={parseStyle('width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;background:none;border:none;cursor:pointer;padding:22px 0;text-align:left;')}>
+                <button onClick={fq.toggle} aria-expanded={fq.open} style={parseStyle('width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;background:none;border:none;cursor:pointer;padding:22px 0;text-align:left;')}>
                   <span style={parseStyle('font-size:16.5px;font-weight:500;color:#15241c;')}>{fq.q}</span>
                   <span style={parseStyle('font-size:22px;color:#b18a4a;font-weight:300;')}>{fq.sign}</span>
                 </button>
-                {fq.open && (
-                  <>
-                    <p style={parseStyle('font-size:15px;color:#3f6249;font-weight:300;line-height:1.6;margin:0;padding:0 0 22px;')}>{fq.a}</p>
-                  </>
-                )}
+                {/* Fechada, a resposta fica escondida mas no HTML: só com o
+                    clique, o Google lia a pergunta sem resposta. */}
+                <p hidden={!fq.open} style={parseStyle('font-size:15px;color:#3f6249;font-weight:300;line-height:1.6;margin:0;padding:0 0 22px;')}>{fq.a}</p>
               </div>
             ))}
           </div>

@@ -26,6 +26,7 @@ import React, {
 import { empsFallback, EMP_IMG, type EmpItem } from '@/lib/lancamentos-list-fallback';
 import { opcoesDeFiltro, passaNosFiltros, SEM_FILTRO } from '@/lib/filtros-lancamentos';
 import { SEM_PRECO } from '@/lib/preco-sob-consulta';
+import { FAQ_LANCAMENTOS } from '@/lib/lancamentos-faq';
 import AbasLancamentos from './AbasLancamentos';
 import Link from 'next/link';
 import LotusHeader from './LotusHeader';
@@ -174,14 +175,6 @@ const motivos = [
   { num: '04', title: 'Mais opções de escolha', text: 'Nas primeiras fases, costuma haver maior variedade de plantas, andares, posições solares e vistas. A melhor unidade é aquela que combina esses fatores com o seu objetivo.' },
 ];
 
-// faqs (perguntas/respostas) do renderVals — open/sign/toggle derivados do state openFaq.
-const faqData = [
-  { q: 'Por que comprar na planta?', a: 'Porque pode oferecer condições comerciais diferenciadas, maior variedade de unidades e potencial de valorização ao longo da obra. Esses benefícios variam conforme o empreendimento e precisam ser analisados caso a caso.' },
-  { q: 'É seguro comprar na planta?', a: 'Sim, desde que a construtora seja sólida e o registro de incorporação esteja em ordem. A Lotus avalia o histórico da construtora e a documentação antes de recomendar.' },
-  { q: 'Quanto preciso de entrada?', a: 'Varia por empreendimento, mas em geral a entrada é parcelada durante a obra, o que dilui bastante o esforço inicial frente a um imóvel pronto.' },
-  { q: 'Posso financiar um lançamento?', a: 'Sim. Durante a obra você paga direto à construtora e, na entrega (ou perto dela), pode financiar o saldo pelo banco. A Lotus acompanha a simulação.' },
-];
-
 /**
  * Ordem em que a listagem abre: alfabetica pelo nome.
  *
@@ -284,8 +277,9 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
     setNewsDone(true);
   };
 
-  // faqs derivados (open/sign/toggle) do state openFaq.
-  const faqs = faqData.map((x, i) => ({
+  // faqs derivados (open/sign/toggle) do state openFaq. As perguntas moram em
+  // lib/lancamentos-faq.ts, de onde a rota também monta o FAQPage.
+  const faqs = FAQ_LANCAMENTOS.map((x, i) => ({
     q: x.q,
     a: x.a,
     open: openFaq === i,
@@ -506,15 +500,13 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
             {/* hint-placeholder-count="4" */}
             {faqs.map((f, i) => (
               <div key={i} style={parseStyle('border-bottom:1px solid rgba(21,36,28,.12);')}>
-                <button onClick={f.toggle} style={parseStyle('width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;background:none;border:none;cursor:pointer;padding:22px 0;text-align:left;')}>
+                <button onClick={f.toggle} aria-expanded={f.open} style={parseStyle('width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;background:none;border:none;cursor:pointer;padding:22px 0;text-align:left;')}>
                   <span style={parseStyle('font-size:16.5px;font-weight:500;color:#15241c;')}>{f.q}</span>
                   <span style={parseStyle('font-size:22px;color:#b18a4a;font-weight:300;')}>{f.sign}</span>
                 </button>
-                {f.open && (
-                  <>
-                    <p style={parseStyle('font-size:15px;color:#3f6249;font-weight:300;line-height:1.6;margin:0;padding:0 0 22px;')}>{f.a}</p>
-                  </>
-                )}
+                {/* Fechada, a resposta fica escondida mas no HTML: só com o
+                    clique, o Google lia a pergunta sem resposta. */}
+                <p hidden={!f.open} style={parseStyle('font-size:15px;color:#3f6249;font-weight:300;line-height:1.6;margin:0;padding:0 0 22px;')}>{f.a}</p>
               </div>
             ))}
           </div>

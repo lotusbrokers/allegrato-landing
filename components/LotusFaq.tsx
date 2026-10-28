@@ -324,18 +324,20 @@ export default function LotusFaq({
                   const toggle = () => setOpenId((prev) => (prev === f.id ? null : f.id));
                   return (
                     <div key={i} style={parseStyle('background:#fff;border-radius:14px;box-shadow:0 14px 36px -34px rgba(21,36,28,.34);overflow:hidden;')}>
-                      <button onClick={toggle} style={parseStyle('width:100%;display:flex;align-items:flex-start;justify-content:space-between;gap:18px;background:none;border:none;cursor:pointer;padding:24px 26px;text-align:left;')}>
+                      <button onClick={toggle} aria-expanded={open} style={parseStyle('width:100%;display:flex;align-items:flex-start;justify-content:space-between;gap:18px;background:none;border:none;cursor:pointer;padding:24px 26px;text-align:left;')}>
                         <div>
                           <div style={parseStyle('font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#b18a4a;margin-bottom:7px;')}>{fCat}</div>
                           <span style={parseStyle('font-size:17px;font-weight:500;color:#15241c;line-height:1.35;')}>{f.q}</span>
                         </div>
                         <span style={parseStyle('flex-shrink:0;font-size:24px;color:#b18a4a;font-weight:300;line-height:1;margin-top:14px;')}>{sign}</span>
                       </button>
-                      {open && (
-                        <>
-                          <Resposta item={f} />
-                        </>
-                      )}
+                      {/* A resposta vai no HTML mesmo fechada, só escondida.
+                          Até 28/10/2026 ela só existia depois do clique: o
+                          Google lia as 47 perguntas sem nenhuma resposta, e
+                          nesse dia a página estava fora do índice. */}
+                      <div hidden={!open}>
+                        <Resposta item={f} />
+                      </div>
                     </div>
                   );
                 })}

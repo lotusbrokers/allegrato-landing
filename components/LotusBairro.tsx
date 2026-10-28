@@ -344,14 +344,13 @@ export default function LotusBairro({
           {/* sc-for list=faqs as=f (4) */}
           {faqs.map((f, i) => (
             <div key={i} style={parseStyle('border-bottom:1px solid rgba(21,36,28,.12);')}>
-              <button onClick={f.toggle} style={parseStyle('width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;background:none;border:none;cursor:pointer;padding:22px 0;text-align:left;')}>
+              <button onClick={f.toggle} aria-expanded={f.open} style={parseStyle('width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;background:none;border:none;cursor:pointer;padding:22px 0;text-align:left;')}>
                 <span style={parseStyle('font-size:16.5px;font-weight:500;color:#15241c;')}>{f.q}</span>
                 <span style={parseStyle('font-size:22px;color:#b18a4a;font-weight:300;')}>{f.sign}</span>
               </button>
-              {/* sc-if value=f.open */}
-              {f.open && (
-                <p style={parseStyle('font-size:15px;color:#3f6249;font-weight:300;line-height:1.6;margin:0;padding:0 0 22px;')}>{f.a}</p>
-              )}
+              {/* Fechada, a resposta fica escondida mas no HTML: só com o
+                  clique, o Google lia a pergunta sem resposta. */}
+              <p hidden={!f.open} style={parseStyle('font-size:15px;color:#3f6249;font-weight:300;line-height:1.6;margin:0;padding:0 0 22px;')}>{f.a}</p>
             </div>
           ))}
         </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import LotusAnunciar from '@/components/LotusAnunciar';
+import { FAQ_ANUNCIAR } from '@/lib/anunciar-faq';
 
 // Metadata portada de lotus-anunciar/index.html (<helmet>) — paridade de SEO com o estático.
 // TODO go-live: revisar canonical/og:url para o domínio final e publicar sitemap/robots.
@@ -32,36 +33,16 @@ const serviceJsonLd = {
   provider: { '@type': 'RealEstateAgent', name: 'Lotus Brokers' },
 };
 
-// JSON-LD FAQPage (portado literal do <helmet> do estático).
+// JSON-LD FAQPage. Sai da mesma lista que a seção desenha: o FAQPage não pode
+// anunciar pergunta que a página não mostra (ver lib/anunciar-faq.ts).
 const faqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'Quanto a Lotus cobra para vender meu imóvel?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'A comissão segue a tabela do CRECI-SP e só é cobrada quando o imóvel é vendido. A avaliação é gratuita e sem compromisso.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'A avaliação do imóvel é gratuita?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Sim. A estimativa online é imediata e gratuita, e a avaliação presencial com o especialista também não tem custo nem compromisso.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Preciso dar exclusividade?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'A Gestão Exclusiva é o modelo que rende mais, foco total, marketing premium e boletim semanal. Mas a decisão é sua; o especialista explica as opções.',
-      },
-    },
-  ],
+  mainEntity: FAQ_ANUNCIAR.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
 };
 
 export default function LotusAnunciarPage() {

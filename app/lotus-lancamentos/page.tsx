@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import LotusLancamentos from '@/components/LotusLancamentos';
 import { type EmpItem } from '@/lib/lancamentos-list-fallback';
+import { FAQ_LANCAMENTOS } from '@/lib/lancamentos-faq';
 import {
   getLancamentosList,
   isListItemApresentavel,
@@ -67,27 +68,16 @@ const collectionLd = {
     'Todos os empreendimentos em lançamento e pré-lançamento acompanhados pela Lotus Brokers em Jundiaí, Itupeva e região, com filtros por preço, cidade e estágio de obra.',
 };
 
+// Sai da mesma lista que a seção desenha: o FAQPage não pode anunciar
+// pergunta que a página não mostra (ver lib/lancamentos-faq.ts).
 const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'Por que comprar um imóvel na planta?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Comprar na planta costuma oferecer o melhor preço (tabela de lançamento), condições de pagamento facilitadas direto com a construtora, potencial de valorização até a entrega e a possibilidade de escolher as melhores unidades.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Comprar na planta vale a pena?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Para quem pode esperar a obra, sim: o valor de entrada é menor, o pagamento é diluído e a valorização da entrega até a chave costuma superar a de um imóvel pronto. A Lotus ajuda a avaliar a construtora e o melhor momento de compra.',
-      },
-    },
-  ],
+  mainEntity: FAQ_LANCAMENTOS.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
 };
 
 export default async function LotusLancamentosPage() {
