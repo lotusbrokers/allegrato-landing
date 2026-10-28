@@ -7,6 +7,10 @@
  * venceu e a nova só veio para o Reserva Castanheira. Os demais empreendimentos
  * dela passam a "valor a consultar" nas landings e nos cards.
  *
+ * O Jardins do Horto saiu da lista em 27/10/2026, também a pedido da Lotus: o
+ * card volta a mostrar o valor da tabela de setembro (R$ 631.083,74), mesmo
+ * com ela vencida. A landing dele nunca mostrou preço.
+ *
  * Diferente de lib/correcoes-cadastro.ts, que é temporário e se desliga sozinho
  * quando a Dashboard é atualizada, isto é uma decisão comercial: só sai daqui
  * quando a Lotus quiser o preço de volta. Ao tirar um slug, confira antes se a
@@ -20,7 +24,6 @@ export const PRECO_SOB_CONSULTA: ReadonlySet<string> = new Set([
   'allegrato',
   'altos-da-avenida',
   'gioviale',
-  'jardins-do-horto',
   'maxx-santa-angela',
   'portal-dos-lagos',
   'resort-prime',

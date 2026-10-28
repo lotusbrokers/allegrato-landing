@@ -20,11 +20,13 @@ test('fora da lista (e sem slug), o preço continua', () => {
 });
 
 // Pedido da Lotus em 05/10/2026: todas as landings da Santa Angela, menos o
-// Reserva Castanheira, que recebeu a tabela de outubro.
-test('Santa Angela: valor a consultar em todas, menos o Reserva Castanheira', () => {
-  const santaAngela = ['allegrato', 'altos-da-avenida', 'gioviale', 'jardins-do-horto', 'maxx-santa-angela', 'portal-dos-lagos', 'resort-prime', 'santorini', 'vigore'];
+// Reserva Castanheira, que recebeu a tabela de outubro. O Jardins do Horto
+// voltou a ter preço em 27/10/2026, também a pedido da Lotus.
+test('Santa Angela: valor a consultar em todas, menos o Reserva Castanheira e o Jardins do Horto', () => {
+  const santaAngela = ['allegrato', 'altos-da-avenida', 'gioviale', 'maxx-santa-angela', 'portal-dos-lagos', 'resort-prime', 'santorini', 'vigore'];
   assert.deepEqual([...PRECO_SOB_CONSULTA].sort(), santaAngela);
   assert.equal(PRECO_SOB_CONSULTA.has('reserva-castanheira'), false);
+  assert.equal(PRECO_SOB_CONSULTA.has('jardins-do-horto'), false);
   assert.equal(SEM_PRECO, 'Valor a consultar');
 });
 

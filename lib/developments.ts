@@ -41,7 +41,11 @@ export const developmentsFallback: DevelopmentCard[] = [
   { name: 'Avelã Vila Residencial', location: 'Itupeva', stage: 'Lançamento', builder: 'Construtora', specs: '66–87 m² · 2 e 3 dorms · gardens', price: 'Consultar valor', exclusive: true, img: '/avela/a007.jpg', href: '/avela' },
   { name: 'Forest Houses', location: 'Louveira', stage: 'Lançamento', builder: 'Construtora', specs: 'Casas em condomínio', price: 'Consultar valor', exclusive: false, img: '/forest-houses/a002.jpg', href: '/forest-houses' },
   { name: 'Gran Ville Santo Angelo', location: 'Itupeva', stage: 'Lançamento', builder: 'GP Desenvolvimento Urbano', specs: 'Loteamento de alto padrão', price: 'Consultar valor', exclusive: true, img: '/gran-ville-santo-angelo/a038.jpg', href: '/gran-ville-santo-angelo' },
-  { name: 'Jardins do Horto', location: 'Horto Florestal · Jundiaí', stage: 'Em obras', builder: 'Santa Angela', specs: '72 m² e 95 m²', price: 'Consultar valor', exclusive: true, img: '/jardins-do-horto/a004.jpg', href: '/jardins-do-horto' },
+  // O Jardins do Horto não tem linha na Dashboard, então o card é este. Preço da
+  // tabela de setembro/2026 da Santa Angela (R$ 631.083,74), mostrado a pedido
+  // da Lotus em 27/10/2026 mesmo com a tabela vencida (ver
+  // lib/preco-sob-consulta.ts). Cadastrado na Dashboard, o card passa a vir de lá.
+  { name: 'Jardins do Horto', location: 'Horto Florestal · Jundiaí', stage: 'Em obras', builder: 'Santa Angela', specs: '72 m² e 95 m²', price: 'a partir de R$ 631.083', exclusive: true, img: '/jardins-do-horto/a004.jpg', href: '/jardins-do-horto' },
   { name: 'Manawa', location: 'Recanto Quarto Centenário · Jundiaí', stage: 'Lançamento', builder: 'Mac Lucer', specs: '2 e 3 dorms com suíte', price: 'Consultar valor', exclusive: false, img: '/manawa/a005.png', href: '/manawa' },
   { name: 'Maxx Santa Angela', location: 'Vila Galvão · Jundiaí', stage: 'Entregue', builder: 'Santa Angela', specs: '71–98 m² · ao lado do Maxi Shopping', price: 'Consultar valor', exclusive: true, img: '/maxx-santa-angela/capa-max-old.jpg', href: '/maxx-santa-angela' },
   { name: 'Resort Prime', location: 'Engordadouro · Jundiaí', stage: 'Entregue', builder: 'Santa Angela', specs: 'Lazer de resort, todos os dias', price: 'Consultar valor', exclusive: true, img: '/resort-prime/a009.jpg', href: '/resort-prime' },
