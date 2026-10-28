@@ -30,7 +30,10 @@ import React, {
   type CSSProperties,
   type ReactNode,
 } from 'react';
-import { formatValor, type ImovelRow, type ImovelCard } from '@/lib/imoveis';
+// De lib/imoveis, só tipos: importar valor de lá traria o client do Supabase
+// para o navegador (ver lib/formatar-valor).
+import type { ImovelRow, ImovelCard } from '@/lib/imoveis';
+import { formatValor } from '@/lib/formatar-valor';
 import { galeriaDoImovel, type CondominioDoImovel } from '@/lib/condominio-do-imovel';
 import LotusHeader from './LotusHeader';
 import LightboxFotos from './LightboxFotos';

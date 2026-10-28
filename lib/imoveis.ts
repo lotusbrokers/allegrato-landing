@@ -1,6 +1,7 @@
 import { supabase, TENANT_ID } from './supabase';
 import { resumoDescricao } from './resumo-imovel';
 import { nomesDoBairro } from './bairros-taxonomia';
+import { formatValor } from './formatar-valor';
 
 // Camada de dados dos IMÓVEIS do Portal.
 // Fonte: view pública portal_imoveis (Supabase, leitura anônima, RLS por
@@ -72,11 +73,10 @@ export function toCard(row: ImovelRow): ImovelCard {
   };
 }
 
-// Formata valor em R$ (para a UI). null/0 -> "Consultar valor".
-export function formatValor(v: number | null): string {
-  if (!v || v <= 0) return 'Consultar valor';
-  return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
-}
+// formatValor mora em lib/formatar-valor, sem o client do Supabase, para os
+// componentes 'use client' importarem de lá. Reexportado aqui para quem já
+// importa de lib/imoveis.
+export { formatValor };
 
 const SELECT_FULL =
   'id, tenant_id, codigo_imovel, titulo, tipo, tipo_simplificado, finalidade, logradouro, numero, bairro, cidade, estado, cep, area_total, area_util, quartos, suites, banheiros, vagas, salas, valor_venda, valor_locacao, valor_condominio, valor_iptu, descricao, fotos, metragem_m2, condominio_id, link_video, tour_virtual, destaque, super_destaque, exclusivo';
