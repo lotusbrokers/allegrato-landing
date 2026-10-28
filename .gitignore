@@ -14,6 +14,10 @@ next-env.d.ts
 # (.env.example, com placeholders, continua versionado.)
 env.download
 
+# Dados do UTM Manager quando UTM_DATA_DIR não está definida (ver
+# docs/utm-manager.md): importações e histórico da equipe, não código.
+/.dados/
+
 # logs / OS
 npm-debug.log*
 .DS_Store

@@ -49,6 +49,17 @@ export default async function InicioDoGestor() {
         )}
       </section>
 
+      <section className={estilos.secao} aria-labelledby="ferramentas-da-gestao">
+        <div className={estilos.cabecalhoSecao}>
+          <h2 id="ferramentas-da-gestao" className={estilos.tituloSecao}>
+            <Icone nome="megafone" /> Marketing
+          </h2>
+        </div>
+        <div className={estilos.gradeAtalhos}>
+          <Atalho titulo="UTM Manager" resumo="UTMs das campanhas ativas do Meta Ads: importar, gerar, auditar" href={`${ROTA_GESTOR}/utm`} icone="megafone" />
+        </div>
+      </section>
+
       {MODULOS_DA_DASHBOARD.map((grupo) => (
         <section key={grupo.titulo} className={estilos.secao} aria-label={`Dashboard: ${grupo.titulo}`}>
           <div className={estilos.cabecalhoSecao}>
