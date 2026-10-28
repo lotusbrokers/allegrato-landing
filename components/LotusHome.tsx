@@ -368,7 +368,7 @@ export default function LotusHome({
   const [fTipo, setFTipo] = useState('');
   const [fCidade, setFCidade] = useState('');
   const [fBairro, setFBairro] = useState('');
-  const [fMax, setFMax] = useState('');
+  const [fPreco, setFPreco] = useState('');
 
   /** URL da busca com o que foi preenchido; campo vazio não vira parâmetro. */
   const urlDaBusca = (extra?: Record<string, string>) => {
@@ -376,7 +376,12 @@ export default function LotusHome({
     if (fTipo) p.set('tipo', fTipo);
     if (fCidade) p.set('cidade', fCidade);
     if (fBairro) p.set('bairro', fBairro);
-    if (fMax) p.set('max', fMax);
+    // Faixa "min-max", com um dos lados vazio nas pontas ("-500000", "3000000-").
+    // Até 28/10/2026 só ia o teto: "Acima de R$ 3 mi" virava "até R$ 99 mi" e
+    // trazia o acervo inteiro, e "R$ 1 a 2 mi" trazia os de R$ 300 mil.
+    const [min, max] = fPreco.split('-');
+    if (min) p.set('min', min);
+    if (max) p.set('max', max);
     for (const [k, v] of Object.entries(extra ?? {})) if (v.trim()) p.set(k, v.trim());
     const qs = p.toString();
     return '/lotus-busca' + (qs ? '?' + qs : '');
@@ -661,8 +666,8 @@ export default function LotusHome({
                     <select aria-label="Bairro" value={fBairro} onChange={(e) => setFBairro(e.target.value)} style={parseStyle('width:100%;border:1px solid rgba(21,36,28,.18);background:#fff;color:#15241c;font-size:14px;padding:13px 12px;border-radius:10px;outline:none;cursor:pointer;')}>
                       <option value="">Todos os bairros</option><option>Eloy Chaves</option><option>Anhangabaú</option><option>Malota</option><option>Medeiros</option><option>Centro</option>
                     </select>
-                    <select aria-label="Faixa de preço" value={fMax} onChange={(e) => setFMax(e.target.value)} style={parseStyle('width:100%;border:1px solid rgba(21,36,28,.18);background:#fff;color:#15241c;font-size:14px;padding:13px 12px;border-radius:10px;outline:none;cursor:pointer;')}>
-                      <option value="">Qualquer valor</option><option value="500000">Até R$ 500 mil</option><option value="1000000">R$ 500 mil a 1 mi</option><option value="2000000">R$ 1 a 2 mi</option><option value="3000000">R$ 2 a 3 mi</option><option value="99000000">Acima de R$ 3 mi</option>
+                    <select aria-label="Faixa de preço" value={fPreco} onChange={(e) => setFPreco(e.target.value)} style={parseStyle('width:100%;border:1px solid rgba(21,36,28,.18);background:#fff;color:#15241c;font-size:14px;padding:13px 12px;border-radius:10px;outline:none;cursor:pointer;')}>
+                      <option value="">Qualquer valor</option><option value="-500000">Até R$ 500 mil</option><option value="500000-1000000">R$ 500 mil a 1 mi</option><option value="1000000-2000000">R$ 1 a 2 mi</option><option value="2000000-3000000">R$ 2 a 3 mi</option><option value="3000000-">Acima de R$ 3 mi</option>
                     </select>
                   </div>
                   <Hoverable
@@ -687,6 +692,9 @@ export default function LotusHome({
                       onKeyDown={(e) => { if (e.key === 'Enter') window.location.href = urlDaBusca({ q: searchRef.current?.value ?? '' }); }} placeholder="Ex.: casa com 4 suítes perto da Serra do Japi, até R$ 2,5 mi" style={parseStyle('flex:1;border:none;outline:none;background:transparent;font-size:15.5px;color:#15241c;padding:9px 0;')} />
                     <Hoverable
                       as="button"
+                      // Só tem a lupa: sem o rótulo, o leitor de tela anunciava
+                      // apenas "botão".
+                      aria-label="Buscar"
                       // Antes so dava focus() no campo: a busca por texto nao
                       // levava a lugar nenhum. Agora leva o texto para /lotus-busca,
                       // que sabe interpreta-lo.

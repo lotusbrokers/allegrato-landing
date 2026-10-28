@@ -28,7 +28,7 @@ import React, {
 } from 'react';
 import LotusHeader from './LotusHeader';
 import ConsentimentoLgpd from './ConsentimentoLgpd';
-import { formatValor } from '@/lib/imoveis';
+import { interpretarBusca, passaNaBusca, rotuloDeValor, type FiltroDaBusca } from '@/lib/interpretar-busca';
 import { CONSENT_EVENT, reabrirPreferencias } from '@/lib/consent';
 import { alternarFavorito, lerBuscas, lerFavoritos, podeGuardar, salvarBusca, type BuscaSalva } from '@/lib/preferencias';
 import type { ImovelBusca } from '@/lib/imoveis';
@@ -158,7 +158,7 @@ const WHATSAPP_DEFAULT = '5511926143393';
 // aliás `Property` mantido para não renomear todos os usos internos.
 type Property = ImovelBusca;
 
-type Chip = { id: string; kind: string; val: any; label: string };
+type Chip = FiltroDaBusca & { id: string };
 
 /* Estilos de segmento comprar/alugar (strings literais do fonte). */
 const segOn = 'border:none;border-radius:30px;padding:8px 18px;font-size:13.5px;font-weight:600;cursor:pointer;background:#1d3a2c;color:#f7f2e8;';
@@ -171,10 +171,17 @@ const segOff = 'border:none;border-radius:30px;padding:8px 18px;font-size:13.5px
 export default function LotusBusca({
   whatsapp = WHATSAPP_DEFAULT,
   imoveis = [],
+  bairrosDoGuia = [],
 }: {
   whatsapp?: string;
   /** Imóveis reais aprovados (vêm do servidor em app/lotus-busca/page.tsx). */
   imoveis?: ImovelBusca[];
+  /**
+   * Nomes dos guias de /lotus-bairro. A busca por texto os reconhece como
+   * lugar mesmo sem imóvel cadastrado lá: "casa no Caxambu" volta vazia em vez
+   * de mostrar as casas de todos os bairros.
+   */
+  bairrosDoGuia?: string[];
 } = {}) {
   // state (espelha o `state` do dc-runtime)
   const [chips, setChips] = useState<Chip[]>([]);
@@ -213,38 +220,28 @@ export default function LotusBusca({
   };
 
   /* -------- chips helpers -------- */
-  const addChip = (kind: string, val: any, label: string) => {
-    setChips((s) => [...s.filter((c) => c.kind !== kind), { id: kind, kind, val, label }]);
+  const addChip = (filtro: FiltroDaBusca) => {
+    setChips((s) => [...s.filter((c) => c.kind !== filtro.kind), { ...filtro, id: filtro.kind }]);
   };
   const removeChip = (id: string) => {
     setChips((s) => s.filter((c) => c.id !== id));
   };
 
-  /* -------- parseAndSearch(): interpreta a busca conversacional -------- */
+  /* -------- parseAndSearch(): interpreta a busca conversacional --------
+   * A leitura do texto mora em lib/interpretar-busca.ts, com os testes e o
+   * histórico do que ela errava. Os lugares são os do acervo e os dos guias. */
   const parseAndSearch = () => {
-    const q = ((searchRef.current && searchRef.current.value) || '').toLowerCase();
-    if (!q.trim()) return;
-    const newChips: Chip[] = [];
-    const beds = q.match(/(\d+)\s*(suíte|suite|dorm|quarto)/);
-    if (beds) newChips.push({ id: 'beds', kind: 'beds', val: parseInt(beds[1], 10), label: beds[1] + '+ dorm.' });
-    const pm = q.match(/(\d+[.,]?\d*)\s*(mi|milh)/);
-    if (pm) {
-      const v = Math.round(parseFloat(pm[1].replace(',', '.')) * 1000000);
-      newChips.push({ id: 'priceMax', kind: 'priceMax', val: v, label: 'até ' + pm[0].replace('milhões', 'mi').replace('milhão', 'mi') });
-    } else {
-      const pk = q.match(/(\d+)\s*mil/);
-      if (pk) {
-        const v = parseInt(pk[1], 10) * 1000;
-        newChips.push({ id: 'priceMax', kind: 'priceMax', val: v, label: 'até R$ ' + pk[1] + ' mil' });
-      }
+    const q = searchRef.current?.value ?? '';
+    if (!q.trim()) {
+      // Clique com a caixa vazia leva para a caixa, em vez de não fazer nada.
+      searchRef.current?.focus();
+      return;
     }
-    const locs = ['serra do japi', 'eloy chaves', 'anhangabaú', 'anhangabau', 'malota', 'medeiros', 'reserva da serra', 'itupeva', 'vinhedo', 'caxambu', 'centro'];
-    const found = locs.find((l) => q.includes(l));
-    if (found) newChips.push({ id: 'loc', kind: 'loc', val: found.replace('anhangabau', 'anhangabaú').replace('serra do japi', 'serra'), label: found.charAt(0).toUpperCase() + found.slice(1) });
-    const types: Array<[string, string]> = [['casa', 'Casa'], ['apart', 'Apartamento'], ['apê', 'Apartamento'], ['ape ', 'Apartamento'], ['cobertura', 'Cobertura'], ['terreno', 'Terreno'], ['comercial', 'Comercial'], ['sala', 'Comercial'], ['loja', 'Comercial']];
-    const t = types.find((p) => q.includes(p[0]));
-    if (t) newChips.push({ id: 'type', kind: 'type', val: t[1], label: t[1] });
-    setChips(newChips);
+    const lugares = {
+      bairros: [...imoveis.map((r) => r.neighborhood), ...bairrosDoGuia],
+      cidades: imoveis.map((r) => r.city),
+    };
+    setChips(interpretarBusca(q, lugares).map((f) => ({ ...f, id: f.kind })));
     setSelectedId(null);
   };
 
@@ -272,15 +269,20 @@ export default function LotusBusca({
     const bairro = p.get('bairro');
     const local = bairro || cidade;
     if (local) novos.push({ id: 'loc', kind: 'loc', val: local.toLowerCase(), label: local });
+    // Faixa de preço da home: "R$ 500 mil a 1 mi" chega como min e max.
+    const min = p.get('min');
+    if (min && /^\d+$/.test(min)) {
+      const v = parseInt(min, 10);
+      novos.push({ id: 'priceMin', kind: 'priceMin', val: v, label: 'a partir de ' + rotuloDeValor(v) });
+    }
     const max = p.get('max');
     if (max && /^\d+$/.test(max)) {
-      novos.push({
-        id: 'priceMax',
-        kind: 'priceMax',
-        val: parseInt(max, 10),
-        label: 'até ' + formatValor(parseInt(max, 10)),
-      });
+      const v = parseInt(max, 10);
+      novos.push({ id: 'priceMax', kind: 'priceMax', val: v, label: 'até ' + rotuloDeValor(v) });
     }
+    // Gravado por queryDaBusca, que já salvava os quartos sem ninguém lê-los.
+    const dorms = p.get('dorms');
+    if (dorms && /^\d+$/.test(dorms)) novos.push({ id: 'beds', kind: 'beds', val: parseInt(dorms, 10), label: dorms + '+ dorm.' });
     if (novos.length) setChips(novos);
 
     // Texto livre chega pela outra aba da home; aí a interpretação faz sentido.
@@ -306,14 +308,7 @@ export default function LotusBusca({
   };
 
   // Só compra: a Lotus não trabalha com locação (ver o seletor "Comprar" lá embaixo).
-  let list = imoveis.filter((r) => r.fin === 'comprar');
-  chips.forEach((c) => {
-    if (c.kind === 'beds') list = list.filter((r) => r.beds >= c.val);
-    else if (c.kind === 'priceMax') list = list.filter((r) => r.priceNum <= c.val);
-    else if (c.kind === 'type') list = list.filter((r) => r.type === c.val);
-    else if (c.kind === 'loc') list = list.filter((r) => (r.neighborhood + ' ' + r.city).toLowerCase().includes(c.val));
-  });
-  list = [...list];
+  const list = imoveis.filter((r) => r.fin === 'comprar' && passaNaBusca(r, chips));
   if (sortKey === 'priceAsc') list.sort((a, b) => a.priceNum - b.priceNum);
   else if (sortKey === 'priceDesc') list.sort((a, b) => b.priceNum - a.priceNum);
   else if (sortKey === 'recent') list.sort((a, b) => b.recent - a.recent);
@@ -360,19 +355,20 @@ export default function LotusBusca({
 
   const onCity = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const v = e.target.value;
-    v === 'any' ? removeChip('loc') : addChip('loc', v, v.charAt(0).toUpperCase() + v.slice(1));
+    v === 'any' ? removeChip('loc') : addChip({ kind: 'loc', val: v, label: v.charAt(0).toUpperCase() + v.slice(1) });
   };
   const onType = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const v = e.target.value;
-    v === 'any' ? removeChip('type') : addChip('type', v, v);
+    v === 'any' ? removeChip('type') : addChip({ kind: 'type', val: v, label: v });
   };
   const onBeds = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const v = e.target.value;
-    v === 'any' ? removeChip('beds') : addChip('beds', parseInt(v, 10), v + '+ dorm.');
+    v === 'any' ? removeChip('beds') : addChip({ kind: 'beds', val: parseInt(v, 10), label: v + '+ dorm.' });
   };
   const onPrice = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const v = e.target.value;
-    v === 'any' ? removeChip('priceMax') : addChip('priceMax', parseInt(v, 10), 'até R$ ' + parseInt(v, 10) / 1000000 + ' mi');
+    // O rótulo era "até R$ 0.5 mi" para a opção "Até R$ 500 mil".
+    v === 'any' ? removeChip('priceMax') : addChip({ kind: 'priceMax', val: parseInt(v, 10), label: 'até ' + rotuloDeValor(parseInt(v, 10)) });
   };
 
   const hasChips = chips.length > 0;
@@ -435,8 +431,10 @@ export default function LotusBusca({
     for (const c of chips) {
       if (c.kind === 'type') p.set('tipo', String(c.val));
       else if (c.kind === 'loc') p.set('bairro', String(c.val));
+      else if (c.kind === 'priceMin') p.set('min', String(c.val));
       else if (c.kind === 'priceMax') p.set('max', String(c.val));
       else if (c.kind === 'beds') p.set('dorms', String(c.val));
+      else if (c.kind === 'texto') p.set('q', c.val);
     }
     return p.toString();
   };
@@ -544,7 +542,7 @@ export default function LotusBusca({
                   É o mesmo texto que já estava na tela, no mesmo lugar: só
                   deixou de ser <div>. margin e font-weight vêm explícitos para
                   anular o padrão do navegador para h1 e manter o visual igual. */}
-              <h1 style={parseStyle("font-family:'Fraunces',serif;font-size:22px;font-weight:400;color:#15241c;line-height:1.1;margin:0;")}>{count} imóveis selecionados</h1>
+              <h1 style={parseStyle("font-family:'Fraunces',serif;font-size:22px;font-weight:400;color:#15241c;line-height:1.1;margin:0;")}>{count} {count === 1 ? 'imóvel selecionado' : 'imóveis selecionados'}</h1>
               <div style={parseStyle('font-size:13.5px;color:#8aa593;margin-top:3px;')}>em Jundiaí, Itupeva e região · curados pelo especialista do bairro</div>
             </div>
             <div style={parseStyle('display:flex;align-items:center;gap:8px;')}>

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import LotusBusca from '@/components/LotusBusca';
+import { listBairros } from '@/lib/bairros';
 import { getImoveisBusca } from '@/lib/imoveis';
 
 const SITE = 'https://www.lotusbrokers.com.br';
@@ -53,7 +54,8 @@ export default async function LotusBuscaPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}
       />
-      <LotusBusca imoveis={imoveis} />
+      {/* Só os nomes dos guias: o conteúdo deles não vai para o navegador. */}
+      <LotusBusca imoveis={imoveis} bairrosDoGuia={listBairros().map((b) => b.nome)} />
     </>
   );
 }
