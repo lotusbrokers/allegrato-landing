@@ -164,8 +164,71 @@ export function relacionados(posts: Post[], atual: Post, quantos = 3): Post[] {
 // mão, que envelheceu: títulos que não existiam mais no blog e nenhuma capa.
 export const POSTS: Post[] = [
   /* ------------------------------------------------------------------
-   * Enviado pela Lotus em 27/10/2026, para sair no mesmo dia. Primeiro da
-   * lista, e por isso o novo destaque da capa do blog.
+   * Enviado pela Lotus em 30/10/2026 (sexta-feira), para sair no mesmo dia.
+   * Primeiro da lista, e por isso o novo destaque da capa do blog.
+   *
+   * CONFERIDO em 30/10/2026 na notícia da Prefeitura do mesmo dia, em que o
+   * texto se baseia (jundiai.sp.gov.br/noticias/2026/10/30/aproveite-o-fim-
+   * de-semana-para-descobrir-jundiai-seus-sabores-historias-e-passeios), e no
+   * portal oficial das rotas (rotasturisticas.jundiai.sp.gov.br):
+   *  - Finados cai na segunda-feira, 2 de novembro;
+   *  - as Rotas Turísticas oficiais são dez, e todas as citadas existem com
+   *    esses nomes: Uva, Vinho, Cultura Italiana, Cerveja Artesanal, Sabores,
+   *    Brincar, Centro Histórico e Cultura Negra;
+   *  - o Mundo das Crianças e o Parque da Cidade são os exemplos que a própria
+   *    Prefeitura dá na Rota do Brincar.
+   * Tudo confere.
+   *
+   * Ajustes de forma:
+   *  - "comprar, vender ou alugar" perdeu o "alugar": a Lotus não trabalha
+   *    com locação (pedido de 27/10/2026);
+   *  - "[WhatsApp/link]" virou o WhatsApp (11) 92614-3393;
+   *  - "Rotas Turísticas oficiais" e a fonte do fim ganharam os links das
+   *    páginas oficiais, e a fonte ganhou o crédito da foto;
+   *  - a meta description sugerida virou `excerpt`. O meta title sugerido não
+   *    tem onde entrar (a página usa o título do texto, com "| Blog Lotus"),
+   *    nem as palavras-chave: o blog usa categoria, e esta é "Sextou em
+   *    Jundiaí".
+   *
+   * Capa: a foto enviada junto, que é da galeria da mesma notícia da
+   * Prefeitura (si_0557, Arquivo PMJ), recortada em 16:10 e reduzida para
+   * 1024x640. O blog serve a capa sem otimizar, e a de destaque carrega com
+   * prioridade.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'sextou-em-jundiai-feriado-de-finados', cat: 'Sextou em Jundiaí', date: 'Out 2026', publicadoEm: '2026-10-30', read: '3 min', img: '/blog/sextou-em-jundiai-feriado-de-finados.jpg', slot: 'blog-sextou-em-jundiai-feriado-de-finados', title: 'Sextou em Jundiaí: o que fazer no feriado de Finados sem sair da cidade', excerpt: 'Adegas, cervejarias artesanais, parques e roteiros culturais: veja ideias de passeio para o feriado em Jundiaí e descubra por que a cidade é ótima para morar.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'No feriado prolongado de Finados, com a segunda-feira (2) livre, dá para aproveitar Jundiaí sem pegar estrada, com sugestões inspiradas nas Rotas Turísticas oficiais da cidade: adegas, vinhos e almoços de tradição italiana nas rotas ligadas à uva, ao vinho e à cultura italiana; cervejarias na Rota da Cerveja Artesanal; um dia de gastronomia na Rota dos Sabores; o Mundo das Crianças e o Parque da Cidade na Rota do Brincar; e história e memória nas rotas do Centro Histórico, da Cultura Italiana e da Cultura Negra. Com chuva, a dica é escolher ambientes cobertos e confirmar o funcionamento antes de sair; com pet, conferir as regras de cada local.',
+    body: [
+      'Chegou a sexta-feira e, com ela, mais um Sextou aqui no blog da Lotus Brokers. Nesta edição, o fim de semana vem esticado: na segunda-feira (2) é feriado de Finados, uma ótima oportunidade para desacelerar e aproveitar o que Jundiaí tem de melhor, sem pegar estrada.',
+      'A cidade reúne paisagens rurais, gastronomia variada, adegas tradicionais, cervejarias artesanais, espaços de lazer e atrações culturais. Seja para um almoço em família, um passeio com as crianças, um programa a dois ou um encontro com os amigos, há opção para todos os perfis. Confira as sugestões, inspiradas nas [Rotas Turísticas oficiais](https://rotasturisticas.jundiai.sp.gov.br/) do município.',
+      { titulo: 'Vinho, uva e tradição italiana' },
+      'Quem gosta de paisagem e boa mesa encontra na zona rural de Jundiaí um programa completo. As rotas ligadas à uva, ao vinho e à cultura italiana conectam adegas familiares, vinícolas, restaurantes e propriedades que ajudam a contar a história da cidade.',
+      'O roteiro pode incluir uma visita a uma adega, a compra de vinhos artesanais, sucos, doces e geleias e um almoço com massas, polenta e outras receitas que preservam a influência da imigração italiana. É uma escolha perfeita para quem prefere um passeio tranquilo, sem pressa.',
+      { titulo: 'Cerveja artesanal para quem gosta de novidade' },
+      'Se a ideia é encontrar os amigos, a Rota da Cerveja Artesanal reúne cervejarias e bares especializados em rótulos da produção local. Além de provar sabores diferentes, você conhece de perto o trabalho dos cervejeiros da região.',
+      { titulo: 'Um dia pelo paladar' },
+      'Na Rota dos Sabores, a gastronomia é o ponto de partida. Dá para montar um dia completo: café da manhã especial, almoço em família e uma parada para doces ou um bom café. Também é uma chance de valorizar os empreendedores locais e descobrir lugares que passam despercebidos na rotina.',
+      { titulo: 'Diversão para as crianças' },
+      'Para quem vai passar o feriado com os pequenos, a Rota do Brincar reúne atrações voltadas à infância. O Mundo das Crianças combina atividades recreativas com contato com a natureza, e o Parque da Cidade oferece áreas para caminhar, relaxar e passar tempo ao ar livre em família.',
+      { titulo: 'Cultura e história: conheça melhor a cidade onde você mora' },
+      'O feriado também é um bom momento para olhar Jundiaí com outros olhos. A Rota do Centro Histórico percorre espaços que ajudam a entender a formação da cidade, sua arquitetura e seu patrimônio. Já as rotas da Cultura Italiana e da Cultura Negra valorizam as tradições e memórias que compõem a identidade jundiaiense.',
+      'Vale ainda consultar a programação de museus e equipamentos culturais, que são ótimas alternativas para quem procura atividades que não dependam do tempo.',
+      { titulo: 'E se chover? O passeio continua' },
+      'A previsão do tempo não precisa estragar os planos. Em dias de chuva, priorize ambientes cobertos: uma adega com espaço interno, um almoço demorado em restaurante rural, um café especial, uma cervejaria com área coberta ou uma visita cultural. Só não esqueça de confirmar o funcionamento antes de sair de casa.',
+      { titulo: 'Passeio com pet: o que verificar antes' },
+      'Para quem não abre mão da companhia do animal de estimação, a cidade oferece passeios ao ar livre e estabelecimentos que recebem pets, cada um com suas regras. Confirme previamente se o local permite a entrada, se há restrição de porte e quais áreas são liberadas.',
+      { titulo: 'Morar em Jundiaí é viver perto de tudo isso' },
+      'Natureza, tradição, gastronomia e lazer para todas as idades, tudo a poucos minutos de casa: é essa combinação que torna Jundiaí tão atraente para quem busca qualidade de vida. Ter esse tipo de programa por perto muda a rotina, valoriza o tempo em família e fortalece o vínculo com a cidade.',
+      'Se você está pensando em comprar ou vender um imóvel em Jundiaí, a Lotus Brokers pode ajudar. Nossa equipe conhece os bairros, entende o que cada perfil procura e orienta você em cada etapa, para encontrar o imóvel que combina com o seu estilo de vida.',
+      'Fale com a Lotus Brokers pelo WhatsApp [(11) 92614-3393](https://wa.me/5511926143393) e conte o que você procura.',
+      'Bom feriado e até o próximo Sextou!',
+      'Informações baseadas em conteúdo divulgado pela [Prefeitura de Jundiaí](https://jundiai.sp.gov.br/noticias/2026/10/30/aproveite-o-fim-de-semana-para-descobrir-jundiai-seus-sabores-historias-e-passeios/) e pelo portal [Visite Jundiaí](https://visitejundiai.sp.gov.br/). Foto: Arquivo PMJ, Prefeitura de Jundiaí.',
+    ],
+  },
+  /* ------------------------------------------------------------------
+   * Enviado pela Lotus em 27/10/2026, para sair no mesmo dia.
+   *
+   * Foi o destaque da capa do blog até 30/10/2026.
    *
    * CONFERIDO em 27/10/2026 na matéria da Tribuna de Jundiaí (23/10/2026), a
    * fonte que o próprio texto indica, e na notícia da Prefeitura do mesmo dia
