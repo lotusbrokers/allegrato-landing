@@ -61,6 +61,10 @@ const COLUNAS: { titulo: string; links: { rotulo: string; href: string }[] }[] =
     titulo: 'Serviços',
     links: [
       { rotulo: 'Lançamentos', href: '/lotus-lancamentos' },
+      // /construtoras não estava no menu nem nos rodapés: em 03/11/2026 as 19
+      // páginas de construtora só eram alcançáveis por /lotus-lancamentos, e o
+      // Search Console as mostrava como "Detectada, mas não indexada".
+      { rotulo: 'Construtoras', href: '/construtoras' },
       { rotulo: 'Comprar', href: '/lotus-busca' },
       { rotulo: 'Anunciar imóvel', href: '/lotus-anunciar' },
       { rotulo: 'Bairros', href: '/lotus-bairro' },
