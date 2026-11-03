@@ -65,6 +65,7 @@ const LANDINGS_HTML = [
   'reserva-di-medeiros',
   'edificio-trend',
   'auten-serrah',
+  'terria-by-rodrigo-faro',
 ];
 
 // Componentes de moldura, presentes em dezenas de páginas: um ajuste no
