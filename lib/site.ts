@@ -39,6 +39,13 @@ export const SITE = {
  */
 export const PERFIL_GOOGLE = {
   url: 'https://maps.google.com/?cid=17362839248987197221',
+  /**
+   * Lista de avaliações do perfil (abre a busca do Google com as avaliações).
+   * O placeid é o mesmo perfil do cid acima, no formato da Places API.
+   * Conferido em 30/10/2026: cai na Lotus Brokers da Av. Luiz José Sereno, e
+   * não na Brokers Jundiaí, que é outra empresa (briefing de 28/10/2026).
+   */
+  avaliacoes: 'https://search.google.com/local/reviews?placeid=ChIJzwx0oBwlz5QRJY8XAE4y9fA',
   latitude: -23.1879705,
   longitude: -46.9651952,
   horario: [

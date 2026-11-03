@@ -1,6 +1,7 @@
 'use client';
 import { getBairro } from '@/lib/bairros';
-import { footerLegalLine } from '@/lib/site';
+import { footerLegalLine, PERFIL_GOOGLE } from '@/lib/site';
+import { DEPOIMENTOS, NOTA_NO_GOOGLE, notaComVirgula } from '@/lib/depoimentos';
 import { imagemOtimizada, logoLotus } from '@/lib/imagem-otimizada';
 
 /**
@@ -108,6 +109,22 @@ function Hoverable<T extends keyof React.JSX.IntrinsicElements = 'div'>({
 }
 
 /**
+ * O "G" do Google, nas cores da marca. Com rótulo, o leitor de tela anuncia;
+ * sem rótulo é decorativo, para quando o texto ao lado já diz "Google".
+ */
+function LogoGoogle({ tamanho, rotulo }: { tamanho: number; rotulo?: string }) {
+  const acessivel = rotulo ? { role: 'img', 'aria-label': rotulo } : { 'aria-hidden': true };
+  return (
+    <svg width={tamanho} height={tamanho} viewBox="0 0 24 24" {...acessivel}>
+      <path fill="#4285F4" d="M21.6 12.2c0-.6-.1-1.2-.2-1.8H12v3.4h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.1Z"></path>
+      <path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 .9-3.4.9-2.6 0-4.8-1.7-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22Z"></path>
+      <path fill="#FBBC05" d="M6.4 13.9a6 6 0 0 1 0-3.8V7.5H3.1a10 10 0 0 0 0 9z"></path>
+      <path fill="#EA4335" d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.8 9.4 6.1 12 6.1Z"></path>
+    </svg>
+  );
+}
+
+/**
  * image-slot do dc-runtime: bloco com gradiente de fundo (fallback) e, quando há
  * src, a imagem cobrindo (object-fit:cover). Sem src => só o gradiente.
  * Gradiente idêntico ao do estático: linear-gradient(135deg,#1d3a2c,#3f6249).
@@ -182,15 +199,6 @@ const banners = [
   { slot: 'lotus-banner-3', eyebrow: 'Quer vender?', title: 'Uma estratégia de venda à altura do seu imóvel', text: 'Receba uma análise completa de precificação e posicionamento, conduzida por especialistas que conhecem profundamente a região.', cta: 'Anunciar agora', href: 'https://www.lotusbrokers.com.br/lotus-anunciar', img: '/home-hero-jundiai.jpg', alt: 'Vista aérea de Jundiaí ao amanhecer' },
 ];
 
-const reviewsData = [
-  { initial: 'C', name: 'Camila & Rodrigo', where: 'compraram em Eloy Chaves', text: 'A Lotus entendeu o que a gente queria melhor do que a gente mesmo. Visitou tudo com a gente e achou a casa certa em duas semanas.' },
-  { initial: 'P', name: 'Patrícia Senra', where: 'vendeu no Anhangabaú', text: 'Avaliaram meu apê com honestidade, fotografaram lindo e venderam pelo valor que eu queria. Sem enrolação, do começo ao fim.' },
-  { initial: 'E', name: 'Eduardo Lima', where: 'comprou na planta · Itupeva', text: 'Me explicaram cada detalhe da tabela e da construtora. Senti que tinha alguém do meu lado, não só vendendo.' },
-  { initial: 'O', name: 'Família Okabe', where: 'alugou na Malota', text: 'Atendimento de gente que se importa. Responderam rápido, resolveram a papelada e ainda nos receberam pessoalmente.' },
-  { initial: 'R', name: 'Renata Vasconcelos', where: 'comprou em Medeiros', text: 'Profissionais, presentes e muito humanos. Recomendo de olhos fechados pra quem quer comprar bem na região.' },
-  { initial: 'T', name: 'Thiago Bertolino', where: 'investiu em Vinhedo', text: 'Conhecem a região como ninguém. Me trouxeram uma oportunidade que eu não tinha visto em portal nenhum.' },
-];
-
 const guias = [
   { tag: 'Comprar', title: 'Como comprar um imóvel em Jundiaí', desc: 'Da pré-aprovação à escritura: o passo a passo sem susto.', read: '8 min' },
   { tag: 'Financiamento', title: 'Como conseguir a aprovação do financiamento', desc: 'Renda, score e documentação, o que os bancos olham.', read: '7 min' },
@@ -232,14 +240,8 @@ const popularCidades = [
 // compartilhável, sem 'use client') para poderem ser importados pelo Server
 // Component da rota, que faz o merge com o Supabase.
 
-/**
- * Depoimentos desativados enquanto não houver avaliações reais, autorizadas e
- * verificáveis (exceção autorizada na atualização de copy). A seção, os dados e
- * o carrossel permanecem no arquivo — só não são renderizados. Para reativar,
- * troque para `true`; o ideal é ligar antes na origem real (avaliações do Perfil
- * da Empresa no Google) em vez de voltar com os textos atuais.
- */
-const DEPOIMENTOS_ATIVOS = false;
+/** Tempo de cada depoimento no carrossel; seta e bolinha recomeçam a contagem. */
+const TROCA_DO_DEPOIMENTO_MS = 5000;
 
 /**
  * Perfis com CRECI placeholder (000000-F…) desativados: "Erick Santos" e os
@@ -478,10 +480,12 @@ export default function LotusHome({
       }, 5500);
     }
 
-    // --- review timer (5000ms, % 6) ---
-    reviewTimerRef.current = setInterval(() => {
-      setReviewIndex((i) => (i + 1) % 6);
-    }, 5000);
+    // --- review timer (5 s, um depoimento por vez) ---
+    if (DEPOIMENTOS.length > 1) {
+      reviewTimerRef.current = setInterval(() => {
+        setReviewIndex((i) => (i + 1) % DEPOIMENTOS.length);
+      }, TROCA_DO_DEPOIMENTO_MS);
+    }
 
     // --- cleanup (componentWillUnmount) ---
     return () => {
@@ -496,11 +500,12 @@ export default function LotusHome({
 
   /* -------- goReview: reinicia o timer de reviews ao navegar manualmente -------- */
   const goReview = (i: number) => {
+    const n = DEPOIMENTOS.length;
     if (reviewTimerRef.current) clearInterval(reviewTimerRef.current);
-    setReviewIndex(((i % 6) + 6) % 6);
+    setReviewIndex(((i % n) + n) % n);
     reviewTimerRef.current = setInterval(() => {
-      setReviewIndex((s) => (s + 1) % 6);
-    }, 5000);
+      setReviewIndex((s) => (s + 1) % n);
+    }, TROCA_DO_DEPOIMENTO_MS);
   };
 
   /* -------- fill: preenche e foca o input de busca por conversa -------- */
@@ -535,16 +540,21 @@ export default function LotusHome({
       ';',
   }));
 
-  const reviewsView = reviewsData.map((r, i) => ({
+  // Todos os depoimentos vão no HTML; só o da vez aparece. Empilhados na mesma
+  // célula do grid, a caixa fica com a altura do mais longo: nada pula na
+  // troca e o texto longo não vaza do card (com position:absolute vazava).
+  const reviewsView = DEPOIMENTOS.map((r, i) => ({
     ...r,
+    ativo: i === ri,
     style:
-      'position:absolute;inset:0;opacity:' +
+      'grid-area:1/1;display:flex;opacity:' +
       (i === ri ? '1' : '0') +
       ';transition:opacity .55s ease;pointer-events:' +
       (i === ri ? 'auto' : 'none') +
-      ';display:flex;align-items:center;justify-content:center;',
+      ';',
   }));
-  const reviewDots = reviewsData.map((_r, i) => ({
+  const reviewDots = DEPOIMENTOS.map((_r, i) => ({
+    ativo: i === ri,
     go: () => goReview(i),
     style:
       'width:' +
@@ -1044,7 +1054,10 @@ export default function LotusHome({
       </section>
 
       {/* ============ DEPOIMENTOS ============ */}
-      {DEPOIMENTOS_ATIVOS && (
+      {/* Avaliações reais do Perfil da Empresa no Google (lib/depoimentos.ts).
+          Até 30/10/2026 a seção ficava desligada: os textos do layout eram de
+          clientes inventados. Nota e total são os do perfil, conferidos à mão. */}
+      {DEPOIMENTOS.length > 0 && (
       <section id="depoimentos" style={parseStyle('content-visibility:auto;contain-intrinsic-size:auto 800px;background:#f7f2e8;padding:90px 40px 36px;')}>
         <div style={parseStyle('max-width:1280px;margin:0 auto;')}>
           <div data-reveal="" style={parseStyle('display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px;margin-bottom:48px;')}>
@@ -1052,42 +1065,54 @@ export default function LotusHome({
               <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b18a4a;margin-bottom:18px;')}>Quem viveu, conta</div>
               <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(30px,4vw,48px);line-height:1.06;letter-spacing:-.02em;margin:0;color:#15241c;")}>Grandes histórias, contadas por quem viveu.</h2>
             </div>
+            <div style={parseStyle('display:flex;align-items:center;gap:16px;background:#fff;border-radius:20px;padding:16px 24px;box-shadow:0 18px 44px -30px rgba(21,36,28,.45);')}>
+              <LogoGoogle tamanho={30} />
+              <div>
+                <div style={parseStyle('display:flex;align-items:baseline;gap:8px;')}>
+                  <span style={parseStyle("font-family:'Fraunces',serif;font-weight:400;font-size:38px;line-height:1;color:#15241c;")}>{notaComVirgula(NOTA_NO_GOOGLE.nota)}</span>
+                  <span aria-hidden="true" style={parseStyle('color:#b18a4a;font-size:18px;')}>★</span>
+                </div>
+                <div style={parseStyle('margin-top:6px;font-size:13px;font-weight:600;color:#3f6249;')}>{NOTA_NO_GOOGLE.total} avaliações no Google</div>
+              </div>
+            </div>
           </div>
 
           <div style={parseStyle('position:relative;max-width:840px;margin:0 auto;')}>
-            <div style={parseStyle('position:relative;min-height:290px;')}>
-              {/* hint-placeholder-count: 6 */}
+            <div style={parseStyle('display:grid;')}>
               {reviewsView.map((r, i) => (
-                <div key={i} style={parseStyle(r.style)}>
-                  <div style={parseStyle('width:100%;background:#fff;border-radius:24px;padding:48px clamp(28px,5vw,60px);box-shadow:0 28px 64px -36px rgba(21,36,28,.4);text-align:center;')}>
+                <div key={i} aria-hidden={r.ativo ? undefined : true} style={parseStyle(r.style)}>
+                  <figure style={parseStyle('width:100%;margin:0;background:#fff;border-radius:24px;padding:48px clamp(28px,5vw,60px);box-shadow:0 28px 64px -36px rgba(21,36,28,.4);text-align:center;display:flex;flex-direction:column;justify-content:center;')}>
                     <div style={parseStyle('display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:22px;')}>
-                      <span style={parseStyle('color:#b18a4a;font-size:19px;letter-spacing:4px;')}>★★★★★</span>
-                      <svg width="22" height="22" viewBox="0 0 24 24" aria-label="Google"><path fill="#4285F4" d="M21.6 12.2c0-.6-.1-1.2-.2-1.8H12v3.4h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.1Z"></path><path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 .9-3.4.9-2.6 0-4.8-1.7-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22Z"></path><path fill="#FBBC05" d="M6.4 13.9a6 6 0 0 1 0-3.8V7.5H3.1a10 10 0 0 0 0 9z"></path><path fill="#EA4335" d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.8 9.4 6.1 12 6.1Z"></path></svg>
+                      <span role="img" aria-label="5 de 5 estrelas" style={parseStyle('color:#b18a4a;font-size:19px;letter-spacing:4px;')}>★★★★★</span>
+                      <LogoGoogle tamanho={22} rotulo="Avaliação no Google" />
                     </div>
-                    <p style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(20px,2.3vw,27px);line-height:1.34;letter-spacing:-.01em;color:#15241c;margin:0 0 28px;")}>“{r.text}”</p>
-                    <div style={parseStyle('display:flex;align-items:center;justify-content:center;gap:12px;')}>
-                      <div style={parseStyle("width:46px;height:46px;border-radius:50%;background:#1d3a2c;display:flex;align-items:center;justify-content:center;color:#cdab6e;font-family:'Fraunces',serif;font-size:19px;flex-shrink:0;")}>{r.initial}</div>
-                      <div style={parseStyle('text-align:left;')}>
-                        <div style={parseStyle('font-size:15px;font-weight:600;color:#15241c;')}>{r.name}</div>
-                        <div style={parseStyle('font-size:12.5px;color:#8aa593;')}>{r.where}</div>
-                      </div>
-                    </div>
-                  </div>
+                    <blockquote style={parseStyle('margin:0 0 28px;')}>
+                      <p style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(20px,2.3vw,27px);line-height:1.34;letter-spacing:-.01em;color:#15241c;margin:0;")}>“{r.texto}”</p>
+                    </blockquote>
+                    <figcaption style={parseStyle('display:flex;align-items:center;justify-content:center;gap:12px;')}>
+                      <div aria-hidden="true" style={parseStyle("width:46px;height:46px;border-radius:50%;background:#1d3a2c;display:flex;align-items:center;justify-content:center;color:#cdab6e;font-family:'Fraunces',serif;font-size:19px;flex-shrink:0;")}>{r.autor.charAt(0)}</div>
+                      <div style={parseStyle('text-align:left;font-size:15px;font-weight:600;color:#15241c;')}>{r.autor}</div>
+                    </figcaption>
+                  </figure>
                 </div>
               ))}
             </div>
-            <Hoverable as="button" onClick={() => goReview(ri - 1)} aria-label="Depoimento anterior" baseStyle={parseStyle('position:absolute;top:50%;left:-8px;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;background:#fff;border:1px solid rgba(21,36,28,.12);color:#1d3a2c;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px -18px rgba(21,36,28,.5);transition:all .2s;z-index:3;')} hoverStyle={parseStyle('background:#1d3a2c;color:#f7f2e8;border-color:#1d3a2c')}>‹</Hoverable>
-            <Hoverable as="button" onClick={() => goReview(ri + 1)} aria-label="Próximo depoimento" baseStyle={parseStyle('position:absolute;top:50%;right:-8px;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;background:#fff;border:1px solid rgba(21,36,28,.12);color:#1d3a2c;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px -18px rgba(21,36,28,.5);transition:all .2s;z-index:3;')} hoverStyle={parseStyle('background:#1d3a2c;color:#f7f2e8;border-color:#1d3a2c')}>›</Hoverable>
+            {/* No celular as setas descem para a linha das bolinhas (styles/base.css, data-depoimento-seta). */}
+            <Hoverable as="button" type="button" data-depoimento-seta="anterior" onClick={() => goReview(ri - 1)} aria-label="Depoimento anterior" baseStyle={parseStyle('position:absolute;top:50%;left:-8px;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;background:#fff;border:1px solid rgba(21,36,28,.12);color:#1d3a2c;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px -18px rgba(21,36,28,.5);transition:all .2s;z-index:3;')} hoverStyle={parseStyle('background:#1d3a2c;color:#f7f2e8;border-color:#1d3a2c')}>‹</Hoverable>
+            <Hoverable as="button" type="button" data-depoimento-seta="proximo" onClick={() => goReview(ri + 1)} aria-label="Próximo depoimento" baseStyle={parseStyle('position:absolute;top:50%;right:-8px;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;background:#fff;border:1px solid rgba(21,36,28,.12);color:#1d3a2c;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px -18px rgba(21,36,28,.5);transition:all .2s;z-index:3;')} hoverStyle={parseStyle('background:#1d3a2c;color:#f7f2e8;border-color:#1d3a2c')}>›</Hoverable>
           </div>
 
           <div data-reveal="" style={parseStyle('margin-top:30px;display:flex;justify-content:center;gap:8px;')}>
-            {/* hint-placeholder-count: 6 */}
             {reviewDots.map((d, i) => (
-              <button key={i} onClick={d.go} aria-label="Ir para o depoimento" style={parseStyle(d.style)}></button>
+              <button key={i} type="button" onClick={d.go} aria-label={`Depoimento ${i + 1} de ${DEPOIMENTOS.length}`} aria-current={d.ativo ? 'true' : undefined} style={parseStyle(d.style)}></button>
             ))}
           </div>
 
           <div data-reveal="" style={parseStyle('margin-top:34px;text-align:center;')}>
+            <Hoverable as="a" href={PERFIL_GOOGLE.avaliacoes} target="_blank" rel="noopener" baseStyle={parseStyle('display:inline-flex;align-items:center;gap:8px;background:#fff;color:#1d3a2c;font-weight:600;font-size:15px;padding:14px 22px;border-radius:40px;border:1px solid rgba(21,36,28,.14);transition:background .2s, color .2s;')} hoverStyle={parseStyle('background:#1d3a2c;color:#f7f2e8;border-color:#1d3a2c')}>
+              <LogoGoogle tamanho={18} />
+              Ver todas as avaliações no Google <span style={parseStyle('font-size:18px;')}>→</span>
+            </Hoverable>
           </div>
         </div>
       </section>

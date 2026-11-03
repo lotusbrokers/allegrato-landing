@@ -196,3 +196,19 @@
   background: rgba(21, 36, 28, .06);
   border-color: rgba(21, 36, 28, .45);
 }
+
+/* ---- Setas do carrossel de depoimentos da home (#depoimentos). ----
+   No celular, nas laterais do card elas cobririam o começo e o fim das linhas
+   do texto. Descem para a linha das bolinhas, uma em cada ponta: o centro fica
+   30px (margem das bolinhas) + 4,5px (metade da bolinha) abaixo do card.
+   !important porque a posição vem do style inline do componente. */
+@media (max-width: 760px) {
+  [data-depoimento-seta] {
+    top: calc(100% + 13.5px) !important;
+    transform: none !important;
+    width: 42px !important;
+    height: 42px !important;
+  }
+  [data-depoimento-seta="anterior"] { left: 0 !important; }
+  [data-depoimento-seta="proximo"] { right: 0 !important; }
+}
