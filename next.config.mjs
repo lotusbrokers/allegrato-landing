@@ -76,6 +76,8 @@ const nextConfig = {
   // - As outras 11, em 06/10/2026, por scripts/desempacotar-landing.mjs (ver o
   //   cabeçalho dele): mesmo texto, links e formulários do bundle, conferidos
   //   página a página. Se uma landing chegar de novo como bundle, é só rodá-lo.
+  // - Terriá by Rodrigo Faro, em 03/11/2026, pelo mesmo script; o pacote veio
+  //   sem os scripts da Lotus, que foram copiados das outras.
   //
   // Os scripts da Lotus no fim de cada página (rodapé, atalhos, correções)
   // ainda observam o documento com MutationObserver, herança do tempo em que
@@ -100,6 +102,7 @@ const nextConfig = {
       { source: '/reserva-di-medeiros', destination: '/reserva-di-medeiros/index.html' },
       { source: '/edificio-trend', destination: '/edificio-trend/index.html' },
       { source: '/auten-serrah', destination: '/auten-serrah/index.html' },
+      { source: '/terria-by-rodrigo-faro', destination: '/terria-by-rodrigo-faro/index.html' },
     ];
   },
 };

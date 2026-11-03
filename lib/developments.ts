@@ -50,6 +50,12 @@ export const developmentsFallback: DevelopmentCard[] = [
   { name: 'Maxx Santa Angela', location: 'Vila Galvão · Jundiaí', stage: 'Entregue', builder: 'Santa Angela', specs: '71–98 m² · ao lado do Maxi Shopping', price: 'Consultar valor', exclusive: true, img: '/maxx-santa-angela/capa-max-old.jpg', href: '/maxx-santa-angela' },
   { name: 'Resort Prime', location: 'Engordadouro · Jundiaí', stage: 'Entregue', builder: 'Santa Angela', specs: 'Lazer de resort, todos os dias', price: 'Consultar valor', exclusive: true, img: '/resort-prime/a009.jpg', href: '/resort-prime' },
   { name: 'Terrace Serra do Japi', location: 'Jundiaí', stage: 'Lançamento', builder: 'Construtora', specs: 'Alto padrão · 3 torres', price: 'Consultar valor', exclusive: true, img: '/terrace-serra-do-japi/a026.jpg', href: '/terrace-serra-do-japi' },
+  // O Terriá (landing publicada em 03/11/2026) ainda não tem linha na Dashboard,
+  // então o card é este; sem ele a página só seria achada pelo sitemap. Cadastrado
+  // lá como "Terriá by Rodrigo Faro" (o nome vira o slug da landing), o card
+  // passa a vir do banco. Pré-lançamento: comercialização só depois do registro
+  // da incorporação, por isso sem preço.
+  { name: 'Terriá by Rodrigo Faro', location: 'Jardim Bonfiglioli · Jundiaí', stage: 'Lançamento', builder: 'TERRIÁ Incorporadora', specs: '64 m² e 88 m²', price: 'Consultar valor', exclusive: false, img: '/terria-by-rodrigo-faro/midia/28ef4b3e3a3a80e9.webp', href: '/terria-by-rodrigo-faro' },
   { name: 'Vigóre', location: 'Colônia · Jundiaí', stage: 'Em obras', builder: 'Santa Angela', specs: '2 dorms · 53–54 m² · lazer completo', price: 'Consultar valor', exclusive: false, img: '/vigore/a18.jpg', href: '/vigore' },
   { name: 'Vistta Castanho', location: 'Castanho · Jundiaí', stage: 'Lançamento', builder: 'Construtora', specs: 'Loteamento fechado', price: 'Consultar valor', exclusive: false, img: '/vistta-castanho/a007.jpg', href: '/vistta-castanho' },
   { name: 'Doppio Jundiaí', location: 'Campos Elísios · Jundiaí', stage: 'Lançamento', builder: 'Alto padrão', specs: '156–442 m² · alto padrão', price: 'Consultar valor', exclusive: false, img: '/vivarte/a003.jpg', href: '/doppio-jundiai' },
