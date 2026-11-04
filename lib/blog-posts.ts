@@ -164,8 +164,107 @@ export function relacionados(posts: Post[], atual: Post, quantos = 3): Post[] {
 // mão, que envelheceu: títulos que não existiam mais no blog e nenhuma capa.
 export const POSTS: Post[] = [
   /* ------------------------------------------------------------------
+   * Enviado pela Lotus em 04/11/2026, com a foto aérea do bairro e o pedido de
+   * listar embaixo todos os lançamentos do Medeiros. Primeiro da lista, e por
+   * isso o novo destaque da capa do blog.
+   *
+   * CONFERIDO em 04/11/2026:
+   *  - região oeste, perto da Serra do Japi, Mini Shopping Sarapiranga e as
+   *    avenidas Reynaldo (de) Porcari e Juvenal Arantes: batem com o guia do
+   *    bairro (lib/bairros.ts);
+   *  - às margens da Rodovia Dom Gabriel Paulino Bueno Couto e perto da
+   *    Vice-Prefeito Hermenegildo Tonoli: série "Bairro a bairro" da Tribuna de
+   *    Jundiaí sobre o Medeiros, e moção da Câmara de 2025 sobre obras "na
+   *    altura do acesso ao bairro Medeiros" na Hermenegildo Tonoli;
+   *  - UBS Sarapiranga, na região do Medeiros: notícias da Prefeitura (reforma
+   *    e ampliação em 2022);
+   *  - EMEB Aparecida Merino Elias: Av. José Gothard, 531, Medeiros.
+   * Não achados na busca e mantidos como vieram: as demais escolas (a E.E.
+   * Rafael de Oliveira existe em Jundiaí, e o texto fala em "Medeiros e seus
+   * arredores"), os restaurantes, a piscina e o campo do Quinta das Fontainhas
+   * (o espaço existe, como área de lazer e eventos), as linhas para o Terminal
+   * Eloy Chaves e os valores de mercado, que o texto atribui a uma pesquisa sem
+   * nome e acompanha da própria ressalva.
+   *
+   * Ajustes de forma:
+   *  - a locação saiu, porque a Lotus não trabalha com ela (pedido de
+   *    27/10/2026): "compradores e locatários" virou "compradores", "comprar
+   *    ou alugar" virou "comprar", e o aluguel médio (R$ 4.000) e a faixa de
+   *    locação (R$ 1.370 a R$ 7.290) saíram da seção de valores;
+   *  - a tabela de valores, que ficou só com a compra, virou uma frase: o blog
+   *    não desenha tabela;
+   *  - links internos: "oportunidades imobiliárias disponíveis na região" leva
+   *    ao guia do Medeiros, e "Ermida" ao guia do Jardim Ermida;
+   *  - a lista de lançamentos do fim sai de lancamentosNosBairros (Medeiros,
+   *    Jundiaí), e acompanha a vitrine sozinha;
+   *  - a meta description sugerida virou `excerpt`. O título SEO sugerido não
+   *    tem onde entrar (a página usa o título do texto, com "| Blog Lotus"),
+   *    nem as palavras-chave: o blog usa categoria, e esta é "Região", a mesma
+   *    do artigo do Caxambu. O slug é o sugerido.
+   *
+   * Capa: a foto aérea enviada junto (1162x563), recortada em 16:10 no centro
+   * e mantida em 896x560, sem ampliar.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'morar-em-medeiros-jundiai', cat: 'Região', date: 'Nov 2026', publicadoEm: '2026-11-04', read: '5 min', img: '/blog/morar-em-medeiros-jundiai.jpg', slot: 'blog-morar-em-medeiros-jundiai', title: 'Morar em Medeiros, Jundiaí: tranquilidade, natureza e qualidade de vida em um bairro em crescimento', excerpt: 'Descubra como é morar em Medeiros, Jundiaí. Conheça a localização, escolas, comércio, lazer e oportunidades imobiliárias do bairro.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'O Medeiros fica na região oeste de Jundiaí, às margens da Rodovia Dom Gabriel Paulino Bueno Couto, perto da Serra do Japi e com acesso fácil a Itupeva. É um bairro residencial em expansão, com condomínios fechados, casas térreas e sobrados, comércio nas avenidas principais, o Mini Shopping Sarapiranga, a UBS Sarapiranga, escolas de educação infantil e ensino fundamental e restaurantes para a família. Na pesquisa usada no artigo, o valor médio de compra é de R$ 858 mil, com imóveis entre R$ 211 mil e R$ 3,9 milhões.',
+    body: [
+      'Descubra por que o bairro Medeiros vem conquistando cada vez mais famílias que buscam morar em Jundiaí, com tranquilidade, áreas verdes, boa localização e potencial de valorização imobiliária.',
+      'Escolher onde morar vai muito além de encontrar um imóvel. É também escolher o estilo de vida que você deseja ter, a rotina que pretende construir e a praticidade que espera encontrar no dia a dia. Em Jundiaí, o bairro Medeiros reúne características que tornam essa escolha cada vez mais interessante.',
+      'Localizado próximo à Serra do Japi e com acesso facilitado por importantes rodovias, Medeiros vem passando por um processo de expansão urbana, recebendo novos empreendimentos residenciais e atraindo pessoas que procuram um ambiente mais tranquilo, sem abrir mão da conexão com outros pontos da cidade.',
+      'Com ruas predominantemente residenciais, condomínios fechados, casas térreas e sobrados, o bairro apresenta uma atmosfera acolhedora, cercada por áreas verdes e com boas perspectivas de desenvolvimento.',
+      { titulo: 'Onde fica o bairro Medeiros em Jundiaí?' },
+      'O Medeiros está localizado na região oeste de Jundiaí, às margens da Rodovia Dom Gabriel Paulino Bueno Couto e próximo à Rodovia Vice-Prefeito Hermenegildo Tonoli.',
+      'Essa localização favorece o deslocamento para diferentes regiões da cidade e também para municípios vizinhos, como Itupeva.',
+      'Entre as principais vias de circulação do bairro estão as avenidas Reynaldo de Porcari, Francisco Nobre, João Gonçalves dos Reis e Juvenal Arantes.',
+      'Além do acesso por rodovias, o transporte público também atende a região, com linhas de ônibus que conectam Medeiros a outros bairros de Jundiaí, principalmente ao Terminal Eloy Chaves.',
+      { titulo: 'Qualidade de vida e contato com a natureza' },
+      'Um dos grandes diferenciais de morar em Medeiros é a proximidade com a natureza.',
+      'A região está próxima à Serra do Japi, um dos patrimônios naturais mais importantes de Jundiaí, reconhecido por sua biodiversidade, vegetação preservada e paisagens características.',
+      'Essa proximidade proporciona uma experiência residencial interessante para quem valoriza ambientes mais verdes e deseja uma rotina que permita aproveitar melhor os espaços ao ar livre.',
+      'O perfil predominantemente residencial também contribui para a atmosfera do bairro. Entre casas, sobrados e condomínios fechados, Medeiros oferece alternativas para diferentes necessidades familiares, especialmente para quem procura mais espaço e privacidade.',
+      { titulo: 'Comércio, serviços e conveniências no dia a dia' },
+      'Embora mantenha características de bairro residencial, Medeiros conta com estabelecimentos que facilitam a rotina de seus moradores.',
+      'Pelas principais vias é possível encontrar mercados, postos de combustível, salões de beleza, lojas de materiais de construção, concessionárias, docerias e outros serviços.',
+      'Um dos destaques é o Mini Shopping Sarapiranga, pequeno centro comercial que concentra opções gastronômicas, lojas e serviços, incluindo pet shop.',
+      'Na área da saúde, os moradores também contam com a UBS Sarapiranga, que oferece atendimento básico à população.',
+      'Essa estrutura permite resolver diversas necessidades cotidianas sem precisar se deslocar para regiões mais centrais da cidade.',
+      { titulo: 'Escolas e educação: opções para diferentes fases da infância' },
+      'Para famílias com crianças, a oferta de instituições de ensino na região é um aspecto importante na escolha de um imóvel.',
+      'Medeiros e seus arredores contam com diferentes alternativas de educação infantil e ensino fundamental, entre elas:',
+      { itens: ['Colégio Videirinha', 'Colégio Videira Jundiaí', 'Colégio Educar Kids', 'Colégio Educarmais', 'Tato Ecolégio', 'EMEB Aparecida Merino Elias', 'E.E. Rafael de Oliveira'] },
+      'A presença dessas instituições amplia as possibilidades para famílias que desejam estabelecer sua rotina escolar na própria região ou em bairros próximos.',
+      { titulo: 'Gastronomia e lazer: onde aproveitar o bairro?' },
+      'Morar em um bairro tranquilo não significa abrir mão de boas experiências gastronômicas.',
+      'Medeiros conta com restaurantes, lanchonetes e estabelecimentos que oferecem diferentes opções para aproveitar momentos em família ou encontrar amigos.',
+      'Entre os locais conhecidos da região estão:',
+      { itens: ['Quinta das Fontainhas', 'Una Más Empanadas Argentinas', 'Restaurante Noz Mostarda', 'Espetaria do Coruja', 'Restaurante São Judas', 'Quero Burger'] },
+      'O Quinta das Fontainhas, por exemplo, reúne gastronomia e estrutura de lazer, com piscina e campo de futebol, proporcionando uma alternativa para aproveitar os momentos de descanso.',
+      { titulo: 'Quanto custa morar em Medeiros?' },
+      'O mercado imobiliário de Medeiros apresenta opções para diferentes perfis de compradores, com variações de valores conforme o tipo de imóvel, metragem, localização e infraestrutura do condomínio.',
+      'Como referência apresentada na pesquisa imobiliária utilizada para este artigo, o valor médio de compra é de R$ 858.000.',
+      'As faixas de valores identificadas são amplas, podendo variar aproximadamente entre R$ 211 mil e R$ 3,9 milhões para compra.',
+      'Essas diferenças refletem a diversidade de imóveis disponíveis, desde unidades mais compactas até casas e residências de padrão elevado em condomínios.',
+      'Os valores são referências de mercado e podem sofrer alterações conforme a disponibilidade e as características dos imóveis.',
+      { titulo: 'Bairros próximos ao Medeiros' },
+      'Outro ponto positivo da localização é a proximidade com outras regiões de Jundiaí, permitindo ampliar as possibilidades de acesso a serviços, comércio e infraestrutura.',
+      'Entre os bairros próximos estão:',
+      { itens: ['Fazenda Grande: região residencial com diferentes opções de imóveis e serviços', '[Ermida](/lotus-bairro/jardim-ermida): área que também apresenta empreendimentos residenciais e condomínios', 'Parque Industrial: região com atividades comerciais, empresariais e industriais'] },
+      'A proximidade com essas localidades contribui para a integração de Medeiros com diferentes áreas da cidade.',
+      { titulo: 'Vale a pena morar no Medeiros, em Jundiaí?' },
+      'Para quem procura um bairro residencial, com proximidade da natureza, acesso facilitado e oportunidades no mercado imobiliário, Medeiros merece estar entre as opções consideradas.',
+      'Seu crescimento urbano, a chegada de novos empreendimentos e a presença de condomínios residenciais tornam a região interessante para quem deseja comprar um imóvel em Jundiaí.',
+      'Além disso, a combinação entre tranquilidade, escolas, comércio local, gastronomia e proximidade com Itupeva atende a diferentes estilos de vida.',
+      'Mais do que escolher um endereço, morar em Medeiros pode representar a oportunidade de construir uma rotina com mais tranquilidade, espaço e conexão com o que realmente importa.',
+      { titulo: 'Está pensando em morar em Medeiros?' },
+      'Conheça as [oportunidades imobiliárias disponíveis na região](/lotus-bairro/medeiros) e encontre um imóvel que combine com seus planos, suas necessidades e o estilo de vida que você deseja construir.',
+      'A escolha do próximo endereço pode ser o primeiro passo de uma nova história!',
+      { titulo: 'Lançamentos no Medeiros', lancamentosNosBairros: { cidade: 'Jundiaí', bairros: ['Medeiros'] } },
+    ],
+  },
+  /* ------------------------------------------------------------------
    * Enviado pela Lotus em 30/10/2026 (sexta-feira), para sair no mesmo dia.
-   * Primeiro da lista, e por isso o novo destaque da capa do blog.
+   * Foi o destaque da capa do blog até 04/11/2026.
    *
    * CONFERIDO em 30/10/2026 na notícia da Prefeitura do mesmo dia, em que o
    * texto se baseia (jundiai.sp.gov.br/noticias/2026/10/30/aproveite-o-fim-
