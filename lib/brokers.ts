@@ -142,31 +142,13 @@ function pessoaDoSite(row: LinhaDoCartao | null): PessoaDoCartao | null {
 }
 
 /**
- * Nome e foto de quem mandou o link do imóvel (`?c=`), para o painel da página.
+ * Nome e foto de quem captou o imóvel: o cartão da página do imóvel (sempre,
+ * mesmo com link de corretor, desde 03/11/2026; ver quemApareceNoCartao) e o
+ * "Corretor captador" da Área do Corretor.
  *
- * `codigo_link` entra em portal_brokers pela migration 20261146 da Dash. Antes
- * dela, com erro, com código de quem não está na view (a Diretoria não está) ou
- * de quem a Lotus tirou do site, devolve null: o painel fica com o captador (ou
- * o genérico) e o código segue no texto do WhatsApp, porque quem resolve o
- * corretor é a Dash.
- */
-export async function getBrokerDoLink(codigo: string): Promise<PessoaDoCartao | null> {
-  const { data, error } = await supabase
-    .from('portal_brokers')
-    .select(COLUNAS_DO_CARTAO)
-    .eq('tenant_id', TENANT_ID)
-    .eq('codigo_link', codigo)
-    .maybeSingle();
-  if (error) {
-    console.error('[getBrokerDoLink] erro Supabase:', error.message);
-    return null;
-  }
-  return pessoaDoSite(data as LinhaDoCartao | null);
-}
-
-/**
- * Nome e foto de quem captou o imóvel: o cartão da página do imóvel sem link de
- * corretor e o "Corretor captador" da Área do Corretor.
+ * Até 03/11/2026 havia também getBrokerDoLink, que buscava pelo `codigo_link`
+ * o corretor do link para trocar o rosto do cartão. Saiu com a decisão de
+ * mostrar sempre o captador: o código segue no WhatsApp, e quem o resolve é a Dash.
  *
  * `portal_imoveis.captador_id` entra pela migration 20261176 da Dash. A leitura
  * fica fora do SELECT_FULL de propósito: sem a coluna (antes da migration), só

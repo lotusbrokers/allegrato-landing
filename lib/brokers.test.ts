@@ -80,7 +80,7 @@ test('getCaptadorDoImovel: o captador oculto cai no genérico', async () => {
   });
   const captador = await brokers.getCaptadorDoImovel('AP0001');
   assert.equal(captador, null);
-  assert.deepEqual(quemApareceNoCartao(null, captador), GENERICO_DO_CARTAO);
+  assert.deepEqual(quemApareceNoCartao(captador), GENERICO_DO_CARTAO);
 });
 
 test('getCaptadorDoImovel: sem captador ou fora de portal_brokers, null', async () => {
@@ -112,32 +112,6 @@ test('getCaptadorDoImovel: a falha da leitura devolve null (o site antes da migr
     portal_brokers: { status: 401, corpo: { code: '42501', message: 'permission denied for view portal_brokers' } },
   });
   assert.equal(await brokers.getCaptadorDoImovel('CA0063'), null);
-});
-
-test('getBrokerDoLink: a mesma limpeza do nome e o mesmo oculto', async () => {
-  cenario({ portal_brokers: { status: 200, corpo: [{ name: 'Mariana  Mamede', photo_url: null, especialidades: ['Apartamento'] }] } });
-  assert.deepEqual(await brokers.getBrokerDoLink('k7m2qx'), {
-    nome: 'Mariana Mamede',
-    foto: '/corretores/mariana-mamede.jpg',
-    especialidades: ['Apartamento'],
-  });
-  assert.equal(pedidos[0].searchParams.get('select'), 'name,photo_url,especialidades');
-  assert.equal(pedidos[0].searchParams.get('codigo_link'), 'eq.k7m2qx');
-
-  cenario({ portal_brokers: { status: 200, corpo: [{ name: 'Alex  Xavier da Silva', photo_url: null }] } });
-  assert.equal(await brokers.getBrokerDoLink('k7m2qx'), null);
-});
-
-test('getBrokerDoLink: a falha da leitura devolve null (o site antes da migration 20261311)', async (t) => {
-  const erros = t.mock.method(console, 'error', () => {});
-  cenario({
-    portal_brokers: {
-      status: 400,
-      corpo: { code: '42703', message: 'column portal_brokers.especialidades does not exist', details: null, hint: null },
-    },
-  });
-  assert.equal(await brokers.getBrokerDoLink('k7m2qx'), null);
-  assert.match(String(erros.mock.calls[0]?.arguments[1]), /especialidades does not exist/);
 });
 
 test('getBrokers: pede especialidades e as entrega como vieram; os EXTRAS ficam sem', async () => {

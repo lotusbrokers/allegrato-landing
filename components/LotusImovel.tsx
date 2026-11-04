@@ -373,29 +373,14 @@ export default function LotusImovel({
   const [openFaq, setOpenFaq] = useState(0);
   const [form, setForm] = useState({ nome: '', whats: '', data: '' });
 
-  // Corretor que mandou o link (?c=, ver lib/corretor-do-link). Lido só aqui,
-  // no navegador: ler searchParams no servidor tiraria a página do cache. Até
-  // a leitura, o painel mostra o captador e o WhatsApp vai sem código.
+  // O cartão mostra sempre o captador da Dashboard (lib/corretor-do-link). O
+  // código de quem mandou o link (?c=) vai só no texto do WhatsApp e no lead,
+  // para a Lia creditar quem trouxe o cliente. Lido só aqui, no navegador: ler
+  // searchParams no servidor tiraria a página do cache.
+  const pessoaDoCartao = quemApareceNoCartao(captador);
   const [codigoDoCorretor, setCodigoDoCorretor] = useState<string | null>(null);
-  const [corretor, setCorretor] = useState<PessoaDoCartao | null>(null);
-  const pessoaDoCartao = quemApareceNoCartao(corretor, captador);
   useEffect(() => {
-    const codigo = codigoDestaAba();
-    if (!codigo) return;
-    setCodigoDoCorretor(codigo);
-    let ativo = true;
-    // Import sob demanda: a leitura dos corretores e os textos deles
-    // (lib/corretores-conteudo) só descem para quem chegou por um link de
-    // corretor. Sem o nome, o código segue no texto do WhatsApp.
-    import('@/lib/brokers')
-      .then(({ getBrokerDoLink }) => getBrokerDoLink(codigo))
-      .then((b) => {
-        if (ativo) setCorretor(b);
-      })
-      .catch(() => {});
-    return () => {
-      ativo = false;
-    };
+    setCodigoDoCorretor(codigoDestaAba());
   }, []);
 
   // fmt(n) do estático
@@ -408,7 +393,7 @@ export default function LotusImovel({
     '?text=' +
     encodeURIComponent(
       `Vim pela página do imóvel ${data.codigo_imovel} (${titulo}) e quero agendar uma visita${
-        codigoDoCorretor ? trechoDoCorretor(codigoDoCorretor, corretor?.nome) : ''
+        codigoDoCorretor ? trechoDoCorretor(codigoDoCorretor) : ''
       }.`,
     );
 

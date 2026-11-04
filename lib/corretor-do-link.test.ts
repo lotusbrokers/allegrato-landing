@@ -58,23 +58,20 @@ test('codigoDaVisita: aba nova, guardado adulterado e armazenamento bloqueado', 
   assert.equal(codigoDaVisita('', bloqueado), null);
 });
 
-test('trechoDoCorretor: com e sem o nome, sempre com o marcador que a Lia procura', () => {
-  assert.equal(trechoDoCorretor('k7m2qx', 'Mariana Mamede'), ' com Mariana Mamede (código do corretor: k7m2qx)');
-  assert.equal(trechoDoCorretor('k7m2qx', null), ' (código do corretor: k7m2qx)');
+test('trechoDoCorretor: só o código, com o marcador que a Lia procura', () => {
+  assert.equal(trechoDoCorretor('k7m2qx'), ' (código do corretor: k7m2qx)');
   assert.equal(
-    `Vim pela página do imóvel AP677 (Apartamento) e quero agendar uma visita${trechoDoCorretor('k7m2qx', 'Mariana Mamede')}.`,
-    'Vim pela página do imóvel AP677 (Apartamento) e quero agendar uma visita com Mariana Mamede (código do corretor: k7m2qx).',
+    `Vim pela página do imóvel AP677 (Apartamento) e quero agendar uma visita${trechoDoCorretor('k7m2qx')}.`,
+    'Vim pela página do imóvel AP677 (Apartamento) e quero agendar uma visita (código do corretor: k7m2qx).',
   );
   // o padrão que a Parte C pede à Lia acha o código no texto
   const lia = /código do corretor:\s*([a-z2-9]{6})/i;
   assert.equal(lia.exec(trechoDoCorretor('k7m2qx'))?.[1], 'k7m2qx');
 });
 
-test('quemApareceNoCartao: o corretor do link, depois o captador, depois o genérico', () => {
-  const mariana = { nome: 'Mariana Mamede', foto: '/corretores/mariana-mamede.jpg', especialidades: null };
+test('quemApareceNoCartao: o captador da Dashboard; sem ele, o genérico', () => {
   const gabriele = { nome: 'Gabriele Fávaro', foto: '/corretores/gabriele-favaro.jpg', especialidades: ['Casa'] };
-  assert.deepEqual(quemApareceNoCartao(mariana, gabriele), mariana, 'o link vence o captador');
-  assert.deepEqual(quemApareceNoCartao(null, gabriele), gabriele, 'sem ?c=, ou com um código que não resolve');
-  assert.deepEqual(quemApareceNoCartao(null, null), GENERICO_DO_CARTAO);
+  assert.deepEqual(quemApareceNoCartao(gabriele), gabriele, 'com ou sem ?c=: o link não troca o rosto (03/11/2026)');
+  assert.deepEqual(quemApareceNoCartao(null), GENERICO_DO_CARTAO);
   assert.deepEqual(GENERICO_DO_CARTAO, { nome: 'Especialista Lotus', foto: null, especialidades: null }, 'o genérico não tem especialidade: fica o bairro');
 });
