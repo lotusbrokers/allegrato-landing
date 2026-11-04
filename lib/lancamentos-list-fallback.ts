@@ -44,7 +44,8 @@ export const empsFallback: EmpItem[] = [
   { id: 'terrace', name: 'Terrace Jundiaí', neighborhood: 'Centro', city: 'Jundiaí', stage: 'Pronto', type: '4 dorms', priceNum: 1650000, price: 'R$ 1,65 mi', specs: 'Coberturas · 180–230 m² · 3 vagas', exclusive: false, slot: 'le-4', href: '/terrace-serra-do-japi' },
   { id: 'doppio', name: 'Doppio Jundiaí', neighborhood: 'Vila Arens', city: 'Jundiaí', stage: 'Pré-lançamento', type: '2 dorms', priceNum: 480000, price: 'R$ 480 mil', specs: '1–2 dorms · 38–62 m² · 1 vaga', exclusive: true, slot: 'le-5', href: '/doppio-jundiai' },
   { id: 'reserva', name: 'Reserva da Serra', neighborhood: 'Caxambu', city: 'Itupeva', stage: 'Em obras', type: '4 dorms', priceNum: 1890000, price: 'R$ 1,89 mi', specs: 'Casas em condomínio · 4 suítes · 280 m²', exclusive: true, slot: 'le-6', href: null },
-  { id: 'vivarte', name: 'Vivarte Grand', neighborhood: 'Eloy Chaves', city: 'Jundiaí', stage: 'Em obras', type: '3 dorms', priceNum: 850000, price: 'R$ 850 mil', specs: '3 dorms · 88–110 m² · 2 vagas', exclusive: false, slot: 'le-7', href: '/vivarte' },
+  // Vivart: tabela da Diretiva base 11/2026 e tipologias da Dashboard (04/11/2026).
+  { id: 'vivarte', name: 'Vivarte Grand', neighborhood: 'Eloy Chaves', city: 'Jundiaí', stage: 'Em obras', type: '3 dorms', priceNum: 498820, price: 'R$ 498.820', specs: '2 e 3 dorms · 65–78 m²', exclusive: false, slot: 'le-7', href: '/vivarte' },
   { id: 'forest', name: 'Forest Manduca', neighborhood: 'Vianelo', city: 'Jundiaí', stage: 'Pré-lançamento', type: '3 dorms', priceNum: 990000, price: 'R$ 990 mil', specs: '3 dorms · 95–120 m² · 2 vagas', exclusive: false, slot: 'le-8', href: '/forest-houses' },
   { id: 'gran', name: 'Gran Park Itupeva', neighborhood: 'Residencial Phytus', city: 'Itupeva', stage: 'Pronto', type: '2 dorms', priceNum: 420000, price: 'R$ 420 mil', specs: '2 dorms · 55–70 m² · 1 vaga', exclusive: false, slot: 'le-9', href: null },
 ];
