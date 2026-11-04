@@ -11,7 +11,7 @@
  * pedaços, sem regex nenhuma no navegador. Módulo puro, sem dependências, para
  * o teste importar direto.
  */
-import type { BlocoArtigo, LinkArtigo } from './blog-posts';
+import type { BlocoArtigo, EmpreendimentoDoArtigo, LinkArtigo } from './blog-posts';
 
 /** Nome que vira link automático, na primeira vez que aparece no artigo. */
 export type AlvoDeLink = { nome: string; href: string };
@@ -22,7 +22,7 @@ export type Pedaco = string | { texto: string; href: string };
 /** Bloco pronto para desenhar. Parágrafo e itens já vêm em pedaços. */
 export type BlocoPronto =
   | { paragrafo: Pedaco[] }
-  | { titulo?: string; nivel?: 2 | 3; itens?: Pedaco[][]; links?: LinkArtigo[] };
+  | { titulo?: string; nivel?: 2 | 3; itens?: Pedaco[][]; links?: LinkArtigo[]; empreendimentos?: EmpreendimentoDoArtigo[] };
 
 const LINK_EXPLICITO = /\[([^\]]+)\]\(([^)\s]+)\)/g;
 const escapar = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -69,7 +69,8 @@ export function pedacosDoTexto(texto: string, alvos: readonly AlvoDeLink[] = [],
 /**
  * O corpo inteiro em blocos prontos. Cada alvo vira link uma vez por artigo
  * (o primeiro parágrafo ou item que o cita); título de seção não ganha link.
- * Blocos de imóveis devem chegar aqui já resolvidos em `links`.
+ * Blocos de imóveis e de lançamentos chegam aqui já resolvidos pela rota, em
+ * `links` e em `empreendimentos`.
  */
 export function prepararCorpo(corpo: readonly BlocoArtigo[], alvos: readonly AlvoDeLink[] = []): BlocoPronto[] {
   const usados = new Set<string>();
@@ -81,6 +82,7 @@ export function prepararCorpo(corpo: readonly BlocoArtigo[], alvos: readonly Alv
           nivel: bloco.nivel,
           itens: bloco.itens?.map((item) => pedacosDoTexto(item, alvos, usados)),
           links: bloco.links,
+          empreendimentos: bloco.empreendimentos,
         },
   );
 }

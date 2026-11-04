@@ -33,8 +33,16 @@ export type LinkArtigo = { texto: string; href: string; detalhe?: string };
  * página. Imóvel vendido sai sozinho do artigo; sem nenhum anúncio, o bloco
  * some. A cidade evita que o "Centro" de Itupeva entre numa agenda de Jundiaí.
  * Criado para o Sextou em Jundiaí (16/10/2026): os imóveis perto dos eventos.
+ * Os imóveis viram lista de links; os lançamentos, cartões com foto (desde
+ * 04/11/2026, pedido da Lotus no artigo do Medeiros).
  */
 export type BairrosDoBloco = { cidade: string; bairros: string[] };
+
+/**
+ * Cartão de lançamento de um bloco `lancamentosNosBairros` já resolvido pela
+ * rota do artigo. Sai do banco na hora de gerar a página: não se escreve à mão.
+ */
+export type EmpreendimentoDoArtigo = { nome: string; href: string; img: string | null; detalhe: string };
 
 export type BlocoArtigo =
   | string
@@ -45,6 +53,7 @@ export type BlocoArtigo =
       links?: LinkArtigo[];
       imoveisNosBairros?: BairrosDoBloco;
       lancamentosNosBairros?: BairrosDoBloco;
+      empreendimentos?: EmpreendimentoDoArtigo[];
     };
 
 export type Post = {

@@ -8,6 +8,7 @@ import {
   resumoDoPost,
   type BairrosDoBloco,
   type BlocoArtigo,
+  type EmpreendimentoDoArtigo,
   type LinkArtigo,
   type Post,
 } from '@/lib/blog-posts';
@@ -141,10 +142,11 @@ const estaNoBloco = (sel: BairrosDoBloco, bairro: string, cidade: string) =>
   normalizar(cidade) === normalizar(sel.cidade) && posicaoNoBloco(sel, bairro) >= 0;
 
 /**
- * Troca os blocos de imóveis e lançamentos por listas de links com o que está
- * anunciado agora nos bairros pedidos, na ordem em que os bairros foram
- * escritos (o mais perto primeiro). Sem anúncio, o bloco some; banco fora do
- * ar também só some com o bloco, sem derrubar o artigo.
+ * Troca os blocos de imóveis e lançamentos pelo que está anunciado agora nos
+ * bairros pedidos, na ordem em que os bairros foram escritos (o mais perto
+ * primeiro): imóveis como lista de links, lançamentos como cartões com a foto
+ * da vitrine (desde 04/11/2026). Sem anúncio, o bloco some; banco fora do ar
+ * também só some com o bloco, sem derrubar o artigo.
  */
 async function comAnuncios(corpo: BlocoArtigo[]): Promise<BlocoArtigo[]> {
   const precisa = corpo.some((b) => typeof b !== 'string' && (b.imoveisNosBairros || b.lancamentosNosBairros));
@@ -171,16 +173,33 @@ async function comAnuncios(corpo: BlocoArtigo[]): Promise<BlocoArtigo[]> {
           .map((im) => ({ texto: `${im.type} em ${im.neighborhood}`, href: `/lotus-imovel/${im.codigo}`, detalhe: im.price })),
       );
     }
+    const empreendimentos: EmpreendimentoDoArtigo[] = [];
     const selLancamentos = bloco.lancamentosNosBairros;
     if (selLancamentos) {
-      links.push(
+      empreendimentos.push(
         ...lancamentos
           .filter((l) => l.href && estaNoBloco(selLancamentos, l.neighborhood, l.city))
           .sort((a, b) => posicaoNoBloco(selLancamentos, a.neighborhood) - posicaoNoBloco(selLancamentos, b.neighborhood))
-          .map((l) => ({ texto: l.name, href: l.href as string, detalhe: `lançamento, ${l.neighborhood}` })),
+          .map((l) => ({
+            nome: l.name,
+            href: l.href as string,
+            img: l.img,
+            // Bairro e cidade, como a vitrine. O estágio fica de fora pelo mesmo
+            // motivo de lá: o cadastro grava texto livre ("Obras", "Pronto",
+            // frase de entrega prevista) e o badge saiu dos cards.
+            detalhe: [l.neighborhood, l.city].filter(Boolean).join(' · '),
+          })),
       );
     }
-    return links.length ? [{ titulo: bloco.titulo, nivel: bloco.nivel, links }] : [];
+    if (!links.length && !empreendimentos.length) return [];
+    return [
+      {
+        titulo: bloco.titulo,
+        nivel: bloco.nivel,
+        ...(links.length ? { links } : {}),
+        ...(empreendimentos.length ? { empreendimentos } : {}),
+      },
+    ];
   });
 }
 

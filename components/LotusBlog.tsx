@@ -150,6 +150,7 @@ const WHATSAPP_DEFAULT = '5511926143393';
 
 import type { PostResumo } from '@/lib/blog-posts';
 import type { BlocoPronto, Pedaco } from '@/lib/texto-com-links';
+import { imagemOtimizada } from '@/lib/imagem-otimizada';
 
 /* Estilos de chip (strings literais do fonte). */
 const chipOn =
@@ -420,6 +421,22 @@ export default function LotusBlog({
                         </li>
                       ))}
                     </ul>
+                  )}
+                  {/* Lançamentos com a foto da vitrine. <a> comum, como LinkDoTexto: parte das landings é HTML estático de public/. */}
+                  {bloco.empreendimentos && (
+                    <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px;margin:4px 0 26px;')}>
+                      {bloco.empreendimentos.map((e) => (
+                        <a key={e.href} href={e.href} style={parseStyle('display:block;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 18px 40px -30px rgba(21,36,28,.45);text-decoration:none;')}>
+                          <div style={parseStyle('position:relative;aspect-ratio:4/3;')}>
+                            <ImageSlot src={e.img ? imagemOtimizada(e.img, [640]).src : undefined} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={e.nome} />
+                          </div>
+                          <div style={parseStyle('padding:14px 16px 16px;')}>
+                            <div style={parseStyle("font-family:'Fraunces',serif;font-size:18px;color:#15241c;line-height:1.2;")}>{e.nome}</div>
+                            {e.detalhe && <div style={parseStyle('font-size:13px;color:#3f6249;margin-top:4px;')}>{e.detalhe}</div>}
+                          </div>
+                        </a>
+                      ))}
+                    </div>
                   )}
                 </div>
               )
