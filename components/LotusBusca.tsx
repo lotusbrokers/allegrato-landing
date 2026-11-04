@@ -172,10 +172,16 @@ export default function LotusBusca({
   whatsapp = WHATSAPP_DEFAULT,
   imoveis = [],
   bairrosDoGuia = [],
+  titulo,
 }: {
   whatsapp?: string;
   /** Imóveis reais aprovados (vêm do servidor em app/lotus-busca/page.tsx). */
   imoveis?: ImovelBusca[];
+  /**
+   * H1 de um recorte da busca ("Casas à venda em Jundiaí", ver
+   * lib/recortes-busca). Sem ele, o H1 é a contagem, como em /lotus-busca.
+   */
+  titulo?: string;
   /**
    * Nomes dos guias de /lotus-bairro. A busca por texto os reconhece como
    * lugar mesmo sem imóvel cadastrado lá: "casa no Caxambu" volta vazia em vez
@@ -501,12 +507,18 @@ export default function LotusBusca({
                 Anuncie seu imóvel
               </Hoverable>
             </div>
-            <select onChange={onCity} value={vCity} style={parseStyle('border:1px solid rgba(21,36,28,.16);background:#fff;color:#15241c;font-size:13.5px;padding:9px 32px 9px 13px;border-radius:30px;cursor:pointer;')}>
-              <option value="any">Cidade</option><option value="jundiaí">Jundiaí</option><option value="itupeva">Itupeva</option><option value="vinhedo">Vinhedo</option>
-            </select>
-            <select onChange={onType} value={vType} style={parseStyle('border:1px solid rgba(21,36,28,.16);background:#fff;color:#15241c;font-size:13.5px;padding:9px 32px 9px 13px;border-radius:30px;cursor:pointer;')}>
-              <option value="any">Tipo</option><option value="Casa">Casa</option><option value="Apartamento">Apartamento</option><option value="Cobertura">Cobertura</option><option value="Terreno">Terreno</option><option value="Comercial">Comercial</option>
-            </select>
+            {/* Num recorte (titulo), cidade e tipo já são o próprio recorte: os
+                selects escolheriam fora da lista recebida e zerariam a busca. */}
+            {!titulo && (
+              <>
+                <select onChange={onCity} value={vCity} style={parseStyle('border:1px solid rgba(21,36,28,.16);background:#fff;color:#15241c;font-size:13.5px;padding:9px 32px 9px 13px;border-radius:30px;cursor:pointer;')}>
+                  <option value="any">Cidade</option><option value="jundiaí">Jundiaí</option><option value="itupeva">Itupeva</option><option value="vinhedo">Vinhedo</option>
+                </select>
+                <select onChange={onType} value={vType} style={parseStyle('border:1px solid rgba(21,36,28,.16);background:#fff;color:#15241c;font-size:13.5px;padding:9px 32px 9px 13px;border-radius:30px;cursor:pointer;')}>
+                  <option value="any">Tipo</option><option value="Casa">Casa</option><option value="Apartamento">Apartamento</option><option value="Cobertura">Cobertura</option><option value="Terreno">Terreno</option><option value="Comercial">Comercial</option>
+                </select>
+              </>
+            )}
             <select onChange={onBeds} value={vBeds} style={parseStyle('border:1px solid rgba(21,36,28,.16);background:#fff;color:#15241c;font-size:13.5px;padding:9px 32px 9px 13px;border-radius:30px;cursor:pointer;')}>
               <option value="any">Dormitórios</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option>
             </select>
@@ -542,8 +554,12 @@ export default function LotusBusca({
                   É o mesmo texto que já estava na tela, no mesmo lugar: só
                   deixou de ser <div>. margin e font-weight vêm explícitos para
                   anular o padrão do navegador para h1 e manter o visual igual. */}
-              <h1 style={parseStyle("font-family:'Fraunces',serif;font-size:22px;font-weight:400;color:#15241c;line-height:1.1;margin:0;")}>{count} {count === 1 ? 'imóvel selecionado' : 'imóveis selecionados'}</h1>
-              <div style={parseStyle('font-size:13.5px;color:#8aa593;margin-top:3px;')}>em Jundiaí, Itupeva e região · curados pelo especialista do bairro</div>
+              <h1 style={parseStyle("font-family:'Fraunces',serif;font-size:22px;font-weight:400;color:#15241c;line-height:1.1;margin:0;")}>{titulo ?? `${count} ${count === 1 ? 'imóvel selecionado' : 'imóveis selecionados'}`}</h1>
+              <div style={parseStyle('font-size:13.5px;color:#8aa593;margin-top:3px;')}>
+                {titulo
+                  ? `${count} ${count === 1 ? 'imóvel selecionado' : 'imóveis selecionados'} · curados pelo especialista do bairro`
+                  : 'em Jundiaí, Itupeva e região · curados pelo especialista do bairro'}
+              </div>
             </div>
             <div style={parseStyle('display:flex;align-items:center;gap:8px;')}>
               <span style={parseStyle('font-size:13px;color:#3f6249;')}>Ordenar:</span>

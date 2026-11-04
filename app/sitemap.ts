@@ -9,6 +9,7 @@ import { curadasSemLancamento } from '@/lib/construtoras-conteudo';
 import { POSTS, hrefDoArtigo } from '@/lib/blog-posts';
 import { publicados } from '@/lib/blog-agenda';
 import { ROTAS_FIXAS } from '@/lib/sitemap-rotas';
+import { RECORTES_DA_BUSCA } from '@/lib/recortes-busca';
 import { dataDaRota, dataDoGrupo, maisRecente } from '@/lib/datas-de-alteracao';
 
 /**
@@ -124,6 +125,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...ROTAS_FIXAS.map((f) =>
       entrada(f.rota, f.rota in dataDoIndice ? dataDoIndice[f.rota] : dataDaRota(f.rota), f.frequencia, f.prioridade),
     ),
+    // Recortes da busca (casas em Jundiaí, em Itupeva): fora do menu, mas no
+    // sitemap, que é por onde o Google os acha. Mudam com o acervo, como a busca.
+    ...RECORTES_DA_BUSCA.map((r) => entrada(`/lotus-busca/${r.slug}`, dataDoIndice['/lotus-busca'], 'daily', 0.7)),
     // Landings de empreendimento: derivadas do filesystem, igual aos cards.
     ...[...landingSlugs()].sort().map((slug) => entrada(`/${slug}`, dataDaRota(`/${slug}`), 'weekly', 0.8)),
     ...bairros.map((slug) => entrada(`/lotus-bairro/${slug}`, dataDoBairro(slug), 'monthly', 0.6)),
