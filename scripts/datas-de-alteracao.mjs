@@ -66,6 +66,7 @@ const LANDINGS_HTML = [
   'edificio-trend',
   'auten-serrah',
   'terria-by-rodrigo-faro',
+  'vinhas-da-invernada',
 ];
 
 // Componentes de moldura, presentes em dezenas de páginas: um ajuste no

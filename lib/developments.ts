@@ -56,6 +56,12 @@ export const developmentsFallback: DevelopmentCard[] = [
   // passa a vir do banco. Pré-lançamento: comercialização só depois do registro
   // da incorporação, por isso sem preço.
   { name: 'Terriá by Rodrigo Faro', location: 'Jardim Bonfiglioli · Jundiaí', stage: 'Lançamento', builder: 'TERRIÁ Incorporadora', specs: '64 m² e 88 m²', price: 'Consultar valor', exclusive: false, img: '/terria-by-rodrigo-faro/midia/28ef4b3e3a3a80e9.webp', href: '/terria-by-rodrigo-faro' },
+  // Vinhas da Invernada (landing publicada em 05/11/2026), também sem linha na
+  // Dashboard. Fazenda São Simão, com o pino do mapa da landing em Cabreúva; a
+  // tabela recebida é de pré-lançamento (agosto/2026) e a página não mostra
+  // preço. Nem a página nem a tabela dizem a construtora: fica o genérico, que
+  // não gera página em /construtoras.
+  { name: 'Vinhas da Invernada', location: 'Fazenda São Simão · Cabreúva', stage: 'Pré-lançamento', builder: 'Construtora', specs: 'Lotes de 20 a 35 mil m² com vinha privativa', price: 'Consultar valor', exclusive: false, img: '/vinhas-da-invernada/midia/6fa4e326bb914696.webp', href: '/vinhas-da-invernada' },
   { name: 'Vigóre', location: 'Colônia · Jundiaí', stage: 'Em obras', builder: 'Santa Angela', specs: '2 dorms · 53–54 m² · lazer completo', price: 'Consultar valor', exclusive: false, img: '/vigore/a18.jpg', href: '/vigore' },
   { name: 'Vistta Castanho', location: 'Castanho · Jundiaí', stage: 'Lançamento', builder: 'Construtora', specs: 'Loteamento fechado', price: 'Consultar valor', exclusive: false, img: '/vistta-castanho/a007.jpg', href: '/vistta-castanho' },
   { name: 'Doppio Jundiaí', location: 'Campos Elísios · Jundiaí', stage: 'Lançamento', builder: 'Alto padrão', specs: '156–442 m² · alto padrão', price: 'Consultar valor', exclusive: false, img: '/vivarte/a003.jpg', href: '/doppio-jundiai' },

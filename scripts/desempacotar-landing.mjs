@@ -57,6 +57,9 @@ const EXTENSAO = {
   'application/javascript': 'js',
   'text/javascript': 'js',
   'text/css': 'css',
+  // Vídeo vai como veio (o do Vinhas da Invernada, 04/11/2026, é MP4).
+  'video/mp4': 'mp4',
+  'video/webm': 'webm',
 };
 
 /** Atributos de uma tag ("<meta name="x" content="y">") em objeto. */

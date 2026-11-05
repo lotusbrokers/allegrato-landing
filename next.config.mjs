@@ -103,6 +103,7 @@ const nextConfig = {
       { source: '/edificio-trend', destination: '/edificio-trend/index.html' },
       { source: '/auten-serrah', destination: '/auten-serrah/index.html' },
       { source: '/terria-by-rodrigo-faro', destination: '/terria-by-rodrigo-faro/index.html' },
+      { source: '/vinhas-da-invernada', destination: '/vinhas-da-invernada/index.html' },
     ];
   },
 };
