@@ -1060,46 +1060,46 @@ export default function LotusHome({
       {DEPOIMENTOS.length > 0 && (
       <section id="depoimentos" style={parseStyle('content-visibility:auto;contain-intrinsic-size:auto 800px;background:#f7f2e8;padding:90px 40px 36px;')}>
         <div style={parseStyle('max-width:1280px;margin:0 auto;')}>
-          <div data-reveal="" style={parseStyle('display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px;margin-bottom:48px;')}>
+          <div data-reveal="" style={parseStyle('display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px;margin-bottom:40px;')}>
             <div style={parseStyle('max-width:620px;')}>
               <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b18a4a;margin-bottom:18px;')}>Quem viveu, conta</div>
               <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(30px,4vw,48px);line-height:1.06;letter-spacing:-.02em;margin:0;color:#15241c;")}>Grandes histórias, contadas por quem viveu.</h2>
             </div>
-            <div style={parseStyle('display:flex;align-items:center;gap:16px;background:#fff;border-radius:20px;padding:16px 24px;box-shadow:0 18px 44px -30px rgba(21,36,28,.45);')}>
-              <LogoGoogle tamanho={30} />
+            <div style={parseStyle('display:flex;align-items:center;gap:14px;background:#fff;border-radius:18px;padding:12px 20px;box-shadow:0 18px 44px -30px rgba(21,36,28,.45);')}>
+              <LogoGoogle tamanho={24} />
               <div>
-                <div style={parseStyle('display:flex;align-items:baseline;gap:8px;')}>
-                  <span style={parseStyle("font-family:'Fraunces',serif;font-weight:400;font-size:38px;line-height:1;color:#15241c;")}>{notaComVirgula(NOTA_NO_GOOGLE.nota)}</span>
-                  <span aria-hidden="true" style={parseStyle('color:#b18a4a;font-size:18px;')}>★</span>
+                <div style={parseStyle('display:flex;align-items:baseline;gap:6px;')}>
+                  <span style={parseStyle("font-family:'Fraunces',serif;font-weight:400;font-size:30px;line-height:1;color:#15241c;")}>{notaComVirgula(NOTA_NO_GOOGLE.nota)}</span>
+                  <span aria-hidden="true" style={parseStyle('color:#b18a4a;font-size:15px;')}>★</span>
                 </div>
-                <div style={parseStyle('margin-top:6px;font-size:13px;font-weight:600;color:#3f6249;')}>{NOTA_NO_GOOGLE.total} avaliações no Google</div>
+                <div style={parseStyle('margin-top:4px;font-size:12.5px;font-weight:600;color:#3f6249;')}>{NOTA_NO_GOOGLE.total} avaliações no Google</div>
               </div>
             </div>
           </div>
 
-          <div style={parseStyle('position:relative;max-width:840px;margin:0 auto;')}>
+          <div style={parseStyle('position:relative;max-width:640px;margin:0 auto;')}>
             <div style={parseStyle('display:grid;')}>
               {reviewsView.map((r, i) => (
                 <div key={i} aria-hidden={r.ativo ? undefined : true} style={parseStyle(r.style)}>
-                  <figure style={parseStyle('width:100%;margin:0;background:#fff;border-radius:24px;padding:48px clamp(28px,5vw,60px);box-shadow:0 28px 64px -36px rgba(21,36,28,.4);text-align:center;display:flex;flex-direction:column;justify-content:center;')}>
-                    <div style={parseStyle('display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:22px;')}>
-                      <span role="img" aria-label="5 de 5 estrelas" style={parseStyle('color:#b18a4a;font-size:19px;letter-spacing:4px;')}>★★★★★</span>
-                      <LogoGoogle tamanho={22} rotulo="Avaliação no Google" />
+                  <figure style={parseStyle('width:100%;margin:0;background:#fff;border-radius:20px;padding:34px clamp(24px,4vw,48px);box-shadow:0 18px 44px -30px rgba(21,36,28,.45);text-align:center;display:flex;flex-direction:column;justify-content:center;')}>
+                    <div style={parseStyle('display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:16px;')}>
+                      <span role="img" aria-label="5 de 5 estrelas" style={parseStyle('color:#b18a4a;font-size:15px;letter-spacing:3px;')}>★★★★★</span>
+                      <LogoGoogle tamanho={18} rotulo="Avaliação no Google" />
                     </div>
-                    <blockquote style={parseStyle('margin:0 0 28px;')}>
-                      <p style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(20px,2.3vw,27px);line-height:1.34;letter-spacing:-.01em;color:#15241c;margin:0;")}>“{r.texto}”</p>
+                    <blockquote style={parseStyle('margin:0 0 20px;')}>
+                      <p style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(17px,1.7vw,19px);line-height:1.5;color:#15241c;margin:0;")}>“{r.texto}”</p>
                     </blockquote>
-                    <figcaption style={parseStyle('display:flex;align-items:center;justify-content:center;gap:12px;')}>
-                      <div aria-hidden="true" style={parseStyle("width:46px;height:46px;border-radius:50%;background:#1d3a2c;display:flex;align-items:center;justify-content:center;color:#cdab6e;font-family:'Fraunces',serif;font-size:19px;flex-shrink:0;")}>{r.autor.charAt(0)}</div>
-                      <div style={parseStyle('text-align:left;font-size:15px;font-weight:600;color:#15241c;')}>{r.autor}</div>
+                    <figcaption style={parseStyle('display:flex;align-items:center;justify-content:center;gap:10px;')}>
+                      <div aria-hidden="true" style={parseStyle("width:34px;height:34px;border-radius:50%;background:#1d3a2c;display:flex;align-items:center;justify-content:center;color:#cdab6e;font-family:'Fraunces',serif;font-size:15px;flex-shrink:0;")}>{r.autor.charAt(0)}</div>
+                      <div style={parseStyle('text-align:left;font-size:14px;font-weight:600;color:#15241c;')}>{r.autor}</div>
                     </figcaption>
                   </figure>
                 </div>
               ))}
             </div>
             {/* No celular as setas descem para a linha das bolinhas (styles/base.css, data-depoimento-seta). */}
-            <Hoverable as="button" type="button" data-depoimento-seta="anterior" onClick={() => goReview(ri - 1)} aria-label="Depoimento anterior" baseStyle={parseStyle('position:absolute;top:50%;left:-8px;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;background:#fff;border:1px solid rgba(21,36,28,.12);color:#1d3a2c;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px -18px rgba(21,36,28,.5);transition:all .2s;z-index:3;')} hoverStyle={parseStyle('background:#1d3a2c;color:#f7f2e8;border-color:#1d3a2c')}>‹</Hoverable>
-            <Hoverable as="button" type="button" data-depoimento-seta="proximo" onClick={() => goReview(ri + 1)} aria-label="Próximo depoimento" baseStyle={parseStyle('position:absolute;top:50%;right:-8px;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;background:#fff;border:1px solid rgba(21,36,28,.12);color:#1d3a2c;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px -18px rgba(21,36,28,.5);transition:all .2s;z-index:3;')} hoverStyle={parseStyle('background:#1d3a2c;color:#f7f2e8;border-color:#1d3a2c')}>›</Hoverable>
+            <Hoverable as="button" type="button" data-depoimento-seta="anterior" onClick={() => goReview(ri - 1)} aria-label="Depoimento anterior" baseStyle={parseStyle('position:absolute;top:50%;left:-20px;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid rgba(21,36,28,.12);color:#1d3a2c;font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px -16px rgba(21,36,28,.45);transition:all .2s;z-index:3;')} hoverStyle={parseStyle('background:#1d3a2c;color:#f7f2e8;border-color:#1d3a2c')}>‹</Hoverable>
+            <Hoverable as="button" type="button" data-depoimento-seta="proximo" onClick={() => goReview(ri + 1)} aria-label="Próximo depoimento" baseStyle={parseStyle('position:absolute;top:50%;right:-20px;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid rgba(21,36,28,.12);color:#1d3a2c;font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px -16px rgba(21,36,28,.45);transition:all .2s;z-index:3;')} hoverStyle={parseStyle('background:#1d3a2c;color:#f7f2e8;border-color:#1d3a2c')}>›</Hoverable>
           </div>
 
           <div data-reveal="" style={parseStyle('margin-top:30px;display:flex;justify-content:center;gap:8px;')}>
