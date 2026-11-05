@@ -173,9 +173,129 @@ export function relacionados(posts: Post[], atual: Post, quantos = 3): Post[] {
 // mão, que envelheceu: títulos que não existiam mais no blog e nenhuma capa.
 export const POSTS: Post[] = [
   /* ------------------------------------------------------------------
+   * Enviado pela Lotus em 05/11/2026, com a foto do notebook. Primeiro da
+   * lista, e por isso o novo destaque da capa do blog.
+   *
+   * CONFERIDO em 05/11/2026:
+   *  - ITBI em Jundiaí: alíquota geral de 2,5%; em imóvel residencial
+   *    financiado pelo SFH ou SFI em 60 parcelas ou mais, 1,5% sobre a parte
+   *    financiada até R$ 120 mil e 2,5% sobre o restante; 2,5% nas demais
+   *    situações, inclusive parcelamento direto com o vendedor. A base é o
+   *    valor da transmissão no contrato, atualizado, e não fica abaixo do
+   *    valor venal (jundiai.sp.gov.br/financas/itbi/como-e-calculado e
+   *    /base-de-calculo);
+   *  - ITBI WEB em vigor desde 01/10/2026 (LC 650/2026); o cartório só
+   *    registra com o imposto pago, e a matrícula atualizada vai à Fazenda em
+   *    até 30 dias depois do registro (notícia da Prefeitura de 01/10/2026);
+   *  - escritura obrigatória acima de 30 salários mínimos, salvo lei em
+   *    contrário: Código Civil, art. 108;
+   *  - contrato de financiamento com força de escritura: Lei 4.380/64, art.
+   *    61, § 5º (SFH), e Lei 9.514/97, art. 38 (SFI);
+   *  - despesas de escritura e registro com o comprador, salvo cláusula em
+   *    contrário: Código Civil, art. 490;
+   *  - 50% de desconto nos emolumentos da primeira aquisição residencial
+   *    financiada pelo SFH: Lei 6.015/73, art. 290.
+   * Tudo confere.
+   *
+   * Ajustes de forma:
+   *  - "Lótus Brokers" virou "Lotus Brokers", a grafia da marca no site;
+   *  - das páginas da Prefeitura entraram "em 60 parcelas ou mais", na regra
+   *    do financiamento, o prazo de 30 dias da matrícula e o link do ITBI WEB;
+   *  - o blog não desenha negrito nem tabela: as perguntas em negrito viraram
+   *    subtítulos, a tabela do item 4 virou lista com os mesmos valores e o
+   *    título "Introdução" saiu (o texto começa direto, como nos outros);
+   *  - a meta description sugerida virou `excerpt`. O meta title sugerido não
+   *    tem onde entrar (a página usa o título do texto, com "| Blog Lotus"),
+   *    nem as palavras-chave: o blog usa categoria, e esta é "Documentação",
+   *    a mesma da nota fiscal na venda de imóveis;
+   *  - o endereço do site no fim virou link para a home.
+   *
+   * Capa: a foto enviada junto (735x413), recortada em 16:10 no centro e
+   * mantida em 656x410, sem ampliar.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'itbi-escritura-e-registro', cat: 'Documentação', date: 'Nov 2026', publicadoEm: '2026-11-05', read: '6 min', img: '/blog/itbi-escritura-e-registro.jpg', slot: 'blog-itbi-escritura-e-registro', title: 'ITBI, escritura e registro: o que pagar na compra de um imóvel?', excerpt: 'Vai comprar um imóvel? Entenda quanto custam ITBI, escritura e registro, como calcular as despesas e quanto reservar para não ter surpresas.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'Para passar um imóvel para o seu nome, além do preço entram três custos: o ITBI, imposto municipal; a escritura pública, quando exigida; e o registro na matrícula, que é o que transfere a propriedade. Em Jundiaí, a alíquota geral do ITBI é de 2,5%; em financiamento residencial pelo SFH ou SFI em 60 parcelas ou mais, a parte financiada até R$ 120 mil paga 1,5%. No financiamento, o contrato do banco costuma ter força de escritura; na compra à vista, a escritura é exigida acima de 30 salários mínimos. Escritura e registro seguem a tabela de emolumentos do estado, e a primeira aquisição residencial financiada pelo SFH tem 50% de desconto nos emolumentos.',
+    body: [
+      'Comprar um imóvel envolve muito mais do que o valor anunciado ou a entrada do financiamento. Para que a propriedade seja oficialmente transferida para o nome do comprador, existem despesas obrigatórias que precisam entrar no planejamento financeiro.',
+      'Entre os principais custos estão o ITBI (Imposto sobre Transmissão de Bens Imóveis), a escritura pública e o registro do imóvel.',
+      'Mas quanto custa cada um? É obrigatório pagar todos? E como calcular o valor total antes de fechar negócio?',
+      'Neste guia, a Lotus Brokers explica cada despesa, apresenta exemplos práticos e mostra como organizar os custos para comprar seu imóvel com mais tranquilidade, especialmente em Jundiaí e região.',
+      { titulo: '1. ITBI: o imposto pago na transferência do imóvel' },
+      'O ITBI é um imposto municipal cobrado quando acontece a transmissão de um imóvel entre pessoas vivas, como em uma compra e venda.',
+      'Na prática, é um dos principais custos que o comprador precisa considerar durante a aquisição.',
+      'O valor varia de acordo com a legislação de cada município e é calculado sobre a base de cálculo definida pela Prefeitura.',
+      { titulo: 'Qual é o valor do ITBI em Jundiaí?', nivel: 3 },
+      'Em Jundiaí, a alíquota geral é de 2,5%. Existem condições específicas para imóveis residenciais adquiridos por financiamento dentro das regras do Sistema Financeiro da Habitação (SFH) ou do Sistema Financeiro Imobiliário (SFI), em 60 parcelas ou mais.',
+      'Nesses casos, quando atendidos os requisitos legais, aplica-se:',
+      { itens: ['1,5% sobre a parcela financiada até R$ 120 mil;', '2,5% sobre o valor restante, financiado ou não.'] },
+      'Para outras situações, como compra à vista ou parcelamento direto com o vendedor, aplica-se, em regra, a alíquota de 2,5%.',
+      'A base de cálculo considera o valor da transmissão, respeitado o valor venal de mercado conforme as regras municipais.',
+      { titulo: 'Exemplo prático', nivel: 3 },
+      'Imagine a compra de um imóvel de R$ 400 mil em Jundiaí, em uma operação sujeita à alíquota geral de 2,5%.',
+      'O cálculo será: R$ 400.000 × 2,5% = R$ 10.000 de ITBI.',
+      'Esse é um exemplo ilustrativo. O valor definitivo depende da operação e da base de cálculo reconhecida pelo município.',
+      { titulo: '2. Escritura pública: o documento que formaliza a compra' },
+      'A escritura pública é o documento elaborado em Cartório de Notas que formaliza juridicamente a negociação entre comprador e vendedor.',
+      'Ela registra informações importantes, como:',
+      { itens: ['Identificação do comprador e do vendedor;', 'Descrição e localização do imóvel;', 'Valor da negociação;', 'Forma de pagamento;', 'Condições acordadas entre as partes.'] },
+      'É importante saber que a escritura pública não é necessária em todas as modalidades de aquisição.',
+      { titulo: 'E quem compra um imóvel financiado?', nivel: 3 },
+      'Em muitos financiamentos imobiliários, especialmente aqueles enquadrados no SFH ou SFI, o contrato firmado com a instituição financeira tem força de escritura pública, conforme a legislação aplicável.',
+      'Isso significa que, nesses casos, normalmente não é necessário pagar por uma escritura pública separada.',
+      'Já nas compras à vista, em regra, a escritura pública é necessária para imóveis com valor superior a 30 salários mínimos, observadas as exceções legais.',
+      'O custo da escritura varia conforme o valor do imóvel e a tabela de emolumentos vigente no estado.',
+      { titulo: '3. Registro do imóvel: o passo que coloca a propriedade no seu nome' },
+      'Entre todas as etapas, esta merece atenção especial.',
+      'O registro é realizado no Cartório de Registro de Imóveis responsável pela região onde a propriedade está localizada.',
+      'É por meio dele que a transferência da propriedade é efetivamente formalizada na matrícula do imóvel.',
+      'Isso significa que não basta assinar o contrato ou pagar a escritura: é necessário registrar o título para que a propriedade seja transferida legalmente ao comprador.',
+      'O registro também permite atualizar a matrícula, documento que reúne o histórico jurídico do imóvel, incluindo proprietários, características e eventuais restrições.',
+      'O valor cobrado depende da tabela estadual de emolumentos, do valor do negócio e da natureza do documento apresentado.',
+      { titulo: '4. Quanto reservar para comprar um imóvel?' },
+      'Agora que você conhece os três principais custos, é hora de entender como eles entram no planejamento financeiro.',
+      'Veja um exemplo considerando um imóvel de R$ 400 mil comprado à vista em Jundiaí:',
+      { itens: ['Valor do imóvel: R$ 400.000', 'ITBI (2,5%): R$ 10.000', 'Escritura pública: conforme tabela', 'Registro do imóvel: conforme tabela', 'Total da compra: R$ 410.000 + cartório'] },
+      'Os valores de escritura e registro precisam ser consultados diretamente nos cartórios, conforme a tabela vigente e as características da operação.',
+      'Como referência, além do imposto, é prudente reservar uma quantia adicional para as despesas cartorárias. O percentual exato varia conforme o imóvel e a modalidade de compra.',
+      'Dica: não comprometa todo o seu orçamento com a entrada. Planeje também os custos de documentação, possíveis despesas bancárias, mudança e eventuais ajustes no imóvel.',
+      { titulo: '5. Quem paga ITBI, escritura e registro?' },
+      'Na compra e venda tradicional, é comum que o comprador seja responsável pelo pagamento do ITBI e das despesas necessárias à formalização e ao registro da aquisição.',
+      'Entretanto, a distribuição de despesas pode ser negociada entre as partes, respeitando as obrigações legais e o que foi estabelecido no contrato.',
+      'Por isso, antes de assinar qualquer documento, confira quais custos serão de sua responsabilidade e quais estão incluídos na negociação.',
+      { titulo: '6. É possível ter desconto nos custos de cartório?' },
+      'Sim. Existem situações previstas em lei que podem proporcionar redução nos custos de registro.',
+      'Um exemplo é o desconto de 50% nos emolumentos relacionados à primeira aquisição imobiliária residencial financiada pelo Sistema Financeiro da Habitação (SFH), desde que sejam atendidos os requisitos legais.',
+      'É importante verificar o enquadramento da operação diretamente com o cartório responsável, pois o benefício não é automático para qualquer compra de imóvel.',
+      { titulo: '7. Qual é a ordem de pagamento?' },
+      'Embora cada negociação possa apresentar particularidades, o processo geralmente segue esta sequência:',
+      { itens: ['1. Negociação e assinatura do contrato de compra e venda ou financiamento.', '2. Emissão e pagamento da guia de ITBI, conforme as regras municipais.', '3. Formalização da escritura pública, quando necessária, ou utilização do contrato bancário com força de escritura.', '4. Apresentação do título ao Cartório de Registro de Imóveis.', '5. Pagamento dos emolumentos e conclusão do registro.', '6. Emissão da matrícula atualizada em nome do novo proprietário.'] },
+      'Em Jundiaí, a emissão da guia do ITBI pode ser realizada pelo sistema digital [ITBI WEB da Prefeitura](https://jundiai.sp.gov.br/noticias/2026/10/01/novo-sistema-do-itbi-amplia-servicos-digitais-e-agiliza-emissao-de-guia-em-jundiai/).',
+      'Após o registro, também é necessário encaminhar a matrícula atualizada à Prefeitura, conforme as orientações e o prazo estabelecido pelo município: hoje, até 30 dias.',
+      { titulo: '8. Perguntas frequentes sobre os custos da compra de um imóvel' },
+      { titulo: 'ITBI e escritura são a mesma coisa?', nivel: 3 },
+      'Não. O ITBI é um imposto municipal cobrado pela transmissão do imóvel. A escritura é um documento público que formaliza a negociação, quando exigida.',
+      { titulo: 'Posso comprar um imóvel sem pagar ITBI?', nivel: 3 },
+      'O ITBI é devido nas transmissões tributáveis, mas existem hipóteses legais de imunidade, não incidência e benefícios fiscais. É necessário analisar cada situação.',
+      { titulo: 'A escritura garante que o imóvel já está no meu nome?', nivel: 3 },
+      'Não. A transferência da propriedade acontece com o registro do título na matrícula do imóvel.',
+      { titulo: 'Quem compra imóvel financiado precisa pagar escritura?', nivel: 3 },
+      'Em muitos casos, não. O contrato de financiamento pode ter força de escritura pública, dispensando a lavratura de um documento separado.',
+      { titulo: 'Quanto custa toda a documentação de um imóvel?', nivel: 3 },
+      'Não existe um valor único. O total depende do preço do imóvel, do município, da modalidade de aquisição, das condições do financiamento e das tabelas de emolumentos dos cartórios.',
+      { titulo: 'Conclusão: planejar a documentação também faz parte da conquista' },
+      'Comprar um imóvel é uma decisão importante e exige planejamento em todas as etapas. Conhecer os custos de ITBI, escritura e registro ajuda a evitar surpresas, organizar o orçamento e realizar uma compra mais segura.',
+      'O segredo é considerar todas as despesas desde o início, e não apenas o valor da entrada ou das parcelas do financiamento.',
+      'Na Lotus Brokers, acreditamos que uma boa compra começa com informação e orientação.',
+      { titulo: 'Está pensando em comprar um imóvel em Jundiaí ou região?', nivel: 3 },
+      'Conte com a Lotus Brokers para encontrar oportunidades alinhadas ao seu perfil e entender melhor cada etapa da conquista do seu novo imóvel.',
+      '[Acesse nosso site e encontre seu próximo endereço](/).',
+    ],
+  },
+  /* ------------------------------------------------------------------
    * Enviado pela Lotus em 04/11/2026, com a foto aérea do bairro e o pedido de
-   * listar embaixo todos os lançamentos do Medeiros. Primeiro da lista, e por
-   * isso o novo destaque da capa do blog.
+   * listar embaixo todos os lançamentos do Medeiros. Foi o destaque da capa do
+   * blog até 05/11/2026.
    *
    * CONFERIDO em 04/11/2026:
    *  - região oeste, perto da Serra do Japi, Mini Shopping Sarapiranga e as
