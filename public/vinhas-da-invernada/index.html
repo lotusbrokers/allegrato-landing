@@ -264,8 +264,8 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 /* header */
 .hd{position:fixed;inset:0 0 auto;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px var(--pad);transition:background .4s,padding .4s,box-shadow .4s}
 .hd.on{background:rgba(14,27,58,.94);backdrop-filter:blur(12px);padding-block:8px;box-shadow:0 1px 0 var(--lineD)}
-.hd .brand img{height:62px;width:auto;transition:height .4s}
-.hd.on .brand img{height:48px}
+.hd .brand img{height:46px;width:auto;transition:height .4s}
+.hd.on .brand img{height:38px}
 .nav{display:flex;align-items:center;gap:28px}
 .nav-l{display:flex;gap:24px}
 .nav-l a{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--onD);white-space:nowrap}
@@ -458,7 +458,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 }
 @media (max-width:640px){
   body{font-size:16px}
-  .hd .brand img{height:48px}.hd.on .brand img{height:40px}
+  .hd .brand img{height:38px}.hd.on .brand img{height:32px}
   .hd .btn{padding:10px 14px;font-size:11px;letter-spacing:.1em;min-height:44px}
   .hd .btn span{display:none}
   .snd{top:auto;bottom:18px;left:var(--pad);right:auto}
@@ -520,6 +520,12 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 @media (max-width:640px){.fic-wrap .fic>div{grid-template-columns:1fr}.fic-wrap .fic .l{grid-row:auto;margin-bottom:6px}}
 .fic-wrap .fic>div>div{background:transparent;padding:0;border:0}
 .fic-wrap .fic .d{padding-top:0;margin-top:6px}
+/* Logo da Lotus no cabeçalho (06/11/2026, no lugar do logo do empreendimento):
+   é horizontal e não pode encolher, senão o flex o espreme. Com ele, os links
+   de seção e os atalhos da Lotus, o cabeçalho só cabe inteiro a partir de
+   1361px; abaixo disso os links de seção saem (o botão e os atalhos ficam). */
+.hd .brand{flex-shrink:0}
+@media (max-width:1360px){.nav-l{display:none}}
 /* Atalhos da Lotus ("Início" e "Voltar", do script padrão no fim da página).
    Abaixo de 1100px o script os põe no fim do cabeçalho, e aqui um caía na linha
    do logo e o outro sozinho embaixo. Ganham uma linha própria, um em cada ponta;
@@ -536,7 +542,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 
 
 <header class="hd" id="hd">
-  <a href="#topo" class="brand" aria-label="Vinhas da Invernada"><img src="/vinhas-da-invernada/midia/19af6d00f4eb4462.webp" alt="Vinhas da Invernada — Fazenda São Simão 1860"></a>
+  <a href="#topo" class="brand" aria-label="Lotus Brokers"><img src="/vinhas-da-invernada/midia/3df101c0cd4c384b.webp" alt="Lotus Brokers" width="400" height="151"></a>
   <nav class="nav" aria-label="Navegação">
     <div class="nav-l">
       <a href="#fazenda">A fazenda</a>
