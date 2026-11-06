@@ -1,24 +1,16 @@
 import type { Metadata } from 'next';
-import { Fraunces } from 'next/font/google';
 import './recrutamento.css';
 import LotusRecrutamento from '@/components/LotusRecrutamento';
 import { PERGUNTAS_RECRUTAMENTO } from '@/lib/recrutamento';
 import { IMAGEM_COMPARTILHAMENTO } from '@/lib/site';
-
 // Página nova em 19/10/2026 (Seja-Corretor-Lotus.html): título e descrição são
 // os do arquivo.
 //
 // A Fraunces do portal (styles/fonts.css) vai só até o peso 500, e os títulos
 // desta página são 600, com eixo óptico, como o arquivo pedia ao Google Fonts.
-// next/font auto-hospeda a fonte (sem request a terceiro); a variável alimenta
-// --serif em recrutamento.css.
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  style: ['normal', 'italic'],
-  axes: ['opsz'],
-  variable: '--font-fraunces',
-  display: 'swap',
-});
+// A fonte fica no projeto (app/_fontes), sem depender do Google no build; a
+// variável alimenta --serif em recrutamento.css.
+import { fraunces } from '@/app/_fontes/fraunces';
 
 const URL_DA_PAGINA = 'https://www.lotusbrokers.com.br/lotus-recrutamento';
 

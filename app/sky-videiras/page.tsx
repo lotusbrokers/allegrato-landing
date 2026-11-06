@@ -1,25 +1,12 @@
 import type { Metadata } from 'next';
-import { Montserrat, Playfair_Display } from 'next/font/google';
 import './sky-videiras.css';
 import SkyVideiras from '@/components/SkyVideiras';
 import AtalhosLanding from '@/components/AtalhosLanding';
 import LightboxPlantas from '@/components/LightboxPlantas';
 import RodapeLotus from '@/components/RodapeLotus';
-
-// Mesmo par de fontes do fonte estático, auto-hospedado pelo next/font.
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  weight: ['500', '600', '700'],
-  style: ['normal', 'italic'],
-  variable: '--font-playfair',
-  display: 'swap',
-});
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-montserrat',
-  display: 'swap',
-});
+// Mesmo par de fontes do fonte estático, guardado no projeto (app/_fontes):
+// o build não depende do Google.
+import { montserrat, playfair } from '@/app/_fontes/playfair-montserrat';
 
 // Metadata portada do <head> do fonte estático.
 export const metadata: Metadata = {

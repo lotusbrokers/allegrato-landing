@@ -1,27 +1,12 @@
 import type { Metadata } from 'next';
-import { Montserrat, Playfair_Display } from 'next/font/google';
 import './avalon.css';
 import Avalon from '@/components/Avalon';
 import AtalhosLanding from '@/components/AtalhosLanding';
 import LightboxPlantas from '@/components/LightboxPlantas';
 import RodapeLotus from '@/components/RodapeLotus';
-
-// O fonte carregava estas fontes pelo CDN do Google. next/font auto-hospeda:
-// sem request a terceiro e sem flash de fonte. As variáveis alimentam
-// --serif/--sans do avalon.css.
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  weight: ['500', '600', '700'],
-  style: ['normal', 'italic'],
-  variable: '--font-playfair',
-  display: 'swap',
-});
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-montserrat',
-  display: 'swap',
-});
+// Playfair Display e Montserrat ficam no projeto (app/_fontes): o build não
+// depende do Google. As variáveis alimentam --serif/--sans do avalon.css.
+import { montserrat, playfair } from '@/app/_fontes/playfair-montserrat';
 
 // Metadata portada do <head> do fonte estático.
 export const metadata: Metadata = {
