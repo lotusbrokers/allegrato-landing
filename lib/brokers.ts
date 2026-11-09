@@ -67,6 +67,9 @@ const OCULTOS = new Set(['reginaldo barbosa faleiros', 'samir said', 'alex xavie
 //
 // Restaurado o acesso, o banco volta a mandar sozinho (quem já existe lá é
 // descartado daqui pelo nome) e esta lista deve ser esvaziada.
+//
+// Marcos Lafratta saiu da lista em 09/11/2026, a pedido da Lotus: ele já não
+// estava em portal_brokers, e era esta cópia que o mantinha em /lotus-corretores.
 const EXTRAS: Broker[] = [
   { id: 'alexandra-niero', name: 'Alexandra Niero', photoUrl: null, creci: '272.515-F', imoveisAtivos: 0, especialidades: null },
   { id: 'fabio-goncalves', name: 'Fábio Gonçalves', photoUrl: null, creci: '319294-F', imoveisAtivos: 0, especialidades: null },
@@ -76,7 +79,6 @@ const EXTRAS: Broker[] = [
   { id: 'gisele-alves', name: 'Gisele Alves', photoUrl: null, creci: '328459', imoveisAtivos: 0, especialidades: null },
   { id: 'humberto-martinez', name: 'Humberto Martinez', photoUrl: null, creci: '302852', imoveisAtivos: 0, especialidades: null },
   { id: 'lara-matos', name: 'Lara Matos', photoUrl: null, creci: '382.076 - F', imoveisAtivos: 0, especialidades: null },
-  { id: 'marcos-lafratta', name: 'Marcos Lafratta', photoUrl: null, creci: '335323-F', imoveisAtivos: 0, especialidades: null },
   { id: 'mariana-mamede', name: 'Mariana Mamede', photoUrl: null, creci: '251592 F', imoveisAtivos: 0, especialidades: null },
 ];
 
@@ -117,9 +119,11 @@ export async function getBrokers(): Promise<Broker[]> {
 
 
   // Se o corretor já existe no banco, o banco vence e o EXTRA é descartado —
-  // evita duplicata no dia em que o cadastro real for feito.
+  // evita duplicata no dia em que o cadastro real for feito. Os OCULTOS saem
+  // também daqui: como `doBanco` já vem sem eles, um oculto que estivesse nos
+  // EXTRAS voltaria por esta lista.
   const jaNoBanco = new Set(doBanco.map((b) => chaveNome(b.name)));
-  const extras = EXTRAS.filter((e) => !jaNoBanco.has(chaveNome(e.name)));
+  const extras = semOcultos(EXTRAS).filter((e) => !jaNoBanco.has(chaveNome(e.name)));
 
   // A ordenação por nome vinha do `.order('name')`; refaz porque os extras
   // entrariam sempre no fim.

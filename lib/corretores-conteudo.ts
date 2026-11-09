@@ -202,6 +202,12 @@ const CONTEUDO_REAL: Record<string, { bio?: BlocoBio[]; foto?: string }> = {
       'Trazendo experiência à estrutura e ao trabalho da equipe para proporcionar um atendimento personalizado a proprietários e compradores, conduzindo cada negociação com ética, profissionalismo, transparência e dedicação.',
     ],
   },
+  // Foto da Dashboard (Gestão de Equipe, bucket membros-fotos), pedido da Lotus
+  // em 09/11/2026: a view portal_brokers não traz as fotos da equipe, e o card
+  // dele saía só com as iniciais. Recortada em 4:5 a partir do topo, como as demais.
+  'celso franciscon': {
+    foto: '/corretores/celso-franciscon.webp',
+  },
 };
 
 /**

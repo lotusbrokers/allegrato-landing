@@ -132,6 +132,14 @@ test('getBrokers: pede especialidades e as entrega como vieram; os EXTRAS ficam 
   assert.equal(porNome['Mariana Mamede'], null, 'quem só está nos EXTRAS não tem especialidade');
 });
 
+test('getBrokers: Marcos Lafratta saiu do site (09/11/2026), com o banco respondendo ou não', async (t) => {
+  t.mock.method(console, 'error', () => {});
+  cenario({ portal_brokers: { status: 200, corpo: [{ id: 'id-da-lara', name: 'Lara Matos', photo_url: null, creci: '382.076 - F', imoveis_ativos: 6, especialidades: null }] } });
+  assert.ok(!(await brokers.getBrokers()).some((b) => /lafratta/i.test(b.name)), 'com o banco no ar');
+  cenario({ portal_brokers: { status: 401, corpo: { code: '42501', message: 'permission denied for view portal_brokers' } } });
+  assert.ok(!(await brokers.getBrokers()).some((b) => /lafratta/i.test(b.name)), 'com o banco fora');
+});
+
 test('getBrokers: a falha da leitura cai nos EXTRAS, todos sem especialidade', async (t) => {
   t.mock.method(console, 'error', () => {});
   cenario({

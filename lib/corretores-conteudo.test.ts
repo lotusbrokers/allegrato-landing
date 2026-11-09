@@ -16,7 +16,7 @@ test('o nome do cadastro acha a foto e o texto, com espaço duplo e maiúsculas'
 // Foto apontando para arquivo que não existe não quebra a tela (cai nas
 // iniciais), mas some sem ninguém perceber — mesma regra das capas do blog.
 test('toda foto declarada existe em public/', () => {
-  const nomes = ['mariana mamede', 'gabriele fávaro', 'andre marcondes', 'alex xavier da silva', 'fernanda souza', 'flavia ceolin', 'fábio gonçalves', 'reginaldo barbosa faleiros', 'humberto martinez', 'lara matos', 'marcos lafratta', 'gisele alves', 'alexandra niero', 'samir augusto', 'danilo gardim'];
+  const nomes = ['mariana mamede', 'gabriele fávaro', 'andre marcondes', 'alex xavier da silva', 'fernanda souza', 'flavia ceolin', 'fábio gonçalves', 'reginaldo barbosa faleiros', 'humberto martinez', 'lara matos', 'marcos lafratta', 'gisele alves', 'alexandra niero', 'samir augusto', 'danilo gardim', 'celso franciscon'];
   for (const nome of nomes) {
     const foto = conteudoRealDe(nome)?.foto;
     if (!foto) continue;
