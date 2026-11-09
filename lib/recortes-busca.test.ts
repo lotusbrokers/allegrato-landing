@@ -1,7 +1,7 @@
 // Recortes da busca (lib/recortes-busca.ts): quem entra em "casas em Jundiaí".
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { RECORTES_DA_BUSCA, imoveisDoRecorte, recorteDaBusca } from './recortes-busca.ts';
+import { RECORTES_DA_BUSCA, imoveisDoRecorte, recorteDaBusca, recorteDaCidade } from './recortes-busca.ts';
 
 const imovel = (codigo: string, type: string, city: string, fin: 'comprar' | 'alugar' = 'comprar') => ({ codigo, type, city, fin });
 
@@ -27,6 +27,15 @@ test('casas em Itupeva não pega as de Jundiaí', () => {
     imoveisDoRecorte([imovel('CA1', 'Casa', 'Jundiaí'), imovel('CA2', 'Casa', 'Itupeva')], itupeva).map((i) => i.codigo),
     ['CA2'],
   );
+});
+
+test('o guia de bairro acha o recorte da própria cidade, com ou sem acento', () => {
+  assert.equal(recorteDaCidade('Jundiaí')?.slug, 'casas-em-jundiai');
+  assert.equal(recorteDaCidade('JUNDIAI')?.slug, 'casas-em-jundiai');
+  assert.equal(recorteDaCidade('Itupeva')?.slug, 'casas-em-itupeva');
+  assert.equal(recorteDaCidade('Campinas'), undefined);
+  assert.equal(recorteDaCidade(''), undefined);
+  assert.equal(recorteDaCidade(null), undefined);
 });
 
 test('slug desconhecido não é recorte, e os slugs não se repetem', () => {

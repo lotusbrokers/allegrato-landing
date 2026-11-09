@@ -8,6 +8,7 @@ import { getLancamentosList, isListItemApresentavel, type LancamentoListItem } f
 import { agruparPorConstrutora, comCuradasSemLancamento, construtoraPorSlug } from '@/lib/construtoras-paginas';
 import { conteudoDaConstrutora, curadasSemLancamento, logoClaroDaConstrutora } from '@/lib/construtoras-conteudo';
 import { IMAGEM_COMPARTILHAMENTO } from '@/lib/site';
+import { girar } from '@/lib/girar';
 
 export const revalidate = 3600;
 
@@ -159,8 +160,17 @@ function perguntasDaConstrutora(nome: string, lancamentos: LancamentoListItem[])
 
 export default async function ConstrutoraPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const c = construtoraPorSlug(await todas(), slug);
+  const lista = await todas();
+  const c = construtoraPorSlug(lista, slug);
   if (!c) notFound();
+
+  // "Outras construtoras": as 4 que vêm depois desta na lista, dando a volta
+  // (lib/girar). Até 06/11/2026 as páginas de construtora só recebiam link do
+  // índice /construtoras e ficavam em "Detectada, mas não indexada".
+  const aqui = lista.findIndex((x) => x.slug === c.slug);
+  const outras = girar(lista, aqui + 1)
+    .filter((x) => x.slug !== c.slug)
+    .slice(0, 4);
 
   const cidades = [...new Set(c.lancamentos.map((l) => l.city).filter(Boolean))];
   const sobre = conteudoDaConstrutora(c.slug);
@@ -469,6 +479,39 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
             </div>
           </div>
         </section>
+
+        {/* ---------------- Outras construtoras ---------------- */}
+        {outras.length > 0 && (
+          <section style={{ background: '#f7f2e8', padding: '64px 32px 80px' }}>
+            <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+              <h2 style={{ fontFamily: "'Fraunces',serif", fontWeight: 300, fontSize: 'clamp(22px,2.6vw,30px)', color: '#15241c', margin: '0 0 22px' }}>
+                Outras construtoras
+              </h2>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(220px,1fr))', columnGap: 40 }}>
+                {outras.map((o) => (
+                  <Link
+                    key={o.slug}
+                    href={`/construtoras/${o.slug}`}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      gap: 12,
+                      padding: '16px 0',
+                      borderBottom: '1px solid rgba(21,36,28,.1)',
+                      color: '#15241c',
+                      fontSize: 16,
+                      fontWeight: 500,
+                    }}
+                  >
+                    <span>{o.nome}</span>
+                    <span style={{ fontSize: 13, color: '#8aa593' }}>→</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
       </main>
 
       <RodapeLotus />

@@ -14,6 +14,7 @@ import { getLancamentosList, isListItemApresentavel, type LancamentoListItem } f
 import { descricaoComNome } from '@/lib/descricao-com-nome';
 import { resumoDescricao } from '@/lib/resumo-imovel';
 import { guiaDoBairro } from '@/lib/bairros';
+import { girar } from '@/lib/girar';
 
 // Rota dinâmica /lotus-condominio/[slug] — lê cada condomínio do Supabase.
 //
@@ -243,10 +244,18 @@ export default async function LotusCondominioPage({ params }: Params) {
   // Semelhantes DE PERTO: mesmo bairro na frente, depois mesma cidade. Sem isso
   // a lista vinha na ordem do banco e um condomínio de Itupeva podia abrir a
   // seção na página de um de Jundiaí.
-  const relacionados = todosRelacionados
+  //
+  // Dentro de cada faixa, em roda pela ordem alfabética a partir deste
+  // condomínio (lib/girar, 06/11/2026). Desempatando sempre pelo começo do
+  // alfabeto, os mesmos quatro levavam o link de todas as páginas, e o resto
+  // só tinha o do índice. O sort é estável: a roda vale dentro de cada peso.
+  const porNome = todosRelacionados
     .filter(isCondominioApresentavel)
+    .sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
+  const depoisDeste = porNome.findIndex((r) => r.nome.localeCompare(cond.nome, 'pt-BR') > 0);
+  const relacionados = girar(porNome, depoisDeste)
     .map((r) => ({ r, peso: proximidade(`${r.bairro ?? ''} ${r.cidade ?? ''}`, cond.bairro, cond.cidade) }))
-    .sort((a, b) => b.peso - a.peso || a.r.nome.localeCompare(b.r.nome, 'pt-BR'))
+    .sort((a, b) => b.peso - a.peso)
     .map((x) => x.r)
     .slice(0, 4);
 

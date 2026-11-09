@@ -3,8 +3,10 @@
  * endereço próprio (/lotus-busca/<slug>), com título, H1 e descrição próprios.
  *
  * Pedido da Lotus em 04/11/2026: "casas em Jundiaí" e "casas em Itupeva", fora
- * do menu. Ficam no sitemap, para o Google achá-las, mas nenhum menu nem rodapé
- * as linka. Recorte novo entra nesta lista; a rota e o sitemap leem daqui.
+ * do menu. Nenhum menu nem rodapé as linka; ficam no sitemap e, desde
+ * 06/11/2026, nos guias de bairro da mesma cidade (ver recorteDaCidade): só com
+ * o sitemap, o Google não tinha caminho até elas a partir da home. Recorte novo
+ * entra nesta lista; a rota, o sitemap e os guias leem daqui.
  *
  * O filtro é feito no servidor, antes de o componente receber a lista: o HTML
  * já sai só com as casas, e o visitante refina dali (quartos, faixa de preço,
@@ -52,6 +54,13 @@ export function recorteDaBusca(slug: string): RecorteDaBusca | undefined {
 }
 
 const normalizar = (s: string) => s.normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+
+/** O recorte da cidade de um guia de bairro, comparando sem acento nem caixa; undefined se a cidade não tem. */
+export function recorteDaCidade(cidade: string | null | undefined): RecorteDaBusca | undefined {
+  if (!cidade?.trim()) return undefined;
+  const alvo = normalizar(cidade);
+  return RECORTES_DA_BUSCA.find((r) => normalizar(r.cidade) === alvo);
+}
 
 /** Os imóveis à venda do recorte: tipo na lista e a mesma cidade, sem acento nem caixa. */
 export function imoveisDoRecorte<T extends Pick<ImovelBusca, 'fin' | 'type' | 'city'>>(

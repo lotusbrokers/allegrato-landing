@@ -4,7 +4,10 @@ import LotusBairro from '@/components/LotusBairro';
 import { getBairro, bairroSlugs, bairrosVizinhos, guiaDoBairro, type Bairro } from '@/lib/bairros';
 import { nomesDoBairro } from '@/lib/bairros-taxonomia';
 import { getImoveisPorBairro } from '@/lib/imoveis';
-import { getLancamentosList } from '@/lib/lancamentos';
+import { getLancamentosList, isListItemApresentavel } from '@/lib/lancamentos';
+import { agruparPorConstrutora } from '@/lib/construtoras-paginas';
+import { getCondominiosCards, isCondominioApresentavel, type CondominioCard } from '@/lib/condominios';
+import { recorteDaCidade } from '@/lib/recortes-busca';
 import { POSTS, hrefDoArtigo } from '@/lib/blog-posts';
 import { publicados } from '@/lib/blog-agenda';
 import { IMAGEM_COMPARTILHAMENTO } from '@/lib/site';
@@ -94,15 +97,45 @@ function buildJsonLd(bairro: Bairro, slug: string) {
  * para os lançamentos do bairro, e as landings, que são as páginas que vendem,
  * não recebiam link dos guias. Banco fora do ar não derruba o guia: a seção
  * só não aparece.
+ *
+ * Desde 06/11/2026 a construtora de cada um aponta para a página dela em
+ * /construtoras, que até então só recebia link do índice e ficava em
+ * "Detectada, mas não indexada". Os grupos são os mesmos do índice e do
+ * sitemap (agruparPorConstrutora), então o link só sai quando a página existe.
  */
 async function lancamentosDoBairro(slug: string) {
   const lista = await getLancamentosList().catch((e) => {
     console.error('[bairro] lançamentos indisponíveis:', e);
     return [];
   });
+  const paginaDaConstrutora = new Map<(typeof lista)[number], { nome: string; href: string }>();
+  for (const c of agruparPorConstrutora(lista.filter(isListItemApresentavel))) {
+    for (const l of c.lancamentos) paginaDaConstrutora.set(l, { nome: c.nome, href: `/construtoras/${c.slug}` });
+  }
   return lista
     .filter((l) => l.href && guiaDoBairro(l.neighborhood, l.city)?.slug === slug)
-    .map((l) => ({ nome: l.name, href: l.href as string, construtora: l.builder }));
+    .map((l) => {
+      const pagina = paginaDaConstrutora.get(l);
+      return { nome: l.name, href: l.href as string, construtora: pagina?.nome ?? l.builder, construtoraHref: pagina?.href ?? null };
+    });
+}
+
+/**
+ * Condomínios do bairro com página própria: os mesmos do índice
+ * /lotus-condominio e do sitemap (isCondominioApresentavel). Até 06/11/2026
+ * essas páginas só recebiam link do índice e ficavam em "Detectada, mas não
+ * indexada"; o guia do bairro é o lugar natural para elas. Banco fora do ar
+ * não derruba o guia: a seção só não aparece.
+ */
+async function condominiosDoBairro(slug: string) {
+  const lista = await getCondominiosCards().catch((e) => {
+    console.error('[bairro] condomínios indisponíveis:', e);
+    return [] as CondominioCard[];
+  });
+  return lista
+    .filter((c) => isCondominioApresentavel(c) && guiaDoBairro(c.bairro, c.cidade)?.slug === slug)
+    .map((c) => ({ nome: c.nome, href: `/lotus-condominio/${c.slug}` }))
+    .sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
 }
 
 const normalizar = (s: string) => s.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
@@ -137,6 +170,9 @@ export default async function LotusBairroSlugPage({ params }: Params) {
     slug: v.slug,
   }));
   const jsonLd = buildJsonLd(bairro, slug);
+  const [lancamentos, condominios] = await Promise.all([lancamentosDoBairro(slug), condominiosDoBairro(slug)]);
+  // Recorte "Casas à venda" da cidade do guia (lib/recortes-busca), se houver.
+  const recorte = recorteDaCidade(bairro.cidade);
 
   return (
     <>
@@ -151,7 +187,9 @@ export default async function LotusBairroSlugPage({ params }: Params) {
         bairro={bairro}
         imoveis={imoveis}
         vizinhos={vizinhos}
-        lancamentos={await lancamentosDoBairro(slug)}
+        lancamentos={lancamentos}
+        condominios={condominios}
+        casasNaCidade={recorte ? { href: `/lotus-busca/${recorte.slug}`, titulo: recorte.titulo } : undefined}
         leituras={leiturasDoBairro(bairro)}
       />
     </>

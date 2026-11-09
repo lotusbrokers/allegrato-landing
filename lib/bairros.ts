@@ -14,6 +14,7 @@
  * os bairros dela aqui.
  */
 import { bairroDoGuia } from './bairros-taxonomia';
+import { girar } from './girar';
 
 export type BairroFaq = { q: string; a: string };
 export type BairroGuideItem = { num: string; title: string; text: string };
@@ -916,11 +917,21 @@ export function listBairros(): Bairro[] {
   return BAIRROS;
 }
 
-/** Vizinhos de um bairro: os demais da mesma cidade (até 4). */
+/**
+ * Vizinhos de um bairro: até 4 guias publicados da mesma cidade, os que vêm
+ * depois dele na lista, dando a volta (lib/girar). Até 06/11/2026 eram sempre
+ * os 4 primeiros da cidade: Gramadão, Jardim Tannus e Aeroporto, por exemplo,
+ * nunca recebiam link de outro guia, e um guia `publicado: false` (noindex)
+ * podia levar o link no lugar de um publicado.
+ */
 export function bairrosVizinhos(slug: string): Bairro[] {
   const atual = getBairro(slug);
   if (!atual) return [];
-  return BAIRROS.filter((b) => b.slug !== slug && b.cidade === atual.cidade).slice(0, 4);
+  const daCidade = BAIRROS.filter((b) => b.cidade === atual.cidade && (b.publicado || b.slug === slug));
+  const aqui = daCidade.findIndex((b) => b.slug === slug);
+  return girar(daCidade, aqui + 1)
+    .filter((b) => b.slug !== slug)
+    .slice(0, 4);
 }
 
 const semAcento = (s: string) => s.normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();

@@ -200,6 +200,8 @@ export default function LotusBairro({
   imoveis = [],
   vizinhos = [],
   lancamentos = [],
+  condominios = [],
+  casasNaCidade,
   leituras = [],
 }: {
   whatsapp?: string;
@@ -209,8 +211,15 @@ export default function LotusBairro({
   imoveis?: ImovelBusca[];
   /** Bairros vizinhos (mesma cidade) para o rodapé de navegação. */
   vizinhos?: { name: string; note: string; slug: string }[];
-  /** Lançamentos do bairro com página própria (a rota filtra pelo cadastro). Vazio esconde a seção. */
-  lancamentos?: { nome: string; href: string; construtora: string }[];
+  /**
+   * Lançamentos do bairro com página própria (a rota filtra pelo cadastro). Vazio esconde a seção.
+   * `construtoraHref`: página da construtora em /construtoras, quando existe.
+   */
+  lancamentos?: { nome: string; href: string; construtora: string; construtoraHref?: string | null }[];
+  /** Condomínios do bairro com página própria (a rota filtra). Vazio esconde a seção. */
+  condominios?: { nome: string; href: string }[];
+  /** Recorte "Casas à venda" da cidade do bairro (lib/recortes-busca), quando existe. */
+  casasNaCidade?: { href: string; titulo: string };
   /** Artigos do blog para "Leituras sobre a região" (a rota escolhe; até 3). */
   leituras?: { href: string; img: string; cat: string; title: string; slot: string }[];
 }) {
@@ -426,7 +435,12 @@ export default function LotusBairro({
         <div style={parseStyle('max-width:1200px;margin:0 auto;')}>
           <div style={parseStyle('display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:36px;')}>
             <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(26px,3vw,40px);color:#15241c;margin:0;")}>Imóveis em {nomeBairro}</h2>
-            <Link href="/lotus-busca" style={parseStyle('display:inline-flex;align-items:center;gap:8px;color:#1d3a2c;font-weight:600;font-size:15px;border-bottom:1.5px solid #b18a4a;padding-bottom:3px;')}>Ver todos na busca <span>→</span></Link>
+            <div style={parseStyle('display:flex;flex-wrap:wrap;gap:12px 28px;')}>
+              {casasNaCidade && (
+                <Link href={casasNaCidade.href} style={parseStyle('display:inline-flex;align-items:center;gap:8px;color:#1d3a2c;font-weight:600;font-size:15px;border-bottom:1.5px solid #b18a4a;padding-bottom:3px;')}>{casasNaCidade.titulo} <span>→</span></Link>
+              )}
+              <Link href="/lotus-busca" style={parseStyle('display:inline-flex;align-items:center;gap:8px;color:#1d3a2c;font-weight:600;font-size:15px;border-bottom:1.5px solid #b18a4a;padding-bottom:3px;')}>Ver todos na busca <span>→</span></Link>
+            </div>
           </div>
           {imoveis.length > 0 ? (
             <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;')}>
@@ -467,9 +481,31 @@ export default function LotusBairro({
             <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(22px,2.6vw,30px);color:#15241c;margin:0 0 22px;")}>Lançamentos em {nomeBairro}</h2>
             <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));column-gap:48px;')}>
               {lancamentos.map((l) => (
-                <Hoverable key={l.href} as="a" href={l.href} target="_top" baseStyle={parseStyle('display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid rgba(21,36,28,.1);transition:color .2s;')} hoverStyle={parseStyle('color:#b18a4a')}>
-                  <span style={parseStyle('font-size:16px;font-weight:500;')}>{l.nome}</span>
-                  <span style={parseStyle('font-size:13px;color:#8aa593;')}>{l.construtora ? `${l.construtora} →` : '→'}</span>
+                // Dois links na linha: o empreendimento e, quando tem página, a construtora.
+                <div key={l.href} style={parseStyle('display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid rgba(21,36,28,.1);')}>
+                  <Hoverable as="a" href={l.href} target="_top" baseStyle={parseStyle('font-size:16px;font-weight:500;transition:color .2s;')} hoverStyle={parseStyle('color:#b18a4a')}>{l.nome} →</Hoverable>
+                  {l.construtora && (l.construtoraHref ? (
+                    <Hoverable as="a" href={l.construtoraHref} target="_top" baseStyle={parseStyle('font-size:13px;color:#8aa593;transition:color .2s;')} hoverStyle={parseStyle('color:#b18a4a')}>{l.construtora}</Hoverable>
+                  ) : (
+                    <span style={parseStyle('font-size:13px;color:#8aa593;')}>{l.construtora}</span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* CONDOMÍNIOS NO BAIRRO: as páginas de condomínio recebem link do guia (ver condominiosDoBairro na rota). */}
+      {condominios.length > 0 && (
+        <section style={parseStyle('background:#f7f2e8;padding:0 32px 90px;')}>
+          <div style={parseStyle('max-width:1200px;margin:0 auto;')}>
+            <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(22px,2.6vw,30px);color:#15241c;margin:0 0 22px;")}>Condomínios em {nomeBairro}</h2>
+            <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));column-gap:48px;')}>
+              {condominios.map((c) => (
+                <Hoverable key={c.href} as="a" href={c.href} target="_top" baseStyle={parseStyle('display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid rgba(21,36,28,.1);transition:color .2s;')} hoverStyle={parseStyle('color:#b18a4a')}>
+                  <span style={parseStyle('font-size:16px;font-weight:500;')}>{c.nome}</span>
+                  <span style={parseStyle('font-size:13px;color:#8aa593;')}>→</span>
                 </Hoverable>
               ))}
             </div>
