@@ -43,7 +43,8 @@ export const DEPOIMENTOS: readonly Depoimento[] = [
  * servidor. Ficou para depois porque exige uma chave da Places API com
  * faturamento ativo no Google Cloud, e a chave atual do site é só do Drive.
  */
-export const NOTA_NO_GOOGLE = { nota: 5, total: 13, conferidaEm: '2026-10-30' } as const;
+// 15 avaliações: número do perfil informado pela Lotus no Radar C9 (05–10/11/2026).
+export const NOTA_NO_GOOGLE = { nota: 5, total: 15, conferidaEm: '2026-11-10' } as const;
 
 /** "5,0": uma casa decimal e vírgula, como o Google mostra em português. */
 export function notaComVirgula(nota: number): string {

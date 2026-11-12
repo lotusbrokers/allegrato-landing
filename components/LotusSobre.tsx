@@ -216,7 +216,8 @@ const WHATSAPP_DEFAULT = '5511926143393';
 
 /** Endereço do escritório — fonte única do mapa, do texto e do "Como chegar". */
 const ENDERECO_ESCRITORIO = {
-  linha1: 'Av. Luiz José Sereno, 655 · sala 5',
+  // Sem a "sala 5": igual ao Perfil da Empresa no Google (ver SITE.endereco).
+  linha1: 'Av. Luiz José Sereno, 655',
   linha2: 'Jardim Ermida II · Jundiaí · SP',
   busca: 'Avenida Luiz José Sereno, 655, Jardim Ermida II, Jundiaí, SP',
 };
@@ -387,7 +388,7 @@ export default function LotusSobre({
         <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,.7),rgba(21,36,28,.92));')}></div>
         <div style={parseStyle('position:relative;max-width:1000px;margin:0 auto;padding:120px 32px;text-align:center;')}>
           <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#cdab6e;margin-bottom:26px;')}>A Lotus</div>
-          <h1 style={parseStyle('font-family:\'Fraunces\',serif;font-weight:300;font-size:clamp(40px,6vw,72px);line-height:1.02;letter-spacing:-.02em;color:#f7f2e8;margin:0 0 28px;')}>Quem é a Lotus.<br /><em style={parseStyle('font-style:italic;color:#cdab6e;')}>Especialistas que te chamam pelo nome.</em></h1>
+          <h1 style={parseStyle('font-family:\'Fraunces\',serif;font-weight:300;font-size:clamp(40px,6vw,72px);line-height:1.02;letter-spacing:-.02em;color:#f7f2e8;margin:0 0 28px;')}>Quem é a Lotus.{' '}<br /><em style={parseStyle('font-style:italic;color:#cdab6e;')}>Especialistas que te chamam pelo nome.</em></h1>
           <p style={parseStyle('font-size:clamp(17px,1.8vw,21px);color:rgba(247,242,232,.82);font-weight:300;line-height:1.55;max-width:680px;margin:0 auto;')}>Uma imobiliária de Jundiaí e Itupeva construída em torno de uma ideia simples: devolver ao cliente um corretor inteiro, presente, que conhece o bairro e leva o seu imóvel a sério como se fosse o dele.</p>
         </div>
       </section>

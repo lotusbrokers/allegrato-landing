@@ -18,10 +18,12 @@ export const SITE = {
    * Endereço do escritório. A rua é Luiz José Sereno, nesta ordem: é o nome no
    * CEP 13212-210 (Correios) e no Perfil da Empresa no Google. Até 16/10/2026 o
    * site dizia "José Luiz", e endereço divergente entre site e perfil enfraquece
-   * a ligação que o Google faz entre os dois.
+   * a ligação que o Google faz entre os dois. Pelo mesmo motivo, sem a "sala
+   * 5" desde 12/11/2026: o perfil traz só "Av. Luiz José Sereno, 655" (Radar
+   * Competitivo C9, consistência de NAP).
    */
-  endereco: 'Av. Luiz José Sereno, 655, sala 5, Jardim Ermida II, Jundiaí/SP',
-  logradouro: 'Av. Luiz José Sereno, 655, sala 5',
+  endereco: 'Av. Luiz José Sereno, 655, Jardim Ermida II, Jundiaí/SP',
+  logradouro: 'Av. Luiz José Sereno, 655',
   bairro: 'Jardim Ermida II',
   cep: '13212-210',
   /** Telefone e WhatsApp, o mesmo número em todo o site e no perfil do Google. */
