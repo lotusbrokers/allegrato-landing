@@ -4,16 +4,18 @@ import { FAQ_ANUNCIAR } from '@/lib/anunciar-faq';
 
 // Metadata portada de lotus-anunciar/index.html (<helmet>) — paridade de SEO com o estático.
 // TODO go-live: revisar canonical/og:url para o domínio final e publicar sitemap/robots.
+// Título, description e H1 com "avaliação de imóvel em Jundiaí" desde 12/11/2026
+// (Radar Competitivo C9: a busca de proprietário que a página disputa).
 export const metadata: Metadata = {
-  title: 'Anuncie e avalie seu imóvel em Jundiaí e Itupeva | Lotus Brokers',
+  title: 'Avaliação de imóvel em Jundiaí e Itupeva | Lotus Brokers',
   description:
-    'Descubra quanto vale o seu imóvel em Jundiaí e Itupeva. Avaliação justa, marketing premium e um especialista do seu bairro do anúncio à chave.',
+    'Avaliação de imóvel em Jundiaí e Itupeva, sem custo: comparação com imóveis do bairro, visita do especialista e relatório com a faixa de preço.',
   alternates: { canonical: 'https://www.lotusbrokers.com.br/lotus-anunciar' },
   openGraph: {
     siteName: 'Lotus Brokers',
     type: 'website',
     url: 'https://www.lotusbrokers.com.br/lotus-anunciar',
-    title: 'Anuncie e avalie seu imóvel com a Lotus',
+    title: 'Avaliação de imóvel em Jundiaí, com a Lotus',
     description:
       'Avaliação sem custo, processo transparente e um especialista do seu bairro. Saiba quanto vale o seu imóvel.',
     images: [

@@ -200,6 +200,27 @@ const metodo = [
   { num: '6', title: 'Pós-venda de verdade', text: 'Documentação, cartório e financiamento acompanhados até a chave passar de mão. Sem você se perder.' },
 ];
 
+// Seção "Como funciona a avaliação de imóvel em Jundiaí" (Radar Competitivo C9,
+// 12/11/2026): responde a busca de quem quer avaliar antes de vender. Sem
+// número nenhum de prazo ou de preço: nada disso está medido. O prazo entra
+// quando a Lotus informar o real.
+const PASSOS_DA_AVALIACAO = [
+  { titulo: 'Você conta sobre o imóvel', texto: 'Pelo formulário desta página ou pelo WhatsApp: endereço, tipo, metragem, dormitórios, vagas e estado de conservação.' },
+  { titulo: 'O especialista do bairro visita', texto: 'Ele confere o que a ficha não mostra: acabamento, reformas, luz, vista, barulho da rua e a situação da documentação.' },
+  { titulo: 'A comparação com o mercado', texto: 'A Lotus compara o imóvel com outros parecidos à venda no mesmo bairro, ajustando por metragem, estado, vagas e localização. É a análise comparativa de mercado (ACM).' },
+  { titulo: 'Você recebe o relatório', texto: 'Com os imóveis comparáveis usados e a faixa de preço sugerida para anunciar, explicados pelo especialista.' },
+];
+
+const FATORES_DE_VALOR = [
+  { titulo: 'Bairro e rua', texto: 'O mesmo apartamento vale diferente no Eloy Chaves, no Centro ou no Medeiros. Dentro do bairro, rua tranquila, comércio por perto e acesso à Anhanguera e à Bandeirantes também contam.' },
+  { titulo: 'Metragem e planta', texto: 'Suíte, varanda e uma planta bem resolvida pesam junto com o tamanho: metro a mais não vale sempre o mesmo.' },
+  { titulo: 'Estado de conservação', texto: 'Reforma recente, instalações em dia e acabamento atual entram na conta. Problema de manutenção também, e costuma virar argumento de desconto.' },
+  { titulo: 'Condomínio e lazer', texto: 'Em apartamento e casa em condomínio, a estrutura de lazer, a portaria e o valor da taxa mudam o interesse de quem compra.' },
+  { titulo: 'Vista e entorno', texto: 'Em bairros como Malota e Eloy Chaves, a vista e a proximidade da Serra do Japi fazem parte do valor. Ruído, trânsito e obras vizinhas também.' },
+  { titulo: 'Documentação', texto: 'Matrícula atualizada, habite-se e IPTU em dia permitem o financiamento bancário, e isso amplia o número de compradores.' },
+  { titulo: 'O mercado do momento', texto: 'Quantos imóveis parecidos estão à venda no bairro, e por quanto, muda o preço que o comprador aceita. Por isso a comparação usa anúncios atuais.' },
+];
+
 const comum = [
   'Atendido por agentes que nunca visitaram o imóvel',
   'Anúncio genérico em vários portais e silêncio',
@@ -422,7 +443,7 @@ export default function LotusAnunciar({
         <div style={parseStyle('position:relative;max-width:1200px;margin:0 auto;padding:80px 32px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;')}>
           <div>
             <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#cdab6e;margin-bottom:24px;')}>Vender com a Lotus</div>
-            <h1 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(36px,4.6vw,60px);line-height:1.04;letter-spacing:-.02em;color:#f7f2e8;margin:0 0 22px;")}>Quanto vale o seu imóvel?<br /><em style={parseStyle('font-style:italic;color:#cdab6e;')}>Descubra em minutos.</em></h1>
+            <h1 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(36px,4.6vw,60px);line-height:1.04;letter-spacing:-.02em;color:#f7f2e8;margin:0 0 22px;")}>Avaliação de imóvel em Jundiaí,{' '}<br /><em style={parseStyle('font-style:italic;color:#cdab6e;')}>com quem conhece o bairro.</em></h1>
             <p style={parseStyle('font-size:clamp(16px,1.6vw,19px);color:rgba(247,242,232,.82);font-weight:300;line-height:1.55;max-width:480px;margin:0 0 28px;')}>Avaliação com dado real do mercado de Jundiaí e Itupeva e um especialista do seu bairro para vender pelo melhor preço, sem você passar por isso sozinho.</p>
             <div style={parseStyle('display:flex;flex-wrap:wrap;gap:14px;align-items:center;')}>
               <Hoverable as="a" href={waLink} target="_blank" rel="noopener" baseStyle={parseStyle('display:inline-flex;align-items:center;gap:8px;background:transparent;border:1.5px solid rgba(247,242,232,.4);color:#f7f2e8;font-weight:600;font-size:15px;padding:13px 24px;border-radius:40px;transition:background .2s;')} hoverStyle={parseStyle('background:rgba(247,242,232,.1)')}>Falar com um especialista</Hoverable>
@@ -593,6 +614,38 @@ export default function LotusAnunciar({
                 <p style={parseStyle('font-size:14.5px;color:#3f6249;font-weight:300;line-height:1.55;margin:0;')}>{m.text}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* AVALIAÇÃO EM JUNDIAÍ (texto da busca "avaliação de imóvel Jundiaí") */}
+      <section style={parseStyle('background:#fff;padding:100px 32px;')}>
+        <div style={parseStyle('max-width:1000px;margin:0 auto;')}>
+          <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b18a4a;margin-bottom:18px;')}>Avaliação de imóvel</div>
+          <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(28px,3.6vw,44px);color:#15241c;line-height:1.08;letter-spacing:-.02em;margin:0 0 18px;")}>Como funciona a avaliação de imóvel em Jundiaí</h2>
+          <p style={parseStyle('font-size:16.5px;color:#3f6249;font-weight:300;line-height:1.65;margin:0 0 40px;max-width:720px;')}>A avaliação da Lotus responde a uma pergunta prática: por quanto o seu imóvel vende hoje, no seu bairro. É gratuita, sem compromisso, e parte de imóveis comparáveis, não de uma média da cidade.</p>
+          <ol style={parseStyle('list-style:none;padding:0;margin:0 0 72px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;')}>
+            {PASSOS_DA_AVALIACAO.map((p, i) => (
+              <li key={p.titulo} style={parseStyle('background:#f7f2e8;border-radius:16px;padding:24px 22px;')}>
+                <div style={parseStyle("font-family:'Fraunces',serif;font-size:28px;font-weight:300;color:#cdab6e;line-height:1;margin-bottom:12px;")}>{i + 1}</div>
+                <h3 style={parseStyle("font-family:'Fraunces',serif;font-weight:400;font-size:18px;color:#15241c;margin:0 0 8px;")}>{p.titulo}</h3>
+                <p style={parseStyle('font-size:14.5px;color:#3f6249;font-weight:300;line-height:1.55;margin:0;')}>{p.texto}</p>
+              </li>
+            ))}
+          </ol>
+          <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(24px,3vw,36px);color:#15241c;line-height:1.1;margin:0 0 28px;")}>O que muda o valor de um imóvel em Jundiaí</h2>
+          <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px 40px;margin:0 0 64px;')}>
+            {FATORES_DE_VALOR.map((f) => (
+              <div key={f.titulo}>
+                <h3 style={parseStyle('font-size:16.5px;font-weight:600;color:#15241c;margin:0 0 6px;')}>{f.titulo}</h3>
+                <p style={parseStyle('font-size:15px;color:#3f6249;font-weight:300;line-height:1.6;margin:0;')}>{f.texto}</p>
+              </div>
+            ))}
+          </div>
+          <div style={parseStyle('background:#f7f2e8;border-radius:18px;padding:30px 30px;')}>
+            <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:400;font-size:clamp(20px,2.4vw,26px);color:#15241c;line-height:1.15;margin:0 0 12px;")}>Avaliação da Lotus, avaliação do banco e laudo técnico</h2>
+            <p style={parseStyle('font-size:15.5px;color:#3f6249;font-weight:300;line-height:1.65;margin:0 0 18px;')}>A avaliação da Lotus serve para definir o preço de venda. No financiamento, o banco faz a própria avaliação, que limita quanto ele empresta ao comprador. Inventário, partilha e processos judiciais podem exigir laudo técnico de avaliação, feito segundo a norma ABNT NBR 14653.</p>
+            <a href="#topo" style={parseStyle('display:inline-flex;align-items:center;gap:8px;color:#1d3a2c;font-weight:600;font-size:15px;text-decoration:none;border-bottom:1.5px solid #cdab6e;padding-bottom:2px;')}>Começar a avaliação ↑</a>
           </div>
         </div>
       </section>
