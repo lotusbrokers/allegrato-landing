@@ -8,9 +8,9 @@ import RodapeLotus from '@/components/RodapeLotus';
 // Metadata portada do <head>/<helmet> de altos-da-avenida/index.html (paridade de SEO).
 export const metadata: Metadata = {
   title:
-    'Altos da Avenida, da Santa Angela, no Jardim do Lago, Jundiaí | Imobiliária Lotus Brokers',
+    'Altos da Avenida, apartamentos no Jardim do Lago, Jundiaí | Imobiliária Lotus Brokers',
   description:
-    'Altos da Avenida, da Santa Angela Construtora, no Jardim do Lago, Jundiaí: apartamentos de 58, 68, 96 e 105m² com 2 ou 3 dormitórios e opção de suíte, lazer completo, a 10 min da Anhanguera. Atendimento pela Imobiliária Lotus Brokers, autorizada a comercializar os empreendimentos da Santa Angela.',
+    'Altos da Avenida, no Jardim do Lago, Jundiaí: apartamentos de 58 a 105 m², com 2 ou 3 dorms. Atendimento pela Imobiliária Lotus Brokers, autorizada a comercializar os empreendimentos da Santa Angela.',
   keywords:
     'Altos da Avenida, apartamento Jundiaí, lançamento Jundiaí, Jardim do Lago, Avenida Samuel Martins, apartamento 2 dormitórios Jundiaí, apartamento 3 dormitórios, Santa Angela',
   // Sem canonical próprio a página herdava o da home (app/layout.tsx) e o Google

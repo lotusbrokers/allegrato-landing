@@ -206,7 +206,7 @@ export default function Allegrato() {
             Conquiste agora seu lugar.
           </h1>
           <p className="hero-sub">
-            O apartamento mais completo do Medeiros para você sair do aluguel pagando pouco, lazer com tudo pronto e a segurança de um empreendimento realizado pela Santa Angela Construtora.
+            O apartamento mais completo do Medeiros para você sair do aluguel pagando pouco, lazer com tudo pronto e a segurança de um empreendimento realizado pela <a href="/construtoras/santa-angela" target="_top" style={{ color: 'inherit', textDecoration: 'underline' }}>Santa Angela Construtora</a>.
           </p>
           {/* "Valor a consultar" desde 05/10/2026, a pedido da Lotus: a tabela de
               setembro venceu e a nova só veio para o Reserva Castanheira. */}

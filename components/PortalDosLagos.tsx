@@ -679,7 +679,7 @@ export default function PortalDosLagos() {
           </p>
           <div className="legal__bar">
             <span>© <span id="yr"></span> Portal dos Lagos · Página, divulgação e atendimento pela Imobiliária Lotus Brokers, autorizada a comercializar este empreendimento.</span>
-            <span>Realização: Santa Angela Construtora · Capital · Mac Lucer</span>
+            <span>Realização: <a href="/construtoras/santa-angela" target="_top" style={{ color: 'inherit', textDecoration: 'underline' }}>Santa Angela Construtora</a> · Capital · <a href="/construtoras/mac-lucer" target="_top" style={{ color: 'inherit', textDecoration: 'underline' }}>Mac Lucer</a></span>
           </div>
         </div>
       </footer>

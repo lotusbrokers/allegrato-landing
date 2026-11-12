@@ -457,7 +457,7 @@ export default function JardinsDoHorto({
         <div style={parseStyle('position:absolute; top:0; left:0; right:0; height:200px; background:linear-gradient(180deg, rgba(15,12,10,.6) 0%, rgba(15,12,10,0) 100%);')}></div>
         <div style={parseStyle('position:relative; width:100%; max-width:1340px; margin:0 auto; padding:clamp(118px,17vh,180px) 32px 64px;')}>
           <h1 style={parseStyle("margin:0; color:#fff; font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(44px,7.4vw,104px); line-height:.97; letter-spacing:-.01em; text-shadow:0 2px 50px rgba(0,0,0,.4);")}>
-            O brilho de<br /><span style={parseStyle('font-style:italic; color:#F4D9CF;')}>morar bem</span>
+            O brilho de{' '}<br /><span style={parseStyle('font-style:italic; color:#F4D9CF;')}>morar bem</span>
           </h1>
           <p style={parseStyle('margin:24px 0 0; color:rgba(255,255,255,.9); font-size:clamp(16px,1.5vw,20px); max-width:560px; line-height:1.55; font-weight:400;')}>
             No coração do Horto Florestal, apartamentos de 72m² e 95m² que unem modernidade, lazer completo e a comodidade de viver ao lado do Maxi Shopping Jundiaí.
@@ -803,7 +803,7 @@ export default function JardinsDoHorto({
           <p style={parseStyle('font-size:11.5px; line-height:1.7; margin:26px 0 0; color:rgba(244,238,228,.4);')}>
             Imagens meramente ilustrativas. As informações constantes no Memorial de Incorporação e nos futuros Instrumentos de Compra e Venda prevalecerão sobre as divulgadas neste material. Incorporação registrada no 1º Oficial de Registro de Imóveis de Jundiaí/SP. Quando da entrega, a vegetação poderá apresentar diferenças de tamanho e porte. Material preliminar, sujeito a alteração sem aviso prévio.
           </p>
-          <div style={parseStyle('margin-top:20px; font-size:12px; color:rgba(244,238,228,.35);')}>© 2026 Jardins do Horto · Realização: Santa Angela Construtora. Página, divulgação e atendimento pela Imobiliária Lotus Brokers, autorizada a comercializar o empreendimento.</div>
+          <div style={parseStyle('margin-top:20px; font-size:12px; color:rgba(244,238,228,.35);')}>© 2026 Jardins do Horto · Realização: <a href="/construtoras/santa-angela" target="_top" style={{ color: 'inherit', textDecoration: 'underline' }}>Santa Angela Construtora</a>. Página, divulgação e atendimento pela Imobiliária Lotus Brokers, autorizada a comercializar o empreendimento.</div>
         </div>
       </footer>
 

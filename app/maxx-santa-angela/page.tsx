@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title:
     'Maxx Santa Angela, apartamentos ao lado do Maxi Shopping, Jundiaí | Imobiliária Lotus Brokers',
   description:
-    'Maxx Santa Angela, da Santa Angela Construtora: apartamentos de 71 a 98 m², 2 e 3 dormitórios, ao lado do Maxi Shopping Jundiaí, com lazer completo e áreas comuns decoradas. Atendimento pela Imobiliária Lotus Brokers, autorizada a comercializar os empreendimentos da Santa Angela.',
+    'Maxx Santa Angela: apartamentos de 71 a 98 m², 2 e 3 dorms, ao lado do Maxi Shopping Jundiaí. Atendimento pela Imobiliária Lotus Brokers, autorizada a comercializar os empreendimentos da Santa Angela.',
   openGraph: {
     type: 'website',
     url: 'https://www.lotusbrokers.com.br/maxx-santa-angela',

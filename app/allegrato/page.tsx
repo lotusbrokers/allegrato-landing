@@ -7,9 +7,9 @@ import RodapeLotus from '@/components/RodapeLotus';
 
 // Metadata portada do <head> do fonte estático.
 export const metadata: Metadata = {
-  title: 'Allegrato Residencial Santa Angela no Medeiros, Jundiaí | Imobiliária Lotus Brokers',
+  title: 'Allegrato Residencial, apartamentos de 2 dorms no Medeiros, Jundiaí | Imobiliária Lotus Brokers',
   description:
-    'Allegrato Residencial, da Santa Angela Construtora, no Medeiros, Jundiaí/SP: lazer entregue decorado, condomínio econômico e Minha Casa Minha Vida. Atendimento pela Imobiliária Lotus Brokers, autorizada a comercializar os empreendimentos da Santa Angela.',
+    'Allegrato Residencial, no Medeiros, Jundiaí: lazer entregue decorado e Minha Casa Minha Vida. Atendimento pela Imobiliária Lotus Brokers, autorizada a comercializar os empreendimentos da Santa Angela.',
   keywords:
     'Allegrato Residencial, apartamento Medeiros, Jundiaí, Minha Casa Minha Vida, MCMV, Santa Angela, lançamento Jundiaí',
   alternates: { canonical: 'https://www.lotusbrokers.com.br/allegrato' },

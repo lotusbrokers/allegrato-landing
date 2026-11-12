@@ -360,7 +360,7 @@ export default function ResortPrime() {
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
               Engordadouro · Jundiaí / SP
             </span>
-            <h1 className="reveal d1">Viva o estilo de vida Resort,<span className="script">todos os dias.</span></h1>
+            <h1 className="reveal d1">Viva o estilo de vida Resort,{' '}<span className="script">todos os dias.</span></h1>
             <p className="hero__lead reveal d2">Um verdadeiro refúgio onde cada detalhe foi pensado para a sua família sentir o conforto de um resort de verdade, lazer, bem-estar e exclusividade, o ano inteiro.</p>
             <div className="hero__pills reveal d3">
               <span className="hero__pill"><b>4</b> Torres</span>
@@ -748,7 +748,7 @@ export default function ResortPrime() {
             <p>Incorporação registrada no 1º Oficial de Registro de Imóveis de Jundiaí/SP.</p>
           </div>
           <div className="footer__bar">
-            <span>© 2026 Imobiliária Lotus Brokers. Página, divulgação e atendimento sob responsabilidade da Lotus Brokers, autorizada a comercializar este empreendimento. Realização: Santa Angela Construtora.</span>
+            <span>© 2026 Imobiliária Lotus Brokers. Página, divulgação e atendimento sob responsabilidade da Lotus Brokers, autorizada a comercializar este empreendimento. Realização: <a href="/construtoras/santa-angela" target="_top" style={{ color: 'inherit', textDecoration: 'underline' }}>Santa Angela Construtora</a>.</span>
             <span>Resort Prime Santa Angela · Jundiaí / SP</span>
           </div>
         </div>

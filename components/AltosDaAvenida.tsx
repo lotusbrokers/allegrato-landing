@@ -541,7 +541,7 @@ export default function AltosDaAvenida({
           <div data-hero-inner="" style={parseStyle('max-width:1340px; margin:0 auto; padding:120px clamp(20px,4vw,64px) 40px; width:100%; box-sizing:border-box;')}>
           <div style={parseStyle('max-width:720px;')}>
             <h1 style={parseStyle('margin:0; color:#fff; line-height:.96;')}>
-              <span data-reveal="" data-reveal-delay="80" style={parseStyle("display:block; font-family:'Sacramento',cursive; font-size:clamp(46px,min(7vw,11vh),92px); color:#e9b896; font-weight:400; line-height:.9; margin-bottom:-4px;")}>Viva os seus</span>
+              <span data-reveal="" data-reveal-delay="80" style={parseStyle("display:block; font-family:'Sacramento',cursive; font-size:clamp(46px,min(7vw,11vh),92px); color:#e9b896; font-weight:400; line-height:.9; margin-bottom:-4px;")}>Viva os seus</span>{' '}
               <span data-reveal="" data-reveal-delay="160" style={parseStyle("display:block; font-family:'Cormorant Garamond',serif; font-size:clamp(58px,min(11vw,17vh),148px); font-weight:600; letter-spacing:-.01em;")}>Altos momentos</span>
             </h1>
             <p data-reveal="" data-reveal-delay="240" style={parseStyle('margin:30px 0 0; max-width:560px; font-size:clamp(16px,1.5vw,20px); line-height:1.65; color:rgba(255,255,255,.9); font-weight:400;')}>
@@ -830,7 +830,7 @@ export default function AltosDaAvenida({
               <span style={parseStyle("font-family:'Barlow Semi Condensed',sans-serif; font-size:13px; letter-spacing:.3em; text-transform:uppercase; color:#e9b896;")}>A Construtora</span>
             </div>
             <h2 data-reveal="" data-reveal-delay="80" style={parseStyle("margin:0; font-family:'Cormorant Garamond',serif; font-size:clamp(34px,4.6vw,58px); font-weight:600; line-height:1.05;")}>Realização<br />Santa Angela Construtora</h2>
-            <p data-reveal="" data-reveal-delay="140" style={parseStyle('margin:26px 0 0; font-size:17px; line-height:1.8; color:rgba(255,255,255,.8); max-width:560px;')}>Realizadora do Altos da Avenida, a Santa Angela Construtora atua em Jundiaí, Americana e Itatiba e acompanha todas as fases da obra, do início à entrega das chaves.</p>
+            <p data-reveal="" data-reveal-delay="140" style={parseStyle('margin:26px 0 0; font-size:17px; line-height:1.8; color:rgba(255,255,255,.8); max-width:560px;')}>Realizadora do Altos da Avenida, a Santa Angela Construtora atua em Jundiaí, Americana e Itatiba e acompanha todas as fases da obra, do início à entrega das chaves. <a href="/construtoras/santa-angela" target="_top" style={{ color: 'inherit', textDecoration: 'underline' }}>Conheça a construtora</a>.</p>
             <p data-reveal="" data-reveal-delay="200" style={parseStyle('margin:16px 0 0; font-size:17px; line-height:1.8; color:rgba(255,255,255,.8); max-width:560px;')}>Com confiança, respeito e comprometimento, a Lotus acompanha a sua família em cada etapa: da primeira visita à entrega das chaves, com quem conhece o Altos da Avenida por dentro.</p>
           </div>
         </div>
