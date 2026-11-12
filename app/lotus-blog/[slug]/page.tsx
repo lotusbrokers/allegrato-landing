@@ -62,8 +62,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   }
 
   const url = `${SITE}${hrefDoArtigo(post.id)}`;
+  const titulo = post.tituloSeo ?? post.title;
   return {
-    title: `${post.title} | Blog Lotus`,
+    title: `${titulo} | Blog Lotus`,
     description: post.excerpt,
     alternates: { canonical: url },
     openGraph: {
@@ -71,7 +72,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       type: 'article',
       locale: 'pt_BR',
       url,
-      title: post.title,
+      title: titulo,
       description: post.excerpt,
       publishedTime: post.publicadoEm,
       section: post.cat,
@@ -89,7 +90,8 @@ function jsonLd(post: Post) {
   const artigo = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
-    headline: post.title,
+    // O Google corta headline acima de 110 caracteres: o título curto vale aqui.
+    headline: post.tituloSeo ?? post.title,
     description: post.excerpt,
     ...(post.img ? { image: `${SITE}${post.img}` } : {}),
     datePublished: post.publicadoEm,

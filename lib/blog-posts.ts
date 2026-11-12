@@ -70,6 +70,12 @@ export type Post = {
   img: string;
   slot: string;
   title: string;
+  /**
+   * Título da aba e do Google quando o do texto (o H1) é longo: acima de uns
+   * 60 caracteres o Google corta, e o headline do JSON-LD para em 110. Sem
+   * ele, vale `title`. Desde 12/11/2026 (post da Selic em 2027).
+   */
+  tituloSeo?: string;
   excerpt: string;
   author: string;
   role: string;
@@ -173,8 +179,117 @@ export function relacionados(posts: Post[], atual: Post, quantos = 3): Post[] {
 // mão, que envelheceu: títulos que não existiam mais no blog e nenhuma capa.
 export const POSTS: Post[] = [
   /* ------------------------------------------------------------------
-   * Enviado pela Lotus em 05/11/2026, com a foto do notebook. Primeiro da
-   * lista, e por isso o novo destaque da capa do blog.
+   * Enviado pela Lotus em 11/11/2026, com a foto de prédios de Jundiaí à
+   * noite. Primeiro da lista, e por isso o novo destaque da capa do blog.
+   *
+   * CONFERIDO em 12/11/2026:
+   *  - a matéria citada é do O Dia de 03/11/2026, "Copom deve manter Selic em
+   *    13,75% e mercado imobiliário mira 2027" (odia.ig.com.br/economia/2026/
+   *    11/7318895): R$ 180,9 bilhões no 1º semestre de 2026, alta de 23%;
+   *    projeção da Abecip elevada para 25% em 2026, "aproximadamente R$ 411
+   *    bilhões"; Focus com a Selic em 12,50% no fim de 2027;
+   *  - na fonte primária, a coletiva da Abecip de 28/07/2026 traz os R$ 180,9
+   *    bilhões, alta de 23% sobre R$ 147,1 bilhões. A revisão para 25% saiu em
+   *    agosto, e as notícias dela falam em R$ 410 bilhões ou R$ 411 bilhões;
+   *    o texto atribui o número ao O Dia, então ficou como veio;
+   *  - o Focus muda toda semana: o texto já diz "era", no passado, e chama o
+   *    número de estimativa.
+   * Tudo confere.
+   *
+   * Ajustes de forma:
+   *  - a data da matéria entrou no texto ("em 3 de novembro de 2026"), como a
+   *    própria recomendação editorial que veio junto pedia;
+   *  - "Grandes escolhas têm endereço" virou "Grandes histórias têm
+   *    endereço", o slogan da Lotus;
+   *  - o título "Introdução" saiu, como nos outros posts, e os itens da lista
+   *    perderam o ponto e vírgula;
+   *  - links pedidos: lançamentos, blog e o post do ITBI (custos da compra);
+   *  - o título SEO sugerido entrou em tituloSeo (aba, Google e headline),
+   *    com "imobiliário" em minúscula como no resto do site; a categoria é
+   *    Mercado, a que já existe; o ALT sugerido não tem onde entrar, e a capa
+   *    usa o título do texto.
+   *
+   * Capa: a foto enviada (736x489, com moldura azul), recortada em 16:10 por
+   * dentro da moldura e mantida em 726x454, sem ampliar.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'mercado-imobiliario-2027-selic', cat: 'Mercado', date: 'Nov 2026', publicadoEm: '2026-11-12', read: '7 min', img: '/blog/mercado-imobiliario-2027-selic.jpg', slot: 'blog-mercado-imobiliario-2027-selic', title: 'Mercado imobiliário em 2027: como a Selic pode influenciar a compra de imóveis e as oportunidades de investimento?', tituloSeo: 'Mercado imobiliário em 2027: Selic e oportunidades', excerpt: 'Entenda como a Selic e as perspectivas econômicas para 2027 podem influenciar o mercado imobiliário, os financiamentos e as oportunidades de compra de imóveis em Jundiaí.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'A Selic influencia o custo do crédito, mas não define sozinha a taxa do financiamento imobiliário, que depende também do banco, da modalidade e do perfil do comprador. Os financiamentos somaram R$ 180,9 bilhões no primeiro semestre de 2026 (Abecip), e o Boletim Focus projetava a Selic em 12,50% ao fim de 2027: uma estimativa, não uma garantia. Mais do que esperar o momento ideal, vale organizar renda, entrada e simulações.',
+    body: [
+      'O mercado imobiliário brasileiro já começa a olhar para 2027. Com a taxa Selic em evidência e as projeções econômicas no radar, compradores e investidores acompanham os possíveis impactos dos juros sobre o financiamento imobiliário e as oportunidades de aquisição de imóveis.',
+      'Mesmo em um cenário de juros elevados, o setor continua movimentando cifras expressivas. De acordo com dados da Associação Brasileira das Entidades de Crédito Imobiliário e Poupança (Abecip), divulgados pelo jornal O Dia em 3 de novembro de 2026, os financiamentos imobiliários alcançaram R$ 180,9 bilhões no primeiro semestre de 2026, um crescimento de 23% em comparação com o mesmo período de 2025.',
+      'Esse cenário reforça uma questão importante: quem pretende comprar um imóvel não precisa esperar 2027 para começar a se preparar.',
+      'Entender o comportamento do mercado, organizar as finanças e conhecer as oportunidades disponíveis são passos fundamentais para tomar decisões mais conscientes.',
+      { titulo: 'Como a Selic influencia o mercado imobiliário?' },
+      'A Selic é a taxa básica de juros da economia brasileira, definida pelo Comitê de Política Monetária (Copom), do Banco Central. Seu comportamento influencia o custo do crédito, as aplicações financeiras e diferentes setores da economia.',
+      'No mercado imobiliário, os efeitos podem ser percebidos principalmente nas condições de financiamento e na capacidade de compra dos consumidores.',
+      'Quando os juros estão elevados, o crédito pode ficar mais caro, impactando o valor das parcelas e o custo total de um financiamento. Em contrapartida, quando existe uma redução consistente das taxas, algumas modalidades de crédito podem se tornar mais acessíveis.',
+      'É importante destacar que a Selic não determina diretamente todas as taxas de financiamento imobiliário. As condições também dependem da instituição financeira, da modalidade de crédito, da origem dos recursos e do perfil do comprador.',
+      'Por isso, acompanhar os indicadores econômicos é importante, mas analisar as condições reais de cada operação é essencial.',
+      { titulo: 'Financiamentos imobiliários continuam movimentando bilhões' },
+      'Mesmo diante de um cenário de juros elevados, o mercado imobiliário brasileiro demonstrou força ao longo de 2026.',
+      'Segundo os dados da Abecip apresentados pelo jornal O Dia, os financiamentos imobiliários movimentaram R$ 180,9 bilhões no primeiro semestre do ano, representando um crescimento de 23% em relação ao mesmo período de 2025.',
+      'A entidade também apresentou uma projeção de crescimento de 25% para o crédito imobiliário em 2026, estimando aproximadamente R$ 411 bilhões em concessões.',
+      'Esses números demonstram a relevância do setor para a economia brasileira e reforçam que a procura por imóveis continua presente.',
+      'Para quem deseja comprar, o cenário mostra a importância de pesquisar diferentes modalidades de aquisição, comparar condições de pagamento e avaliar empreendimentos que estejam alinhados à realidade financeira de cada família.',
+      { titulo: 'O que esperar do mercado imobiliário em 2027?' },
+      'As projeções econômicas para 2027 também estão entre os fatores observados pelo setor.',
+      'De acordo com o Boletim Focus citado na matéria do jornal O Dia, a expectativa do mercado financeiro era de que a Selic encerrasse 2027 em 12,50% ao ano.',
+      'Essa estimativa representa uma perspectiva econômica, e não uma garantia de redução dos juros. As projeções podem mudar conforme o comportamento da inflação, as decisões do Banco Central e as condições econômicas nacionais e internacionais.',
+      'Caso ocorra uma redução gradual da taxa básica de juros, algumas condições de financiamento poderão se tornar mais favoráveis, estimulando o interesse de novos compradores.',
+      'Entretanto, esperar por uma possível queda dos juros nem sempre representa a melhor decisão.',
+      'O momento adequado para comprar um imóvel depende de fatores como renda, reserva financeira, valor disponível para entrada, necessidade de moradia e condições comerciais do empreendimento.',
+      'Mais do que tentar prever o comportamento da economia, o comprador precisa entender suas próprias possibilidades e identificar oportunidades compatíveis com seus objetivos.',
+      { titulo: 'Vale a pena comprar um imóvel antes de 2027?' },
+      'Essa é uma dúvida comum entre pessoas que estão planejando conquistar a casa própria ou investir no mercado imobiliário.',
+      'A resposta depende da situação financeira e dos objetivos de cada comprador. Não existe uma regra que determine que comprar agora seja melhor ou pior do que esperar até 2027.',
+      'Alguns fatores merecem atenção:',
+      { titulo: 'Condições comerciais dos empreendimentos', nivel: 3 },
+      '[Lançamentos imobiliários](/lotus-lancamentos) podem apresentar condições específicas durante determinadas fases de comercialização. Valores de entrada, fluxo de pagamento, disponibilidade de unidades e campanhas comerciais podem variar.',
+      { titulo: 'Planejamento financeiro', nivel: 3 },
+      'Começar a pesquisar antecipadamente permite organizar a entrada, avaliar a renda comprometida e conhecer as possibilidades de financiamento sem tomar decisões precipitadas.',
+      { titulo: 'Escolha da localização', nivel: 3 },
+      'A localização é um dos fatores mais importantes na aquisição de um imóvel. Infraestrutura, mobilidade, comércio, serviços e desenvolvimento urbano devem fazer parte da análise.',
+      { titulo: 'Objetivos pessoais e patrimoniais', nivel: 3 },
+      'Para quem procura o primeiro imóvel, a decisão pode estar relacionada à independência e à conquista da casa própria. Já para investidores, localização, liquidez, demanda e potencial de valorização são aspectos importantes, sem garantia de retorno futuro.',
+      'Portanto, mais importante do que tentar acertar o melhor momento do mercado é conhecer as condições disponíveis e tomar uma decisão bem planejada.',
+      { titulo: 'Jundiaí: oportunidades para morar e investir' },
+      'Quando o assunto é mercado imobiliário, também é importante observar as características de cada cidade.',
+      'Jundiaí apresenta diferentes perfis de empreendimentos, desde apartamentos compactos e imóveis voltados ao primeiro imóvel até condomínios residenciais e projetos de alto padrão.',
+      'A cidade oferece alternativas para quem busca praticidade no cotidiano, proximidade com serviços, infraestrutura urbana e opções para formação de patrimônio.',
+      'Sua localização estratégica entre importantes centros econômicos do estado de São Paulo também faz com que a região seja observada por pessoas que procuram conciliar moradia, mobilidade e oportunidades profissionais.',
+      'Na hora de escolher um imóvel em Jundiaí, alguns critérios merecem atenção:',
+      { itens: ['Localização e infraestrutura do bairro', 'Proximidade de escolas, mercados, hospitais e serviços', 'Acesso às principais vias da região', 'Padrão construtivo e diferenciais do empreendimento', 'Potencial de liquidez e valorização', 'Condições de pagamento e custo total da aquisição'] },
+      'Cada empreendimento atende a um perfil diferente. Por isso, conhecer as opções disponíveis e contar com orientação especializada pode ajudar na comparação entre imóveis e na tomada de decisão.',
+      { titulo: 'Como se preparar financeiramente para comprar um imóvel em 2027?' },
+      'Se o objetivo é adquirir um imóvel nos próximos meses ou ao longo de 2027, o planejamento pode começar agora.',
+      'Algumas medidas ajudam a organizar esse processo:',
+      { titulo: '1. Organize sua renda e seus compromissos financeiros', nivel: 3 },
+      'Conheça sua capacidade de pagamento e avalie quanto da renda mensal poderá ser destinado à aquisição do imóvel.',
+      { titulo: '2. Planeje o valor da entrada', nivel: 3 },
+      'Além das parcelas do financiamento, considere o valor necessário para a entrada e os demais custos da compra, como [ITBI, escritura e registro](/lotus-blog/itbi-escritura-e-registro), conforme o tipo de imóvel e a operação.',
+      { titulo: '3. Faça simulações de financiamento', nivel: 3 },
+      'Compare diferentes instituições financeiras e modalidades de crédito. Observe não apenas as taxas de juros, mas também o Custo Efetivo Total (CET), o prazo e o valor das parcelas.',
+      { titulo: '4. Pesquise empreendimentos e regiões', nivel: 3 },
+      'Conhecer os imóveis disponíveis permite comparar localização, metragem, infraestrutura, padrão construtivo e condições comerciais.',
+      { titulo: '5. Conte com orientação imobiliária', nivel: 3 },
+      'Uma imobiliária pode ajudar a identificar imóveis compatíveis com seu perfil, esclarecer dúvidas e apresentar oportunidades disponíveis de acordo com seus objetivos.',
+      { titulo: 'O mercado muda, mas o planejamento continua sendo essencial' },
+      'As perspectivas para 2027 colocam o mercado imobiliário em evidência. A taxa Selic, o comportamento do crédito e as condições econômicas podem influenciar as decisões de compra e investimento nos próximos meses.',
+      'Entretanto, a aquisição de um imóvel deve ser analisada de forma individualizada.',
+      'Mais do que esperar por um cenário econômico ideal, é importante compreender suas possibilidades financeiras, [conhecer o mercado](/lotus-blog) e avaliar as oportunidades disponíveis.',
+      'Para quem deseja morar, conquistar o primeiro imóvel ou investir em Jundiaí e região, começar a pesquisa agora pode ser um passo importante para tomar decisões mais conscientes.',
+      { titulo: 'Encontre seu próximo imóvel com a Lotus Brokers' },
+      'Na Lotus Brokers, você encontra oportunidades imobiliárias em Jundiaí e região, com opções para diferentes momentos de vida e objetivos.',
+      'Seja para conquistar o primeiro apartamento, encontrar um novo lar para sua família ou avaliar oportunidades de investimento, nossa equipe está preparada para apresentar empreendimentos e ajudar você a encontrar alternativas alinhadas aos seus planos.',
+      'Acesse o site da Lotus Brokers, conheça nossos [imóveis](/lotus-busca) e [lançamentos](/lotus-lancamentos) e converse com nossa equipe.',
+      'Grandes histórias têm endereço.',
+      'Lotus Brokers.',
+    ],
+  },
+  /* ------------------------------------------------------------------
+   * Enviado pela Lotus em 05/11/2026, com a foto do notebook. Foi o destaque
+   * da capa do blog até 12/11/2026.
    *
    * CONFERIDO em 05/11/2026:
    *  - ITBI em Jundiaí: alíquota geral de 2,5%; em imóvel residencial
@@ -335,7 +450,7 @@ export const POSTS: Post[] = [
    * e mantida em 896x560, sem ampliar.
    * ------------------------------------------------------------------ */
   {
-    id: 'morar-em-medeiros-jundiai', cat: 'Região', date: 'Nov 2026', publicadoEm: '2026-11-04', read: '5 min', img: '/blog/morar-em-medeiros-jundiai.jpg', slot: 'blog-morar-em-medeiros-jundiai', title: 'Morar em Medeiros, Jundiaí: tranquilidade, natureza e qualidade de vida em um bairro em crescimento', excerpt: 'Descubra como é morar em Medeiros, Jundiaí. Conheça a localização, escolas, comércio, lazer e oportunidades imobiliárias do bairro.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'morar-em-medeiros-jundiai', cat: 'Região', date: 'Nov 2026', publicadoEm: '2026-11-04', read: '5 min', img: '/blog/morar-em-medeiros-jundiai.jpg', slot: 'blog-morar-em-medeiros-jundiai', title: 'Vale a pena morar no Medeiros, em Jundiaí?', excerpt: 'Escolas, restaurantes, comércio e faixa de preços do Medeiros, em Jundiaí: a Lotus Brokers reúne o que pesa na decisão de morar no bairro.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'O Medeiros fica na região oeste de Jundiaí, às margens da Rodovia Dom Gabriel Paulino Bueno Couto, perto da Serra do Japi e com acesso fácil a Itupeva. É um bairro residencial em expansão, com condomínios fechados, casas térreas e sobrados, comércio nas avenidas principais, o Mini Shopping Sarapiranga, a UBS Sarapiranga, escolas de educação infantil e ensino fundamental e restaurantes para a família. Na pesquisa usada no artigo, o valor médio de compra é de R$ 858 mil, com imóveis entre R$ 211 mil e R$ 3,9 milhões.',
     body: [
       'Descubra por que o bairro Medeiros vem conquistando cada vez mais famílias que buscam morar em Jundiaí, com tranquilidade, áreas verdes, boa localização e potencial de valorização imobiliária.',
@@ -380,13 +495,13 @@ export const POSTS: Post[] = [
       'Entre os bairros próximos estão:',
       { itens: ['Fazenda Grande: região residencial com diferentes opções de imóveis e serviços', '[Ermida](/lotus-bairro/jardim-ermida): área que também apresenta empreendimentos residenciais e condomínios', 'Parque Industrial: região com atividades comerciais, empresariais e industriais'] },
       'A proximidade com essas localidades contribui para a integração de Medeiros com diferentes áreas da cidade.',
-      { titulo: 'Vale a pena morar no Medeiros, em Jundiaí?' },
+      { titulo: 'Para quem o Medeiros é indicado?' },
       'Para quem procura um bairro residencial, com proximidade da natureza, acesso facilitado e oportunidades no mercado imobiliário, Medeiros merece estar entre as opções consideradas.',
       'Seu crescimento urbano, a chegada de novos empreendimentos e a presença de condomínios residenciais tornam a região interessante para quem deseja comprar um imóvel em Jundiaí.',
       'Além disso, a combinação entre tranquilidade, escolas, comércio local, gastronomia e proximidade com Itupeva atende a diferentes estilos de vida.',
       'Mais do que escolher um endereço, morar em Medeiros pode representar a oportunidade de construir uma rotina com mais tranquilidade, espaço e conexão com o que realmente importa.',
       { titulo: 'Está pensando em morar em Medeiros?' },
-      'Conheça as [oportunidades imobiliárias disponíveis na região](/lotus-bairro/medeiros) e encontre um imóvel que combine com seus planos, suas necessidades e o estilo de vida que você deseja construir.',
+      'Conheça os [imóveis à venda e lançamentos no Medeiros](/lotus-bairro/medeiros) e encontre um imóvel que combine com seus planos, suas necessidades e o estilo de vida que você deseja construir.',
       'A escolha do próximo endereço pode ser o primeiro passo de uma nova história!',
       { titulo: 'Lançamentos no Medeiros', lancamentosNosBairros: { cidade: 'Jundiaí', bairros: ['Medeiros'] } },
     ],
@@ -555,6 +670,7 @@ export const POSTS: Post[] = [
       'Atende qualquer renda, mas cobra juros maiores e não tem subsídio. Na Caixa, financia até 80% do valor de avaliação, para imóveis de até R$ 2,25 milhões, com prazo de até 35 anos (420 meses). Levantamentos de mercado de meados de 2026 indicam taxas de balcão a partir de aproximadamente 11,19% ao ano mais TR na Caixa, que tende a ter a menor taxa de balcão; outros bancos costumam cobrar mais, mas podem oferecer condições melhores para quem tem conta-salário ou relacionamento.',
       { titulo: 'Como escolher', nivel: 3 },
       'Se a sua renda familiar cabe em alguma faixa do MCMV e o imóvel que você quer está dentro do teto, comece por ele. Se o imóvel passa do teto ou a renda está acima de R$ 13 mil, o SBPE é o caminho.',
+      'Na compra de um lançamento, o caminho tem uma fase a mais: durante a obra, a entrada e as parcelas vão para a construtora, e o banco entra só na entrega, para financiar o saldo. Veja [como funciona o financiamento na planta](/lotus-blog/como-financiar-lancamento-imobiliario).',
       { titulo: '2. Junte a entrada (e saiba que ela não é o único custo)' },
       'No financiamento comum, a entrada mínima é de 20%. No MCMV pode cair para 10%, e o subsídio ajuda a cobri-la. A entrada pode vir de economias, de venda de outro bem ou do FGTS.',
       { titulo: 'Uso do FGTS', nivel: 3 },
@@ -566,6 +682,7 @@ export const POSTS: Post[] = [
       { titulo: '3. Descubra quanto você consegue pagar' },
       'Os bancos limitam a parcela a 30% da renda bruta familiar. Isso é um teto de aprovação, não uma recomendação de conforto. Antes de simular, faça a conta do seu orçamento real: aluguel que você deixa de pagar, condomínio, IPTU, manutenção e imprevistos.',
       'É possível somar a renda de cônjuge, companheiro ou familiar (até quatro participantes na maioria dos bancos) para aumentar o valor aprovado. Lembre que todos os participantes respondem pela dívida e precisam ter o nome limpo.',
+      'Quem é autônomo também consegue financiar: extratos bancários, declaração de imposto de renda em dia e um histórico de renda bem apresentado cumprem o papel do holerite.',
       { titulo: '4. SAC ou Price: a escolha que mexe no custo total' },
       'Existem dois sistemas de amortização principais.',
       { itens: ['SAC: as parcelas começam mais altas e diminuem ao longo do tempo. Paga-se bem menos juros no total.', 'Price: as parcelas são fixas (antes da correção pela TR), começam menores e o custo final é maior.'] },
@@ -579,6 +696,7 @@ export const POSTS: Post[] = [
         itens: [
           'Organize suas finanças: consulte CPF no Serasa/SPC, regularize pendências e junte comprovantes de renda.',
           'Simule em mais de um banco: Caixa, Banco do Brasil, Itaú, Bradesco e Santander têm condições diferentes. Leve a melhor proposta para os outros e negocie.',
+          'Peça a pré-aprovação de crédito antes de escolher o imóvel: com o valor aprovado em mãos, você negocia com mais força.',
           'Escolha o imóvel: prefira unidades com documentação regular. Para imóvel pronto, peça matrícula atualizada, certidões e, no caso de apartamento, declaração de quitação de condomínio.',
           'Peça a avaliação do banco: o financiamento é calculado sobre o menor valor entre o preço de venda e a avaliação.',
           'Aprovação de crédito e assinatura do contrato.',
@@ -1871,7 +1989,7 @@ export const POSTS: Post[] = [
     ],
   },
   {
-    id: 'bairro-caxambu-jundiai', cat: 'Região', date: 'Ago 2026', publicadoEm: '2026-08-01', read: '6 min', img: '/blog/bairro-caxambu.jpg', slot: 'blog-p00000', title: 'Bairro Caxambu: tradição, natureza e qualidade de vida em Jundiaí', excerpt: 'Conheça o bairro Caxambu, em Jundiaí, e descubra por que a região é uma das melhores opções para quem busca tranquilidade, qualidade de vida e valorização imobiliária.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'bairro-caxambu-jundiai', cat: 'Região', date: 'Ago 2026', publicadoEm: '2026-08-01', read: '6 min', img: '/blog/bairro-caxambu.jpg', slot: 'blog-p00000', title: 'Vale a pena morar no Caxambu, em Jundiaí?', excerpt: 'Chácaras, sobrados, terrenos e condomínios num bairro de herança italiana: a Lotus Brokers mostra para quem o Caxambu é indicado e o que avaliar.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'Na região norte de Jundiaí, o Caxambu mantém perfil residencial e rural, herança da imigração italiana e da produção de uvas, com acesso fácil ao centro e às rodovias. Reúne casas, sobrados, chácaras, terrenos e condomínios fechados, e atrai quem busca espaço e tranquilidade sem perder praticidade.',
     body: [
       'O Caxambu é um dos bairros mais tradicionais de Jundiaí e se destaca por oferecer um estilo de vida que combina tranquilidade, contato com a natureza e excelente infraestrutura. Conhecido por sua forte influência da imigração italiana e pela produção de uvas e vinhos, o bairro preserva seu charme histórico ao mesmo tempo em que acompanha o crescimento imobiliário da cidade.',
@@ -1914,10 +2032,11 @@ export const POSTS: Post[] = [
       'O Caxambu é um bairro que preserva a história de Jundiaí enquanto acompanha o desenvolvimento da cidade. Sua combinação entre natureza, tradição, infraestrutura e valorização imobiliária faz da região uma excelente escolha para quem busca um estilo de vida mais tranquilo sem abrir mão da praticidade.',
       'Seja para morar ou investir, o bairro oferece oportunidades para diferentes perfis de compradores e continua despertando o interesse de quem deseja viver em uma das regiões mais charmosas de Jundiaí.',
       'A Lotus Brokers acompanha diariamente o mercado imobiliário do Caxambu e pode ajudar você a encontrar o imóvel ideal, oferecendo atendimento consultivo e acesso às melhores oportunidades da região.',
+      'Veja os [imóveis à venda no Caxambu](/lotus-bairro/caxambu) no guia do bairro.',
     ],
   },
   {
-    id: 'como-financiar-lancamento-imobiliario', cat: 'Guia', date: 'Ago 2026', publicadoEm: '2026-08-01', read: '8 min', img: '/blog/financiar-lancamento.jpg', slot: 'blog-p0000', title: 'Como financiar um lançamento imobiliário? Guia completo para comprar seu imóvel em Jundiaí', excerpt: 'Saiba como financiar um lançamento imobiliário, conheça as principais modalidades de crédito e descubra as melhores oportunidades para comprar imóveis em Jundiaí.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'como-financiar-lancamento-imobiliario', cat: 'Guia', date: 'Ago 2026', publicadoEm: '2026-08-01', read: '8 min', img: '/blog/financiar-lancamento.jpg', slot: 'blog-p0000', title: 'Como funciona o financiamento na planta', excerpt: 'Na planta, a entrada e as parcelas da obra vão para a construtora; na entrega, o saldo devedor é financiado no banco. A Lotus Brokers explica cada fase.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'O financiamento de um lançamento acontece em duas fases: durante a obra você paga entrada e parcelas direto à construtora; depois da entrega, o saldo devedor é financiado no banco, que só então analisa crédito e renda. FGTS pode entrar na entrada ou na amortização, e a escolha entre SAC e Tabela Price muda o peso das primeiras parcelas.',
     body: [
       'Comprar um imóvel é uma das decisões financeiras mais importantes da vida. Quando se trata de um lançamento imobiliário, além da possibilidade de adquirir um imóvel novo e com excelente potencial de valorização, surgem diversas dúvidas sobre o processo de financiamento.',
@@ -1945,6 +2064,7 @@ export const POSTS: Post[] = [
       { titulo: 'Sistemas de amortização', nivel: 3 },
       'Entre os principais sistemas utilizados estão o SAC e a Tabela Price. No SAC (Sistema de Amortização Constante), as parcelas começam maiores e diminuem ao longo do contrato, é uma opção bastante escolhida por quem busca pagar menos juros ao longo do financiamento.',
       'Na Tabela Price, as parcelas tendem a permanecer mais estáveis durante boa parte do contrato. É indicada para quem prefere maior previsibilidade no orçamento mensal.',
+      'O guia [como financiar o primeiro imóvel](/lotus-blog/como-financiar-o-primeiro-imovel) mostra, com números, quanto cada sistema custa ao fim do contrato.',
       { titulo: 'Quais documentos normalmente são necessários?' },
       'Embora possa haver pequenas variações entre as instituições financeiras, normalmente são solicitados:',
       { itens: ['Documento de identidade', 'CPF', 'Certidão de estado civil', 'Comprovante de renda', 'Comprovante de residência', 'Declaração de Imposto de Renda, quando exigida', 'Extratos bancários, dependendo da análise de crédito'] },
@@ -2191,7 +2311,7 @@ export const POSTS: Post[] = [
     ],
   },
   {
-    id: 'melhores-bairros-para-morar-em-jundiai', cat: 'Guia', date: 'Ago 2026', publicadoEm: '2026-08-01', read: '7 min', img: '/blog/melhores-bairros-jundiai.jpg', slot: 'blog-p0', title: 'Melhores bairros para morar em Jundiaí: guia completo para escolher o lugar ideal', excerpt: 'Jardim Ana Maria, Malota, Engordadouro, Bonfiglioli, Eloy Chaves, Medeiros e Vila Arens: o perfil de cada região e o que pesa na escolha.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'melhores-bairros-para-morar-em-jundiai', cat: 'Guia', date: 'Ago 2026', publicadoEm: '2026-08-01', read: '7 min', img: '/blog/melhores-bairros-jundiai.jpg', slot: 'blog-p0', title: 'Onde morar em Jundiaí: os melhores bairros', excerpt: 'Do Jardim Ana Maria à Malota, do Eloy Chaves ao Medeiros: a Lotus Brokers mostra o perfil de cada bairro de Jundiaí e como escolher onde morar.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'Sete bairros concentram a procura em Jundiaí: Jardim Ana Maria e Vila Arens pela praticidade perto do centro; Malota e Eloy Chaves pela tranquilidade e pela Serra do Japi; Engordadouro e Medeiros pelo ritmo de lançamentos e potencial de valorização; e o Jardim Bonfiglioli pelo equilíbrio entre os dois lados.',
     body: [
       'Jundiaí está entre as cidades mais desejadas do interior de São Paulo para quem busca qualidade de vida, segurança e valorização imobiliária. Sua localização estratégica entre São Paulo e Campinas, aliada à excelente infraestrutura urbana, faz com que a procura por imóveis em Jundiaí cresça ano após ano.',
@@ -2241,6 +2361,7 @@ export const POSTS: Post[] = [
       { titulo: 'Como escolher o melhor bairro em Jundiaí?' },
       'A resposta depende dos seus objetivos. Quem busca praticidade pode priorizar bairros próximos ao centro. Já famílias costumam preferir regiões com condomínios fechados, áreas verdes e maior tranquilidade.',
       'Para investidores, bairros em expansão como Medeiros e Engordadouro apresentam excelente potencial de valorização nos próximos anos.',
+      'O Jardim do Lago também vale a visita: combina preço ainda acessível com localização estratégica, perto dos acessos e do centro.',
       'Antes da compra, vale considerar fatores como:',
       { itens: ['Tempo de deslocamento', 'Infraestrutura da região', 'Segurança', 'Perfil do imóvel', 'Potencial de valorização'] },
       'Contar com uma imobiliária especializada faz toda a diferença para encontrar oportunidades alinhadas ao seu perfil.',
@@ -2251,28 +2372,6 @@ export const POSTS: Post[] = [
       'Escolher entre os melhores bairros para morar em Jundiaí fica muito mais fácil com o apoio de especialistas que conhecem profundamente o mercado local.',
       'A Lotus Brokers acompanha as principais oportunidades da cidade e oferece atendimento personalizado para quem deseja comprar, vender ou investir em imóveis em Jundiaí.',
       'Seja para encontrar um apartamento moderno, uma casa em condomínio ou um imóvel para investimento, conte com uma equipe preparada para ajudar você a fazer a melhor escolha.',
-    ],
-  },
-  {
-    id: 'onde-morar-em-jundiai-2026', cat: 'Mercado', date: 'Jun 2026', publicadoEm: '2026-06-01', read: '7 min', img: '/forest-houses/a000.jpg', slot: 'blog-p1', title: 'Onde morar em Jundiaí em 2026: 5 bairros em ascensão', excerpt: 'A cidade cresce para além do centro. Veja os bairros que combinam infraestrutura, verde e valorização.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
-    tldr: 'Eloy Chaves, Medeiros, Malota, Jardim do Lago e a região do Engordadouro combinam infraestrutura consolidada, áreas verdes e procura crescente e concentram boa parte das buscas por imóveis em Jundiaí em 2026.',
-    body: [
-      'Jundiaí sempre foi uma cidade de bairros fortes, cada um com identidade própria. Mas nos últimos anos, alguns deles passaram a concentrar a atenção de quem busca qualidade de vida sem abrir mão de estar perto de tudo.',
-      'Eloy Chaves segue como o queridinho das famílias: ruas arborizadas, escolas por perto e a Serra do Japi a dez minutos. Medeiros cresce com condomínios novos e comércio de bairro cada vez mais completo. A Malota atrai quem quer casas maiores e tranquilidade.',
-      'O Jardim do Lago e a região do Engordadouro entram na lista pela combinação de preço ainda acessível com localização estratégica, perto dos acessos e do centro.',
-      'O que esses bairros têm em comum? Infraestrutura pronta, verde de verdade e liquidez: imóveis bem precificados nessas regiões não ficam muito tempo no mercado.',
-      'Se você está pensando em comprar (ou vender) em um deles, converse com um especialista que conhece cada rua, é isso que muda o resultado da negociação.',
-    ],
-  },
-  {
-    id: 'financiamento-imobiliario-2026', cat: 'Guia', date: 'Jun 2026', publicadoEm: '2026-06-01', read: '6 min', img: '/blog/financiamento-2026.jpg', slot: 'blog-p2', title: 'Financiamento em 2026: o que muda e como se preparar', excerpt: 'Taxas, documentação e o passo a passo para chegar ao banco com aprovação quase garantida.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
-    tldr: 'Para financiar bem em 2026: organize a documentação de renda, cuide do score, compare bancos (as taxas variam mais do que parece) e faça a pré-aprovação antes de escolher o imóvel.',
-    body: [
-      'A pergunta mais comum de quem quer comprar o primeiro imóvel continua sendo a mesma: "será que o banco aprova?". A boa notícia é que a aprovação depende menos de sorte e mais de preparo.',
-      'O primeiro passo é entender a regra dos 30%: os bancos esperam que a parcela não comprometa mais do que cerca de um terço da renda familiar bruta. Somar a renda de duas pessoas no mesmo financiamento é permitido e muito comum.',
-      'O segundo é a documentação: comprovantes de renda organizados, declaração de imposto de renda em dia e nome limpo. Trabalhadores autônomos conseguem financiar, sim, com extratos e histórico bem apresentados.',
-      'Terceiro: compare. A diferença de taxa entre bancos pode significar dezenas de milhares de reais ao longo do contrato. Vale simular em pelo menos três instituições, ou pedir para a Lotus fazer isso por você.',
-      'Por fim, faça a pré-aprovação antes de se apaixonar por um imóvel. Com o crédito aprovado, você negocia com força de comprador à vista.',
     ],
   },
   {
