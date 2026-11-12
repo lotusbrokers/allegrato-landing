@@ -1,5 +1,7 @@
 import { supabase, TENANT_ID } from './supabase';
 import { slugCondominio } from './slug-condominio';
+import { principalDoRepetido } from './condominios-repetidos';
+import { textoSemMarkdown } from './texto-sem-markdown';
 
 // Camada de dados dos CONDOMÍNIOS do Portal.
 // Fonte: view pública portal_condominios (Supabase, leitura anônima, RLS por
@@ -128,7 +130,7 @@ export function toCard(row: CondominioRow): CondominioCard {
     bairro: row.bairro,
     cidade: row.cidade,
     capa: capaUrl(row.fotos),
-    resumo: resumoDe(row.descricao_site),
+    resumo: resumoDe(textoSemMarkdown(row.descricao_site)),
     enderecoCompleto:
       preenchido(row.logradouro) &&
       preenchido(row.numero) &&
@@ -209,7 +211,18 @@ export async function getCondominioPorSlug(slug: string): Promise<CondominioRow 
   return alvo ? getCondominio(alvo.id) : null;
 }
 
+/**
+ * Para onde vai o slug de um cadastro repetido (lib/condominios-repetidos.ts),
+ * ou null. Lê a lista leve de slugs, a mesma de getCondominioPorSlug.
+ */
+export async function getPrincipalDoRepetido(slug: string): Promise<string | null> {
+  const publicados = new Set((await getCondominioSlugs()).map((c) => c.slug));
+  return principalDoRepetido(slug, publicados);
+}
+
 // Cards resumidos (listagem / relacionados). Exclui opcionalmente um id.
+// Cadastro repetido de outro condomínio não entra: índice, sitemap, home,
+// guias de bairro, "Perto do" e páginas do build passam todos por aqui.
 export async function getCondominiosCards(excludeId?: string): Promise<CondominioCard[]> {
   const { data, error } = await supabase
     .from('portal_condominios')
@@ -219,7 +232,7 @@ export async function getCondominiosCards(excludeId?: string): Promise<Condomini
     console.error('[getCondominiosCards] erro Supabase:', error.message);
     return [];
   }
-  return (data as CondominioRow[])
-    .filter((r) => r.id !== excludeId)
-    .map(toCard);
+  const cards = (data as CondominioRow[]).map(toCard);
+  const publicados = new Set(cards.map((c) => c.slug));
+  return cards.filter((c) => c.id !== excludeId && !principalDoRepetido(c.slug, publicados));
 }

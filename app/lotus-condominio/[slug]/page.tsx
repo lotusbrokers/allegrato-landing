@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
-import { notFound, permanentRedirect } from 'next/navigation';
+import { notFound, permanentRedirect, redirect } from 'next/navigation';
 import LotusCondominio from '@/components/LotusCondominio';
 import {
   getCondominio,
   getCondominioPorSlug,
   getCondominiosCards,
+  getPrincipalDoRepetido,
   slugCondominio,
   type CondominioRow,
   isCondominioApresentavel,
@@ -13,6 +14,7 @@ import { getImoveisDoCondominio } from '@/lib/imoveis';
 import { getLancamentosList, isListItemApresentavel, type LancamentoListItem } from '@/lib/lancamentos';
 import { descricaoComNome } from '@/lib/descricao-com-nome';
 import { resumoDescricao } from '@/lib/resumo-imovel';
+import { textoSemMarkdown } from '@/lib/texto-sem-markdown';
 import { guiaDoBairro } from '@/lib/bairros';
 import { girar } from '@/lib/girar';
 
@@ -129,7 +131,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   // de busca e de compartilhamento; a página mostra o texto como foi cadastrado.
   const description = resumoDescricao(
     descricaoComNome(
-      cond.descricao_site?.trim() ||
+      textoSemMarkdown(cond.descricao_site) ||
         `Tudo sobre morar no ${cond.nome}, ${cidade}: estrutura, localização e imóveis disponíveis com o especialista da Lotus.`,
       cond.nome,
     ).replace(/[\p{Extended_Pictographic}\u{FE0F}]/gu, ''),
@@ -167,7 +169,7 @@ function buildJsonLd(cond: CondominioRow, slug: string) {
     '@type': 'ApartmentComplex',
     name: cond.nome,
     description:
-      cond.descricao_site?.trim() ||
+      textoSemMarkdown(cond.descricao_site) ||
       `${cond.nome} é um condomínio em ${cidade}, procurado por famílias pela estrutura, segurança e qualidade de vida.`,
     address: {
       '@type': 'PostalAddress',
@@ -226,6 +228,10 @@ function guiaDoCondominio(cond: CondominioRow): { nome: string; slug: string } |
 
 export default async function LotusCondominioPage({ params }: Params) {
   const { slug } = await params;
+  // Cadastro repetido (um por portaria): 307 para o que fica. Ver
+  // lib/condominios-repetidos.ts.
+  const principal = await getPrincipalDoRepetido(slug);
+  if (principal) redirect(`/lotus-condominio/${principal}`);
   const { cond, redirecionarPara } = await resolver(slug);
   if (redirecionarPara) permanentRedirect(redirecionarPara);
   if (!cond) notFound();

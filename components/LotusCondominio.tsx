@@ -1,5 +1,8 @@
 'use client';
 import { footerLegalLine } from '@/lib/site';
+import { imagemOtimizada } from '@/lib/imagem-otimizada';
+import { juntarEndereco } from '@/lib/endereco';
+import { textoSemMarkdown } from '@/lib/texto-sem-markdown';
 
 /**
  * LotusCondominio — porte 1:1 de lotus-condominio/index.html (mecanismo dc-runtime) para React.
@@ -116,6 +119,7 @@ function ImageSlot({
   style,
   alt = '',
   prioridade = false,
+  sizes = '(max-width: 900px) 100vw, 50vw',
 }: {
   src?: string;
   id?: string;
@@ -129,6 +133,11 @@ function ImageSlot({
    * sem rolar — marcar demais anula o ganho.
    */
   prioridade?: boolean;
+  /**
+   * Quanto da tela a foto ocupa, para o navegador escolher a largura certa do
+   * otimizador (lib/imagem-otimizada). Hero ocupa a tela toda: "100vw".
+   */
+  sizes?: string;
 }) {
   return (
     <div
@@ -141,7 +150,8 @@ function ImageSlot({
     >
       {src && (
         <img
-          src={src}
+          {...imagemOtimizada(src)}
+          sizes={sizes}
           alt={alt}
           loading={prioridade ? 'eager' : 'lazy'}
           fetchPriority={prioridade ? 'high' : undefined}
@@ -362,7 +372,7 @@ export default function LotusCondominio({
   const fotoAt = (i: number): string | undefined => galeria[i];
 
   const descricao =
-    data.descricao_site?.trim() ||
+    textoSemMarkdown(data.descricao_site) ||
     `O ${nome} é um condomínio em ${cidade}, procurado por famílias pela estrutura, segurança e qualidade de vida. A Lotus conhece o condomínio por dentro e acompanha você na compra.`;
   const tldr = primeiraFrase(descricao);
 
@@ -377,16 +387,14 @@ export default function LotusCondominio({
    * O zoom acompanha: quarteirão quando há endereço, bairro quando não há —
    * mostrar rua no zoom máximo sem saber a rua seria precisão fingida.
    */
-  const endereco = [
+  const endereco = juntarEndereco([
     data.logradouro,
     data.numero,
     data.bairro,
     data.cidade,
     data.estado || 'SP',
     data.cep,
-  ]
-    .filter((p) => p && String(p).trim())
-    .join(', ');
+  ]);
   const temEndereco = Boolean(data.logradouro && String(data.logradouro).trim());
   const mapaQuery = encodeURIComponent(temEndereco ? `${nome}, ${endereco}` : `${nome}, ${cidade}, SP`);
   /**
@@ -448,7 +456,7 @@ export default function LotusCondominio({
       {/* HERO */}
       <section style={parseStyle('max-width:1200px;margin:16px auto 0;padding:0 32px;')}>
         <div style={parseStyle('position:relative;border-radius:22px;overflow:hidden;height:clamp(320px,42vw,460px);background:#1d3a2c;')}>
-          <ImageSlot prioridade id="cond-hero" src={fotoCapa} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={`Foto do condomínio ${nome}`} />
+          <ImageSlot prioridade sizes="100vw" id="cond-hero" src={fotoCapa} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={`Foto do condomínio ${nome}`} />
           <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,.25) 0%,rgba(21,36,28,.2) 40%,rgba(21,36,28,.88) 100%);')}></div>
           <div style={parseStyle('position:absolute;left:0;right:0;bottom:0;padding:clamp(28px,4vw,48px);')}>
             <div style={parseStyle('font-size:12.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#cdab6e;margin-bottom:14px;')}>{tipoLabel} · {cidade}</div>
@@ -578,7 +586,7 @@ export default function LotusCondominio({
                 mostra o endereço; sem ele, avisa que a posição é aproximada. */}
             <div style={parseStyle('position:absolute;bottom:12px;left:12px;right:12px;background:rgba(247,242,232,.92);border-radius:8px;padding:7px 11px;font-size:11.5px;color:#3f6249;line-height:1.35;pointer-events:none;')}>
               {temEndereco
-                ? [data.logradouro, data.numero, data.bairro].filter(Boolean).join(', ')
+                ? juntarEndereco([data.logradouro, data.numero, data.bairro])
                 : 'Localização aproximada'}
             </div>
           </div>
