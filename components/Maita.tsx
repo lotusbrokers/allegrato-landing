@@ -402,12 +402,12 @@ export default function Maita() {
                 <span>
                   Vivencie
                 </span>
-              </span>
+              </span>{' '}
               <span className="ln">
                 <span>
                   novos voos
                 </span>
-              </span>
+              </span>{' '}
               <span className="ln">
                 <span>
                   com o{' '}

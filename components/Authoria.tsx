@@ -753,7 +753,9 @@ export default function Authoria() {
                 acessível vem do alt da imagem. margin:0 na regra .hero-logo-wrap
                 anula o padrão do navegador para h1 e mantém o visual igual. */}
             <h1 className="hero-logo-wrap" data-reveal="" style={{ '--rd': '.08s' } as React.CSSProperties}>
-              <img src="/authoria/a003.png" alt="Authoria by Tebas" className="hero-logo-img" />
+              <img src="/authoria/a003.png" alt="" className="hero-logo-img" />
+              {/* Nome em texto no H1 (o logo sozinho deixava o título sem texto), fora da vista. */}
+              <span style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)', whiteSpace: 'nowrap' }}>Authoria by Tebas</span>
             </h1>
             <p className="hero-tagline lede" data-reveal="" style={{ '--rd': '.16s' } as React.CSSProperties}>
               Quando você muda, o mundo muda também. Um encontro raro entre exclusividade, natureza e
@@ -1755,7 +1757,7 @@ export default function Authoria() {
           </div>
           <div className="ft-base">
             <span>© 2026 · Authoria by Tebas</span>
-            <span>Realização e Construção: Tebas · Vendas: Lotus Brokers</span>
+            <span>Realização e Construção: <a href="/construtoras/tebas" target="_top" style={{ color: 'inherit', textDecoration: 'underline' }}>Tebas</a> · Vendas: Lotus Brokers</span>
           </div>
         </div>
       </footer>

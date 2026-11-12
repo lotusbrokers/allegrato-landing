@@ -9,7 +9,7 @@ import RodapeLotus from '@/components/RodapeLotus';
 export const metadata: Metadata = {
   title: 'Authoria by Tebas, apartamentos de 3 e 4 suítes, 137 a 211 m², em Jundiaí | Imobiliária Lotus Brokers',
   description:
-    'Authoria by Tebas: alto padrão elevado ao estado da arte em Jundiaí. Apartamentos de 3 e 4 suítes, 137,39 a 211,91 m², 4 torres, lazer completo com piscina coberta, beach tennis, coworking e mais. Arquitetura HOCH e paisagismo Benedito Abbud. Agende sua visita ao decorado.',
+    'Authoria by Tebas, em Jundiaí: 3 e 4 suítes de 137 a 211 m², arquitetura HOCH, paisagismo Benedito Abbud e piscina coberta. Agende a visita ao decorado.',
   keywords:
     'Authoria by Tebas, apartamento Jundiaí, alto padrão Jundiaí, 4 suítes Jundiaí, 3 suítes, lançamento Jundiaí, Jardim Santa Teresa, Tebas, apartamento de luxo, imóvel Jundiaí',
   authors: [{ name: 'Tebas' }],

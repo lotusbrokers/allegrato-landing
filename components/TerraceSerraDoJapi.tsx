@@ -537,7 +537,7 @@ export default function TerraceSerraDoJapi() {
             Jardim das Samambaias · Jundiaí, SP
           </span>
           <h1 className="hero__title">
-            Terrace<span className="ital">Serra do Japi</span>
+            Terrace{' '}<span className="ital">Serra do Japi</span>
           </h1>
           <p className="hero__sub">
             Residências suspensas de 157 a 203 m², com vista permanente para a

@@ -11,7 +11,7 @@ export const viewport: Viewport = { themeColor: '#2c1e10' };
 export const metadata: Metadata = {
   title: 'Manawa Residencial, 2 e 3 dormitórios com suíte em Jundiaí | Imobiliária Lotus Brokers',
   description:
-    'Manawa Residencial em Jundiaí/SP: apartamentos de 65,96 a 102,79 m², 2 e 3 dormitórios com suíte, +15 itens de lazer, vagas 100% cobertas e infraestrutura para carro elétrico. Obras em andamento. Agende sua visita.',
+    'Manawa Residencial, em Jundiaí: apartamentos de 65,96 a 102,79 m², 2 e 3 dorms com suíte, mais de 15 itens de lazer e vagas cobertas.',
   keywords:
     'Manawa Residencial, apartamento Jundiaí, 2 dormitórios Jundiaí, 3 dormitórios suíte, lançamento Jundiaí, apartamento com lazer Jundiaí, Recanto Quarto Centenário, MacLucer',
   alternates: {

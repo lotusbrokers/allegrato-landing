@@ -407,7 +407,7 @@ export default function VisttaCastanho() {
                 Loteamento Fechado · Castanho, Jundiaí, SP
               </span>
               <h1 className="display reveal d1">
-                Vistta Castanho
+                Vistta Castanho{' '}
                 <span className="accent">um sonho do tamanho do seu</span>
               </h1>
               <p className="hero-sub reveal d2">

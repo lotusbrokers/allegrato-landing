@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title:
     'Terrace Serra do Japi, apartamentos de alto padrão em Jundiaí | Imobiliária Lotus Brokers',
   description:
-    'Terrace Serra do Japi: residências de 157 a 203 m² com vista permanente para a Serra do Japi, no Jardim das Samambaias, Jundiaí. 3 torres, lazer premium e localização privilegiada. Consulte valores com a Lotus Brokers.',
+    'Terrace Serra do Japi, no Jardim das Samambaias, Jundiaí: apartamentos de 157 a 203 m² em 3 torres, com vista permanente para a Serra do Japi.',
   keywords:
     'Terrace Serra do Japi, apartamento alto padrão Jundiaí, lançamento Jundiaí, Jardim das Samambaias, Auten, apartamento 4 suítes Jundiaí, imóvel de luxo Jundiaí',
   authors: [{ name: 'Lotus Brokers' }],

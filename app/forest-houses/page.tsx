@@ -11,7 +11,7 @@ export const viewport: Viewport = { themeColor: '#022B1D' };
 export const metadata: Metadata = {
   title: 'Forest Houses, casas em condomínio em Louveira | Imobiliária Lotus Brokers',
   description:
-    'Forest Houses: casas em condomínio de 147m² e 200m² com 3 suítes e sacada em Louveira/SP. Lazer completo, fiação subterrânea, gás encanado e localização privilegiada a 2 km do centro. Agende sua visita com a Lotus Brokers.',
+    'Forest Houses, em Louveira: casas em condomínio de 147 e 200 m² com 3 suítes, lazer completo, fiação subterrânea e gás encanado, a 2 km do centro.',
   keywords:
     'Forest Houses, casas em condomínio Louveira, condomínio fechado Louveira, casas 147m², casas 200m², 3 suítes, Lotus Brokers, imóveis Louveira SP, alto padrão',
   authors: [{ name: 'Lotus Brokers' }],

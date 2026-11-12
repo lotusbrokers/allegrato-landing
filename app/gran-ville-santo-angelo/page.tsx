@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title:
     'Gran Ville Santo Angelo, loteamento de alto padrão em Itupeva | Imobiliária Lotus Brokers',
   description:
-    'Gran Ville Santo Angelo: o novo bairro planejado em Itupeva-SP. 450 mil m² com 200 mil m² de Mata Atlântica preservada, clube privativo, complexo esportivo e lotes a partir de 360 m². Novo urbanismo da GP Desenvolvimento Urbano.',
+    'Gran Ville Santo Angelo, bairro planejado em Itupeva: lotes a partir de 360 m², 200 mil m² de Mata Atlântica preservada, clube e complexo esportivo.',
   keywords:
     'Gran Ville Santo Angelo, loteamento Itupeva, lotes Itupeva, bairro planejado, novo urbanismo, GP Desenvolvimento Urbano, lotes alto padrão, condomínio Itupeva, Jundiaí, Mata Atlântica',
   authors: [{ name: 'GP Desenvolvimento Urbano' }],

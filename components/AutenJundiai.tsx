@@ -596,7 +596,7 @@ export default function AutenJundiai() {
             <div className="hero-grid">
               <div className="hero-head" data-reveal="">
                 <div className="hero-loc"><span className="dot"></span><span>Anhangabaú · Jundiaí / SP</span></div>
-                <h1>Auten<br /><em>Jundiaí</em></h1>
+                <h1>Auten{' '}<br /><em>Jundiaí</em></h1>
                 <p className="hero-tag">Um projeto que nasceu para ser um marco na sua vida.</p>
                 <div className="hero-stats">
                   <div className="stat"><div className="n">74</div><div className="l">unidades exclusivas</div></div>

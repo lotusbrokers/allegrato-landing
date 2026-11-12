@@ -373,7 +373,7 @@ export default function Manawa() {
               <span className="dot"></span>Obras iniciadas · Jundiaí / SP
             </span>
             <h1>
-              Viva o <em>agora</em>.<br />Manawa Residencial.
+              Viva o <em>agora</em>.{' '}<br />Manawa Residencial.
             </h1>
             <p className="hero-sub">
               Conforto, natureza e lazer completo para a sua família, no coração de Jundiaí.

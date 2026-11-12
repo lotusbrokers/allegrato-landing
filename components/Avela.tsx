@@ -514,7 +514,7 @@ export default function Avela({
               Vila Residencial · Itupeva / SP
             </div>
             <h1 style={parseStyle("font-family:'Zilla Slab',serif;font-weight:600;color:#fff;font-size:clamp(40px,6.6vw,82px);line-height:1.02;letter-spacing:-.01em;margin:0 0 24px;text-shadow:0 2px 30px rgba(0,0,0,.35);text-wrap:balance;")}>
-              A beleza do campo<br /><span style={parseStyle("font-family:'Playfair Display',serif;font-style:italic;font-weight:500;color:#F0C98A;")}>no coração da cidade</span>
+              A beleza do campo{' '}<br /><span style={parseStyle("font-family:'Playfair Display',serif;font-style:italic;font-weight:500;color:#F0C98A;")}>no coração da cidade</span>
             </h1>
             <p style={parseStyle('color:rgba(255,255,255,.92);font-size:clamp(16px,1.7vw,20px);line-height:1.6;max-width:600px;margin:0 0 32px;animation:avUp .9s .3s both;')}>
               Apartamentos de 2 e 3 dormitórios, de <strong style={parseStyle('font-weight:700;color:#fff;')}>66 a 87 m²</strong>, com gardens privativos e mais de 12 espaços de lazer, cercados de natureza, a minutos de tudo.

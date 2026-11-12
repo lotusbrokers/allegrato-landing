@@ -650,7 +650,7 @@ export default function GranVilleSantoAngelo() {
               Gran Ville Santo Angelo, Itupeva · SP
             </span>
             <h1 className="hero__title">
-              Acalente sua alma,
+              Acalente sua alma,{' '}
               <br />
               aconchegue sua <em>natureza</em>.
             </h1>

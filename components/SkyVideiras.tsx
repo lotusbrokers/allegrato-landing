@@ -93,7 +93,7 @@ export default function SkyVideiras() {
               SEBEL Empreendimentos · Chegamos a Jundiaí
             </p>
             <h1>
-              No horizonte
+              No horizonte{' '}
               <br />
               da sua{' '}
               <em>
@@ -680,7 +680,7 @@ export default function SkyVideiras() {
               SEBEL Empreendimentos: história que se faz também no presente.
             </h2>
             <p className="lead">
-              Na estrada desde os anos 80, a SEBEL atua com força no estado de São Paulo, do tradicional Edifício Maison Rodin a conjuntos habitacionais com mais de 600 unidades. Agora, chega a Jundiaí com o SKY Videiras.
+              Na estrada desde os anos 80, a SEBEL atua com força no estado de São Paulo, do tradicional Edifício Maison Rodin a conjuntos habitacionais com mais de 600 unidades. Agora, chega a Jundiaí com o SKY Videiras. <a href="/construtoras/sebel-empreendimentos" target="_top" style={{ color: 'inherit', textDecoration: 'underline' }}>Conheça a SEBEL</a>.
             </p>
             <blockquote className="quote">
               "Eu acredito que duas coisas são fundamentais: Responsabilidade e Qualidade."

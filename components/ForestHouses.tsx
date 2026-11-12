@@ -393,7 +393,7 @@ export default function ForestHouses() {
           </div>
           <div className="container hero__inner">
             <p className="eyebrow hero__eyebrow" data-reveal="" style={{ '--d': '80ms' } as React.CSSProperties}>Casas em condomínio · Louveira / SP</p>
-            <h1 className="display" data-reveal="" style={{ '--d': '180ms' } as React.CSSProperties}>Forest Houses<span className="accent">Viver é natural.</span></h1>
+            <h1 className="display" data-reveal="" style={{ '--d': '180ms' } as React.CSSProperties}>Forest Houses{' '}<span className="accent">Viver é natural.</span></h1>
             <p className="hero__sub" data-reveal="" style={{ '--d': '320ms' } as React.CSSProperties}>Um estilo de vida moderno, conectado à natureza, a apenas 2 km do centro de Louveira. Natural, moderno e funcional.</p>
             <div className="hero__specs" data-reveal="" style={{ '--d': '440ms' } as React.CSSProperties}>
               <span className="hero__chip"><b>147 m²</b></span>
