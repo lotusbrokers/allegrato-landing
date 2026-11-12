@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './recrutamento.css';
 import LotusRecrutamento from '@/components/LotusRecrutamento';
 import { PERGUNTAS_RECRUTAMENTO } from '@/lib/recrutamento';
-import { IMAGEM_COMPARTILHAMENTO } from '@/lib/site';
+import { IMAGEM_COMPARTILHAMENTO, SITE } from '@/lib/site';
 // Página nova em 19/10/2026 (Seja-Corretor-Lotus.html): título e descrição são
 // os do arquivo.
 //
@@ -15,9 +15,12 @@ import { fraunces } from '@/app/_fontes/fraunces';
 const URL_DA_PAGINA = 'https://www.lotusbrokers.com.br/lotus-recrutamento';
 
 export const metadata: Metadata = {
-  title: 'Seja um Corretor Lotus em Jundiaí e Itupeva: carreira | Lotus Brokers',
+  // "Vaga de corretor de imóveis em Jundiaí" desde 12/11/2026 (Radar C9: a busca hoje é
+  // dos sites de vagas). "corretor de imóveis em Jundiaí" continua no título, que é o
+  // que segura o 4º lugar em "trabalhar como corretor de imóveis Jundiaí".
+  title: 'Vaga de corretor de imóveis em Jundiaí e Itupeva | Lotus Brokers',
   description:
-    'Carreira de corretor de imóveis na Lotus Brokers, em Jundiaí e Itupeva. Comissão até 60%, mentoria e formação de especialista, estrutura que te tira do operacional. Com ou sem experiência.',
+    'Vaga de corretor de imóveis em Jundiaí e Itupeva: comissão até 60%, mentoria 1:1, formação completa e estrutura de marketing. Com ou sem experiência.',
   alternates: { canonical: URL_DA_PAGINA },
   openGraph: {
     siteName: 'Lotus Brokers',
@@ -35,15 +38,22 @@ const jobPostingLd = {
   '@context': 'https://schema.org',
   '@type': 'JobPosting',
   title: 'Corretor de imóveis especialista',
+  // O texto da vaga é o da própria página: o Google exige que bata com o que se lê.
   description:
-    'Vaga para corretor especialista na Lotus Brokers, com mentoria, estrutura de apoio, time de marketing e comissão até 60%.',
-  hiringOrganization: { '@type': 'Organization', name: 'Lotus Brokers' },
+    '<p>Vaga de corretor de imóveis na Lotus Brokers, em Jundiaí e Itupeva, com ou sem experiência.</p>' +
+    '<ul><li>Comissão até 60%, com tabela transparente.</li><li>Formação completa e mentoria 1:1 até a primeira venda.</li>' +
+    '<li>Marketing, CRM, fotos e material prontos.</li><li>Um bairro e uma carteira para chamar de seus.</li><li>Plano de carreira, do início ao especialista sênior.</li></ul>' +
+    '<p>Para atuar é preciso CRECI; a Lotus orienta quem ainda vai tirar o seu. Candidatura pelo formulário da página, com resposta pelo WhatsApp.</p>',
+  hiringOrganization: { '@type': 'Organization', name: SITE.nome, sameAs: 'https://www.lotusbrokers.com.br', logo: 'https://www.lotusbrokers.com.br/logo-lotus-dourado.png' },
+  directApply: true,
   jobLocation: {
     '@type': 'Place',
     address: {
       '@type': 'PostalAddress',
+      streetAddress: SITE.logradouro,
       addressLocality: 'Jundiaí',
       addressRegion: 'SP',
+      postalCode: SITE.cep,
       addressCountry: 'BR',
     },
   },

@@ -142,7 +142,7 @@ export default function LotusRecrutamento() {
       <section className="hero" id="topo">
         <div className="wrap">
           <div className="hero-inner" data-reveal="">
-            <p className="eyebrow">Carreira na Lotus · Jundiaí e Itupeva</p>
+            <p className="eyebrow">Vaga de corretor de imóveis · Jundiaí e Itupeva</p>
             <h1>
               Pare de ser mais um. Vire o <em>especialista</em> do seu bairro.
             </h1>

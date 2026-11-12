@@ -43,7 +43,29 @@ export function mensagemDeCandidatura(c: Candidatura): string {
   );
 }
 
+// As quatro primeiras respondem o que procura quem busca "vaga de corretor de imóveis
+// em Jundiaí" (Radar C9, 12/11/2026), com o que a página já diz: nada de número novo.
 export const PERGUNTAS_RECRUTAMENTO: { pergunta: string; resposta: string }[] = [
+  {
+    pergunta: 'Quanto ganha um corretor na Lotus?',
+    resposta:
+      'A comissão vai até 60%, com tabela transparente: você sabe quanto ganha em cada negócio. As condições completas são apresentadas no processo seletivo.',
+  },
+  {
+    pergunta: 'De onde vêm os clientes?',
+    resposta:
+      'Em vez de disputar lead em grupo de WhatsApp, o corretor da Lotus trabalha um bairro, com carteira, conteúdo, marketing e CRM da Lotus a favor. As regras de distribuição de contatos são explicadas no processo seletivo.',
+  },
+  {
+    pergunta: 'Como é o treinamento?',
+    resposta:
+      'Uma imersão com produto, bairro, processo e as ferramentas da Lotus, e mentoria 1:1 até a primeira venda, que você faz acompanhado.',
+  },
+  {
+    pergunta: 'Como me candidatar à vaga?',
+    resposta:
+      'Pelo formulário desta página, em 2 minutos. Um recrutador da Lotus responde pelo WhatsApp; depois vêm a conversa, a imersão e a primeira venda com mentoria.',
+  },
   {
     pergunta: 'Preciso ter experiência?',
     resposta:
