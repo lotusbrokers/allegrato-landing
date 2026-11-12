@@ -11,6 +11,7 @@ import { recorteDaCidade } from '@/lib/recortes-busca';
 import { POSTS, hrefDoArtigo } from '@/lib/blog-posts';
 import { publicados } from '@/lib/blog-agenda';
 import { IMAGEM_COMPARTILHAMENTO } from '@/lib/site';
+import { videoDoBairro } from '@/lib/video-bairro';
 
 // Guias de bairro são conteúdo estático (lib/bairros) — dá pra pré-renderizar
 // todos no build. Os imóveis do bairro vêm do banco em runtime; por isso ISR
@@ -88,7 +89,9 @@ function buildJsonLd(bairro: Bairro, slug: string) {
       { '@type': 'ListItem', position: 2, name: bairro.nome, item: url },
     ],
   };
-  return [place, faq, breadcrumb];
+  // VideoObject só quando o bairro tem vídeo publicado (lib/video-bairro.ts).
+  const video = videoDoBairro(bairro);
+  return video ? [place, faq, breadcrumb, video.jsonLd] : [place, faq, breadcrumb];
 }
 
 /**

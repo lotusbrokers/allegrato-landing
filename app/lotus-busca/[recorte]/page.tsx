@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import LotusBusca from '@/components/LotusBusca';
 import { listBairros } from '@/lib/bairros';
@@ -59,10 +60,45 @@ export default async function RecorteDaBuscaPage({ params }: Params) {
     })),
   };
 
+  // Os guias de bairro da cidade do recorte, antes do rodapé. Com o acervo
+  // pequeno (/casas-em-itupeva tinha 1 casa em 11/2026, "página fraca" na
+  // auditoria de SEO), a página continua levando a conteúdo real da cidade.
+  const guias = listBairros()
+    .filter((b) => b.publicado && b.cidade === recorte.cidade)
+    .sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
+  const complemento = guias.length > 0 && (
+    <section style={{ background: '#f7f2e8', padding: '56px 32px 40px' }}>
+      <div style={{ maxWidth: 1480, margin: '0 auto' }}>
+        <h2 style={{ fontFamily: "'Fraunces',serif", fontWeight: 300, fontSize: 'clamp(22px,2.6vw,30px)', color: '#15241c', margin: '0 0 8px' }}>
+          Bairros de {recorte.cidade}
+        </h2>
+        <p style={{ fontSize: 15, color: '#3f6249', fontWeight: 300, margin: '0 0 22px' }}>
+          Guias da Lotus com o dia a dia, os acessos e os imóveis de cada bairro.
+        </p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+          {guias.map((b) => (
+            <Link
+              key={b.slug}
+              href={`/lotus-bairro/${b.slug}`}
+              style={{ fontSize: 14, color: '#15241c', background: '#ece2cf', borderRadius: 40, padding: '9px 16px' }}
+            >
+              {b.nome}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }} />
-      <LotusBusca imoveis={imoveis} bairrosDoGuia={listBairros().map((b) => b.nome)} titulo={recorte.titulo} />
+      <LotusBusca
+        imoveis={imoveis}
+        bairrosDoGuia={listBairros().map((b) => b.nome)}
+        titulo={recorte.titulo}
+        complemento={complemento || undefined}
+      />
     </>
   );
 }

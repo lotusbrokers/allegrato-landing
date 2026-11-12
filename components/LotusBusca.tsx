@@ -173,6 +173,7 @@ export default function LotusBusca({
   imoveis = [],
   bairrosDoGuia = [],
   titulo,
+  complemento,
 }: {
   whatsapp?: string;
   /** Imóveis reais aprovados (vêm do servidor em app/lotus-busca/page.tsx). */
@@ -188,6 +189,8 @@ export default function LotusBusca({
    * de mostrar as casas de todos os bairros.
    */
   bairrosDoGuia?: string[];
+  /** Bloco do servidor antes do rodapé: os guias de bairro da cidade do recorte. */
+  complemento?: ReactNode;
 } = {}) {
   // state (espelha o `state` do dc-runtime)
   const [chips, setChips] = useState<Chip[]>([]);
@@ -677,6 +680,8 @@ export default function LotusBusca({
           </div>
         </div>
       </div>
+
+      {complemento}
 
       {/* ===== FOOTER (slim) ===== */}
       <footer data-rodape-portal="" style={parseStyle('background:#15241c;padding:40px 32px;margin-top:24px;')}>

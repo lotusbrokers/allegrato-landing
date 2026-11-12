@@ -36,6 +36,10 @@ const PERTENCE_A: Record<string, string> = {
   'jardim ermida i': 'Eloy Chaves',
   'jardim ermida ii': 'Eloy Chaves',
   'vila sereno': 'Eloy Chaves',
+  // Nome completo do bairro, como o próprio guia abre ("o Parque Residencial
+  // Eloy Chaves"). 4 condomínios gravados assim ficavam sem link para o guia
+  // (medido em 12/11/2026).
+  'parque residencial eloy chaves': 'Eloy Chaves',
   bonfiglioli: 'Vianelo Bonfiglioli',
   'jardim bonfiglioli': 'Vianelo Bonfiglioli',
   vianelo: 'Vianelo Bonfiglioli',

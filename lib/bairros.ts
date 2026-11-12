@@ -15,6 +15,7 @@
  */
 import { bairroDoGuia } from './bairros-taxonomia';
 import { girar } from './girar';
+import type { VideoDoBairroCadastro } from './video-bairro';
 
 export type BairroFaq = { q: string; a: string };
 export type BairroGuideItem = { num: string; title: string; text: string };
@@ -52,6 +53,11 @@ export type Bairro = {
   mapQuery: string;
   /** Conteúdo real preenchido? (false = placeholders a revisar). */
   publicado: boolean;
+  /**
+   * Vídeo "Morar em <bairro>, <cidade>" no YouTube (lib/video-bairro.ts). Sem
+   * ele a seção não aparece: só preencher quando o vídeo estiver publicado.
+   */
+  video?: VideoDoBairroCadastro;
 };
 
 // Eloy Chaves — conteúdo real (portado do componente original).

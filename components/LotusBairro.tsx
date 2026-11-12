@@ -1,5 +1,6 @@
 'use client';
 import { footerLegalLine } from '@/lib/site';
+import { imagemOtimizada } from '@/lib/imagem-otimizada';
 
 /**
  * LotusBairro — porte 1:1 de lotus-bairro/index.html (mecanismo dc-runtime) para React.
@@ -23,6 +24,7 @@ import React, {
 } from 'react';
 import LotusHeader from './LotusHeader';
 import { getBairro, type Bairro } from '@/lib/bairros';
+import { videoDoBairro } from '@/lib/video-bairro';
 import type { ImovelBusca } from '@/lib/imoveis';
 
 /* ------------------------------------------------------------------ */
@@ -116,6 +118,7 @@ function ImageSlot({
   alt = '',
   prioridade = false,
   initials,
+  sizes = '(max-width: 900px) 100vw, 50vw',
 }: {
   src?: string;
   id?: string;
@@ -131,6 +134,11 @@ function ImageSlot({
   prioridade?: boolean;
   /** Nome para gerar iniciais quando não há `src` (avatar-fallback). */
   initials?: string;
+  /**
+   * Quanto da tela a foto ocupa, para o navegador escolher a largura certa do
+   * otimizador (lib/imagem-otimizada). Hero ocupa a tela toda: "100vw".
+   */
+  sizes?: string;
 }) {
   const fallbackInitials = !src ? initialsOf(initials) : '';
   return (
@@ -161,7 +169,8 @@ function ImageSlot({
       )}
       {src && (
         <img
-          src={src}
+          {...imagemOtimizada(src)}
+          sizes={sizes}
           alt={alt}
           loading={prioridade ? 'eager' : 'lazy'}
           fetchPriority={prioridade ? 'high' : undefined}
@@ -193,6 +202,43 @@ const BAIRRO_FALLBACK: Bairro = getBairro('eloy-chaves')!;
 /* ------------------------------------------------------------------ */
 /* Componente                                                          */
 /* ------------------------------------------------------------------ */
+
+/**
+ * "Morar em X, cidade" em vídeo. A miniatura é um botão: o player do YouTube
+ * só carrega no clique, para não entrar no LCP do guia. Sem vídeo cadastrado,
+ * nada aparece.
+ */
+function VideoDoBairro({ bairro }: { bairro: Bairro }) {
+  const [tocando, setTocando] = useState(false);
+  const video = videoDoBairro(bairro);
+  if (!video) return null;
+  return (
+    <section style={parseStyle('max-width:1200px;margin:0 auto;padding:0 32px 72px;')}>
+      <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(24px,3vw,34px);color:#15241c;margin:0 0 20px;")}>{video.titulo}, em vídeo</h2>
+      <div style={parseStyle('position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#15241c;')}>
+        {tocando ? (
+          <iframe
+            src={video.player}
+            title={video.titulo}
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowFullScreen
+            style={parseStyle('position:absolute;inset:0;width:100%;height:100%;border:0;')}
+          />
+        ) : (
+          <button
+            type="button"
+            onClick={() => setTocando(true)}
+            aria-label={`Assistir: ${video.titulo}`}
+            style={parseStyle('position:absolute;inset:0;width:100%;height:100%;border:0;padding:0;cursor:pointer;background:none;')}
+          >
+            <img src={video.miniatura} alt="" loading="lazy" style={parseStyle('width:100%;height:100%;object-fit:cover;display:block;')} />
+            <span style={parseStyle('position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:74px;height:74px;border-radius:50%;background:rgba(21,36,28,.82);color:#f7f2e8;font-size:28px;display:flex;align-items:center;justify-content:center;')}>▶</span>
+          </button>
+        )}
+      </div>
+    </section>
+  );
+}
 
 export default function LotusBairro({
   whatsapp = WHATSAPP_DEFAULT,
@@ -319,7 +365,7 @@ export default function LotusBairro({
       {/* HERO */}
       <section style={parseStyle('max-width:1200px;margin:16px auto 0;padding:0 32px;')}>
         <div style={parseStyle('position:relative;border-radius:22px;overflow:hidden;height:clamp(320px,42vw,460px);background:#1d3a2c;')}>
-          <ImageSlot prioridade src={bairro.heroImg || undefined} id="bairro-hero" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={`Foto de ${nomeBairro}, ${bairro.cidade}`} />
+          <ImageSlot prioridade sizes="100vw" src={bairro.heroImg || undefined} id="bairro-hero" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={`Foto de ${nomeBairro}, ${bairro.cidade}`} />
           <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,.25) 0%,rgba(21,36,28,.2) 40%,rgba(21,36,28,.88) 100%);')}></div>
           <div style={parseStyle('position:absolute;left:0;right:0;bottom:0;padding:clamp(28px,4vw,48px);')}>
             <div style={parseStyle('font-size:12.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#cdab6e;margin-bottom:14px;')}>Guia do bairro · {bairro.cidade}</div>
@@ -365,6 +411,9 @@ export default function LotusBairro({
         </div>
         )}
       </section>
+
+      {/* VÍDEO "Morar em X": só com vídeo publicado (lib/video-bairro.ts). */}
+      <VideoDoBairro bairro={bairro} />
 
       {/* GUIA PROFUNDO, só aparece quando há bloco escrito. Um bairro que
           entrou no índice antes da copy chegar exibiria o título "Como é

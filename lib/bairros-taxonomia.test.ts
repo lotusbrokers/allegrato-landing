@@ -49,7 +49,8 @@ test('o guia procura por si e pelos filhos', () => {
   assert.ok(nomes.includes('jardim ermida i'));
   assert.ok(nomes.includes('jardim ermida ii'));
   assert.ok(nomes.includes('vila sereno'));
-  assert.equal(nomes.length, 4);
+  assert.ok(nomes.includes('parque residencial eloy chaves'));
+  assert.equal(nomes.length, 5);
 });
 
 test('guia sem filhos procura só por si', () => {
@@ -60,4 +61,9 @@ test('o mapa é somente leitura para quem consulta', () => {
   const m = subBairrosConhecidos();
   m['inventado'] = 'Nada';
   assert.equal(bairroDoGuia('inventado', GUIAS), null);
+});
+
+// 4 condomínios gravados com o nome completo ficavam sem link para o guia (12/11/2026).
+test('"Parque Residencial Eloy Chaves" é o guia de Eloy Chaves', () => {
+  assert.equal(bairroDoGuia('Parque Residencial Eloy Chaves', ['Eloy Chaves', 'Medeiros']), 'Eloy Chaves');
 });
