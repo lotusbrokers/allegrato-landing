@@ -305,7 +305,7 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
               carrega a ideia (a escolha), a segunda o momento (antes da chave).
               A cor separa as duas, branco e bege. */}
           <h1 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(38px,5.4vw,68px);line-height:1.03;letter-spacing:-.02em;color:#fff;margin:0 0 22px;")}>
-            <span style={parseStyle('display:block;')}>Grandes histórias</span>
+            <span style={parseStyle('display:block;')}>Grandes histórias</span>{' '}
             {/* Bege entre o #ece2cf (fundo bege do site) e o #cdab6e (dourado).
                 O #ece2cf tinha só 1.28x de contraste contra o branco da linha
                 de cima: as duas liam como a mesma cor e a separação sumia. */}
