@@ -109,3 +109,20 @@ export function construtoraPorSlug<T extends LancamentoDaConstrutora>(
 ): Construtora<T> | null {
   return construtoras.find((c) => c.slug === slug) ?? null;
 }
+
+/**
+ * A construtora cujo slug só difere deste nos hifens, ou null.
+ *
+ * O slug nasce do nome digitado no dash: quando "FA Oliva" virou "F A Oliva",
+ * /construtoras/fa-oliva passou a dar 404 com links e Google ainda apontando
+ * para lá (auditoria de 11/2026). A página manda o endereço antigo para o
+ * novo. Duas construtoras com a mesma chave ficam sem palpite (null).
+ */
+export function construtoraPorSlugParecido<T extends LancamentoDaConstrutora>(
+  construtoras: readonly Construtora<T>[],
+  slug: string
+): Construtora<T> | null {
+  const chave = slug.replaceAll('-', '');
+  const achadas = construtoras.filter((c) => c.slug.replaceAll('-', '') === chave);
+  return achadas.length === 1 ? achadas[0] : null;
+}

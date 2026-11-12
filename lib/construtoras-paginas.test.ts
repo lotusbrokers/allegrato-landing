@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { agruparPorConstrutora, construtoraPorSlug } from './construtoras-paginas.ts';
+import { agruparPorConstrutora, construtoraPorSlug, construtoraPorSlugParecido } from './construtoras-paginas.ts';
 
 const l = (name: string, builder: string, img: string | null = null) => ({ name, builder, img });
 
@@ -56,4 +56,17 @@ test('busca por slug acha e devolve null quando não existe', () => {
   const cs = agruparPorConstrutora([l('A', 'Mac Lucer')]);
   assert.equal(construtoraPorSlug(cs, 'mac-lucer')?.nome, 'Mac Lucer');
   assert.equal(construtoraPorSlug(cs, 'nao-existe'), null);
+});
+
+// /construtoras/fa-oliva dava 404 desde que o dash passou a escrever "F A Oliva".
+test('slug antigo, que só difere nos hifens, acha a construtora; empate fica sem palpite', () => {
+  const cs = agruparPorConstrutora([l('A', 'F A Oliva'), l('B', 'Tebas')]);
+  assert.equal(construtoraPorSlug(cs, 'fa-oliva'), null, 'o slug exato mudou');
+  assert.equal(construtoraPorSlugParecido(cs, 'fa-oliva')?.slug, 'f-a-oliva');
+  assert.equal(construtoraPorSlugParecido(cs, 'oliva'), null);
+
+  // Duas páginas com a mesma chave (ex.: uma vinda do conteúdo curado).
+  const pagina = (nome: string, slug: string) => ({ nome, slug, lancamentos: [], capa: null });
+  const empate = [pagina('AB Obras', 'ab-obras'), pagina('A B Obras', 'a-b-obras')];
+  assert.equal(construtoraPorSlugParecido(empate, 'abobras'), null);
 });

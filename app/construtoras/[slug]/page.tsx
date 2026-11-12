@@ -1,11 +1,16 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import LotusHeader from '@/components/LotusHeader';
 import RodapeLotus from '@/components/RodapeLotus';
 import CardEmpreendimento from '@/components/CardEmpreendimento';
 import { getLancamentosList, isListItemApresentavel, type LancamentoListItem } from '@/lib/lancamentos';
-import { agruparPorConstrutora, comCuradasSemLancamento, construtoraPorSlug } from '@/lib/construtoras-paginas';
+import {
+  agruparPorConstrutora,
+  comCuradasSemLancamento,
+  construtoraPorSlug,
+  construtoraPorSlugParecido,
+} from '@/lib/construtoras-paginas';
 import { conteudoDaConstrutora, curadasSemLancamento, logoClaroDaConstrutora } from '@/lib/construtoras-conteudo';
 import { IMAGEM_COMPARTILHAMENTO } from '@/lib/site';
 import { girar } from '@/lib/girar';
@@ -25,6 +30,11 @@ export const revalidate = 3600;
 const AJUSTE = { width: 'auto', height: 'auto', display: 'block' } as const;
 const CAIXA_HERO = { maxHeight: 104, maxWidth: 320, ...AJUSTE } as const;
 const CAIXA_HERO_EMPILHADA = { maxHeight: 230, maxWidth: 170, ...AJUSTE } as const;
+
+/** Texto que o leitor de tela e o buscador leem, sem aparecer (o padrão "sr-only"). */
+const FORA_DA_VISTA = {
+  position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)', whiteSpace: 'nowrap',
+} as const;
 
 /**
  * A capa atrás do hero, no verde da Lotus.
@@ -67,8 +77,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         `${cidades ? ` em ${cidades}` : ''} com acompanhamento da Lotus Brokers. Veja plantas, condições e fale com um especialista.`
       : `Conheça a ${c.nome}, construtora parceira da Lotus Brokers em Jundiaí e região: história, números e diferenciais.`;
 
+  // "Lançamentos da X em Jundiaí": a busca de quem procura a construtora na
+  // cidade (Radar C9, 12/11/2026). Sem lançamento, fica o nome com a região.
+  const onde = cidades || 'Jundiaí';
   return {
-    title: `${c.nome}, lançamentos e empreendimentos | Lotus Brokers`,
+    title:
+      quantos > 0
+        ? `Lançamentos da ${c.nome} em ${onde} | Lotus Brokers`
+        : `${c.nome}, construtora em Jundiaí e região | Lotus Brokers`,
     description: descricao,
     alternates: { canonical: url },
     openGraph: {
@@ -162,7 +178,12 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
   const { slug } = await params;
   const lista = await todas();
   const c = construtoraPorSlug(lista, slug);
-  if (!c) notFound();
+  if (!c) {
+    // Grafia antiga do nome no dash (fa-oliva → f-a-oliva): 308 para a atual.
+    const atual = construtoraPorSlugParecido(lista, slug);
+    if (atual) permanentRedirect(`/construtoras/${atual.slug}`);
+    notFound();
+  }
 
   // "Outras construtoras": as 4 que vêm depois desta na lista, dando a volta
   // (lib/girar). Até 06/11/2026 as páginas de construtora só recebiam link do
@@ -171,6 +192,15 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
   const outras = girar(lista, aqui + 1)
     .filter((x) => x.slug !== c.slug)
     .slice(0, 4);
+
+  // Construtora sem lançamento acompanhado ("página fraca" na auditoria de SEO
+  // de 11/2026: Emccamp, Grupo Zarin e VIC Engenharia): três lançamentos de
+  // outras construtoras, em roda, para a página não terminar sem caminho.
+  const todosOsLancamentos = lista.flatMap((x) => x.lancamentos);
+  const vitrine =
+    c.lancamentos.length > 0 || todosOsLancamentos.length === 0
+      ? []
+      : girar(todosOsLancamentos, (Math.max(aqui, 0) * 3) % todosOsLancamentos.length).slice(0, 3);
 
   const cidades = [...new Set(c.lancamentos.map((l) => l.city).filter(Boolean))];
   const sobre = conteudoDaConstrutora(c.slug);
@@ -245,16 +275,21 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
             >
               ← Construtoras
             </Link>
-            {/* O logo ocupa o lugar do nome, mas dentro do <h1>: o alt carrega o
-                nome, então o buscador e o leitor de tela continuam recebendo o
-                título da página. */}
+            {/* O logo ocupa o lugar do nome dentro do <h1>, e o nome vai junto em
+                texto, fora da vista. Só com o alt, o título da página não tinha
+                texto: a auditoria de SEO de 11/2026 leu "H1 vazio" nas 17
+                construtoras. O alt fica vazio para o leitor de tela não ler o
+                nome duas vezes. */}
             <h1 style={{ fontFamily: "'Fraunces',serif", fontWeight: 300, fontSize: 'clamp(32px,4.6vw,56px)', color: '#f7f2e8', lineHeight: 1.05, margin: '18px 0 16px' }}>
               {logoDoHero ? (
-                <img
-                  src={logoDoHero}
-                  alt={c.nome}
-                  style={sobre?.logoVertical ? CAIXA_HERO_EMPILHADA : CAIXA_HERO}
-                />
+                <>
+                  <img
+                    src={logoDoHero}
+                    alt=""
+                    style={sobre?.logoVertical ? CAIXA_HERO_EMPILHADA : CAIXA_HERO}
+                  />
+                  <span style={FORA_DA_VISTA}>{c.nome}</span>
+                </>
               ) : (
                 c.nome
               )}
@@ -384,6 +419,24 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
             </div>
           </div>
         </section>
+        )}
+
+        {vitrine.length > 0 && (
+          <section style={{ padding: '70px 32px 90px' }}>
+            <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+              <h2 style={{ fontFamily: "'Fraunces',serif", fontWeight: 300, fontSize: 'clamp(26px,3.2vw,38px)', color: '#15241c', lineHeight: 1.1, margin: '0 0 8px' }}>
+                Lançamentos em Jundiaí e região
+              </h2>
+              <p style={{ fontSize: 15, color: '#3f6249', fontWeight: 300, margin: '0 0 34px' }}>
+                A {c.nome} não tem lançamento acompanhado pela Lotus no momento. Veja outros que a Lotus acompanha.
+              </p>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(310px,1fr))', gap: 24 }}>
+                {vitrine.map((l) => (
+                  <CardEmpreendimento key={l.id} item={l} />
+                ))}
+              </div>
+            </div>
+          </section>
         )}
 
         {/* ---------------- Perguntas ----------------
