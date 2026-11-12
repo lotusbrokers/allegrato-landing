@@ -261,6 +261,22 @@ export async function getImoveisPorBairro(
 
 // Um imóvel por codigo_imovel (para a rota /lotus-imovel/[codigo]).
 export async function getImovel(codigo: string): Promise<ImovelRow | null> {
+  try {
+    return await getImovelPublicado(codigo);
+  } catch (e) {
+    console.error('[getImovel] erro Supabase:', (e as Error).message);
+    return null;
+  }
+}
+
+/**
+ * Como getImovel, mas separa "o banco não tem este código" (null) de "a
+ * leitura falhou" (lança). A página pública precisa da diferença: o código que
+ * saiu do ar vai para a busca (lib/imovel-que-saiu.ts), e um tropeço do banco
+ * não pode mandar para lá um imóvel que existe. Lançando, a revalidação falha
+ * e o cache segue com a versão anterior da página.
+ */
+export async function getImovelPublicado(codigo: string): Promise<ImovelRow | null> {
   const { data, error } = await supabase
     .from('portal_imoveis')
     .select(SELECT_FULL)
@@ -268,10 +284,7 @@ export async function getImovel(codigo: string): Promise<ImovelRow | null> {
     .eq('codigo_imovel', codigo)
     .maybeSingle();
 
-  if (error) {
-    console.error('[getImovel] erro Supabase:', error.message);
-    return null;
-  }
+  if (error) throw new Error(`[getImovelPublicado] ${codigo}: ${error.message}`);
   return (data as unknown as ImovelRow) ?? null;
 }
 

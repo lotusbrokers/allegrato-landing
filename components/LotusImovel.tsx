@@ -1,5 +1,6 @@
 'use client';
 import { footerLegalLine } from '@/lib/site';
+import { juntarEndereco } from '@/lib/endereco';
 import { imagemOtimizada, logoLotus } from '@/lib/imagem-otimizada';
 import { demonstrativoDe, temAreaDeTerreno } from '@/lib/tipologia';
 import CtaSimulacao from './CtaSimulacao';
@@ -356,7 +357,7 @@ export default function LotusImovel({
 
   const local = localCurto(data);
   const mapaBase = data.logradouro
-    ? [data.logradouro, data.numero, bairro, cidade, data.estado || 'SP'].filter(Boolean).join(', ')
+    ? juntarEndereco([data.logradouro, data.numero, bairro, cidade, data.estado || 'SP'])
     : `${bairro}, ${cidade}, ${data.estado || 'SP'}`;
   const mapaQuery = encodeURIComponent(mapaBase);
 

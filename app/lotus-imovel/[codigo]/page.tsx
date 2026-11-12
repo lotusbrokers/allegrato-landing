@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import LotusImovel from '@/components/LotusImovel';
-import { getImovel, getImoveisCards, type ImovelRow } from '@/lib/imoveis';
+import { getImovelPublicado, getImoveisCards, type ImovelRow } from '@/lib/imoveis';
+import { destinoDoImovelQueSaiu } from '@/lib/imovel-que-saiu';
+import { juntarEndereco } from '@/lib/endereco';
 import { getCaptadorDoImovel } from '@/lib/brokers';
 import { getCondominio } from '@/lib/condominios';
 import { condominioDoImovel } from '@/lib/condominio-do-imovel';
@@ -23,8 +25,8 @@ export const revalidate = 3600;
  * que declaram a função, saíam do cache. Cada acesso do Google virava consulta
  * ao Supabase, e banco fora do ar derrubava a página. Com a lista vazia, cada
  * imóvel é gerado no primeiro acesso e servido do cache por 1h, inclusive quando
- * o banco oscila; código que não existe continua dando 404 (dynamicParams fica
- * no padrão, true).
+ * o banco oscila; código que não existe vai para a busca do mesmo tipo
+ * (lib/imovel-que-saiu.ts; dynamicParams fica no padrão, true).
  */
 export function generateStaticParams(): { codigo: string }[] {
   return [];
@@ -53,7 +55,7 @@ function capaDe(imovel: ImovelRow): string | undefined {
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { codigo } = await params;
-  const imovel = await getImovel(codigo);
+  const imovel = await getImovelPublicado(codigo);
   if (!imovel) {
     return { title: 'Imóvel, Lotus Brokers', robots: { index: false } };
   }
@@ -116,7 +118,7 @@ function buildJsonLd(imovel: ImovelRow, codigo: string) {
   // ausente e melhor do que dado inventado.
   const area = imovel.area_util || imovel.area_total || imovel.metragem_m2 || null;
   const endereco: Record<string, unknown> = { '@type': 'PostalAddress', addressCountry: 'BR' };
-  if (imovel.logradouro) endereco.streetAddress = [imovel.logradouro, imovel.numero].filter(Boolean).join(', ');
+  if (imovel.logradouro) endereco.streetAddress = juntarEndereco([imovel.logradouro, imovel.numero]);
   if (imovel.cidade) endereco.addressLocality = imovel.cidade;
   if (imovel.estado) endereco.addressRegion = imovel.estado;
   if (imovel.cep) endereco.postalCode = imovel.cep;
@@ -166,8 +168,9 @@ function buildJsonLd(imovel: ImovelRow, codigo: string) {
 
 export default async function LotusImovelPage({ params }: Params) {
   const { codigo } = await params;
-  const imovel = await getImovel(codigo);
-  if (!imovel) notFound();
+  const imovel = await getImovelPublicado(codigo);
+  // Vendido, retirado ou fora de aprovação: 307 para a busca do mesmo tipo.
+  if (!imovel) redirect(destinoDoImovelQueSaiu(codigo));
 
   // O condomínio e o captador vêm junto dos relacionados, sem somar uma ida ao
   // banco no tempo da página. getCondominio devolve null para condomínio não
