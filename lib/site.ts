@@ -30,7 +30,6 @@ export const SITE = {
   telefone: '+55 11 92614-3393',
   creciPj: 'CRECI 054615-J',
   cnpj: 'CNPJ 67.767.385/0001-98',
-  regiao: 'Jundiaí · Itupeva · SP',
   ano: 2026,
 } as const;
 
