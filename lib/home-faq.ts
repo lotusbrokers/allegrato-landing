@@ -24,4 +24,10 @@ export const FAQ_HOME: PerguntaFrequente[] = [
     q: 'Como funciona o atendimento de vocês?',
     a: 'Você fala com um especialista do seu bairro, não com um corretor que dá conta de tudo. A estrutura cuida do repetitivo; o corretor cuida de você, com processo transparente do começo ao pós-chave.',
   },
+  // Radar de 13/11/2026: a home não falava de banco nem de simulador. A pergunta leva
+  // ao hub /lotus-simuladores (link logo abaixo da lista, em LotusHome).
+  {
+    q: 'Onde simulo o financiamento do imóvel?',
+    a: 'Nos simuladores oficiais dos bancos: a Lotus reuniu os da Caixa, do Banco do Brasil, do Itaú, do Bradesco e do Santander numa página só. Para comparar as condições, um especialista da Lotus simula com você, sem custo adicional.',
+  },
 ];

@@ -120,7 +120,7 @@ export const PERSONAS: Persona[] = [
  */
 export const PERGUNTAS_DA_PERSONA: Record<PersonaId, number[]> = {
   // Financiamento é a espinha: entrada, renda, FGTS, documentos, alienação.
-  'primeiro-imovel': [9, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 29, 40, 41, 42],
+  'primeiro-imovel': [9, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 48, 29, 40, 41, 42],
   // Menos financiamento, mais decisão: pronto x planta, valorização, região.
   'alto-padrao': [4, 6, 8, 10, 13, 14, 15, 16, 18, 26, 27, 28, 30, 40, 41, 43, 44, 45],
   // Só as genéricas que se aplicam de verdade. Ver a lacuna no comentário acima.
@@ -405,6 +405,15 @@ export const FAQ: FaqItem[] = [
       'Intermediamos qualquer pendência ou complementação.',
     ],
     nota: 'Você economiza semanas de idas ao banco e recebe a melhor condição disponível para o seu perfil — sem custo adicional.',
+  },
+  // Radar de 13/11/2026: o FAQ não falava de simulador. Leva ao hub /lotus-simuladores.
+  {
+    id: 48,
+    cat: 'Financiamento',
+    q: 'Onde simulo o financiamento imobiliário?',
+    a: 'No simulador oficial de cada banco. A página Simuladores de financiamento da Lotus (lotusbrokers.com.br/lotus-simuladores) reúne os endereços:',
+    lista: ['Caixa — simulador habitacional, com o Minha Casa, Minha Vida.', 'Banco do Brasil, Itaú, Bradesco e Santander — a página de crédito imobiliário de cada banco.'],
+    depois: 'Tenha em mãos a renda bruta da família, o valor do imóvel e da entrada e o saldo do FGTS. Para comparar o resultado, olhe o Custo Efetivo Total (CET), não só a taxa de juros.',
   },
 
   /* ---------------- 4. Lançamentos ---------------- */

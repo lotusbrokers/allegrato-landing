@@ -44,6 +44,7 @@ const ROTAS_FIXAS = [
   '/lotus-faq',
   '/construtoras',
   '/lotus-anunciar',
+  '/lotus-simuladores',
   '/lotus-recrutamento',
   '/lotus-privacidade',
   '/lotus-termos',

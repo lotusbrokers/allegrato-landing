@@ -269,7 +269,7 @@ export const POSTS: Post[] = [
       { titulo: '2. Planeje o valor da entrada', nivel: 3 },
       'Além das parcelas do financiamento, considere o valor necessário para a entrada e os demais custos da compra, como [ITBI, escritura e registro](/lotus-blog/itbi-escritura-e-registro), conforme o tipo de imóvel e a operação.',
       { titulo: '3. Faça simulações de financiamento', nivel: 3 },
-      'Compare diferentes instituições financeiras e modalidades de crédito. Observe não apenas as taxas de juros, mas também o Custo Efetivo Total (CET), o prazo e o valor das parcelas.',
+      'Compare diferentes [instituições financeiras](/lotus-simuladores) e modalidades de crédito. Observe não apenas as taxas de juros, mas também o Custo Efetivo Total (CET), o prazo e o valor das parcelas.',
       { titulo: '4. Pesquise empreendimentos e regiões', nivel: 3 },
       'Conhecer os imóveis disponíveis permite comparar localização, metragem, infraestrutura, padrão construtivo e condições comerciais.',
       { titulo: '5. Conte com orientação imobiliária', nivel: 3 },
@@ -695,7 +695,7 @@ export const POSTS: Post[] = [
       {
         itens: [
           'Organize suas finanças: consulte CPF no Serasa/SPC, regularize pendências e junte comprovantes de renda.',
-          'Simule em mais de um banco: Caixa, Banco do Brasil, Itaú, Bradesco e Santander têm condições diferentes. Leve a melhor proposta para os outros e negocie.',
+          '[Simule em mais de um banco](/lotus-simuladores): Caixa, Banco do Brasil, Itaú, Bradesco e Santander têm condições diferentes. Leve a melhor proposta para os outros e negocie.',
           'Peça a pré-aprovação de crédito antes de escolher o imóvel: com o valor aprovado em mãos, você negocia com mais força.',
           'Escolha o imóvel: prefira unidades com documentação regular. Para imóvel pronto, peça matrícula atualizada, certidões e, no caso de apartamento, declaração de quitação de condomínio.',
           'Peça a avaliação do banco: o financiamento é calculado sobre o menor valor entre o preço de venda e a avaliação.',

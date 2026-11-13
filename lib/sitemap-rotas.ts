@@ -29,6 +29,7 @@ export const ROTAS_FIXAS: {
   { rota: '/lotus-faq', prioridade: 0.5, frequencia: 'monthly' },
   { rota: '/construtoras', prioridade: 0.6, frequencia: 'weekly' },
   { rota: '/lotus-anunciar', prioridade: 0.6, frequencia: 'monthly' },
+  { rota: '/lotus-simuladores', prioridade: 0.5, frequencia: 'monthly' },
   { rota: '/lotus-recrutamento', prioridade: 0.4, frequencia: 'monthly' },
   { rota: '/lotus-privacidade', prioridade: 0.2, frequencia: 'yearly' },
   { rota: '/lotus-termos', prioridade: 0.2, frequencia: 'yearly' },

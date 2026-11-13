@@ -1241,6 +1241,7 @@ export default function LotusHome({
                 <p hidden={!f.open} style={parseStyle('font-size:15.5px;color:#3f6249;font-weight:300;line-height:1.6;margin:0;padding:0 0 24px;')}>{f.a}</p>
               </div>
             ))}
+            <Link href="/lotus-simuladores" style={parseStyle('align-self:flex-start;margin-top:22px;color:#1d3a2c;font-weight:600;font-size:15px;border-bottom:1.5px solid #cdab6e;padding-bottom:2px;')}>Simuladores de financiamento dos bancos →</Link>
           </div>
         </div>
       </section>
