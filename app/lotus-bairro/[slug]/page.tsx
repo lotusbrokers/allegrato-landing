@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import LotusBairro from '@/components/LotusBairro';
-import { getBairro, bairroSlugs, bairrosVizinhos, guiaDoBairro, type Bairro } from '@/lib/bairros';
+import { getBairro, bairroSlugs, bairrosVizinhos, guiaDoBairro, tituloDoGuia, type Bairro } from '@/lib/bairros';
 import { nomesDoBairro } from '@/lib/bairros-taxonomia';
 import { getImoveisPorBairro } from '@/lib/imoveis';
 import { getLancamentosList, isListItemApresentavel } from '@/lib/lancamentos';
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!bairro) {
     return { title: 'Bairro, Lotus Brokers', robots: { index: false } };
   }
-  const title = `Morar em ${bairro.nome}, ${bairro.cidade}: guia do bairro e imóveis | Lotus Brokers`;
+  const title = tituloDoGuia(bairro);
   const description = bairro.tagline;
   const url = `${SITE}/lotus-bairro/${slug}`;
   return {
@@ -166,7 +166,7 @@ export default async function LotusBairroSlugPage({ params }: Params) {
   const bairro = getBairro(slug);
   if (!bairro) notFound();
 
-  const imoveis = await getImoveisPorBairro(bairro.nome);
+  const imoveis = await getImoveisPorBairro(bairro);
   const vizinhos = bairrosVizinhos(slug).map((v) => ({
     name: v.nome,
     note: v.cidade,

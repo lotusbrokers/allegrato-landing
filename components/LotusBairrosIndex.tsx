@@ -69,7 +69,7 @@ function Hoverable<T extends keyof React.JSX.IntrinsicElements = 'div'>({
 }
 
 /** Card de bairro — mesmo padrão dos cards de bairro da home. */
-function BairroCard({ b }: { b: Bairro }) {
+function BairroCard({ b, imoveis }: { b: Bairro; imoveis?: number }) {
   return (
     <Hoverable
       as="a"
@@ -91,7 +91,11 @@ function BairroCard({ b }: { b: Bairro }) {
       <div style={parseStyle('position:absolute;left:0;right:0;bottom:0;padding:20px;')}>
         <div style={parseStyle('font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#cdab6e;margin-bottom:5px;')}>{b.cidade}</div>
         <div style={parseStyle("font-family:'Fraunces',serif;font-size:21px;font-weight:400;color:#f7f2e8;line-height:1.05;")}>{b.nome}</div>
-        <div style={parseStyle('font-size:12.5px;color:rgba(247,242,232,.7);margin-top:5px;')}>Ver o guia →</div>
+        {/* Contagem só quando há imóvel: "0 imóveis" num guia novo leria como
+            bairro sem oferta, e o guia vale pelo texto também. */}
+        <div style={parseStyle('font-size:12.5px;color:rgba(247,242,232,.7);margin-top:5px;')}>
+          {imoveis ? `${imoveis} ${imoveis === 1 ? 'imóvel' : 'imóveis'} · ` : ''}Ver o guia →
+        </div>
       </div>
     </Hoverable>
   );
@@ -99,9 +103,12 @@ function BairroCard({ b }: { b: Bairro }) {
 
 export default function LotusBairrosIndex({
   bairros,
+  contagens = {},
   whatsapp = WHATSAPP_DEFAULT,
 }: {
   bairros: Bairro[];
+  /** Imóveis que cada guia lista, por slug (contados no servidor). */
+  contagens?: Record<string, number>;
   whatsapp?: string;
 }) {
   const waLink =
@@ -139,7 +146,7 @@ export default function LotusBairrosIndex({
             </div>
             <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;')}>
               {bairros.filter((b) => b.cidade === cidade).map((b) => (
-                <BairroCard key={b.slug} b={b} />
+                <BairroCard key={b.slug} b={b} imoveis={contagens[b.slug]} />
               ))}
             </div>
           </div>

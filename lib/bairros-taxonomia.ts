@@ -11,9 +11,7 @@
  * apontar. Não era falta de estoque; era taxonomia.
  *
  * Este mapa é a ponte, e cobre só quem é de fato sub-bairro: só entra pertencimento que
- * dá para confirmar. Os títulos de AP676 e AP677 dizem "Vila Sereno, Eloy
- * Chaves" enquanto o campo bairro diz "Jardim Ermida II" — é daí que sai a
- * relação, não de chute geográfico. Os demais nomes que aparecem no cadastro
+ * dá para confirmar, não chute geográfico (ver os comentários de cada linha). Os demais nomes que aparecem no cadastro
  * são bairros de verdade, e não sub-bairros: ver a nota no fim
  * do arquivo.
  *
@@ -33,8 +31,13 @@
  * Centenário, como responde o FAQ do guia.
  */
 const PERTENCE_A: Record<string, string> = {
-  'jardim ermida i': 'Eloy Chaves',
-  'jardim ermida ii': 'Eloy Chaves',
+  // Jardim Ermida I e II contavam para o Eloy Chaves até 13/11/2026. Desde
+  // então são do guia próprio do Jardim Ermida (lib/bairros.ts): a auditoria
+  // do site pediu, em 28/10 e em 13/11, que o guia do Eloy Chaves mostre só os
+  // imóveis do bairro, e o texto do Jardim Ermida o trata como bairro vizinho.
+  // O Vila Sereno continua no Eloy Chaves, como dizem os títulos de AP676/AP677.
+  'jardim ermida i': 'Jardim Ermida',
+  'jardim ermida ii': 'Jardim Ermida',
   'vila sereno': 'Eloy Chaves',
   // Nome completo do bairro, como o próprio guia abre ("o Parque Residencial
   // Eloy Chaves"). 4 condomínios gravados assim ficavam sem link para o guia
@@ -66,7 +69,7 @@ export function bairroDoGuia(bairroDoImovel: string | null | undefined, nomesDeG
 
 /**
  * Todos os nomes que um guia deve procurar no cadastro: ele mesmo e os
- * sub-bairros que pertencem a ele. É o que faz o guia de Eloy Chaves somar os
+ * sub-bairros que pertencem a ele. É o que faz o guia do Jardim Ermida somar os
  * imóveis de Jardim Ermida I e II.
  */
 export function nomesDoBairro(bairroDoGuiaNome: string): string[] {
@@ -75,6 +78,26 @@ export function nomesDoBairro(bairroDoGuiaNome: string): string[] {
     .filter(([, pai]) => chave(pai) === k)
     .map(([sub]) => sub);
   return [bairroDoGuiaNome, ...filhos];
+}
+
+/**
+ * O imóvel entra no guia? Entra se o bairro dele é o do guia ou um sub-bairro
+ * do guia, na mesma cidade. Um critério só para a lista do guia
+ * (getImoveisPorBairro) e para as contagens da home e de /lotus-bairro, para o
+ * número do cartão bater com o que a página mostra.
+ *
+ * Até 13/11/2026 a comparação era só em minúsculas: "Recanto IV Centenário",
+ * com acento, não casava com a chave sem acento do mapa. Também não olhava a
+ * cidade, e o guia "Centro" (o de Itupeva) recebia o Centro de Jundiaí. Imóvel
+ * sem cidade no cadastro ainda entra pelo bairro, como antes.
+ */
+export function imovelDoGuia(
+  imovel: { neighborhood: string; city: string },
+  guia: { nome: string; cidade: string },
+): boolean {
+  if (imovel.city && chave(imovel.city) !== chave(guia.cidade)) return false;
+  const k = chave(imovel.neighborhood);
+  return k !== '' && nomesDoBairro(guia.nome).some((n) => chave(n) === k);
 }
 
 /** Sub-bairros conhecidos, para diagnóstico e para o teste. */

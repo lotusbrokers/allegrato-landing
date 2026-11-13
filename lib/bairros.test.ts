@@ -2,13 +2,15 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { BAIRROS, bairroSlugsIndexaveis, guiaDoBairro } from './bairros.ts';
+import { BAIRROS, bairroSlugsIndexaveis, guiaDoBairro, tituloDoGuia } from './bairros.ts';
 
 test('o guia do bairro confere o nome, o pertencimento e a cidade', () => {
   assert.equal(guiaDoBairro('Medeiros', 'Jundiaí')?.slug, 'medeiros');
   // Parte do bairro do guia, como o cadastro grava.
   assert.equal(guiaDoBairro('Bonfiglioli', 'Jundiaí')?.slug, 'vianelo-bonfiglioli');
-  assert.equal(guiaDoBairro('Jardim Ermida II', 'Jundiaí')?.slug, 'eloy-chaves');
+  // Jardim Ermida I e II têm guia próprio desde 13/11/2026 (eram do Eloy Chaves).
+  assert.equal(guiaDoBairro('Jardim Ermida II', 'Jundiaí')?.slug, 'jardim-ermida');
+  assert.equal(guiaDoBairro('Vila Sereno', 'Jundiaí')?.slug, 'eloy-chaves');
   // Cidade sem acento também vale.
   assert.equal(guiaDoBairro('Recanto Quarto Centenário', 'Jundiai')?.slug, 'recanto-quarto-centenario');
   // O guia do Centro é o de Itupeva: o Centro de Jundiaí não tem guia.
@@ -70,4 +72,15 @@ test('todo link fixo para guia de bairro aponta para um guia publicado', () => {
       assert.ok(publicados.has(slug), `${arquivo} aponta para /lotus-bairro/${slug}, que não é um guia publicado`);
     }
   }
+});
+
+// Auditoria do site (13/11/2026): o título do Eloy Chaves tinha 71 caracteres.
+test('o título de todo guia cabe em 70 caracteres e diz a cidade', () => {
+  for (const b of BAIRROS) {
+    const t = tituloDoGuia(b);
+    assert.ok(t.length <= 70, `${b.slug}: "${t}" tem ${t.length} caracteres`);
+    assert.ok(t.includes(b.cidade), `${b.slug}: "${t}" não diz a cidade`);
+  }
+  assert.equal(tituloDoGuia({ nome: 'Eloy Chaves', cidade: 'Jundiaí' }), 'Morar em Eloy Chaves, Jundiaí: guia do bairro | Lotus Brokers');
+  assert.equal(tituloDoGuia({ nome: 'Medeiros', cidade: 'Jundiaí' }), 'Morar em Medeiros, Jundiaí: guia do bairro e imóveis | Lotus Brokers');
 });

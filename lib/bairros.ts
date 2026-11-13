@@ -624,25 +624,15 @@ const jardimSamambaia: Bairro = {
 };
 
 /**
- * ATENÇÃO ao mexer neste bairro: ele conflita com lib/bairros-taxonomia.
+ * Jardim Ermida I e II são deste guia desde 13/11/2026 (lib/bairros-taxonomia).
  *
- * Aquele arquivo mapeia "Jardim Ermida I" e "Jardim Ermida II" como sub-bairros
- * do Eloy Chaves, e o mapeamento veio dos títulos dos imóveis: AP676 e AP677
- * dizem "Vila Sereno, Eloy Chaves" enquanto o campo bairro diz "Jardim Ermida
- * II". Só que AP679 diz apenas "Jardim Ermida I", sem Eloy Chaves, e o texto
- * que a Lotus enviou trata o Jardim Ermida como bairro próprio, vizinho do
- * Eloy Chaves ("a infraestrutura é complementada pelas regiões próximas,
- * especialmente o Eloy Chaves").
- *
- * Resultado hoje: este guia existe e não lista imóvel nenhum, porque os três
- * cadastrados como Ermida I/II continuam contando para o Eloy Chaves. Ficou
- * assim de propósito — mover os imóveis mudaria a página do Eloy Chaves, que
- * já está publicada, e a orientação foi não alterar o que já estava no ar.
- *
- * Para migrar, quando a Lotus decidir: em lib/bairros-taxonomia.ts, tirar as
- * linhas de 'jardim ermida i' e 'jardim ermida ii' do PERTENCE_A (os imóveis
- * passam a casar por nome exato com este guia). A dúvida real é o Vila Sereno,
- * que o cadastro chama de Ermida II e o título chama de Eloy Chaves.
+ * Até então contavam para o Eloy Chaves: o mapeamento tinha vindo dos títulos
+ * de AP676 e AP677 ("Vila Sereno, Eloy Chaves", com o campo bairro "Jardim
+ * Ermida II"), e este guia existia sem listar imóvel nenhum. A auditoria do
+ * site pediu em 28/10 e em 13/11 que o Eloy Chaves mostre só os imóveis do
+ * bairro, e o texto que a Lotus enviou trata o Jardim Ermida como bairro
+ * próprio, vizinho do Eloy Chaves. O Vila Sereno, como bairro gravado no
+ * cadastro, continua no Eloy Chaves.
  */
 const jardimErmida: Bairro = {
   slug: 'jardim-ermida',
@@ -897,6 +887,18 @@ const BY_SLUG = new Map(BAIRROS.map((b) => [b.slug, b]));
 /** Um bairro pelo slug (undefined se não existir). */
 export function getBairro(slug: string): Bairro | undefined {
   return BY_SLUG.get(slug);
+}
+
+/**
+ * `<title>` do guia: a forma mais completa que cabe em 70 caracteres, sempre
+ * com a cidade. Até 13/11/2026 era uma forma só, e "Morar em Eloy Chaves,
+ * Jundiaí: guia do bairro e imóveis | Lotus Brokers" tinha 71 (auditoria do
+ * site, item "Título até 70 caracteres, com a cidade").
+ */
+export function tituloDoGuia(b: { nome: string; cidade: string }): string {
+  const base = `Morar em ${b.nome}, ${b.cidade}`;
+  const formas = [`${base}: guia do bairro e imóveis | Lotus Brokers`, `${base}: guia do bairro | Lotus Brokers`, `${base} | Lotus Brokers`];
+  return formas.find((t) => t.length <= 70) ?? formas[formas.length - 1];
 }
 
 /** Todos os slugs (para generateStaticParams). */
