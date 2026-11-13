@@ -15,7 +15,7 @@ const ap0684 = {
 
 test('preço entra uma vez, formatado, e o título do feed é ignorado', () => {
   const t = tituloDaPdp(ap0684);
-  assert.equal(t, 'Apartamento com 2 quartos em Reserva do Japy | R$ 310.000 | Lotus Brokers');
+  assert.equal(t, 'Apartamento com 2 quartos em Reserva do Japy, Jundiaí | R$ 310.000');
   assert.equal((t.match(/R\$/g) || []).length, 1);
   assert.ok(!t.includes('310.000,00'));
 });
@@ -23,18 +23,24 @@ test('preço entra uma vez, formatado, e o título do feed é ignorado', () => {
 test('tipo em minúsculas no feed sai capitalizado', () => {
   // Caso real (AP0684): tipo_simplificado "apartamento", bairro comprido.
   const t = tituloDaPdp({ tipo_simplificado: 'apartamento', tipo: 'Apartamento', quartos: 2, bairro: 'Recanto Quarto Centenário', cidade: 'Jundiaí', valor_venda: 310000 });
-  assert.equal(t, 'Apartamento 2 quartos em Recanto Quarto Centenário | R$ 310.000 | Lotus Brokers');
+  assert.equal(t, 'Apartamento em Recanto Quarto Centenário, Jundiaí | R$ 310.000');
   assert.equal(tituloDaPdp({ tipo_simplificado: 'casa', tipo: 'Sobrado', quartos: 4, bairro: 'Malota', cidade: 'Jundiaí', valor_venda: 2150000 }), 'Casa com 4 quartos em Malota, Jundiaí | R$ 2.150.000 | Lotus Brokers');
 });
 
-test('a parte antes da marca cabe em ~60 caracteres, encurtando na ordem certa', () => {
-  const t = tituloDaPdp(ap0684);
-  assert.ok(t.replace(' | Lotus Brokers', '').length <= 65, t);
-  // Cidade cabendo, ela fica.
-  assert.equal(tituloDaPdp({ ...ap0684, bairro: 'Centro' }), 'Apartamento com 2 quartos em Centro, Jundiaí | R$ 310.000 | Lotus Brokers');
-  // Bairro comprido: sai a cidade, depois o "com", depois o bairro.
+// Auditoria do site (13/11/2026): "Título até 70 caracteres, com a cidade". O
+// AP0693 saía com 78 caracteres e sem Jundiaí.
+test('o título inteiro cabe em 70 caracteres e a cidade nunca sai', () => {
+  const ap0693 = { tipo_simplificado: 'Apartamento', quartos: 4, bairro: 'Jardim Bonfiglioli', cidade: 'Jundiaí', valor_venda: 2000000 };
+  assert.equal(tituloDaPdp(ap0693), 'Apartamento 4 quartos em Jardim Bonfiglioli, Jundiaí | R$ 2.000.000');
+  // Ordem dos cortes: primeiro o "com", depois a marca, depois os quartos...
+  assert.equal(tituloDaPdp({ ...ap0684, bairro: 'Centro' }), 'Apartamento 2 quartos em Centro, Jundiaí | R$ 310.000 | Lotus Brokers');
+  // ...e por último o bairro, que leva de volta os quartos e a marca se couberem.
   const longo = tituloDaPdp({ ...ap0684, tipo_simplificado: 'Casa em condomínio', bairro: 'Residencial Jardim das Flores do Alto da Serra' });
   assert.equal(longo, 'Casa em condomínio 2 quartos em Jundiaí | R$ 310.000 | Lotus Brokers');
+  for (const t of [tituloDaPdp(ap0684), tituloDaPdp(ap0693), longo]) {
+    assert.ok(t.length <= 70, t);
+    assert.ok(t.includes('Jundiaí'), t);
+  }
 });
 
 test('campo ausente não deixa vírgula, hífen nem "com" sobrando', () => {

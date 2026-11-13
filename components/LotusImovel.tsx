@@ -625,15 +625,23 @@ export default function LotusImovel({
           real: a taxa e chute, FGTS e subsidio nao entram, e nada disso
           sobrevive a analise de credito. Numero preciso e errado vira
           expectativa quebrada no atendimento. A simulacao passa a ser feita
-          pela LIA, com os dados da pessoa. */}
+          pela LIA, com os dados da pessoa.
+          Desde 13/11/2026 (decisão D094, cobrada na auditoria do site) o
+          caminho principal é o simulador oficial de cada banco, reunido em
+          /lotus-simuladores; a LIA fica como segunda opção. */}
       <section style={parseStyle('background:#f7f2e8;padding:90px 32px;')}>
         <div style={parseStyle('max-width:820px;margin:0 auto;text-align:center;')}>
           <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b18a4a;margin-bottom:16px;')}>Financiamento</div>
-          <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(28px,3.4vw,42px);color:#15241c;margin:0 0 16px;")}>Quanto fica a parcela?</h2>
+          <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(28px,3.4vw,42px);color:#15241c;margin:0 0 16px;")}>Simule o financiamento nos bancos</h2>
           <p style={parseStyle('font-size:16px;color:#3f6249;font-weight:300;line-height:1.6;margin:0 0 28px;')}>
-            Depende da sua renda, do FGTS, do subsídio a que você tem direito e do banco escolhido. Em vez de um número aproximado aqui, a gente faz a conta com os seus dados, sem custo e sem compromisso.
+            A parcela depende da sua renda, do FGTS, do subsídio a que você tem direito e do banco escolhido. Os simuladores oficiais da Caixa, do Banco do Brasil, do Itaú, do Bradesco e do Santander estão numa página só; se preferir, a gente faz a conta com os seus dados, sem custo e sem compromisso.
           </p>
-          <CtaSimulacao />
+          <div style={parseStyle('display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center;')}>
+            <Link href="/lotus-simuladores" style={parseStyle("display:inline-flex;align-items:center;gap:10px;font-family:'Hanken Grotesk',system-ui,sans-serif;font-size:15px;font-weight:600;line-height:1;padding:15px 26px;border-radius:40px;background:#b18a4a;color:#15241c;text-decoration:none;")}>
+              Ver os simuladores dos bancos <span aria-hidden="true">→</span>
+            </Link>
+            <CtaSimulacao cor="#1d3a2c" corHover="#15241c" corTexto="#f7f2e8" />
+          </div>
         </div>
       </section>
 

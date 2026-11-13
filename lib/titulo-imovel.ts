@@ -8,9 +8,13 @@
  * campo ausente simplesmente não aparece — sem vírgula nem hífen sobrando.
  *
  * Forma cheia: "{Tipo} com {N} quartos em {Bairro}, {Cidade} | R$ {preço} | Lotus Brokers".
- * O trecho antes de "| Lotus Brokers" é mantido em até ~60 caracteres (65, na
- * prática), encurtando nesta ordem: sai a cidade, depois o "com", depois o
- * bairro. Tipo, quartos e preço são os últimos a cair.
+ * O título inteiro cabe em 70 caracteres e a cidade nunca sai (auditoria do
+ * site de 13/11/2026, "Título até 70 caracteres, com a cidade"). Até então o
+ * trecho antes da marca ia até 65 e a cidade era a primeira a cair: o AP0693
+ * saía com 78 caracteres e sem Jundiaí. Encurta nesta ordem: sai o "com",
+ * depois a marca do fim (o Google já mostra o nome do site junto do
+ * resultado), depois os quartos, depois o bairro (que leva os quartos e a
+ * marca de volta, se couberem). Tipo, cidade e preço ficam sempre.
  *
  * Módulo sem dependências (nem do Supabase) para o teste importar a função pura.
  */
@@ -26,9 +30,8 @@ export type CamposDoTitulo = {
 };
 
 export const MARCA = 'Lotus Brokers';
-// ~60 é o que o Google costuma exibir; 65 dá folga para não perder o bairro
-// por um ou dois caracteres — ele vale mais no resultado do que a marca no fim.
-const LIMITE = 65;
+/** Limite do título inteiro, com a marca quando ela entra. */
+export const LIMITE_DO_TITULO = 70;
 
 const limpo = (v: string | null | undefined) => (v ?? '').replace(/\s+/g, ' ').trim();
 // O feed grava tipo_simplificado em minúsculas ("apartamento", "casa").
@@ -43,39 +46,45 @@ export function precoDoTitulo(imovel: CamposDoTitulo): string {
   return '';
 }
 
+type Partes = { com: boolean; quartos: boolean; bairro: boolean; marca: boolean };
+
 /** Só a parte descritiva ("Apartamento com 2 quartos em Reserva do Japy, Jundiaí"). */
-function descricao(imovel: CamposDoTitulo, opcoes: { cidade: boolean; com: boolean; bairro: boolean }): string {
+function descricao(imovel: CamposDoTitulo, partes: Partes): string {
   const tipo = capitalizado(limpo(imovel.tipo_simplificado) || limpo(imovel.tipo)) || 'Imóvel';
-  const quartos = imovel.quartos && imovel.quartos > 0 ? imovel.quartos : 0;
-  const bairro = opcoes.bairro ? limpo(imovel.bairro) : '';
-  const cidade = opcoes.cidade ? limpo(imovel.cidade) : '';
+  const quartos = partes.quartos && imovel.quartos && imovel.quartos > 0 ? imovel.quartos : 0;
+  const bairro = partes.bairro ? limpo(imovel.bairro) : '';
+  const cidade = limpo(imovel.cidade);
 
   let s = tipo;
-  if (quartos) s += (opcoes.com ? ' com ' : ' ') + quartos + (quartos === 1 ? ' quarto' : ' quartos');
+  if (quartos) s += (partes.com ? ' com ' : ' ') + quartos + (quartos === 1 ? ' quarto' : ' quartos');
   const lugar = [bairro, cidade].filter(Boolean).join(', ');
   if (lugar) s += ' em ' + lugar;
   return s;
 }
 
+/** Da forma cheia à mais curta; vale a primeira que couber. */
+const TENTATIVAS: Partes[] = [
+  { com: true, quartos: true, bairro: true, marca: true },
+  { com: false, quartos: true, bairro: true, marca: true },
+  { com: true, quartos: true, bairro: true, marca: false },
+  { com: false, quartos: true, bairro: true, marca: false },
+  { com: false, quartos: false, bairro: true, marca: false },
+  { com: true, quartos: true, bairro: false, marca: true },
+  { com: false, quartos: true, bairro: false, marca: true },
+  { com: false, quartos: true, bairro: false, marca: false },
+  { com: false, quartos: false, bairro: false, marca: false },
+];
+
 /**
- * Título completo, com a marca. Ex.: "Apartamento com 2 quartos em Reserva do
- * Japy | R$ 310.000 | Lotus Brokers".
+ * Título da página, em até 70 caracteres. Ex.: "Casa com 4 quartos em Malota,
+ * Jundiaí | R$ 2.150.000 | Lotus Brokers".
  */
 export function tituloDaPdp(imovel: CamposDoTitulo): string {
   const preco = precoDoTitulo(imovel);
-  const monta = (d: string) => (preco ? `${d} | ${preco}` : d);
-
-  const tentativas: { cidade: boolean; com: boolean; bairro: boolean }[] = [
-    { cidade: true, com: true, bairro: true },
-    { cidade: false, com: true, bairro: true },
-    { cidade: false, com: false, bairro: true },
-    { cidade: true, com: false, bairro: false },
-    { cidade: false, com: false, bairro: false },
-  ];
-  let principal = monta(descricao(imovel, tentativas[0]));
-  for (const t of tentativas) {
-    principal = monta(descricao(imovel, t));
-    if (principal.length <= LIMITE) break;
+  const monta = (p: Partes) => [descricao(imovel, p), preco, p.marca ? MARCA : ''].filter(Boolean).join(' | ');
+  for (const p of TENTATIVAS) {
+    const titulo = monta(p);
+    if (titulo.length <= LIMITE_DO_TITULO) return titulo;
   }
-  return `${principal} | ${MARCA}`;
+  return monta(TENTATIVAS[TENTATIVAS.length - 1]);
 }
