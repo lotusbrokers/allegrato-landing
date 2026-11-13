@@ -15,12 +15,14 @@ import { fraunces } from '@/app/_fontes/fraunces';
 const URL_DA_PAGINA = 'https://www.lotusbrokers.com.br/lotus-recrutamento';
 
 export const metadata: Metadata = {
-  // "Vaga de corretor de imóveis em Jundiaí" desde 12/11/2026 (Radar C9: a busca hoje é
-  // dos sites de vagas). "corretor de imóveis em Jundiaí" continua no título, que é o
-  // que segura o 4º lugar em "trabalhar como corretor de imóveis Jundiaí".
-  title: 'Vaga de corretor de imóveis em Jundiaí e Itupeva | Lotus Brokers',
+  // Duas buscas do Radar C9: "trabalhar como corretor de imóveis Jundiaí" (4º em
+  // 10/11, fora da 1ª página em 13/11, com o Google ainda mostrando o título antigo,
+  // "Seja um Corretor Lotus…": a queda não veio da troca de 12/11) e "vaga corretor
+  // de imóveis Jundiaí". As duas são hoje de sites de vagas e de páginas "Trabalhe
+  // Conosco" de imobiliárias: o título espelha a primeira frase e mantém "vagas".
+  title: 'Trabalhe como corretor de imóveis em Jundiaí: vagas na Lotus Brokers',
   description:
-    'Vaga de corretor de imóveis em Jundiaí e Itupeva: comissão até 60%, mentoria 1:1, formação completa e estrutura de marketing. Com ou sem experiência.',
+    'Vagas para corretor de imóveis em Jundiaí e Itupeva: comissão até 60%, mentoria 1:1, formação completa e estrutura de marketing. Com ou sem experiência.',
   alternates: { canonical: URL_DA_PAGINA },
   openGraph: {
     siteName: 'Lotus Brokers',

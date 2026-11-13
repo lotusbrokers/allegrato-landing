@@ -311,7 +311,7 @@ export default function LotusRecrutamento() {
         <div className="wrap">
           <div data-reveal="" style={{ maxWidth: '60ch' }}>
             <p className="eyebrow">Dúvidas</p>
-            <h2>Como ser corretor em Jundiaí?</h2>
+            <h2>Como trabalhar como corretor de imóveis em Jundiaí?</h2>
           </div>
           <div style={{ marginTop: 34 }}>
             {PERGUNTAS_RECRUTAMENTO.map((f) => (
