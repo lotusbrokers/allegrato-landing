@@ -191,8 +191,197 @@ export function relacionados(posts: Post[], atual: Post, quantos = 3): Post[] {
 // mão, que envelheceu: títulos que não existiam mais no blog e nenhuma capa.
 export const POSTS: Post[] = [
   /* ------------------------------------------------------------------
+   * Enviado pela Lotus em 13/11/2026 (sexta-feira), com 14 fotos, para sair
+   * no mesmo dia. Primeiro da lista, e por isso o novo destaque da capa do
+   * blog. Primeiro post com fotos no meio do texto (bloco `imagem`).
+   *
+   * CONFERIDO em 13/11/2026 nas fontes oficiais:
+   *  - agenda cultural da Prefeitura (cultura.jundiai.sp.gov.br): Festival do
+   *    Pastel, Cia Jovem de Dança (13 e 14/11), Dentes Velhos, Corte da Uva,
+   *    Cirandeio, Oficina de Xadrez, Lê no Ninho, Fábrica das Infâncias e
+   *    Passaporte para a Arte. Datas, horários, locais, endereços, duração,
+   *    classificação e ingresso conferem;
+   *  - JundiaíShopping (página da chegada do Papai Noel, sábado 14/11):
+   *    horários conferem. O texto dizia que as condições das ativações não
+   *    estavam na página, mas estão: Máquina Mágica e Estação de Fotos com
+   *    resgate de pontos no app Multi, bondinho e caricatura gratuitos com
+   *    check-in no Multi, última saída do bondinho às 19h30. A frase seguiu
+   *    a página;
+   *  - Tom Cavalcante (agenda oficial do artista): 14/11, 20h30, Teatro
+   *    Polytheama, ingressos pela Bileto. A duração de 90 minutos não aparece
+   *    lá e ficou como veio;
+   *  - Prefeitura na Área (notícia da Prefeitura de 12/11/2026): 5ª edição,
+   *    14/11, das 9h às 15h, na EMEB Luiz Biela de Souza, mais de mil vagas.
+   *    As atividades para crianças não aparecem na notícia e ficaram como
+   *    vieram;
+   *  - Parque da Cidade e Mundo das Crianças (notícias da Prefeitura e Visite
+   *    Jundiaí): endereços, horários, gratuidade e agendamento no fim de
+   *    semana conferem;
+   *  - Jardim Botânico (jardimbotanico.jundiai.sp.gov.br): o site oficial diz
+   *    "aberto todos os dias das 7h às 17h" e lista as portarias na Av.
+   *    Navarro de Andrade, 120, e na Av. Antonio Frederico Ozanan, 6700. O
+   *    texto trazia 6h e o número 6400: seguiu o site;
+   *  - Michelin Frutas e Cereais: o Visite Jundiaí confirma o atrativo e as
+   *    experiências (frutas, trenzinho, café caipira), mas não mostra
+   *    endereço, telefone nem horário, e a busca não achou outra fonte.
+   *    Ficaram como vieram, com a ressalva do próprio texto;
+   *  - o fim da atração do Festival do Pastel (19h30) também não aparece na
+   *    agenda e ficou como veio.
+   *
+   * Ajustes de forma:
+   *  - os selos de fonte colados no texto ("Cultura Jundiaí+1", "Turismo
+   *    Jundiaí+2") saíram, e as chamadas ("Confira a programação oficial",
+   *    "Informações oficiais", "Agendar visita") viraram links para as
+   *    páginas oficiais;
+   *  - a tabela de horários do shopping virou lista, e os itens perderam o
+   *    ponto final;
+   *  - "Grandes escolhas têm endereço" virou "Grandes histórias têm
+   *    endereço", o slogan da Lotus; "conheça nossas oportunidades" ganhou o
+   *    link da busca;
+   *  - o slug sugerido virou o id; a categoria sugerida ("Lazer e qualidade
+   *    de vida") não existe no blog, e o post fica na série "Sextou em
+   *    Jundiaí"; a palavra-chave abre o tituloSeo; a meta description virou
+   *    `excerpt`; "Pauta atualizada em 12/11/2026" foi para a linha das
+   *    fontes, no fim.
+   *
+   * Fotos: a 1 é a capa (a Catedral e o Centro vistos do alto), recortada em
+   * 16:10 e reduzida para 1024x640; a 12 repetia a capa. As outras entraram
+   * onde o texto deixou a vaga (com o crédito colado embaixo) ou, sem vaga,
+   * pelo assunto da foto, reduzidas para até 1200 px. Crédito só onde o texto
+   * dava (tribunadejundiai.com.br, sampi.net.br, elissalles.com.br). Sem
+   * certeza do lugar: o prédio de tijolos à noite (posto no cinema, por
+   * parecer as antigas oficinas do Complexo Fepasa, onde fica o Espaço
+   * Expressa) e o casarão amarelo (posto no fecho, sobre morar em Jundiaí).
+   * A vaga da Corte da Uva ficou sem foto: nenhuma das enviadas é dela.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'sextou-em-jundiai-o-que-fazer-fim-de-semana-novembro-2026', cat: 'Sextou em Jundiaí', date: 'Nov 2026', publicadoEm: '2026-11-13', read: '8 min', img: '/blog/sextou-em-jundiai-o-que-fazer-fim-de-semana-novembro-2026.jpg', slot: 'blog-sextou-em-jundiai-o-que-fazer-fim-de-semana-novembro-2026', title: 'Sextou em Jundiaí: confira o que fazer neste fim de semana, de 13 a 15 de novembro de 2026', tituloSeo: 'O que fazer em Jundiaí neste fim de semana: 13 a 15/11', excerpt: 'O que fazer em Jundiaí neste fim de semana? Confira eventos culturais, Festival do Pastel, atrações de Natal, passeios em família e opções de lazer de 13 a 15 de novembro de 2026.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'De 13 a 15 de novembro, Jundiaí tem Festival do Pastel na Praça da Matriz, Cia Jovem de Dança no Centro das Artes, cinema gratuito e a escolha da nova Corte da Uva no Teatro Polytheama na sexta. No sábado, o JundiaíShopping abre o Natal com a chegada do Papai Noel a partir das 14h, a Biblioteca Municipal tem atividades gratuitas para crianças e famílias, e Tom Cavalcante se apresenta no Polytheama. No domingo, há contação de histórias na Fábrica das Infâncias Japy e o espetáculo Passaporte para a Arte. Parque da Cidade, Jardim Botânico, Mundo das Crianças (com agendamento no fim de semana) e o turismo rural completam o roteiro.',
+    body: [
+      'Jundiaí tem sempre um bom motivo para sair de casa e aproveitar! O fim de semana de 13 a 15 de novembro promete movimentar a cidade com uma programação que reúne cultura, gastronomia, atividades infantis, apresentações artísticas e o início das celebrações natalinas.',
+      'Entre os destaques estão o Festival do Pastel na Praça da Matriz, os espetáculos da Cia Jovem de Dança, a escolha da nova Corte da Uva e a chegada do Papai Noel ao JundiaíShopping.',
+      'Para quem prefere programas ao ar livre, também existem opções de parques, turismo rural e experiências gastronômicas.',
+      'A Lotus Brokers reuniu os principais destaques para você organizar o roteiro e aproveitar o melhor da cidade!',
+      { titulo: '🎭 Sexta-feira, 13 de novembro: cultura, dança e gastronomia' },
+      { imagem: { src: '/blog/sextou-em-jundiai-o-que-fazer-fim-de-semana-novembro-2026/festival-do-pastel-praca-da-matriz.jpg', alt: 'Barracas de comida e mesas na Praça da Matriz, em frente à Catedral de Jundiaí', largura: 1200, altura: 675, credito: 'tribunadejundiai.com.br' } },
+      { titulo: 'Festival do Pastel na Praça da Matriz', nivel: 3 },
+      'Que tal começar o fim de semana com pastel e caldo de cana?',
+      'A Praça Governador Pedro de Toledo, conhecida como Praça da Matriz, recebe o Festival do Pastel, com gastronomia e música.',
+      { itens: ['Horário da atração musical: 18h às 19h30', 'Atração: DJ Adriano HP', 'Local: Praça Governador Pedro de Toledo', 'Endereço: Rua Barão de Jundiaí, 762 – Centro', 'Entrada: gratuita'] },
+      'Confira a [programação oficial](https://cultura.jundiai.sp.gov.br/agenda-cultural/festival-do-pastel/).',
+      { titulo: 'Cia Jovem de Dança – três espetáculos', nivel: 3 },
+      { imagem: { src: '/blog/sextou-em-jundiai-o-que-fazer-fim-de-semana-novembro-2026/cia-jovem-de-danca.jpg', alt: 'Bailarinos se apresentam em um palco iluminado de azul', largura: 1200, altura: 797, credito: 'tribunadejundiai.com.br' } },
+      'Às 19h30, o Centro das Artes recebe a Cia Jovem de Dança com três coreografias: Ínterim, Anônimo e Aquilo que Guardo.',
+      'As apresentações exploram temas como memória, identidade, emoções e relações humanas.',
+      { itens: ['Horário: 19h30', 'Duração: aproximadamente 55 minutos', 'Local: Centro das Artes – Sala Glória Rocha', 'Endereço: Rua Barão de Jundiaí, 1093 – Centro', 'Entrada: gratuita, com retirada de ingresso'] },
+      'Os ingressos podem ser retirados nas bilheterias e totens do Centro das Artes e do Teatro Polytheama ou pela plataforma indicada na [agenda cultural](https://cultura.jundiai.sp.gov.br/agenda-cultural/interim-anonimo-e-aquilo-que-guardo-cia-jovem-de-danca/).',
+      { titulo: 'Cinema: Dentes Velhos', nivel: 3 },
+      { imagem: { src: '/blog/sextou-em-jundiai-o-que-fazer-fim-de-semana-novembro-2026/predio-historico-a-noite.jpg', alt: 'Prédio histórico de tijolos aparentes iluminado à noite', largura: 1200, altura: 674 } },
+      'Para quem gosta de cinema, a sexta-feira também reserva a exibição do filme Dentes Velhos, dirigido por Armando Fonseca.',
+      { itens: ['Horário: 19h30', 'Duração: 83 minutos', 'Classificação: 14 anos', 'Local: Sala de Cinema Pública São Paulo-Minas, no Espaço Expressa', 'Endereço: Avenida União dos Ferroviários, 1760', 'Entrada: gratuita, sem necessidade de retirada de ingresso'] },
+      'Após a sessão, haverá um bate-papo com o diretor.',
+      'Cultura Jundiaí: [informações do filme](https://cultura.jundiai.sp.gov.br/agenda-cultural/dentes-velhos-do-diretor-armando-fonseca-exibicao-de-filme/).',
+      { titulo: 'Escolha da nova Corte da Uva', nivel: 3 },
+      'Um dos eventos tradicionais da cidade acontece nesta sexta-feira: a escolha da nova Corte da Uva, que representará Jundiaí na 42ª Festa da Uva e 13ª Expo Vinho 2027.',
+      { itens: ['Horário: 19h30', 'Local: Teatro Polytheama', 'Endereço: Rua Barão de Jundiaí, 176 – Centro', 'Entrada: gratuita', 'Ingressos: disponíveis uma hora antes do evento nas bilheterias ou pela Sympla'] },
+      '[Clique para conferir os detalhes](https://cultura.jundiai.sp.gov.br/agenda-cultural/escolha-da-nova-corte-da-uva-smcult/).',
+      { titulo: '🎅 Sábado, 14 de novembro: o Natal chega a Jundiaí!' },
+      { imagem: { src: '/blog/sextou-em-jundiai-o-que-fazer-fim-de-semana-novembro-2026/natal-no-shopping.jpg', alt: 'Decoração de Natal em shopping, com árvores enfeitadas e um urso gigante vestido de Papai Noel', largura: 1200, altura: 900, credito: 'tribunadejundiai.com.br' } },
+      { titulo: 'Chegada do Papai Noel no JundiaíShopping', nivel: 3 },
+      'Um dos principais destaques do fim de semana será a abertura da temporada de Natal do JundiaíShopping, com o tema Uma Viagem para o Natal.',
+      'A programação começa às 14h e reúne atividades para toda a família. Confira os horários:',
+      { itens: ['14h: início das ativações', '16h: Parada de Natal com Banda Paralela e personagens', '17h: chuva de balões', '19h: inauguração da decoração externa'] },
+      'Entre as atrações anunciadas estão:',
+      { itens: ['Bondinho de Natal', 'Soldadinho de estátua viva', 'Distribuição de chaveiros, pirulitos e gorrinhos', 'Máquina Mágica de Natal', 'Caricaturas', 'Estação de fotos'] },
+      { itens: ['Local: JundiaíShopping', 'Endereço: Avenida Nove de Julho, 3.333 – Anhangabaú'] },
+      'A programação está divulgada no site oficial do empreendimento. Segundo a página, a participação na Máquina Mágica e na Estação de Fotos é feita com resgate de pontos no aplicativo Multi, e o bondinho e a caricatura são gratuitos, mediante check-in no Multi. A última saída do bondinho é às 19h30.',
+      'Confira a [programação completa no JundiaíShopping](https://www.jundiaishopping.com.br/chegada-do-papainoel-2025/).',
+      { titulo: '📚 Sábado também tem programação cultural gratuita' },
+      { imagem: { src: '/blog/sextou-em-jundiai-o-que-fazer-fim-de-semana-novembro-2026/biblioteca-infantil.jpg', alt: 'Estantes circulares com livros infantis em uma biblioteca', largura: 1024, altura: 569, credito: 'sampi.net.br' } },
+      'A Biblioteca Municipal Professor Nelson Foot, no Complexo Argos, terá atividades para crianças e famílias.',
+      { titulo: 'Cirandeio 10 anos – Nando Garcia Torres', nivel: 3 },
+      { itens: ['Horário: 10h às 14h', 'Local: Biblioteca Municipal Professor Nelson Foot', 'Endereço: Avenida Doutor Cavalcanti, 396 – Complexo Argos', 'Entrada: gratuita'] },
+      'A comemoração celebra os dez anos do projeto, que desenvolve atividades artísticas e educativas, incluindo propostas voltadas à inclusão e à convivência.',
+      { titulo: 'Oficina de Xadrez', nivel: 3 },
+      { itens: ['Horário: 10h às 12h', 'Local: Biblioteca Municipal Professor Nelson Foot', 'Entrada: gratuita'] },
+      'Uma atividade para crianças e famílias que desejam aprender ou aprimorar estratégias no xadrez.',
+      { titulo: 'Lê no Ninho: Muito cansado e bem acordado', nivel: 3 },
+      { itens: ['Horário: 11h às 12h', 'Local: Biblioteca Municipal Professor Nelson Foot', 'Entrada: gratuita'] },
+      'A contação de histórias é voltada à primeira infância e incentiva o contato das crianças com os livros.',
+      'As três atividades estão divulgadas na [agenda cultural municipal](https://cultura.jundiai.sp.gov.br/agenda-cultural/).',
+      { titulo: '💃 Mais dança e humor no sábado à noite' },
+      { titulo: 'Cia Jovem de Dança', nivel: 3 },
+      'A companhia volta a apresentar Ínterim, Anônimo e Aquilo que Guardo.',
+      { itens: ['Horário: 19h30', 'Local: Centro das Artes – Sala Glória Rocha', 'Endereço: Rua Barão de Jundiaí, 1093 – Centro', 'Entrada: gratuita, com retirada de ingresso'] },
+      { titulo: 'O Tom Tá On – Tom Cavalcante', nivel: 3 },
+      'Para quem prefere uma noite de humor, o Teatro Polytheama recebe o espetáculo O Tom Tá On, com Tom Cavalcante.',
+      { itens: ['Data: sábado, 14 de novembro', 'Horário: 20h30', 'Duração aproximada: 90 minutos', 'Local: Teatro Polytheama', 'Endereço: Rua Barão de Jundiaí, 176 – Centro', 'Ingressos: pagos, disponíveis pela Bileto'] },
+      'O espetáculo reúne imitações, personagens conhecidos e comentários bem-humorados sobre situações do cotidiano.',
+      'Consulte a [agenda oficial do artista](https://www.tomcavalcante.com.br/agenda) e compre seu ingresso.',
+      { titulo: '👨‍👩‍👧 Domingo, 15 de novembro: histórias e experiências em família' },
+      { imagem: { src: '/blog/sextou-em-jundiai-o-que-fazer-fim-de-semana-novembro-2026/fabrica-das-infancias.jpg', alt: 'Crianças brincam entre varas de bambu em um espaço cultural infantil', largura: 648, altura: 365, credito: 'tribunadejundiai.com.br' } },
+      { titulo: 'Contação de histórias na Fábrica das Infâncias Japy', nivel: 3 },
+      'O domingo começa com uma atividade especial para as crianças.',
+      'A Cia Manterê apresenta Quase Tudo Que Há Em Mim, uma história que aborda sonhos, descobertas e as possibilidades que surgem durante a infância.',
+      { itens: ['Horário: 10h30 às 11h15', 'Local: Fábrica das Infâncias Japy', 'Endereço: Rua Lacerda Franco, 175 – Vila Arens', 'Classificação: livre', 'Entrada: gratuita'] },
+      '[Clique para consultar a agenda cultural](https://cultura.jundiai.sp.gov.br/agenda-cultural/quase-tudo-que-ha-em-mim-cia-mantere-contacao-de-historias/).',
+      { titulo: 'Vitrine da Dança: Passaporte para a Arte', nivel: 3 },
+      'Para encerrar o domingo, o Teatro Polytheama recebe o espetáculo Passaporte para a Arte, do Projeto Up.',
+      'A apresentação convida o público a embarcar em uma viagem por diferentes países, culturas e tradições por meio da dança.',
+      { itens: ['Horário: 19h30 às 21h30', 'Local: Teatro Polytheama', 'Endereço: Rua Barão de Jundiaí, 176 – Centro', 'Ingressos: pagos, disponíveis pela plataforma de venda indicada na agenda cultural'] },
+      'Confira os [detalhes do espetáculo](https://cultura.jundiai.sp.gov.br/agenda-cultural/vitrine-da-danca-passaporte-para-a-arte-projeto-up/).',
+      { titulo: '🌳 Passeios ao ar livre: aproveite os parques de Jundiaí' },
+      'Nem todo passeio precisa ter horário marcado. Jundiaí também oferece espaços para quem deseja desacelerar, praticar atividades físicas e aproveitar a natureza.',
+      { imagem: { src: '/blog/sextou-em-jundiai-o-que-fazer-fim-de-semana-novembro-2026/represa-vista-aerea.jpg', alt: 'Vista aérea de uma represa cercada de mata, com área de lazer entre a água e a rodovia', largura: 840, altura: 532 } },
+      { titulo: 'Parque da Cidade', nivel: 3 },
+      { imagem: { src: '/blog/sextou-em-jundiai-o-que-fazer-fim-de-semana-novembro-2026/parque-da-cidade.jpg', alt: 'Pista de caminhada e ciclovia à beira da represa, com pessoas caminhando e pedalando', largura: 1200, altura: 800 } },
+      'Rodovia João Cereser, km 66 – Pinheirinho.',
+      'Aberto sábado, domingo e feriados das 6h30 às 18h, com entrada até as 17h. Entrada e estacionamento gratuitos.',
+      'Opção para caminhadas, piqueniques, atividades esportivas e momentos em família.',
+      '[Informações oficiais](https://visitejundiai.sp.gov.br/item-negocio/parque-da-cidade-2/) no portal Visite Jundiaí.',
+      { titulo: 'Jardim Botânico de Jundiaí', nivel: 3 },
+      { imagem: { src: '/blog/sextou-em-jundiai-o-que-fazer-fim-de-semana-novembro-2026/jardim-botanico.jpg', alt: 'Vista aérea do Jardim Botânico de Jundiaí, com lago, jardins e mata', largura: 1200, altura: 674 } },
+      'Portarias na Avenida Navarro de Andrade, 120, e na Avenida Antônio Frederico Ozanam, 6700.',
+      'Aberto todos os dias, das 7h às 17h.',
+      'Possui jardins temáticos, orquidário, trilhas, cachoeiras e espaços para contemplação.',
+      '[Informações oficiais](https://jardimbotanico.jundiai.sp.gov.br/) no site do Jardim Botânico.',
+      { titulo: 'Mundo das Crianças', nivel: 3 },
+      { imagem: { src: '/blog/sextou-em-jundiai-o-que-fazer-fim-de-semana-novembro-2026/mundo-das-criancas.jpg', alt: 'Criança brinca entre os jatos de água de uma fonte interativa', largura: 1200, altura: 800 } },
+      'Rodovia João Cereser, pista Sul, km 64+400 – Pinheirinho.',
+      'Aberto de terça a domingo, das 7h às 17h, com entrada até as 16h. Parque gratuito.',
+      'Possui playgrounds, fontes interativas, casa na árvore, quadras e áreas verdes.',
+      'Atenção: aos finais de semana e feriados é obrigatório fazer agendamento prévio. [Agendar visita](https://mundodascriancasjundiai.com.br/agendamento/).',
+      { titulo: '🍇 Turismo rural: conheça os sabores e tradições da cidade' },
+      { imagem: { src: '/blog/sextou-em-jundiai-o-que-fazer-fim-de-semana-novembro-2026/turismo-rural.jpg', alt: 'Casal em um parreiral, com cesta de uvas, vinho e chapéu de palha sobre a mesa', largura: 670, altura: 450, credito: 'elissalles.com.br' } },
+      'Para quem deseja aproveitar o fim de semana de uma maneira diferente, o turismo rural é uma das experiências que fazem parte da identidade de Jundiaí.',
+      'A cidade possui diferentes [rotas turísticas](https://rotasturisticas.jundiai.sp.gov.br/), com propriedades familiares, adegas, vinícolas, gastronomia e experiências ligadas à produção agrícola.',
+      'Entre as opções estão a Rota da Uva, Rota do Vinho, Rota da Cultura Italiana e Rota dos Sabores.',
+      { titulo: 'Uma sugestão para o fim de semana: Michelin Frutas e Cereais', nivel: 3 },
+      { itens: ['Endereço: Rua dos Michelin, 25 – Bom Jardim', 'Funcionamento cadastrado: sábado e domingo, das 8h às 17h', 'Atendimento: somente com agendamento', 'Telefone: (11) 97176-8363'] },
+      'A propriedade oferece experiências de turismo rural, como colhe e pague, passeio de trenzinho e café caipira. A disponibilidade de frutas e os valores devem ser confirmados diretamente com o estabelecimento.',
+      'Conheça o atrativo no [portal oficial de Turismo de Jundiaí](https://visitejundiai.sp.gov.br/item-negocio/michelin-frutas-e-cereais/).',
+      { titulo: '📍 Mais uma oportunidade para os moradores: Prefeitura na Área' },
+      'No sábado, 14 de novembro, Jundiaí também recebe a quinta edição do Prefeitura na Área, no Jardim Santa Gertrudes.',
+      'A iniciativa oferece mais de mil oportunidades de emprego e diversos serviços gratuitos à população, incluindo atendimentos de saúde, cidadania, orientação profissional, serviços do INSS e atividades para crianças.',
+      { itens: ['Horário: 9h às 15h', 'Local: EMEB Luiz Biela de Souza', 'Endereço: Rua Alice Guimarães Pelegrini, 850 – Jardim Santa Gertrudes', 'Participação: gratuita'] },
+      'Uma oportunidade para quem busca emprego, precisa resolver pendências ou deseja acessar serviços públicos em um único local.',
+      'Confira a [divulgação da Prefeitura](https://jundiai.sp.gov.br/noticias/2026/11/12/5a-edicao-do-prefeitura-na-area-chega-neste-sabado-14-ao-jardim-santa-gertrudes/).',
+      { titulo: 'Jundiaí: uma cidade para aproveitar, viver e construir histórias' },
+      { imagem: { src: '/blog/sextou-em-jundiai-o-que-fazer-fim-de-semana-novembro-2026/casarao-historico.jpg', alt: 'Casarão histórico amarelo com jardim e prédios residenciais ao fundo', largura: 1200, altura: 675 } },
+      'Uma programação como essa mostra que Jundiaí oferece muito mais do que infraestrutura urbana. A cidade reúne cultura, gastronomia, áreas verdes, turismo rural e opções de lazer para diferentes gerações.',
+      'São experiências que contribuem para uma rotina mais completa e reforçam os motivos pelos quais tantas pessoas escolhem Jundiaí para morar e investir.',
+      'Na hora de escolher um imóvel, vale olhar também para o que existe ao redor: parques, restaurantes, escolas, centros comerciais, opções culturais e facilidade de acesso.',
+      'Afinal, comprar um imóvel não significa apenas escolher uma casa ou um apartamento. Significa escolher onde você quer viver suas próximas histórias.',
+      'Está pensando em morar ou investir em Jundiaí?',
+      'A Lotus Brokers pode ajudar você a encontrar um imóvel alinhado aos seus planos, às suas necessidades e ao estilo de vida que deseja construir.',
+      'Acesse nosso site, conheça nossas [oportunidades](/lotus-busca) e descubra tudo o que Jundiaí tem a oferecer.',
+      'Lotus Brokers. Grandes histórias têm endereço.',
+      'Pauta atualizada em 12/11/2026, com informações da [agenda cultural da Prefeitura de Jundiaí](https://cultura.jundiai.sp.gov.br/agenda-cultural/), do JundiaíShopping, da agenda oficial de Tom Cavalcante, das notícias da Prefeitura e do portal [Visite Jundiaí](https://visitejundiai.sp.gov.br/).',
+    ],
+  },
+  /* ------------------------------------------------------------------
    * Enviado pela Lotus em 11/11/2026, com a foto de prédios de Jundiaí à
-   * noite. Primeiro da lista, e por isso o novo destaque da capa do blog.
+   * noite. Foi o destaque da capa do blog até 13/11/2026.
    *
    * CONFERIDO em 12/11/2026:
    *  - a matéria citada é do O Dia de 03/11/2026, "Copom deve manter Selic em
