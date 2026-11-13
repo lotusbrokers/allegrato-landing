@@ -556,12 +556,15 @@ export default function LotusBusca({
                   entrar na página e o Google via uma lista de cards sem título.
                   É o mesmo texto que já estava na tela, no mesmo lugar: só
                   deixou de ser <div>. margin e font-weight vêm explícitos para
-                  anular o padrão do navegador para h1 e manter o visual igual. */}
-              <h1 style={parseStyle("font-family:'Fraunces',serif;font-size:22px;font-weight:400;color:#15241c;line-height:1.1;margin:0;")}>{titulo ?? `${count} ${count === 1 ? 'imóvel selecionado' : 'imóveis selecionados'}`}</h1>
+                  anular o padrão do navegador para h1 e manter o visual igual.
+                  Desde 13/11/2026 a busca principal tem H1 com a palavra-chave,
+                  como os recortes (auditoria do site: era só "36 imóveis
+                  selecionados"), e a contagem fica na linha de baixo. O H1
+                  padrão mora aqui, e não num `titulo` passado pela rota, porque
+                  `titulo` também marca o recorte e esconde os filtros. */}
+              <h1 style={parseStyle("font-family:'Fraunces',serif;font-size:22px;font-weight:400;color:#15241c;line-height:1.1;margin:0;")}>{titulo ?? 'Imóveis à venda em Jundiaí e Itupeva'}</h1>
               <div style={parseStyle('font-size:13.5px;color:#8aa593;margin-top:3px;')}>
-                {titulo
-                  ? `${count} ${count === 1 ? 'imóvel selecionado' : 'imóveis selecionados'} · curados pelo especialista do bairro`
-                  : 'em Jundiaí, Itupeva e região · curados pelo especialista do bairro'}
+                {`${count} ${count === 1 ? 'imóvel selecionado' : 'imóveis selecionados'} · curados pelo especialista do bairro`}
               </div>
             </div>
             <div style={parseStyle('display:flex;align-items:center;gap:8px;')}>

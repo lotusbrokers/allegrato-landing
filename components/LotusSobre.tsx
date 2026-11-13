@@ -384,7 +384,7 @@ export default function LotusSobre({
 
       {/* HERO */}
       <section style={parseStyle('background:#1d3a2c;position:relative;overflow:hidden;')}>
-        <ImageSlot prioridade id="sobre-hero" src="/gran-ville-santo-angelo/a038.jpg" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;opacity:.4;')} />
+        <ImageSlot prioridade id="sobre-hero" src="/gran-ville-santo-angelo/a038.jpg" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;opacity:.4;')} alt="Perspectiva da entrada do condomínio Gran Ville Santo Angelo, com jardim e palmeiras" />
         <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,.7),rgba(21,36,28,.92));')}></div>
         <div style={parseStyle('position:relative;max-width:1000px;margin:0 auto;padding:120px 32px;text-align:center;')}>
           <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#cdab6e;margin-bottom:26px;')}>A Lotus</div>
@@ -505,7 +505,10 @@ export default function LotusSobre({
               <div style={parseStyle('font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#cdab6e;margin-bottom:12px;')}>Fundador</div>
               <h3 style={parseStyle('font-family:\'Fraunces\',serif;font-weight:400;font-size:clamp(24px,2.6vw,30px);color:#f7f2e8;margin:0 0 10px;')}>Erick Ferrigatti</h3>
               <p style={parseStyle('font-size:15.5px;color:rgba(247,242,232,.8);font-weight:300;line-height:1.6;margin:0 0 14px;max-width:620px;')}>Há 15 anos no mercado imobiliário, já atuei desde o operacional administrativo, correspondente bancário, recrutador, marketing, treinamentos, planejamento e hoje atuo como diretor de marketing e estratégia da imobiliária. Estudei Engenharia na Unicamp e sou formado em Publicidade com pós-graduação em Gestão de Negócios.</p>
-              <p style={parseStyle('font-size:15.5px;color:rgba(247,242,232,.8);font-weight:300;line-height:1.6;margin:0;max-width:620px;')}>Tive a oportunidade de aprender com o mercado imobiliário dentro e fora do país, e retornei como sócio da imobiliária em 2020, quando iniciamos a metodologia de exclusivos que hoje nos fez crescer em 7x, saindo de 8 para mais de 30 corretores atualmente e estruturando o que é o mais importante na minha visão: o local perfeito para corretores que desejam atuar com excelência, contando com treinamentos, mentorias e um suporte contínuo nas áreas essenciais para seu trabalho como marketing, jurídico, administrativo e muito mais.</p>
+              {/* Sem o "em 7x" desde 13/11/2026 (auditoria do site, "Números coerentes"): de 8 para
+                  mais de 30 corretores não dá 7 vezes. Se o 7x for de outra medida (vendas,
+                  faturamento), volta numa frase própria, com a medida dita. */}
+              <p style={parseStyle('font-size:15.5px;color:rgba(247,242,232,.8);font-weight:300;line-height:1.6;margin:0;max-width:620px;')}>Tive a oportunidade de aprender com o mercado imobiliário dentro e fora do país, e retornei como sócio da imobiliária em 2020, quando iniciamos a metodologia de exclusivos que hoje nos fez crescer, saindo de 8 para mais de 30 corretores atualmente e estruturando o que é o mais importante na minha visão: o local perfeito para corretores que desejam atuar com excelência, contando com treinamentos, mentorias e um suporte contínuo nas áreas essenciais para seu trabalho como marketing, jurídico, administrativo e muito mais.</p>
             </div>
           </div>
           {/* squads grid */}

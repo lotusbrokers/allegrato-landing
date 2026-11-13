@@ -300,11 +300,15 @@ export default function LotusLancamentos({ emps: empsProp }: { emps?: EmpItem[] 
         <ImageSlot prioridade id="lanc-hero" src="/assets/doppio-capa.jpg" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;opacity:.32;')} alt="Foto aérea de empreendimentos / região" />
         <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,28,.7),rgba(21,36,28,.92));')}></div>
         <div style={parseStyle('position:relative;max-width:980px;margin:0 auto;padding:100px 32px;text-align:center;')}>
-          <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#cdab6e;margin-bottom:24px;')}>Lançamentos em Jundiaí e região</div>
           {/* Duas linhas fixas em vez de quebra por acaso da largura: a primeira
               carrega a ideia (a escolha), a segunda o momento (antes da chave).
               A cor separa as duas, branco e bege. */}
           <h1 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(38px,5.4vw,68px);line-height:1.03;letter-spacing:-.02em;color:#fff;margin:0 0 22px;")}>
+            {/* "Lançamentos em Jundiaí e região" no H1 desde 13/11/2026
+                (auditoria do site, "Um H1 só, com a palavra-chave"): era a
+                linha pequena de cima, num <div>. Mesmo desenho, no padrão do
+                H1 da home. */}
+            <span style={parseStyle("display:block;font-family:'Hanken Grotesk',system-ui,sans-serif;font-size:13px;font-weight:600;line-height:normal;letter-spacing:.22em;text-transform:uppercase;color:#cdab6e;margin-bottom:24px;")}>Lançamentos em Jundiaí e região</span>{' '}
             <span style={parseStyle('display:block;')}>Grandes histórias</span>{' '}
             {/* Bege entre o #ece2cf (fundo bege do site) e o #cdab6e (dourado).
                 O #ece2cf tinha só 1.28x de contraste contra o branco da linha

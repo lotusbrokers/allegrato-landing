@@ -7,9 +7,11 @@ import { FAQ, respostaEmTexto } from '@/lib/faq';
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: 'Perguntas frequentes sobre comprar e vender imóvel em Jundiaí | Lotus Brokers',
+  // Até 70 caracteres no título e 160 na descrição (auditoria do site de
+  // 13/11/2026: estavam com 77 e 161).
+  title: 'Perguntas sobre comprar e vender imóvel em Jundiaí | Lotus Brokers',
   description:
-    'Respostas diretas sobre comprar, financiar, vender e investir em imóveis em Jundiaí e Itupeva: documentação, lançamentos, FGTS, ITBI, bairros e suporte jurídico.',
+    'Respostas diretas sobre comprar, financiar, vender e investir em imóveis em Jundiaí e Itupeva: documentação, lançamentos, FGTS, ITBI e bairros.',
   alternates: {
     canonical: 'https://www.lotusbrokers.com.br/lotus-faq',
   },

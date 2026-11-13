@@ -20,7 +20,8 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: 'Blog Lotus: notícias da cidade e do mercado imobiliário',
   description:
-    'Blog Lotus: notícias de Jundiaí e Itupeva, mercado imobiliário sem juridiquês, guias de compra, venda e locação e a vida na região da Serra do Japi.',
+    // Sem "locação" desde 13/11/2026: a Lotus não trabalha com locação (27/10/2026).
+    'Blog Lotus: notícias de Jundiaí e Itupeva, mercado imobiliário sem juridiquês, guias de compra e venda e a vida na região da Serra do Japi.',
   alternates: {
     canonical: 'https://www.lotusbrokers.com.br/lotus-blog',
   },

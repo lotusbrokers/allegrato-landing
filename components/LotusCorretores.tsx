@@ -3,6 +3,7 @@ import { footerLegalLine } from '@/lib/site';
 import { SQUADS, nomesDosSquads } from '@/lib/squads';
 import { conteudoRealDe } from '@/lib/corretores-conteudo';
 import { especialidadesDoSite, especialistaEm } from '@/lib/especialidades';
+import NotaNoGoogle from './NotaNoGoogle';
 
 /**
  * LotusCorretores — porte 1:1 de lotus-corretores/index.html (mecanismo dc-runtime) para React.
@@ -445,9 +446,15 @@ export default function LotusCorretores({
           <section style={parseStyle('background:#1d3a2c;position:relative;overflow:hidden;')}>
             <div style={parseStyle('position:absolute;inset:0;opacity:.05;mix-blend-mode:overlay;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'140\' height=\'140\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'.85\' numOctaves=\'2\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E");')}></div>
             <div style={parseStyle('position:relative;max-width:1000px;margin:0 auto;padding:96px 32px;text-align:center;')}>
-              <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#cdab6e;margin-bottom:24px;')}>Nossa equipe</div>
-              <h1 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(36px,5vw,62px);line-height:1.04;letter-spacing:-.02em;color:#f7f2e8;margin:0 0 22px;")}>Especialistas que conhecem o seu bairro <em style={parseStyle('font-style:italic;color:#cdab6e;')}>pelo nome.</em></h1>
+              {/* "Corretores de imóveis em Jundiaí e Itupeva" no H1 desde
+                  13/11/2026 (auditoria do site, "Um H1 só, com a palavra-chave").
+                  Ocupa a linha pequena de cima, que dizia "Nossa equipe", com o
+                  mesmo desenho, no padrão do H1 da home. */}
+              <h1 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(36px,5vw,62px);line-height:1.04;letter-spacing:-.02em;color:#f7f2e8;margin:0 0 22px;")}><span style={parseStyle("display:block;font-family:'Hanken Grotesk',system-ui,sans-serif;font-size:13px;font-weight:600;line-height:normal;letter-spacing:.22em;text-transform:uppercase;color:#cdab6e;margin-bottom:24px;")}>Corretores de imóveis em Jundiaí e Itupeva</span>{' '}Especialistas que conhecem o seu bairro <em style={parseStyle('font-style:italic;color:#cdab6e;')}>pelo nome.</em></h1>
               <p style={parseStyle('font-size:clamp(16px,1.7vw,20px);color:rgba(247,242,232,.82);font-weight:300;line-height:1.55;max-width:600px;margin:0 auto;')}>Na Lotus você não fala com um generalista de tudo. Encontre o corretor certo por bairro, especialidade ou squad.</p>
+              {/* Nota da Lotus no Google (auditoria do site de 13/11/2026:
+                  "Avaliações do Google" não apareciam nesta página). */}
+              <div style={parseStyle('margin-top:28px;')}><NotaNoGoogle /></div>
               <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;max-width:920px;margin:48px auto 0;text-align:left;')}>
                 <div style={parseStyle('background:rgba(247,242,232,.06);border:1px solid rgba(247,242,232,.12);border-radius:16px;padding:24px;')}>
                   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#cdab6e" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" style={parseStyle('margin-bottom:14px;')}><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>

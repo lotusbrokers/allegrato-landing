@@ -9,7 +9,8 @@ export const revalidate = 3600;
 // Metadata portada do <helmet> de lotus-corretores/index.html (paridade de SEO com o estático).
 // TODO go-live: trocar canonical/og:url para o domínio final, remover noindex e publicar sitemap/robots.
 export const metadata: Metadata = {
-  title: 'Corretores especialistas por bairro em Jundiaí e Itupeva | Lotus Brokers',
+  // Até 70 caracteres (auditoria do site de 13/11/2026: estava com 72).
+  title: 'Corretores de imóveis por bairro em Jundiaí e Itupeva | Lotus Brokers',
   description:
     'Conheça os corretores especialistas da Lotus por bairro em Jundiaí e Itupeva. Gente que conhece cada esquina e te chama pelo nome. CRECI visível.',
   alternates: { canonical: 'https://www.lotusbrokers.com.br/lotus-corretores' },

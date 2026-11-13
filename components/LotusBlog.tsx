@@ -309,8 +309,14 @@ export default function LotusBlog({
           <section style={parseStyle('background:#1d3a2c;position:relative;overflow:hidden;')}>
             <div style={{ ...parseStyle('position:absolute;inset:0;opacity:.05;mix-blend-mode:overlay;pointer-events:none;'), backgroundImage: NOISE_BG }}></div>
             <div style={parseStyle('position:relative;max-width:820px;margin:0 auto;padding:84px 32px;text-align:center;')}>
-              <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#cdab6e;margin-bottom:22px;')}>Blog Lotus</div>
-              <h1 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(34px,5vw,60px);line-height:1.03;letter-spacing:-.02em;color:#f7f2e8;margin:0 0 18px;")}>Nossa cidade, nosso mercado, <em style={parseStyle('font-style:italic;color:#cdab6e;')}>contado por quem vive aqui.</em></h1>
+              {/* "Blog imobiliário de Jundiaí e Itupeva" no H1 desde 13/11/2026
+                  (auditoria do site: o H1 não dizia blog nem Jundiaí). Era a
+                  linha pequena de cima ("Blog Lotus"), num <div>: mesmo
+                  desenho, no padrão do H1 da home. */}
+              <h1 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(34px,5vw,60px);line-height:1.03;letter-spacing:-.02em;color:#f7f2e8;margin:0 0 18px;")}>
+                <span style={parseStyle("display:block;font-family:'Hanken Grotesk',system-ui,sans-serif;font-size:13px;font-weight:600;line-height:normal;letter-spacing:.22em;text-transform:uppercase;color:#cdab6e;margin-bottom:22px;")}>Blog imobiliário de Jundiaí e Itupeva</span>{' '}
+                Nossa cidade, nosso mercado, <em style={parseStyle('font-style:italic;color:#cdab6e;')}>contado por quem vive aqui.</em>
+              </h1>
               <p style={parseStyle('font-size:clamp(15px,1.6vw,19px);color:rgba(247,242,232,.82);font-weight:300;line-height:1.5;max-width:560px;margin:0 auto;')}>Notícias de Jundiaí e Itupeva, mercado imobiliário sem juridiquês e a vida na região da Serra do Japi.</p>
             </div>
           </section>

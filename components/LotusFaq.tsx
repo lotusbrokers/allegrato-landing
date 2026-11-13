@@ -257,8 +257,13 @@ export default function LotusFaq({
       <section style={parseStyle('background:#1d3a2c;position:relative;overflow:hidden;')}>
         <div style={parseStyle("position:absolute;inset:0;opacity:.05;mix-blend-mode:overlay;pointer-events:none;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\");")}></div>
         <div style={parseStyle('position:relative;max-width:820px;margin:0 auto;padding:90px 32px;text-align:center;')}>
-          <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#cdab6e;margin-bottom:22px;')}>Perguntas frequentes</div>
-          <h1 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(34px,5vw,60px);line-height:1.03;letter-spacing:-.02em;color:#f7f2e8;margin:0 0 18px;")}>Tudo o que você quer saber sobre imóveis na região.</h1>
+          {/* "Perguntas frequentes · Jundiaí e Itupeva" no H1 desde 13/11/2026
+              (auditoria do site: o H1 não dizia Jundiaí). Era a linha pequena
+              de cima, num <div>: mesmo desenho, no padrão do H1 da home. */}
+          <h1 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(34px,5vw,60px);line-height:1.03;letter-spacing:-.02em;color:#f7f2e8;margin:0 0 18px;")}>
+            <span style={parseStyle("display:block;font-family:'Hanken Grotesk',system-ui,sans-serif;font-size:13px;font-weight:600;line-height:normal;letter-spacing:.22em;text-transform:uppercase;color:#cdab6e;margin-bottom:22px;")}>Perguntas frequentes · Jundiaí e Itupeva</span>{' '}
+            Tudo o que você quer saber sobre imóveis na região.
+          </h1>
           <p style={parseStyle('font-size:clamp(15px,1.6vw,19px);color:rgba(247,242,232,.82);font-weight:300;line-height:1.5;max-width:560px;margin:0 auto 32px;')}>Comprar, vender, financiar e investir em Jundiaí e Itupeva, respondido de forma direta por quem vive o mercado da região.</p>
           <div style={parseStyle('display:flex;align-items:center;gap:10px;background:#f7f2e8;border-radius:14px;padding:7px 7px 7px 18px;max-width:540px;margin:0 auto;box-shadow:0 20px 50px -24px rgba(0,0,0,.5);')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8aa593" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.2-3.2"></path></svg>
