@@ -140,6 +140,21 @@ export function hrefDoArtigo(id: string): string {
 }
 
 /**
+ * "Guias práticos" da home: um artigo por assunto, nesta ordem. `tag` é o
+ * assunto que o cartão mostra, não a categoria do blog. Até 13/11/2026 a home
+ * tinha seis guias escritos à mão, sem link e com o selo "em breve" (auditoria
+ * do site). Artigo fundido ou removido some do cartão sozinho; o teste avisa.
+ */
+export const GUIAS_DA_HOME: readonly { tag: string; id: string }[] = [
+  { tag: 'Comprar', id: 'guia-documentacao-compra-imovel' },
+  { tag: 'Financiamento', id: 'como-financiar-o-primeiro-imovel' },
+  { tag: 'Na planta', id: 'comprar-imovel-na-planta-com-seguranca' },
+  { tag: 'Vender', id: 'como-vender-imovel-jundiai' },
+  { tag: 'Custos', id: 'itbi-escritura-e-registro' },
+  { tag: 'Região', id: 'vantagens-de-morar-em-itupeva' },
+];
+
+/**
  * O que um card de artigo precisa: tudo menos o texto. Listagem, "Continue
  * lendo", a home e os guias de bairro recebem isto.
  *

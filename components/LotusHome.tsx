@@ -2,6 +2,7 @@
 import { getBairro } from '@/lib/bairros';
 import { footerLegalLine, PERFIL_GOOGLE } from '@/lib/site';
 import { DEPOIMENTOS, NOTA_NO_GOOGLE, notaComVirgula } from '@/lib/depoimentos';
+import { LogoGoogle } from './NotaNoGoogle';
 import { imagemOtimizada, logoLotus } from '@/lib/imagem-otimizada';
 
 /**
@@ -109,22 +110,6 @@ function Hoverable<T extends keyof React.JSX.IntrinsicElements = 'div'>({
 }
 
 /**
- * O "G" do Google, nas cores da marca. Com rótulo, o leitor de tela anuncia;
- * sem rótulo é decorativo, para quando o texto ao lado já diz "Google".
- */
-function LogoGoogle({ tamanho, rotulo }: { tamanho: number; rotulo?: string }) {
-  const acessivel = rotulo ? { role: 'img', 'aria-label': rotulo } : { 'aria-hidden': true };
-  return (
-    <svg width={tamanho} height={tamanho} viewBox="0 0 24 24" {...acessivel}>
-      <path fill="#4285F4" d="M21.6 12.2c0-.6-.1-1.2-.2-1.8H12v3.4h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.1Z"></path>
-      <path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 .9-3.4.9-2.6 0-4.8-1.7-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22Z"></path>
-      <path fill="#FBBC05" d="M6.4 13.9a6 6 0 0 1 0-3.8V7.5H3.1a10 10 0 0 0 0 9z"></path>
-      <path fill="#EA4335" d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.8 9.4 6.1 12 6.1Z"></path>
-    </svg>
-  );
-}
-
-/**
  * image-slot do dc-runtime: bloco com gradiente de fundo (fallback) e, quando há
  * src, a imagem cobrindo (object-fit:cover). Sem src => só o gradiente.
  * Gradiente idêntico ao do estático: linear-gradient(135deg,#1d3a2c,#3f6249).
@@ -197,17 +182,6 @@ const banners = [
   { slot: 'lotus-banner-1', eyebrow: 'Campanha do mês', title: 'Lançamentos com condições de pré-venda', text: 'Unidades selecionadas com tabela exclusiva por tempo limitado.', cta: 'Ver lançamentos', href: 'https://www.lotusbrokers.com.br/lotus-lancamentos', img: '/assets/doppio-capa.jpg', alt: 'Vista aérea do Doppio Jundiaí ao anoitecer, torre iluminada junto à avenida' },
   { slot: 'lotus-banner-2', eyebrow: 'Serra do Japi', title: 'Casas em condomínio a partir de R$ 1,2 mi', text: 'Mais verde, mais privacidade, a 10 minutos do centro de Jundiaí.', cta: 'Explorar imóveis', href: 'https://www.lotusbrokers.com.br/lotus-busca', img: '/gran-ville-santo-angelo/a025.jpg', alt: 'Casa térrea moderna com piscina e varanda gourmet em condomínio fechado' },
   { slot: 'lotus-banner-3', eyebrow: 'Quer vender?', title: 'Uma estratégia de venda à altura do seu imóvel', text: 'Receba uma análise completa de precificação e posicionamento, conduzida por especialistas que conhecem profundamente a região.', cta: 'Anunciar agora', href: 'https://www.lotusbrokers.com.br/lotus-anunciar', img: '/home-hero-jundiai.jpg', alt: 'Vista aérea de Jundiaí ao amanhecer' },
-];
-
-const guias = [
-  { tag: 'Comprar', title: 'Como comprar um imóvel em Jundiaí', desc: 'Da pré-aprovação à escritura: o passo a passo sem susto.', read: '8 min' },
-  { tag: 'Financiamento', title: 'Como conseguir a aprovação do financiamento', desc: 'Renda, score e documentação, o que os bancos olham.', read: '7 min' },
-  // Era "Alugar · Documentos necessários para alugar" até 27/10/2026: a Lotus não
-  // trabalha com locação. O texto vem da própria /lotus-anunciar.
-  { tag: 'Anunciar', title: 'Como anunciar o seu imóvel', desc: 'Avaliação sem custo e um especialista do seu bairro, do anúncio à chave.', read: '5 min' },
-  { tag: 'Vender', title: 'Quanto vale o meu imóvel? Como avaliar', desc: 'O que pesa no preço e como não deixar dinheiro na mesa.', read: '6 min' },
-  { tag: 'Custos', title: 'ITBI, escritura e registro: o que pagar', desc: 'Todos os custos da compra, em uma conta só.', read: '4 min' },
-  { tag: 'Região', title: 'Morar em Itupeva vale a pena?', desc: 'Serra, condomínios e rotina: o guia honesto da cidade.', read: '6 min' },
 ];
 
 // Sem os "para alugar" desde 27/10/2026: a Lotus não trabalha com locação.
@@ -333,6 +307,7 @@ export default function LotusHome({
   developments,
   bairroCounts,
   posts,
+  guias,
   oportunidades,
   vitrineFixa,
   condominios,
@@ -348,6 +323,9 @@ export default function LotusHome({
   // Destaques do blog ja filtrados por data de publicacao (a rota decide a
   // hora, ver lib/blog-agenda), so com os dados do card. Ausente -> sem cards.
   posts?: PostResumo[];
+  // "Guias práticos": um artigo publicado por assunto (ver GUIAS_DA_HOME em
+  // lib/blog-posts), com o assunto em `tag`. Vazio → seção some.
+  guias?: (PostResumo & { tag: string })[];
   // Imóveis prontos da vitrine "Oportunidades da semana", já na ordem dos selos
   // do dashboard (ver oportunidadesDaSemana em lib/imoveis). Vazio → seção some.
   oportunidades?: ImovelBusca[];
@@ -1123,7 +1101,7 @@ export default function LotusHome({
         <div style={parseStyle('max-width:1280px;margin:0 auto;')}>
           <div data-reveal="" style={parseStyle('display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:52px;')}>
             <div style={parseStyle('max-width:620px;')}>
-              <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b18a4a;margin-bottom:18px;')}>Blog Lotus · em breve</div>
+              <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b18a4a;margin-bottom:18px;')}>Blog Lotus</div>
               <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(30px,4vw,48px);line-height:1.06;letter-spacing:-.02em;margin:0;color:#15241c;")}>Conhecimento para grandes escolhas.</h2>
             </div>
             <Hoverable as="a" href="/lotus-blog" target="_top" baseStyle={parseStyle('display:inline-flex;align-items:center;gap:8px;background:#b18a4a;color:#15241c;font-weight:700;font-size:15px;padding:13px 26px;border-radius:40px;white-space:nowrap;transition:transform .2s, background .2s;')} hoverStyle={parseStyle('background:#cdab6e;transform:translateY(-2px)')}>Saiba mais <span style={parseStyle('font-size:17px;')}>→</span></Hoverable>
@@ -1175,11 +1153,15 @@ export default function LotusHome({
       </section>
 
       {/* ============ GUIAS PRÁTICOS ============ */}
+      {/* Um artigo publicado por assunto. Até 13/11/2026 eram seis cartões sem
+          link, com o selo "em breve" (auditoria do site): tirar só o selo
+          deixaria cartões que parecem guias e não abrem nada. */}
+      {guias && guias.length > 0 && (
       <section id="guias" style={parseStyle('content-visibility:auto;contain-intrinsic-size:auto 800px;background:#ece2cf;padding:120px 40px;')}>
         <div style={parseStyle('max-width:1280px;margin:0 auto;')}>
           <div data-reveal="" style={parseStyle('display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:52px;')}>
             <div style={parseStyle('max-width:620px;')}>
-              <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b18a4a;margin-bottom:18px;')}>Guias práticos · em breve</div>
+              <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b18a4a;margin-bottom:18px;')}>Guias práticos</div>
               <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(30px,4vw,48px);line-height:1.06;letter-spacing:-.02em;margin:0 0 16px;color:#15241c;")}>Boas decisões começam com boas perguntas.</h2>
               <p style={parseStyle('font-size:17px;color:#3f6249;font-weight:300;line-height:1.55;margin:0;')}>Conteúdo direto pra você decidir com segurança, de quem faz isso todos os dias na região.</p>
             </div>
@@ -1187,21 +1169,24 @@ export default function LotusHome({
           </div>
           <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:18px;')}>
             {/* hint-placeholder-count: 6 */}
-            {guias.map((g, i) => (
-              <Hoverable key={i} as="a" data-reveal="" baseStyle={parseStyle('cursor:default;display:flex;gap:20px;align-items:flex-start;background:#f7f2e8;border-radius:16px;padding:26px;box-shadow:0 16px 40px -32px rgba(21,36,28,.4);transition:transform .3s ease, box-shadow .3s ease;')} hoverStyle={parseStyle('transform:translateY(-3px);box-shadow:0 26px 54px -34px rgba(21,36,28,.5)')}>
+            {guias.map((g) => (
+              <Hoverable key={g.id} as="a" href={g.href} data-reveal="" baseStyle={parseStyle('cursor:pointer;display:flex;gap:20px;align-items:flex-start;background:#f7f2e8;border-radius:16px;padding:26px;box-shadow:0 16px 40px -32px rgba(21,36,28,.4);transition:transform .3s ease, box-shadow .3s ease;')} hoverStyle={parseStyle('transform:translateY(-3px);box-shadow:0 26px 54px -34px rgba(21,36,28,.5)')}>
                 <div style={parseStyle('flex-shrink:0;width:48px;height:48px;border-radius:12px;background:#1d3a2c;display:flex;align-items:center;justify-content:center;')}>
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#cdab6e" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v18H6.5A2.5 2.5 0 0 0 4 22.5z"></path><path d="M4 4.5A2.5 2.5 0 0 0 6.5 7H20"></path><path d="M9 12h7M9 15.5h5"></path></svg>
                 </div>
                 <div style={parseStyle('flex:1;')}>
                   <div style={parseStyle('font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#b18a4a;margin-bottom:8px;')}>{g.tag} · {g.read}</div>
                   <h3 style={parseStyle("font-family:'Fraunces',serif;font-weight:400;font-size:19px;line-height:1.15;color:#15241c;margin:0 0 6px;")}>{g.title}</h3>
-                  <p style={parseStyle('font-size:14px;color:#3f6249;font-weight:300;line-height:1.45;margin:0;')}>{g.desc}</p>
+                  {/* O resumo do artigo é mais longo que as frases curtas de antes:
+                      três linhas, para os cartões continuarem do mesmo tamanho. */}
+                  <p style={parseStyle('font-size:14px;color:#3f6249;font-weight:300;line-height:1.45;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;')}>{g.excerpt}</p>
                 </div>
               </Hoverable>
             ))}
           </div>
         </div>
       </section>
+      )}
 
       {/* ============ ANUNCIAR CTA ============ */}
       <section id="anunciar" style={parseStyle('content-visibility:auto;contain-intrinsic-size:auto 800px;background:#3f6249;padding:110px 40px;position:relative;overflow:hidden;')}>

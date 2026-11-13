@@ -31,7 +31,8 @@ const serviceJsonLd = {
   '@type': 'Service',
   name: 'Avaliação e venda de imóveis, Lotus Brokers',
   serviceType: 'Intermediação imobiliária e avaliação',
-  areaServed: ['Jundiaí', 'Itupeva', 'Vinhedo', 'Valinhos'],
+  // Mesmas cidades do RealEstateAgent de app/layout.tsx (decisão D026).
+  areaServed: ['Jundiaí', 'Itupeva'],
   provider: { '@type': 'RealEstateAgent', name: 'Lotus Brokers' },
 };
 

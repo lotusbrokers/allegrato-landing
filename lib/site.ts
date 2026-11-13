@@ -80,10 +80,25 @@ function isPlaceholder(value: string): boolean {
  * omitindo CRECI/CNPJ enquanto forem placeholders — assim não vaza
  * "CRECI 00000" em produção, mas volta sozinho quando os reais entrarem.
  */
+/** "(11) 92614-3393": o telefone como o Perfil da Empresa no Google mostra. */
+export function telefoneEmTexto(): string {
+  const d = SITE.telefone.replace(/\D/g, '').replace(/^55/, '');
+  return `(${d.slice(0, 2)}) ${d.slice(2, -4)}-${d.slice(-4)}`;
+}
+
+/**
+ * Linha legal do rodapé, igual em todas as páginas do portal.
+ *
+ * Desde 13/11/2026 leva o endereço com CEP e o telefone em texto (auditoria do
+ * site, item "Endereço com CEP e telefone em texto"): até então o endereço só
+ * existia no dado estruturado, e o visitante e o Google não liam na página o
+ * mesmo NAP do Perfil da Empresa. A região ("Jundiaí · Itupeva · SP") saiu
+ * porque o endereço já diz a cidade.
+ */
 export function footerLegalLine(): string {
   const partes: string[] = [`© ${SITE.ano} ${SITE.nome}`];
   if (!isPlaceholder(SITE.creciPj)) partes.push(SITE.creciPj);
   if (!isPlaceholder(SITE.cnpj)) partes.push(SITE.cnpj);
-  partes.push(SITE.regiao);
+  partes.push(`${SITE.endereco}, CEP ${SITE.cep}`, telefoneEmTexto());
   return partes.join(' · ');
 }

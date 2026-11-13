@@ -45,8 +45,9 @@ export const metadata: Metadata = {
   // "imobiliária em Jundiaí" vem primeiro desde 27/10/2026, pedido da auditoria
   // de SEO de 19/10/2026: a home não aparecia para a busca principal da Lotus.
   title: 'Imobiliária em Jundiaí e Itupeva | Lotus Brokers',
+  // Até 160 caracteres (auditoria do site de 13/11/2026: estava com 165).
   description:
-    'Imobiliária em Jundiaí e Itupeva. A Lotus Brokers reúne lançamentos, casas e apartamentos com especialistas que conhecem cada bairro. Avaliação grátis do seu imóvel.',
+    'Imobiliária em Jundiaí e Itupeva: lançamentos, casas e apartamentos com especialistas que conhecem cada bairro. Avaliação grátis do seu imóvel.',
   alternates: { canonical: 'https://www.lotusbrokers.com.br/' },
   openGraph: {
     siteName: 'Lotus Brokers',
@@ -85,7 +86,11 @@ const jsonLd = {
   taxID: SITE.cnpj.replace(/\D/g, ''),
   description:
     'Imobiliária moderna de Jundiaí e Itupeva, voltada para um atendimento de excelência, com equipe de corretores segmentada por especialidade e por bairro.',
-  areaServed: ['Jundiaí', 'Itupeva', 'Vinhedo', 'Valinhos', 'Indaiatuba'],
+  // As cidades da decisão D026, as mesmas dos títulos do site. Vinhedo,
+  // Valinhos e Indaiatuba saíram em 13/11/2026 (auditoria do site, item
+  // "Cidades iguais à D026"). O texto de /lotus-sobre continua dizendo que a
+  // Lotus "também atende" a região: área de atuação não é lista de exclusão.
+  areaServed: ['Jundiaí', 'Itupeva'],
   address: {
     '@type': 'PostalAddress',
     streetAddress: `${SITE.logradouro}, ${SITE.bairro}`,

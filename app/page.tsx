@@ -4,9 +4,9 @@ import { getLancamentos, isApresentavel, type LancamentoCard } from '@/lib/lanca
 import { getImoveisBusca, oportunidadesDaSemana } from '@/lib/imoveis';
 import { getCondominiosCards, isCondominioApresentavel } from '@/lib/condominios';
 import { BAIRROS } from '@/lib/bairros';
-import { POSTS, resumoDoPost } from '@/lib/blog-posts';
+import { GUIAS_DA_HOME, POSTS, resumoDoPost } from '@/lib/blog-posts';
 import { publicados } from '@/lib/blog-agenda';
-import { nomesDoBairro } from '@/lib/bairros-taxonomia';
+import { imovelDoGuia } from '@/lib/bairros-taxonomia';
 import { FAQ_HOME } from '@/lib/home-faq';
 
 // ISR: revalida a cada 1h. O Portal é praticamente read-only; revalidação
@@ -180,20 +180,21 @@ export default async function LotusHomePage() {
   );
   const developments = apresentaveis.length > 0 ? apresentaveis : undefined;
 
-  // Contagem real por bairro, pelo MESMO critério de getImoveisPorBairro: o
-  // guia conta a si e aos sub-bairros que pertencem a ele (ver
-  // lib/bairros-taxonomia). Comparar só com b.nome zerava o card do Eloy
-  // Chaves na home enquanto a página do bairro listava três imóveis — os dele
-  // estão cadastrados como Jardim Ermida I/II.
+  // Contagem real por bairro, pelo MESMO critério de getImoveisPorBairro
+  // (imovelDoGuia): o guia conta a si e aos sub-bairros que pertencem a ele,
+  // na mesma cidade. Comparar só com b.nome zerava o card de um guia enquanto
+  // a página dele listava imóveis cadastrados com o nome do sub-bairro.
   const bairroCounts: Record<string, number> = {};
-  for (const b of BAIRROS) {
-    const alvos = new Set(nomesDoBairro(b.nome).map((n) => n.trim().toLowerCase()));
-    bairroCounts[b.slug] = imoveis.filter((im) => alvos.has(im.neighborhood.trim().toLowerCase())).length;
-  }
+  for (const b of BAIRROS) bairroCounts[b.slug] = imoveis.filter((im) => imovelDoGuia(im, b)).length;
 
   // Os tres destaques do blog saem da MESMA fonte de /lotus-blog e respeitam o
   // agendamento: artigo marcado para amanha nao pode vazar na home hoje.
-  const destaques = publicados(POSTS).slice(0, 3).map(resumoDoPost);
+  const noAr = publicados(POSTS);
+  const destaques = noAr.slice(0, 3).map(resumoDoPost);
+  const guias = GUIAS_DA_HOME.flatMap(({ tag, id }) => {
+    const post = noAr.find((p) => p.id === id);
+    return post ? [{ ...resumoDoPost(post), tag }] : [];
+  });
 
   // "Oportunidades da semana": sai da lista de imóveis que JÁ foi buscada acima
   // para a contagem por bairro — nenhuma ida extra ao banco. Só exclusivos, e
@@ -226,6 +227,7 @@ export default async function LotusHomePage() {
         developments={developments}
         bairroCounts={bairroCounts}
         posts={destaques}
+        guias={guias}
         oportunidades={oportunidades}
         vitrineFixa={vitrineFixa}
         condominios={condominios}

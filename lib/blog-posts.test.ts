@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { CATEGORIAS_BLOG, POSTS, hrefDoArtigo, relacionados } from './blog-posts.ts';
+import { CATEGORIAS_BLOG, GUIAS_DA_HOME, POSTS, hrefDoArtigo, relacionados } from './blog-posts.ts';
 
 /**
  * Invariantes da lista de artigos.
@@ -63,6 +63,12 @@ test('toda capa declarada existe em public/', () => {
       `${p.id} aponta a capa para ${p.img}, que não existe em public/`
     );
   }
+});
+
+test('os guias práticos da home apontam para artigos que existem, sem repetir', () => {
+  const ids = GUIAS_DA_HOME.map((g) => g.id);
+  assert.equal(new Set(ids).size, ids.length, 'guia repetido na home');
+  for (const id of ids) assert.ok(POSTS.some((p) => p.id === id), `o guia da home "${id}" não é artigo do blog`);
 });
 
 // Foto no meio do texto (desde 13/11/2026): o mesmo cuidado da capa, e mais a
