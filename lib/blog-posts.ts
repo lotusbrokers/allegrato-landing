@@ -35,8 +35,19 @@ export type LinkArtigo = { texto: string; href: string; detalhe?: string };
  * Criado para o Sextou em Jundiaí (16/10/2026): os imóveis perto dos eventos.
  * Os imóveis viram lista de links; os lançamentos, cartões com foto (desde
  * 04/11/2026, pedido da Lotus no artigo do Medeiros).
+ *
+ * `imagem` é uma foto no meio do texto (ver ImagemDoArtigo).
  */
 export type BairrosDoBloco = { cidade: string; bairros: string[] };
+
+/**
+ * Foto no meio do texto, na largura da coluna. `largura` e `altura` são as do
+ * arquivo em public/: reservam o espaço antes de a foto carregar, para o texto
+ * não pular. `credito` sai embaixo, como "Foto: <credito>". Sem crédito
+ * conhecido, fica sem, em vez de inventar um. Criado para o Sextou de 13 a
+ * 15/11/2026, o primeiro texto que veio com uma foto por seção.
+ */
+export type ImagemDoArtigo = { src: string; alt: string; largura: number; altura: number; credito?: string };
 
 /**
  * Cartão de lançamento de um bloco `lancamentosNosBairros` já resolvido pela
@@ -51,6 +62,7 @@ export type BlocoArtigo =
       itens?: string[];
       nivel?: 2 | 3;
       links?: LinkArtigo[];
+      imagem?: ImagemDoArtigo;
       imoveisNosBairros?: BairrosDoBloco;
       lancamentosNosBairros?: BairrosDoBloco;
       empreendimentos?: EmpreendimentoDoArtigo[];

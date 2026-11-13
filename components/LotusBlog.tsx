@@ -148,7 +148,7 @@ const NOISE_BG =
 
 const WHATSAPP_DEFAULT = '5511926143393';
 
-import type { PostResumo } from '@/lib/blog-posts';
+import type { ImagemDoArtigo, PostResumo } from '@/lib/blog-posts';
 import type { BlocoPronto, Pedaco } from '@/lib/texto-com-links';
 import { imagemOtimizada } from '@/lib/imagem-otimizada';
 
@@ -177,6 +177,30 @@ function LinkDoTexto({ href, children }: { href: string; children: React.ReactNo
     >
       {children}
     </a>
+  );
+}
+
+/* Foto no meio do artigo, na largura do texto e na proporção do próprio
+   arquivo: width/height reservam o espaço antes de carregar, sem o texto
+   pular. Passa pelo otimizador do Next (WebP/AVIF na largura da tela) e só
+   carrega perto de aparecer. A coluna tem 756px (820 menos o padding). */
+function FotoNoTexto({ imagem }: { imagem: ImagemDoArtigo }) {
+  const { src, srcSet } = imagemOtimizada(imagem.src, [640, 1080]);
+  return (
+    <figure style={parseStyle('margin:6px 0 28px;')}>
+      <img
+        src={src}
+        srcSet={srcSet}
+        sizes="(max-width: 820px) calc(100vw - 64px), 756px"
+        alt={imagem.alt}
+        width={imagem.largura}
+        height={imagem.altura}
+        loading="lazy"
+        decoding="async"
+        style={parseStyle('display:block;width:100%;height:auto;border-radius:16px;background:#1d3a2c;')}
+      />
+      {imagem.credito && <figcaption style={parseStyle('font-size:12.5px;color:#8aa593;margin-top:8px;')}>Foto: {imagem.credito}</figcaption>}
+    </figure>
   );
 }
 
@@ -405,6 +429,7 @@ export default function LotusBlog({
                     ) : (
                       <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:400;font-size:clamp(22px,2.4vw,28px);color:#15241c;margin:36px 0 16px;")}>{bloco.titulo}</h2>
                     ))}
+                  {bloco.imagem && <FotoNoTexto imagem={bloco.imagem} />}
                   {bloco.itens && (
                     <ul style={parseStyle('margin:0 0 22px;padding-left:22px;display:grid;gap:9px;')}>
                       {bloco.itens.map((item, j) => (

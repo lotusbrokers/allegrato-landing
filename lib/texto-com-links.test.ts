@@ -47,13 +47,19 @@ test('dentro de link explícito não entra link automático', () => {
 
 test('o corpo inteiro: título sem link, itens com link, uma vez por artigo', () => {
   const pronto = prepararCorpo([{ titulo: 'Morar no Medeiros' }, 'O Medeiros é calmo.', { itens: ['Perto do Medeiros'] }], ALVOS);
-  assert.deepEqual(pronto[0], { titulo: 'Morar no Medeiros', nivel: undefined, itens: undefined, links: undefined, empreendimentos: undefined });
+  assert.deepEqual(pronto[0], { titulo: 'Morar no Medeiros', nivel: undefined, itens: undefined, links: undefined, imagem: undefined, empreendimentos: undefined });
   assert.deepEqual(pronto[1], { paragrafo: ['O ', { texto: 'Medeiros', href: '/lotus-bairro/medeiros' }, ' é calmo.'] });
-  assert.deepEqual(pronto[2], { titulo: undefined, nivel: undefined, itens: [['Perto do Medeiros']], links: undefined, empreendimentos: undefined });
+  assert.deepEqual(pronto[2], { titulo: undefined, nivel: undefined, itens: [['Perto do Medeiros']], links: undefined, imagem: undefined, empreendimentos: undefined });
 });
 
 test('os cartões de lançamento passam intactos, sem link automático no nome', () => {
   const cartao = { nome: 'Reserva Di Medeiros', href: '/reserva-di-medeiros', img: '/reserva-di-medeiros/capa.jpg', detalhe: 'Lançamento · Medeiros' };
   const [pronto] = prepararCorpo([{ titulo: 'Lançamentos no Medeiros', empreendimentos: [cartao] }], ALVOS);
-  assert.deepEqual(pronto, { titulo: 'Lançamentos no Medeiros', nivel: undefined, itens: undefined, links: undefined, empreendimentos: [cartao] });
+  assert.deepEqual(pronto, { titulo: 'Lançamentos no Medeiros', nivel: undefined, itens: undefined, links: undefined, imagem: undefined, empreendimentos: [cartao] });
+});
+
+test('a foto passa intacta, sem link automático na descrição', () => {
+  const foto = { src: '/blog/medeiros/praca.jpg', alt: 'Praça no Medeiros', largura: 1200, altura: 800, credito: 'Arquivo PMJ' };
+  const [pronto] = prepararCorpo([{ imagem: foto }], ALVOS);
+  assert.deepEqual(pronto, { titulo: undefined, nivel: undefined, itens: undefined, links: undefined, imagem: foto, empreendimentos: undefined });
 });

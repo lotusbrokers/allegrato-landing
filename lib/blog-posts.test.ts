@@ -65,6 +65,21 @@ test('toda capa declarada existe em public/', () => {
   }
 });
 
+// Foto no meio do texto (desde 13/11/2026): o mesmo cuidado da capa, e mais a
+// descrição, que é o que o leitor de tela e o Google leem, e o tamanho, que
+// reserva o espaço da foto antes de ela carregar.
+test('toda foto do corpo existe em public/, com descrição e tamanho', () => {
+  for (const p of POSTS) {
+    for (const bloco of p.body) {
+      if (typeof bloco === 'string' || !bloco.imagem) continue;
+      const { src, alt, largura, altura } = bloco.imagem;
+      assert.ok(existsSync(join(process.cwd(), 'public', src)), `${p.id}: a foto ${src} não existe em public/`);
+      assert.notEqual(alt.trim(), '', `${p.id}: a foto ${src} está sem descrição (alt)`);
+      assert.ok(Number.isInteger(largura) && largura > 0 && Number.isInteger(altura) && altura > 0, `${p.id}: a foto ${src} está sem largura e altura`);
+    }
+  }
+});
+
 // O id é o endereço do artigo (/lotus-blog/<id>). Acento, espaço ou maiúscula
 // ali viram URL com %C3%A7 no meio, ou duas URLs para o mesmo texto quando
 // alguém digita com outra caixa. Minúsculas, números e hífens, e só.
