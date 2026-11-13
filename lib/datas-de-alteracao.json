@@ -1,6 +1,6 @@
 {
   "rotas": {
-    "/": "2026-11-05T19:20:25.000Z",
+    "/": "2026-11-13T19:04:25.000Z",
     "/allegrato": "2026-11-12T18:35:01.000Z",
     "/altissimi": "2026-11-12T18:34:58.000Z",
     "/altos-da-avenida": "2026-11-12T18:35:01.000Z",
@@ -59,7 +59,7 @@
     "/lotus-bairro/retiro": "2026-09-08T19:12:11.000Z",
     "/lotus-bairro/vianelo-bonfiglioli": "2026-08-10T17:17:45.000Z",
     "/lotus-bairro/vila-hortolandia": "2026-09-08T19:12:11.000Z",
-    "/lotus-blog": "2026-11-04T16:23:05.000Z",
+    "/lotus-blog": "2026-11-13T19:04:32.000Z",
     "/lotus-busca": "2026-11-12T18:34:53.000Z",
     "/lotus-condominio": "2026-10-16T14:45:11.000Z",
     "/lotus-cookies": "2026-09-28T14:16:16.000Z",
@@ -67,7 +67,8 @@
     "/lotus-faq": "2026-11-03T18:59:52.000Z",
     "/lotus-lancamentos": "2026-11-12T18:35:16.000Z",
     "/lotus-privacidade": "2026-10-16T14:45:08.000Z",
-    "/lotus-recrutamento": "2026-11-12T18:35:14.000Z",
+    "/lotus-recrutamento": "2026-11-13T19:04:04.000Z",
+    "/lotus-simuladores": "2026-11-13T19:04:25.000Z",
     "/lotus-sobre": "2026-11-12T18:34:56.000Z",
     "/lotus-termos": "2026-10-16T14:45:08.000Z",
     "/maita": "2026-11-12T18:35:05.000Z",
