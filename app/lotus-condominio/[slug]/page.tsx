@@ -12,8 +12,7 @@ import {
 } from '@/lib/condominios';
 import { getImoveisDoCondominio } from '@/lib/imoveis';
 import { getLancamentosList, isListItemApresentavel, type LancamentoListItem } from '@/lib/lancamentos';
-import { descricaoComNome } from '@/lib/descricao-com-nome';
-import { resumoDescricao } from '@/lib/resumo-imovel';
+import { descricaoDoCondominio, tituloDoCondominio } from '@/lib/metadados-condominio';
 import { textoSemMarkdown } from '@/lib/texto-sem-markdown';
 import { guiaDoBairro } from '@/lib/bairros';
 import { girar } from '@/lib/girar';
@@ -121,21 +120,21 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   }
   const cidade = cond.cidade || 'Jundiaí e Itupeva';
   const capa = (cond.fotos?.find((f) => f.isCapa) ?? cond.fotos?.[0])?.url;
-  const title = `${cond.nome}, ${cidade}, guia do condomínio e imóveis | Lotus Brokers`;
-  // Com o nome na frente quando o texto do dashboard não o cita: fases do mesmo
-  // condomínio chegaram com a mesma descrição (ver lib/descricao-com-nome.ts).
+  // Até 70 caracteres, com a cidade (lib/metadados-condominio).
+  const title = tituloDoCondominio(cond.nome, cidade);
+  // Com o nome na frente quando o RESUMO não o cita: fases do mesmo condomínio
+  // chegaram com a mesma descrição (ver lib/metadados-condominio.ts).
   //
   // Resumida: o texto do dashboard chega inteiro (o do Altissimi tinha 1.469
   // caracteres, com listas e emojis) e o Google mostra cerca de 155. O corte é em
   // fim de frase, como na página de imóvel. O emoji sai só daqui, da descrição
   // de busca e de compartilhamento; a página mostra o texto como foi cadastrado.
-  const description = resumoDescricao(
-    descricaoComNome(
+  const description = descricaoDoCondominio(
+    (
       textoSemMarkdown(cond.descricao_site) ||
-        `Tudo sobre morar no ${cond.nome}, ${cidade}: estrutura, localização e imóveis disponíveis com o especialista da Lotus.`,
-      cond.nome,
+      `Tudo sobre morar no ${cond.nome}, ${cidade}: estrutura, localização e imóveis disponíveis com o especialista da Lotus.`
     ).replace(/[\p{Extended_Pictographic}\u{FE0F}]/gu, ''),
-    155,
+    cond.nome,
   );
   // Canonical sempre no endereço novo, mesmo quando se chegou pelo UUID: duas
   // URLs para o mesmo texto é o que o canonical existe para evitar.
