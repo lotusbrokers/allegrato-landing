@@ -39,6 +39,16 @@ test('nenhum artigo fica sem título, resumo ou corpo', () => {
   }
 });
 
+// Acima de 70 caracteres o Google corta o título no resultado. Artigo com
+// título longo ganha um tituloSeo curto, tirado do próprio título; o H1 não
+// muda. Em 16/11/2026 eram 11 sem ele (seo-data/conteudo.csv).
+test('o título de busca de todo artigo cabe em 70 caracteres', () => {
+  for (const p of POSTS) {
+    const titulo = p.tituloSeo ?? p.title;
+    assert.ok(titulo.length <= 70, `${p.id}: "${titulo}" tem ${titulo.length} caracteres; ponha um tituloSeo`);
+  }
+});
+
 // A lista de categorias era copiada aqui à mão, e divergiu na primeira seção
 // nova: o teste acusou "Documentação" como inválida enquanto a barra do blog já
 // a oferecia. Agora lê CATEGORIAS_BLOG, a mesma fonte que a barra usa — o teste
