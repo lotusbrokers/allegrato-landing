@@ -1357,6 +1357,9 @@ export const POSTS: Post[] = [
       { titulo: '9. Uma alternativa para quem quer sair dos grandes centros' },
       'O movimento de pessoas buscando cidades do interior ganhou força nos últimos anos, principalmente entre famílias que passaram a valorizar mais espaço, tranquilidade e qualidade de vida.',
       'Itupeva se encaixa nesse perfil por oferecer uma localização estratégica e uma estrutura que permite ao morador manter conexão com grandes centros sem necessariamente viver na dinâmica de uma metrópole.',
+      // Do artigo "Itupeva em crescimento" (maio/2026), fundido neste em 16/11/2026
+      // (lib/posts-fundidos.mjs): era o que só ele dizia.
+      'Boa parte desse movimento passa pelos condomínios de casas: famílias que buscavam espaço e segurança encontraram em Itupeva lotes maiores e um custo de vida mais leve que o dos grandes centros.',
       'Para quem trabalha de forma híbrida ou remota, essa característica pode ser ainda mais interessante.',
       { titulo: '10. Vale a pena morar em Itupeva?' },
       'A resposta depende do perfil de cada pessoa ou família, mas Itupeva reúne características que podem ser interessantes para quem procura qualidade de vida, localização estratégica e possibilidades no mercado imobiliário.',
@@ -2598,16 +2601,6 @@ export const POSTS: Post[] = [
       'Primeiro, o clima: as áreas próximas da serra são visivelmente mais frescas no verão. Segundo, o lazer: trilhas, cachoeiras e estradas de terra para pedalar a minutos de casa.',
       'E há o efeito no mercado: bairros na região da serra, como Eloy Chaves e Malota, e os condomínios de Itupeva, mantêm procura constante justamente por essa combinação de natureza com cidade.',
       'Para quem vem de fora, é o argumento que resume a mudança: qualidade de vida que não depende de viajar no fim de semana.',
-    ],
-  },
-  {
-    id: 'itupeva-em-crescimento', cat: 'Cidade', date: 'Mai 2026', publicadoEm: '2026-05-01', read: '4 min', img: '/gran-ville-santo-angelo/a000.jpg', slot: 'blog-p4', title: 'Itupeva em crescimento: por que a cidade atrai novas famílias', excerpt: 'Condomínios, indústria e a serra ao lado: o retrato de uma das cidades que mais crescem na região.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
-    tldr: 'Itupeva cresce puxada por condomínios de casas, novos empregos e preço mais acessível que o de Jundiaí, mantendo acesso rápido à Anhanguera, perfil ideal para famílias que querem espaço.',
-    body: [
-      'Itupeva vive um momento raro: cresce em população, em empregos e em infraestrutura ao mesmo tempo, sem perder o jeito de cidade tranquila.',
-      'O motor são os condomínios de casas. Famílias que buscavam espaço e segurança encontraram na cidade lotes maiores e um custo de vida mais leve que o dos grandes centros.',
-      'A localização ajuda: acesso direto à Anhanguera, Jundiaí ao lado e Campinas e São Paulo a distâncias viáveis para o trabalho híbrido.',
-      'Para quem investe, o raciocínio é simples: cidade em crescimento, com demanda real de moradia, tende a valorizar. Para quem vai morar, o argumento é ainda melhor: qualidade de vida agora, não daqui a dez anos.',
     ],
   },
   {
