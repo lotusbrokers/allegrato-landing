@@ -36,7 +36,9 @@ const SIGNIFICADO = {
   200: 'recebido',
   202: 'recebido; a chave ainda vai ser conferida',
   400: 'pedido mal formado',
-  403: 'a chave não confere com o arquivo no ar',
+  // Na primeira vez o serviço ainda está conferindo a chave e responde 403
+  // "SiteVerificationNotCompleted" (16/11/2026): é só tentar de novo depois.
+  403: 'chave não aceita: ainda em verificação (tentar de novo em alguns minutos) ou diferente do arquivo no ar',
   422: 'URL fora do domínio ou chave que não bate',
   429: 'avisos demais; esperar antes de mandar de novo',
 };
