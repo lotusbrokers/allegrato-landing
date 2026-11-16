@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Site do Cliente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Hanken+Grotesk:wght@400;600;700&display=swap">
+<!--
+  Esqueleto do Site do Cliente (lotusbrokers.com.br/nome.sobrenome/<token>), as três fases
+  numa página só, para alinhar desenho e conteúdo antes das Fases 2 e 3.
+  Não é o código de produção: a Fase 1 de verdade está em app/[cliente]/[token] e
+  components/PaginaDoCliente.tsx. Os dados aqui são de exemplo.
+  A barra "Protótipo" no topo alterna o papel (quem abriu), o modo da página e, no
+  acompanhamento, o tipo de negócio (lançamento ou imóvel de terceiro).
+  Revisão de 16/11/2026 (Erick): mini mapa, notas de 0 a 5, proposta assinada em PDF,
+  documentos e etapas do pós-venda. Marcado como "novo". Proposta, documentos e etapas
+  seguem o Jurídico da Dash (estados da proposta, aba Documentos, etapas e subetapas,
+  "Responsável pela etapa" e o portal do cliente que o Jurídico gera).
+-->
+<style>
+  /* Uma coluna de leitura de celular, como a página real do cliente. Tema claro só, de
+     propósito: é a página da Lotus, que não tem tema escuro; toda cor vem daqui. */
+  :root {
+    --verde: #1d3a2c; --escuro: #15241c; --dourado: #b18a4a; --dourado-claro: #cdab6e;
+    --creme: #f7f2e8; --bege: #ece2cf; --texto: #3f6249; --suave: #8aa593; --branco: #fff;
+    --barra: #2b2b2b;
+    --raio: 16px; --sombra: 0 16px 40px -32px rgba(21, 36, 28, .45);
+    --serifa: 'Fraunces', Georgia, 'Times New Roman', serif;
+    --sans: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--creme); color: var(--escuro); font-family: var(--sans); line-height: 1.5; }
+  a { color: var(--verde); }
+  button { font: inherit; cursor: pointer; }
+  .moldura { max-width: 720px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+  /* Barra do protótipo: não existe no site. */
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--barra); }
+  .prototipo { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--barra); color: #eee; font-size: 13px; padding-block: 8px; }
+  .prototipo .moldura { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+  .prototipo strong { color: #ffd479; }
+  .prototipo button { background: #444; color: #eee; border: 0; border-radius: 6px; padding: 5px 9px; }
+  .prototipo button[aria-pressed="true"] { background: #ffd479; color: #222; font-weight: 700; }
+  body:not([data-modo="acompanhamento"]) .prototipo .so-acompanhamento { display: none; }
+
+  header.topo { background: var(--verde); }
+  header.topo .moldura { display: flex; align-items: center; justify-content: space-between; height: 58px; }
+  .marca { color: var(--dourado-claro); font-family: var(--serifa); letter-spacing: .18em; font-size: 15px; }
+  header.topo a { color: var(--creme); font-weight: 600; font-size: 14px; text-decoration: none; }
+
+  main { padding: 26px 0 64px; }
+  .sobretitulo { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--dourado); margin: 0 0 8px; }
+  h1 { font-family: var(--serifa); font-weight: 400; font-size: clamp(26px, 7vw, 38px); line-height: 1.1; margin: 0 0 14px; }
+  h2 { font-family: var(--serifa); font-weight: 400; font-size: 24px; margin: 0 0 12px; }
+  h3 { font-size: 15px; margin: 0 0 10px; }
+  section { margin-top: 34px; }
+  .fase { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; border-radius: 20px; padding: 2px 8px; margin-left: 8px; vertical-align: middle; font-family: var(--sans); }
+  .f1 { background: #d9ead3; color: #2d5a27; } .f2 { background: #fdf0d5; color: #7a5a12; } .f3 { background: #e3e1f5; color: #3d3480; }
+  .novo { background: #fde2e1; color: #9a3b2f; }
+  .nota { font-size: 12.5px; color: var(--suave); }
+
+  .corretor { display: flex; align-items: center; gap: 12px; margin: 16px 0; }
+  .avatar { width: 46px; height: 46px; border-radius: 50%; background: var(--verde); color: var(--creme); display: grid; place-items: center; font-weight: 700; flex-shrink: 0; }
+  blockquote { margin: 0; padding: 14px 18px; background: var(--branco); border-left: 3px solid var(--dourado); border-radius: 10px; color: var(--texto); }
+  .caixa { background: var(--branco); border-radius: var(--raio); padding: 16px; box-shadow: var(--sombra); }
+  .caixa.escura { background: var(--verde); color: var(--creme); }
+  .botoes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .botao { border: 1px solid rgba(21, 36, 28, .2); background: var(--branco); color: var(--escuro); border-radius: 30px; padding: 9px 14px; text-decoration: none; display: inline-block; font-size: 14px; }
+  .botao.primario { background: var(--dourado); border-color: var(--dourado); font-weight: 700; }
+  .botao.verde { background: var(--verde); border-color: var(--verde); color: var(--creme); font-weight: 600; }
+  .botao.pequeno { padding: 5px 11px; font-size: 13px; }
+  .campo { width: 100%; border: 1px solid rgba(21, 36, 28, .2); border-radius: 10px; padding: 11px 12px; font-size: 16px; }
+
+  /* Mini mapa (novo) */
+  .mapa { padding: 0; overflow: hidden; margin-bottom: 22px; }
+  .mapa svg { display: block; width: 100%; height: auto; }
+  .mapa .legenda { list-style: none; margin: 0; padding: 10px 14px 12px; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13.5px; }
+  .mapa .legenda a { text-decoration: none; color: var(--escuro); }
+  .mapa .legenda b { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--verde); color: var(--creme); font-size: 12px; margin-right: 6px; }
+
+  .cartoes { display: grid; gap: 22px; }
+  .cartao { background: var(--branco); border-radius: 18px; overflow: hidden; box-shadow: var(--sombra); }
+  .foto { aspect-ratio: 4 / 3; background: repeating-linear-gradient(45deg, #2a4a39, #2a4a39 12px, #244234 12px, #244234 24px); color: var(--bege); display: grid; place-items: center; font-size: 13px; }
+  .cartao .corpo { padding: 16px 18px 18px; }
+  .numero { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--verde); color: var(--creme); font-size: 12px; font-weight: 700; margin-right: 8px; vertical-align: 3px; }
+  .preco { font-family: var(--serifa); font-size: 24px; color: var(--verde); }
+  .ficha { font-weight: 600; font-size: 14.5px; }
+  .lugar { font-size: 13.5px; color: var(--texto); }
+  .combina { margin: 12px 0 0; color: var(--texto); }
+  .simulacao { background: var(--creme); border-radius: 12px; padding: 12px 14px; margin-top: 12px; font-size: 14px; color: var(--texto); }
+  .votos { font-size: 13px; color: var(--texto); margin-top: 8px; }
+
+  /* Notas de 0 a 5 (novo) */
+  .notas { margin-top: 14px; border-top: 1px solid rgba(21, 36, 28, .08); padding-top: 12px; }
+  .notas .cabeca { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+  .notas .cabeca strong { font-size: 14.5px; }
+  .notas .media { font-family: var(--serifa); font-size: 20px; color: var(--verde); }
+  .notas .linha { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 8px; padding: 4px 0; }
+  .notas .rotulo { font-size: 13.5px; color: var(--texto); }
+  .notas .escala { display: flex; gap: 3px; }
+  .notas .escala button { width: 29px; height: 29px; border-radius: 8px; border: 1px solid rgba(21, 36, 28, .18); background: var(--branco); font-size: 13px; padding: 0; }
+  .notas .escala button[aria-pressed="true"] { background: var(--verde); color: var(--creme); border-color: var(--verde); }
+
+  .lista { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  .lista li { display: flex; align-items: center; gap: 10px; background: var(--branco); border-radius: 12px; padding: 10px 12px; }
+  .lista .n { font-family: var(--serifa); color: var(--dourado); width: 18px; }
+  .lista .tx { flex: 1; font-size: 14.5px; }
+  .lista button { border: 0; background: none; font-size: 17px; }
+
+  .comparador { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; background: var(--branco); border-radius: var(--raio); overflow: hidden; font-size: 14px; min-width: 520px; }
+  th, td { padding: 10px 12px; border-bottom: 1px solid rgba(21, 36, 28, .08); text-align: left; }
+  th { background: var(--bege); font-weight: 600; }
+  tr.grupo th { background: var(--creme); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--dourado); }
+  td.melhor { background: #eef6ea; font-weight: 700; color: #2d5a27; }
+  .cabe { font-weight: 700; } .cabe.sim { color: #2d6a2d; } .cabe.justo { color: #8a6412; } .cabe.nao { color: #9a3b2f; }
+
+  .passos { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .passos li { display: flex; gap: 12px; align-items: flex-start; }
+  .passos .bola { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--suave); flex-shrink: 0; margin-top: 2px; }
+  .passos .feito .bola { background: var(--verde); border-color: var(--verde); }
+  .passos .agora .bola { border-color: var(--dourado); background: var(--dourado-claro); }
+  .passos li:not(.feito):not(.agora) strong { color: var(--suave); font-weight: 600; }
+  .pendencia { margin-top: 6px; font-size: 13.5px; background: #fdf0d5; color: #7a5a12; border-radius: 8px; padding: 6px 10px; }
+
+  /* Documentos (novo) */
+  .docs li { flex-wrap: wrap; justify-content: space-between; }
+  .docs .acoes { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .selo { font-size: 12px; font-weight: 700; border-radius: 20px; padding: 3px 9px; }
+  .selo.ok { background: #d9ead3; color: #2d5a27; } .selo.falta { background: #fdf0d5; color: #7a5a12; } .selo.recusado { background: #fbe3df; color: #9a3b2f; }
+  .arquivo { display: flex; align-items: center; gap: 12px; background: var(--branco); border-radius: 12px; padding: 12px 14px; box-shadow: var(--sombra); text-decoration: none; color: inherit; }
+  .arquivo + .arquivo { margin-top: 8px; }
+  .arquivo .icone { width: 36px; height: 44px; border-radius: 6px; background: #f3e7e5; color: #9a3b2f; display: grid; place-items: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+  .arquivo .titulo { flex: 1; }
+  .arquivo .abrir { color: var(--verde); font-weight: 600; font-size: 14px; white-space: nowrap; }
+
+  footer { margin-top: 40px; text-align: center; font-size: 12.5px; color: var(--suave); }
+  footer button { border: 0; background: none; color: var(--texto); text-decoration: underline; padding: 0; font-size: 12.5px; }
+
+  /* Papel, modo e tipo de negócio: o que cada um vê. */
+  body:not([data-papel="cliente"]) .so-cliente { display: none !important; }
+  body:not([data-papel="convite"]) .so-convite { display: none !important; }
+  body[data-papel="convite"] .nao-convite { display: none !important; }
+  body:not([data-modo="selecao"]) .modo-selecao { display: none !important; }
+  body:not([data-modo="proposta"]) .modo-proposta { display: none !important; }
+  body:not([data-modo="acompanhamento"]) .modo-acompanhamento { display: none !important; }
+  body[data-modo="selecao"] .modo-pos-selecao { display: none !important; }
+  body:not([data-tipo="lancamento"]) .tipo-lancamento { display: none !important; }
+  body:not([data-tipo="pronto"]) .tipo-pronto { display: none !important; }
+</style>
+</head>
+<body data-papel="cliente" data-modo="selecao" data-tipo="pronto">
+
+<div class="prototipo" role="toolbar" aria-label="Controles do protótipo">
+  <div class="moldura">
+    <strong>Protótipo</strong>
+    <span>Quem abriu:</span>
+    <button type="button" data-papel="cliente" aria-pressed="true">Cliente</button>
+    <button type="button" data-papel="convidado" aria-pressed="false">Convidado</button>
+    <button type="button" data-papel="convite" aria-pressed="false">Link de convite</button>
+    <span>Modo:</span>
+    <button type="button" data-modo="selecao" aria-pressed="true">Seleção</button>
+    <button type="button" data-modo="proposta" aria-pressed="false">Proposta</button>
+    <button type="button" data-modo="acompanhamento" aria-pressed="false">Acompanhamento</button>
+    <span class="so-acompanhamento">Negócio:</span>
+    <button type="button" class="so-acompanhamento" data-tipo="pronto" aria-pressed="true">Pronto (terceiro)</button>
+    <button type="button" class="so-acompanhamento" data-tipo="lancamento" aria-pressed="false">Lançamento</button>
+  </div>
+</div>
+
+<header class="topo">
+  <div class="moldura">
+    <span class="marca">LOTUS BROKERS</span>
+    <a href="#whatsapp">WhatsApp</a>
+  </div>
+</header>
+
+<div class="moldura">
+<main>
+
+  <!-- ABERTURA ------------------------------------------------------------ -->
+  <p class="sobretitulo">
+    <span class="modo-selecao">Seleção de imóveis</span>
+    <span class="modo-proposta">Sua proposta</span>
+    <span class="modo-acompanhamento">Até as chaves</span>
+    <span class="fase f1">Fase 1</span>
+  </p>
+  <h1>
+    <span class="so-cliente">Olá, Erick. <span class="modo-selecao">Estes imóveis foram escolhidos para você.</span><span class="modo-proposta">Sua proposta está andando.</span><span class="modo-acompanhamento">Acompanhe cada etapa da sua compra.</span></span>
+    <span class="so-convidado-texto" data-papel-texto="convidado">Oi, Ana! Erick quer a sua opinião.</span>
+    <span class="so-convite">Erick quer a sua opinião sobre estes imóveis.</span>
+  </h1>
+
+  <div class="corretor">
+    <div class="avatar" aria-hidden="true">LM</div>
+    <div>Seleção de <strong>[Nome do corretor]</strong>, Lotus Brokers</div>
+  </div>
+  <blockquote>[Recado do corretor: "Separei estes três para você comparar com calma. Qualquer dúvida, me chama."]</blockquote>
+
+  <!-- Consentimento (LGPD): só o cliente, só na 1ª vez, sem caixa marcada. -->
+  <div class="caixa escura so-cliente" style="margin-top:18px">
+    Para [corretor] te atender melhor, esta página pode registrar quais imóveis você vê e por quanto tempo. Só a Lotus vê esses dados.
+    <a href="#privacidade" style="color:var(--bege)">Privacidade</a>
+    <div class="botoes"><button class="botao primario" type="button">Aceitar</button><button class="botao" type="button" style="background:transparent;color:var(--creme);border-color:var(--bege)">Agora não</button></div>
+    <span class="fase f1" style="margin:10px 0 0">Fase 1</span>
+  </div>
+
+  <!-- Link de convite: a pessoa diz o nome e ganha o próprio link. -->
+  <form class="caixa so-convite" style="margin-top:18px" onsubmit="return false">
+    <label for="nome" style="display:block;font-weight:600;margin-bottom:8px">Como você se chama? Assim Erick sabe quem votou.</label>
+    <div style="display:flex;gap:8px"><input id="nome" class="campo" placeholder="Seu nome"><button class="botao verde" type="submit">Entrar</button></div>
+    <span class="fase f1" style="margin:10px 0 0">Fase 1</span>
+  </form>
+
+  <!-- MODO SELEÇÃO ---------------------------------------------------------- -->
+  <section class="modo-selecao" aria-labelledby="t-escolhidos">
+    <h2 id="t-escolhidos">Imóveis escolhidos <span class="fase f1">Fase 1</span></h2>
+
+    <!-- Mini mapa: um pino numerado por imóvel, na ordem dos cartões, no endereço exato
+         (decisão de 16/11/2026). O cadastro hoje não tem latitude e longitude: ver o briefing. -->
+    <div class="caixa mapa" aria-labelledby="t-mapa">
+      <svg viewBox="0 0 640 250" role="img" aria-labelledby="t-mapa">
+        <title id="t-mapa">Mapa com a localização dos imóveis escolhidos</title>
+        <rect width="640" height="250" fill="#e9e4d6"/>
+        <path d="M0 190 C70 150 120 210 190 170 S300 120 330 160 L330 250 L0 250 Z" fill="#cfdcc4"/>
+        <text x="24" y="232" font-size="12" fill="#5d7a63" font-family="system-ui">Serra do Japi</text>
+        <path d="M0 70 L640 40" stroke="#fff" stroke-width="9"/>
+        <text x="470" y="34" font-size="11" fill="#8a8a7a" font-family="system-ui">Rod. Anhanguera</text>
+        <path d="M150 0 L240 250" stroke="#fff" stroke-width="6"/>
+        <path d="M330 0 C350 90 420 140 640 170" stroke="#fff" stroke-width="6"/>
+        <path d="M60 120 L600 110" stroke="#fff" stroke-width="4"/>
+        <text x="370" y="100" font-size="12" fill="#8a8a7a" font-family="system-ui">Centro de Jundiaí</text>
+        <g><path d="M255 96 l-11 -18 a13 13 0 1 1 22 0 z" fill="#1d3a2c"/><text x="255" y="85" text-anchor="middle" font-size="12" font-weight="700" fill="#f7f2e8" font-family="system-ui">1</text></g>
+        <g><path d="M128 178 l-11 -18 a13 13 0 1 1 22 0 z" fill="#1d3a2c"/><text x="128" y="167" text-anchor="middle" font-size="12" font-weight="700" fill="#f7f2e8" font-family="system-ui">2</text></g>
+      </svg>
+      <ol class="legenda">
+        <li><a href="#imovel-1"><b>1</b>AP0693 · Jardim Bonfiglioli</a></li>
+        <li><a href="#imovel-2"><b>2</b>CA0056 · Malota</a></li>
+      </ol>
+    </div>
+    <p class="nota" style="margin:-14px 0 18px">Mini mapa <span class="fase novo">novo</span> · no endereço exato · tocar no número leva ao imóvel.</p>
+
+    <div class="cartoes">
+      <article class="cartao" id="imovel-1">
+        <div class="foto">[foto do imóvel · 4:3]</div>
+        <div class="corpo">
+          <div class="preco"><span class="numero">1</span>R$ 2.000.000</div>
+          <div class="ficha">Apartamento · 4 quartos · 158 m²</div>
+          <div class="lugar">Jardim Bonfiglioli, Jundiaí</div>
+          <p class="combina"><strong>Por que combina com você:</strong> [texto do corretor, pré-preenchido pelo perfil do lead]</p>
+          <div class="simulacao so-cliente"><strong>Simulação [banco]</strong>, [data]: entrada de R$ [x] e parcela de R$ [y] em [n] meses (SAC).
+            <div class="nota">Simulação anexada à seleção. As condições só valem depois da aprovação do crédito.</div></div>
+          <div class="botoes nao-convite">
+            <button class="botao so-cliente" type="button">☆ Adicionar à lista</button>
+            <button class="botao" type="button" aria-label="Gostei">❤️ 2</button>
+            <button class="botao" type="button" aria-label="Não gostei">👎</button>
+          </div>
+          <div class="votos">❤️ Erick, Ana</div>
+
+          <!-- Notas de 0 a 5: cada pessoa dá as suas (cliente e convidados); o comparador usa. -->
+          <div class="notas nao-convite" data-imovel="AP0693">
+            <div class="cabeca"><strong>Suas notas, de 0 a 5 <span class="fase novo">novo</span></strong><span class="media" aria-live="polite">–</span></div>
+            <div class="linha" data-topico="valor"><span class="rotulo">Valor</span><span class="escala" data-inicial="3"></span></div>
+            <div class="linha" data-topico="localizacao"><span class="rotulo">Localização</span><span class="escala" data-inicial="4"></span></div>
+            <div class="linha" data-topico="planta"><span class="rotulo">Planta</span><span class="escala" data-inicial="5"></span></div>
+            <div class="linha" data-topico="condominio"><span class="rotulo">Condomínio / bairro</span><span class="escala" data-inicial="4"></span></div>
+            <div class="linha" data-topico="oportunidade"><span class="rotulo">Oportunidade</span><span class="escala" data-inicial="3"></span></div>
+          </div>
+          <p style="margin:12px 0 0"><a href="#imovel">Ver fotos e detalhes do AP0693 →</a></p>
+        </div>
+      </article>
+      <article class="cartao" id="imovel-2">
+        <div class="foto">[foto do imóvel · 4:3]</div>
+        <div class="corpo">
+          <div class="preco"><span class="numero">2</span>R$ 1.980.000</div>
+          <div class="ficha">Casa · 4 quartos · 320 m²</div>
+          <div class="lugar">Malota, Jundiaí</div>
+          <p class="combina"><strong>Por que combina com você:</strong> [texto do corretor]</p>
+          <div class="botoes nao-convite">
+            <button class="botao so-cliente" type="button">★ Na minha lista</button>
+            <button class="botao" type="button" aria-label="Gostei">❤️</button>
+            <button class="botao" type="button" aria-label="Não gostei">👎 1</button>
+          </div>
+          <div class="votos">👎 João</div>
+          <div class="notas nao-convite" data-imovel="CA0056">
+            <div class="cabeca"><strong>Suas notas, de 0 a 5 <span class="fase novo">novo</span></strong><span class="media" aria-live="polite">–</span></div>
+            <div class="linha" data-topico="valor"><span class="rotulo">Valor</span><span class="escala" data-inicial="4"></span></div>
+            <div class="linha" data-topico="localizacao"><span class="rotulo">Localização</span><span class="escala" data-inicial="2"></span></div>
+            <div class="linha" data-topico="planta"><span class="rotulo">Planta</span><span class="escala" data-inicial="4"></span></div>
+            <div class="linha" data-topico="condominio"><span class="rotulo">Condomínio / bairro</span><span class="escala" data-inicial=""></span></div>
+            <div class="linha" data-topico="oportunidade"><span class="rotulo">Oportunidade</span><span class="escala" data-inicial="5"></span></div>
+          </div>
+          <p style="margin:12px 0 0"><a href="#imovel">Ver fotos e detalhes do CA0056 →</a></p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="modo-selecao so-cliente" aria-labelledby="t-lista">
+    <h2 id="t-lista">Minha lista <span class="fase f1">Fase 1</span></h2>
+    <ol class="lista">
+      <li><span class="n">1</span><span class="tx"><strong>CA0056</strong> · R$ 1.980.000 · Malota</span><button aria-label="Subir">↑</button><button aria-label="Descer">↓</button><button aria-label="Tirar">✕</button></li>
+      <li><span class="n">2</span><span class="tx"><strong>AP0693</strong> · R$ 2.000.000 · Jardim Bonfiglioli</span><button aria-label="Subir">↑</button><button aria-label="Descer">↓</button><button aria-label="Tirar">✕</button></li>
+    </ol>
+  </section>
+
+  <section class="modo-selecao so-cliente comparador" aria-labelledby="t-comparador">
+    <h2 id="t-comparador">Comparar lado a lado <span class="fase f2">Fase 2</span></h2>
+    <p class="nota">De 2 a 4 imóveis da lista. As notas vêm dos cartões acima (mude uma nota e a tabela acompanha); o melhor de cada linha fica em verde. "Cabe no meu bolso" compara a parcela da simulação anexada com a parcela-alvo do seu perfil ([R$ 15.000]).</p>
+    <table>
+      <thead><tr><th></th><th>AP0693</th><th>CA0056</th><th>[3º]</th></tr></thead>
+      <tbody>
+        <tr><th>Preço</th><td>R$ 2.000.000</td><td>R$ 1.980.000</td><td>[ ]</td></tr>
+        <tr><th>Área</th><td>158 m²</td><td>320 m²</td><td>[ ]</td></tr>
+        <tr><th>Quartos</th><td>4</td><td>4</td><td>[ ]</td></tr>
+        <tr><th>Bairro</th><td>Jd. Bonfiglioli</td><td>Malota</td><td>[ ]</td></tr>
+        <tr class="grupo"><th colspan="4">Suas notas <span class="fase novo">novo</span></th></tr>
+        <tr data-linha="valor"><th>Valor</th><td data-nota="AP0693"></td><td data-nota="CA0056"></td><td>[ ]</td></tr>
+        <tr data-linha="localizacao"><th>Localização</th><td data-nota="AP0693"></td><td data-nota="CA0056"></td><td>[ ]</td></tr>
+        <tr data-linha="planta"><th>Planta</th><td data-nota="AP0693"></td><td data-nota="CA0056"></td><td>[ ]</td></tr>
+        <tr data-linha="condominio"><th>Condomínio / bairro</th><td data-nota="AP0693"></td><td data-nota="CA0056"></td><td>[ ]</td></tr>
+        <tr data-linha="oportunidade"><th>Oportunidade</th><td data-nota="AP0693"></td><td data-nota="CA0056"></td><td>[ ]</td></tr>
+        <tr data-linha="media"><th>Média das suas notas</th><td data-nota="AP0693"></td><td data-nota="CA0056"></td><td>[ ]</td></tr>
+        <tr><th>Média dos convidados</th><td>[4,0 · Ana]</td><td>[2,6 · João]</td><td>[ ]</td></tr>
+        <tr class="grupo"><th colspan="4">Bolso</th></tr>
+        <tr><th>Parcela simulada</th><td>R$ 14.200</td><td>sem simulação</td><td>[ ]</td></tr>
+        <tr><th>Cabe no meu bolso</th><td class="cabe sim">✓ cabe</td><td class="cabe justo">pedir simulação</td><td class="cabe nao">[✕ não cabe]</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="modo-selecao" aria-labelledby="t-junto">
+    <div class="caixa escura so-cliente">
+      <h2 id="t-junto" style="color:var(--creme)">Decide junto com alguém? <span class="fase f1">Fase 1</span></h2>
+      <p style="margin:0 0 12px;color:rgba(247,242,232,.85)">Mande a seleção para quem escolhe com você. Cada um marca ❤️ ou 👎 e dá as próprias notas, e você vê quem votou o quê. Quem você convidar não vê as simulações.</p>
+      <button class="botao primario" type="button">Compartilhar a seleção</button>
+      <p class="nota" style="color:var(--bege);margin:12px 0 0">Convidados: Ana (2 votos) · João (1 voto)</p>
+    </div>
+  </section>
+
+  <section class="modo-selecao nao-convite" aria-labelledby="t-comentarios">
+    <h2 id="t-comentarios">Comentários <span class="fase f2">Fase 2</span></h2>
+    <div class="caixa">
+      <p style="margin:0 0 6px"><strong>Ana</strong> sobre o AP0693: [Gostei da varanda, mas fica longe do trabalho.]</p>
+      <p style="margin:0 0 12px"><strong>João</strong> sobre o CA0056: [O quintal é ótimo.]</p>
+      <textarea id="comentario" class="campo" rows="2" placeholder="Escreva um comentário" aria-label="Comentário"></textarea>
+    </div>
+  </section>
+
+  <section class="modo-selecao" aria-labelledby="t-indicacao">
+    <div class="caixa" style="border:1px dashed var(--dourado)">
+      <h2 id="t-indicacao">Quer uma seleção só sua? <span class="fase f2">Fase 2</span></h2>
+      <p style="margin:0 0 12px;color:var(--texto)">Conte o que procura e um especialista da Lotus monta a sua. (Vira um lead novo com a origem "indicação de Erick", distribuído pela regra atual.)</p>
+      <button class="botao verde" type="button">Montar a minha seleção</button>
+    </div>
+  </section>
+
+  <section class="modo-selecao so-cliente" aria-labelledby="t-alertas">
+    <h2 id="t-alertas">Avisos <span class="fase f2">Fase 2</span></h2>
+    <div class="caixa">
+      <label style="display:flex;gap:8px;align-items:center"><input id="alerta-preco" type="checkbox"> Me avise pelo WhatsApp se um imóvel da minha lista baixar de preço</label>
+      <label style="display:flex;gap:8px;align-items:center;margin-top:6px"><input id="alerta-parecido" type="checkbox"> Me avise se entrar um imóvel parecido</label>
+      <p class="nota" style="margin:8px 0 0">Nenhuma caixa vem marcada.</p>
+    </div>
+  </section>
+
+  <!-- MODO PROPOSTA (Fase 3): da proposta enviada até a assinatura ------------- -->
+  <section class="modo-proposta" aria-labelledby="t-proposta">
+    <h2 id="t-proposta">Proposta do AP0693 <span class="fase f3">Fase 3</span></h2>
+    <div class="caixa">
+      <p style="margin:0 0 10px"><strong>Valor proposto:</strong> <span class="so-cliente">R$ [1.900.000] · entrada R$ [x] · financiamento [banco]</span><span class="nao-cliente-texto">[visível só para o cliente]</span></p>
+      <ol class="passos">
+        <li class="feito"><span class="bola"></span><div><strong>Negociação</strong><div class="nota">[10/11/2026]</div></div></li>
+        <li class="feito"><span class="bola"></span><div><strong>Proposta enviada</strong><div class="nota">[12/11/2026]</div></div></li>
+        <li class="agora"><span class="bola"></span><div><strong>Resposta do vendedor</strong><div class="nota">contraproposta, quando houver · [14/11/2026] · R$ [1.950.000]</div></div></li>
+        <li><span class="bola"></span><div><strong>Contrato da proposta</strong></div></li>
+        <li><span class="bola"></span><div><strong>Proposta assinada</strong><div class="nota">assinatura eletrônica · daqui a página passa para o acompanhamento</div></div></li>
+      </ol>
+      <p class="nota" style="margin:12px 0 0">São os estados da proposta no negócio, no Jurídico da Dash (Negociação, Proposta, Respondidas, Contrato, Assinadas). Quando o Jurídico muda o estado lá, esta lista muda junto.</p>
+    </div>
+  </section>
+
+  <!-- Proposta assinada em PDF: a Lotus sobe, o cliente abre. -->
+  <section class="modo-proposta so-cliente" aria-labelledby="t-assinada">
+    <h2 id="t-assinada">Proposta assinada <span class="fase f3">Fase 3</span> <span class="fase novo">novo</span></h2>
+    <a class="arquivo" href="#pdf"><span class="icone">PDF</span><span class="titulo"><strong>Proposta assinada · AP0693</strong><br><span class="nota">Enviada pela Lotus em [18/11/2026] · assinada por comprador e vendedor</span></span><span class="abrir">Abrir →</span></a>
+    <p class="nota">Vem do negócio na Dash: a assinatura eletrônica do Jurídico, ou o PDF que a Lotus anexar ao negócio. Antes disso: "A proposta assinada aparece aqui assim que todos assinarem."</p>
+  </section>
+
+  <!-- Documentos: a lista e o envio são os da Dash. O site só mostra o status e abre
+       o portal do cliente que o Jurídico gera; nenhum arquivo passa pelo site da Lotus. -->
+  <section class="modo-pos-selecao so-cliente" aria-labelledby="t-docs">
+    <h2 id="t-docs">Seus documentos <span class="fase f3">Fase 3</span> <span class="fase novo">novo: lista e envio da Dash</span></h2>
+    <p style="margin:0 0 12px;color:var(--texto)">Faltam <strong>4 de 7</strong> documentos.</p>
+    <ul class="lista docs">
+      <li><span>RG ou CNH</span><span class="acoes"><span class="selo ok">recebido</span></span></li>
+      <li><span>CPF</span><span class="acoes"><span class="selo ok">recebido</span></span></li>
+      <li><span>Comprovante de residência</span><span class="acoes"><span class="selo ok">recebido</span></span></li>
+      <li><span>Holerite</span><span class="acoes"><span class="selo falta">falta</span></span></li>
+      <li><span>Declaração de imposto de renda</span><span class="acoes"><span class="selo falta">falta</span></span></li>
+      <li><span>Extrato do FGTS</span><span class="acoes"><span class="selo falta">falta</span></span></li>
+      <li><span>Certidão</span><span class="acoes"><span class="selo falta">falta</span></span></li>
+    </ul>
+    <div class="botoes"><a class="botao primario" href="#portal-dash">Enviar e ver meus documentos →</a></div>
+    <p class="nota">A lista e o status são os da aba Documentos do negócio na Dash. O botão abre o portal do cliente da Dash (o link do campo "Link do portal do cliente", no Jurídico), onde a pessoa digita o próprio telefone e envia ou vê os arquivos. O documento fica só na Dash: o site da Lotus não guarda arquivo. Convidado não vê esta parte.</p>
+  </section>
+
+  <!-- MODO ACOMPANHAMENTO (Fase 3): o pós-venda, depois da proposta assinada ---- -->
+  <section class="modo-acompanhamento" aria-labelledby="t-etapas">
+    <h2 id="t-etapas">Andamento da compra <span class="fase f3">Fase 3</span> <span class="fase novo">novo: etapas do Jurídico da Dash</span></h2>
+    <div class="caixa">
+      <p style="margin:0 0 12px">
+        <strong class="tipo-pronto">Pronto · AP0693 · com financiamento</strong>
+        <strong class="tipo-lancamento">Lançamento · [Empreendimento] · Torre [x] · unidade [y]</strong>
+      </p>
+
+      <ol class="passos tipo-pronto">
+        <li class="feito"><span class="bola"></span><div><strong>Proposta aceita</strong><div class="nota">em negociação até as assinaturas · [18/11/2026]</div></div></li>
+        <li class="feito"><span class="bola"></span><div><strong>Contrato · Due diligence</strong><div class="nota">conferência dos documentos e das certidões · [25/11/2026]</div></div></li>
+        <li class="agora"><span class="bola"></span><div><strong>Contrato · Feitura</strong><div class="nota">redação do contrato · previsto [02/12]</div><div class="pendencia">Agora está com a Lotus.</div></div></li>
+        <li><span class="bola"></span><div><strong>Contrato · Em análise</strong><div class="nota">com financiamento, o banco analisa</div></div></li>
+        <li><span class="bola"></span><div><strong>Contrato · ITBI</strong><div class="nota">imposto de transmissão</div></div></li>
+        <li><span class="bola"></span><div><strong>Contrato · Escritura</strong></div></li>
+        <li><span class="bola"></span><div><strong>Contrato · Registro</strong><div class="nota">registro na matrícula</div></div></li>
+        <li><span class="bola"></span><div><strong>Compra concluída</strong></div></li>
+        <li><span class="bola"></span><div><strong>Pós-vendas · Relacionamento</strong></div></li>
+      </ol>
+
+      <ol class="passos tipo-lancamento">
+        <li class="feito"><span class="bola"></span><div><strong>Proposta aceita</strong><div class="nota">em negociação até as assinaturas · [18/11/2026]</div></div></li>
+        <li class="agora"><span class="bola"></span><div><strong>Contrato</strong><div class="nota">contrato com a construtora</div><div class="pendencia">Agora é com você: falta o holerite. <a href="#t-docs">Enviar</a></div></div></li>
+        <li><span class="bola"></span><div><strong>Compra concluída</strong></div></li>
+        <li><span class="bola"></span><div><strong>Pós-vendas · Relacionamento</strong><div class="nota">até as chaves</div></div></li>
+      </ol>
+      <p class="nota" style="margin:12px 0 0">Etapas e subetapas do Jurídico da Dash (Proposta aceita, Contrato, A receber, Recebido, Pós-vendas), com os nomes de lá. Aprovado em 16/11: "A receber" e "Recebido" (a comissão) aparecem para o cliente como "Compra concluída", e o "Termo de comissionamento" do lançamento só como "Contrato". "Agora está com" vem do "Responsável pela etapa" (imobiliária, construtora, cliente, banco ou cartório). A obra do lançamento fica fora da página. Quando o Jurídico move o negócio, a página muda junto.</p>
+    </div>
+  </section>
+
+  <section class="modo-acompanhamento so-cliente" aria-labelledby="t-docs-compra">
+    <h2 id="t-docs-compra">Documentos da compra <span class="fase f3">Fase 3</span> <span class="fase novo">novo</span></h2>
+    <a class="arquivo" href="#pdf"><span class="icone">PDF</span><span class="titulo"><strong>Proposta assinada</strong><br><span class="nota">[18/11/2026]</span></span><span class="abrir">Abrir →</span></a>
+    <a class="arquivo" href="#pdf"><span class="icone">PDF</span><span class="titulo"><strong><span class="tipo-pronto">Contrato de compra e venda</span><span class="tipo-lancamento">Contrato com a construtora</span></strong><br><span class="nota">aparece quando o Jurídico anexa ao negócio</span></span><span class="abrir">Abrir →</span></a>
+    <a class="arquivo" href="#pdf"><span class="icone">PDF</span><span class="titulo"><strong>Matrícula registrada</strong><br><span class="nota">no fim do registro</span></span><span class="abrir">Abrir →</span></a>
+    <p class="nota">Os arquivos que o Jurídico anexar ao negócio na Dash. Abrem pelo portal do cliente da Dash, com o mesmo telefone.</p>
+  </section>
+
+  <!-- FECHO --------------------------------------------------------------- -->
+  <div style="margin-top:34px;text-align:center" id="whatsapp">
+    <button class="botao verde" type="button">Falar com [corretor] no WhatsApp</button>
+  </div>
+
+  <footer id="privacidade">
+    Página pessoal, fora das buscas. <a href="#privacidade">Privacidade</a>
+    <span class="so-cliente"> · <button type="button">Remover minha página</button></span>
+    <p class="nota">Esqueleto do Site do Cliente · dados de exemplo · Fase 1 já existe no código; Fases 2 e 3 são proposta · "novo" = revisão de 16/11/2026 · proposta, documentos e etapas alinhados ao Jurídico da Dash.</p>
+  </footer>
+
+</main>
+</div>
+
+<script>
+  // Só o protótipo: alterna papel, modo e tipo de negócio, e faz as notas e o
+  // comparador funcionarem. O site real decide pelo token e pela etapa do lead na Dash.
+  (function () {
+    var corpo = document.body;
+    var CHAVES = ['data-papel', 'data-modo', 'data-tipo'];
+    function chaveDo(botao) {
+      for (var i = 0; i < CHAVES.length; i++) if (botao.hasAttribute(CHAVES[i])) return CHAVES[i];
+      return null;
+    }
+    function atualizar() {
+      var papel = corpo.getAttribute('data-papel');
+      document.querySelectorAll('[data-papel-texto="convidado"]').forEach(function (el) {
+        el.style.display = papel === 'convidado' ? '' : 'none';
+      });
+      document.querySelectorAll('.nao-cliente-texto').forEach(function (el) {
+        el.style.display = papel === 'cliente' ? 'none' : '';
+      });
+      document.querySelectorAll('.prototipo button').forEach(function (b) {
+        var chave = chaveDo(b);
+        b.setAttribute('aria-pressed', String(corpo.getAttribute(chave) === b.getAttribute(chave)));
+      });
+    }
+    document.querySelectorAll('.prototipo button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var chave = chaveDo(b);
+        corpo.setAttribute(chave, b.getAttribute(chave));
+        atualizar();
+      });
+    });
+
+    // Notas de 0 a 5: seis botões por tópico; a média conta só os tópicos com nota.
+    var formato = function (n) { return n.toFixed(1).replace('.', ','); };
+    function notasDe(bloco) {
+      var notas = {};
+      bloco.querySelectorAll('.linha').forEach(function (linha) {
+        var marcado = linha.querySelector('button[aria-pressed="true"]');
+        notas[linha.getAttribute('data-topico')] = marcado ? Number(marcado.textContent) : null;
+      });
+      return notas;
+    }
+    function mediaDe(notas) {
+      var valores = Object.keys(notas).map(function (k) { return notas[k]; }).filter(function (v) { return v !== null; });
+      return valores.length ? valores.reduce(function (a, b) { return a + b; }, 0) / valores.length : null;
+    }
+    function recalcular() {
+      var porImovel = {};
+      document.querySelectorAll('.notas').forEach(function (bloco) {
+        var notas = notasDe(bloco);
+        var media = mediaDe(notas);
+        notas.media = media;
+        porImovel[bloco.getAttribute('data-imovel')] = notas;
+        bloco.querySelector('.media').textContent = media === null ? '–' : formato(media);
+      });
+      document.querySelectorAll('tr[data-linha]').forEach(function (tr) {
+        var topico = tr.getAttribute('data-linha');
+        var celulas = tr.querySelectorAll('td[data-nota]');
+        // Compara o valor como aparece na tela (média com uma casa): "3,8" e "3,8"
+        // empatam, mesmo que um seja 3,80 e o outro 3,75.
+        var valorDe = function (td) {
+          var v = (porImovel[td.getAttribute('data-nota')] || {})[topico];
+          return v === null || v === undefined ? v : Math.round(v * 10) / 10;
+        };
+        var melhor = -1;
+        celulas.forEach(function (td) {
+          var v = valorDe(td);
+          if (v !== null && v !== undefined && v > melhor) melhor = v;
+        });
+        celulas.forEach(function (td) {
+          var v = valorDe(td);
+          var vazio = v === null || v === undefined;
+          td.textContent = vazio ? 'sem nota' : (topico === 'media' ? formato(v) : String(v));
+          td.classList.toggle('melhor', !vazio && v === melhor && celulas.length > 1);
+        });
+      });
+    }
+    document.querySelectorAll('.notas .escala').forEach(function (escala) {
+      var inicial = escala.getAttribute('data-inicial');
+      for (var n = 0; n <= 5; n++) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = String(n);
+        b.setAttribute('aria-pressed', String(inicial !== '' && Number(inicial) === n));
+        b.setAttribute('aria-label', escala.parentNode.querySelector('.rotulo').textContent + ': nota ' + n);
+        b.addEventListener('click', function (ev) {
+          var botao = ev.currentTarget;
+          var jaEra = botao.getAttribute('aria-pressed') === 'true';
+          botao.parentNode.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+          // Tocar de novo na mesma nota apaga a nota.
+          if (!jaEra) botao.setAttribute('aria-pressed', 'true');
+          recalcular();
+        });
+        escala.appendChild(b);
+      }
+    });
+
+    atualizar();
+    recalcular();
+  })();
+</script>
+</body>
+</html>
