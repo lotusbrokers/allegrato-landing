@@ -1,10 +1,10 @@
 # Indexação no Google e no Bing: relatório de 16/11/2026
 
-Branch `seo/indexacao`. **Nada disto está no ar ainda**: entra com o deploy (item 1 das Ações manuais).
+Branch `seo/indexacao`, enviada para a main em 16/11/2026, a pedido da Lotus ("commit changes").
 
 ## Resumo
 
-Não achei bloqueio técnico que impeça a indexação. O robots.txt libera o site, o sitemap lista 241 páginas com data real, o conteúdo sai no HTML do servidor, as canonicals estão certas e as páginas respondem rápido.
+Não achei bloqueio técnico que impeça a indexação. O robots.txt libera o site, o sitemap lista as páginas com data real, o conteúdo sai no HTML do servidor, as canonicals estão certas e as páginas respondem rápido.
 
 As 160 páginas "não indexadas" do Search Console, pelo que dá para medir de fora, misturam dois grupos:
 
@@ -13,7 +13,7 @@ As 160 páginas "não indexadas" do Search Console, pelo que dá para medir de f
 
 Para separar os dois grupos com certeza, falta o export do Search Console (Ações manuais, item 2).
 
-O que dava para corrigir no código foi corrigido. O resto depende de texto da Lotus, de dados na Dash e de ações nas contas do Google e do Bing. Nenhuma correção garante indexação: quem decide é o buscador.
+O que dava para corrigir no código foi corrigido, incluindo o que a Lotus aprovou em 16/11 (títulos curtos de artigos e a fusão do post de Itupeva). O resto depende de texto da Lotus, de dados na Dash e de ações nas contas do Google e do Bing. Nenhuma correção garante indexação: quem decide é o buscador.
 
 ## 1. Diagnóstico (Fase 1)
 
@@ -56,7 +56,7 @@ São hipóteses. O export do Search Console confirma.
 | Motivo no Search Console | Origem provável | Precisa de correção? |
 |---|---|---|
 | Detectada ou Rastreada, mas não indexada | Pouca autoridade do domínio e páginas fracas | Conteúdo, links de fora e tempo |
-| Página com redirecionamento | `http://` e domínio sem www; imóveis vendidos ou retirados (307 para a busca, de propósito); 2 posts fundidos (308) | Não |
+| Página com redirecionamento | `http://` e domínio sem www; imóveis vendidos ou retirados (307 para a busca, de propósito); 3 posts fundidos (308) | Não |
 | Página alternativa com tag canônica adequada | Busca com filtro (`/lotus-busca?tipo=...`), que aponta para `/lotus-busca` | Não |
 | Excluída pela tag noindex | 4 guias sem texto e `/meus-dados` | Só os guias, quando tiverem texto |
 | Bloqueada pelo robots.txt | `/area-do-corretor` e `/area-do-gestor`, linkadas no rodapé | Não |
@@ -67,22 +67,24 @@ São hipóteses. O export do Search Console confirma.
 |---|---|
 | `f999fd4` | O script de diagnóstico e o resultado de 16/11 (`seo-data/`). |
 | `f14232f` | Título do condomínio: a forma mais completa que cabe em 70 caracteres, sempre com a cidade (46 dos 78 passavam). A descrição traz o nome do condomínio no trecho que aparece, e as fases do Ecovillage deixam de repetir a mesma. |
-| `0c1190c` | Artigo do blog: o "\| Blog Lotus" só entra se couber em 70. Corrige 10 dos 21 títulos longos; os outros 11 precisam de um título curto (Fase 3). |
+| `0c1190c` | Artigo do blog: o "\| Blog Lotus" só entra se couber em 70. Corrige 10 dos 21 títulos longos. |
+| `a071969` | Os outros 11 artigos ganham um título de busca curto (`tituloSeo`), tirado do próprio título e aprovado pela Lotus; o H1 não muda. Um teste passa a exigir que o título de busca de todo artigo caiba em 70. |
+| `91fc25d` | "Itupeva em crescimento" fundido em "Vantagens de morar em Itupeva", com o ok da Lotus. O que só ele dizia foi para a seção 9 do que ficou, e o endereço antigo leva ao novo com 308. |
 | `48e0811` | JSON-LD no Gioviale, Oásis, Reserva Castanheira e Santorini, só com o que a página mostra. Um teste passa a exigir JSON-LD válido em toda landing estática. |
+| `07de8c9` | "Jardim das Samambaias", grafia da Dash, passa a levar ao guia do Jardim Samambaia: a Prefeitura põe a avenida do Terrace Serra do Japi no Jardim Samambaia. Com isso o guia linka a landing, que recebia 2 links. |
 | `dba6383` | IndexNow (Fase 4). |
-| `439a749` | O plano de conteúdo (`seo-data/conteudo.csv`). |
-| `f691d04` | Datas de alteração do sitemap (só as 4 landings mudaram). |
+| `439a749` | O plano de conteúdo (`seo-data/conteudo.csv`), com a situação de cada página desde `eb74bf7`. |
+| `f691d04`, `3065dd5` | Datas de alteração do sitemap. |
 
-Verificação:
-- 329 testes passam.
-- O build passa.
+Verificação na árvore exata que foi para a main (o Site do Cliente, que não está em commit, ficou de fora):
+- 319 testes passam.
+- O build passa, com 214 páginas geradas.
 - O `tsc` só acusa o erro de sempre dos testes (import com `.ts`).
-- No servidor local, o arquivo da chave do IndexNow responde 200 na raiz.
-- As 4 landings saem com o JSON-LD.
+- No servidor local, o arquivo da chave do IndexNow responde 200 na raiz, as 4 landings saem com o JSON-LD e os títulos saem como o esperado.
 
 **Conferido e sem mudança necessária:**
 - **robots.txt:** bloqueia só `/api/` e as áreas logadas.
-- **Sitemap:** 241 URLs, todas com lastmod vindo de commit ou do `updated_at` da Dash, nunca da hora do build. Páginas com noindex ficam fora.
+- **Sitemap:** todas as URLs com lastmod vindo de commit ou do `updated_at` da Dash, nunca da hora do build. Páginas com noindex ficam fora.
 - **Canonical:** uma por página, apontando para o endereço com www.
 - **Renderização:** o texto está no HTML do servidor, sem depender de JavaScript.
 - **TTFB:** medianas entre 65 e 338 ms, nenhuma acima de 1,5 s.
@@ -91,24 +93,26 @@ Verificação:
 - **Parâmetros:** a busca filtrada aponta canonical para a página limpa.
 
 **Não mudei, e por quê:**
-- **Títulos das 38 landings** ("\| Imobiliária Lotus Brokers"): o formato é exigência de conformidade (padrão P2 da auditoria de 01/10 e regras da Santa Angela). Trocar o sufixo por "\| Lotus Brokers" ainda deixaria 33 acima de 70. Só a reescrita do meio do título resolve, e essa decisão é da Lotus. Título longo não impede a indexação.
+- **Títulos das 38 landings** ("\| Imobiliária Lotus Brokers"): o formato é exigência de conformidade (padrão P2 da auditoria de 01/10 e regras da Santa Angela), e ficou como está com o acordo da Lotus em 16/11. Trocar o sufixo por "\| Lotus Brokers" ainda deixaria 33 acima de 70; só a reescrita do meio do título resolveria. Título longo não impede a indexação.
 - **Descrições das landings da Santa Angela** (até 200 caracteres): a frase final é obrigatória. As outras 7 landings passam de 160 por pouco (161 a 190) e só perdem o fim no resultado.
 - **Imóvel vendido ou retirado responde 307 para a busca:** decisão documentada em `lib/imovel-que-saiu.ts`, porque o imóvel pode voltar.
 - **Links do rodapé para as áreas logadas:** o bloqueio no robots.txt é o correto, e esse motivo no Search Console é só informativo.
+- **Bairro do Vivart Grand Alamedas:** a landing só diz "Av. Juvenal Arantes, s/n", e a avenida passa por mais de um bairro. Fica para a Dash (item 6).
 
 ## 3. Conteúdo (Fase 3)
 
-`seo-data/conteudo.csv`: 26 páginas, cada uma com o problema, a recomendação, quem faz, a prioridade e um brief curto. Nada foi escrito no lugar da Lotus.
+`seo-data/conteudo.csv`: 26 páginas, cada uma com o problema, a recomendação, quem faz, a prioridade, a situação e um brief curto. Nada foi escrito no lugar da Lotus.
 
-- **Melhorar (23):**
+- **Feito em 16/11, com o ok da Lotus (12):**
+  - 11 títulos curtos de artigo;
+  - a fusão de "Itupeva em crescimento".
+- **Esperando texto da Lotus (9):**
   - 4 guias de bairro sem texto (seguem com noindex até o texto chegar);
   - 3 páginas de construtora (MRV, Terriá Incorporadora, Trend Canadá);
   - o artigo da Serra do Japi;
-  - o índice de guias (prioridade baixa);
-  - 3 condomínios que dependem de dados na Dash;
-  - 11 artigos com título sugerido, tirado do próprio título, para aprovar.
-- **Consolidar (1):** "Itupeva em crescimento" dentro de "Vantagens de morar em Itupeva", com 308. Muda uma URL, então só com o OK da Lotus.
-- **Manter (2):**
+  - o índice de guias (opcional, prioridade baixa).
+- **Esperando dados na Dash (3):** Ecovillage I e II (o código já foi corrigido) e New Garden.
+- **Sem nada a fazer (2):**
   - `/meus-dados`, com noindex correto;
   - `/lotus-busca/casas-em-itupeva`, fina por falta de casas no acervo e não de texto. Não pôr noindex.
 
@@ -118,55 +122,44 @@ Verificação:
 - A chave está em `public/957850290d08780a19bcbca20f22ee04.txt`; ela é pública por desenho do protocolo.
 - O script `scripts/indexnow.mjs` lê o sitemap e só envia com `--enviar`.
 - Antes de enviar, o script confere que a chave já está no ar. Por isso o envio só vale depois do deploy.
+- O primeiro envio, com todas as URLs, fica com o Claude, logo depois deste deploy.
 
-```bash
-node scripts/indexnow.mjs --enviar
-```
-
-O comando acima é para a primeira vez, logo depois do deploy: envia as 241 URLs.
+Depois de cada deploy que mude páginas, envie só o que mudou desde a data:
 
 ```bash
 node scripts/indexnow.mjs --desde 2026-11-16 --enviar
 ```
 
-Depois disso, use `--desde` só com o que mudou desde a data. Reenviar página igual não adianta.
+Reenviar página igual não adianta.
 
 **O Google não participa do IndexNow.** Para ele, os caminhos são o sitemap no Search Console e a inspeção de URL (itens 2 e 3 abaixo).
 
 ## Ações manuais
 
-Não tenho acesso às contas do Search Console, do Bing Webmaster Tools, do Easypanel nem da Dash. Nada abaixo foi feito.
+Não tenho acesso às contas do Search Console, do Bing Webmaster Tools, do Easypanel nem da Dash. Os itens 2 a 8 não foram feitos.
 
-1. **Deploy.**
-   - Levar a branch `seo/indexacao` para a main (é o "commit changes").
-   - A branch também leva 3 commits locais anteriores que esperavam o mesmo pedido: o texto do Sobre (D026), a página de cada corretor e uma atualização das datas do sitemap.
-   - O Site do Cliente não está em commit nenhum.
+1. **Deploy:** feito em 16/11, a pedido. Foram junto os 3 commits que esperavam o mesmo pedido: o texto do Sobre (D026), a página de cada corretor e uma atualização das datas do sitemap. O Site do Cliente não está em commit nenhum e ficou de fora.
 2. **Search Console: exportar o relatório "Páginas"**, com as não indexadas por motivo. Com ele dá para confirmar as hipóteses da tabela da Fase 1 e achar o que o rastreamento de fora não vê.
-3. **Search Console, depois do deploy:**
+3. **Search Console, com esta versão no ar:**
    - conferir se o sitemap `https://www.lotusbrokers.com.br/sitemap.xml` está enviado e lido;
    - inspecionar e pedir indexação das páginas comerciais que aparecerem como "Detectada, mas não indexada" (a cota é de poucas por dia);
    - usar "Validar correção" nos motivos corrigidos.
 4. **Bing Webmaster Tools:**
    - adicionar o site (importar do Search Console é o caminho mais curto);
    - enviar o mesmo sitemap;
-   - depois do primeiro `--enviar`, conferir a aba IndexNow.
+   - conferir a aba IndexNow depois do primeiro envio.
 5. **Easypanel:** fazer `http://lotusbrokers.com.br` ir direto para `https://www.lotusbrokers.com.br` num salto só. Hoje são dois (301 do proxy e depois 308 do site).
 6. **Dash:**
    - **New Garden:** completar a capa e o endereço. A página volta sozinha ao sitemap e ao índice de condomínios.
    - **Ecovillage I e II:** um texto próprio para cada fase.
    - **Vivart Grand Alamedas:** o bairro está gravado como "Av. Juvenal Arantes", que é uma rua. Com o bairro certo, o guia do bairro (se houver) passa a linkar a landing.
-   - **Terrace Serra do Japi:** está como "Jardim das Samambaias", e o guia é do "Jardim Samambaia". Se for o mesmo bairro, gravar igual, ou me confirmar para eu pôr no mapa de pertencimento (`lib/bairros-taxonomia.ts`).
    - **SKY Videiras:** o card mostra "56-71m", e a landing, de 56,96 a 83,31 m².
    - **AP0693** (pendência de 13/11): o texto diz Golden Garden e 158 m², mas o vínculo é o New Garden e o campo diz 157 m².
-7. **Textos e decisões da Lotus:** os itens de `seo-data/conteudo.csv`.
-   - 4 guias, 3 construtoras, o artigo da Serra do Japi.
-   - Aprovar os 11 títulos.
-   - Decidir a consolidação do post de Itupeva.
-   - Decidir se reescreve os títulos das landings.
+7. **Textos da Lotus** (roteiro de cada um em `seo-data/conteudo.csv`): 4 guias de bairro, 3 construtoras e o artigo da Serra do Japi; a abertura do índice de guias é opcional.
 8. **Links de outros sites**, o que mais pesa no "Detectada, mas não indexada" de um domínio novo. O plano de 27/10 já está pronto em https://claude.ai/artifact/4DDCgqWydSrrBZWDy2aKDY: perfis com o mesmo nome, endereço e telefone, avaliações, as construtoras, imprensa local. Sem compra de link nem troca artificial.
 
 ## Como acompanhar
 
 - **Linha de base de 16/10:** 30 páginas indexadas, 170 detectadas e não indexadas, 15 sem www, 2 links externos.
 - **Comparar:** o relatório "Páginas" do Search Console de 2 a 4 semanas depois do deploy.
-- **Medir de novo de fora:** depois do deploy, `node scripts/diagnostico-seo.mjs`.
+- **Medir de novo de fora:** `node scripts/diagnostico-seo.mjs`.
