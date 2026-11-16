@@ -9,6 +9,7 @@ import { getCondominio } from '@/lib/condominios';
 import { condominioDoImovel } from '@/lib/condominio-do-imovel';
 import { resumoDescricao } from '@/lib/resumo-imovel';
 import { tituloDaPdp } from '@/lib/titulo-imovel';
+import { paginaDaCidade } from '@/lib/recortes-busca';
 
 // Rota dinâmica /lotus-imovel/[codigo] — lê cada imóvel do Supabase.
 // ISR sob demanda: a página é renderizada no primeiro acesso e cacheada por 1h.
@@ -151,13 +152,21 @@ function buildJsonLd(imovel: ImovelRow, codigo: string) {
       : {}),
   };
 
+  // A cidade leva à página com todos os imóveis à venda dela, quando existe
+  // (lib/recortes-busca; desde 16/11/2026 só Jundiaí). Sem ela, à busca geral.
+  const paginaCidade = paginaDaCidade(imovel.cidade);
   const breadcrumb = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Comprar', item: `${SITE}/lotus-busca` },
       ...(imovel.cidade
-        ? [{ '@type': 'ListItem', position: 2, name: imovel.cidade, item: `${SITE}/lotus-busca` }]
+        ? [{
+            '@type': 'ListItem',
+            position: 2,
+            name: imovel.cidade,
+            item: paginaCidade ? `${SITE}/lotus-busca/${paginaCidade.slug}` : `${SITE}/lotus-busca`,
+          }]
         : []),
       { '@type': 'ListItem', position: imovel.cidade ? 3 : 2, name: titulo, item: url },
     ],

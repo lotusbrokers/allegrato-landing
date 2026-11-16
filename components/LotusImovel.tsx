@@ -6,6 +6,7 @@ import { demonstrativoDe, temAreaDeTerreno } from '@/lib/tipologia';
 import CtaSimulacao from './CtaSimulacao';
 import MapaEmbed from './MapaEmbed';
 import { guiaDoBairro } from '@/lib/bairros';
+import { paginaDaCidade } from '@/lib/recortes-busca';
 
 /**
  * LotusImovel — porte 1:1 de lotus-imovel/index.html (mecanismo dc-runtime) para React,
@@ -332,6 +333,10 @@ export default function LotusImovel({
    * como antes: melhor um link genérico do que um link quebrado. */
   const guiaBairro = guiaDoBairro(data.bairro, data.cidade);
   const hrefBairro = guiaBairro ? `/lotus-bairro/${guiaBairro.slug}` : '/lotus-busca';
+  // A cidade da trilha leva à página com todos os imóveis à venda dela, quando
+  // existe (lib/recortes-busca); senão, à busca geral, como antes.
+  const paginaCidade = paginaDaCidade(data.cidade);
+  const hrefCidade = paginaCidade ? `/lotus-busca/${paginaCidade.slug}` : '/lotus-busca';
 
   // Descrição: usa a do banco; se vazia, texto genérico curto e honesto.
   const descricao =
@@ -455,7 +460,7 @@ export default function LotusImovel({
       {/* BREADCRUMB + MEDIA TABS */}
       <div style={parseStyle('max-width:1280px;margin:0 auto;padding:18px 32px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;')}>
         <div style={parseStyle('font-size:13px;color:#8aa593;')}>
-          <Hoverable as="a" href="/lotus-busca" target="_top" baseStyle={parseStyle('color:#3f6249;')} hoverStyle={parseStyle('color:#b18a4a')}>Comprar</Hoverable> › <Link href="/lotus-busca" style={parseStyle('color:#3f6249;')}>{cidade}</Link> › <Link href={hrefBairro} style={parseStyle('color:#3f6249;')}>{bairro}</Link> › <span style={parseStyle('color:#15241c;')}>{tipoLabel}</span>
+          <Hoverable as="a" href="/lotus-busca" target="_top" baseStyle={parseStyle('color:#3f6249;')} hoverStyle={parseStyle('color:#b18a4a')}>Comprar</Hoverable> › <Link href={hrefCidade} style={parseStyle('color:#3f6249;')}>{cidade}</Link> ›<Link href={hrefBairro} style={parseStyle('color:#3f6249;')}>{bairro}</Link> › <span style={parseStyle('color:#15241c;')}>{tipoLabel}</span>
         </div>
         <div style={parseStyle('display:flex;gap:6px;')}>
           <a href="#galeria" style={parseStyle('font-size:13px;font-weight:600;color:#1d3a2c;background:#ece2cf;padding:7px 14px;border-radius:30px;')}>Fotos</a>
