@@ -20,7 +20,8 @@ export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.lotusbrokers.com.br';
 
 export const metadata: Metadata = {
-  title: 'Condomínios em Jundiaí e Itupeva: fotos, estrutura e localização | Lotus Brokers',
+  // Até 70 caracteres (eram 80; diagnóstico de indexação de 16/11/2026).
+  title: 'Condomínios em Jundiaí e Itupeva: fotos e localização | Lotus Brokers',
   description:
     'Conheça por dentro os condomínios de Jundiaí e Itupeva: fotos, estrutura de lazer, localização e bairro de cada um, com quem acompanha o que entra e sai.',
   alternates: { canonical: `${SITE}/lotus-condominio` },
