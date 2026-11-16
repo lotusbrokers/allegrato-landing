@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import LotusBusca from '@/components/LotusBusca';
 import { listBairros } from '@/lib/bairros';
 import { getImoveisBusca } from '@/lib/imoveis';
+import { RECORTES_DA_BUSCA } from '@/lib/recortes-busca';
 
 const SITE = 'https://www.lotusbrokers.com.br';
 
@@ -48,6 +50,32 @@ export default async function LotusBuscaPage() {
     })),
   };
 
+  // As subpáginas de Comprar (lib/recortes-busca), antes do rodapé: até
+  // 16/11/2026 só os guias de bairro e o sitemap levavam até elas.
+  const buscasProntas = (
+    <section style={{ background: '#f7f2e8', padding: '56px 32px 40px' }}>
+      <div style={{ maxWidth: 1480, margin: '0 auto' }}>
+        <h2 style={{ fontFamily: "'Fraunces',serif", fontWeight: 300, fontSize: 'clamp(22px,2.6vw,30px)', color: '#15241c', margin: '0 0 8px' }}>
+          Buscas prontas
+        </h2>
+        <p style={{ fontSize: 15, color: '#3f6249', fontWeight: 300, margin: '0 0 22px' }}>
+          Os imóveis à venda de cada cidade, numa página só.
+        </p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+          {RECORTES_DA_BUSCA.map((r) => (
+            <Link
+              key={r.slug}
+              href={`/lotus-busca/${r.slug}`}
+              style={{ fontSize: 14, color: '#15241c', background: '#ece2cf', borderRadius: 40, padding: '9px 16px' }}
+            >
+              {r.titulo}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+
   return (
     <>
       <script
@@ -55,7 +83,7 @@ export default async function LotusBuscaPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}
       />
       {/* Só os nomes dos guias: o conteúdo deles não vai para o navegador. */}
-      <LotusBusca imoveis={imoveis} bairrosDoGuia={listBairros().map((b) => b.nome)} />
+      <LotusBusca imoveis={imoveis} bairrosDoGuia={listBairros().map((b) => b.nome)} complemento={buscasProntas} />
     </>
   );
 }
