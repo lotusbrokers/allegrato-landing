@@ -49,8 +49,14 @@
 .recru .hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(177,138,74,.22),transparent 70%)}
 .recru .hero .wrap{position:relative;z-index:2;padding:86px 24px 90px}
 .recru .hero-inner{max-width:780px}
-.recru .hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.5rem,6vw,4.4rem);line-height:1.04;letter-spacing:-.02em;margin:8px 0 10px}
+.recru .hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.5rem,6vw,4.4rem);line-height:1.04;letter-spacing:-.02em;margin:0 0 10px}
 .recru .hero h1 em{font-style:italic;color:var(--gold-2)}
+/* A linha "Vaga de corretor de imóveis" mora dentro do H1 desde 16/11/2026 (a
+   busca "vaga corretor Jundiaí"). Era um <p class="eyebrow"> antes do H1; com
+   a fonte e a altura de linha dela e o H1 sem margem em cima, o desenho fica o
+   mesmo: os 18px da eyebrow eram o espaço entre as duas (somavam com os 8px do
+   H1 só no maior). */
+.recru .hero h1 .eyebrow{display:block;font-family:var(--sans);line-height:1.7}
 .recru .hero-sub{color:rgba(255,255,255,.88);font-size:1.2rem;max-width:58ch;margin:22px 0 32px}
 .recru .hero-cta{display:flex;flex-wrap:wrap;gap:14px}
 .recru .hero-mini{margin-top:20px;font-size:.9rem;color:rgba(255,255,255,.6)}
