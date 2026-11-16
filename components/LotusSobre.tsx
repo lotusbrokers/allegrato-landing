@@ -505,10 +505,11 @@ export default function LotusSobre({
               <div style={parseStyle('font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#cdab6e;margin-bottom:12px;')}>Fundador</div>
               <h3 style={parseStyle('font-family:\'Fraunces\',serif;font-weight:400;font-size:clamp(24px,2.6vw,30px);color:#f7f2e8;margin:0 0 10px;')}>Erick Ferrigatti</h3>
               <p style={parseStyle('font-size:15.5px;color:rgba(247,242,232,.8);font-weight:300;line-height:1.6;margin:0 0 14px;max-width:620px;')}>Há 15 anos no mercado imobiliário, já atuei desde o operacional administrativo, correspondente bancário, recrutador, marketing, treinamentos, planejamento e hoje atuo como diretor de marketing e estratégia da imobiliária. Estudei Engenharia na Unicamp e sou formado em Publicidade com pós-graduação em Gestão de Negócios.</p>
-              {/* Sem o "em 7x" desde 13/11/2026 (auditoria do site, "Números coerentes"): de 8 para
-                  mais de 30 corretores não dá 7 vezes. Se o 7x for de outra medida (vendas,
-                  faturamento), volta numa frase própria, com a medida dita. */}
-              <p style={parseStyle('font-size:15.5px;color:rgba(247,242,232,.8);font-weight:300;line-height:1.6;margin:0;max-width:620px;')}>Tive a oportunidade de aprender com o mercado imobiliário dentro e fora do país, e retornei como sócio da imobiliária em 2020, quando iniciamos a metodologia de exclusivos que hoje nos fez crescer, saindo de 8 para mais de 30 corretores atualmente e estruturando o que é o mais importante na minha visão: o local perfeito para corretores que desejam atuar com excelência, contando com treinamentos, mentorias e um suporte contínuo nas áreas essenciais para seu trabalho como marketing, jurídico, administrativo e muito mais.</p>
+              {/* Sem números de crescimento (auditoria do site, "Números coerentes"): o
+                  "em 7x" saiu em 13/11/2026 e o "saindo de 8 para mais de 30 corretores"
+                  em 16/11/2026, porque o site lista 12 corretores. A Lotus escolheu tirar o
+                  número. Se voltar, volta com a medida dita e batendo com o site. */}
+              <p style={parseStyle('font-size:15.5px;color:rgba(247,242,232,.8);font-weight:300;line-height:1.6;margin:0;max-width:620px;')}>Tive a oportunidade de aprender com o mercado imobiliário dentro e fora do país, e retornei como sócio da imobiliária em 2020, quando iniciamos a metodologia de exclusivos que hoje nos fez crescer e estruturar o que é o mais importante na minha visão: o local perfeito para corretores que desejam atuar com excelência, contando com treinamentos, mentorias e um suporte contínuo nas áreas essenciais para seu trabalho como marketing, jurídico, administrativo e muito mais.</p>
             </div>
           </div>
           {/* squads grid */}
