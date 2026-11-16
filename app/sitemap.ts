@@ -11,6 +11,8 @@ import { publicados } from '@/lib/blog-agenda';
 import { ROTAS_FIXAS } from '@/lib/sitemap-rotas';
 import { RECORTES_DA_BUSCA } from '@/lib/recortes-busca';
 import { dataDaRota, dataDoGrupo, maisRecente } from '@/lib/datas-de-alteracao';
+import { getBrokers } from '@/lib/brokers';
+import { estaNoSite, hrefDoCorretor, slugsDosCorretores } from '@/lib/corretores-perfil';
 
 /**
  * Sitemap dinâmico do portal.
@@ -55,7 +57,7 @@ type Frequencia = MetadataRoute.Sitemap[number]['changeFrequency'];
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Falha de banco não pode derrubar o sitemap inteiro: sem imóveis ele ainda
   // declara as páginas fixas e as landings, que é melhor do que erro 500.
-  const [codigos, condominios, lancamentos] = await Promise.all([
+  const [codigos, condominios, lancamentos, corretores] = await Promise.all([
     getImovelCodigosComData().catch((e) => {
       console.error('[sitemap] imóveis indisponíveis:', e);
       return [] as { codigo: string; atualizadoEm: string | null }[];
@@ -76,7 +78,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       console.error('[sitemap] lançamentos indisponíveis:', e);
       return [] as LancamentoListItem[];
     }),
+    // Os mesmos corretores da listagem: só quem está no site tem página.
+    getBrokers()
+      .then((cs) => cs.filter(estaNoSite))
+      .catch((e) => {
+        console.error('[sitemap] corretores indisponíveis:', e);
+        return [];
+      }),
   ]);
+  const slugsDosCorretoresNoSite = slugsDosCorretores(corretores);
 
   // Uma página por construtora, derivada dos lançamentos — a mesma fonte que
   // gera as rotas em generateStaticParams. Construtora que sai do acervo sai
@@ -138,6 +148,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Slug, não id: as URLs com UUID continuam respondendo (redirecionam com
     // 308), mas quem anuncia no sitemap é o endereço definitivo.
     ...condominios.map((c) => entrada(`/lotus-condominio/${c.slug}`, maisRecente(c.atualizadoEm), 'monthly', 0.5)),
+    // Página de cada corretor (desde 16/11/2026). Sem lastmod: o cadastro não
+    // tem data de alteração, e o sitemap não inventa uma.
+    ...corretores.map((c) => entrada(hrefDoCorretor(slugsDosCorretoresNoSite[c.id]), undefined, 'monthly', 0.5)),
     // A página da construtora muda com o texto dela e com os lançamentos que lista.
     ...construtoras.map((c) =>
       entrada(

@@ -3,6 +3,8 @@ import { footerLegalLine } from '@/lib/site';
 import { SQUADS, nomesDosSquads } from '@/lib/squads';
 import { conteudoRealDe } from '@/lib/corretores-conteudo';
 import { especialidadesDoSite, especialistaEm } from '@/lib/especialidades';
+import { estaNoSite, hrefDoCorretor, slugsDosCorretores } from '@/lib/corretores-perfil';
+import type { ImovelBusca } from '@/lib/imoveis';
 import NotaNoGoogle from './NotaNoGoogle';
 
 /**
@@ -253,13 +255,11 @@ function formatCreci(creci: string | null): string | null {
   return /creci/i.test(c) ? c : 'CRECI ' + c;
 }
 
-// Só entra na listagem quem tem CRECI cadastrado no dashboard. Ligado em
-// 07/08/2026, quando os nove corretores passaram a ter número — antes disso
-// exigir CRECI teria esvaziado a página. Um corretor novo sem número fica fora
-// do site até o cadastro ser completado.
-const EXIGIR_CRECI = true;
-
-const temCreci = (b: { creci: string | null }) => Boolean(b.creci);
+// Só entra na listagem quem tem CRECI cadastrado no dashboard (estaNoSite, em
+// lib/corretores-perfil: a mesma regra decide quem tem página própria e quem
+// vai para o sitemap). Ligado em 07/08/2026, quando os nove corretores
+// passaram a ter número. Um corretor novo sem número fica fora do site até o
+// cadastro ser completado.
 
 // A view portal_brokers não expõe squad nem cidade: `realToBroker` preenche
 // todos com "Especialista" e "Jundiaí". O efeito era filtro que não filtra —
@@ -306,15 +306,11 @@ function realToBroker(b: {
   };
 }
 
-// bioFor(b) do script — valores exatos. Texto genérico de placeholder: vale para
-// quem ainda não tem bio própria em CONTEUDO_REAL (lib/corretores-conteudo.ts).
-function bioFor(b: Broker): string[] {
-  return [
-    'Comecei no mercado imobiliário porque gosto de gente e descobri que a melhor parte de vender um imóvel é entender a história de quem vai morar nele. Há anos atendo ' + b.area + ' e conheço cada rua, cada escola, cada esquina que pega sol da manhã.',
-    'Meu jeito de trabalhar é simples: ouço primeiro, mostro só o que faz sentido pra você e fico do seu lado do começo ao fim. Sem pressão, sem catálogo jogado no WhatsApp, com dado de mercado de verdade e o cuidado que você merece.',
-    'Se você procura (ou quer vender) em ' + b.area + ', me chama. A gente toma um café e eu te mostro a região pelo que ela tem de vivido.',
-  ];
-}
+// Aqui morava bioFor: uma bio genérica em primeira pessoa ("Comecei no mercado
+// imobiliário porque gosto de gente...") posta na boca de quem ainda não tinha
+// bio própria em CONTEUDO_REAL. Saiu em 16/11/2026, quando o perfil virou página
+// indexável: texto inventado assinado por uma pessoa real. Sem bio, o perfil
+// mostra só o que o cadastro tem.
 
 /* ------------------------------------------------------------------ */
 /* Componente                                                          */
@@ -323,19 +319,29 @@ function bioFor(b: Broker): string[] {
 export default function LotusCorretores({
   whatsapp = WHATSAPP_DEFAULT,
   brokers,
+  perfilId,
+  imoveisDoPerfil = [],
 }: {
   whatsapp?: string;
   /** Corretores reais (portal_brokers). Vazio/undefined => fallback demo. */
   brokers?: { id: string; name: string; photoUrl: string | null; creci: string | null; imoveisAtivos: number; especialidades: string[] | null }[];
+  /**
+   * Página de um corretor (/lotus-corretores/<slug>): o id dele. Sem isto, a
+   * tela é a listagem. Até 16/11/2026 o perfil abria aqui dentro por estado,
+   * sem endereço próprio; ver lib/corretores-perfil.
+   */
+  perfilId?: string;
+  /** Perfil: os imóveis publicados que o corretor captou, já resolvidos pela rota. */
+  imoveisDoPerfil?: ImovelBusca[];
 } = {}) {
   // Fonte dos corretores: banco (se veio algum) ou fallback demo.
   const doBanco: Broker[] =
     brokers && brokers.length > 0 ? brokers.map(realToBroker) : BROKERS_FALLBACK;
-  const BROKERS: Broker[] = EXIGIR_CRECI ? doBanco.filter(temCreci) : doBanco;
+  const BROKERS: Broker[] = doBanco.filter(estaNoSite);
+  // O endereço de cada perfil, pela mesma regra da rota e do sitemap.
+  const slugPorId = slugsDosCorretores(BROKERS);
 
   // state (espelha o `state` do dc-runtime)
-  const [view, setView] = useState<'list' | 'profile'>('list');
-  const [selId, setSelId] = useState<string | null>(null);
   const [fSquad, setFSquad] = useState('any');
   const [fCity, setFCity] = useState('any');
   const [fName, setFName] = useState('');
@@ -361,28 +367,17 @@ export default function LotusCorretores({
       (fName.trim() === '' || b.name.toLowerCase().includes(fName.toLowerCase()))
   );
 
-  const openBroker = (id: string) => {
-    setView('profile');
-    setSelId(id);
-    setOpenFaq(0);
-    setFormDone(false);
-    if (rootRef.current) window.scrollTo({ top: 0, behavior: 'auto' });
-  };
-
-  const backToList = () => {
-    setView('list');
-    window.scrollTo({ top: 0, behavior: 'auto' });
-  };
-
-  // Seleção do perfil (raw + sel derivado), igual ao script.
-  //
-  // Pode nao haver ninguem: sem corretor, nao ha perfil para montar. O
-  // undefined aqui derrubava a pagina inteira na linha de baixo.
-  const raw = BROKERS.find((b) => b.id === selId) || BROKERS[0] || null;
+  // O corretor da página (/lotus-corretores/<slug>). A rota só chega aqui com um
+  // id que está na lista; sem ele, não há perfil para montar.
+  const raw = (perfilId && BROKERS.find((b) => b.id === perfilId)) || null;
+  // "Alexandra  Niero": o cadastro tem espaço duplo em vários nomes.
+  const nomeLimpo = raw ? raw.name.trim().replace(/\s+/g, ' ') : '';
   const sel = raw && {
     ...raw,
-    wa,
-    bio: conteudoRealDe(raw.name)?.bio ?? bioFor(raw),
+    // WhatsApp da Lotus com o nome de quem a pessoa escolheu.
+    wa: 'https://wa.me/' + String(whatsapp ?? WHATSAPP_DEFAULT) + '?text=' + encodeURIComponent(`Olá! Quero falar com ${nomeLimpo}, da Lotus.`),
+    // Só bio real (CONTEUDO_REAL). Sem ela, a seção "Sobre" não aparece.
+    bio: conteudoRealDe(raw.name)?.bio ?? [],
     // `area` já traz a cidade e `squad` é fixo em "Especialista" — repetir os
     // dois viraria chip duplicado. Depois da cidade, as especialidades reais
     // (até 5); sem nenhuma, só a cidade. "Casas", "Apartamentos" e "Avaliação
@@ -430,8 +425,9 @@ export default function LotusCorretores({
   const noBrokers = list.length === 0;
   // Lista vazia por falta de gente, e nao por causa do filtro.
   const equipeVazia = BROKERS.length === 0;
-  const isDirectory = view === 'list';
-  const isProfile = view === 'profile';
+  // Listagem em /lotus-corretores; perfil em /lotus-corretores/<slug>.
+  const isDirectory = !perfilId;
+  const isProfile = Boolean(sel);
   const notDone = !formDone;
 
   return (
@@ -535,7 +531,7 @@ export default function LotusCorretores({
                           <div style={parseStyle('font-size:12px;color:#8aa593;margin-top:4px;')}>{linhaCredenciais(b.creci, imoveisAtivosLabel(b.active))}</div>
                         )}
                         <div style={parseStyle('display:flex;gap:8px;margin-top:16px;')}>
-                          <Hoverable as="button" onClick={() => openBroker(b.id)} baseStyle={parseStyle('flex:1;background:#1d3a2c;color:#f7f2e8;font-weight:600;font-size:13px;padding:10px;border:none;border-radius:9px;cursor:pointer;transition:background .2s;')} hoverStyle={parseStyle('background:#15241c')}>Ver perfil</Hoverable>
+                          <Hoverable as="a" href={hrefDoCorretor(slugPorId[b.id])} baseStyle={parseStyle('flex:1;display:block;text-align:center;text-decoration:none;background:#1d3a2c;color:#f7f2e8;font-weight:600;font-size:13px;padding:10px;border:none;border-radius:9px;cursor:pointer;transition:background .2s;')} hoverStyle={parseStyle('background:#15241c')}>Ver perfil</Hoverable>
                           <a href={wa} target="_blank" rel="noopener" aria-label="WhatsApp" style={parseStyle('flex-shrink:0;width:40px;background:#25543b;border-radius:9px;display:flex;align-items:center;justify-content:center;')}><svg width="18" height="18" viewBox="0 0 24 24" fill="#f7f2e8"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Z"></path></svg></a>
                         </div>
                       </div>
@@ -583,13 +579,13 @@ export default function LotusCorretores({
         <div>
           {/* breadcrumb */}
           <div style={parseStyle('max-width:1100px;margin:0 auto;padding:18px 32px 0;font-size:13px;color:#8aa593;')}>
-            <Hoverable as="button" onClick={backToList} baseStyle={parseStyle('background:none;border:none;color:#3f6249;font-size:13px;cursor:pointer;padding:0;')} hoverStyle={parseStyle('color:#b18a4a')}>Corretores</Hoverable> › <span style={parseStyle('color:#15241c;')}>{sel.name}</span>
+            <Hoverable as="a" href="/lotus-corretores" baseStyle={parseStyle('color:#3f6249;font-size:13px;')} hoverStyle={parseStyle('color:#b18a4a')}>Corretores</Hoverable> › <span style={parseStyle('color:#15241c;')}>{sel.name}</span>
           </div>
 
           {/* header de perfil */}
           <section style={parseStyle('max-width:1100px;margin:0 auto;padding:24px 32px 0;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;')}>
             <div style={parseStyle('position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#1d3a2c;')}>
-              <ImageSlot id={sel.slot} src={sel.photoUrl || undefined} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={sel.name} initials={sel.name} />
+              <ImageSlot prioridade id={sel.slot} src={sel.photoUrl || undefined} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={sel.name} initials={sel.name} />
             </div>
             <div style={parseStyle('position:sticky;top:88px;')}>
               {SQUAD_NO_DASH && (
@@ -610,7 +606,8 @@ export default function LotusCorretores({
             </div>
           </section>
 
-          {/* sobre */}
+          {/* sobre: só com bio real (CONTEUDO_REAL). */}
+          {sel.bio.length > 0 && (
           <section style={parseStyle('max-width:1100px;margin:0 auto;padding:64px 32px;')}>
             <div style={parseStyle('max-width:720px;')}>
               <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(24px,3vw,34px);color:#15241c;margin:0 0 22px;")}>Sobre {sel.first}</h2>
@@ -632,6 +629,7 @@ export default function LotusCorretores({
               )}
             </div>
           </section>
+          )}
 
           {/* especialidades */}
           <section style={parseStyle('background:#ece2cf;padding:70px 32px;')}>
@@ -658,10 +656,31 @@ export default function LotusCorretores({
             </div>
           </section>
 
-          {/* As seções "Imóveis com {first}" e "Quem foi atendido por {first}"
-              saíram: os três imóveis eram preços inventados apontando todos para
-              /lotus-imovel, e os dois depoimentos eram assinados por pessoas que
-              não existem. Voltam quando houver carteira e avaliações no banco. */}
+          {/* "Imóveis com {first}": os imóveis publicados que a pessoa captou
+              (portal_imoveis.captador_id), desde 16/11/2026. Antes a seção
+              mostrava três imóveis de preço inventado, e saiu; voltou com a
+              carteira real. "Quem foi atendido por {first}" segue fora: os dois
+              depoimentos eram de pessoas que não existem, e não há avaliações
+              por corretor no banco. */}
+          {imoveisDoPerfil.length > 0 && (
+            <section style={parseStyle('max-width:1100px;margin:0 auto;padding:70px 32px;')}>
+              <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(24px,3vw,34px);color:#15241c;margin:0 0 26px;")}>Imóveis com {sel.first}</h2>
+              <div style={parseStyle('display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px;')}>
+                {imoveisDoPerfil.map((im) => (
+                  <Hoverable key={im.codigo} as="a" href={`/lotus-imovel/${im.codigo}`} baseStyle={parseStyle('display:flex;flex-direction:column;background:#fff;border-radius:16px;overflow:hidden;text-decoration:none;box-shadow:0 16px 40px -30px rgba(21,36,28,.34);transition:transform .3s ease;')} hoverStyle={parseStyle('transform:translateY(-4px)')}>
+                    <div style={parseStyle('position:relative;aspect-ratio:4/3;background:#1d3a2c;')}>
+                      <ImageSlot src={im.img || undefined} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={`${im.type} em ${im.neighborhood}`} />
+                    </div>
+                    <div style={parseStyle('padding:16px 18px 18px;')}>
+                      <div style={parseStyle("font-family:'Fraunces',serif;font-size:19px;color:#1d3a2c;")}>{im.price}</div>
+                      <div style={parseStyle('font-size:13.5px;font-weight:600;color:#15241c;margin-top:6px;')}>{[im.type, im.beds > 0 ? `${im.beds} ${im.beds === 1 ? 'quarto' : 'quartos'}` : '', im.area > 0 ? `${im.area} m²` : ''].filter(Boolean).join(' · ')}</div>
+                      <div style={parseStyle('font-size:12.5px;color:#3f6249;margin-top:3px;')}>{[im.neighborhood, im.city].filter(Boolean).join(', ')}</div>
+                    </div>
+                  </Hoverable>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* agenda / contato */}
           <section id="agenda" style={parseStyle('background:#ece2cf;padding:80px 32px;')}>
@@ -706,7 +725,7 @@ export default function LotusCorretores({
                 </div>
               ))}
               <div style={parseStyle('margin-top:36px;text-align:center;')}>
-                <Hoverable as="button" onClick={backToList} baseStyle={parseStyle('background:none;border:1px solid rgba(21,36,28,.2);color:#1d3a2c;font-weight:600;font-size:14.5px;padding:12px 26px;border-radius:40px;cursor:pointer;')} hoverStyle={parseStyle('background:#ece2cf')}>← Ver todos os corretores</Hoverable>
+                <Hoverable as="a" href="/lotus-corretores" baseStyle={parseStyle('display:inline-block;background:none;border:1px solid rgba(21,36,28,.2);color:#1d3a2c;font-weight:600;font-size:14.5px;padding:12px 26px;border-radius:40px;cursor:pointer;')} hoverStyle={parseStyle('background:#ece2cf')}>← Ver todos os corretores</Hoverable>
               </div>
             </div>
           </section>

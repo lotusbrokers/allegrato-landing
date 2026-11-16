@@ -160,6 +160,25 @@ function pessoaDoSite(row: LinhaDoCartao | null): PessoaDoCartao | null {
  * erro, sem captador, com captador fora de portal_brokers (Diretoria,
  * ex-membro) ou oculto, também null. O 2º captador não aparece.
  */
+/**
+ * Códigos dos imóveis que o corretor captou (portal_imoveis.captador_id), para
+ * a página dele (/lotus-corretores/<slug>). É a leitura inversa de
+ * getCaptadorDoImovel. Erro de leitura vira lista vazia: a página fica sem a
+ * seção de imóveis, mas de pé.
+ */
+export async function getCodigosDoCaptador(captadorId: string): Promise<string[]> {
+  const { data, error } = await supabase
+    .from('portal_imoveis')
+    .select('codigo_imovel')
+    .eq('tenant_id', TENANT_ID)
+    .eq('captador_id', captadorId);
+  if (error) {
+    console.error('[getCodigosDoCaptador] erro Supabase:', error.message);
+    return [];
+  }
+  return (data as { codigo_imovel: string | null }[]).map((r) => r.codigo_imovel).filter((c): c is string => Boolean(c));
+}
+
 export async function getCaptadorDoImovel(codigoImovel: string): Promise<PessoaDoCartao | null> {
   const { data: imovel, error } = await supabase
     .from('portal_imoveis')
