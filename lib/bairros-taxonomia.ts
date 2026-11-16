@@ -47,6 +47,11 @@ const PERTENCE_A: Record<string, string> = {
   'jardim bonfiglioli': 'Vianelo Bonfiglioli',
   vianelo: 'Vianelo Bonfiglioli',
   'recanto iv centenario': 'Recanto Quarto Centenário',
+  // Outra grafia do mesmo bairro. O Terrace Serra do Japi está gravado como
+  // "Jardim das Samambaias", na Av. Dr. Adilson Rodrigues, 151, e a Prefeitura
+  // põe essa avenida "no Jardim Samambaia" (jundiai.sp.gov.br, notícia de
+  // 27/09/2026 sobre o plantio de mudas). Conferido em 16/11/2026.
+  'jardim das samambaias': 'Jardim Samambaia',
 };
 
 const chave = (s: string) =>

@@ -11,6 +11,8 @@ test('o guia do bairro confere o nome, o pertencimento e a cidade', () => {
   // Jardim Ermida I e II têm guia próprio desde 13/11/2026 (eram do Eloy Chaves).
   assert.equal(guiaDoBairro('Jardim Ermida II', 'Jundiaí')?.slug, 'jardim-ermida');
   assert.equal(guiaDoBairro('Vila Sereno', 'Jundiaí')?.slug, 'eloy-chaves');
+  // Outra grafia do mesmo bairro (o Terrace Serra do Japi está gravado assim).
+  assert.equal(guiaDoBairro('Jardim das Samambaias', 'Jundiaí')?.slug, 'jardim-samambaia');
   // Cidade sem acento também vale.
   assert.equal(guiaDoBairro('Recanto Quarto Centenário', 'Jundiai')?.slug, 'recanto-quarto-centenario');
   // O guia do Centro é o de Itupeva: o Centro de Jundiaí não tem guia.
