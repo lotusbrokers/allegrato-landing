@@ -122,7 +122,7 @@ Verificação na árvore exata que foi para a main (o Site do Cliente, que não 
 - A chave está em `public/957850290d08780a19bcbca20f22ee04.txt`; ela é pública por desenho do protocolo.
 - O script `scripts/indexnow.mjs` lê o sitemap e só envia com `--enviar`.
 - Antes de enviar, o script confere que a chave já está no ar. Por isso o envio só vale depois do deploy.
-- O primeiro envio, com todas as URLs, fica com o Claude, logo depois deste deploy.
+- Primeiro envio: 16/11/2026 às 11:55, as 252 URLs do sitemap, aceitas pelo serviço (HTTP 200). A tentativa das 11:50 deu 403 "SiteVerificationNotCompleted": na primeira vez o serviço ainda está conferindo a chave, e basta tentar de novo alguns minutos depois.
 
 Depois de cada deploy que mude páginas, envie só o que mudou desde a data:
 
