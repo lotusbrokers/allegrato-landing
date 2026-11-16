@@ -157,6 +157,7 @@ Não tenho acesso às contas do Search Console, do Bing Webmaster Tools, do Easy
    - **Vivart Grand Alamedas:** o bairro está gravado como "Av. Juvenal Arantes", que é uma rua. Com o bairro certo, o guia do bairro (se houver) passa a linkar a landing.
    - **Terrace Serra do Japi:** está como "Jardim das Samambaias", e o guia é do "Jardim Samambaia". Se for o mesmo bairro, gravar igual, ou me confirmar para eu pôr no mapa de pertencimento (`lib/bairros-taxonomia.ts`).
    - **SKY Videiras:** o card mostra "56-71m", e a landing, de 56,96 a 83,31 m².
+   - **AP0693** (pendência de 13/11): o texto diz Golden Garden e 158 m², mas o vínculo é o New Garden e o campo diz 157 m².
 7. **Textos e decisões da Lotus:** os itens de `seo-data/conteudo.csv`.
    - 4 guias, 3 construtoras, o artigo da Serra do Japi.
    - Aprovar os 11 títulos.
