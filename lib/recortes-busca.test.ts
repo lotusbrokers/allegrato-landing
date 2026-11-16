@@ -1,7 +1,7 @@
 // Recortes da busca (lib/recortes-busca.ts): quem entra em "casas em Jundiaí".
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { RECORTES_DA_BUSCA, imoveisDoRecorte, recorteDaBusca, recortesDaCidade } from './recortes-busca.ts';
+import { RECORTES_DA_BUSCA, imoveisDoRecorte, paginaDaCidade, recorteDaBusca, recortesDaCidade } from './recortes-busca.ts';
 
 const imovel = (codigo: string, type: string, city: string, fin: 'comprar' | 'alugar' = 'comprar') => ({ codigo, type, city, fin });
 
@@ -42,10 +42,32 @@ test('apartamentos em Jundiaí: apartamento e cobertura da cidade, só à venda'
   assert.deepEqual(imoveisDoRecorte(lista, aptos).map((i) => i.codigo), ['AP1', 'AP2']);
 });
 
+test('imóveis em Jundiaí: todos os tipos da cidade, só à venda', () => {
+  const todos = recorteDaBusca('imoveis-em-jundiai');
+  assert.ok(todos);
+  const lista = [
+    imovel('AP1', 'Apartamento', 'Jundiaí'),
+    imovel('CA1', 'Casa', 'JUNDIAI'),
+    imovel('SO1', 'Sobrado', 'Jundiaí'),
+    imovel('TE1', 'Terreno', 'Jundiaí'),
+    imovel('AP2', 'Apartamento', 'Itupeva'),
+    imovel('CA2', 'Casa', 'Jundiaí', 'alugar'),
+  ];
+  assert.deepEqual(imoveisDoRecorte(lista, todos).map((i) => i.codigo), ['AP1', 'CA1', 'SO1', 'TE1']);
+});
+
+test('a página da cidade é o recorte sem lista de tipos', () => {
+  assert.equal(paginaDaCidade('Jundiaí')?.slug, 'imoveis-em-jundiai');
+  assert.equal(paginaDaCidade('jundiai')?.slug, 'imoveis-em-jundiai');
+  // Itupeva só tem "Casas à venda": a trilha do imóvel segue para a busca geral.
+  assert.equal(paginaDaCidade('Itupeva'), undefined);
+  assert.equal(paginaDaCidade(null), undefined);
+});
+
 test('o guia de bairro acha os recortes da própria cidade, com ou sem acento', () => {
   const slugs = (cidade: string | null) => recortesDaCidade(cidade).map((r) => r.slug);
-  assert.deepEqual(slugs('Jundiaí'), ['casas-em-jundiai', 'apartamentos-em-jundiai']);
-  assert.deepEqual(slugs('JUNDIAI'), ['casas-em-jundiai', 'apartamentos-em-jundiai']);
+  assert.deepEqual(slugs('Jundiaí'), ['imoveis-em-jundiai', 'casas-em-jundiai', 'apartamentos-em-jundiai']);
+  assert.deepEqual(slugs('JUNDIAI'), ['imoveis-em-jundiai', 'casas-em-jundiai', 'apartamentos-em-jundiai']);
   assert.deepEqual(slugs('Itupeva'), ['casas-em-itupeva']);
   assert.deepEqual(slugs('Campinas'), []);
   assert.deepEqual(slugs(''), []);

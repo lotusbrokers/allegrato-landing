@@ -97,6 +97,7 @@ export default async function RecorteDaBuscaPage({ params }: Params) {
         imoveis={imoveis}
         bairrosDoGuia={listBairros().map((b) => b.nome)}
         titulo={recorte.titulo}
+        comFiltroDeTipo={!recorte.tipos}
         complemento={complemento || undefined}
       />
     </>

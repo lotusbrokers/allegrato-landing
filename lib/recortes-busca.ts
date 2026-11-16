@@ -13,6 +13,11 @@
  * casas em condomínio (nenhuma gravada com esse tipo) ficaram para quando
  * houver acervo: página quase vazia é o que o Google deixa fora do índice.
  *
+ * "Imóveis em Jundiaí" entrou no mesmo dia, como subpágina de Comprar: todos os
+ * imóveis à venda na cidade, de qualquer tipo. É o recorte sem lista de tipos
+ * (ver paginaDaCidade), e o "Jundiaí" da trilha "Comprar › Jundiaí" da página
+ * do imóvel leva até ele.
+ *
  * O filtro é feito no servidor, antes de o componente receber a lista: o HTML
  * já sai só com as casas, e o visitante refina dali (quartos, faixa de preço,
  * texto). Os chips da busca não servem para o recorte porque o filtro de tipo
@@ -28,14 +33,25 @@ export type RecorteDaBusca = {
   titulo: string;
   descricao: string;
   cidade: string;
-  /** Tipos do cadastro que entram, comparados sem acento e sem caixa. */
-  tipos: readonly string[];
+  /**
+   * Tipos do cadastro que entram, comparados sem acento e sem caixa. Sem a
+   * lista, entram todos os tipos: é a página da cidade inteira.
+   */
+  tipos?: readonly string[];
 };
 
 /** "Casas": a casa de rua, o sobrado e a casa em condomínio, com as grafias que o cadastro usa. */
 const TIPOS_DE_CASA = ['Casa', 'Sobrado', 'Casa em condomínio', 'Casa de condomínio', 'Casa térrea'] as const;
 
+// A ordem é a dos links nos guias de bairro: a página da cidade vem antes dos tipos.
 export const RECORTES_DA_BUSCA: readonly RecorteDaBusca[] = [
+  {
+    slug: 'imoveis-em-jundiai',
+    titulo: 'Imóveis à venda em Jundiaí',
+    descricao:
+      'Imóveis à venda em Jundiaí na vitrine da Lotus Brokers: apartamentos, casas e terrenos, com fotos, valores e atendimento de quem conhece o bairro.',
+    cidade: 'Jundiaí',
+  },
   {
     slug: 'casas-em-jundiai',
     titulo: 'Casas à venda em Jundiaí',
@@ -75,12 +91,19 @@ export function recortesDaCidade(cidade: string | null | undefined): RecorteDaBu
   return RECORTES_DA_BUSCA.filter((r) => normalizar(r.cidade) === alvo);
 }
 
-/** Os imóveis à venda do recorte: tipo na lista e a mesma cidade, sem acento nem caixa. */
+/** A página com todos os imóveis à venda da cidade (o recorte sem lista de tipos), se houver. */
+export function paginaDaCidade(cidade: string | null | undefined): RecorteDaBusca | undefined {
+  return recortesDaCidade(cidade).find((r) => !r.tipos);
+}
+
+/** Os imóveis à venda do recorte: da mesma cidade e, quando há lista, do tipo; sem acento nem caixa. */
 export function imoveisDoRecorte<T extends Pick<ImovelBusca, 'fin' | 'type' | 'city'>>(
   imoveis: readonly T[],
   recorte: RecorteDaBusca,
 ): T[] {
-  const tipos = new Set(recorte.tipos.map(normalizar));
+  const tipos = recorte.tipos ? new Set(recorte.tipos.map(normalizar)) : null;
   const cidade = normalizar(recorte.cidade);
-  return imoveis.filter((im) => im.fin === 'comprar' && tipos.has(normalizar(im.type)) && normalizar(im.city) === cidade);
+  return imoveis.filter(
+    (im) => im.fin === 'comprar' && (!tipos || tipos.has(normalizar(im.type))) && normalizar(im.city) === cidade,
+  );
 }

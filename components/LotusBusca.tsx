@@ -173,6 +173,7 @@ export default function LotusBusca({
   imoveis = [],
   bairrosDoGuia = [],
   titulo,
+  comFiltroDeTipo = false,
   complemento,
 }: {
   whatsapp?: string;
@@ -183,6 +184,12 @@ export default function LotusBusca({
    * lib/recortes-busca). Sem ele, o H1 é a contagem, como em /lotus-busca.
    */
   titulo?: string;
+  /**
+   * Mostra o filtro de tipo mesmo num recorte. Na página da cidade com todos os
+   * tipos ("Imóveis à venda em Jundiaí") ele refina dentro da lista recebida; o
+   * de cidade continua escondido, porque a página já é da cidade.
+   */
+  comFiltroDeTipo?: boolean;
   /**
    * Nomes dos guias de /lotus-bairro. A busca por texto os reconhece como
    * lugar mesmo sem imóvel cadastrado lá: "casa no Caxambu" volta vazia em vez
@@ -511,16 +518,18 @@ export default function LotusBusca({
               </Hoverable>
             </div>
             {/* Num recorte (titulo), cidade e tipo já são o próprio recorte: os
-                selects escolheriam fora da lista recebida e zerariam a busca. */}
+                selects escolheriam fora da lista recebida e zerariam a busca.
+                A exceção é o tipo na página da cidade com todos os tipos
+                (comFiltroDeTipo), onde ele refina dentro da lista. */}
             {!titulo && (
-              <>
-                <select onChange={onCity} value={vCity} style={parseStyle('border:1px solid rgba(21,36,28,.16);background:#fff;color:#15241c;font-size:13.5px;padding:9px 32px 9px 13px;border-radius:30px;cursor:pointer;')}>
-                  <option value="any">Cidade</option><option value="jundiaí">Jundiaí</option><option value="itupeva">Itupeva</option><option value="vinhedo">Vinhedo</option>
-                </select>
-                <select onChange={onType} value={vType} style={parseStyle('border:1px solid rgba(21,36,28,.16);background:#fff;color:#15241c;font-size:13.5px;padding:9px 32px 9px 13px;border-radius:30px;cursor:pointer;')}>
-                  <option value="any">Tipo</option><option value="Casa">Casa</option><option value="Apartamento">Apartamento</option><option value="Cobertura">Cobertura</option><option value="Terreno">Terreno</option><option value="Comercial">Comercial</option>
-                </select>
-              </>
+              <select onChange={onCity} value={vCity} style={parseStyle('border:1px solid rgba(21,36,28,.16);background:#fff;color:#15241c;font-size:13.5px;padding:9px 32px 9px 13px;border-radius:30px;cursor:pointer;')}>
+                <option value="any">Cidade</option><option value="jundiaí">Jundiaí</option><option value="itupeva">Itupeva</option><option value="vinhedo">Vinhedo</option>
+              </select>
+            )}
+            {(!titulo || comFiltroDeTipo) && (
+              <select onChange={onType} value={vType} style={parseStyle('border:1px solid rgba(21,36,28,.16);background:#fff;color:#15241c;font-size:13.5px;padding:9px 32px 9px 13px;border-radius:30px;cursor:pointer;')}>
+                <option value="any">Tipo</option><option value="Casa">Casa</option><option value="Apartamento">Apartamento</option><option value="Cobertura">Cobertura</option><option value="Terreno">Terreno</option><option value="Comercial">Comercial</option>
+              </select>
             )}
             <select onChange={onBeds} value={vBeds} style={parseStyle('border:1px solid rgba(21,36,28,.16);background:#fff;color:#15241c;font-size:13.5px;padding:9px 32px 9px 13px;border-radius:30px;cursor:pointer;')}>
               <option value="any">Dormitórios</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option>
