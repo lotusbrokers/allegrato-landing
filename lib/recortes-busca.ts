@@ -4,9 +4,14 @@
  *
  * Pedido da Lotus em 04/11/2026: "casas em Jundiaí" e "casas em Itupeva", fora
  * do menu. Nenhum menu nem rodapé as linka; ficam no sitemap e, desde
- * 06/11/2026, nos guias de bairro da mesma cidade (ver recorteDaCidade): só com
+ * 06/11/2026, nos guias de bairro da mesma cidade (ver recortesDaCidade): só com
  * o sitemap, o Google não tinha caminho até elas a partir da home. Recorte novo
  * entra nesta lista; a rota, o sitemap e os guias leem daqui.
+ *
+ * "Apartamentos em Jundiaí" entrou em 16/11/2026 (pedido da Lotus de páginas
+ * por tipo), com 20 apartamentos à venda na cidade. Terrenos (1 em Jundiaí) e
+ * casas em condomínio (nenhuma gravada com esse tipo) ficaram para quando
+ * houver acervo: página quase vazia é o que o Google deixa fora do índice.
  *
  * O filtro é feito no servidor, antes de o componente receber a lista: o HTML
  * já sai só com as casas, e o visitante refina dali (quartos, faixa de preço,
@@ -40,6 +45,14 @@ export const RECORTES_DA_BUSCA: readonly RecorteDaBusca[] = [
     tipos: TIPOS_DE_CASA,
   },
   {
+    slug: 'apartamentos-em-jundiai',
+    titulo: 'Apartamentos à venda em Jundiaí',
+    descricao:
+      'Apartamentos à venda em Jundiaí na vitrine da Lotus Brokers, com fotos, valores e atendimento de quem conhece o bairro.',
+    cidade: 'Jundiaí',
+    tipos: ['Apartamento', 'Cobertura'],
+  },
+  {
     slug: 'casas-em-itupeva',
     titulo: 'Casas à venda em Itupeva',
     descricao:
@@ -55,11 +68,11 @@ export function recorteDaBusca(slug: string): RecorteDaBusca | undefined {
 
 const normalizar = (s: string) => s.normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
 
-/** O recorte da cidade de um guia de bairro, comparando sem acento nem caixa; undefined se a cidade não tem. */
-export function recorteDaCidade(cidade: string | null | undefined): RecorteDaBusca | undefined {
-  if (!cidade?.trim()) return undefined;
+/** Os recortes da cidade de um guia de bairro, na ordem da lista, comparando sem acento nem caixa. */
+export function recortesDaCidade(cidade: string | null | undefined): RecorteDaBusca[] {
+  if (!cidade?.trim()) return [];
   const alvo = normalizar(cidade);
-  return RECORTES_DA_BUSCA.find((r) => normalizar(r.cidade) === alvo);
+  return RECORTES_DA_BUSCA.filter((r) => normalizar(r.cidade) === alvo);
 }
 
 /** Os imóveis à venda do recorte: tipo na lista e a mesma cidade, sem acento nem caixa. */

@@ -247,7 +247,7 @@ export default function LotusBairro({
   vizinhos = [],
   lancamentos = [],
   condominios = [],
-  casasNaCidade,
+  buscasNaCidade = [],
   leituras = [],
 }: {
   whatsapp?: string;
@@ -264,8 +264,8 @@ export default function LotusBairro({
   lancamentos?: { nome: string; href: string; construtora: string; construtoraHref?: string | null }[];
   /** Condomínios do bairro com página própria (a rota filtra). Vazio esconde a seção. */
   condominios?: { nome: string; href: string }[];
-  /** Recorte "Casas à venda" da cidade do bairro (lib/recortes-busca), quando existe. */
-  casasNaCidade?: { href: string; titulo: string };
+  /** Recortes da busca na cidade do bairro (lib/recortes-busca): "Casas à venda em X" etc. */
+  buscasNaCidade?: { href: string; titulo: string }[];
   /** Artigos do blog para "Leituras sobre a região" (a rota escolhe; até 3). */
   leituras?: { href: string; img: string; cat: string; title: string; slot: string }[];
 }) {
@@ -485,9 +485,9 @@ export default function LotusBairro({
           <div style={parseStyle('display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:36px;')}>
             <h2 style={parseStyle("font-family:'Fraunces',serif;font-weight:300;font-size:clamp(26px,3vw,40px);color:#15241c;margin:0;")}>Imóveis em {nomeBairro}</h2>
             <div style={parseStyle('display:flex;flex-wrap:wrap;gap:12px 28px;')}>
-              {casasNaCidade && (
-                <Link href={casasNaCidade.href} style={parseStyle('display:inline-flex;align-items:center;gap:8px;color:#1d3a2c;font-weight:600;font-size:15px;border-bottom:1.5px solid #b18a4a;padding-bottom:3px;')}>{casasNaCidade.titulo} <span>→</span></Link>
-              )}
+              {buscasNaCidade.map((b) => (
+                <Link key={b.href} href={b.href} style={parseStyle('display:inline-flex;align-items:center;gap:8px;color:#1d3a2c;font-weight:600;font-size:15px;border-bottom:1.5px solid #b18a4a;padding-bottom:3px;')}>{b.titulo} <span>→</span></Link>
+              ))}
               <Link href="/lotus-busca" style={parseStyle('display:inline-flex;align-items:center;gap:8px;color:#1d3a2c;font-weight:600;font-size:15px;border-bottom:1.5px solid #b18a4a;padding-bottom:3px;')}>Ver todos na busca <span>→</span></Link>
             </div>
           </div>

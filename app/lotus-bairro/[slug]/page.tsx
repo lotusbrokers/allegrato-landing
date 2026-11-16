@@ -7,7 +7,7 @@ import { getImoveisPorBairro } from '@/lib/imoveis';
 import { getLancamentosList, isListItemApresentavel } from '@/lib/lancamentos';
 import { agruparPorConstrutora } from '@/lib/construtoras-paginas';
 import { getCondominiosCards, isCondominioApresentavel, type CondominioCard } from '@/lib/condominios';
-import { recorteDaCidade } from '@/lib/recortes-busca';
+import { recortesDaCidade } from '@/lib/recortes-busca';
 import { POSTS, hrefDoArtigo } from '@/lib/blog-posts';
 import { publicados } from '@/lib/blog-agenda';
 import { IMAGEM_COMPARTILHAMENTO } from '@/lib/site';
@@ -174,8 +174,9 @@ export default async function LotusBairroSlugPage({ params }: Params) {
   }));
   const jsonLd = buildJsonLd(bairro, slug);
   const [lancamentos, condominios] = await Promise.all([lancamentosDoBairro(slug), condominiosDoBairro(slug)]);
-  // Recorte "Casas à venda" da cidade do guia (lib/recortes-busca), se houver.
-  const recorte = recorteDaCidade(bairro.cidade);
+  // Recortes da cidade do guia (lib/recortes-busca): "Casas à venda em X",
+  // "Apartamentos à venda em X"... Cidade sem recorte não mostra nenhum.
+  const buscasNaCidade = recortesDaCidade(bairro.cidade).map((r) => ({ href: `/lotus-busca/${r.slug}`, titulo: r.titulo }));
 
   return (
     <>
@@ -192,7 +193,7 @@ export default async function LotusBairroSlugPage({ params }: Params) {
         vizinhos={vizinhos}
         lancamentos={lancamentos}
         condominios={condominios}
-        casasNaCidade={recorte ? { href: `/lotus-busca/${recorte.slug}`, titulo: recorte.titulo } : undefined}
+        buscasNaCidade={buscasNaCidade}
         leituras={leiturasDoBairro(bairro)}
       />
     </>

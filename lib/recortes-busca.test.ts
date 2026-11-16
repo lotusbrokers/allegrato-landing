@@ -1,7 +1,7 @@
 // Recortes da busca (lib/recortes-busca.ts): quem entra em "casas em Jundiaí".
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { RECORTES_DA_BUSCA, imoveisDoRecorte, recorteDaBusca, recorteDaCidade } from './recortes-busca.ts';
+import { RECORTES_DA_BUSCA, imoveisDoRecorte, recorteDaBusca, recortesDaCidade } from './recortes-busca.ts';
 
 const imovel = (codigo: string, type: string, city: string, fin: 'comprar' | 'alugar' = 'comprar') => ({ codigo, type, city, fin });
 
@@ -29,13 +29,27 @@ test('casas em Itupeva não pega as de Jundiaí', () => {
   );
 });
 
-test('o guia de bairro acha o recorte da própria cidade, com ou sem acento', () => {
-  assert.equal(recorteDaCidade('Jundiaí')?.slug, 'casas-em-jundiai');
-  assert.equal(recorteDaCidade('JUNDIAI')?.slug, 'casas-em-jundiai');
-  assert.equal(recorteDaCidade('Itupeva')?.slug, 'casas-em-itupeva');
-  assert.equal(recorteDaCidade('Campinas'), undefined);
-  assert.equal(recorteDaCidade(''), undefined);
-  assert.equal(recorteDaCidade(null), undefined);
+test('apartamentos em Jundiaí: apartamento e cobertura da cidade, só à venda', () => {
+  const aptos = recorteDaBusca('apartamentos-em-jundiai');
+  assert.ok(aptos);
+  const lista = [
+    imovel('AP1', 'Apartamento', 'Jundiaí'),
+    imovel('AP2', 'COBERTURA', 'Jundiai'),
+    imovel('CA1', 'Casa', 'Jundiaí'),
+    imovel('AP3', 'Apartamento', 'Itupeva'),
+    imovel('AP4', 'Apartamento', 'Jundiaí', 'alugar'),
+  ];
+  assert.deepEqual(imoveisDoRecorte(lista, aptos).map((i) => i.codigo), ['AP1', 'AP2']);
+});
+
+test('o guia de bairro acha os recortes da própria cidade, com ou sem acento', () => {
+  const slugs = (cidade: string | null) => recortesDaCidade(cidade).map((r) => r.slug);
+  assert.deepEqual(slugs('Jundiaí'), ['casas-em-jundiai', 'apartamentos-em-jundiai']);
+  assert.deepEqual(slugs('JUNDIAI'), ['casas-em-jundiai', 'apartamentos-em-jundiai']);
+  assert.deepEqual(slugs('Itupeva'), ['casas-em-itupeva']);
+  assert.deepEqual(slugs('Campinas'), []);
+  assert.deepEqual(slugs(''), []);
+  assert.deepEqual(slugs(null), []);
 });
 
 test('slug desconhecido não é recorte, e os slugs não se repetem', () => {
