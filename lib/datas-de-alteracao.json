@@ -61,13 +61,13 @@
     "/lotus-bairro/vila-hortolandia": "2026-09-08T19:12:11.000Z",
     "/lotus-blog": "2026-11-13T19:56:07.000Z",
     "/lotus-busca": "2026-11-13T19:56:07.000Z",
-    "/lotus-condominio": "2026-10-16T14:45:11.000Z",
+    "/lotus-condominio": "2026-11-16T15:29:38.000Z",
     "/lotus-cookies": "2026-09-28T14:16:16.000Z",
     "/lotus-corretores": "2026-11-16T12:06:07.000Z",
-    "/lotus-faq": "2026-11-13T19:56:07.000Z",
+    "/lotus-faq": "2026-11-16T15:29:38.000Z",
     "/lotus-lancamentos": "2026-11-13T19:56:07.000Z",
     "/lotus-privacidade": "2026-10-16T14:45:08.000Z",
-    "/lotus-recrutamento": "2026-11-13T19:04:04.000Z",
+    "/lotus-recrutamento": "2026-11-16T15:29:38.000Z",
     "/lotus-simuladores": "2026-11-13T19:04:25.000Z",
     "/lotus-sobre": "2026-11-16T12:05:54.000Z",
     "/lotus-termos": "2026-10-16T14:45:08.000Z",
@@ -93,7 +93,7 @@
     "/vivarte": "2026-10-27T17:46:54.000Z"
   },
   "grupos": {
-    "bairros": "2026-11-16T14:35:27.000Z",
+    "bairros": "2026-11-16T15:29:37.000Z",
     "construtoras": "2026-11-12T18:34:50.000Z"
   }
 }
