@@ -151,6 +151,18 @@ for (const slug of LANDINGS_HTML) {
     html.includes('data-rodape-lotus'),
     `landing ${slug} está sem o rodapé da Lotus`,
   );
+
+  // Os dados estruturados descrevem o empreendimento para o Google e o Bing.
+  // Bloco que não é JSON válido é ignorado sem aviso nenhum. Gioviale, Oásis,
+  // Reserva Castanheira e Santorini estavam sem (diagnóstico de 16/11/2026).
+  const blocosJsonLd = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
+  assert.ok(blocosJsonLd.length > 0, `landing ${slug} está sem JSON-LD`);
+  for (const [, json] of blocosJsonLd) {
+    let dado: Record<string, unknown> = {};
+    assert.doesNotThrow(() => (dado = JSON.parse(json)), `landing ${slug}: JSON-LD que não é JSON válido`);
+    assert.equal(dado['@context'], 'https://schema.org', `landing ${slug}: JSON-LD sem o @context do schema.org`);
+    assert.ok(dado['@type'], `landing ${slug}: JSON-LD sem @type`);
+  }
 }
 
 // E o contrário: entrada apontando para página que não existe vira card com link
