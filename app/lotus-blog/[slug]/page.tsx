@@ -64,7 +64,10 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const url = `${SITE}${hrefDoArtigo(post.id)}`;
   const titulo = post.tituloSeo ?? post.title;
   return {
-    title: `${titulo} | Blog Lotus`,
+    // "| Blog Lotus" só quando cabe nos 70 caracteres: o Google já mostra o nome
+    // do site no resultado, e 21 títulos passavam de 70 com ele (diagnóstico de
+    // 16/11/2026). Para os que passam mesmo sem ele, o caminho é o tituloSeo.
+    title: `${titulo} | Blog Lotus`.length <= 70 ? `${titulo} | Blog Lotus` : titulo,
     description: post.excerpt,
     alternates: { canonical: url },
     openGraph: {
