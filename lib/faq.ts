@@ -172,7 +172,8 @@ export const FAQ: FaqItem[] = [
     id: 2,
     cat: 'Lotus',
     q: 'Em quais cidades a Lotus atua?',
-    a: 'Jundiaí e Itupeva são o nosso chão. Também atendemos Vinhedo, Valinhos, Cabreúva, Itatiba, Louveira e demais cidades da região.',
+    // Só Jundiaí e Itupeva desde 16/11/2026 (decisão D026, a mesma do /lotus-sobre).
+    a: 'A Lotus atua em Jundiaí e Itupeva, que são o nosso chão.',
   },
   {
     id: 3,

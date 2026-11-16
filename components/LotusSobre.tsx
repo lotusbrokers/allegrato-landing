@@ -530,13 +530,12 @@ export default function LotusSobre({
         <div style={parseStyle('max-width:1000px;margin:0 auto;position:relative;text-align:center;')}>
           <div style={parseStyle('font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#cdab6e;margin-bottom:20px;')}>Nossa região</div>
           <h2 style={parseStyle('font-family:\'Fraunces\',serif;font-weight:300;font-size:clamp(28px,3.6vw,46px);color:#f7f2e8;line-height:1.08;letter-spacing:-.02em;margin:0 0 22px;')}>Daqui. De verdade.</h2>
-          <p style={parseStyle('font-size:17px;color:rgba(247,242,232,.78);font-weight:300;line-height:1.7;max-width:680px;margin:0 auto 36px;')}>Jundiaí e Itupeva são o nosso chão e a gente também atende Vinhedo, Valinhos e Indaiatuba. Serra do Japi, vinhedos, condomínios e ruas arborizadas: a gente conhece a região pelo que ela tem de vivido, não só pelo que cabe num anúncio.</p>
+          <p style={parseStyle('font-size:17px;color:rgba(247,242,232,.78);font-weight:300;line-height:1.7;max-width:680px;margin:0 auto 36px;')}>Jundiaí e Itupeva são o nosso chão. Serra do Japi, vinhedos, condomínios e ruas arborizadas: a gente conhece a região pelo que ela tem de vivido, não só pelo que cabe num anúncio.</p>
           <div style={parseStyle('display:flex;flex-wrap:wrap;gap:10px;justify-content:center;')}>
             <Hoverable as="a" href="/lotus-bairro" target="_top" baseStyle={parseStyle('background:rgba(247,242,232,.1);border:1px solid rgba(247,242,232,.22);color:#f7f2e8;font-size:14px;padding:9px 18px;border-radius:30px;transition:all .2s;')} hoverStyle={parseStyle('background:rgba(247,242,232,.18);border-color:#cdab6e')}>Jundiaí</Hoverable>
             <Hoverable as="a" href="/lotus-bairro" target="_top" baseStyle={parseStyle('background:rgba(247,242,232,.1);border:1px solid rgba(247,242,232,.22);color:#f7f2e8;font-size:14px;padding:9px 18px;border-radius:30px;transition:all .2s;')} hoverStyle={parseStyle('background:rgba(247,242,232,.18);border-color:#cdab6e')}>Itupeva</Hoverable>
-            <Hoverable as="a" href="/lotus-bairro" target="_top" baseStyle={parseStyle('background:rgba(247,242,232,.1);border:1px solid rgba(247,242,232,.22);color:#f7f2e8;font-size:14px;padding:9px 18px;border-radius:30px;transition:all .2s;')} hoverStyle={parseStyle('background:rgba(247,242,232,.18);border-color:#cdab6e')}>Vinhedo</Hoverable>
-            <Hoverable as="a" href="/lotus-bairro" target="_top" baseStyle={parseStyle('background:rgba(247,242,232,.1);border:1px solid rgba(247,242,232,.22);color:#f7f2e8;font-size:14px;padding:9px 18px;border-radius:30px;transition:all .2s;')} hoverStyle={parseStyle('background:rgba(247,242,232,.18);border-color:#cdab6e')}>Valinhos</Hoverable>
-            <Hoverable as="a" href="/lotus-bairro" target="_top" baseStyle={parseStyle('background:rgba(247,242,232,.1);border:1px solid rgba(247,242,232,.22);color:#f7f2e8;font-size:14px;padding:9px 18px;border-radius:30px;transition:all .2s;')} hoverStyle={parseStyle('background:rgba(247,242,232,.18);border-color:#cdab6e')}>Indaiatuba</Hoverable>
+            {/* Só Jundiaí e Itupeva desde 16/11/2026 (decisão D026): Vinhedo, Valinhos
+                e Indaiatuba saíram do texto e dos atalhos, como já tinham saído do dado estruturado. */}
           </div>
         </div>
       </section>
