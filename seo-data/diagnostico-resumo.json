@@ -1,0 +1,36 @@
+{
+  "base": "https://www.lotusbrokers.com.br",
+  "lido_em": "2026-11-16T14:02:39.592Z",
+  "robots_txt": "User-Agent: *\nAllow: /\nDisallow: /api/\nDisallow: /area-do-corretor\nDisallow: /area-do-gestor\n\nHost: https://www.lotusbrokers.com.br\nSitemap: https://www.lotusbrokers.com.br/sitemap.xml\n",
+  "sitemap": {
+    "status": 200,
+    "urls": 241,
+    "com_lastmod": 241
+  },
+  "paginas_lidas": 249,
+  "variacoes_do_dominio": {
+    "http://lotusbrokers.com.br/": "301 http://lotusbrokers.com.br/ -> 308 https://lotusbrokers.com.br/ -> 200 https://www.lotusbrokers.com.br/",
+    "https://lotusbrokers.com.br/": "308 https://lotusbrokers.com.br/ -> 200 https://www.lotusbrokers.com.br/",
+    "http://www.lotusbrokers.com.br/": "301 http://www.lotusbrokers.com.br/ -> 200 https://www.lotusbrokers.com.br/",
+    "https://lotusbrokers.com.br/lotus-blog": "308 https://lotusbrokers.com.br/lotus-blog -> 200 https://www.lotusbrokers.com.br/lotus-blog",
+    "https://www.lotusbrokers.com.br/lotus-blog/": "308 https://www.lotusbrokers.com.br/lotus-blog/ -> 200 https://www.lotusbrokers.com.br/lotus-blog"
+  },
+  "por_causa": {
+    "título com N caracteres": 106,
+    "descrição com N caracteres": 23,
+    "só N página(s) linkam para ela": 18,
+    "conteúdo fino (N caracteres de texto principal)": 11,
+    "meta robots": 5,
+    "sem dados estruturados": 4,
+    "descrição repetida em N páginas": 2,
+    "redirecionamento N -> /area-do-corretor/entrar?volta=%NFarea-do-corretor": 1,
+    "redirecionamento N -> /area-do-corretor/entrar?volta=%NFarea-do-gestor": 1,
+    "fora do sitemap": 1
+  },
+  "severidade": {
+    "alta": 5,
+    "media": 12,
+    "baixa": 108,
+    "ok": 124
+  }
+}
