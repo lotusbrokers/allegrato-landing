@@ -206,9 +206,111 @@ export function relacionados(posts: Post[], atual: Post, quantos = 3): Post[] {
 // mão, que envelheceu: títulos que não existiam mais no blog e nenhuma capa.
 export const POSTS: Post[] = [
   /* ------------------------------------------------------------------
+   * Enviado pela Lotus em 17/11/2026, com a foto do pórtico de Itupeva.
+   * Primeiro da lista, e por isso o novo destaque da capa do blog.
+   *
+   * CONFERIDO em 17/11/2026:
+   *  - Região Metropolitana de Jundiaí: Lei Complementar estadual 1.362, de
+   *    30/11/2021, com sete municípios, Itupeva entre eles (Alesp e
+   *    Prefeitura de Jundiaí);
+   *  - Gran Ville São Venâncio: é o nome do loteamento fechado em São
+   *    Venâncio, feito em fases (anúncios dos portais). Não é o Gran Ville
+   *    Santo Angelo da landing do site;
+   *  - Residencial Ibi Aram (I e II), Parque dos Resedás e Parque dos
+   *    Cafezais (IV, V, VI): existem em Itupeva, pelos portais e pela Tribuna
+   *    de Jundiaí. A ligação do Ibi Aram com o Bairro da Mina aparece nos
+   *    anúncios;
+   *  - Parque da Cidade: é o parque público de Itupeva (Av. Emílio
+   *    Chechinato, 706), pela Tribuna de Jundiaí;
+   *  - Hopi Hari fica em Vinhedo; Wet'n Wild e Outlet Premium, em Itupeva. O
+   *    texto diz "a região conta com", então ficou como veio.
+   * Mudou: "Grandes escolhas têm endereço" virou o slogan da Lotus, "Grandes
+   * histórias têm endereço". O título tem 101 caracteres: o tituloSeo é o
+   * começo dele, até os dois-pontos.
+   * Capa: a foto veio com 840x473 e foi recortada em 16:10 (752x470), sem
+   * ampliar.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'melhores-lugares-para-morar-em-itupeva', cat: 'Cidade', date: 'Nov 2026', publicadoEm: '2026-11-17', read: '7 min', img: '/blog/melhores-lugares-para-morar-em-itupeva.jpg', slot: 'blog-melhores-lugares-para-morar-em-itupeva', title: 'Os 5 melhores lugares para morar em Itupeva: conheça as regiões que se destacam em qualidade de vida', tituloSeo: 'Os 5 melhores lugares para morar em Itupeva', excerpt: 'Descubra os 5 melhores lugares para morar em Itupeva, conheça os bairros e condomínios, infraestrutura, qualidade de vida e opções de imóveis.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'Cinco regiões de Itupeva se destacam para morar: o Bairro da Mina, com o Residencial Ibi Aram; o Parque dos Cafezais; o Parque dos Resedás; São Venâncio e Jardim Primavera; e o Centro. A melhor escolha depende da prioridade de cada família: condomínio fechado e lazer, espaço e terreno para construir, ou praticidade perto dos serviços.',
+    body: [
+      { titulo: 'Introdução' },
+      'Escolher onde morar vai muito além de encontrar um imóvel bonito. A localização, a infraestrutura do entorno, a segurança, o acesso aos serviços e a qualidade de vida fazem toda a diferença na rotina de uma família.',
+      'Nesse cenário, Itupeva, no interior de São Paulo, vem chamando a atenção de quem procura tranquilidade, contato com a natureza e boas alternativas de moradia, sem abrir mão da conexão com importantes centros urbanos.',
+      'Localizada na Região Metropolitana de Jundiaí, a cidade oferece diferentes possibilidades residenciais: bairros tradicionais, loteamentos planejados e condomínios fechados com infraestrutura de lazer e segurança.',
+      'Mas, afinal, quais são os melhores lugares para morar em Itupeva?',
+      'Preparamos um levantamento com cinco regiões que merecem entrar no radar de quem está pensando em comprar um imóvel, construir ou investir na cidade.',
+      { titulo: '1. Bairro da Mina e região do Ibi Aram: natureza, lazer e condomínios planejados' },
+      'A região do Bairro da Mina se destaca pela presença de empreendimentos residenciais planejados e condomínios que oferecem uma proposta de moradia voltada ao conforto e à qualidade de vida.',
+      'Um dos principais exemplos é o Residencial Ibi Aram, conhecido por sua estrutura de condomínio fechado, áreas verdes e opções de lazer.',
+      'O empreendimento atende especialmente quem procura morar em uma casa, ter mais privacidade e aproveitar uma estrutura de lazer sem precisar sair do condomínio.',
+      'Outro diferencial é a possibilidade de conciliar um ambiente residencial mais tranquilo com o acesso aos serviços e ao comércio de Itupeva.',
+      { titulo: 'Para quem é indicado?', nivel: 3 },
+      { itens: ['Famílias que buscam condomínios fechados.', 'Pessoas que valorizam áreas verdes e lazer.', 'Quem deseja construir ou comprar uma casa.', 'Compradores que priorizam privacidade e tranquilidade.'] },
+      'É uma região interessante para quem deseja unir o estilo de vida de interior com uma estrutura residencial planejada.',
+      { titulo: '2. Parque dos Cafezais: espaço, tranquilidade e contato com a natureza' },
+      'O Parque dos Cafezais é uma das regiões que merecem destaque quando o assunto é morar em Itupeva.',
+      'Conhecida por seus loteamentos e condomínios residenciais, a região apresenta alternativas para quem deseja mais espaço, terrenos amplos e uma rotina próxima à natureza.',
+      'Entre os atrativos estão o perfil predominantemente residencial, a presença de áreas verdes e as possibilidades de encontrar imóveis com quintais, áreas gourmet e espaços de convivência.',
+      'A região também conta com diferentes etapas de loteamentos, o que permite encontrar alternativas para diversos projetos de moradia.',
+      { titulo: 'Para quem é indicado?', nivel: 3 },
+      { itens: ['Famílias que procuram casas com quintal.', 'Pessoas que desejam mais espaço e privacidade.', 'Quem gosta de ambientes arborizados.', 'Compradores interessados em terrenos para construir.'] },
+      'Vale considerar que a distância entre as diferentes etapas dos Cafezais pode influenciar a rotina. Por isso, é importante avaliar a localização exata do imóvel e o acesso ao comércio e aos serviços.',
+      { titulo: '3. Residencial Parque dos Resedás: qualidade de vida e estrutura de condomínio' },
+      'Para quem procura um padrão residencial diferenciado, o Parque dos Resedás é uma opção que merece atenção.',
+      'O empreendimento possui perfil de condomínio fechado e se destaca pela proposta de oferecer tranquilidade, áreas verdes e espaços de lazer para os moradores.',
+      'É uma alternativa interessante para famílias que desejam morar em casas, com mais privacidade e um ambiente residencial planejado.',
+      'Além disso, sua localização em Itupeva permite aproveitar a estrutura da cidade e manter conexão com municípios vizinhos.',
+      { titulo: 'Para quem é indicado?', nivel: 3 },
+      { itens: ['Famílias que procuram condomínios fechados.', 'Pessoas que valorizam lazer e áreas verdes.', 'Quem deseja mais privacidade.', 'Compradores que buscam imóveis de padrão médio-alto ou alto.'] },
+      'Antes de escolher, vale avaliar as taxas condominiais, as regras internas e a infraestrutura disponível no empreendimento.',
+      { titulo: '4. São Venâncio e Jardim Primavera: planejamento residencial e novas possibilidades' },
+      'A região de São Venâncio e Jardim Primavera também merece espaço entre as alternativas para morar em Itupeva.',
+      'Um dos empreendimentos que representam esse perfil é o Gran Ville São Venâncio, que apresenta uma proposta residencial planejada, com loteamentos e possibilidades para construção de casas.',
+      'A região pode atender quem deseja investir em um terreno e desenvolver um projeto personalizado, além de compradores que procuram uma casa em um ambiente residencial organizado.',
+      'O perfil de moradia é especialmente interessante para quem deseja sair de áreas mais movimentadas e encontrar um ambiente com características de bairro planejado.',
+      { titulo: 'Para quem é indicado?', nivel: 3 },
+      { itens: ['Pessoas que desejam construir a própria casa.', 'Famílias que procuram loteamentos residenciais.', 'Compradores que valorizam tranquilidade.', 'Quem busca alternativas para morar ou investir em Itupeva.'] },
+      'É importante verificar a infraestrutura de cada empreendimento, os acessos e a disponibilidade de serviços nas proximidades.',
+      { titulo: '5. Centro de Itupeva: praticidade e conveniência no dia a dia' },
+      'Nem todo mundo procura um condomínio fechado ou uma casa afastada do movimento urbano.',
+      'Para quem prioriza praticidade, o Centro de Itupeva é uma das alternativas mais interessantes.',
+      'A região concentra atividades comerciais e serviços essenciais, facilitando o acesso a estabelecimentos que fazem parte da rotina, como supermercados, farmácias, bancos, restaurantes e outros comércios.',
+      'Também é uma opção para quem deseja reduzir deslocamentos e ter maior proximidade com a estrutura urbana da cidade.',
+      'O Centro pode oferecer alternativas de casas e apartamentos, atendendo diferentes perfis de compradores.',
+      { titulo: 'Para quem é indicado?', nivel: 3 },
+      { itens: ['Pessoas que priorizam praticidade.', 'Famílias que desejam morar perto de serviços.', 'Quem prefere reduzir deslocamentos.', 'Compradores que procuram imóveis com diferentes características e faixas de investimento.'] },
+      'Para quem possui uma rotina intensa de trabalho e compromissos, morar próximo aos serviços essenciais pode representar uma grande vantagem.',
+      { titulo: 'Por que tantas pessoas consideram morar em Itupeva?' },
+      'A escolha de Itupeva não está relacionada apenas aos bairros e condomínios. A cidade também oferece características que tornam a região atrativa para diferentes perfis de moradores.',
+      { titulo: '1. Localização estratégica', nivel: 3 },
+      'Itupeva está próxima de Jundiaí e possui conexão com importantes rodovias, como Anhanguera e Bandeirantes.',
+      'Essa localização favorece quem trabalha ou possui compromissos em outras cidades da região.',
+      { titulo: '2. Contato com a natureza', nivel: 3 },
+      'A cidade possui características de interior, com áreas verdes, propriedades amplas e empreendimentos que valorizam o contato com ambientes naturais.',
+      { titulo: '3. Lazer e entretenimento', nivel: 3 },
+      'A região conta com atrações conhecidas, como o Hopi Hari, Wet\'n Wild e Outlet Premium, além de espaços públicos de lazer, como o Parque da Cidade.',
+      { titulo: '4. Diversidade de imóveis', nivel: 3 },
+      'É possível encontrar diferentes propostas de moradia, desde casas em bairros tradicionais até terrenos, apartamentos e casas em condomínios fechados.',
+      'Essa diversidade permite que o comprador escolha de acordo com seu momento de vida, orçamento e prioridades.',
+      { titulo: 'Como escolher o melhor lugar para morar em Itupeva?' },
+      'Antes de tomar uma decisão, é importante avaliar alguns critérios que podem fazer diferença no longo prazo:',
+      { itens: ['Localização: considere a distância entre o imóvel, trabalho, escolas e serviços essenciais.', 'Infraestrutura: avalie as condições das ruas, iluminação, saneamento e serviços disponíveis.', 'Segurança: conheça o entorno e, em condomínios, verifique os sistemas de controle de acesso.', 'Custo de manutenção: considere IPTU, condomínio e despesas de conservação.', 'Mobilidade: faça o trajeto nos horários em que você normalmente precisará sair de casa.', 'Potencial de valorização: analise o desenvolvimento da região, a infraestrutura e a demanda imobiliária.'] },
+      'Uma visita presencial em diferentes horários também ajuda a entender melhor o perfil da vizinhança e a dinâmica do bairro.',
+      { titulo: 'Conclusão: Itupeva tem uma opção de moradia para cada estilo de vida' },
+      'Os melhores lugares para morar em Itupeva dependem diretamente do que você considera prioridade.',
+      'Quem busca praticidade pode encontrar no Centro uma alternativa interessante. Já quem deseja mais espaço, lazer e contato com a natureza pode considerar regiões como Parque dos Cafezais, Bairro da Mina e condomínios como Ibi Aram e Parque dos Resedás.',
+      'São Venâncio também merece atenção de quem procura loteamentos planejados e possibilidades para construir.',
+      'Mais do que escolher um endereço, o importante é encontrar um imóvel que acompanhe seus planos, ofereça conforto e faça sentido para o seu momento de vida.',
+      'A Lotus Brokers pode ajudar você a encontrar essa oportunidade em Itupeva.',
+      'Conheça as opções disponíveis, converse com nossos especialistas e descubra qual região combina com o seu próximo capítulo.',
+      'Grandes histórias têm endereço. E a sua pode estar em Itupeva.',
+    ],
+  },
+  /* ------------------------------------------------------------------
    * Enviado pela Lotus em 13/11/2026 (sexta-feira), com 14 fotos, para sair
-   * no mesmo dia. Primeiro da lista, e por isso o novo destaque da capa do
-   * blog. Primeiro post com fotos no meio do texto (bloco `imagem`).
+   * no mesmo dia. Foi o destaque da capa do blog de 13/11 a 17/11/2026.
+   * Primeiro post com fotos no meio do texto (bloco `imagem`).
    *
    * CONFERIDO em 13/11/2026 nas fontes oficiais:
    *  - agenda cultural da Prefeitura (cultura.jundiai.sp.gov.br): Festival do
