@@ -128,16 +128,25 @@ const paraScript = (obj: unknown) => JSON.stringify(obj).replace(/</g, '\\u003c'
  * "Jardim Primavera" aparecem no texto com outro sentido. Bonfiglioli e
  * Vianelo, as duas partes do Vianelo Bonfiglioli, levam ao guia dele, e o
  * Recanto IV Centenário é o outro nome do Recanto Quarto Centenário.
+ *
+ * Desde 17/11/2026 (post dos melhores lugares para morar em Itupeva), o nome
+ * ambíguo fica de fora, mas o guia não: "Centro de Itupeva" leva ao guia do
+ * Centro, e "São Venâncio" ao do Residencial São Venâncio.
  */
 const NOMES_AMBIGUOS = new Set(['Centro', 'Retiro', 'Aeroporto', 'Jardim Primavera']);
 const OUTROS_NOMES: Record<string, string[]> = {
   'vianelo-bonfiglioli': ['Bonfiglioli', 'Vianelo'],
   'recanto-quarto-centenario': ['Recanto IV Centenário'],
+  'centro-itupeva': ['Centro de Itupeva'],
+  'residencial-sao-venancio': ['São Venâncio'],
 };
 
 function alvosDosGuias(): AlvoDeLink[] {
-  return BAIRROS.filter((b) => b.publicado && !NOMES_AMBIGUOS.has(b.nome)).flatMap((b) =>
-    [b.nome, ...(OUTROS_NOMES[b.slug] ?? [])].map((nome) => ({ nome, href: `/lotus-bairro/${b.slug}` })),
+  return BAIRROS.filter((b) => b.publicado).flatMap((b) =>
+    [...(NOMES_AMBIGUOS.has(b.nome) ? [] : [b.nome]), ...(OUTROS_NOMES[b.slug] ?? [])].map((nome) => ({
+      nome,
+      href: `/lotus-bairro/${b.slug}`,
+    })),
   );
 }
 
