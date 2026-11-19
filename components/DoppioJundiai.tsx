@@ -21,6 +21,7 @@ import React, { useCallback, useEffect, useState, type CSSProperties } from 'rea
 import { parseStyle, waHref } from '@/lib/dc-runtime';
 import { sendLead } from '@/lib/lead';
 import { SITE } from '@/lib/site';
+import TourVirtual from './TourVirtual';
 
 const WA_NUMBER = '5511926143393';
 const waMain = waHref(
@@ -379,6 +380,9 @@ export default function DoppioJundiai() {
               <a className="navlink" data-scroll="plantas">
                 Plantas
               </a>
+              {/* Sem "Tour virtual" aqui: a caixa do topo para em 1180px e, com mais um
+                  item, "Tour virtual" e "Quero conhecer" quebravam em duas linhas em
+                  todas as larguras de computador. Ele fica no menu do celular e no rodapé. */}
               <a className="navlink" data-scroll="localizacao">
                 Localização
               </a>
@@ -410,6 +414,9 @@ export default function DoppioJundiai() {
             </a>
             <a style={parseStyle('font-size:18px')} className="navlink" data-scroll="plantas">
               Plantas
+            </a>
+            <a style={parseStyle('font-size:18px')} className="navlink" data-scroll="tour-virtual">
+              Tour virtual
             </a>
             <a style={parseStyle('font-size:18px')} className="navlink" data-scroll="localizacao">
               Localização
@@ -1054,6 +1061,30 @@ export default function DoppioJundiai() {
             </div>
           </div>
         </section>
+        {/* TOUR VIRTUAL: a apresentação interativa do Doppio, em doppio.zamitt.com
+            (pedido da Lotus em 17/11/2026). Só carrega quando a pessoa clica: ver
+            components/TourVirtual. O texto cita só o que o tour tem no menu dele. */}
+        <section style={parseStyle('background:#140c06;padding:clamp(80px,12vh,150px) 0')} id="tour-virtual">
+          <div className="container">
+            <div style={parseStyle('margin-bottom:34px;max-width:720px')} data-reveal="">
+              <div style={parseStyle("font-family:'Jost',sans-serif;text-transform:uppercase;letter-spacing:.34em;font-size:12px;color:#c9a36a;margin-bottom:20px")}>
+                Tour virtual
+              </div>
+              <h2 style={parseStyle("font-family:'Jost',sans-serif;font-weight:200;font-size:clamp(1.9rem,3.6vw,3.2rem);line-height:1.12;margin:0 0 18px;color:#f3ece0")}>
+                Percorra o Doppio de onde estiver
+              </h2>
+              <p style={parseStyle("font-family:'Jost',sans-serif;font-weight:300;font-size:16px;line-height:1.7;margin:0;color:rgba(243,236,224,.72)")}>
+                A apresentação interativa reúne a experiência 360°, a vista de cada andar, a insolação, a galeria e as plantas do Doppio.
+              </p>
+            </div>
+            <TourVirtual
+              src="https://doppio.zamitt.com/"
+              titulo="Tour virtual do Doppio Jundiaí"
+              capa="/doppio-jundiai/midia/a1c9609202096602.webp"
+              capaAlt="Acesso e fachada do Doppio Jundiaí, perspectiva preliminar"
+            />
+          </div>
+        </section>
         {/* LOCALIZAÇÃO */}
         <section style={parseStyle('background:#18100a;padding:clamp(80px,12vh,150px) 0;position:relative')} id="localizacao">
           <div className="container">
@@ -1449,6 +1480,9 @@ export default function DoppioJundiai() {
                   </a>
                   <a className="navlink" data-scroll="plantas">
                     Plantas
+                  </a>
+                  <a className="navlink" data-scroll="tour-virtual">
+                    Tour virtual
                   </a>
                   <a className="navlink" data-scroll="localizacao">
                     Localização
