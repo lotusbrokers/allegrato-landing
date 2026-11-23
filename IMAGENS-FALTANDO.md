@@ -164,26 +164,26 @@ imagens que **não vieram** no material original (já estavam quebradas lá):
 
 ## Doppio Jundiaí — plantas
 `components/DoppioJundiai.tsx` aponta para `public/doppio-jundiai/plantas/`.
-Enquanto os arquivos não existirem, cada planta mostra o aviso
+Enquanto um arquivo não existir, a planta mostra o aviso
 "planta disponível sob consulta" (fallback do `PlanImg`) em vez de imagem
-quebrada. Arquivos esperados:
+quebrada.
+
+Em 19/11/2026 entraram 9 plantas, tiradas das "Plantas Humanizadas" (arquivos
+41 a 50) do material oficial ZT085, que estava numa pasta do Drive da Lotus.
+Elas foram recortadas na borda branca e gravadas em WebP com 2000 px:
+tipo191a, tipo191b, tipo156a, tipo156b, gar212, gar186, gar244, plana442 e
+plana434. A "Planta Humanizada do Decorado" (210 m²) ficou de fora.
+
+Continuam faltando. Essas plantas estão no tour oficial (doppio.zamitt.com/plantas):
 
 ```
-public/doppio-jundiai/plantas/tipo210.jpg
-public/doppio-jundiai/plantas/tipo191.jpg
-public/doppio-jundiai/plantas/tipo156a.jpg
-public/doppio-jundiai/plantas/tipo156b.jpg
-public/doppio-jundiai/plantas/gar186.jpg
-public/doppio-jundiai/plantas/gar212.jpg
-public/doppio-jundiai/plantas/gar244.jpg
-public/doppio-jundiai/plantas/plana442.jpg
-public/doppio-jundiai/plantas/plana434.jpg
-public/doppio-jundiai/plantas/dpx375i.jpg
-public/doppio-jundiai/plantas/dpx375s.jpg
-public/doppio-jundiai/plantas/dpx307i.jpg
-public/doppio-jundiai/plantas/dpx307s.jpg
-public/doppio-jundiai/plantas/dpx374i.jpg
-public/doppio-jundiai/plantas/dpx374s.jpg
+public/doppio-jundiai/plantas/tipo210.webp   (210 m², finais 1 e 6)
+public/doppio-jundiai/plantas/dpx375i.webp   (Duplex I, pavimento inferior)
+public/doppio-jundiai/plantas/dpx375s.webp   (Duplex I, pavimento superior)
+public/doppio-jundiai/plantas/dpx307i.webp   (Duplex II, inferior)
+public/doppio-jundiai/plantas/dpx307s.webp   (Duplex II, superior)
+public/doppio-jundiai/plantas/dpx374i.webp   (Duplex III, inferior)
+public/doppio-jundiai/plantas/dpx374s.webp   (Duplex III, superior)
 ```
 
 ## Maitá Residencial — 3 das 4 plantas

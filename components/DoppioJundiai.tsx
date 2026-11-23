@@ -13,8 +13,11 @@
  * Diferenças conscientes em relação ao fonte:
  *  - O lightbox usa o src real do <img> de cada tile; o galleryData apontava para
  *    `assets/raw/*.jpg`, caminhos que não existem fora do bundle.
- *  - As plantas (`assets/plantas/*.jpg`) não vieram no material de origem. Ficam
- *    em /doppio-jundiai/plantas/ com fallback visível — ver IMAGENS-FALTANDO.md.
+ *  - As plantas (`assets/plantas/*.jpg`) não vieram no material de origem. Em
+ *    19/11/2026 entraram 9 delas, tiradas das "Plantas Humanizadas" do material
+ *    oficial (ZT085, pasta do Drive da Lotus), em /doppio-jundiai/plantas/*.webp.
+ *    A de 210 m² e as três duplex não estão nesse material e seguem com o aviso
+ *    do PlanImg — ver IMAGENS-FALTANDO.md.
  */
 
 import React, { useCallback, useEffect, useState, type CSSProperties } from 'react';
@@ -59,42 +62,55 @@ type Plan = {
 };
 type Tipology = { key: string; tab: string; plans: Plan[] };
 
-// Valores exatos do `tipologies` do fonte.
+/*
+ * Partiu do `tipologies` do fonte. Em 19/11/2026 foi conferido com o tour
+ * oficial (doppio.zamitt.com/plantas) e com as plantas do material ZT085:
+ *  - entrou a Planta Tipo de 191 m² dos finais 2 e 5, com 4 suítes, que o
+ *    fonte não tinha (só trazia a opção de living ampliado);
+ *  - Garden I e II estavam trocados: no material, o Garden I é o de 212 m²
+ *    (finais 2 e 5) e o II, o de 186 m² (finais 3 e 4);
+ *  - a 442 m² é a "Cobertura Plana Ampliada" do material (Unidade 201 no tour)
+ *    e a 434 m², a "Cobertura Plana" (Unidade 211);
+ *  - a aba Apartamentos Tipo vai da menor à maior metragem, como o título da
+ *    seção ("De 156 m² ao topo"). No fonte, ela abria na de 210 m², a única do
+ *    tipo sem imagem no material.
+ */
 const TIPOLOGIES: Tipology[] = [
   {
     key: 'tipo',
     tab: 'Apartamentos Tipo',
     plans: [
-      { area: '210 m²', sub: 'Planta Tipo', detail: 'Finais 1 e 6', suites: '3 suítes', vagas: '3 vagas', desc: 'A maior metragem entre os apartamentos tipo, com living de pé-direito duplo de 5,60 m e hall social privativo.', floors: [{ img: PLANTAS + 'tipo210.jpg', label: 'Planta Tipo · Finais 1 e 6' }] },
-      { area: '191 m²', sub: 'Opção Living Ampliado', detail: 'Finais 2 e 5', suites: '3 suítes', vagas: '3 vagas', desc: 'Opção com living ampliado e pé-direito duplo de 5,60 m, com três suítes e hall social privativo.', floors: [{ img: PLANTAS + 'tipo191.jpg', label: 'Opção Living Ampliado · Finais 2 e 5' }] },
-      { area: '156 m²', sub: 'Planta Tipo', detail: 'Finais 3 e 4', suites: '3 suítes', vagas: '3 vagas', desc: 'Três suítes e living de pé-direito duplo de 5,60 m, com hall social privativo.', floors: [{ img: PLANTAS + 'tipo156a.jpg', label: 'Planta Tipo · Finais 3 e 4' }] },
-      { area: '156 m²', sub: 'Opção II · Living Ampliado', detail: 'Finais 3 e 4', suites: '2 suítes', vagas: '3 vagas', desc: 'Segunda opção dos finais 3 e 4, com living ampliado, duas suítes e pé-direito duplo de 5,60 m.', floors: [{ img: PLANTAS + 'tipo156b.jpg', label: 'Opção II Living Ampliado · Finais 3 e 4' }] },
+      { area: '156 m²', sub: 'Planta Tipo', detail: 'Finais 3 e 4', suites: '3 suítes', vagas: '3 vagas', desc: 'Três suítes e living de pé-direito duplo de 5,60 m, com hall social privativo.', floors: [{ img: PLANTAS + 'tipo156a.webp', label: 'Planta Tipo · Finais 3 e 4' }] },
+      { area: '156 m²', sub: 'Opção II · Living Ampliado', detail: 'Finais 3 e 4', suites: '2 suítes', vagas: '3 vagas', desc: 'Segunda opção dos finais 3 e 4, com living ampliado, duas suítes e pé-direito duplo de 5,60 m.', floors: [{ img: PLANTAS + 'tipo156b.webp', label: 'Opção II Living Ampliado · Finais 3 e 4' }] },
+      { area: '191 m²', sub: 'Planta Tipo', detail: 'Finais 2 e 5', suites: '4 suítes', vagas: '3 vagas', desc: 'Quatro suítes e living de pé-direito duplo de 5,60 m, com hall social privativo.', floors: [{ img: PLANTAS + 'tipo191a.webp', label: 'Planta Tipo · Finais 2 e 5' }] },
+      { area: '191 m²', sub: 'Opção Living Ampliado', detail: 'Finais 2 e 5', suites: '3 suítes', vagas: '3 vagas', desc: 'Opção com living ampliado e pé-direito duplo de 5,60 m, com três suítes e hall social privativo.', floors: [{ img: PLANTAS + 'tipo191b.webp', label: 'Opção Living Ampliado · Finais 2 e 5' }] },
+      { area: '210 m²', sub: 'Planta Tipo', detail: 'Finais 1 e 6', suites: '3 suítes', vagas: '3 vagas', desc: 'A maior metragem entre os apartamentos tipo, com living de pé-direito duplo de 5,60 m e hall social privativo.', floors: [{ img: PLANTAS + 'tipo210.webp', label: 'Planta Tipo · Finais 1 e 6' }] },
     ],
   },
   {
     key: 'garden',
     tab: 'Gardens',
     plans: [
-      { area: '186 m²', sub: 'Garden I', detail: 'Finais 3 e 4', suites: '3 suítes', vagas: '3 vagas', desc: 'Garden com área externa privativa e living de pé-direito duplo de 5,60 m.', floors: [{ img: PLANTAS + 'gar186.jpg', label: 'Garden I · Finais 3 e 4' }] },
-      { area: '212 m²', sub: 'Garden II', detail: 'Finais 2 e 5', suites: '4 suítes', vagas: '3 vagas', desc: 'Quatro suítes e amplo jardim privativo, com living de pé-direito duplo de 5,60 m.', floors: [{ img: PLANTAS + 'gar212.jpg', label: 'Garden II · Finais 2 e 5' }] },
-      { area: '244 m²', sub: 'Garden III', detail: 'Finais 1 e 6', suites: '3 suítes', vagas: '3 vagas', desc: 'O maior garden, com generosa área externa privativa e living de pé-direito duplo.', floors: [{ img: PLANTAS + 'gar244.jpg', label: 'Garden III · Finais 1 e 6' }] },
+      { area: '212 m²', sub: 'Garden I', detail: 'Finais 2 e 5', suites: '4 suítes', vagas: '3 vagas', desc: 'Quatro suítes e amplo jardim privativo, com living de pé-direito duplo de 5,60 m.', floors: [{ img: PLANTAS + 'gar212.webp', label: 'Garden I · Finais 2 e 5' }] },
+      { area: '186 m²', sub: 'Garden II', detail: 'Finais 3 e 4', suites: '3 suítes', vagas: '3 vagas', desc: 'Garden com área externa privativa e living de pé-direito duplo de 5,60 m.', floors: [{ img: PLANTAS + 'gar186.webp', label: 'Garden II · Finais 3 e 4' }] },
+      { area: '244 m²', sub: 'Garden III', detail: 'Finais 1 e 6', suites: '3 suítes', vagas: '3 vagas', desc: 'O maior garden, com generosa área externa privativa e living de pé-direito duplo.', floors: [{ img: PLANTAS + 'gar244.webp', label: 'Garden III · Finais 1 e 6' }] },
     ],
   },
   {
     key: 'plana',
     tab: 'Coberturas Planas',
     plans: [
-      { area: '442 m²', sub: 'Cobertura Plana', detail: '', suites: '4 suítes', vagas: '5 vagas', desc: 'Cobertura em um único pavimento, com quatro suítes e cinco vagas demarcadas.', floors: [{ img: PLANTAS + 'plana442.jpg', label: 'Cobertura Plana' }] },
-      { area: '434 m²', sub: 'Cobertura Plana II', detail: '', suites: '4 suítes', vagas: '5 vagas', desc: 'Segunda opção de cobertura plana, com quatro suítes e cinco vagas demarcadas.', floors: [{ img: PLANTAS + 'plana434.jpg', label: 'Cobertura Plana II' }] },
+      { area: '442 m²', sub: 'Cobertura Plana', detail: '', suites: '4 suítes', vagas: '5 vagas', desc: 'Cobertura em um único pavimento, com quatro suítes e cinco vagas demarcadas.', floors: [{ img: PLANTAS + 'plana442.webp', label: 'Cobertura Plana' }] },
+      { area: '434 m²', sub: 'Cobertura Plana II', detail: '', suites: '4 suítes', vagas: '5 vagas', desc: 'Segunda opção de cobertura plana, com quatro suítes e cinco vagas demarcadas.', floors: [{ img: PLANTAS + 'plana434.webp', label: 'Cobertura Plana II' }] },
     ],
   },
   {
     key: 'duplex',
     tab: 'Coberturas Duplex',
     plans: [
-      { area: '375 m²', sub: 'Cobertura Duplex I', detail: 'Finais 2 e 5', suites: '4 suítes', vagas: '4 vagas', desc: 'Dois pavimentos integrados, com quatro suítes e living de pé-direito duplo de 5,60 m.', floors: [{ img: PLANTAS + 'dpx375i.jpg', label: 'Pavimento Inferior' }, { img: PLANTAS + 'dpx375s.jpg', label: 'Pavimento Superior' }] },
-      { area: '307 m²', sub: 'Cobertura Duplex II', detail: 'Finais 3 e 4', suites: '4 suítes', vagas: '4 vagas', desc: 'Dois pavimentos integrados, com quatro suítes distribuídas entre os níveis.', floors: [{ img: PLANTAS + 'dpx307i.jpg', label: 'Pavimento Inferior' }, { img: PLANTAS + 'dpx307s.jpg', label: 'Pavimento Superior' }] },
-      { area: '374 m²', sub: 'Cobertura Duplex III', detail: 'Finais 1 e 6', suites: '4 suítes', vagas: '4 vagas', desc: 'Dois pavimentos integrados dos finais 1 e 6, com quatro suítes e living de pé-direito duplo.', floors: [{ img: PLANTAS + 'dpx374i.jpg', label: 'Pavimento Inferior' }, { img: PLANTAS + 'dpx374s.jpg', label: 'Pavimento Superior' }] },
+      { area: '375 m²', sub: 'Cobertura Duplex I', detail: 'Finais 2 e 5', suites: '4 suítes', vagas: '4 vagas', desc: 'Dois pavimentos integrados, com quatro suítes e living de pé-direito duplo de 5,60 m.', floors: [{ img: PLANTAS + 'dpx375i.webp', label: 'Pavimento Inferior' }, { img: PLANTAS + 'dpx375s.webp', label: 'Pavimento Superior' }] },
+      { area: '307 m²', sub: 'Cobertura Duplex II', detail: 'Finais 3 e 4', suites: '4 suítes', vagas: '4 vagas', desc: 'Dois pavimentos integrados, com quatro suítes distribuídas entre os níveis.', floors: [{ img: PLANTAS + 'dpx307i.webp', label: 'Pavimento Inferior' }, { img: PLANTAS + 'dpx307s.webp', label: 'Pavimento Superior' }] },
+      { area: '374 m²', sub: 'Cobertura Duplex III', detail: 'Finais 1 e 6', suites: '4 suítes', vagas: '4 vagas', desc: 'Dois pavimentos integrados dos finais 1 e 6, com quatro suítes e living de pé-direito duplo.', floors: [{ img: PLANTAS + 'dpx374i.webp', label: 'Pavimento Inferior' }, { img: PLANTAS + 'dpx374s.webp', label: 'Pavimento Superior' }] },
     ],
   },
 ];
@@ -107,13 +123,18 @@ const PLAN_IMG_STYLE: CSSProperties = {
 };
 
 /**
- * Imagem de planta com fallback: o material de origem não trouxe os arquivos.
- * Assim que forem colocados em public/doppio-jundiai/plantas/ a imagem aparece
- * sozinha; até lá, um aviso legível em vez de um ícone de imagem quebrada.
+ * Imagem de planta com fallback: nem todas as plantas vieram no material.
+ * Assim que o arquivo for colocado em public/doppio-jundiai/plantas/, a imagem
+ * aparece sozinha; até lá, um aviso legível em vez de um ícone de imagem quebrada.
+ *
+ * A falha fica guardada junto com o endereço que falhou. O React reaproveita o
+ * mesmo componente quando a pessoa troca de metragem. Com um booleano, a falha
+ * da planta de 210 m² (a primeira da aba) continuava valendo para as outras, e
+ * elas também mostravam o aviso.
  */
 function PlanImg({ src, alt, style }: { src: string; alt: string; style?: CSSProperties }) {
-  const [failed, setFailed] = useState(false);
-  if (failed) {
+  const [srcQueFalhou, setSrcQueFalhou] = useState<string | null>(null);
+  if (srcQueFalhou === src) {
     return (
       <div
         style={{
@@ -131,7 +152,7 @@ function PlanImg({ src, alt, style }: { src: string; alt: string; style?: CSSPro
       </div>
     );
   }
-  return <img src={src} alt={alt} loading="lazy" style={style} onError={() => setFailed(true)} />;
+  return <img src={src} alt={alt} loading="lazy" style={style} onError={() => setSrcQueFalhou(src)} />;
 }
 
 export default function DoppioJundiai() {
