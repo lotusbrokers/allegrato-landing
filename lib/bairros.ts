@@ -327,9 +327,10 @@ const residencialSaoVenancio: Bairro = {
 /* ---------------------------------------------------------------------------
  * JUNDIAÍ — bairros que entraram no índice antes da copy chegar
  *
- * A Lotus tem imóvel cadastrado nestes quatro bairros e pediu que eles
- * aparecessem no guia, para existirem no mapa e no índice de bairros. A
- * descrição de cada um ainda não chegou.
+ * A Lotus tem imóvel cadastrado nestes bairros e pediu que eles aparecessem no
+ * guia, para existirem no mapa e no índice de bairros. Eram quatro: a Vila Rio
+ * Branco ganhou o guia em 19/11/2026 (registro logo abaixo da fábrica), e a
+ * descrição dos outros três ainda não chegou.
  *
  * O que está escrito aqui é só o que o cadastro comprova: são bairros de
  * Jundiaí. Nada de "arborizado", "perfil familiar" ou preço médio do m² —
@@ -383,7 +384,62 @@ function bairroSemGuiaAinda(nome: string, slug: string, artigo: 'o' | 'a', heroI
 
 const jardimMessina = bairroSemGuiaAinda('Jardim Messina', 'jardim-messina', 'o', '/bairros/jardim-messina.jpg');
 const jardimPacaembu = bairroSemGuiaAinda('Jardim Pacaembu', 'jardim-pacaembu', 'o', '/bairros/jardim-pacaembu.jpg');
-const vilaRioBranco = bairroSemGuiaAinda('Vila Rio Branco', 'vila-rio-branco', 'a', '/bairros/vila-rio-branco.jpg');
+/* ---------------------------------------------------------------------------
+ * VILA RIO BRANCO — guia escrito em 19/11/2026
+ *
+ * Texto enviado pela Lotus em 19/11/2026, o mesmo do artigo
+ * /lotus-blog/vila-rio-branco-jundiai, reorganizado nos blocos do template.
+ * Conferido na ficha "Conheça seu bairro – Região Norte – Vila Rio Branco", da
+ * Unidade de Gestão de Planejamento Urbano e Meio Ambiente da Prefeitura de
+ * Jundiaí (2021), que a Lotus mandou junto:
+ *  - uso do solo pelo Cadastro Imobiliário de 2021: 92,8% residencial e 7%
+ *    comercial;
+ *  - IBGE: 8.951 moradores em 2000 e 8.064 em 2010 (53,6% mulheres e 46,4%
+ *    homens em 2010);
+ *  - a história: ferrovias no século XIX, "Bairro das Cabras", Avenida Itatiba
+ *    como estrada de boiada, Matadouro Municipal nos anos 1940, viadutos e
+ *    Rodovia Constâncio Cintra nos anos 1950;
+ *  - a lista de loteamentos. A ficha traz a lista completa; o texto da Lotus
+ *    cita nove, "entre eles".
+ *
+ * Sem dado de mercado (preço do m², tempo de venda), `dados` e `tipologias`
+ * ficam vazios e a seção de números não aparece. Também ficou de fora tempo
+ * até o centro ou "fácil acesso" a rodovias: a ficha não fala disso.
+ * ------------------------------------------------------------------------- */
+const vilaRioBranco: Bairro = {
+  slug: 'vila-rio-branco',
+  nome: 'Vila Rio Branco',
+  cidade: 'Jundiaí',
+  tagline:
+    'Na Região Norte de Jundiaí, um bairro tradicional e residencial que nasceu com as ferrovias e tem o Maxi Shopping entre suas referências.',
+  heroImg: '/bairros/vila-rio-branco.jpg',
+  stats: [
+    { value: 'Região Norte', label: 'localização em Jundiaí' },
+    { value: '92,8%', label: 'uso residencial do solo (2021)' },
+    { value: '8.064', label: 'moradores no Censo de 2010' },
+    { value: 'Século XIX', label: 'origem, com as ferrovias' },
+  ],
+  tldr:
+    'A Vila Rio Branco fica na Região Norte de Jundiaí e é um dos bairros tradicionais da cidade. Cresceu com as ferrovias, ainda no século XIX, e hoje tem perfil predominantemente residencial: 92,8% do uso do solo, segundo o levantamento da Prefeitura com dados cadastrais de 2021. Entre as referências do bairro estão o Maxi Shopping Jundiaí, a Praça Maestro João da Silva e o CECE José Pedro Raymundo.',
+  guide: [
+    { num: '1', title: 'Como é viver aqui', text: 'É um bairro de perfil residencial, com uma identidade construída ao longo de décadas. No levantamento da Prefeitura com dados cadastrais de 2021, o uso residencial representa 92,8% do solo e o comercial, 7%.' },
+    { num: '2', title: 'História e formação', text: 'O crescimento da Vila Rio Branco está ligado às ferrovias, no século XIX: a construção das linhas gerou empregos e atraiu moradores. Por muitos anos o lugar foi conhecido como "Bairro das Cabras", pelo grande número de criadores, e a Avenida Itatiba era estrada de boiada. O Matadouro Municipal chegou na década de 1940; nos anos 1950, os viadutos Joaquim Candelário e General Euclides de Oliveira Figueiredo e a Rodovia Constâncio Cintra intensificaram a urbanização.' },
+    { num: '3', title: 'Loteamentos e vilas', text: 'O bairro reúne o Jardim Rio Branco, o Jardim Carlos Gomes, o Jardim Banúbio, o Jardim Liberdade, o Jardim Marcos Leite, a Vila Rio Branco, a Vila Liberdade, a Vila Margarida, a Vila Palma, a Vila Carlos W. Muller, a Vila Savieto e o Loteamento Vistas Jundiaí.' },
+    { num: '4', title: 'Comércio e serviços', text: 'O Maxi Shopping Jundiaí é a principal referência comercial da região, com lojas, alimentação, serviços e opções de entretenimento.' },
+    { num: '5', title: 'Lazer e espaços públicos', text: 'A Praça Maestro João da Silva é espaço de convivência e lazer, e o CECE José Pedro Raymundo, complexo educacional, cultural e esportivo, oferece estrutura para atividades esportivas e de lazer.' },
+    { num: '6', title: 'Quem mora aqui', text: 'Os dados do IBGE usados pela Prefeitura registram 8.951 moradores em 2000 e 8.064 em 2010. Em 2010, 53,6% eram mulheres e 46,4%, homens, numa população com crianças, jovens, adultos e idosos.' },
+  ],
+  dados: [],
+  tipologias: [],
+  faq: [
+    { q: 'Onde fica a Vila Rio Branco?', a: 'Na Região Norte de Jundiaí. O bairro reúne loteamentos como o Jardim Rio Branco, o Jardim Carlos Gomes, o Jardim Liberdade, a Vila Liberdade e a Vila Margarida.' },
+    { q: 'A Vila Rio Branco é um bairro residencial?', a: 'Sim. No levantamento da Prefeitura de Jundiaí com dados cadastrais de 2021, 92,8% do uso do solo no bairro é residencial e 7%, comercial.' },
+    { q: 'Por que a Vila Rio Branco já foi chamada de "Bairro das Cabras"?', a: 'Pelo grande número de criadores que viviam na região. Na mesma época, a Avenida Itatiba era uma estrada de boiada.' },
+    { q: 'O que há de comércio e lazer no bairro?', a: 'O Maxi Shopping Jundiaí, com lojas, alimentação e serviços, a Praça Maestro João da Silva e o CECE José Pedro Raymundo, complexo educacional, cultural e esportivo.' },
+  ],
+  mapQuery: 'Vila Rio Branco, Jundiaí, SP',
+  publicado: true,
+};
 const jardimColonial = bairroSemGuiaAinda('Jardim Colonial', 'jardim-colonial', 'o', '/bairros/jardim-colonial.jpg');
 
 /* ---------------------------------------------------------------------------
