@@ -206,8 +206,425 @@ export function relacionados(posts: Post[], atual: Post, quantos = 3): Post[] {
 // mão, que envelheceu: títulos que não existiam mais no blog e nenhuma capa.
 export const POSTS: Post[] = [
   /* ------------------------------------------------------------------
+   * Enviado pela Lotus em 23/11/2026, com a foto da capa e sugestões de SEO
+   * (palavra-chave "bairro Vianelo Jundiaí", URL guia-do-bairro-vianelo-
+   * jundiai). Primeiro da lista, e por isso o novo destaque da capa do blog.
+   *
+   * O site já tem o guia /lotus-bairro/vianelo-bonfiglioli, e "Vianelo" no
+   * texto vira link para ele sozinho (OUTROS_NOMES em app/lotus-blog/[slug]).
+   * Para não competir com o guia, o tituloSeo responde à pergunta do bairro,
+   * como os outros posts de bairro (auditoria de SEO de 10/11/2026), e começa
+   * pela palavra-chave sugerida.
+   *
+   * CONFERIDO em 23/11/2026:
+   *  - Região Sul: é o que diz o cabeçalho da ficha "Conheça seu Bairro –
+   *    Vianelo" da Prefeitura (jundiai.sp.gov.br/conhecaseubairro, bairro 84).
+   *    O texto dizia "região central-sul";
+   *  - Atílio Vianelo: tinha desde a década de 1910 a grande propriedade cujos
+   *    limites o bairro marca hoje, e morreu em 1939 (Tribuna de Jundiaí,
+   *    "Cica marcou época…", 23/07/2021);
+   *  - CICA: começou a operar em 25/08/1941 (mesma fonte);
+   *  - Praça Francisco Fernandes Pessolano: em 2018 virou a segunda "Praça que
+   *    Acolhe", com requalificação paisagística, piso pintado para o programa
+   *    Ruas de Brincar e wi-fi (Prefeitura, 15/12/2018);
+   *  - Praça Mansueto Rigoni: entre as ruas 23 de Maio e Pitangueiras,
+   *    revitalizada pela Prefeitura em maio de 2025 (notícia de 17/05/2025);
+   *  - Hospital Universitário, Pitangueiras e Sobam, Av. Dr. Odil Campos de
+   *    Sáes e Rua Messina: são os mesmos do guia do Vianelo Bonfiglioli, com
+   *    texto da Lotus de 27/08/2026.
+   * NÃO CONFIRMADO, ficou como veio: o loteamento "a partir da década de
+   * 1940" e o Mercadão "inaugurado em 1957 para aproximar pequenos produtores
+   * dos consumidores". As fontes achadas só falam do "Mercadão da Vila Arens",
+   * com uma loja aberta lá em 1957. A ficha da Prefeitura (PDF de 12 MB) não
+   * abriu: o leitor tem limite de 10 MB e o navegador interno o trata como
+   * download.
+   * Mudou:
+   *  - "região central-sul" virou "Região Sul";
+   *  - "Grandes escolhas têm endereço" virou o slogan da Lotus, "Grandes
+   *    histórias têm endereço";
+   *  - "conheça as oportunidades disponíveis" leva ao guia do Vianelo
+   *    Bonfiglioli, que lista os imóveis do bairro;
+   *  - as listas perderam o ponto e vírgula do fim de cada item, e os quatro
+   *    perfis de morador ("Para famílias: …") viraram lista;
+   *  - a meta description sugerida virou `excerpt`. Tinha 166 caracteres e
+   *    ficou com 159: saiu o "(SP)" e "em uma" virou "numa";
+   *  - a URL sugerida virou o id.
+   * Capa: a foto enviada (1024x576), recortada em 16:10 no centro e mantida em
+   * 920x575, sem ampliar.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'guia-do-bairro-vianelo-jundiai', cat: 'Região', date: 'Nov 2026', publicadoEm: '2026-11-23', read: '7 min', img: '/blog/guia-do-bairro-vianelo-jundiai.jpg', slot: 'blog-guia-do-bairro-vianelo-jundiai', title: 'Guia do Bairro Vianelo, em Jundiaí: tradição, praticidade e qualidade de vida em uma localização privilegiada', tituloSeo: 'Bairro Vianelo, em Jundiaí: vale a pena morar?', excerpt: 'Conheça o bairro Vianelo, em Jundiaí. Descubra sua história, infraestrutura, comércio, mobilidade e vantagens de morar numa das regiões tradicionais da cidade.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'O Vianelo fica na Região Sul de Jundiaí, perto do Jardim Bonfiglioli, da Vila Arens e do Anhangabaú. Nasceu nas terras de Atílio Vianelo e cresceu a partir da década de 1940, com a CICA instalada em 1941. Tem perfil residencial e comercial, os hospitais Universitário, Pitangueiras e Sobam por perto, e praças como a Francisco Fernandes Pessolano e a Mansueto Rigoni, revitalizada em 2025.',
+    body: [
+      { titulo: 'Introdução' },
+      'Escolher onde morar vai muito além de encontrar um imóvel bonito. A localização, a facilidade de acesso, a proximidade de serviços e a infraestrutura do entorno fazem toda a diferença na qualidade de vida.',
+      'Em Jundiaí, no interior de São Paulo, o bairro Vianelo reúne características que o tornam uma opção interessante para quem busca praticidade no dia a dia sem abrir mão de uma região com identidade e história.',
+      'Com perfil residencial e comercial, o bairro oferece uma combinação de casas, apartamentos, estabelecimentos comerciais e serviços essenciais. Sua localização estratégica também facilita o deslocamento para diferentes regiões da cidade.',
+      'Neste guia, você vai conhecer melhor o Vianelo e descobrir por que essa região merece atenção na hora de escolher seu próximo endereço em Jundiaí.',
+      { titulo: 'A história do bairro Vianelo' },
+      'O Vianelo é um dos bairros tradicionais de Jundiaí e tem sua história ligada ao desenvolvimento urbano e industrial do município.',
+      'A urbanização da região ganhou força a partir da década de 1940, quando as terras pertencentes a Atílio Vianelo começaram a ser loteadas. Outro marco importante foi a instalação da Companhia Industrial de Conservas Alimentícias (CICA), em 1941, que contribuiu para o crescimento econômico e populacional daquela área.',
+      'Em 1957, outro ponto importante passou a fazer parte da história local: a inauguração do Mercadão, criado inicialmente para aproximar pequenos produtores dos consumidores.',
+      'Ao longo das décadas, o Vianelo acompanhou a expansão de Jundiaí, desenvolvendo uma infraestrutura comercial e residencial que ajudou a consolidar sua importância na cidade.',
+      'Hoje, sua identidade reúne elementos da história jundiaiense e a praticidade de uma região urbana consolidada.',
+      { titulo: 'Onde fica o Vianelo em Jundiaí?' },
+      'O Vianelo está localizado na Região Sul de Jundiaí, em uma posição que favorece o acesso a diferentes pontos do município.',
+      'A região também está próxima de bairros importantes, como Jardim Bonfiglioli, Vila Arens e Anhangabaú, ampliando as possibilidades de acesso ao comércio, aos serviços e às principais áreas da cidade.',
+      'Entre as vias de referência para circulação estão:',
+      { itens: ['Avenida Dr. Odil Campos de Sáes', 'Rua Bom Jesus de Pirapora', 'Rua Vinte e Três de Maio', 'Rua Messina', 'Rua Itália'] },
+      'A proximidade com importantes corredores viários é um diferencial para quem precisa se deslocar diariamente para trabalhar, estudar ou realizar atividades pessoais.',
+      { titulo: 'Comércio e serviços: praticidade no dia a dia' },
+      'Um dos pontos positivos do Vianelo é sua infraestrutura comercial.',
+      'A região reúne estabelecimentos que facilitam a rotina dos moradores, permitindo resolver diversas necessidades sem precisar percorrer grandes distâncias.',
+      'Entre os serviços encontrados estão:',
+      { itens: ['Padarias e confeitarias', 'Supermercados e mercados de bairro', 'Farmácias', 'Restaurantes e lanchonetes', 'Bancos e serviços financeiros', 'Lojas e estabelecimentos variados', 'Serviços automotivos e profissionais'] },
+      'Essa diversidade contribui para um cotidiano mais funcional, especialmente para quem valoriza ter opções de comércio e serviços próximos de casa.',
+      { titulo: 'Saúde e educação na região' },
+      'Outro aspecto importante na escolha de um bairro é a proximidade com serviços de saúde e instituições de ensino.',
+      'O Vianelo e seu entorno contam com opções de atendimento médico, clínicas e unidades de saúde, além de instituições de ensino públicas e particulares.',
+      'Entre as referências de saúde da região estão o Hospital Universitário, o Hospital Pitangueiras e o Hospital Sobam, além de unidades de atendimento básico.',
+      'Na educação, famílias encontram alternativas de escolas e instituições voltadas a diferentes etapas de ensino.',
+      'Essa estrutura é um diferencial para quem procura um endereço que facilite a organização da rotina familiar.',
+      { titulo: 'Lazer e convivência: espaços para aproveitar o bairro' },
+      'Morar bem também significa ter espaços para descansar, passear e aproveitar momentos com a família.',
+      'O Vianelo conta com praças e áreas de convivência que fazem parte da identidade da região.',
+      'Um dos destaques é a Praça Francisco Fernandes Pessolano, que recebeu melhorias paisagísticas e estrutura voltada à convivência comunitária, incluindo espaço para brincadeiras e atividades ao ar livre.',
+      'Outro espaço importante é a Praça Mansueto Rigoni, localizada entre as ruas 23 de Maio e Pitangueiras, que passou por revitalização em 2025.',
+      'Esses espaços reforçam a importância das áreas públicas para a qualidade de vida e o relacionamento entre os moradores.',
+      { titulo: 'Como é morar no Vianelo?' },
+      'O Vianelo apresenta um perfil urbano diversificado, com ruas residenciais, comércio de bairro e edifícios residenciais.',
+      'É uma região que pode atender diferentes perfis de moradores:',
+      { itens: ['Para famílias: a presença de escolas, serviços de saúde, comércio e espaços públicos facilita a rotina.', 'Para quem trabalha em Jundiaí: a localização e os acessos a diferentes regiões da cidade ajudam na mobilidade diária.', 'Para quem busca praticidade: a variedade de estabelecimentos comerciais permite resolver muitas tarefas perto de casa.', 'Para quem deseja investir: bairros tradicionais e com infraestrutura consolidada merecem entrar no radar de quem avalia oportunidades imobiliárias, considerando sempre localização, características do imóvel e potencial de valorização.'] },
+      { titulo: 'Quais são os tipos de imóveis encontrados no Vianelo?' },
+      'A diversidade imobiliária é outra característica da região.',
+      'É possível encontrar diferentes configurações de imóveis, como:',
+      { itens: ['Casas térreas e sobrados', 'Apartamentos residenciais', 'Imóveis em condomínios', 'Casas com quintal e espaços privativos', 'Imóveis comerciais'] },
+      'Essa variedade permite atender desde pessoas que estão comprando o primeiro imóvel até famílias que desejam mais espaço ou investidores que procuram oportunidades em regiões consolidadas.',
+      'A escolha ideal depende de fatores como orçamento, metragem, localização dentro do bairro e objetivo da compra.',
+      { titulo: 'Vianelo é uma boa opção para morar em Jundiaí?' },
+      'Para quem procura uma região tradicional, com comércio diversificado e infraestrutura urbana estabelecida, o Vianelo merece atenção.',
+      'Seu desenvolvimento histórico, a presença de serviços essenciais e a facilidade de conexão com outras áreas da cidade são características que tornam o bairro uma alternativa interessante no mercado imobiliário de Jundiaí.',
+      'Além disso, a combinação entre imóveis residenciais e atividades comerciais proporciona uma dinâmica urbana que atende diferentes necessidades.',
+      'Antes de escolher um imóvel, vale analisar a rua, as condições de acesso, a vizinhança e a proximidade dos serviços que fazem parte da sua rotina.',
+      { titulo: 'Encontre seu próximo endereço no Vianelo com a Lotus Brokers' },
+      'O bairro certo pode transformar sua experiência de morar em Jundiaí.',
+      'Seja para conquistar o primeiro imóvel, encontrar mais espaço para a família ou buscar uma oportunidade de investimento, conhecer as características de cada região é o primeiro passo para fazer uma escolha consciente.',
+      'A Lotus Brokers acompanha o mercado imobiliário de Jundiaí e pode ajudar você a encontrar imóveis alinhados aos seus objetivos.',
+      'Grandes histórias têm endereço.',
+      'Acesse nosso site, [conheça as oportunidades disponíveis](/lotus-bairro/vianelo-bonfiglioli) e descubra qual imóvel combina com o seu momento de vida.',
+    ],
+  },
+  /* ------------------------------------------------------------------
+   * Sextou de 20 a 22/11/2026, enviado pela Lotus em PDF no próprio dia 20,
+   * feriado da Consciência Negra, com a marca da Rota Turística Cultura Negra
+   * para a capa. Era o primeiro da lista até 23/11/2026, quando o guia do
+   * Vianelo entrou na frente; nenhum dos dois tinha ido ao ar ainda.
+   *
+   * CONFERIDO em 20/11/2026 nas fontes oficiais:
+   *  - "Abre e Fecha" e "Programação cultural do feriado" (Prefeitura, 18/11):
+   *    na sexta (20) fecham o Museu dos Ferroviários, o Teatro Polytheama, a
+   *    Fábrica das Infâncias Japy e a Biblioteca; no sábado (21) o Polytheama
+   *    não abre; no domingo (22) fecham o Centro das Artes e a Biblioteca. O
+   *    Museu dos Ferroviários abre sábado e domingo, até 22h no domingo. O
+   *    Parque da Cidade abre das 6h30 às 18h (entrada até 17h) e o Mundo das
+   *    Crianças das 7h às 17h (entrada até 16h). Ônibus com tabela de
+   *    domingo no dia 20. Festival Baobá no Espaço Expressa, de 19 a 22;
+   *  - "Mês da Consciência Negra" (Prefeitura, 02/11): Feira da Rota na Praça
+   *    da Matriz de 17 a 20, das 9h às 15h; Rota Afro às 8h do dia 20, saindo
+   *    do Complexo Fepasa; Marcha às 9h, da Praça do Fórum ao Gabinete de
+   *    Leitura Ruy Barbosa;
+   *  - Agenda Cultural (cultura.jundiai.sp.gov.br): Mundo Mágico da Música,
+   *    xadrez, curtas, contação com Irene Tanabe (21, 11h), Psiquê em Música
+   *    (21, 20h), Vitrine da Dança (22, 18h);
+   *  - previsão da Defesa Civil (Prefeitura, 19/11): confere.
+   * Ficou como veio, com o aviso do próprio texto: a Cia Jovem de Dança (20,
+   * 19h) e o concerto da Orquestra com Cláudio Cruz (21, 20h) continuam na
+   * Agenda Cultural e nas notícias de 16 e 17/11, mas os comunicados de 18/11
+   * dão o Polytheama fechado nesses dias. Não deu para confirmar com a
+   * Secretaria de Cultura.
+   * Mudou:
+   *  - Jardim Botânico: "das 6h às 17h" virou "das 7h às 17h", o horário
+   *    oficial (jardimbotanico.jundiai.sp.gov.br e site da Rota), como no Sextou
+   *    de 13/11; e "Ozanam" virou "Ozanan";
+   *  - Espaço Expressa: "Ponte de Campinas" virou "Centro", como no endereço
+   *    oficial da Rota da Cultura Negra;
+   *  - "confirme ... antes de divulgar ou se deslocar" virou "antes de se
+   *    deslocar": a primeira parte era recado para quem publica;
+   *  - saíram a meta descrição (virou `excerpt`, encurtada para caber em 160
+   *    caracteres), as configurações de SEO, a nota editorial e o rodapé do
+   *    PDF. As "Fontes oficiais consultadas" viraram links no fim, e os
+   *    "Informações: ..." viraram links para as páginas oficiais;
+   *  - "Grandes escolhas têm endereço" virou o slogan da Lotus, "Grandes
+   *    histórias têm endereço";
+   *  - entrou um link para o artigo da Rota da Cultura Negra, do mesmo dia, e
+   *    "conheça nossos imóveis" leva à busca de Jundiaí;
+   *  - o slug sugerido virou o id. A categoria sugerida, "Lazer e qualidade de
+   *    vida", não existe: é "Sextou em Jundiaí", a da série.
+   * Capa: a marca da Rota Turística Cultura Negra que a Lotus mandou (PNG de
+   * 223x191 com fundo branco), em 2x no centro de um quadro branco de
+   * 1024x640. Não dá para ampliar mais sem borrar.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'sextou-em-jundiai-programacao-feriado-consciencia-negra-novembro-2026', cat: 'Sextou em Jundiaí', date: 'Nov 2026', publicadoEm: '2026-11-20', read: '8 min', img: '/blog/sextou-em-jundiai-programacao-feriado-consciencia-negra-novembro-2026.jpg', slot: 'blog-sextou-em-jundiai-programacao-feriado-consciencia-negra-novembro-2026', title: 'Sextou em Jundiaí: feriado da Consciência Negra tem Festival Baobá, música, dança e passeios em família', tituloSeo: 'O que fazer em Jundiaí no feriado da Consciência Negra', excerpt: 'O que fazer em Jundiaí no feriado da Consciência Negra? Festival Baobá, shows, espetáculos, atividades infantis, parques e passeios de 20 a 22 de novembro.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'No feriado prolongado da Consciência Negra, de 20 a 22 de novembro, Jundiaí tem o Festival Baobá no Espaço Expressa e, na sexta, a Rota Afro, a Marcha da Consciência Negra e o último dia da Feira da Rota da Cultura Negra. No sábado há atividades gratuitas para crianças na Biblioteca Municipal; no domingo, o Vitrine da Dança no Teatro Polytheama. Os parques abrem nos três dias, o Museu dos Ferroviários fecha na sexta e abre até as 22h no domingo, e a previsão é de chuva.',
+    body: [
+      'O fim de semana será prolongado em Jundiaí! Com o feriado nacional da Consciência Negra na sexta-feira, 20 de novembro, a cidade terá uma programação especial que reúne cultura afro-brasileira, apresentações musicais, dança, atividades para crianças, gastronomia e opções de lazer ao ar livre.',
+      'Entre os destaques estão o Festival Baobá Afro Party, a Marcha da Consciência Negra, apresentações da Orquestra Municipal de Jundiaí e atividades gratuitas na Biblioteca Municipal.',
+      'Para quem deseja aproveitar os dias de folga, a Lotus Brokers preparou um roteiro com atrações para diferentes públicos e estilos.',
+      { titulo: 'Sexta-feira, 20 de novembro: Consciência Negra e cultura afro-brasileira' },
+      { titulo: 'Rota Afro – Roteiro Histórico Afro-Jundiaiense', nivel: 3 },
+      'Uma oportunidade de conhecer a história da população negra na cidade por meio de um percurso histórico e cultural.',
+      { itens: ['Horário: 8h', 'Saída: Complexo Fepasa, no Espaço Expressa', 'Destino: Centro Histórico de Jundiaí', 'Inscrição e valor: não detalhados na divulgação consultada; confirme com a organização'] },
+      { titulo: 'Marcha da Consciência Negra', nivel: 3 },
+      'Às 9h, acontece a Marcha da Consciência Negra, com concentração na Praça do Fórum. O percurso seguirá pela Rua Barão de Jundiaí até a Praça do Gabinete de Leitura Ruy Barbosa, com manifestações culturais e pronunciamentos.',
+      { itens: ['Horário: 9h', 'Local de saída: Praça do Fórum – Centro', 'Participação: atividade pública; não há cobrança de ingresso informada'] },
+      { titulo: 'Feira da Rota da Cultura Negra', nivel: 3 },
+      'A Praça da Matriz recebe a feira com expositores e cortejo do Roteiro Afro-Jundiaiense.',
+      { itens: ['Horário: das 9h às 15h', 'Local: Praça da Matriz – Centro', 'Último dia da feira: 20 de novembro'] },
+      'A programação integra as ações municipais do [Mês da Consciência Negra](https://jundiai.sp.gov.br/noticias/2026/11/02/jundiai-prepara-programacao-especial-para-o-mes-da-consciencia-negra/).',
+      'Para conhecer com calma os lugares do roteiro, veja também o nosso guia da [Rota da Cultura Negra de Jundiaí](/lotus-blog/rota-cultura-negra-jundiai).',
+      { titulo: 'Festival Baobá Afro Party: quatro dias de cultura e ancestralidade', nivel: 3 },
+      'Um dos grandes destaques do feriado é o Festival Baobá Afro Party 2026, que acontece de 19 a 22 de novembro, no Espaço Expressa. Com o conceito Raízes que conectam gerações, o evento reúne mais de 30 apresentações artísticas e iniciativas de valorização da cultura afro-brasileira.',
+      { itens: ['Apresentações musicais e de dança', 'Desfile de moda afro e desfile de trancistas e gerações', 'Expositores de artesanato afro e exposições culturais', 'Espaço de beleza afro', 'Espaço Erê, dedicado às crianças', 'Praça de alimentação'] },
+      'Serviço: 19 a 22 de novembro; Espaço Expressa – Complexo Fepasa, Avenida União dos Ferroviários, 1760 – Centro. Estacionamento gratuito, conforme divulgação do evento. A entrada foi divulgada como gratuita pela cobertura local. Os horários de cada dia não constam da programação oficial.',
+      'É uma oportunidade de aproveitar gastronomia, música, cultura e atividades para diferentes gerações no mesmo espaço.',
+      { titulo: 'Música e apresentações na sexta-feira' },
+      { titulo: 'O Mundo Mágico da Música', nivel: 3 },
+      'Às 19h, o Centro das Artes recebe o recital de Maristela Rodrigues Marques. A apresentação reúne músicas de diferentes universos, passando por trilhas sonoras, clássicos da música erudita, Queen e canções infantis.',
+      { itens: ['Horário: 19h às 21h20', 'Local: Centro das Artes – Sala Glória Rocha', 'Endereço: Rua Barão de Jundiaí, 1093 – Centro', 'Classificação: livre', 'Ingressos: pagos, pela plataforma indicada na agenda cultural'] },
+      'Informações: [Agenda Cultural de Jundiaí](https://cultura.jundiai.sp.gov.br/agenda-cultural/o-mundo-magico-da-musica-maristela-rodrigues-marques/).',
+      { titulo: 'Cia Jovem de Dança – atenção à programação', nivel: 3 },
+      'A agenda cultural também lista para as 19h o espetáculo "Anônimo, apresentações das escolas e Aquilo que Guardo", no Teatro Polytheama, com entrada gratuita e retirada de ingressos. Entretanto, existe uma divergência importante: a própria Prefeitura informou que o Teatro Polytheama estará fechado na sexta-feira, dia 20. Por isso, confirme diretamente com a Secretaria de Cultura antes de se deslocar para essa apresentação.',
+      'Informações: [Agenda Cultural de Jundiaí](https://cultura.jundiai.sp.gov.br/agenda-cultural/anonimo-apresentacoes-das-escolas-e-aquilo-que-guardo-cia-jovem-de-danca/).',
+      { titulo: 'Sábado, 21 de novembro: programação para crianças e famílias' },
+      { titulo: 'Oficina de Xadrez', nivel: 3 },
+      { itens: ['Horário: 10h às 12h', 'Local: Biblioteca Municipal Professor Nelson Foot', 'Endereço: Avenida Doutor Cavalcanti, 396 – Complexo Argos', 'Entrada: gratuita'] },
+      { titulo: 'Exibição de Curtas de Animação', nivel: 3 },
+      { itens: ['Horário: 10h30 às 11h30', 'Local: Biblioteca Municipal Professor Nelson Foot', 'Classificação: livre', 'Entrada: gratuita'] },
+      'Entre os filmes anunciados está "Esperança", que acompanha o sonho de uma menina negra de se tornar jogadora profissional de futebol.',
+      { titulo: 'Contação de histórias: Eles passarão, eu… passarinho de papel', nivel: 3 },
+      'Às 11h, Irene Tanabe apresenta uma atividade que mistura literatura oral, poemas, imaginação e origami.',
+      { itens: ['Horário: 11h às 12h', 'Local: Biblioteca Municipal Professor Nelson Foot', 'Classificação: livre', 'Entrada: gratuita'] },
+      'As atividades são ótimas alternativas para incentivar a criatividade, a leitura e o aprendizado das crianças.',
+      { titulo: 'Sábado à noite: música e concerto especial' },
+      { titulo: 'Psiquê em Música – A Alegria é a Tristeza Distraída', nivel: 3 },
+      'O Centro das Artes recebe o espetáculo que une música e reflexões sobre sentimentos e experiências humanas.',
+      { itens: ['Horário: 20h às 22h', 'Local: Centro das Artes – Sala Glória Rocha', 'Endereço: Rua Barão de Jundiaí, 1093 – Centro', 'Classificação: livre', 'Ingressos: pagos, disponíveis na Sympla e nas bilheterias'] },
+      'Informações: [Agenda Cultural de Jundiaí](https://cultura.jundiai.sp.gov.br/agenda-cultural/psique-em-musica-a-alegria-e-a-tristeza-distraida-oke-aro-cultural/).',
+      { titulo: 'Orquestra Municipal de Jundiaí recebe Cláudio Cruz', nivel: 3 },
+      'O 8º Concerto da Temporada 2026 da Orquestra Municipal de Jundiaí foi anunciado com participação especial do violinista Cláudio Cruz. O repertório inclui obras de Felix Mendelssohn e Anton Arensky, sob regência da maestrina Claudia Feres.',
+      { itens: ['Horário: 20h', 'Duração: aproximadamente 70 minutos', 'Local: Teatro Polytheama', 'Endereço: Rua Barão de Jundiaí, 176 – Centro', 'Entrada: gratuita', 'Ingressos: retirada na véspera, a partir das 10h30, no Centro das Artes e pela Sympla; a partir das 14h, também na bilheteria do Polytheama'] },
+      'Atenção: há uma divergência com o comunicado municipal que informa que o Teatro Polytheama não abrirá no sábado. Confirme a realização com a Secretaria de Cultura antes de sair. Informações: [Agenda Cultural de Jundiaí](https://cultura.jundiai.sp.gov.br/agenda-cultural/8o-concerto-da-orquestra-municipal-de-jundiai-temporada-2026/).',
+      { titulo: 'Domingo, 22 de novembro: espetáculo com clima de Natal' },
+      { titulo: 'Vitrine da Dança – A Cidade dos Presentes e o Acordo de Natal', nivel: 3 },
+      'O Teatro Polytheama recebe a Cia. Eu Danço com um espetáculo que mistura dança, música e personagens natalinos. A história acompanha Luna em uma jornada pela Cidade dos Presentes, onde elfos, fadas e outros personagens trabalham para fazer o Natal acontecer.',
+      { itens: ['Horário: 18h às 20h', 'Local: Teatro Polytheama', 'Endereço: Rua Barão de Jundiaí, 176 – Centro', 'Classificação: livre', 'Ingressos: pagos, disponíveis pela plataforma Bileto/Sympla e bilheterias'] },
+      'Informações: [Agenda Cultural de Jundiaí](https://cultura.jundiai.sp.gov.br/agenda-cultural/vitrine-da-danca-a-cidade-dos-presentes-e-o-acordo-de-natal-cia-eu-danco/).',
+      { titulo: 'Passeios ao ar livre para aproveitar o feriado' },
+      { titulo: 'Parque da Cidade', nivel: 3 },
+      'Rodovia João Cereser, km 66 – Pinheirinho. Sexta, sábado e domingo: 6h30 às 18h, com entrada até 17h. Entrada e estacionamento gratuitos. Possui pistas de caminhada, ciclovias, playgrounds, quadras e áreas para piquenique.',
+      'Informações: [Turismo Jundiaí](https://visitejundiai.sp.gov.br/item-negocio/parque-da-cidade-2/).',
+      { titulo: 'Mundo das Crianças', nivel: 3 },
+      'Rodovia João Cereser, km 64+400 – Pinheirinho. Sexta, sábado e domingo: 7h às 17h, com entrada até 16h. Entrada gratuita. Conta com playgrounds, fontes interativas, casa na árvore, quadras e áreas verdes. É obrigatório fazer agendamento prévio para finais de semana e feriados.',
+      'Agendamento: [Mundo das Crianças](https://mundodascriancasjundiai.com.br/agendamento/).',
+      { titulo: 'Jardim Botânico', nivel: 3 },
+      'Avenida Antônio Frederico Ozanan, 6400. Funcionamento informado: diariamente, das 7h às 17h. Uma alternativa para passeios tranquilos, contemplação e contato com a natureza.',
+      'Informações: [Jardim Botânico de Jundiaí](https://jardimbotanico.jundiai.sp.gov.br/).',
+      { titulo: 'Fábrica das Infâncias Japy', nivel: 3 },
+      'Rua Lacerda Franco, 175 – Vila Arens. Sábado e domingo: 9h às 13h. Entrada gratuita. Espaço dedicado às brincadeiras, criatividade e experimentação artística para crianças. Atenção: estará fechada na sexta-feira, conforme o comunicado do feriado.',
+      'Informações: [Turismo Jundiaí](https://visitejundiai.sp.gov.br/).',
+      { titulo: 'Museu dos Ferroviários e história de Jundiaí', nivel: 3 },
+      'Para quem gosta de história, o Museu dos Ferroviários é uma alternativa interessante. Localizado no Espaço Expressa, preserva parte importante da memória ferroviária da cidade e apresenta objetos, documentos e exposições sobre a história das ferrovias.',
+      { itens: ['Endereço: Avenida União dos Ferroviários, 1760 – Espaço Expressa', 'Entrada: gratuita', 'Sábado: funcionamento habitual das 10h às 17h', 'Domingo: funcionamento especial até as 22h, conforme comunicado da Prefeitura', 'Sexta-feira: fechado'] },
+      'O jardim do Museu Histórico e Cultural – Solar do Barão também estará aberto para visitação durante os três dias do feriado.',
+      { titulo: 'Turismo rural: sabores e tradições de Jundiaí' },
+      'Para quem deseja aproveitar o fim de semana de maneira diferente, o turismo rural é uma das experiências que representam a identidade de Jundiaí. A cidade reúne propriedades familiares, adegas, vinícolas, gastronomia típica e paisagens que convidam a desacelerar.',
+      { itens: ['Rota da Uva: propriedades rurais e tradição da produção de uvas', 'Rota do Vinho: adegas, vinícolas e experiências ligadas à produção artesanal', 'Rota da Cultura Italiana: gastronomia e tradições dos imigrantes', 'Rota dos Sabores: experiências gastronômicas e produtos regionais', 'Rota do Castanho: paisagens e experiências do turismo rural'] },
+      'Os estabelecimentos possuem horários e condições de visitação próprios. Consulte o empreendimento escolhido antes de sair, especialmente para experiências que exigem reserva.',
+      'Conheça as rotas: [Turismo Jundiaí](https://rotasturisticas.jundiai.sp.gov.br/).',
+      { titulo: 'Atenção à previsão do tempo' },
+      'A Defesa Civil informou que o feriado prolongado deve ter instabilidade climática em Jundiaí.',
+      { itens: ['Sexta-feira (20): muitas nuvens e possibilidade de chuva a partir da tarde, com temperaturas entre 20°C e 29°C', 'Sábado (21): possibilidade de pancadas de chuva durante o dia e à noite', 'Domingo (22): previsão de chuva principalmente à tarde e à noite, com possibilidade de rajadas de vento de até 44 km/h'] },
+      'A recomendação é acompanhar as atualizações meteorológicas antes de programar atividades ao ar livre.',
+      'Na sexta-feira, 20 de novembro, os ônibus municipais seguirão a programação de domingos. Consulte os horários no SITU Jundiaí.',
+      { titulo: 'Jundiaí: uma cidade para viver e aproveitar' },
+      'Um feriado como esse mostra que Jundiaí oferece muito mais do que infraestrutura urbana. A cidade reúne cultura, gastronomia, áreas verdes, turismo rural e atividades para diferentes gerações.',
+      'São opções que fazem a diferença na rotina de quem busca qualidade de vida e deseja aproveitar a cidade para além de casa e trabalho.',
+      'Na hora de escolher um imóvel, vale considerar também o que existe ao redor: parques, escolas, restaurantes, centros comerciais, espaços culturais e facilidade de acesso. Afinal, escolher onde morar também é escolher as experiências que farão parte da sua vida.',
+      'Está pensando em morar ou investir em Jundiaí? A Lotus Brokers pode ajudar você a encontrar oportunidades alinhadas aos seus planos e ao estilo de vida que deseja construir. Acesse nosso site, [conheça nossos imóveis](/lotus-busca/imoveis-em-jundiai) e descubra as possibilidades que a cidade oferece.',
+      'Lotus Brokers. Grandes histórias têm endereço.',
+      'Fontes: [programação cultural do feriado](https://jundiai.sp.gov.br/noticias/2026/11/18/confira-a-programacao-cultural-de-jundiai-durante-o-feriado-da-consciencia-negra/) e [funcionamento dos serviços no feriado](https://jundiai.sp.gov.br/noticias/2026/11/18/20-de-novembro-confira-o-abre-e-fecha-da-prefeitura-no-feriado-nacional-de-cosciencia-negra/), da Prefeitura de Jundiaí; [Agenda Cultural de Jundiaí](https://cultura.jundiai.sp.gov.br/agenda-cultural/); [previsão da Defesa Civil](https://jundiai.sp.gov.br/noticias/2026/11/19/feriado-prolongado-sera-marcado-por-tempo-instavel-e-possibilidade-de-chuva-em-jundiai/). Imagem: marca da Rota Turística Cultura Negra de Jundiaí.',
+    ],
+  },
+  /* ------------------------------------------------------------------
+   * Enviado pela Lotus em 19/11/2026, com sugestões de SEO, e publicado em
+   * 20/11/2026, o próprio feriado da Consciência Negra (sexta-feira).
+   * Segundo da lista: o Sextou do mesmo dia (20 a 22/11) foi na frente.
+   *
+   * CONFERIDO em 20/11/2026 no site oficial da Rota da Cultura Negra
+   * (rotasturisticas.jundiai.sp.gov.br/culturanegra, Prefeitura de Jundiaí):
+   *  - a rota existe com esse nome e tem os três lugares do texto. O "O que
+   *    visitar" lista também o Espaço Expressa, o Museu Solar do Barão e a
+   *    Praça Rui Barbosa; o texto diz "entre os destaques";
+   *  - o objetivo (preservar e divulgar a história e o legado da comunidade
+   *    negra, e o afroturismo) é o da página "Sobre", que cita a Lei
+   *    municipal 10.255, de 17/10/2024;
+   *  - Museu dos Ferroviários: Av. União dos Ferroviários, 1760, no Espaço
+   *    Expressa, de terça a domingo, das 10h às 17h, com documentos, fotos,
+   *    jornais e objetos;
+   *  - Clube 28 de Setembro: Rua Petronilha Antunes, 363, Centro. Idealizado
+   *    em 02/04/1895 por ferroviários negros da Companhia Paulista. É bem
+   *    cultural imaterial da cidade desde 2016 (COMPAC, 19/01/2016). Tinha
+   *    saraus, escola de alfabetização, escola de samba e bailes;
+   *  - Espaço África: no Jardim Botânico, com espaço de ervas aromáticas e
+   *    plantas medicinais e dois baobás.
+   * Tudo confere.
+   * Mudou:
+   *  - "Grandes escolhas têm endereço" virou o slogan da Lotus, "Grandes
+   *    histórias têm endereço";
+   *  - o blog não desenha negrito, então "Endereço:" e "Horário informado:"
+   *    ficaram como texto, e o endereço da rota virou link;
+   *  - a meta description virou `excerpt`, e o slug sugerido virou o id;
+   *  - a categoria sugerida, "Turismo e Cultura", não existe no blog. Ficou
+   *    em "Cidade", como o Outubro Rosa;
+   *  - o tituloSeo começa pela palavra-chave principal sugerida;
+   *  - entrou, depois do horário do Museu dos Ferroviários, o funcionamento
+   *    dele no feriado ("Abre e Fecha" da Prefeitura, 18/11): fechado na
+   *    sexta (20), aberto no sábado e no domingo, até 22h no domingo. Sem
+   *    isso, o texto convidava a ir no feriado a um museu fechado na sexta.
+   * Capa: a foto enviada (espaco-africa.jpg, 1280x720) é o mesmo arquivo da
+   * página do Espaço África no site da rota (mesmo tamanho em bytes). Foi
+   * recortada em 16:10 e reduzida para 1024x640, com crédito no fim do texto.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'rota-cultura-negra-jundiai', cat: 'Cidade', date: 'Nov 2026', publicadoEm: '2026-11-20', read: '5 min', img: '/blog/rota-cultura-negra-jundiai.jpg', slot: 'blog-rota-cultura-negra-jundiai', title: 'Consciência Negra: aproveite o feriado prolongado para conhecer a Rota da Cultura Negra de Jundiaí', tituloSeo: 'Rota da Cultura Negra de Jundiaí: roteiro para o feriado', excerpt: 'Aproveite o feriado da Consciência Negra para conhecer a Rota da Cultura Negra de Jundiaí. Descubra lugares históricos, cultura e memória da cidade.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'A Rota da Cultura Negra de Jundiaí reúne lugares ligados à história e ao legado da comunidade negra na cidade. Três destaques para o feriado: o Museu dos Ferroviários, no Espaço Expressa, aberto de terça a domingo, das 10h às 17h; o Clube 28 de Setembro, fundado em 1895 por ferroviários negros e reconhecido como patrimônio cultural imaterial de Jundiaí em 2016; e o Espaço África, no Jardim Botânico, com ervas aromáticas e baobás.',
+    body: [
+      { titulo: 'Introdução' },
+      'O feriado prolongado da Consciência Negra é uma oportunidade para descansar, aproveitar momentos em família e também conhecer mais sobre a história e a cultura da cidade onde vivemos.',
+      'Em Jundiaí, uma experiência que merece entrar no roteiro é a Rota da Cultura Negra, um percurso que convida moradores e visitantes a conhecerem espaços importantes para a preservação da memória, da ancestralidade e da contribuição da população negra na formação do município.',
+      'Muito além dos tradicionais pontos turísticos, a iniciativa apresenta uma parte fundamental da identidade jundiaiense, valorizando histórias que ajudam a compreender o passado e a construir um futuro com mais reconhecimento e respeito.',
+      'Se você ainda não conhece esse roteiro, o feriado pode ser o momento ideal para descobrir novos lugares e enxergar Jundiaí por outra perspectiva.',
+      { titulo: 'O que é a Rota da Cultura Negra de Jundiaí?' },
+      'A Rota da Cultura Negra integra as iniciativas de valorização do patrimônio histórico e cultural de Jundiaí. Seu objetivo é preservar, reconhecer e divulgar a história e o legado da comunidade negra na cidade, além de incentivar o afroturismo.',
+      'O roteiro reúne espaços que carregam significados históricos e culturais, permitindo que o público conheça diferentes capítulos da trajetória da população negra em Jundiaí.',
+      'Entre os destaques estão três locais que merecem uma visita:',
+      { titulo: '1. Museu dos Ferroviários: conheça a história que também passa pelos trilhos' },
+      'Localizado no Espaço Expressa, o Museu dos Ferroviários é um importante espaço de preservação da memória ferroviária de Jundiaí.',
+      'O visitante encontra documentos, fotografias, jornais, objetos históricos e elementos que ajudam a contar a trajetória das ferrovias e dos trabalhadores que participaram do desenvolvimento da cidade.',
+      'O local também permite refletir sobre a presença e a contribuição dos trabalhadores negros na história ferroviária de Jundiaí.',
+      'Endereço: Avenida União dos Ferroviários, 1760 – Espaço Expressa.',
+      'Horário informado: terça-feira a domingo, das 10h às 17h.',
+      'No feriado, segundo a Prefeitura, o museu fica fechado na sexta-feira (20) e abre no sábado (21) e no domingo (22), quando funciona até as 22h.',
+      { titulo: '2. Clube 28 de Setembro: um símbolo de resistência e identidade' },
+      'Um dos pontos mais significativos da Rota da Cultura Negra é o Clube Beneficente, Cultural e Recreativo 28 de Setembro.',
+      'Fundado em 1895 por iniciativa de um grupo de ferroviários negros, o clube nasceu como um espaço de convivência, educação, cultura, lazer e assistência mútua.',
+      'Sua criação representou uma importante conquista em um período marcado pela exclusão social e pelas restrições impostas à população negra.',
+      'Ao longo de sua trajetória, o Clube 28 de Setembro promoveu atividades culturais, saraus, iniciativas educacionais, eventos sociais e manifestações ligadas à cultura afro-brasileira.',
+      'Reconhecido como patrimônio cultural imaterial de Jundiaí em 2016, o espaço permanece como um símbolo da resistência e da preservação da memória negra no município.',
+      'Endereço: Rua Petronilha Antunes, 363 – Centro.',
+      { titulo: '3. Espaço África: uma conexão com a ancestralidade' },
+      'Localizado no Jardim Botânico de Jundiaí, o Espaço África é outro ponto de destaque do roteiro.',
+      'O ambiente conta com canteiro de ervas aromáticas e pés de baobá, árvore de grande significado simbólico para diferentes culturas africanas.',
+      'É um espaço que convida à contemplação, ao conhecimento e à reflexão sobre a relação entre natureza, ancestralidade e cultura.',
+      'Além de proporcionar um contato com elementos representativos do continente africano, o local amplia a experiência de quem deseja conhecer melhor a diversidade cultural presente em Jundiaí.',
+      { titulo: 'Por que conhecer a história da cidade onde você mora?' },
+      'Conhecer uma cidade vai muito além de saber onde estão seus parques, restaurantes, centros comerciais e principais avenidas.',
+      'É também reconhecer as pessoas, as culturas e os acontecimentos que contribuíram para construir sua identidade.',
+      'Jundiaí possui uma diversidade de experiências culturais, históricas e turísticas que muitas vezes passam despercebidas na rotina dos moradores.',
+      'Iniciativas como a Rota da Cultura Negra ampliam essa percepção e mostram como o patrimônio cultural é parte importante da qualidade de vida de uma cidade.',
+      'Afinal, viver bem também significa ter acesso à cultura, ao conhecimento, à história e a espaços que promovem pertencimento.',
+      { titulo: 'Aproveite o feriado para descobrir Jundiaí por novos caminhos' },
+      'Neste feriado da Consciência Negra, que tal trocar parte da rotina por um passeio de conhecimento e valorização cultural?',
+      'Convide a família, organize seu roteiro e reserve um momento para conhecer os espaços que fazem parte dessa importante trajetória.',
+      'Antes de sair, consulte as informações atualizadas sobre funcionamento, acesso e eventuais necessidades de agendamento diretamente nos canais oficiais.',
+      'Confira a [Rota da Cultura Negra completa](https://rotasturisticas.jundiai.sp.gov.br/culturanegra/) no site oficial das Rotas Turísticas de Jundiaí.',
+      { titulo: 'Conclusão' },
+      'Jundiaí é feita de muitas histórias, culturas e pessoas. Conhecer essa diversidade é uma maneira de valorizar o passado, compreender o presente e fortalecer o sentimento de pertencimento à cidade.',
+      'O feriado da Consciência Negra é um convite à reflexão, ao respeito e também à descoberta de lugares que merecem ser conhecidos e preservados.',
+      'Porque escolher uma cidade para viver também é descobrir tudo o que ela tem a oferecer.',
+      'Lotus Brokers — Grandes histórias têm endereço.',
+      'Foto: Espaço África, no Jardim Botânico de Jundiaí. Site da [Rota da Cultura Negra](https://rotasturisticas.jundiai.sp.gov.br/culturanegra/o-que-visitar/espaco-africa-jardim-botanico/), Prefeitura de Jundiaí.',
+    ],
+  },
+  /* ------------------------------------------------------------------
+   * Enviado pela Lotus em 19/11/2026, para sair no blog e no guia do bairro.
+   * O guia é /lotus-bairro/vila-rio-branco, que deixou de ser provisório no
+   * mesmo dia. Segundo da lista: o artigo da Consciência Negra, que entrou no
+   * ar junto, foi na frente por causa do feriado.
+   *
+   * CONFERIDO em 19/11/2026 na ficha "Conheça seu bairro – Região Norte – Vila
+   * Rio Branco" (Prefeitura de Jundiaí, Unidade de Gestão de Planejamento
+   * Urbano e Meio Ambiente, 2021), a fonte dos números do texto:
+   *  - uso do solo (Cadastro Imobiliário de 2021): 92,8% residencial e 7%
+   *    comercial;
+   *  - IBGE: 8.951 moradores em 2000 e 8.064 em 2010; em 2010, 53,6% de
+   *    mulheres e 46,4% de homens;
+   *  - a história (ferrovias no século XIX, "Bairro das Cabras", Avenida
+   *    Itatiba como estrada de boiada, Matadouro Municipal nos anos 1940,
+   *    viadutos e Rodovia Constâncio Cintra) e os três destaques (Maxi
+   *    Shopping, Praça Maestro João da Silva e CECE José Pedro Raymundo);
+   *  - os loteamentos: os nove do texto estão na ficha, que lista também a
+   *    Vila Carlos W. Muller, a Vila Savieto e o Loteamento Vistas Jundiaí.
+   *    O texto diz "entre eles", então ficou como veio.
+   * Tudo confere.
+   * Mudou:
+   *  - "Grandes escolhas têm endereço" virou o slogan da Lotus, "Grandes
+   *    histórias têm endereço";
+   *  - "oportunidades imobiliárias em Jundiaí" leva à busca de imóveis de
+   *    Jundiaí;
+   *  - a meta description sugerida virou `excerpt`;
+   *  - o título tem 105 caracteres. O tituloSeo responde à pergunta do bairro,
+   *    como os outros posts de bairro (auditoria de SEO de 10/11/2026), e o
+   *    guia fica com "Morar na Vila Rio Branco".
+   * Capa PROVISÓRIA: a foto do guia do bairro (public/bairros/vila-rio-branco.jpg,
+   * 522x399), recortada em 16:10 (522x326). A Lotus mandou uma foto aérea na
+   * conversa, mas o arquivo não chegou ao computador. Quando chegar, trocar
+   * public/blog/vila-rio-branco-jundiai.jpg.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'vila-rio-branco-jundiai', cat: 'Região', date: 'Nov 2026', publicadoEm: '2026-11-20', read: '4 min', img: '/blog/vila-rio-branco-jundiai.jpg', slot: 'blog-vila-rio-branco-jundiai', title: 'Vila Rio Branco, em Jundiaí: história, localização e qualidade de vida em um dos bairros tradicionais da cidade', tituloSeo: 'Vale a pena morar na Vila Rio Branco, em Jundiaí?', excerpt: 'Conheça a Vila Rio Branco, em Jundiaí: um bairro com história, infraestrutura, comércio, serviços e localização estratégica para morar.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'A Vila Rio Branco fica na Região Norte de Jundiaí e nasceu com as ferrovias, no século XIX. Segundo o levantamento da Prefeitura com dados cadastrais de 2021, 92,8% do uso do solo é residencial. O bairro tinha 8.064 moradores no Censo de 2010, e entre suas referências estão o Maxi Shopping Jundiaí, a Praça Maestro João da Silva e o CECE José Pedro Raymundo.',
+    body: [
+      { titulo: 'Introdução' },
+      'Escolher onde morar vai muito além de encontrar um imóvel. Conhecer a história, a infraestrutura e as características de um bairro é fundamental para tomar uma boa decisão.',
+      'Em Jundiaí, a Vila Rio Branco se destaca por sua trajetória histórica, localização na Região Norte e presença de serviços, espaços públicos e importantes pontos de referência da cidade.',
+      'Com uma identidade construída ao longo de décadas, o bairro reúne características residenciais e uma estrutura urbana que merece ser conhecida por quem busca praticidade no dia a dia.',
+      { titulo: 'A história da Vila Rio Branco' },
+      'A história da Vila Rio Branco está diretamente ligada ao desenvolvimento ferroviário de Jundiaí, ainda no século XIX. A construção das linhas férreas gerou oportunidades de emprego e atraiu moradores para a região, contribuindo para o crescimento do bairro.',
+      'Durante muitos anos, a localidade ficou conhecida como "Bairro das Cabras", devido à presença de diversos criadores de animais. Na época, a Avenida Itatiba era utilizada como estrada de boiada, e a passagem dos trens fazia parte da rotina dos moradores.',
+      'Outro marco importante aconteceu na década de 1940, com a instalação do Matadouro Municipal. Posteriormente, a construção dos viadutos Joaquim Candelário e General Euclides de Oliveira Figueiredo, além da rodovia Constâncio Cintra, contribuiu para intensificar a urbanização da região.',
+      'Essa trajetória faz da Vila Rio Branco um bairro que carrega parte importante da memória e do desenvolvimento de Jundiaí.',
+      { titulo: 'Localização e características do bairro' },
+      'Localizada na Região Norte de Jundiaí, a Vila Rio Branco compreende diferentes loteamentos e vilas, entre eles Jardim Rio Branco, Jardim Carlos Gomes, Jardim Banúbio, Jardim Liberdade, Jardim Marcos Leite, Vila Rio Branco, Vila Liberdade, Vila Margarida e Vila Palma.',
+      'De acordo com o levantamento da Prefeitura de Jundiaí, com dados cadastrais de 2021, o uso do solo é predominantemente residencial, representando 92,8% da ocupação legalmente permitida, enquanto o uso comercial corresponde a 7%.',
+      'Essa característica reforça o perfil residencial da região.',
+      { titulo: 'População e perfil dos moradores' },
+      'Os dados do IBGE apresentados no levantamento municipal mostram que a Vila Rio Branco possuía 8.951 habitantes em 2000 e 8.064 habitantes em 2010.',
+      'Em 2010, as mulheres representavam 53,6% da população, enquanto os homens correspondiam a 46,4%.',
+      'O levantamento também apresenta uma distribuição populacional diversificada entre diferentes faixas etárias, demonstrando a presença de crianças, jovens, adultos e idosos na composição do bairro.',
+      'Essas informações ajudam a compreender a dinâmica demográfica da região e seu perfil residencial.',
+      { titulo: 'Comércio, lazer e pontos de referência' },
+      'A Vila Rio Branco conta com importantes referências urbanas e espaços que fazem parte da rotina de Jundiaí.',
+      'Entre os destaques apresentados no levantamento estão:',
+      { itens: ['Maxi Shopping Jundiaí: importante referência comercial da cidade, reunindo lojas, alimentação, serviços e opções de entretenimento.', 'Praça Maestro João da Silva: espaço público de convivência e lazer na região.', 'CECE José Pedro Raymundo: complexo educacional, cultural e esportivo que oferece estrutura para atividades esportivas e de lazer.'] },
+      'A presença desses equipamentos urbanos contribui para a dinâmica da região e amplia as possibilidades de atividades para os moradores.',
+      { titulo: 'Vale a pena morar na Vila Rio Branco?' },
+      'A Vila Rio Branco é uma região que merece atenção de quem procura um bairro tradicional de Jundiaí, com predominância residencial e referências importantes de comércio, lazer e serviços.',
+      'Sua história, o processo de urbanização e a presença de equipamentos públicos ajudam a compor a identidade do bairro.',
+      'Para quem está avaliando a compra de um imóvel, vale considerar fatores como localização dentro da região, proximidade dos serviços utilizados no cotidiano, características do imóvel e facilidade de deslocamento.',
+      'A escolha ideal depende do estilo de vida, das necessidades da família e dos objetivos de cada comprador.',
+      { titulo: 'Conclusão' },
+      'A Vila Rio Branco representa uma parte importante da história de Jundiaí. De sua origem ligada às ferrovias até sua consolidação como região urbana, o bairro passou por transformações que contribuíram para construir sua identidade atual.',
+      'Conhecer esses detalhes é uma forma de entender melhor a cidade e fazer escolhas mais conscientes na hora de comprar um imóvel.',
+      'Grandes histórias têm endereço.',
+      'A Lotus Brokers pode ajudar você a encontrar [oportunidades imobiliárias em Jundiaí](/lotus-busca/imoveis-em-jundiai) e descobrir o bairro que mais combina com seus planos.',
+      'Entre em contato com nossa equipe e encontre seu próximo endereço.',
+    ],
+  },
+  /* ------------------------------------------------------------------
    * Enviado pela Lotus em 17/11/2026, com a foto do pórtico de Itupeva.
-   * Primeiro da lista, e por isso o novo destaque da capa do blog.
+   * Foi o destaque da capa do blog de 17/11 a 20/11/2026.
    *
    * CONFERIDO em 17/11/2026:
    *  - Região Metropolitana de Jundiaí: Lei Complementar estadual 1.362, de
