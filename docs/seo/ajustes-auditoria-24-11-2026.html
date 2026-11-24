@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ajustes de SEO 24/11</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #f7f2e8; --card: #ffffff; --fg: #15241c; --muted: #4d6655; --line: rgba(21,36,28,.12);
+    --accent: #b18a4a; --accent-soft: #ece2cf; --ok: #2f6b45; --ok-bg: #e3efe6; --wait: #8a5a12; --wait-bg: #f6e9cf;
+    --info: #2d5068; --info-bg: #e2ecf2; --code-bg: rgba(21,36,28,.06);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111a15; --card: #18241d; --fg: #eee6d6; --muted: #a9bba9; --line: rgba(238,230,214,.14);
+      --accent: #d2b27a; --accent-soft: #2a2a1f; --ok: #8fd0a4; --ok-bg: #1d3426; --wait: #f0c879; --wait-bg: #3a2f17;
+      --info: #9cc3dd; --info-bg: #1b2c37; --code-bg: rgba(238,230,214,.08);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #111a15; --card: #18241d; --fg: #eee6d6; --muted: #a9bba9; --line: rgba(238,230,214,.14);
+    --accent: #d2b27a; --accent-soft: #2a2a1f; --ok: #8fd0a4; --ok-bg: #1d3426; --wait: #f0c879; --wait-bg: #3a2f17;
+    --info: #9cc3dd; --info-bg: #1b2c37; --code-bg: rgba(238,230,214,.08);
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 15.5px/1.6 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  main { max-width: 980px; margin: 0 auto; padding-block: 48px 72px; }
+  h1, h2, h3 { font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-weight: 300; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.08; letter-spacing: -.01em; }
+  h2 { font-size: clamp(22px, 3vw, 28px); line-height: 1.2; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line); }
+  h3 { font-size: 19px; font-weight: 500; line-height: 1.3; }
+  p { margin: 0; max-width: 68ch; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+  .lead { color: var(--muted); font-size: 17px; margin-top: 14px; }
+  .stack { display: flex; flex-direction: column; gap: 14px; }
+  .aviso { margin-top: 22px; background: var(--wait-bg); color: var(--fg); border-left: 4px solid var(--wait); border-radius: 10px; padding: 14px 18px; }
+  .aviso strong { color: var(--wait); }
+  .numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 28px; }
+  .numero { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; min-width: 0; }
+  .numero b { display: block; font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 30px; line-height: 1.1; color: var(--fg); }
+  .numero span { font-size: 13.5px; color: var(--muted); }
+  .tabela { overflow-x: auto; margin-top: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+  table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  th { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; background: var(--code-bg); white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .selo { display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 30px; white-space: nowrap; }
+  .feito { background: var(--ok-bg); color: var(--ok); }
+  .andamento { background: var(--wait-bg); color: var(--wait); }
+  .corrigido { background: var(--info-bg); color: var(--info); }
+  .item { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 20px 22px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .item-topo { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 14px; }
+  .codigo { font-weight: 600; color: var(--accent); font-size: 14px; letter-spacing: .04em; }
+  ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; max-width: 72ch; }
+  code { font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; font-size: 13px; background: var(--code-bg); padding: 1px 6px; border-radius: 5px; overflow-wrap: anywhere; }
+  .muted { color: var(--muted); font-size: 14px; }
+  footer { margin-top: 56px; color: var(--muted); font-size: 13.5px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="stack">
+    <span class="eyebrow">Portal Lotus Brokers · lotusbrokers.com.br</span>
+    <h1>Ajustes de SEO da auditoria de 24/11/2026</h1>
+    <p class="lead">O que foi corrigido no código, item por item da 2ª edição da auditoria (códigos N1 a N14). Também lista o que a própria auditoria contou errado, a conferência das dicas de endereço (URL) e o que ainda falta.</p>
+  </div>
+
+  <div class="aviso"><strong>Situação: enviado para publicação em 24/11/2026.</strong> Os ajustes foram para a main em 7 commits (f88c42e a f7218a0), e o Easypanel publica a partir dela. Antes do envio, os testes e o build passaram, e a conferência no servidor local passou em todos os ajustes. Depois do deploy, as páginas alteradas vão para o IndexNow.</div>
+
+  <div class="numeros">
+    <div class="numero"><b>13</b><span>descrições encurtadas para até 160 caracteres</span></div>
+    <div class="numero"><b>114</b><span>imagens de landing passaram a carregar sob demanda</span></div>
+    <div class="numero"><b>13</b><span>fotos convertidas para WebP (2,18 → 1,44 MB)</span></div>
+    <div class="numero"><b>12</b><span>fotos do Odeon ganharam descrição (alt)</span></div>
+    <div class="numero"><b>0</b><span>sublinhados nas 272 URLs internas do site</span></div>
+  </div>
+
+  <h2>Resumo por item</h2>
+  <div class="tabela">
+    <table>
+      <thead><tr><th>Código</th><th>Achado</th><th>Situação</th><th>O que mudou</th></tr></thead>
+      <tbody>
+        <tr><td>N13</td><td>Descrições longas</td><td><span class="selo feito">Feito</span></td><td>6 artigos e 7 landings de outras construtoras</td></tr>
+        <tr><td>N13</td><td>H1 duplicado (Altissimi, Vila Triunfo)</td><td><span class="selo corrigido">Falso positivo</span></td><td>Nada: o 2º H1 está num molde que o Google não lê</td></tr>
+        <tr><td>N6</td><td>Perfil do corretor sem link a partir do imóvel</td><td><span class="selo feito">Feito</span></td><td>Nome do captador no cartão do imóvel leva à página dele</td></tr>
+        <tr><td>N6</td><td>Perfis sem imagem de compartilhamento</td><td><span class="selo feito">Feito</span></td><td>Sem foto no cadastro, usa a imagem padrão do site</td></tr>
+        <tr><td>N12</td><td>104 imagens sem descrição</td><td><span class="selo feito">Feito</span></td><td>12 eram falta real (Odeon); o resto era decorativo ou contagem errada</td></tr>
+        <tr><td>N4</td><td>Foto do topo crua nas páginas internas</td><td><span class="selo feito">Feito</span></td><td>Construtora, cards de empreendimento e blog pelo otimizador; capa do artigo com prioridade</td></tr>
+        <tr><td>N5</td><td>Landings em HTML com fotos originais</td><td><span class="selo feito">Feito</span></td><td>WebP, carregamento sob demanda e prioridade para a foto do topo em 12 landings</td></tr>
+        <tr><td>N8</td><td>"Apartamentos na planta" no índice de lançamentos</td><td><span class="selo feito">Feito</span></td><td>Título, descrição e H1 de /lotus-lancamentos</td></tr>
+        <tr><td>N14</td><td>Sem HSTS</td><td><span class="selo feito">Feito no site</span></td><td>Cabeçalho HSTS em toda resposta; o salto http → https fica no Easypanel</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Detalhe do que foi feito</h2>
+  <div class="stack" style="margin-top:18px">
+
+    <section class="item">
+      <div class="item-topo"><span class="codigo">N13</span><h3>13 descrições encurtadas</h3><span class="selo feito">Feito</span></div>
+      <p>Cada descrição ficou com até 160 caracteres (entre 145 e 156), com a palavra-chave no começo e sem dado novo. Só saíram o "Agende sua visita" e repetições. Nas duas landings em HTML mudou também a descrição de compartilhamento (og:description). As 10 landings da Santa Angela continuam com a frase obrigatória.</p>
+      <div class="tabela">
+        <table>
+          <thead><tr><th>Página</th><th>Antes</th><th>Depois</th><th>Nova descrição</th></tr></thead>
+          <tbody>
+            <tr><td>/avalon</td><td class="num">170</td><td class="num">155</td><td>Avalon Residencial, da F A Oliva, na Vila Hortolândia, Jundiaí: apartamentos de 78,5 e 108 m², 2 e 3 dorms com suíte, 19 áreas de lazer e piscina aquecida.</td></tr>
+            <tr><td>/vivarte</td><td class="num">190</td><td class="num">156</td><td>Vivarte Grand Alamedas, do Grupo Diretiva: apartamentos de 2 e 3 dormitórios em Jundiaí, com vista para a Serra do Japi, ampla varanda e +30 itens de lazer.</td></tr>
+            <tr><td>/brisas-do-japi</td><td class="num">184</td><td class="num">154</td><td>Brisas do Japi: studios e apartamentos de 2 dorms com varanda, lazer completo e vista da Serra do Japi no Bairro Medeiros, Jundiaí. Minha Casa Minha Vida.</td></tr>
+            <tr><td>/best-view-residence</td><td class="num">161</td><td class="num">152</td><td>Best View Residence no Swiss Park, Campinas: apartamentos de 2 e 3 dorms com suíte, de 62 a 78 m² e opções Garden, 2 vagas cobertas e 22 itens de lazer.</td></tr>
+            <tr><td>/auten-jundiai</td><td class="num">181</td><td class="num">155</td><td>Auten Jundiaí, alto padrão no Anhangabaú, a 3 min da Rua do Retiro: apartamentos de 128 a 264 m², até 4 suítes e 4 vagas, +20 itens de lazer e 74 unidades.</td></tr>
+            <tr><td>/altissimi</td><td class="num">174</td><td class="num">155</td><td>Altissimi Residencial em Jundiaí: apartamentos prontos para morar de 64 a 86 m², 2 ou 3 dormitórios com suíte, varanda, lazer completo equipado e decorado.</td></tr>
+            <tr><td>/oasis</td><td class="num">164</td><td class="num">147</td><td>Oásis Residencial em Jundiaí: apartamentos de 75,16 a 112,64 m², 2 e 3 dormitórios com suíte, opção de sala ampliada e cobertura com área de lazer.</td></tr>
+            <tr><td>Artigo Selic 2027</td><td class="num">170</td><td class="num">151</td><td>Como a Selic e as perspectivas para 2027 podem influenciar o mercado imobiliário, os financiamentos e as oportunidades de compra de imóveis em Jundiaí.</td></tr>
+            <tr><td>Sextou 13 a 15/11</td><td class="num">179</td><td class="num">151</td><td>O que fazer em Jundiaí de 13 a 15 de novembro de 2026: eventos culturais, Festival do Pastel, atrações de Natal, passeios em família e opções de lazer.</td></tr>
+            <tr><td>Sextou 16 a 18/10</td><td class="num">167</td><td class="num">153</td><td>Osesp gratuita no Polytheama, Feira de Artes e Antiguidades na Praça da Matriz e espetáculo infantil na Vila Arens: a agenda do fim de semana em Jundiaí.</td></tr>
+            <tr><td>Fim da greve da Caixa</td><td class="num">215</td><td class="num">148</td><td>Decisão do TST põe fim à greve dos funcionários da Caixa; setor imobiliário espera a retomada de financiamentos, repasses e contratos habitacionais.</td></tr>
+            <tr><td>Memorial descritivo</td><td class="num">174</td><td class="num">147</td><td>O que observar no memorial descritivo de um lançamento: informações importantes para quem busca comprar, investir ou morar em um imóvel em Jundiaí.</td></tr>
+            <tr><td>Jundiaí para investidores</td><td class="num">173</td><td class="num">145</td><td>Jundiaí é uma boa cidade para investidores? Veja por que o mercado imobiliário da cidade é uma opção para quem busca valorização e oportunidades.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted">A descrição do artigo é o resumo (excerpt), que também aparece no card do blog.</p>
+    </section>
+
+    <section class="item">
+      <div class="item-topo"><span class="codigo">N8</span><h3>"Apartamentos na planta" no índice de lançamentos</h3><span class="selo feito">Feito</span></div>
+      <ul>
+        <li><strong>Título</strong> (63 caracteres): <span class="muted">Lançamentos em Jundiaí e região | Lotus Brokers</span> → Lançamentos e apartamentos na planta em Jundiaí | Lotus Brokers.</li>
+        <li><strong>Descrição:</strong> Lançamentos e apartamentos na planta em Jundiaí e região. Compare plantas, condições e estágios da obra com orientação especializada da Lotus Brokers.</li>
+        <li><strong>H1:</strong> a linha pequena dourada do topo passou a ser "Lançamentos e apartamentos na planta em Jundiaí e região"; a frase "Grandes histórias começam antes da chave." continua igual. No celular ela ocupa duas linhas (390 a 412 px) ou três (360 a 375 px), com as quebras equilibradas e sem rolagem lateral. No computador, uma linha.</li>
+        <li>Os recortes de lançamento por bairro ou por dormitórios, também sugeridos no N8, só valem onde houver 3 ou mais lançamentos ativos e texto próprio. Ficam para quando houver esse acervo.</li>
+      </ul>
+    </section>
+
+    <section class="item">
+      <div class="item-topo"><span class="codigo">N14</span><h3>HSTS</h3><span class="selo feito">Feito no site</span></div>
+      <ul>
+        <li>Toda resposta do site agora leva <code>Strict-Transport-Security: max-age=31536000</code> (um ano): quem já visitou o site vai direto ao https. Conferido na home, numa landing em HTML e no robots.txt.</li>
+        <li>Sem <code>includeSubDomains</code>, porque obrigaria todo subdomínio de lotusbrokers.com.br a ter https. Sem <code>preload</code>, que é difícil de desfazer.</li>
+        <li><strong>Falta no Easypanel</strong> (infraestrutura): o primeiro acesso por http ainda faz dois saltos (http → https sem www → https com www). O proxy deve mandar o http direto para https://www.</li>
+      </ul>
+    </section>
+
+    <section class="item">
+      <div class="item-topo"><span class="codigo">N6</span><h3>Do imóvel para a página do corretor</h3><span class="selo feito">Feito</span></div>
+      <ul>
+        <li>No cartão lateral da página do imóvel, o nome de quem captou o imóvel virou link para <code>/lotus-corretores/&lt;nome&gt;</code>. O visual do cartão não mudou; o nome sublinha ao passar o mouse. Conferido no AP0693, captado por Alexandra Niero.</li>
+        <li>Só ganha link quem tem página no site (CRECI cadastrado na Dash). O cartão genérico "Especialista Lotus" continua sem link.</li>
+        <li>O endereço do perfil passou a sair de uma conta só (<code>getCorretoresDoSite</code>), usada pela página do corretor e pelo cartão do imóvel, para os dois nunca divergirem. Teste novo cobre a regra.</li>
+      </ul>
+    </section>
+
+    <section class="item">
+      <div class="item-topo"><span class="codigo">N6</span><h3>Imagem de compartilhamento dos corretores sem foto</h3><span class="selo feito">Feito</span></div>
+      <p>Quem não tem foto no cadastro passa a sair com a imagem padrão do site ao ter a página compartilhada, o mesmo critério das páginas de construtora. Hoje isso vale para Adaulto Feitosa e Carlos Araújo. Andreia Martins, a terceira da auditoria, saiu da lista de corretores do site depois da varredura: o endereço dela leva à listagem, também no ar, como previsto para quem sai.</p>
+    </section>
+
+    <section class="item">
+      <div class="item-topo"><span class="codigo">N12</span><h3>Descrição das imagens (alt)</h3><span class="selo feito">Feito</span></div>
+      <p>A recontagem com um leitor de HTML de verdade (em vez de busca por texto) mostrou que só 12 das 104 imagens eram falta real:</p>
+      <ul>
+        <li><strong>Corrigido:</strong> as 12 miniaturas da galeria do Odeon. O texto estava só no botão, e a foto ficava sem descrição para o Google Imagens. Agora a descrição está na própria foto ("Foto do decorado de 95,85 m², Sala de estar"), e o botão continua com o mesmo nome para leitores de tela.</li>
+        <li><strong>Certo como está:</strong> texturas de fundo (Epic, Mistral), fotos de banco de imagem e fundos a 22% de opacidade (Gioviale, Vivarte, Allegrato, Altissimi, Altos da Avenida), símbolos de marca (Terriá) e logotipos dentro do título, que já trazem o nome em texto (16 construtoras, Reserva di Medeiros). Para essas, o alt vazio é o recomendado.</li>
+        <li><strong>Não eram imagens da página:</strong> molde inerte (<code>&lt;template&gt;</code>), blocos ocultos que alimentam o lightbox, a imagem vazia do lightbox e tags dentro de comentários do HTML.</li>
+      </ul>
+    </section>
+
+    <section class="item">
+      <div class="item-topo"><span class="codigo">N4</span><h3>Foto do topo pelo otimizador de imagem</h3><span class="selo feito">Feito</span></div>
+      <ul>
+        <li><strong>Construtoras</strong> (o caso da MRV): a capa vinha do Supabase em tamanho cheio. Agora passa pelo otimizador do site (WebP na largura da tela) e é pedida com prioridade alta.</li>
+        <li><strong>Cards de empreendimento</strong> das páginas de construtora: mesmo caminho, nas larguras de card.</li>
+        <li><strong>Blog:</strong> as fotos do blog passam pelo otimizador. A capa do artigo, que é o maior elemento da página, ganhou prioridade. Essa mudança tinha sido feita em 13/11 num worktree antigo e nunca chegou ao ar; foi refeita no código atual.</li>
+        <li>Imóvel e condomínio já usavam o otimizador com prioridade; não mudaram.</li>
+      </ul>
+    </section>
+
+    <section class="item">
+      <div class="item-topo"><span class="codigo">N5</span><h3>Landings em HTML: WebP, carregamento sob demanda e prioridade do topo</h3><span class="selo feito">Feito</span></div>
+      <ul>
+        <li>Script novo, <code>scripts/otimizar-fotos-landing-html.mjs</code>: é o par do script de 27/10 para as landings em HTML, com a mesma conversão (agora num módulo só, <code>lib/fotos-webp.mjs</code>).</li>
+        <li><strong>WebP:</strong> 13 fotos (Santorini 6, Reserva Castanheira 7), de 2,18 para 1,44 MB. As outras JPGs já vinham bem comprimidas e não ficavam ao menos 10% menores, e por isso ficaram como estavam (mesma regra de 27/10).</li>
+        <li><strong>Carregamento sob demanda</strong> em 114 imagens abaixo da primeira tela, em 12 landings: Castanheira 20, Gioviale 16, Oásis 14, Villaggio 13, Santorini 11, Lago Samambaia 9, Edifício Trend 9, Auten Serrah 7, Reserva di Medeiros 6, Terriá 5, Vinhas 3 e Mistral 1.</li>
+        <li><strong>Prioridade para a foto do topo</strong> na Santorini, na Castanheira e no Oásis, onde ela é fundo em CSS e o navegador só a descobria depois do estilo.</li>
+        <li>Conferido num Chrome sem janela, no celular (412×915) e no computador (1366×900): nenhuma imagem sob demanda ficou na primeira tela, e o maior elemento da Santorini já é a foto em WebP.</li>
+        <li>A imagem de compartilhamento (<code>compartilhar.jpg</code>) e os dados estruturados continuam em JPG, que toda prévia de link mostra. Os originais continuam no servidor.</li>
+        <li>Ficaram de fora a Altissimi e o Vila Triunfo, que têm versão pré-renderizada (mexer no molde exige gerá-la de novo), e a Epic, que já estava em ordem.</li>
+      </ul>
+    </section>
+  </div>
+
+  <h2>Dicas de endereço (URL): o que o site já cumpre</h2>
+  <div class="stack" style="margin-top:16px">
+    <p>Conferência das três dicas recebidas, contra a documentação do Google Search Central (página "URL structure", seção Rastreamento e indexação) e as 272 URLs internas do site (sitemap e links).</p>
+    <div class="tabela">
+      <table>
+        <thead><tr><th>Dica</th><th>No site</th><th>Observação</th></tr></thead>
+        <tbody>
+          <tr><td>Hífen, não sublinhado</td><td><span class="selo feito">Cumpre</span></td><td>Nenhuma das 272 URLs tem sublinhado nem acento. O Google recomenda o hífen, mas a documentação não fala em penalizar o sublinhado.</td></tr>
+          <tr><td>Palavras descritivas, não números</td><td><span class="selo feito">Cumpre, com uma exceção</span></td><td>Landings, blog, guias, condomínios, construtoras e corretores usam palavras. Os números que aparecem são parte do conteúdo (anos e datas do blog, "Alpha 3", "Chácara das Flores 2"). A exceção são os imóveis, <code>/lotus-imovel/AP0701</code>, com o código da Dash em maiúsculas. O título e o H1 já descrevem o imóvel.</td></tr>
+          <tr><td>Páginas de cidade, do amplo ao específico</td><td><span class="selo feito">Cumpre</span></td><td>/lotus-bairro agrupa os 23 guias por cidade (Jundiaí e Itupeva), e há buscas por cidade e tipo só onde há imóveis. A política do Google contra páginas-porta condena páginas de cidade quase iguais, então a regra atual (página só com acervo e texto próprio) é a certa.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Decisão do dono:</strong> trocar o endereço dos imóveis por um descritivo (por exemplo, <code>/lotus-imovel/apartamento-2-quartos-engordadouro-jundiai-ap0701</code>) exige redirecionar todos os imóveis e mudar os links que a Dash gera para os corretores. O ganho é pequeno, porque o título e o H1 já descrevem o imóvel e a palavra no endereço pesa pouco para o Google. Recomendo não fazer agora.</p>
+  </div>
+
+  <h2>O que a própria auditoria contou errado</h2>
+  <div class="stack" style="margin-top:16px">
+    <ul>
+      <li><strong>"17 landings da Santa Angela"</strong>: são 10 da Santa Angela, que mantêm a frase obrigatória, e 7 de outras construtoras, que foram encurtadas.</li>
+      <li><strong>H1 duplicado</strong> na Altissimi e no Vila Triunfo: a varredura leu o molde <code>&lt;template&gt;</code>, que o navegador e o Google não tratam como conteúdo. Cada página tem um H1 só.</li>
+      <li><strong>104 imagens sem alt</strong>: a varredura também contou o molde, os blocos ocultos, o lightbox vazio e tags dentro de comentários. Eram 12 faltas reais.</li>
+      <li><strong>Contagem de palavras</strong> da Altissimi e do Vila Triunfo: inflada pelo molde.</li>
+    </ul>
+  </div>
+
+  <h2>Como foi conferido</h2>
+  <div class="stack" style="margin-top:16px">
+    <ul>
+      <li><strong>Testes:</strong> 334 de 334 passando, incluindo o teste novo do link do captador.</li>
+      <li><strong>Build</strong> de produção: concluído sem erro.</li>
+      <li><strong>Servidor local</strong>, página por página: as 13 descrições, título e H1 de lançamentos, imagem de compartilhamento dos perfis, link do captador, alt do Odeon, capa da MRV e do artigo pelo otimizador com prioridade, preload e WebP da Santorini e HSTS. Todos certos; a única diferença foi a saída da Andreia Martins do cadastro.</li>
+      <li><strong>Visual:</strong> H1 de lançamentos no celular (360 a 412 px) e no computador, cartão do captador. Nenhum erro no console nem no servidor.</li>
+    </ul>
+  </div>
+
+  <h2>O que falta</h2>
+  <div class="stack" style="margin-top:16px">
+    <ul>
+      <li><strong>Depois do deploy:</strong> avisar o IndexNow das páginas alteradas e atualizar o relatório da auditoria com o andamento.</li>
+      <li><strong>Easypanel:</strong> mandar o http direto para https://www (N14).</li>
+    </ul>
+    <p><strong>Fora do código</strong> (dependem da Lotus): N1 a N3 (Search Console, links externos, avaliações no Google), N7, N9 e N10 (textos dos guias, condomínios e construtoras; por exemplo, "Chácara das Flores" e "Chácara das Flores 2" têm o mesmo texto-modelo), e N11, títulos das landings, que precisa da decisão de conformidade com as construtoras.</p>
+    <p><strong>Visto e não mexido</strong>, para uma próxima rodada:</p>
+    <ul>
+      <li>O logo da Lotus do rodapé, em PNG sem otimizar, é pré-carregado em 17 páginas e disputa banda com a foto do topo.</li>
+      <li>O Vila Triunfo carrega uma imagem decorativa direto do site da F A Oliva.</li>
+      <li>A Altissimi tem uma JPG de 142 KB que só converte gerando de novo a versão pré-renderizada.</li>
+    </ul>
+  </div>
+
+  <h2>Arquivos alterados</h2>
+  <div class="tabela">
+    <table>
+      <thead><tr><th>Item</th><th>Commit</th><th>Arquivos</th></tr></thead>
+      <tbody>
+        <tr><td>N13</td><td><code>f88c42e</code></td><td><code>app/{avalon,vivarte,brisas-do-japi,best-view-residence,auten-jundiai}/page.tsx</code>, <code>public/{altissimi,oasis}/index.html</code>, <code>lib/blog-posts.ts</code></td></tr>
+        <tr><td>N6</td><td><code>90cc676</code></td><td><code>lib/brokers.ts</code>, <code>lib/brokers.test.ts</code>, <code>app/lotus-corretores/[slug]/page.tsx</code>, <code>app/lotus-imovel/[codigo]/page.tsx</code>, <code>components/LotusImovel.tsx</code></td></tr>
+        <tr><td>N12</td><td><code>8a95084</code></td><td><code>components/Odeon.tsx</code></td></tr>
+        <tr><td>N4</td><td><code>34140df</code></td><td><code>app/construtoras/[slug]/page.tsx</code>, <code>components/CardEmpreendimento.tsx</code>, <code>components/LotusBlog.tsx</code></td></tr>
+        <tr><td>N5</td><td><code>c9d30eb</code></td><td><code>scripts/otimizar-fotos-landing-html.mjs</code> (novo), <code>lib/fotos-webp.mjs</code> (novo), <code>scripts/otimizar-fotos-landing.mjs</code>, 12 <code>public/&lt;landing&gt;/index.html</code>, fotos novas em <code>public/{santorini,reserva-castanheira}/midia/</code></td></tr>
+        <tr><td>N8</td><td><code>c9c16ff</code></td><td><code>app/lotus-lancamentos/page.tsx</code>, <code>components/LotusLancamentos.tsx</code></td></tr>
+        <tr><td>N14</td><td><code>f7218a0</code></td><td><code>next.config.mjs</code></td></tr>
+        <tr><td>Relatório</td><td></td><td><code>docs/seo/ajustes-auditoria-24-11-2026.html</code> (este arquivo)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>Atualizado em 24/11/2026, ao fim da rodada de correções. Relatório da auditoria: 2ª edição, 24/11/2026.</footer>
+</main>
+</body>
+</html>
