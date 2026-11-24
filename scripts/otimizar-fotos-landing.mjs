@@ -35,14 +35,11 @@
  * pastas, e nome solto usado com prefixo de subpasta
  * (PLANTAS = '/doppio-jundiai/plantas/' + 'p1.jpg').
  */
-import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { basename, join, relative } from 'node:path';
-import sharp from 'sharp';
+import { emWebp, nomeDoWebp } from '../lib/fotos-webp.mjs';
 
 const RAIZ = process.cwd();
-const LARGURA_MAX = 2000;
-const TAMANHO_MIN = 80 * 1024;
 const MOLDURA = /^(RodapeLotus|AtalhosLanding|LightboxPlantas)$/;
 const escapar = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
@@ -90,19 +87,6 @@ function citacoes(texto, rel, slug) {
 /** Prefixos de subpasta declarados no componente: const X = '/slug/sub/'. */
 function prefixosDeSubpasta(texto, slug) {
   return [...texto.matchAll(new RegExp(`['"\`]/${escapar(slug)}/([^'"\`/]+)/['"\`]`, 'g'))].map((m) => m[1]);
-}
-
-async function emWebp(arquivo) {
-  const bytes = readFileSync(arquivo);
-  if (bytes.length < TAMANHO_MIN) return { motivo: 'pequena' };
-  const png = /\.png$/i.test(arquivo);
-  const webp = await sharp(bytes, { failOn: 'none' })
-    .rotate()
-    .resize({ width: LARGURA_MAX, withoutEnlargement: true })
-    .webp({ quality: png ? 90 : 80 })
-    .toBuffer();
-  if (webp.length > bytes.length * 0.9) return { motivo: 'WebP não ficou 10% menor' };
-  return { webp, antes: bytes.length };
 }
 
 /** Fim da tag JSX que começa em `inicio` ("<img"): conta chaves e aspas, porque onClick={() => ...} tem ">". */
@@ -182,7 +166,7 @@ async function otimizar(slug, { analisar }) {
     trocadas++;
     if (analisar) continue;
     mkdirSync(pastaMidia, { recursive: true });
-    const nome = `${createHash('sha1').update(r.webp).digest('hex').slice(0, 16)}.webp`;
+    const nome = nomeDoWebp(r.webp);
     writeFileSync(join(pastaMidia, nome), r.webp);
     for (const [arquivo, texto] of comCitacao) {
       let novo = texto;
