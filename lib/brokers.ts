@@ -1,5 +1,6 @@
 import { supabase, TENANT_ID } from './supabase';
 import { conteudoRealDe } from './corretores-conteudo';
+import { estaNoSite, slugsDosCorretores } from './corretores-perfil';
 import type { PessoaDoCartao } from './corretor-do-link';
 
 // Camada de dados dos CORRETORES do Portal.
@@ -130,6 +131,16 @@ export async function getBrokers(): Promise<Broker[]> {
   return [...doBanco, ...extras].sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
 }
 
+/**
+ * Quem tem página no site (/lotus-corretores/<slug>) e o slug de cada um, por
+ * id. A página do corretor e o cartão do captador no imóvel usam esta conta,
+ * para o link do cartão chegar ao mesmo endereço que a página tem.
+ */
+export async function getCorretoresDoSite(): Promise<{ todos: Broker[]; slugs: Record<string, string> }> {
+  const todos = (await getBrokers()).filter(estaNoSite);
+  return { todos, slugs: slugsDosCorretores(todos) };
+}
+
 type LinhaDoCartao = Pick<BrokerRow, 'name' | 'photo_url' | 'especialidades'>;
 const COLUNAS_DO_CARTAO = 'name, photo_url, especialidades';
 
@@ -179,7 +190,10 @@ export async function getCodigosDoCaptador(captadorId: string): Promise<string[]
   return (data as { codigo_imovel: string | null }[]).map((r) => r.codigo_imovel).filter((c): c is string => Boolean(c));
 }
 
-export async function getCaptadorDoImovel(codigoImovel: string): Promise<PessoaDoCartao | null> {
+/** O captador como o cartão o mostra, mais o id em portal_brokers, que leva à página dele. */
+export type CaptadorDoImovel = PessoaDoCartao & { id: string };
+
+export async function getCaptadorDoImovel(codigoImovel: string): Promise<CaptadorDoImovel | null> {
   const { data: imovel, error } = await supabase
     .from('portal_imoveis')
     .select('captador_id')
@@ -203,5 +217,6 @@ export async function getCaptadorDoImovel(codigoImovel: string): Promise<PessoaD
     console.error('[getCaptadorDoImovel] erro Supabase:', erroDoCaptador.message);
     return null;
   }
-  return pessoaDoSite(data as LinhaDoCartao | null);
+  const pessoa = pessoaDoSite(data as LinhaDoCartao | null);
+  return pessoa ? { id: captadorId, ...pessoa } : null;
 }

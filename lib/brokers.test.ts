@@ -46,6 +46,7 @@ test('getCaptadorDoImovel: lê captador_id numa consulta própria e o nome em po
     },
   });
   assert.deepEqual(await brokers.getCaptadorDoImovel('CA0063'), {
+    id: 'id-da-gabriele',
     nome: 'Gabriele Fávaro',
     foto: '/corretores/gabriele-favaro.jpg',
     especialidades: ['Casa', 'Alto padrão', 'Permuta'],
@@ -67,10 +68,27 @@ test('getCaptadorDoImovel: a foto do banco vence a local', async () => {
     portal_brokers: { status: 200, corpo: [{ name: 'Gabriele Fávaro', photo_url: 'https://cdn/gabi.jpg', especialidades: null }] },
   });
   assert.deepEqual(await brokers.getCaptadorDoImovel('CA0063'), {
+    id: 'id-da-gabriele',
     nome: 'Gabriele Fávaro',
     foto: 'https://cdn/gabi.jpg',
     especialidades: null,
   });
+});
+
+test('getCorretoresDoSite: só quem tem CRECI, com o slug da página de cada um', async () => {
+  cenario({
+    portal_brokers: {
+      status: 200,
+      corpo: [
+        { id: 'id-da-ana', name: 'Ana  Lúcia Prado', photo_url: null, creci: '123456-F', imoveis_ativos: 2, especialidades: null },
+        { id: 'id-do-beto', name: 'Beto Sem Creci', photo_url: null, creci: null, imoveis_ativos: 0, especialidades: null },
+      ],
+    },
+  });
+  const { todos, slugs } = await brokers.getCorretoresDoSite();
+  assert.equal(slugs['id-da-ana'], 'ana-lucia-prado', 'o mesmo slug que /lotus-corretores/<slug> usa');
+  assert.ok(!todos.some((b) => b.id === 'id-do-beto'), 'sem CRECI não tem página');
+  assert.equal(slugs['id-do-beto'], undefined, 'e o cartão do imóvel fica sem link');
 });
 
 test('getCaptadorDoImovel: o captador oculto cai no genérico', async () => {

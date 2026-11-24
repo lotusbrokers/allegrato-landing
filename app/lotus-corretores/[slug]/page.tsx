@@ -1,19 +1,13 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import LotusCorretores from '@/components/LotusCorretores';
-import { getBrokers, getCodigosDoCaptador, type Broker } from '@/lib/brokers';
+import { getCodigosDoCaptador, getCorretoresDoSite, type Broker } from '@/lib/brokers';
 import { conteudoRealDe } from '@/lib/corretores-conteudo';
-import {
-  creciEmTexto,
-  descricaoDoPerfil,
-  estaNoSite,
-  hrefDoCorretor,
-  slugsDosCorretores,
-  tituloDoPerfil,
-} from '@/lib/corretores-perfil';
+import { creciEmTexto, descricaoDoPerfil, hrefDoCorretor, tituloDoPerfil } from '@/lib/corretores-perfil';
 import { especialistaEm } from '@/lib/especialidades';
 import { getImoveisBusca } from '@/lib/imoveis';
 import { DOMINIO_OFICIAL } from '@/lib/indexacao.mjs';
+import { IMAGEM_COMPARTILHAMENTO } from '@/lib/site';
 
 /**
  * Página de cada corretor: /lotus-corretores/<slug>, desde 16/11/2026 (ver
@@ -32,24 +26,18 @@ export const revalidate = 3600;
 
 type Params = { params: Promise<{ slug: string }> };
 
-/** Os corretores que estão no site e o slug de cada um: a mesma conta da listagem e do sitemap. */
-async function corretoresDoSite(): Promise<{ todos: Broker[]; slugs: Record<string, string> }> {
-  const todos = (await getBrokers()).filter(estaNoSite);
-  return { todos, slugs: slugsDosCorretores(todos) };
-}
-
 const nomeLimpo = (nome: string) => nome.trim().replace(/\s+/g, ' ');
 const enderecoAbsoluto = (src: string) => (src.startsWith('/') ? `${DOMINIO_OFICIAL}${src}` : src);
 const fotoDe = (c: Broker) => c.photoUrl ?? conteudoRealDe(c.name)?.foto ?? null;
 
 export async function generateStaticParams() {
-  const { todos, slugs } = await corretoresDoSite();
+  const { todos, slugs } = await getCorretoresDoSite();
   return todos.map((c) => ({ slug: slugs[c.id] }));
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
-  const { todos, slugs } = await corretoresDoSite();
+  const { todos, slugs } = await getCorretoresDoSite();
   const corretor = todos.find((c) => slugs[c.id] === slug);
   if (!corretor) return { title: 'Corretores | Lotus Brokers', robots: { index: false } };
 
@@ -74,7 +62,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       url,
       title: `${nome}, Lotus Brokers`,
       description,
-      ...(foto ? { images: [enderecoAbsoluto(foto)] } : {}),
+      // Sem foto no cadastro, a imagem padrão do site: o openGraph da página
+      // substitui o do layout inteiro, e sem `images` o link sai sem imagem.
+      images: [foto ? enderecoAbsoluto(foto) : IMAGEM_COMPARTILHAMENTO],
     },
     twitter: { card: 'summary_large_image' },
   };
@@ -85,7 +75,7 @@ const paraScript = (obj: unknown) => JSON.stringify(obj).replace(/</g, '\\u003c'
 
 export default async function CorretorPage({ params }: Params) {
   const { slug } = await params;
-  const { todos, slugs } = await corretoresDoSite();
+  const { todos, slugs } = await getCorretoresDoSite();
   const corretor = todos.find((c) => slugs[c.id] === slug);
   if (!corretor) redirect('/lotus-corretores');
 

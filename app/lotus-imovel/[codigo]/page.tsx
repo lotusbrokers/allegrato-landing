@@ -4,7 +4,8 @@ import LotusImovel from '@/components/LotusImovel';
 import { getImovelPublicado, getImoveisCards, type ImovelRow } from '@/lib/imoveis';
 import { destinoDoImovelQueSaiu } from '@/lib/imovel-que-saiu';
 import { juntarEndereco } from '@/lib/endereco';
-import { getCaptadorDoImovel } from '@/lib/brokers';
+import { getCaptadorDoImovel, getCorretoresDoSite } from '@/lib/brokers';
+import { hrefDoCorretor } from '@/lib/corretores-perfil';
 import { getCondominio } from '@/lib/condominios';
 import { condominioDoImovel } from '@/lib/condominio-do-imovel';
 import { resumoDescricao } from '@/lib/resumo-imovel';
@@ -187,11 +188,16 @@ export default async function LotusImovelPage({ params }: Params) {
   // aparece. O captador sai no HTML em cache (o cartão não pisca nem consulta o
   // banco por visita); sem ele, o cartão fica no genérico. Uma troca de
   // captador aparece na próxima revalidação, em até 1h.
-  const [relacionados, condominio, captador] = await Promise.all([
+  const [relacionados, condominio, captador, corretoresDoSite] = await Promise.all([
     getImoveisCards(codigo),
     imovel.condominio_id ? getCondominio(imovel.condominio_id) : null,
     getCaptadorDoImovel(codigo),
+    getCorretoresDoSite(),
   ]);
+  // O nome no cartão leva à página do captador. Quem não tem página (sem CRECI
+  // na Dash) fica sem link: o endereço iria para a listagem.
+  const slugDoCaptador = captador ? corretoresDoSite.slugs[captador.id] : undefined;
+  const perfilDoCaptador = slugDoCaptador ? hrefDoCorretor(slugDoCaptador) : null;
   const jsonLd = buildJsonLd(imovel, codigo);
 
   return (
@@ -208,6 +214,7 @@ export default async function LotusImovelPage({ params }: Params) {
         relacionados={relacionados}
         condominio={condominioDoImovel(condominio)}
         captador={captador}
+        perfilDoCaptador={perfilDoCaptador}
       />
     </>
   );

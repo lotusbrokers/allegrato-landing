@@ -269,6 +269,7 @@ export default function LotusImovel({
   relacionados,
   condominio,
   captador,
+  perfilDoCaptador = null,
   whatsapp = WHATSAPP_DEFAULT,
 }: {
   data: ImovelRow;
@@ -280,6 +281,8 @@ export default function LotusImovel({
   condominio: CondominioDoImovel | null;
   /** Quem captou o imóvel, para o cartão sem link de corretor. null = genérico. */
   captador: PessoaDoCartao | null;
+  /** Página do captador (/lotus-corretores/<slug>); null = o nome no cartão fica sem link. */
+  perfilDoCaptador?: string | null;
   whatsapp?: string;
 }) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -536,7 +539,14 @@ export default function LotusImovel({
           <div style={parseStyle('padding:24px 24px 20px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(21,36,28,.08);')}>
             <div style={parseStyle('width:56px;height:56px;border-radius:50%;background:#1d3a2c;flex-shrink:0;overflow:hidden;position:relative;')}><ImageSlot id="imovel-corretor" src={pessoaDoCartao.foto ?? undefined} sizes="56px" style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={pessoaDoCartao.nome} /></div>
             <div>
-              <div style={parseStyle('font-size:15.5px;font-weight:600;color:#15241c;')}>{pessoaDoCartao.nome}</div>
+              <div style={parseStyle('font-size:15.5px;font-weight:600;color:#15241c;')}>
+                {/* Só o captador tem página; o genérico chega aqui com perfilDoCaptador null. */}
+                {perfilDoCaptador ? (
+                  <Hoverable as="a" href={perfilDoCaptador} baseStyle={parseStyle('color:inherit;text-decoration:none;')} hoverStyle={parseStyle('text-decoration:underline')}>{pessoaDoCartao.nome}</Hoverable>
+                ) : (
+                  pessoaDoCartao.nome
+                )}
+              </div>
               {/* As especialidades de quem aparece (até 3); sem nenhuma, e no genérico, o bairro. */}
               <div style={parseStyle('font-size:12.5px;color:#3f6249;')}>Especialista em {especialistaNoCartaoDoImovel(pessoaDoCartao.especialidades, bairro)}</div>
               {/* CRECI 000001-F e a nota 5,0 eram placeholders inventados;
