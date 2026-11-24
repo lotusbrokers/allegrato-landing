@@ -96,6 +96,7 @@ function ImageSlot({
   style,
   alt = '',
   prioridade = false,
+  sizes = '(max-width: 700px) 100vw, 400px',
 }: {
   src?: string;
   id?: string;
@@ -109,6 +110,11 @@ function ImageSlot({
    * sem rolar — marcar demais anula o ganho.
    */
   prioridade?: boolean;
+  /**
+   * Quanto da tela a foto ocupa, para o navegador escolher a largura certa do
+   * otimizador (lib/imagem-otimizada). O padrão é o dos cards (até ~400px).
+   */
+  sizes?: string;
 }) {
   return (
     <div
@@ -121,7 +127,8 @@ function ImageSlot({
     >
       {src && (
         <img
-          src={src}
+          {...imagemOtimizada(src)}
+          sizes={sizes}
           alt={alt}
           loading={prioridade ? 'eager' : 'lazy'}
           fetchPriority={prioridade ? 'high' : undefined}
@@ -330,7 +337,7 @@ export default function LotusBlog({
               hoverStyle={parseStyle('transform:translateY(-3px)')}
             >
               <div style={parseStyle('position:relative;min-height:320px;background:#1d3a2c;')}>
-                <ImageSlot prioridade id={featured.slot} src={featured.img} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={featured.title} />
+                <ImageSlot prioridade sizes="(max-width: 900px) 100vw, 650px" id={featured.slot} src={featured.img} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={featured.title} />
                 <span style={parseStyle('position:absolute;top:16px;left:16px;background:#b18a4a;color:#15241c;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:6px 12px;border-radius:30px;')}>Destaque</span>
               </div>
               <div style={parseStyle('padding:clamp(28px,3.5vw,44px);display:flex;flex-direction:column;justify-content:center;')}>
@@ -418,7 +425,9 @@ export default function LotusBlog({
               </div>
             </div>
             <div style={parseStyle('position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#1d3a2c;margin-bottom:30px;')}>
-              <ImageSlot id={art.slot} src={art.img} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={art.title} />
+              {/* A capa é o LCP do artigo: sem prioridade, o navegador só a pedia
+                  depois do resto, e o JPEG cru da capa ocupava quase todo o LCP. */}
+              <ImageSlot prioridade sizes="(max-width: 820px) 100vw, 756px" id={art.slot} src={art.img} style={parseStyle('position:absolute;inset:0;width:100%;height:100%;')} alt={art.title} />
             </div>
             <div style={parseStyle('background:#1d3a2c;border-radius:14px;padding:20px 24px;margin-bottom:34px;')}>
               <div style={parseStyle('font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#cdab6e;margin-bottom:8px;')}>Resumo</div>

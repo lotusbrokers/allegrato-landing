@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { imagemOtimizada } from '@/lib/imagem-otimizada';
 import { type LancamentoListItem } from '@/lib/lancamentos';
 import { SEM_PRECO } from '@/lib/preco-sob-consulta';
 
@@ -21,7 +22,8 @@ export default function CardEmpreendimento({ item }: { item: LancamentoListItem 
       <div style={{ position: 'relative', aspectRatio: '4 / 3', background: '#1d3a2c' }}>
         {item.img && (
           <img
-            src={item.img}
+            {...imagemOtimizada(item.img, [640, 1080])}
+            sizes="(max-width: 700px) 100vw, 420px"
             alt={`${item.name}, ${item.neighborhood ? item.neighborhood + ', ' : ''}${item.city}`}
             loading="lazy"
             style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}

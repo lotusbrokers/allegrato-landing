@@ -14,6 +14,7 @@ import {
 import { conteudoDaConstrutora, curadasSemLancamento, logoClaroDaConstrutora } from '@/lib/construtoras-conteudo';
 import { IMAGEM_COMPARTILHAMENTO } from '@/lib/site';
 import { girar } from '@/lib/girar';
+import { imagemOtimizada } from '@/lib/imagem-otimizada';
 
 export const revalidate = 3600;
 
@@ -259,9 +260,14 @@ export default async function ConstrutoraPage({ params }: { params: Promise<{ sl
             hero começava 32px à direita do "Sobre" e dos cards, e a página
             inteira parecia torta. */}
         <section style={{ position: 'relative', background: '#15241c', overflow: 'hidden', padding: '0 32px' }}>
+          {/* A capa é o LCP da página. Vinda do Supabase, chegava como o JPEG
+              original; pelo otimizador sai em WebP na largura da tela, e com
+              prioridade alta. */}
           {fundoDoHero && (
             <img
-              src={fundoDoHero}
+              {...imagemOtimizada(fundoDoHero)}
+              sizes="100vw"
+              fetchPriority="high"
               alt=""
               aria-hidden="true"
               style={CAPA_EM_VERDE}
