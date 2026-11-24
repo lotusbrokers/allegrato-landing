@@ -36,13 +36,24 @@ const nextConfig = {
   // arquivo é o hash do próprio conteúdo, então uma URL nunca muda de conteúdo
   // — sem isto o Next manda max-age=0 e o navegador confere cada foto de novo
   // a cada visita.
+  //
+  // HSTS desde 24/11/2026 (auditoria de SEO, N14): quem já visitou o site vai
+  // direto ao https, sem passar pelo http. Sem includeSubDomains, porque este
+  // servidor não responde pelos outros subdomínios de lotusbrokers.com.br e o
+  // cabeçalho obrigaria todos a ter https; e sem preload, que não tem volta
+  // rápida. O navegador ignora o cabeçalho fora do https (dev em localhost). O
+  // primeiro acesso por http continua indo ao https pelo proxy (Easypanel).
   async headers() {
+    const https = {
+      source: '/:path*',
+      headers: [{ key: 'Strict-Transport-Security', value: 'max-age=31536000' }],
+    };
     const midia = {
       source: '/:landing/midia/:arquivo*',
       headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
     };
-    if (indexavel) return [midia];
-    return [midia, { source: '/:path*', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] }];
+    if (indexavel) return [https, midia];
+    return [https, midia, { source: '/:path*', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] }];
   },
   images: {
     // Quanto tempo vale a foto otimizada (/_next/image) antes de ser refeita.
