@@ -12,7 +12,7 @@ import { montserrat, playfair } from '@/app/_fontes/playfair-montserrat';
 export const metadata: Metadata = {
   title: 'Avalon Residencial, apartamentos de 78,5 e 108 m² em Jundiaí | Imobiliária Lotus Brokers',
   description:
-    'Avalon Residencial, da F A Oliva. Apartamentos de 78,5 e 108 m², 2 e 3 dormitórios com suíte, 19 áreas de lazer, piscina coberta e aquecida. Vila Hortolândia, Jundiaí/SP.',
+    'Avalon Residencial, da F A Oliva, na Vila Hortolândia, Jundiaí: apartamentos de 78,5 e 108 m², 2 e 3 dorms com suíte, 19 áreas de lazer e piscina aquecida.',
   keywords:
     'Avalon Residencial, apartamento Jundiaí, Vila Hortolândia, F A Oliva, 3 dormitórios com suíte, piscina aquecida',
   alternates: { canonical: 'https://www.lotusbrokers.com.br/avalon' },

@@ -12,7 +12,7 @@ export const viewport: Viewport = { themeColor: '#123c47' };
 export const metadata: Metadata = {
   title: 'Brisas do Japi, apartamentos e studios Minha Casa Minha Vida em Jundiaí | Imobiliária Lotus Brokers',
   description:
-    'Brisas do Japi: studios e apartamentos de 2 dormitórios com varanda, lazer completo e vista da Serra do Japi no Bairro Medeiros, Jundiaí. Novo Minha Casa Minha Vida. Agende sua visita.',
+    'Brisas do Japi: studios e apartamentos de 2 dorms com varanda, lazer completo e vista da Serra do Japi no Bairro Medeiros, Jundiaí. Minha Casa Minha Vida.',
   keywords:
     'apartamento Jundiaí, Brisas do Japi, Minha Casa Minha Vida Jundiaí, apartamento Bairro Medeiros, apartamento com varanda Jundiaí, Serra do Japi, lançamento Jundiaí, studio Jundiaí',
   alternates: { canonical: 'https://www.lotusbrokers.com.br/brisas-do-japi' },

@@ -9,7 +9,7 @@ import RodapeLotus from '@/components/RodapeLotus';
 export const metadata: Metadata = {
   title: 'Best View Residence, apartamentos de 2 e 3 dorms no Swiss Park, Campinas | Imobiliária Lotus Brokers',
   description:
-    'Best View Residence no Swiss Park, Campinas/SP: apartamentos de 2 e 3 dormitórios com suíte, de 62 a 78 m² e opções Garden, 2 vagas cobertas e 22 itens de lazer.',
+    'Best View Residence no Swiss Park, Campinas: apartamentos de 2 e 3 dorms com suíte, de 62 a 78 m² e opções Garden, 2 vagas cobertas e 22 itens de lazer.',
   keywords:
     'Best View Residence, Swiss Park, apartamento Campinas, 2 dormitórios com suíte, 3 dormitórios, garden, F A Oliva',
   alternates: { canonical: 'https://www.lotusbrokers.com.br/best-view-residence' },
