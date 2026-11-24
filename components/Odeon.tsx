@@ -757,13 +757,16 @@ export default function Odeon() {
             </Hoverable>
           </div>
           <div style={parseStyle('display: flex; gap: 10px; margin-top: 14px; overflow-x: auto; padding-bottom: 6px;')}>
+            {/* O nome do botão vem do alt da miniatura. Com o texto no aria-label
+                do botão e o alt vazio, o Google não tinha descrição para as fotos
+                fora da que está no carrossel. */}
             {galeriaVisivel.map((g, i) => (<React.Fragment key={i}>
-              <button style={g.thumbWrapStyle} onClick={g.selecionar} aria-label={g.alt}>
+              <button style={g.thumbWrapStyle} onClick={g.selecionar}>
                 {g.ativa && (<>
-                  <img style={parseStyle('width: 118px; height: 78px; object-fit: cover; display: block; border-radius: 2px; outline: 3px solid #C08A4E; outline-offset: -3px;')} src={g.src} alt="" loading="lazy" />
+                  <img style={parseStyle('width: 118px; height: 78px; object-fit: cover; display: block; border-radius: 2px; outline: 3px solid #C08A4E; outline-offset: -3px;')} src={g.src} alt={g.alt} loading="lazy" />
                 </>)}
                 {g.inativa && (<>
-                  <Hoverable as="img" baseStyle={parseStyle('width: 118px; height: 78px; object-fit: cover; display: block; border-radius: 2px; opacity: .55; transition: opacity .25s;')} hoverStyle={{ opacity: '1' }} src={g.src} alt="" loading="lazy" />
+                  <Hoverable as="img" baseStyle={parseStyle('width: 118px; height: 78px; object-fit: cover; display: block; border-radius: 2px; opacity: .55; transition: opacity .25s;')} hoverStyle={{ opacity: '1' }} src={g.src} alt={g.alt} loading="lazy" />
                 </>)}
               </button>
             </React.Fragment>))}
