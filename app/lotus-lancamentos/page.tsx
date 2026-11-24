@@ -38,10 +38,12 @@ function toEmpItem(item: LancamentoListItem, i: number): EmpItem {
 
 // Metadata portada do <head>/<helmet> de lotus-lancamentos/index.html (paridade de SEO).
 // TODO go-live: trocar canonical/og:url para o domínio final, remover noindex e publicar sitemap.
+// "Apartamentos na planta" no título, na descrição e no H1 desde 24/11/2026
+// (auditoria de SEO, N8): é a forma mais buscada, e o título não a tinha.
 export const metadata: Metadata = {
-  title: 'Lançamentos em Jundiaí e região | Lotus Brokers',
+  title: 'Lançamentos e apartamentos na planta em Jundiaí | Lotus Brokers',
   description:
-    'Conheça lançamentos selecionados em Jundiaí e região. Compare plantas, condições e estágios da obra com orientação especializada da Lotus Brokers.',
+    'Lançamentos e apartamentos na planta em Jundiaí e região. Compare plantas, condições e estágios da obra com orientação especializada da Lotus Brokers.',
   alternates: {
     canonical: 'https://www.lotusbrokers.com.br/lotus-lancamentos',
   },
