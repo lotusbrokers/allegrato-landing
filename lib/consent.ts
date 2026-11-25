@@ -51,3 +51,23 @@ export const CONSENT_REABRIR = 'lotus-consent-reabrir';
 export function reabrirPreferencias(): void {
   window.dispatchEvent(new Event(CONSENT_REABRIR));
 }
+
+/**
+ * Classe que marca o <html> de quem já escolheu os cookies, antes da primeira
+ * pintura. O CSS (app/globals.css) esconde o aviso nesse caso.
+ *
+ * Existe porque o aviso passou a vir no HTML do servidor (25/11/2026). Antes
+ * ele só era montado depois do JavaScript, e no celular virava o maior
+ * elemento da tela para o PageSpeed: no Doppio, o LCP era o texto do aviso,
+ * com 2,25 s de atraso. Vindo no HTML, ele aparece junto com a página; quem já
+ * escolheu não o vê piscar, porque a marca chega antes dele.
+ */
+export const CLASSE_COM_CONSENTIMENTO = 'lt-consentido';
+
+/**
+ * Script do início do <body> (app/layout.tsx): põe a classe acima quando o
+ * cookie de consentimento já existe. Roda antes de o aviso ser lido pelo
+ * navegador, então não há quadro com o aviso visível para quem já escolheu.
+ * A regra do cookie é a mesma de readConsent().
+ */
+export const CONSENT_MARCA_SCRIPT = `(function(){try{if(/(?:^|; )${CONSENT_COOKIE}=(?:all|essential)(?:;|$)/.test(document.cookie))document.documentElement.classList.add("${CLASSE_COM_CONSENTIMENTO}")}catch(e){}})();`;

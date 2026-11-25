@@ -4,3 +4,9 @@
    border-box mudaria larguras/paddings e quebraria o "idêntico". */
 @import url("../styles/fonts.css");
 @import url("../styles/base.css");
+
+/* Aviso de cookies: vem no HTML para aparecer junto com a página. Quem já
+   escolheu tem o <html> marcado antes da primeira pintura (CONSENT_MARCA_SCRIPT,
+   lib/consent.ts) e não o vê. Vale também para o aviso próprio de
+   /lotus-privacidade e /lotus-termos, que usa o mesmo id. */
+html.lt-consentido #lotus-cookie { display: none !important; }

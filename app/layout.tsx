@@ -5,6 +5,7 @@ import './globals.css';
 import CookieConsent from '@/components/CookieConsent';
 import Analytics, { AnalyticsNoScript } from '@/components/Analytics';
 import PreloadHints from '@/components/PreloadHints';
+import { CONSENT_MARCA_SCRIPT } from '@/lib/consent';
 
 // Metadata portada de lotus-home/index.html (paridade de SEO com o estático).
 // TODO go-live: revisar canonical/og:url para o domínio final e publicar sitemap/robots.
@@ -113,8 +114,13 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR">
+    // suppressHydrationWarning: o script abaixo pode pôr uma classe no <html>
+    // antes da hidratação, de propósito (marca de consentimento).
+    <html lang="pt-BR" suppressHydrationWarning>
       <body>
+        {/* Marca quem já escolheu os cookies antes de o aviso (no fim do body)
+            ser lido; ver CONSENT_MARCA_SCRIPT em lib/consent.ts. */}
+        <script dangerouslySetInnerHTML={{ __html: CONSENT_MARCA_SCRIPT }} />
         <AnalyticsNoScript />
         <PreloadHints />
         <Analytics />
@@ -124,7 +130,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         {children}
         {/* Banner de consentimento global (aparece em todas as páginas, como no
-            site estático). Só renderiza se não houver cookie lotus_consent. */}
+            site estático). Vem no HTML; quem já tem o cookie lotus_consent não
+            o vê, pela marca do início do body e pelo CSS de app/globals.css. */}
         <CookieConsent />
       </body>
     </html>
