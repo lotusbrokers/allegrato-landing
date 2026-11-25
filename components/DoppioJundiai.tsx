@@ -451,7 +451,7 @@ export default function DoppioJundiai() {
         {/* HERO */}
         <section style={parseStyle('position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;background:#140c06')} id="topo">
           <div style={parseStyle('position:absolute;inset:0;overflow:hidden')}>
-            <img style={parseStyle('width:100%;height:100%;object-fit:cover;object-position:72% center;transform:scale(1.12);animation:kenburns 22s ease-out forwards;will-change:transform')} id="lp-hero-img" src="/doppio-jundiai/midia/861562a30a34a09c.webp" alt="Doppio Jundiaí ao entardecer, em Campos Elísios, perspectiva artística preliminar" />
+            <img style={parseStyle('width:100%;height:100%;object-fit:cover;object-position:72% center;transform:scale(1.12);animation:kenburns 22s ease-out forwards;will-change:transform')} id="lp-hero-img" {...imagemOtimizada('/doppio-jundiai/midia/861562a30a34a09c.webp')} sizes="100vw" fetchPriority="high" alt="Doppio Jundiaí ao entardecer, em Campos Elísios, perspectiva artística preliminar" />
           </div>
           <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(to right,rgba(18,11,6,.86) 0%,rgba(18,11,6,.62) 26%,rgba(18,11,6,.22) 48%,transparent 64%)')}>
           </div>
@@ -619,7 +619,7 @@ export default function DoppioJundiai() {
               </div>
               <div style={parseStyle('position:relative')} data-reveal="right">
                 <div style={parseStyle('position:relative;overflow:hidden;border-radius:4px;box-shadow:0 40px 90px -40px rgba(0,0,0,.8)')}>
-                  <img style={parseStyle('width:100%;height:clamp(420px,62vh,640px);object-fit:cover')} src="/doppio-jundiai/midia/6748d6a3499b65cd.webp" alt="Living com pé-direito duplo de 5,60 m, perspectiva artística preliminar" loading="lazy" />
+                  <img style={parseStyle('width:100%;height:clamp(420px,62vh,640px);object-fit:cover')} {...imagemOtimizada('/doppio-jundiai/midia/6748d6a3499b65cd.webp', [640, 1080])} sizes="(max-width: 980px) 100vw, 560px" alt="Living com pé-direito duplo de 5,60 m, perspectiva artística preliminar" loading="lazy" />
                   <div style={parseStyle("position:absolute;left:22px;bottom:20px;font-family:'Jost',sans-serif;text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:#f3ece0;background:rgba(20,12,6,.5);backdrop-filter:blur(6px);padding:9px 16px;border-radius:30px;border:1px solid rgba(231,205,156,.25)")}>
                     Living · pé-direito duplo 5,60 m
                   </div>
@@ -648,7 +648,7 @@ export default function DoppioJundiai() {
             <div className="g3">
               <div style={parseStyle('background:#fff;border:1px solid rgba(40,26,14,.08);border-radius:10px;overflow:hidden;display:flex;flex-direction:column')} data-reveal="" className="dif-card">
                 <div style={parseStyle('position:relative;height:196px;overflow:hidden')}>
-                  <img style={parseStyle('width:100%;height:100%;object-fit:cover')} src="/doppio-jundiai/midia/a1c9609202096602.webp" alt="Acesso e fachada do Doppio Jundiaí, perspectiva preliminar" loading="lazy" />
+                  <img style={parseStyle('width:100%;height:100%;object-fit:cover')} {...imagemOtimizada('/doppio-jundiai/midia/a1c9609202096602.webp', [640, 1080])} sizes="(max-width: 980px) 100vw, 380px" alt="Acesso e fachada do Doppio Jundiaí, perspectiva preliminar" loading="lazy" />
                   <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(to top,rgba(18,10,5,.9),rgba(18,10,5,.05) 62%)')}>
                   </div>
                   <div style={parseStyle("position:absolute;top:16px;left:16px;width:42px;height:42px;border-radius:50%;background:rgba(243,236,224,.94);display:grid;place-items:center;font-family:'Jost',sans-serif;color:#a8763c;font-size:14px;letter-spacing:.05em")}>
@@ -744,7 +744,7 @@ export default function DoppioJundiai() {
               </div>
               <div style={parseStyle('background:#fff;border:1px solid rgba(40,26,14,.08);border-radius:10px;overflow:hidden;display:flex;flex-direction:column')} data-reveal="" className="dif-card">
                 <div style={parseStyle('position:relative;height:196px;overflow:hidden')}>
-                  <img style={parseStyle('width:100%;height:100%;object-fit:cover')} src="/doppio-jundiai/midia/6748d6a3499b65cd.webp" alt="Living com pé-direito duplo de 5,60 m, perspectiva preliminar" loading="lazy" />
+                  <img style={parseStyle('width:100%;height:100%;object-fit:cover')} {...imagemOtimizada('/doppio-jundiai/midia/6748d6a3499b65cd.webp', [640, 1080])} sizes="(max-width: 980px) 100vw, 380px" alt="Living com pé-direito duplo de 5,60 m, perspectiva preliminar" loading="lazy" />
                   <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(to top,rgba(18,10,5,.9),rgba(18,10,5,.05) 62%)')}>
                   </div>
                   <div style={parseStyle("position:absolute;top:16px;left:16px;width:42px;height:42px;border-radius:50%;background:rgba(243,236,224,.94);display:grid;place-items:center;font-family:'Jost',sans-serif;color:#a8763c;font-size:14px;letter-spacing:.05em")}>
@@ -1237,7 +1237,7 @@ export default function DoppioJundiai() {
           <div className="container">
             <div className="g2">
               <div style={parseStyle('overflow:hidden;border-radius:4px;box-shadow:0 40px 90px -45px rgba(0,0,0,.6)')} data-reveal="left">
-                <img style={parseStyle('width:100%;height:clamp(380px,56vh,560px);object-fit:cover')} src="/doppio-jundiai/midia/a1c9609202096602.webp" alt="Porte cochère do Doppio Jundiaí, perspectiva artística preliminar" loading="lazy" />
+                <img style={parseStyle('width:100%;height:clamp(380px,56vh,560px);object-fit:cover')} {...imagemOtimizada('/doppio-jundiai/midia/a1c9609202096602.webp', [640, 1080])} sizes="(max-width: 980px) 100vw, 560px" alt="Porte cochère do Doppio Jundiaí, perspectiva artística preliminar" loading="lazy" />
               </div>
               <div data-reveal="right">
                 <div style={parseStyle("font-family:'Jost',sans-serif;text-transform:uppercase;letter-spacing:.34em;font-size:12px;color:#a8763c;margin-bottom:24px")}>

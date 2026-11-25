@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { imagemOtimizada } from '@/lib/imagem-otimizada';
 
 /**
  * Tour virtual de um empreendimento, numa página de fora, dentro da landing.
@@ -80,7 +81,8 @@ export default function TourVirtual({
             }}
           >
             <img
-              src={capa}
+              {...imagemOtimizada(capa)}
+              sizes="(max-width: 1240px) 100vw, 1180px"
               alt={capaAlt}
               loading="lazy"
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
