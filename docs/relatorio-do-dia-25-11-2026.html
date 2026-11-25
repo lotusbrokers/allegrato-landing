@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relatório do dia 25/11/2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+  /* Mesmo visual dos relatórios de docs/seo: cores e fontes da marca Lotus. */
+  :root {
+    --bg: #f7f2e8; --card: #ffffff; --fg: #15241c; --muted: #4d6655; --line: rgba(21,36,28,.12);
+    --accent: #8a6a2c; --soft: rgba(21,36,28,.055);
+    --ok: #2f6b45; --ok-bg: #e3efe6; --wait: #8a5a12; --wait-bg: #f6e9cf;
+    --info: #2d5068; --info-bg: #e2ecf2;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111a15; --card: #18241d; --fg: #eee6d6; --muted: #a9bba9; --line: rgba(238,230,214,.14);
+      --accent: #d2b27a; --soft: rgba(238,230,214,.07);
+      --ok: #8fd0a4; --ok-bg: #1d3426; --wait: #f0c879; --wait-bg: #3a2f17;
+      --info: #9cc3dd; --info-bg: #1b2c37;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #111a15; --card: #18241d; --fg: #eee6d6; --muted: #a9bba9; --line: rgba(238,230,214,.14);
+    --accent: #d2b27a; --soft: rgba(238,230,214,.07);
+    --ok: #8fd0a4; --ok-bg: #1d3426; --wait: #f0c879; --wait-bg: #3a2f17;
+    --info: #9cc3dd; --info-bg: #1b2c37;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 15.5px/1.6 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  main { max-width: 980px; margin: 0 auto; padding-block: 48px 72px; display: grid; gap: 44px; }
+  h1, h2 { font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-weight: 300; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.08; letter-spacing: -.01em; }
+  h2 { font-size: clamp(22px, 3vw, 28px); line-height: 1.2; }
+  h3 { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.35; }
+  h4 { margin: 0; font-size: 12.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  p { margin: 0; max-width: 72ch; }
+  ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; max-width: 74ch; }
+  a { color: inherit; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+  code { font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; font-size: 13px; background: var(--soft); padding: 1px 6px; border-radius: 5px; overflow-wrap: anywhere; }
+  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+  .lead { color: var(--muted); font-size: 17px; }
+  .muted { color: var(--muted); font-size: 14.5px; }
+  header { display: grid; gap: 14px; }
+  section { display: grid; gap: 18px; min-width: 0; }
+  .cab { display: grid; gap: 6px; padding-top: 22px; border-top: 1px solid var(--line); }
+  .cab p { color: var(--muted); }
+  .numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+  .numeros div { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; min-width: 0; }
+  .numeros b { display: block; font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 30px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .numeros span { font-size: 13.5px; color: var(--muted); }
+  .bloco { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; display: grid; gap: 10px; min-width: 0; }
+  .bloco-topo { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 14px; }
+  .selo { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 999px; white-space: nowrap; }
+  .noar { background: var(--ok-bg); color: var(--ok); }
+  .perfil { background: var(--info-bg); color: var(--info); }
+  .local { background: var(--wait-bg); color: var(--wait); }
+  .tabela { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 14.5px; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  th { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 700; background: var(--soft); white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .duas { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+  footer { color: var(--muted); font-size: 13.5px; display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 20px; }
+</style>
+</head>
+<body>
+<main>
+
+  <header>
+    <span class="eyebrow">Lotus Brokers · relatório do dia</span>
+    <h1>Tudo o que foi feito em 25/11/2026</h1>
+    <p class="lead">Ajustes do site, SEO, Perfil da Empresa no Google, preços na Dashboard e o Site do Cliente. Cada item diz se já está no ar, se foi feito direto no Google ou se ficou pronto no computador, esperando o seu “commit changes”.</p>
+    <div class="numeros">
+      <div><b>13</b><span>commits no ar, em 3 publicações (9h06, 13h29 e 14h57)</span></div>
+      <div><b>82</b><span>páginas avisadas aos buscadores pelo IndexNow</span></div>
+      <div><b>9</b><span>pedidos de indexação no Search Console</span></div>
+      <div><b>7</b><span>mudanças no Google: 5 no perfil, 1 no GTM e 1 no Analytics</span></div>
+      <div><b>332</b><span>testes passando no código publicado, mais 2 novos do aviso de cookies</span></div>
+    </div>
+  </header>
+
+  <section aria-labelledby="site-t">
+    <div class="cab">
+      <h2 id="site-t">Site no ar</h2>
+      <p>Três publicações. Antes de cada uma: testes, build sem o Site do Cliente, datas do sitemap e conferência em produção depois.</p>
+    </div>
+
+    <div class="bloco">
+      <div class="bloco-topo"><h3>9h06 · Rodada 2 de desempenho</h3><span class="selo noar">No ar</span></div>
+      <ul>
+        <li>Logo da Lotus otimizado em 14 arquivos: no rodapé de 10 páginas do portal, carregado só quando aparece; no topo de cookies, privacidade, termos e meus dados, sem atraso (<code>fe3562a</code>).</li>
+        <li>Doppio: galeria de lazer e fotos de seção pelo otimizador de imagem (<code>7abb60b</code>).</li>
+        <li>Relatório dos ajustes de 24 e 25/11 em <code>docs/seo/ajustes-realizados-25-11-2026.html</code> (<code>6224692</code>).</li>
+      </ul>
+    </div>
+
+    <div class="bloco">
+      <div class="bloco-topo"><h3>13h29 · Descrições, títulos e fotos do Doppio</h3><span class="selo noar">No ar</span></div>
+      <ul>
+        <li>As 78 páginas de condomínio ganharam descrição montada dos dados (bairro, comodidades e imóveis à venda), no lugar do slogan da Dash que se repetia (<code>cc3d465</code>).</li>
+        <li>Dois artigos com muita impressão e pouco clique ganharam título e resumo que respondem a dúvida da busca: “Greve da Caixa terminou: como ficam os financiamentos imobiliários” e “Nota fiscal na venda de imóvel: quem precisa emitir a NF-e ABI” (<code>f09d652</code>).</li>
+        <li>Doppio: foto do topo, living, fachada e capa do tour pelo otimizador; a do topo passou de 342 KB para 36 KB no celular (<code>d253b6e</code>).</li>
+        <li>Conferido em produção: 13 de 13 itens certos. IndexNow de 81 páginas, com resposta 200.</li>
+      </ul>
+    </div>
+
+    <div class="bloco">
+      <div class="bloco-topo"><h3>14h57 · Depoimentos da home só de clientes</h3><span class="selo noar">No ar</span></div>
+      <ul>
+        <li>Saíram da home as avaliações de Flávia Ceolin e Giselle Alves, corretoras da Lotus. Avaliação de quem trabalha na empresa não é depoimento de cliente, e o Google não a aceita. A home ficou com 5 depoimentos e a nota “5,0 · 17 avaliações no Google” (<code>e6e4c4f</code>).</li>
+        <li>IndexNow da home, com resposta 200.</li>
+      </ul>
+    </div>
+
+    <div class="bloco">
+      <div class="bloco-topo"><h3>Aviso de cookies no HTML</h3><span class="selo local">Pronto, esperando “commit changes”</span></div>
+      <p>No celular, o PageSpeed via o texto do aviso de cookies como o maior elemento da tela do Doppio, e ele só aparecia 2,25 s depois do resto, porque dependia do JavaScript. Agora o aviso vem pronto no HTML e aparece junto com a página. Quem já escolheu não o vê: um script mínimo no começo da página o esconde antes da primeira pintura.</p>
+      <ul>
+        <li>O texto do aviso fica fora dos trechos do Google (<code>data-nosnippet</code>).</li>
+        <li>Conferido no servidor local: sem cookie, o aviso aparece; com cookie, não aparece; “Abrir preferências de cookies” o traz de volta. Nenhum erro no console, 2 testes novos.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="seo-t">
+    <div class="cab">
+      <h2 id="seo-t">SEO</h2>
+    </div>
+    <div class="duas">
+      <div class="bloco">
+        <h3>Search Console</h3>
+        <ul>
+          <li>239 páginas indexadas e 40 fora, contra 30 indexadas em outubro.</li>
+          <li>9 pedidos de indexação: Doppio, Oásis, Reserva Castanheira, guia e artigo da Vila Rio Branco, artigos do Medeiros, Vianelo e Itupeva, e Casas em Itupeva.</li>
+          <li>Achado novo: páginas que aparecem muito e quase não recebem clique. Os condomínios e os dois artigos já foram corrigidos (13h29).</li>
+        </ul>
+      </div>
+      <div class="bloco">
+        <h3>Medição do Google</h3>
+        <ul>
+          <li><strong>GTM:</strong> pausadas a tag do Google G-QBVBX74XEY e o evento page_view dela, que contavam em dobro. Saiu a versão 3 do contêiner às 14h54.</li>
+          <li><strong>Analytics:</strong> a G-QBVBX74XEY foi desconectada da tag do site (G-ELYJJMHD5N). Saem uns 179 KB de script de cada página, e a propriedade antiga para de receber dados a partir de hoje. Ela não tinha Google Ads vinculado.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bloco">
+      <h3>Verificação do site inteiro, depois dos deploys</h3>
+      <ul>
+        <li>As 265 páginas do sitemap, lidas como o Google de celular: todas respondem normalmente, cada uma com seu endereço oficial, nenhuma bloqueada para o Google, um título principal por página, nenhuma imagem sem texto alternativo, nenhuma descrição repetida e dados estruturados sem erro.</li>
+        <li>Mudaram só as 80 páginas previstas.</li>
+        <li>Ficam os avisos já conhecidos: 38 títulos de landing acima de 70 caracteres, as 10 descrições da Santa Angela acima de 160 caracteres, 7 páginas com um só link interno e 10 com menos de 300 palavras.</li>
+      </ul>
+    </div>
+
+    <div class="tabela">
+      <table>
+        <thead><tr><th>PageSpeed no celular</th><th>Nota</th><th>Maior elemento aparece em</th><th>Antes</th></tr></thead>
+        <tbody>
+          <tr><td>Home</td><td class="n">84</td><td class="n">1,0 s</td><td class="n">94 (24/11)</td></tr>
+          <tr><td>Busca de Jundiaí</td><td class="n">76</td><td class="n">6,8 s</td><td class="n">71</td></tr>
+          <tr><td>Doppio</td><td class="n">74</td><td class="n">4,7 s</td><td class="n">84 (de manhã)</td></tr>
+          <tr><td>Imóvel AP0701</td><td class="n">68</td><td class="n">5,8 s</td><td class="n">67 (9,3 s)</td></tr>
+          <tr><td>Guia do Medeiros</td><td class="n">67</td><td class="n">6,1 s</td><td class="n">58 (8,9 s)</td></tr>
+          <tr><td>Artigo do Vianelo</td><td class="n">63</td><td class="n">6,1 s</td><td class="n">65</td></tr>
+          <tr><td>Condomínio Chronos</td><td class="n">61</td><td class="n">9,0 s</td><td class="n">54</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted">A home e o Doppio foram medidos um de cada vez, depois do último deploy. As outras cinco foram medidas juntas, logo depois do deploy das 13h29, e podem ter saído piores do que são. As medições são de antes da desconexão da G-QBVBX74XEY e da correção do aviso de cookies.</p>
+  </section>
+
+  <section aria-labelledby="gbp-t">
+    <div class="cab">
+      <h2 id="gbp-t">Perfil da Empresa no Google</h2>
+      <p>Feito pela conta que administra o perfil, com a sua aprovação. O Google revisa cada mudança antes de mostrar. O perfil continua verificado.</p>
+    </div>
+    <div class="bloco">
+      <div class="bloco-topo"><h3>Mudanças no perfil</h3><span class="selo perfil">Feito no Google</span></div>
+      <ul>
+        <li>Foto do Allegrato trocada: saiu o anúncio com “a partir de R$ 350.000,00” (a tabela de novembro começa em R$ 360.334,56) e entrou o render do lazer, sem preço.</li>
+        <li>Descrição nova, com 532 caracteres, sem aluguel e só com Jundiaí e Itupeva. Substituiu a de 179 caracteres.</li>
+        <li>Redes sociais: entraram YouTube e TikTok, e o Facebook passou a usar o mesmo link do site.</li>
+        <li>Serviços: saíram os 3 ligados a locação e entrou “Lançamentos imobiliários”, com descrição. Ficaram 17.</li>
+        <li>Endereço no painel com a grafia dos Correios: “Avenida Luiz José Sereno 655”.</li>
+      </ul>
+    </div>
+    <div class="duas">
+      <div class="bloco">
+        <h3>Checklist do Playbook 09</h3>
+        <p>52 itens conferidos no Maps, no painel, no código e no Search Console: 22 feitos, 8 em parte, 11 não feitos, 7 não conferidos e 4 que não se aplicam. Está em <code>docs/seo/checklist-gbp-25-11-2026.html</code>.</p>
+      </div>
+      <div class="bloco">
+        <h3>Playbook revisado (v1.1)</h3>
+        <p>No MD da sua Área de Trabalho: pedido de avaliação para todos os clientes, sem filtro de NPS; perguntas só como proprietário; chat pelo WhatsApp; áreas pela D026; sem locação; horário, telefone e site atualizados.</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="dash-t">
+    <div class="cab">
+      <h2 id="dash-t">Dashboard: tabelas de preço</h2>
+      <p>O preço do site sai das tipologias da Dashboard.</p>
+    </div>
+    <div class="duas">
+      <div class="bloco">
+        <h3>Allegrato, Torre A (tabela 1634)</h3>
+        <ul>
+          <li>Só unidades disponíveis, as verdes da tabela, como você pediu.</li>
+          <li>55,12 m² a R$ 360.334,56 e 63,05 m² corrigido para R$ 454.917,24 (a unidade anterior estava vendida).</li>
+          <li>63,75 m² (R$ 467.642,19) e 64,62 m² (R$ 507.937,89) esperam a correção do bug da Dash.</li>
+        </ul>
+      </div>
+      <div class="bloco">
+        <h3>Vistta Castanho</h3>
+        <ul>
+          <li>O lote compacto ganhou a área de 126 m², a R$ 281.295,00.</li>
+          <li>5 faixas de lote esperam a correção do mesmo bug: a Dash não salva tipologia nova num lançamento que já tem tipologias.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="sdc-t">
+    <div class="cab">
+      <h2 id="sdc-t">Site do Cliente</h2>
+      <p>A página pessoal de cada lead. Nada disto está no ar: depende do dev da Dash.</p>
+    </div>
+    <div class="bloco">
+      <div class="bloco-topo"><h3>Fase 3: proposta e acompanhamento</h3><span class="selo local">Pronto no código, fora do ar</span></div>
+      <ul>
+        <li>Duas páginas novas, liberadas pela etapa do negócio no Jurídico da Dash. A Proposta só existe depois que a proposta é registrada, e o Acompanhamento só depois de “Assinadas”.</li>
+        <li>Nada de fase não liberada chega ao navegador. Convidado e link de convite nunca veem valor, documento ou arquivo, nem no código da página.</li>
+        <li>Os arquivos (proposta, proposta assinada, contrato, matrícula) abrem por um link de poucos minutos pedido à Dash. A Lotus não guarda arquivo.</li>
+        <li>14 testes novos e 21 de 21 conferências no servidor local. Funciona no celular, sem rolagem lateral.</li>
+      </ul>
+    </div>
+    <div class="duas">
+      <div class="bloco">
+        <h3>O que a Dash tem hoje</h3>
+        <ul>
+          <li>A API pública só tem leads, corretores e webhooks.</li>
+          <li>Entre os avisos automáticos, só existe o de proposta assinada.</li>
+          <li>O portal do cliente da Dash é só leitura: a pessoa digita o telefone e vê o que a imobiliária liberou. Não há envio de documento pelo cliente em lugar nenhum.</li>
+        </ul>
+      </div>
+      <div class="bloco">
+        <h3>Para o dev da Dash</h3>
+        <ul>
+          <li>Briefing da Fase 3, com 3 opções para os documentos (recomendada: o cliente enviar pelo portal da Dash) e a proposta de SQL 0008.</li>
+          <li>Página com tudo o que o dev precisa fazer, em ordem: <a href="https://claude.ai/artifact/H4qBRb1zhAvoDH57UatT19">Tarefas do dev da Dash</a> (privada; compartilhe pelo Share).</li>
+          <li>Briefing do bug da tipologia atualizado com os valores de hoje (<code>418f92d</code>, no ar).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="pend-t">
+    <div class="cab">
+      <h2 id="pend-t">Esperando você</h2>
+    </div>
+    <div class="duas">
+      <div class="bloco">
+        <h3>Decisões e liberações</h3>
+        <ul>
+          <li>“commit changes” para publicar o aviso de cookies no HTML.</li>
+          <li>Respostas às 13 avaliações sem resposta (os textos estão prontos).</li>
+          <li>Carlos Fabricio Lamas Mamede tem o sobrenome da corretora Mariana Mamede: se for parente, sai dos depoimentos da home.</li>
+          <li>Foto de capa, categorias secundárias, acessibilidade e estacionamento, e horário de Natal e Ano Novo do perfil.</li>
+          <li>Site do Cliente: qual opção para os documentos, como avisar o cliente e publicar as Fases 1 e 3 juntas.</li>
+        </ul>
+      </div>
+      <div class="bloco">
+        <h3>Com outras pessoas</h3>
+        <ul>
+          <li>Dev da Dash: o bug da tipologia, as migrations 0007 e 0008 e o endpoint de arquivo.</li>
+          <li>As 4 corretoras com avaliação no perfil: só elas podem apagar.</li>
+          <li>Easypanel: o redirecionamento de http direto para https://www.</li>
+          <li>Ainda no SEO: fotos de lazer do Santorini, o nome do Duo e autores reais nos artigos.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Feito em 25/11/2026. Fontes: commits do repositório do portal, site no ar, Search Console, PageSpeed, painel do Perfil da Empresa, GTM e Google Analytics. Relatórios do dia: <code>docs/seo/ajustes-realizados-25-11-2026.html</code>, <code>docs/seo/ajustes-e-indexacao-25-11-2026.html</code>, <code>docs/seo/checklist-gbp-25-11-2026.html</code> e o briefing <code>docs/para-devs/DEV — Site do Cliente Fase 3 (25-11-2026).md</code>.</p>
+  </footer>
+
+</main>
+</body>
+</html>
