@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ajustes realizados 25/11</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #f7f2e8; --card: #ffffff; --fg: #15241c; --muted: #4d6655; --line: rgba(21,36,28,.12);
+    --accent: #b18a4a; --ok: #2f6b45; --ok-bg: #e3efe6; --wait: #8a5a12; --wait-bg: #f6e9cf;
+    --info: #2d5068; --info-bg: #e2ecf2; --code-bg: rgba(21,36,28,.06);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111a15; --card: #18241d; --fg: #eee6d6; --muted: #a9bba9; --line: rgba(238,230,214,.14);
+      --accent: #d2b27a; --ok: #8fd0a4; --ok-bg: #1d3426; --wait: #f0c879; --wait-bg: #3a2f17;
+      --info: #9cc3dd; --info-bg: #1b2c37; --code-bg: rgba(238,230,214,.08);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #111a15; --card: #18241d; --fg: #eee6d6; --muted: #a9bba9; --line: rgba(238,230,214,.14);
+    --accent: #d2b27a; --ok: #8fd0a4; --ok-bg: #1d3426; --wait: #f0c879; --wait-bg: #3a2f17;
+    --info: #9cc3dd; --info-bg: #1b2c37; --code-bg: rgba(238,230,214,.08);
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 15.5px/1.6 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  main { max-width: 980px; margin: 0 auto; padding-block: 48px 72px; }
+  h1, h2, h3 { font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-weight: 300; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.08; letter-spacing: -.01em; }
+  h2 { font-size: clamp(22px, 3vw, 28px); line-height: 1.2; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line); }
+  h3 { font-size: 19px; font-weight: 500; line-height: 1.3; }
+  p { margin: 0; max-width: 68ch; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+  .lead { color: var(--muted); font-size: 17px; margin-top: 14px; }
+  .stack { display: flex; flex-direction: column; gap: 14px; }
+  .aviso { margin-top: 22px; background: var(--wait-bg); border-left: 4px solid var(--wait); border-radius: 10px; padding: 14px 18px; }
+  .aviso strong { color: var(--wait); }
+  .numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 28px; }
+  .numero { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; min-width: 0; }
+  .numero b { display: block; font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 30px; line-height: 1.1; }
+  .numero span { font-size: 13.5px; color: var(--muted); }
+  .tabela { overflow-x: auto; margin-top: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+  table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  th { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; background: var(--code-bg); white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .selo { display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 30px; white-space: nowrap; }
+  .feito { background: var(--ok-bg); color: var(--ok); }
+  .andamento { background: var(--wait-bg); color: var(--wait); }
+  .corrigido { background: var(--info-bg); color: var(--info); }
+  .item { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 20px 22px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .item-topo { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 14px; }
+  .codigo { font-weight: 600; color: var(--accent); font-size: 14px; letter-spacing: .04em; }
+  ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; max-width: 72ch; }
+  code { font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; font-size: 13px; background: var(--code-bg); padding: 1px 6px; border-radius: 5px; overflow-wrap: anywhere; }
+  .muted { color: var(--muted); font-size: 14px; }
+  footer { margin-top: 56px; color: var(--muted); font-size: 13.5px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="stack">
+    <span class="eyebrow">Portal Lotus Brokers · lotusbrokers.com.br · OctoDash</span>
+    <h1>Ajustes realizados de 24 a 25/11/2026</h1>
+    <p class="lead">Tudo o que foi feito a partir da 2ª edição da auditoria de SEO (códigos N1 a N14), em duas rodadas no site, mais as tabelas de preço lançadas na Dashboard e o que ainda depende da Lotus.</p>
+  </div>
+
+  <div class="aviso"><strong>Situação.</strong> A rodada 1 está no ar desde 24/11, às 14:50; 29 de 29 itens foram conferidos em produção e o IndexNow foi avisado. A rodada 2 foi enviada à main em 25/11 (commits fe3562a e 7abb60b), e o Easypanel publica a partir dela. As tabelas da Dashboard foram salvas em 25/11 e conferidas no banco.</div>
+
+  <div class="numeros">
+    <div class="numero"><b>13</b><span>descrições encurtadas para até 160 caracteres</span></div>
+    <div class="numero"><b>114</b><span>imagens das landings em HTML carregando sob demanda</span></div>
+    <div class="numero"><b>14</b><span>arquivos com o logo otimizado (todos os guias, condomínios e artigos)</span></div>
+    <div class="numero"><b>14</b><span>fotos do Doppio pelo otimizador de imagem</span></div>
+    <div class="numero"><b>2</b><span>tabelas de preço na Dashboard (Allegrato e Vistta Castanho)</span></div>
+  </div>
+
+  <h2>Rodada 1 do site (24/11, no ar)</h2>
+  <div class="tabela">
+    <table>
+      <thead><tr><th>Código</th><th>O que mudou</th><th>Commit</th></tr></thead>
+      <tbody>
+        <tr><td>N13</td><td>13 descrições com até 160 caracteres: 6 artigos e 7 landings de outras construtoras (as 10 da Santa Angela mantêm a frase obrigatória).</td><td><code>f88c42e</code></td></tr>
+        <tr><td>N6</td><td>O nome do captador, no cartão do imóvel, leva à página do corretor. Corretor sem foto sai com a imagem padrão ao ser compartilhado.</td><td><code>90cc676</code></td></tr>
+        <tr><td>N12</td><td>Descrição (alt) nas 12 miniaturas da galeria do Odeon.</td><td><code>8a95084</code></td></tr>
+        <tr><td>N4</td><td>Capa da construtora, cards de empreendimento e fotos do blog pelo otimizador; capa do artigo com prioridade.</td><td><code>34140df</code></td></tr>
+        <tr><td>N5</td><td>Landings em HTML: 13 fotos em WebP (2,18 → 1,44 MB), 114 imagens sob demanda, prioridade da foto do topo na Santorini, Castanheira e Oásis.</td><td><code>c9d30eb</code></td></tr>
+        <tr><td>N8</td><td>"Apartamentos na planta" no título, na descrição e no H1 de /lotus-lancamentos.</td><td><code>c9c16ff</code></td></tr>
+        <tr><td>N14</td><td>Cabeçalho HSTS em todas as respostas.</td><td><code>f7218a0</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted" style="margin-top:12px">Conferido antes do envio (323 testes e build) e em produção (29 de 29 itens). O IndexNow recebeu 34 páginas (HTTP 200). Detalhe completo em <code>docs/seo/ajustes-auditoria-24-11-2026.html</code>.</p>
+
+  <h2>Dashboard: tabelas de preço (25/11)</h2>
+  <div class="stack" style="margin-top:16px">
+    <section class="item">
+      <div class="item-topo"><h3>Allegrato, tabela 1634 da Santa Angela (Torre A)</h3><span class="selo feito">Salvo</span></div>
+      <p>Pedido: "subir somente a de verde". No PDF, a bolinha de cada unidade é a situação dela, e a verde é a disponível. O "a partir de" saiu só das 57 unidades verdes, das 140 da torre; a cor foi lida da imagem do PDF, unidade por unidade. O PDF só traz a Torre A, e você confirmou subir a Torre A.</p>
+      <div class="tabela">
+        <table>
+          <thead><tr><th>Planta (Torre A)</th><th>A partir de (verdes)</th><th>Unidade</th><th>Na Dash</th></tr></thead>
+          <tbody>
+            <tr><td>55,12 m², sem vaga</td><td class="num">R$ 360.334,56</td><td>1</td><td><span class="selo feito">mantido</span></td></tr>
+            <tr><td>63,05 m², 1 vaga</td><td class="num">R$ 454.917,24</td><td>38</td><td><span class="selo feito">corrigido</span> (era R$ 441.131,87, da unidade 18, já vendida)</td></tr>
+            <tr><td>63,75 m², 1 vaga</td><td class="num">R$ 467.642,19</td><td>13</td><td><span class="selo andamento">bloqueado pelo bug</span></td></tr>
+            <tr><td>64,62 m², 1 vaga</td><td class="num">R$ 507.937,89</td><td>107</td><td><span class="selo andamento">bloqueado pelo bug</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted">O "Valor mínimo" segue "a partir de R$ 360.334". As Torres B/C/D têm plantas próprias na Dash (55,12, 56,11, 57,22 e 58,96 m²) e continuam sem preço até chegar a tabela delas. No site, o card do Allegrato segue "Valor a consultar", por decisão comercial anterior.</p>
+    </section>
+
+    <section class="item">
+      <div class="item-topo"><h3>Vistta Castanho (Applausi), tabela de novembro/2026</h3><span class="selo feito">Salvo em parte</span></div>
+      <p>31 lotes, todos a R$ 2.232,50/m². A tipologia que já existia, "Lote residencial (compacto)", ganhou a área de 126 m² (R$ 281.295,00, 19 lotes nas quadras B, C e D). O "Valor mínimo" segue "a partir de R$ 281.295".</p>
+      <div class="tabela">
+        <table>
+          <thead><tr><th>Faixa de lote</th><th>Onde</th><th>A partir de</th><th>Na Dash</th></tr></thead>
+          <tbody>
+            <tr><td>126 m²</td><td>Quadras B, C e D (19 lotes)</td><td class="num">R$ 281.295,00</td><td><span class="selo feito">salvo</span></td></tr>
+            <tr><td>133,96 a 136,43 m²</td><td>Quadra I (23, 24, 25, 30)</td><td class="num">R$ 299.065,70</td><td><span class="selo andamento">bloqueado pelo bug</span></td></tr>
+            <tr><td>171,96 a 177,63 m²</td><td>Quadra I (3, 13 a 17, 20)</td><td class="num">R$ 383.900,70</td><td><span class="selo andamento">bloqueado pelo bug</span></td></tr>
+            <tr><td>237,89 m²</td><td>Quadra D, lote 21</td><td class="num">R$ 531.089,42</td><td><span class="selo andamento">bloqueado pelo bug</span></td></tr>
+            <tr><td>327,03 m²</td><td>Quadra D, lote 20</td><td class="num">R$ 730.094,47</td><td><span class="selo andamento">bloqueado pelo bug</span></td></tr>
+            <tr><td>393,45 m²</td><td>Quadra D, lote 19</td><td class="num">R$ 878.377,12</td><td><span class="selo andamento">bloqueado pelo bug</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="item">
+      <div class="item-topo"><h3>Bug da Dash: tipologia nova não salva</h3><span class="selo andamento">Continua em 25/11</span></div>
+      <p>Num lançamento que já tem tipologias, acrescentar uma linha faz a Dash recusar tudo ("Não foi possível salvar as tipologias. O lançamento não foi alterado."). O chamado está aberto desde 19/11, em <code>docs/para-devs/DEV — Tipologia nova não salva (19-11-2026).md</code>. As 7 linhas bloqueadas acima entram assim que o dev corrigir.</p>
+    </section>
+  </div>
+
+  <h2>Rodada 2 do site (25/11)</h2>
+  <div class="stack" style="margin-top:16px">
+    <section class="item">
+      <div class="item-topo"><span class="codigo">N4</span><h3>Logo da Lotus otimizado em 14 arquivos</h3><span class="selo feito">Enviado · fe3562a</span></div>
+      <p>O rodapé de 10 páginas do portal (guias, condomínios, blog, lançamentos, corretores, FAQ, sobre, anunciar e os dois índices) usava o PNG cru de 39 KB, carregado de cara. O React o pré-carregava no topo da página, disputando banda com a foto principal. Agora o logo é o WebP de 256/384 px, carregado só quando a pessoa chega ao rodapé, como já faziam a home e a busca. Em cookies, privacidade, termos e meus-dados o logo fica no topo: otimizado, sem esperar.</p>
+    </section>
+    <section class="item">
+      <div class="item-topo"><span class="codigo">N4</span><h3>Doppio: galeria de lazer pelo otimizador</h3><span class="selo feito">Enviado · 7abb60b</span></div>
+      <p>O PageSpeed apontou 835 KiB em fotos abaixo da primeira tela. As 12 miniaturas da galeria e as fotos do Club House e da localização eram as JPG originais, de 2.200 a 2.844 px, mostradas em blocos de 300 a 600 px. Agora chegam em WebP de 640 ou 1080 px, conforme a tela. O lightbox continua abrindo a foto inteira (conferido no navegador).</p>
+    </section>
+    <section class="item">
+      <div class="item-topo"><h3>Visto e deixado como está</h3><span class="selo corrigido">Analisado</span></div>
+      <ul>
+        <li><strong>Altissimi:</strong> a última JPG pesada (146 KB) não fica nem 10% menor em WebP. Pela mesma regra das outras landings, fica como está, e a versão pré-renderizada não precisou ser refeita.</li>
+        <li><strong>Vila Triunfo:</strong> as 23 fotos da landing vêm direto do site da F A Oliva, sem cópia no nosso servidor. Trazer para cá exige baixar os 23 arquivos do site da construtora, e espera a sua autorização.</li>
+      </ul>
+    </section>
+  </div>
+
+  <h2>Recortes para aprovar (N8 e N10)</h2>
+  <div class="stack" style="margin-top:16px">
+    <p>A auditoria pede página de lançamentos por bairro ou por dormitórios só onde houver 3 ou mais lançamentos ativos, e com texto próprio. Sem isso, o Google trata como página-porta. Levantamento no site em 25/11:</p>
+    <ul>
+      <li><strong>Por bairro:</strong> só o <strong>Medeiros</strong> passa da régua, com 5 lançamentos (Allegrato, Reserva Di Medeiros, Gioviale, Reserva Castanheira e Brisas do Japi). O guia do Medeiros já tem a seção "Lançamentos no bairro". A recomendação é reforçar essa seção com um texto da Lotus, em vez de criar uma página que repetiria o guia.</li>
+      <li><strong>Por dormitórios:</strong> não dá para montar hoje: os 38 lançamentos chegam sem tipo e sem dormitórios na listagem.</li>
+      <li><strong>Estágio da obra:</strong> o campo é texto livre e está despadronizado ("Obras" e "Em obras", "ferveiro", 5 vazios). Vale padronizar na Dash antes de qualquer recorte por status.</li>
+      <li><strong>Itupeva (N10):</strong> há 3 imóveis à venda (2 terrenos e 1 casa). Ainda não há acervo para a página "Imóveis à venda em Itupeva"; a "Casas à venda em Itupeva" segue como está.</li>
+    </ul>
+  </div>
+
+  <h2>Dicas de endereço (URL)</h2>
+  <div class="tabela">
+    <table>
+      <thead><tr><th>Dica</th><th>No site</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td>Hífen, não sublinhado</td><td><span class="selo feito">Cumpre</span></td><td>Nenhuma das 272 URLs internas tem sublinhado nem acento. O Google recomenda o hífen, sem falar em penalidade.</td></tr>
+        <tr><td>Palavras descritivas, não números</td><td><span class="selo feito">Cumpre</span></td><td>A exceção são os imóveis (<code>/lotus-imovel/AP0701</code>), com o código da Dash. Trocar exige redirecionar todos e mudar os links da Dash; recomendado não fazer agora.</td></tr>
+        <tr><td>Páginas de cidade, do amplo ao específico</td><td><span class="selo feito">Cumpre</span></td><td>Guias agrupados por cidade e buscas por cidade só onde há imóveis, dentro da regra do Google contra páginas-porta.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>O que a própria auditoria contou errado</h2>
+  <ul style="margin-top:16px">
+    <li>"17 landings da Santa Angela": são 10 da Santa Angela e 7 de outras construtoras.</li>
+    <li>H1 duplicado na Altissimi e no Vila Triunfo: a varredura leu o molde <code>&lt;template&gt;</code>, que o Google não lê. Cada página tem um H1.</li>
+    <li>104 imagens sem alt: eram 12 faltas reais (Odeon). O resto era decorativo ou nem era imagem da página.</li>
+  </ul>
+
+  <h2>Pendências e decisões</h2>
+  <div class="stack" style="margin-top:16px">
+    <ul>
+      <li><strong>Dev da Dash:</strong> corrigir o bug de tipologia nova. Depois, lançar as 2 plantas do Allegrato e as 5 faixas do Vistta Castanho.</li>
+      <li><strong>Easypanel:</strong> mandar o http direto para https://www (N14).</li>
+      <li><strong>Sua autorização:</strong> trazer para o nosso servidor as 23 fotos do Vila Triunfo que vêm do site da F A Oliva.</li>
+      <li><strong>Decisão da Lotus:</strong> títulos das landings (N11, regras das construtoras), endereço dos imóveis e o texto do Medeiros.</li>
+      <li><strong>Conteúdo da Lotus:</strong> guias, condomínios e construtoras (N7, N9, N10), e o corretor que revisa cada artigo (N6).</li>
+      <li><strong>Lotus (contas):</strong> Search Console, links externos, avaliações no Google (N1 a N3) e as tags do GTM que o site já carrega sozinho (N4).</li>
+      <li><strong>Depois do deploy:</strong> medir de novo no PageSpeed a Santorini, a MRV, o Doppio e um artigo, e atualizar o relatório da auditoria.</li>
+    </ul>
+  </div>
+
+  <h2>Outras entregas da sessão (19 a 23/11)</h2>
+  <div class="tabela">
+    <table>
+      <thead><tr><th>Entrega</th><th>Commit</th></tr></thead>
+      <tbody>
+        <tr><td>Tour virtual na landing do Doppio</td><td><code>5a445a3</code></td></tr>
+        <tr><td>Plantas do Doppio com o material oficial (7 ainda faltam: a de 210 m² e as duplex)</td><td><code>d338306</code></td></tr>
+        <tr><td>Guia do bairro Vila Rio Branco</td><td><code>5f5a4b8</code></td></tr>
+        <tr><td>Blog: Vila Rio Branco, Rota da Cultura Negra, Sextou do feriado e Vianelo</td><td><code>6e7b8c6</code></td></tr>
+        <tr><td>Chamado do bug de tipologia para o dev da Dash</td><td><code>04757fe</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>Gerado em 25/11/2026. Auditoria de referência: 2ª edição, 24/11/2026.</footer>
+</main>
+</body>
+</html>
