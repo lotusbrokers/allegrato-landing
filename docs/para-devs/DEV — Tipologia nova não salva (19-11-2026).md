@@ -52,12 +52,24 @@ Acrescentar plantas a um lançamento que já tem plantas, sem apagar e recriar a
 
 ## Dados / contexto adicional
 
-Tipologias do Allegrato (L030) que ficaram de fora por causa do erro. Subir assim que corrigir:
+Tipologias que ficaram de fora por causa do erro. Subir assim que corrigir. Valores revistos em 25/11/2026: no Allegrato, só as unidades disponíveis (as verdes da tabela).
+
+**Allegrato (L030), Torre A, tabela 1634:**
 
 | Nome | Dorms | Suítes | Vagas | Área m² | A partir de R$ |
 |---|---|---|---|---|---|
-| 2 dorms · 63,75 m² · Torre A, finais 03 e 04 | 2 | 0 | 1 | 63,75 | 467.642,19 |
-| 2 dorms · 64,62 m² · Torre A, final 07 | 2 | 0 | 1 | 64,62 | 451.736,00 |
+| 2 dorms · 63,75 m² · Torre A, finais 03 e 04 | 2 | 0 | 1 | 63,75 | 467.642,19 (unid. 13) |
+| 2 dorms · 64,62 m² · Torre A, final 07 | 2 | 0 | 1 | 64,62 | 507.937,89 (unid. 107) |
+
+**Vistta Castanho, tabela de novembro/2026 (R$ 2.232,50 o m²).** O mesmo erro em 25/11/2026 deixou de fora 5 faixas de lote:
+
+| Lotes | A partir de R$ |
+|---|---|
+| 133,96 a 136,43 m², Quadra I | 299.065,70 |
+| 171,96 a 177,63 m², Quadra I | 383.900,70 |
+| 237,89 m², D21 | 531.089,42 |
+| 327,03 m², D20 | 730.094,47 |
+| 393,45 m², D19 | 878.377,12 |
 
 O que entrou em 19/11/2026 às 10:32, só nas linhas que já existiam:
 - **55,12 m² · Torre A, final 01:** R$ 360.334,56.
