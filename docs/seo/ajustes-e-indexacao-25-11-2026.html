@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ajustes e indexação 25/11</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<style>
+  /* Mesmo visual dos outros relatórios de docs/seo. Arquivo único: abre sem internet
+     (as fontes caem para Georgia e a fonte do sistema) e imprime em PDF. */
+  :root {
+    --bg: #f7f2e8; --card: #ffffff; --fg: #15241c; --muted: #4d6655; --line: rgba(21,36,28,.12);
+    --accent: #b18a4a; --ok: #2f6b45; --ok-bg: #e3efe6; --wait: #8a5a12; --wait-bg: #f6e9cf;
+    --info: #2d5068; --info-bg: #e2ecf2; --code-bg: rgba(21,36,28,.06);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111a15; --card: #18241d; --fg: #eee6d6; --muted: #a9bba9; --line: rgba(238,230,214,.14);
+      --accent: #d2b27a; --ok: #8fd0a4; --ok-bg: #1d3426; --wait: #f0c879; --wait-bg: #3a2f17;
+      --info: #9cc3dd; --info-bg: #1b2c37; --code-bg: rgba(238,230,214,.08);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #111a15; --card: #18241d; --fg: #eee6d6; --muted: #a9bba9; --line: rgba(238,230,214,.14);
+    --accent: #d2b27a; --ok: #8fd0a4; --ok-bg: #1d3426; --wait: #f0c879; --wait-bg: #3a2f17;
+    --info: #9cc3dd; --info-bg: #1b2c37; --code-bg: rgba(238,230,214,.08);
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 15.5px/1.6 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  main { max-width: 980px; margin: 0 auto; padding-block: 48px 72px; }
+  h1, h2, h3 { font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-weight: 300; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.08; letter-spacing: -.01em; }
+  h2 { font-size: clamp(22px, 3vw, 28px); line-height: 1.2; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line); }
+  h3 { font-size: 19px; font-weight: 500; line-height: 1.3; }
+  p { margin: 0; max-width: 68ch; }
+  a { color: var(--accent); text-underline-offset: 3px; overflow-wrap: anywhere; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+  .lead { color: var(--muted); font-size: 17px; margin-top: 14px; }
+  .stack { display: flex; flex-direction: column; gap: 14px; }
+  .aviso { margin-top: 22px; background: var(--wait-bg); border-left: 4px solid var(--wait); border-radius: 10px; padding: 14px 18px; }
+  .aviso strong { color: var(--wait); }
+  .aviso + .aviso { margin-top: 12px; }
+  .aviso.info { background: var(--info-bg); border-left-color: var(--info); }
+  .aviso.info strong { color: var(--info); }
+  .numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 28px; }
+  .numero { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; min-width: 0; }
+  .numero b { display: block; font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 30px; line-height: 1.1; }
+  .numero span { font-size: 13.5px; color: var(--muted); }
+  .tabela { overflow-x: auto; margin-top: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+  table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  th { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; background: var(--code-bg); white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .selo { display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 30px; white-space: nowrap; }
+  .feito { background: var(--ok-bg); color: var(--ok); }
+  .andamento { background: var(--wait-bg); color: var(--wait); }
+  .corrigido { background: var(--info-bg); color: var(--info); }
+  .item { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 20px 22px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .item-topo { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 14px; }
+  .codigo { font-weight: 600; color: var(--accent); font-size: 14px; letter-spacing: .04em; }
+  ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; max-width: 72ch; }
+  code { font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; font-size: 13px; background: var(--code-bg); padding: 1px 6px; border-radius: 5px; overflow-wrap: anywhere; }
+  .muted { color: var(--muted); font-size: 14px; }
+  a.end { display: block; font-size: 13px; margin-top: 2px; }
+  .nota-linha { display: block; font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .sumario { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 14px; }
+  footer { margin-top: 56px; color: var(--muted); font-size: 13.5px; display: flex; flex-direction: column; gap: 6px; }
+  @media print {
+    :root { --bg: #ffffff; --card: #ffffff; --fg: #15241c; --muted: #4d6655; --line: rgba(21,36,28,.18);
+      --accent: #8a6829; --ok: #2f6b45; --ok-bg: #e3efe6; --wait: #8a5a12; --wait-bg: #f6e9cf;
+      --info: #2d5068; --info-bg: #e2ecf2; --code-bg: rgba(21,36,28,.06); color-scheme: light; }
+    body { font-size: 12.5px; }
+    main { padding-block: 0; max-width: none; }
+    .sumario { display: none; }
+    .item, tr, .numero, .aviso { break-inside: avoid; }
+    h2 { break-after: avoid; }
+    .tabela { overflow: visible; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <div class="stack">
+    <span class="eyebrow">Portal Lotus Brokers · lotusbrokers.com.br · relatório de 25/11/2026</span>
+    <h1>Ajustes de 24 e 25/11 e pedidos de indexação de hoje</h1>
+    <p class="lead">Tudo o que foi feito no site e na Dashboard a partir da 2ª edição da auditoria de SEO, as páginas com pedido de indexação enviado ao Google em 25/11 e o que as medições mostraram depois dos ajustes.</p>
+  </div>
+
+  <div class="aviso"><strong>Pedido de indexação não é indexação.</strong> Hoje, 9 páginas receberam "Indexação solicitada" no Search Console. Quem decide se e quando cada uma entra no índice é o Google; pela documentação dele, o rastreamento leva de alguns dias a algumas semanas. Outras 8 páginas novas já estavam no índice na inspeção de hoje.</div>
+  <div class="aviso info"><strong>Situação do site.</strong> A rodada 1 está no ar desde 24/11, às 14:50, com 29 de 29 itens conferidos em produção e o IndexNow avisado (34 páginas). A rodada 2 está no ar desde 25/11, às 09:06, com 18 de 18 itens conferidos. As tabelas da Dashboard foram salvas em 25/11 e conferidas no banco, menos as linhas presas no bug de tipologia.</div>
+
+  <div class="numeros">
+    <div class="numero"><b>239</b><span>páginas no índice do Google, de 279 que ele conhece (eram 30 em 16/10)</span></div>
+    <div class="numero"><b>9</b><span>pedidos de indexação enviados hoje</span></div>
+    <div class="numero"><b>8</b><span>páginas novas que já estavam no índice</span></div>
+    <div class="numero"><b>2</b><span>rodadas de ajustes no site, as duas no ar</span></div>
+    <div class="numero"><b>53 → 77</b><span>nota da Santorini no PageSpeed do celular, antes e depois</span></div>
+    <div class="numero"><b>2</b><span>tabelas de preço na Dashboard (Allegrato e Vistta Castanho)</span></div>
+  </div>
+
+  <nav class="sumario" aria-label="Seções">
+    <a href="#indexacao">Indexação de hoje</a>
+    <a href="#indice">Índice do Google</a>
+    <a href="#rodada1">Rodada 1</a>
+    <a href="#rodada2">Rodada 2</a>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#medicoes">Medições</a>
+    <a href="#pendencias">O que falta</a>
+  </nav>
+
+  <h2 id="indexacao">Páginas com pedido de indexação hoje</h2>
+  <p class="muted" style="margin-top:12px">Cada uma foi inspecionada no Search Console ("Inspecionar qualquer URL") e recebeu "Solicitar indexação", com a confirmação "Indexação solicitada" na tela. Todas estavam fora do índice na inspeção e, antes do pedido, respondiam 200, com canonical próprio, sem noindex e no sitemap.</p>
+  <div class="tabela">
+    <table>
+      <thead><tr><th>Página</th><th>Situação</th></tr></thead>
+      <tbody>
+        <tr><td>Landing Doppio Jundiaí<a class="end" href="https://www.lotusbrokers.com.br/doppio-jundiai">/doppio-jundiai</a></td><td><span class="selo corrigido">Indexação solicitada</span></td></tr>
+        <tr><td>Landing Oásis<a class="end" href="https://www.lotusbrokers.com.br/oasis">/oasis</a></td><td><span class="selo corrigido">Indexação solicitada</span></td></tr>
+        <tr><td>Landing Reserva Castanheira<a class="end" href="https://www.lotusbrokers.com.br/reserva-castanheira">/reserva-castanheira</a></td><td><span class="selo corrigido">Indexação solicitada</span></td></tr>
+        <tr><td>Guia do bairro Vila Rio Branco<a class="end" href="https://www.lotusbrokers.com.br/lotus-bairro/vila-rio-branco">/lotus-bairro/vila-rio-branco</a><span class="nota-linha">Antes: excluída por noindex, da época em que era página provisória.</span></td><td><span class="selo corrigido">Indexação solicitada</span></td></tr>
+        <tr><td>Artigo: morar na Vila Rio Branco<a class="end" href="https://www.lotusbrokers.com.br/lotus-blog/vila-rio-branco-jundiai">/lotus-blog/vila-rio-branco-jundiai</a></td><td><span class="selo corrigido">Indexação solicitada</span></td></tr>
+        <tr><td>Artigo: morar no Medeiros<a class="end" href="https://www.lotusbrokers.com.br/lotus-blog/morar-em-medeiros-jundiai">/lotus-blog/morar-em-medeiros-jundiai</a></td><td><span class="selo corrigido">Indexação solicitada</span></td></tr>
+        <tr><td>Artigo: guia do bairro Vianelo<a class="end" href="https://www.lotusbrokers.com.br/lotus-blog/guia-do-bairro-vianelo-jundiai">/lotus-blog/guia-do-bairro-vianelo-jundiai</a></td><td><span class="selo corrigido">Indexação solicitada</span></td></tr>
+        <tr><td>Artigo: melhores lugares para morar em Itupeva<a class="end" href="https://www.lotusbrokers.com.br/lotus-blog/melhores-lugares-para-morar-em-itupeva">/lotus-blog/melhores-lugares-para-morar-em-itupeva</a></td><td><span class="selo corrigido">Indexação solicitada</span></td></tr>
+        <tr><td>Busca: casas à venda em Itupeva<a class="end" href="https://www.lotusbrokers.com.br/lotus-busca/casas-em-itupeva">/lotus-busca/casas-em-itupeva</a></td><td><span class="selo corrigido">Indexação solicitada</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="margin-top:28px">Já estavam no índice (sem pedido)</h3>
+  <div class="tabela">
+    <table>
+      <thead><tr><th>Página</th><th>Situação</th></tr></thead>
+      <tbody>
+        <tr><td>Landing Maxx Santa Angela<a class="end" href="https://www.lotusbrokers.com.br/maxx-santa-angela">/maxx-santa-angela</a></td><td><span class="selo feito">No índice</span></td></tr>
+        <tr><td>Perguntas frequentes<a class="end" href="https://www.lotusbrokers.com.br/lotus-faq">/lotus-faq</a></td><td><span class="selo feito">No índice</span></td></tr>
+        <tr><td>Simuladores de financiamento<a class="end" href="https://www.lotusbrokers.com.br/lotus-simuladores">/lotus-simuladores</a></td><td><span class="selo feito">No índice</span></td></tr>
+        <tr><td>Busca: imóveis à venda em Jundiaí<a class="end" href="https://www.lotusbrokers.com.br/lotus-busca/imoveis-em-jundiai">/lotus-busca/imoveis-em-jundiai</a></td><td><span class="selo feito">No índice</span></td></tr>
+        <tr><td>Busca: apartamentos à venda em Jundiaí<a class="end" href="https://www.lotusbrokers.com.br/lotus-busca/apartamentos-em-jundiai">/lotus-busca/apartamentos-em-jundiai</a></td><td><span class="selo feito">No índice</span></td></tr>
+        <tr><td>Artigo: Rota da Cultura Negra<a class="end" href="https://www.lotusbrokers.com.br/lotus-blog/rota-cultura-negra-jundiai">/lotus-blog/rota-cultura-negra-jundiai</a></td><td><span class="selo feito">No índice</span></td></tr>
+        <tr><td>Imóvel AP0707<a class="end" href="https://www.lotusbrokers.com.br/lotus-imovel/AP0707">/lotus-imovel/AP0707</a></td><td><span class="selo feito">No índice</span></td></tr>
+        <tr><td>Condomínio Residencial Jardim Primavera<a class="end" href="https://www.lotusbrokers.com.br/lotus-condominio/residencial-jardim-primavera">/lotus-condominio/residencial-jardim-primavera</a></td><td><span class="selo feito">No índice</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted" style="margin-top:12px">Ficaram sem pedido os 2 posts do Sextou de fins de semana que já passaram. Para conferir se uma página entrou: Search Console, "Inspecionar qualquer URL", colar o endereço com www; "O URL está no Google" quer dizer que entrou. A cota é de cerca de 10 pedidos por dia, e o Bing recebe as páginas novas pelo IndexNow a cada publicação.</p>
+
+  <h2 id="indice">Índice do Google em 25/11</h2>
+  <p class="muted" style="margin-top:12px">Search Console lido hoje. O relatório de páginas é o que o Google atualizou em 15/11, com a validação dos 6 motivos em andamento.</p>
+  <div class="tabela">
+    <table>
+      <thead><tr><th>Motivo de estar fora do índice</th><th>Páginas</th><th>Leitura</th></tr></thead>
+      <tbody>
+        <tr><td>Página com redirecionamento</td><td class="num">18</td><td><span class="selo feito">Certo</span> endereços antigos e sem www</td></tr>
+        <tr><td>Página alternativa com tag canônica adequada</td><td class="num">8</td><td><span class="selo feito">Certo</span> cópias que apontam para a página oficial</td></tr>
+        <tr><td>Não encontrado (404)</td><td class="num">1</td><td><span class="selo feito">Certo</span> <code>/&amp;</code>, endereço inválido</td></tr>
+        <tr><td>Cópia sem página canônica selecionada pelo usuário</td><td class="num">1</td><td><span class="selo feito">Certo</span> <code>/santorini</code> sem www, que hoje redireciona para o www</td></tr>
+        <tr><td>Detectada, mas não indexada no momento</td><td class="num">9</td><td><span class="selo andamento">Decisão do Google</span> inspecionadas hoje</td></tr>
+        <tr><td>Rastreada, mas não indexada no momento</td><td class="num">3</td><td><span class="selo andamento">Decisão do Google</span> inspecionadas hoje</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <ul style="margin-top:16px">
+    <li><strong>239 indexadas e 40 fora</strong>, contra 30 e 178 em 16/10.</li>
+    <li><strong>Links:</strong> 4 de outros sites (3 do linktr.ee e 1 do tracxn.com; eram 2 em 16/10) e 3.036 internos.</li>
+    <li><strong>Desempenho de 30/09 a 23/11:</strong> 21,1 mil impressões, 273 cliques (1,3%) e posição média 8,4. Fora da marca, as buscas com mais impressões foram "residencial mirante jundiai" (343), "duo reserva do japi" (123) e "manawa jundiai" (82).</li>
+  </ul>
+
+  <h2 id="rodada1">Rodada 1 do site (24/11, no ar)</h2>
+  <div class="tabela">
+    <table>
+      <thead><tr><th>Código</th><th>O que mudou</th><th>Commit</th></tr></thead>
+      <tbody>
+        <tr><td>N13</td><td>13 descrições com até 160 caracteres: 6 artigos e 7 landings de outras construtoras (as 10 da Santa Angela mantêm a frase obrigatória).</td><td><code>f88c42e</code></td></tr>
+        <tr><td>N6</td><td>O nome do captador, no cartão do imóvel, leva à página do corretor. Corretor sem foto sai com a imagem padrão ao ser compartilhado.</td><td><code>90cc676</code></td></tr>
+        <tr><td>N12</td><td>Descrição (alt) nas 12 miniaturas da galeria do Odeon.</td><td><code>8a95084</code></td></tr>
+        <tr><td>N4</td><td>Capa da construtora, cards de empreendimento e fotos do blog pelo otimizador; capa do artigo com prioridade.</td><td><code>34140df</code></td></tr>
+        <tr><td>N5</td><td>Landings em HTML: 13 fotos em WebP (2,18 → 1,44 MB), 114 imagens sob demanda, prioridade da foto do topo na Santorini, Castanheira e Oásis.</td><td><code>c9d30eb</code></td></tr>
+        <tr><td>N8</td><td>"Apartamentos na planta" no título, na descrição e no H1 de /lotus-lancamentos.</td><td><code>c9c16ff</code></td></tr>
+        <tr><td>N14</td><td>Cabeçalho HSTS em todas as respostas.</td><td><code>f7218a0</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted" style="margin-top:12px">Conferido antes do envio (323 testes e build) e em produção (29 de 29 itens). O IndexNow recebeu 34 páginas (HTTP 200). Detalhe completo em <code>docs/seo/ajustes-auditoria-24-11-2026.html</code>.</p>
+
+  <h2 id="rodada2">Rodada 2 do site (25/11, no ar)</h2>
+  <div class="stack" style="margin-top:16px">
+    <section class="item">
+      <div class="item-topo"><span class="codigo">N4</span><h3>Logo da Lotus otimizado em 14 arquivos</h3><span class="selo feito">No ar · fe3562a</span></div>
+      <p>O rodapé de 10 páginas do portal (guias, condomínios, blog, lançamentos, corretores, FAQ, sobre, anunciar e os dois índices) usava o PNG cru de 39 KB, carregado de cara. O React o pré-carregava no topo da página, disputando banda com a foto principal. Agora o logo é o WebP de 256/384 px, carregado só quando a pessoa chega ao rodapé, como já faziam a home e a busca. Em cookies, privacidade, termos e meus-dados o logo fica no topo: otimizado, sem esperar.</p>
+    </section>
+    <section class="item">
+      <div class="item-topo"><span class="codigo">N4</span><h3>Doppio: galeria de lazer pelo otimizador</h3><span class="selo feito">No ar · 7abb60b</span></div>
+      <p>O PageSpeed apontou 835 KiB em fotos abaixo da primeira tela. As 12 miniaturas da galeria e as fotos do Club House e da localização eram as JPG originais, de 2.200 a 2.844 px, mostradas em blocos de 300 a 600 px. Agora chegam em WebP de 640 ou 1080 px, conforme a tela. O lightbox continua abrindo a foto inteira (conferido no navegador).</p>
+    </section>
+    <section class="item">
+      <div class="item-topo"><h3>Visto e deixado como está</h3><span class="selo corrigido">Analisado</span></div>
+      <ul>
+        <li><strong>Altissimi:</strong> a última JPG pesada (146 KB) não fica nem 10% menor em WebP. Pela mesma regra das outras landings, fica como está, e a versão pré-renderizada não precisou ser refeita.</li>
+        <li><strong>Vila Triunfo:</strong> as 23 fotos da landing vêm direto do site da F A Oliva, sem cópia no nosso servidor. Trazer para cá exige baixar os 23 arquivos do site da construtora, e espera a sua autorização.</li>
+        <li><strong>Recortes de lançamento (N8):</strong> só o Medeiros tem 3 ou mais lançamentos ativos (5). Por dormitórios não dá para montar hoje, porque os lançamentos chegam sem tipo e sem dormitórios na listagem, e o estágio da obra é texto livre na Dash.</li>
+        <li><strong>Itupeva (N10):</strong> há 3 imóveis à venda (2 terrenos e 1 casa), pouco para uma página "Imóveis à venda em Itupeva".</li>
+        <li><strong>Endereços (URL):</strong> nenhuma das 272 URLs internas tem sublinhado nem acento. A exceção às palavras descritivas são os imóveis (<code>/lotus-imovel/AP0701</code>), com o código da Dash; trocar exigiria redirecionar todos.</li>
+      </ul>
+    </section>
+  </div>
+
+  <h2 id="dashboard">Dashboard: tabelas de preço (25/11)</h2>
+  <div class="stack" style="margin-top:16px">
+    <section class="item">
+      <div class="item-topo"><h3>Allegrato, tabela 1634 da Santa Angela (Torre A)</h3><span class="selo feito">Salvo</span></div>
+      <p>Pedido: "subir somente a de verde". No PDF, a bolinha de cada unidade é a situação dela, e a verde é a disponível. O "a partir de" saiu só das 57 unidades verdes, das 140 da torre; a cor foi lida da imagem do PDF, unidade por unidade. O PDF só traz a Torre A, e você confirmou subir a Torre A.</p>
+      <div class="tabela">
+        <table>
+          <thead><tr><th>Planta (Torre A)</th><th>A partir de (verdes)</th><th>Unidade</th><th>Na Dash</th></tr></thead>
+          <tbody>
+            <tr><td>55,12 m², sem vaga</td><td class="num">R$ 360.334,56</td><td>1</td><td><span class="selo feito">mantido</span></td></tr>
+            <tr><td>63,05 m², 1 vaga</td><td class="num">R$ 454.917,24</td><td>38</td><td><span class="selo feito">corrigido</span> (era R$ 441.131,87, da unidade 18, já vendida)</td></tr>
+            <tr><td>63,75 m², 1 vaga</td><td class="num">R$ 467.642,19</td><td>13</td><td><span class="selo andamento">bloqueado pelo bug</span></td></tr>
+            <tr><td>64,62 m², 1 vaga</td><td class="num">R$ 507.937,89</td><td>107</td><td><span class="selo andamento">bloqueado pelo bug</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted">O "Valor mínimo" segue "a partir de R$ 360.334". As Torres B/C/D têm plantas próprias na Dash (55,12, 56,11, 57,22 e 58,96 m²) e continuam sem preço até chegar a tabela delas. No site, o card do Allegrato segue "Valor a consultar", por decisão comercial anterior.</p>
+    </section>
+
+    <section class="item">
+      <div class="item-topo"><h3>Vistta Castanho (Applausi), tabela de novembro/2026</h3><span class="selo feito">Salvo em parte</span></div>
+      <p>31 lotes, todos a R$ 2.232,50/m². A tipologia que já existia, "Lote residencial (compacto)", ganhou a área de 126 m² (R$ 281.295,00, 19 lotes nas quadras B, C e D). O "Valor mínimo" segue "a partir de R$ 281.295".</p>
+      <div class="tabela">
+        <table>
+          <thead><tr><th>Faixa de lote</th><th>Onde</th><th>A partir de</th><th>Na Dash</th></tr></thead>
+          <tbody>
+            <tr><td>126 m²</td><td>Quadras B, C e D (19 lotes)</td><td class="num">R$ 281.295,00</td><td><span class="selo feito">salvo</span></td></tr>
+            <tr><td>133,96 a 136,43 m²</td><td>Quadra I (23, 24, 25, 30)</td><td class="num">R$ 299.065,70</td><td><span class="selo andamento">bloqueado pelo bug</span></td></tr>
+            <tr><td>171,96 a 177,63 m²</td><td>Quadra I (3, 13 a 17, 20)</td><td class="num">R$ 383.900,70</td><td><span class="selo andamento">bloqueado pelo bug</span></td></tr>
+            <tr><td>237,89 m²</td><td>Quadra D, lote 21</td><td class="num">R$ 531.089,42</td><td><span class="selo andamento">bloqueado pelo bug</span></td></tr>
+            <tr><td>327,03 m²</td><td>Quadra D, lote 20</td><td class="num">R$ 730.094,47</td><td><span class="selo andamento">bloqueado pelo bug</span></td></tr>
+            <tr><td>393,45 m²</td><td>Quadra D, lote 19</td><td class="num">R$ 878.377,12</td><td><span class="selo andamento">bloqueado pelo bug</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="item">
+      <div class="item-topo"><h3>Bug da Dash: tipologia nova não salva</h3><span class="selo andamento">Continua em 25/11</span></div>
+      <p>Num lançamento que já tem tipologias, acrescentar uma linha faz a Dash recusar tudo ("Não foi possível salvar as tipologias. O lançamento não foi alterado."). O chamado está aberto desde 19/11, em <code>docs/para-devs/DEV — Tipologia nova não salva (19-11-2026).md</code>. As 7 linhas bloqueadas acima entram assim que o dev corrigir.</p>
+    </section>
+  </div>
+
+  <h2 id="medicoes">Medições depois dos ajustes</h2>
+  <p class="muted" style="margin-top:12px">PageSpeed Insights no celular simulado com 4G lento, nas 4 páginas que mudaram, medidas em 25/11 às 10:05, depois da rodada 2. O laboratório varia uns 10 pontos entre medições; o bom para o maior elemento (LCP) é até 2,5 s.</p>
+  <div class="tabela">
+    <table>
+      <thead><tr><th>Página</th><th>Nota 24/11 → 25/11</th><th>Maior elemento</th><th>Tela travada</th><th>O que pesa agora</th></tr></thead>
+      <tbody>
+        <tr><td>Landing Santorini</td><td class="num">53 → 77</td><td class="num">10,6 → 5,7 s</td><td class="num">480 → 90 ms</td><td>fotos de lazer da pasta <code>fotos/</code> ainda em JPG de 1.035 px, exibidas com 404 px (184 KiB)</td></tr>
+        <tr><td>Construtora MRV</td><td class="num">56 → 64</td><td class="num">9,8 → 5,8 s</td><td class="num">430 → 420 ms</td><td>as imagens deixaram de pesar (9 KiB); resta o JavaScript do GTM (212 KiB sem uso)</td></tr>
+        <tr><td>Landing Doppio</td><td class="num">88 → 84</td><td class="num">2,5 → 2,7 s</td><td class="num">60 → 200 ms</td><td>diferença dentro da oscilação do teste; fachada, living e foto do topo ainda saem do arquivo original (732 KiB)</td></tr>
+        <tr><td>Artigo do Vianelo</td><td class="num">69 → 65</td><td class="num">8,8 → 8,5 s</td><td class="num">90 → 280 ms</td><td>a capa já sai otimizada e, no detalhamento do teste, fica pronta em cerca de 0,6 s; os 8,5 s são a estimativa do simulador. Pesa o JavaScript do GTM</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <ul style="margin-top:16px">
+    <li><strong>Releitura das 265 páginas do sitemap (25/11):</strong> todas respondem 200, com canonical próprio, sem noindex, imagem de compartilhamento e a até 2 cliques da home. Lidas com um leitor de HTML, nenhuma página tem mais de um H1 e nenhuma imagem visível está sem descrição (alt).</li>
+    <li><strong>A auditoria de 24/11 contou errado:</strong> o H1 duplicado da Altissimi e do Vila Triunfo estava no molde <code>&lt;template&gt;</code>, que o Google não lê; das 104 "imagens sem alt", 12 eram faltas reais (Odeon, corrigidas); e as "17 landings da Santa Angela" eram 10 da Santa Angela e 7 de outras construtoras.</li>
+  </ul>
+
+  <h2 id="pendencias">O que apareceu hoje e o que falta</h2>
+  <div class="stack" style="margin-top:16px">
+    <section class="item">
+      <div class="item-topo"><span class="codigo">A4 · N4</span><h3>GTM ainda carrega a tag do Google antiga</h3><span class="selo andamento">Lotus</span></div>
+      <p>O GTM ainda carrega a tag do Google G-QBVBX74XEY, que o site já alimenta direto pela G-ELYJJMHD5N desde 02/10. Pelo registro do código (<code>components/Analytics.tsx</code>), enquanto ela estiver no GTM as páginas do portal contam em dobro no Analytics, e cada página baixa 179 KiB a mais de JavaScript. No GTM: pausar essa tag e o evento page_view do GA4 e publicar o contêiner.</p>
+    </section>
+    <section class="item">
+      <div class="item-topo"><span class="codigo">N15</span><h3>Páginas que aparecem muito no Google e quase não recebem clique</h3><span class="selo andamento">Dev e Lotus</span></div>
+      <div class="tabela">
+        <table>
+          <thead><tr><th>Página</th><th>Impressões</th><th>Taxa de clique</th></tr></thead>
+          <tbody>
+            <tr><td>Condomínio Residencial Mirante</td><td class="num">951</td><td class="num">0,6%</td></tr>
+            <tr><td>Artigo: fim da greve da Caixa</td><td class="num">913</td><td class="num">0,5%</td></tr>
+            <tr><td>Artigo: nova nota fiscal na venda de imóveis</td><td class="num">698</td><td class="num">0,7%</td></tr>
+            <tr><td>Landing Resort Prime</td><td class="num">392</td><td class="num">0,8%</td></tr>
+            <tr><td>Landing Altos da Avenida</td><td class="num">369</td><td class="num">0,8%</td></tr>
+            <tr><td>Condomínio Duo Japi</td><td class="num">322</td><td class="num">1,2%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>A média do site é 1,3%. No Mirante, a descrição que aparece no Google é a frase de divulgação da Dashboard, sem o bairro e sem os imóveis à venda. No Duo, as pessoas buscam "duo reserva do japi", e o título e o H1 dizem só "Duo Japi". Resort Prime e Altos da Avenida têm o título cortado na busca (N11).</p>
+    </section>
+    <ul>
+      <li><strong>Dev:</strong> descrições de condomínio montadas a partir dos dados (bairro, cidade, imóveis à venda e faixa de preço), as 3 fotos do Doppio e as fotos de lazer da Santorini pelo otimizador.</li>
+      <li><strong>Easypanel:</strong> mandar o http direto para https://www; hoje são 2 redirecionamentos (N14).</li>
+      <li><strong>Dev da Dash:</strong> corrigir o bug de tipologia nova. Depois, lançar as 2 plantas do Allegrato e as 5 faixas do Vistta Castanho.</li>
+      <li><strong>Search Console:</strong> conferir em alguns dias se as 9 páginas entraram no índice, pedir indexação de cada página nova no dia da publicação e ler o relatório de páginas a cada 15 dias.</li>
+      <li><strong>Sua autorização:</strong> trazer para o nosso servidor as 23 fotos do Vila Triunfo que vêm do site da F A Oliva.</li>
+      <li><strong>Decisão da Lotus:</strong> nome oficial do Duo, títulos das landings (N11, regras das construtoras) e o texto do Medeiros.</li>
+      <li><strong>Conteúdo e contas da Lotus:</strong> links de outros sites (N2), avaliações no Google (N3), o corretor que revisa cada artigo (N6) e os textos de guias, condomínios e construtoras (N7, N9, N10).</li>
+    </ul>
+  </div>
+
+  <h2>Entregas anteriores da mesma sessão (19 a 23/11)</h2>
+  <div class="tabela">
+    <table>
+      <thead><tr><th>Entrega</th><th>Commit</th></tr></thead>
+      <tbody>
+        <tr><td>Tour virtual na landing do Doppio</td><td><code>5a445a3</code></td></tr>
+        <tr><td>Plantas do Doppio com o material oficial (7 ainda faltam: a de 210 m² e as duplex)</td><td><code>d338306</code></td></tr>
+        <tr><td>Guia do bairro Vila Rio Branco</td><td><code>5f5a4b8</code></td></tr>
+        <tr><td>Blog: Vila Rio Branco, Rota da Cultura Negra, Sextou do feriado e Vianelo</td><td><code>6e7b8c6</code></td></tr>
+        <tr><td>Chamado do bug de tipologia para o dev da Dash</td><td><code>04757fe</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    <span>Gerado em 25/11/2026. Fontes: Search Console (lido em 25/11), PageSpeed Insights (25/11, 10:05), varredura das 265 páginas do sitemap (25/11) e o histórico de commits do portal.</span>
+    <span>Auditoria de referência: 2ª edição, atualizada em 25/11 (página privada da auditoria: https://claude.ai/artifact/S9YL23YSfbzbcoMnNhjiE9).</span>
+  </footer>
+</main>
+</body>
+</html>
