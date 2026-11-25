@@ -1539,6 +1539,12 @@ export const POSTS: Post[] = [
    * Nacional) batem com o Ato Conjunto RFB/CGIBS nº 4, de 30/07/2026, nas
    * publicações que o reproduzem.
    *
+   * 25/11/2026 (N15 da auditoria de SEO): 698 impressões e 0,7% de cliques na
+   * posição média 7, de 30/09 a 23/11. As buscas são "nota fiscal (para/de)
+   * venda de imóvel(is)" e "emissão de nota fiscal para venda de imóvel": a
+   * dúvida é quem precisa emitir. O tituloSeo e o `excerpt` passaram a começar
+   * por ela, com a resposta que o texto já dá.
+   *
    * Ajustes de forma, os mesmos dos lotes anteriores: a lista de perguntas
    * virou itens. Não veio meta description: `excerpt` e `tldr` resumem o
    * próprio texto, sem informação nova.
@@ -1547,7 +1553,7 @@ export const POSTS: Post[] = [
    * de casinha), recortada na horizontal, 736x460, na faixa da mão.
    * ------------------------------------------------------------------ */
   {
-    id: 'nova-nota-fiscal-venda-de-imoveis', cat: 'Documentação', date: 'Out 2026', publicadoEm: '2026-10-15', read: '6 min', img: '/blog/nova-nota-fiscal-venda-de-imoveis.jpg', slot: 'blog-nova-nota-fiscal-venda-de-imoveis', title: 'Nova nota fiscal para venda de imóveis: entenda o que muda a partir de dezembro de 2026', tituloSeo: 'Nota fiscal na venda de imóveis: o que muda em dezembro de 2026', excerpt: 'A NF-e ABI passa a ser obrigatória em 1º de dezembro de 2026. Entenda por que isso não obriga toda pessoa física a emitir nota ao vender um imóvel.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'nova-nota-fiscal-venda-de-imoveis', cat: 'Documentação', date: 'Out 2026', publicadoEm: '2026-10-15', read: '6 min', img: '/blog/nova-nota-fiscal-venda-de-imoveis.jpg', slot: 'blog-nova-nota-fiscal-venda-de-imoveis', title: 'Nova nota fiscal para venda de imóveis: entenda o que muda a partir de dezembro de 2026', tituloSeo: 'Nota fiscal na venda de imóvel: quem precisa emitir a NF-e ABI', excerpt: 'Quem vende o próprio imóvel precisa emitir nota fiscal? A NF-e ABI é obrigatória a partir de 1º/12/2026, mas não para toda pessoa física. Veja quem precisa.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'A partir de 1º de dezembro de 2026, a NF-e ABI (Nota Fiscal Eletrônica de Alienação de Bens Imóveis, modelo 77) passa a ser obrigatória, conforme o Ato Conjunto RFB/CGIBS nº 4/2026; para optantes pelo Simples Nacional, o cronograma começa em 1º de janeiro de 2027. Isso não significa que toda pessoa física terá que emitir nota ao vender um imóvel: a venda eventual de um imóvel do próprio patrimônio não a torna, por si só, contribuinte do IBS e da CBS. A atenção é para quem compra, constrói e vende com frequência, como na alienação de mais de três imóveis mantidos há menos de cinco anos, e para quem negocia imóveis na planta, já que o fato gerador pode ocorrer na promessa ou na carta de reserva, antes da escritura.',
     body: [
       'A partir de 1º de dezembro de 2026, entra em vigor uma importante mudança para determinadas operações do mercado imobiliário brasileiro: a obrigatoriedade da Nota Fiscal Eletrônica de Alienação de Bens Imóveis (NF-e ABI), modelo 77.',
@@ -1982,9 +1988,15 @@ export const POSTS: Post[] = [
    * Ajustes de forma, os mesmos dos lotes anteriores: itens de lista começando
    * em maiúscula e sem ponto e vírgula, o subtítulo virando `excerpt` e a
    * marca grafada "Lotus Brokers", sem acento, como no resto do site.
+   *
+   * 25/11/2026 (N15 da auditoria de SEO): 913 impressões e 0,5% de cliques na
+   * posição média 6,6, de 30/09 a 23/11. As buscas que o Search Console mostra
+   * perguntam se a greve acabou ("greve caixa financiamento", "greve caixa
+   * terminou outubro 2026 financiamento imobiliário"). O tituloSeo e o
+   * `excerpt` passaram a responder isso logo no começo, com o que o texto já diz.
    * ------------------------------------------------------------------ */
   {
-    id: 'fim-greve-caixa-financiamentos-imobiliarios', cat: 'Mercado', date: 'Set 2026', publicadoEm: '2026-09-29', read: '5 min', img: '/blog/fim-greve-caixa.jpg', slot: 'blog-fim-greve-caixa', title: 'Fim da greve da Caixa deve destravar financiamentos imobiliários e movimentar o mercado', tituloSeo: 'Fim da greve da Caixa: o que muda nos financiamentos', excerpt: 'Decisão do TST põe fim à greve dos funcionários da Caixa; setor imobiliário espera a retomada de financiamentos, repasses e contratos habitacionais.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    id: 'fim-greve-caixa-financiamentos-imobiliarios', cat: 'Mercado', date: 'Set 2026', publicadoEm: '2026-09-29', read: '5 min', img: '/blog/fim-greve-caixa.jpg', slot: 'blog-fim-greve-caixa', title: 'Fim da greve da Caixa deve destravar financiamentos imobiliários e movimentar o mercado', tituloSeo: 'Greve da Caixa terminou: como ficam os financiamentos imobiliários', excerpt: 'A greve da Caixa acabou por decisão do TST, com retorno até 30 de setembro. Veja como ficam os financiamentos parados, o Minha Casa, Minha Vida e o que fazer.', author: 'Equipe Lotus', role: 'Squad de conteúdo',
     tldr: 'A greve dos funcionários da Caixa, iniciada em 10 de setembro, terminou por decisão do TST, com retorno até 30 de setembro. A expectativa é de retomada gradual dos financiamentos que ficaram parados — análise de documentos, assinatura de contratos e liberação de recursos —, sem normalização instantânea. Quem tem processo em andamento não precisa recomeçar: vale conferir a validade dos documentos, guardar protocolos e acompanhar cada etapa com o corretor ou o correspondente bancário.',
     body: [
       'A greve dos funcionários da Caixa Econômica Federal chegou ao fim após decisão do Tribunal Superior do Trabalho (TST), trazendo expectativa de retomada gradual dos processos que dependem do banco para a conclusão de financiamentos imobiliários.',
