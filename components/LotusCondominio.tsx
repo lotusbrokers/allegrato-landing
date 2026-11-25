@@ -3,6 +3,7 @@ import { footerLegalLine } from '@/lib/site';
 import { imagemOtimizada, logoLotus } from '@/lib/imagem-otimizada';
 import { juntarEndereco } from '@/lib/endereco';
 import { textoSemMarkdown } from '@/lib/texto-sem-markdown';
+import { comodidadesDoCondominio } from '@/lib/comodidades-condominio';
 
 /**
  * LotusCondominio — porte 1:1 de lotus-condominio/index.html (mecanismo dc-runtime) para React.
@@ -179,31 +180,6 @@ const WHATSAPP_DEFAULT = '5511926143393';
 // Fallbacks quando o campo do banco vier nulo/vazio (mantém o layout coerente).
 const FALLBACK_CIDADE = 'Jundiaí e Itupeva';
 
-/* ---- Derivação dos itens de lazer/estrutura a partir das infra_* ---- */
-// Mapa infra_<coluna> -> rótulo legível. Só entra na lista quando a coluna é true.
-const INFRA_LABELS: Record<string, string> = {
-  infra_piscina: 'Piscina',
-  infra_academia: 'Academia',
-  infra_playground: 'Playground',
-  infra_salao_festas: 'Salão de festas',
-  infra_churrasqueira: 'Churrasqueira',
-  infra_quadra_poliesportiva: 'Quadra poliesportiva',
-  infra_portaria_24h: 'Portaria 24h',
-  infra_espaco_gourmet: 'Espaço gourmet',
-  infra_brinquedoteca: 'Brinquedoteca',
-  infra_sauna_seca: 'Sauna',
-  infra_salao_jogos: 'Salão de jogos',
-  infra_bicicletario: 'Bicicletário',
-  infra_espaco_pet: 'Espaço pet',
-  infra_wifi: 'Wi-Fi nas áreas comuns',
-};
-
-function infraItens(data: CondominioRow): string[] {
-  return Object.entries(INFRA_LABELS)
-    .filter(([key]) => data[key as `infra_${string}`] === true)
-    .map(([, label]) => label);
-}
-
 // "75 a 100 m²" (faixa) ou "75 m²" (único) ou "" quando não há metragens.
 function metragensLabel(metragens: number[] | null): string {
   if (!metragens || metragens.length === 0) return '';
@@ -221,7 +197,7 @@ function primeiraFrase(texto: string): string {
 function buildFaq(data: CondominioRow) {
   const nome = data.nome;
   const cidade = data.cidade || FALLBACK_CIDADE;
-  const lazer = infraItens(data);
+  const lazer = comodidadesDoCondominio(data);
   const lazerTexto = lazer.length ? lazer.slice(0, 5).join(', ') : 'áreas de lazer e convivência';
   return [
     {
@@ -250,7 +226,7 @@ function buildFaq(data: CondominioRow) {
 // guide editorial genérico adaptado ao condomínio.
 function buildGuide(data: CondominioRow) {
   const cidade = data.cidade || FALLBACK_CIDADE;
-  const lazer = infraItens(data);
+  const lazer = comodidadesDoCondominio(data);
   const lazerTexto = lazer.length ? lazer.slice(0, 5).join(', ') : 'piscina, quadras e espaço gourmet';
   return [
     {
@@ -358,7 +334,7 @@ export default function LotusCondominio({
   const nome = data.nome;
   const cidade = data.cidade || FALLBACK_CIDADE;
   const metragens = metragensLabel(data.metragens_disponiveis);
-  const lazerItens = infraItens(data);
+  const lazerItens = comodidadesDoCondominio(data);
   const tipoLabel = data.tipo || 'Condomínio';
   const numUnidades =
     typeof data.num_blocos_torres === 'number' && data.num_blocos_torres > 0

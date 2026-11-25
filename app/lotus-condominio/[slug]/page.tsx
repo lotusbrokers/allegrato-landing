@@ -12,7 +12,8 @@ import {
 } from '@/lib/condominios';
 import { getImoveisDoCondominio } from '@/lib/imoveis';
 import { getLancamentosList, isListItemApresentavel, type LancamentoListItem } from '@/lib/lancamentos';
-import { descricaoDoCondominio, tituloDoCondominio } from '@/lib/metadados-condominio';
+import { descricaoComDados, descricaoDoCondominio, tituloDoCondominio } from '@/lib/metadados-condominio';
+import { comodidadesParaABusca } from '@/lib/comodidades-condominio';
 import { textoSemMarkdown } from '@/lib/texto-sem-markdown';
 import { guiaDoBairro } from '@/lib/bairros';
 import { girar } from '@/lib/girar';
@@ -122,20 +123,33 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const capa = (cond.fotos?.find((f) => f.isCapa) ?? cond.fotos?.[0])?.url;
   // Até 70 caracteres, com a cidade (lib/metadados-condominio).
   const title = tituloDoCondominio(cond.nome, cidade);
-  // Com o nome na frente quando o RESUMO não o cita: fases do mesmo condomínio
-  // chegaram com a mesma descrição (ver lib/metadados-condominio.ts).
-  //
-  // Resumida: o texto do dashboard chega inteiro (o do Altissimi tinha 1.469
-  // caracteres, com listas e emojis) e o Google mostra cerca de 155. O corte é em
-  // fim de frase, como na página de imóvel. O emoji sai só daqui, da descrição
-  // de busca e de compartilhamento; a página mostra o texto como foi cadastrado.
-  const description = descricaoDoCondominio(
-    (
-      textoSemMarkdown(cond.descricao_site) ||
-      `Tudo sobre morar no ${cond.nome}, ${cidade}: estrutura, localização e imóveis disponíveis com o especialista da Lotus.`
-    ).replace(/[\p{Extended_Pictographic}\u{FE0F}]/gu, ''),
-    cond.nome,
-  );
+  // Descrição feita com os dados: bairro, cidade, imóveis à venda com o menor
+  // preço e comodidades (N15, 25/11/2026). Conta todos os imóveis com foto do
+  // condomínio, e não só os 6 da vitrine, para o número e o "a partir de"
+  // valerem para o condomínio inteiro.
+  const aVenda = (await getImoveisDoCondominio(cond.id, Number.POSITIVE_INFINITY)).filter((i) => i.fin === 'comprar');
+  const precos = aVenda.map((i) => i.priceNum).filter((p) => p > 0);
+  const description =
+    descricaoComDados({
+      nome: cond.nome,
+      bairro: cond.bairro,
+      cidade: cond.cidade,
+      comodidades: comodidadesParaABusca(cond),
+      imoveisAVenda: aVenda.length,
+      menorPreco: precos.length ? Math.min(...precos) : null,
+    }) ??
+    // Sem bairro, comodidade nem imóvel: o texto da Dashboard, resumido, com o
+    // nome na frente quando o RESUMO não o cita (fases do mesmo condomínio
+    // chegaram com a mesma descrição). O texto chega inteiro (o do Altissimi
+    // tinha 1.469 caracteres, com listas e emojis) e o Google mostra cerca de
+    // 155; o corte é em fim de frase, e o emoji sai só da descrição de busca.
+    descricaoDoCondominio(
+      (
+        textoSemMarkdown(cond.descricao_site) ||
+        `Tudo sobre morar no ${cond.nome}, ${cidade}: estrutura, localização e imóveis disponíveis com o especialista da Lotus.`
+      ).replace(/[\p{Extended_Pictographic}\u{FE0F}]/gu, ''),
+      cond.nome,
+    );
   // Canonical sempre no endereço novo, mesmo quando se chegou pelo UUID: duas
   // URLs para o mesmo texto é o que o canonical existe para evitar.
   const url = `${SITE}/lotus-condominio/${slugCondominio(cond.nome)}`;
