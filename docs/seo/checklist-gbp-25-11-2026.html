@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checklist do Perfil no Google</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+  /* Mesmo visual dos relatórios de docs/seo: cores e fontes da marca Lotus. */
+  :root {
+    --bg: #f7f2e8; --card: #ffffff; --fg: #15241c; --muted: #4d6655; --line: rgba(21,36,28,.12);
+    --accent: #8a6a2c; --soft: rgba(21,36,28,.055);
+    --ok: #2f6b45; --ok-bg: #e3efe6; --wait: #8a5a12; --wait-bg: #f6e9cf;
+    --crit: #9c3a22; --crit-bg: #f6e2da; --info: #2d5068; --info-bg: #e2ecf2;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111a15; --card: #18241d; --fg: #eee6d6; --muted: #a9bba9; --line: rgba(238,230,214,.14);
+      --accent: #d2b27a; --soft: rgba(238,230,214,.07);
+      --ok: #8fd0a4; --ok-bg: #1d3426; --wait: #f0c879; --wait-bg: #3a2f17;
+      --crit: #f2a690; --crit-bg: #3b1e17; --info: #9cc3dd; --info-bg: #1b2c37;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #111a15; --card: #18241d; --fg: #eee6d6; --muted: #a9bba9; --line: rgba(238,230,214,.14);
+    --accent: #d2b27a; --soft: rgba(238,230,214,.07);
+    --ok: #8fd0a4; --ok-bg: #1d3426; --wait: #f0c879; --wait-bg: #3a2f17;
+    --crit: #f2a690; --crit-bg: #3b1e17; --info: #9cc3dd; --info-bg: #1b2c37;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 15.5px/1.6 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  main { max-width: 960px; margin: 0 auto; padding-block: 48px 72px; display: grid; gap: 44px; }
+  h1, h2 { font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-weight: 300; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.08; letter-spacing: -.01em; }
+  h2 { font-size: clamp(22px, 3vw, 28px); line-height: 1.2; }
+  h3 { margin: 0; font-size: 12.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  p { margin: 0; max-width: 70ch; }
+  a { color: inherit; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+  code { font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; font-size: 13px; background: var(--soft); padding: 1px 6px; border-radius: 5px; overflow-wrap: anywhere; }
+  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+  .lead { color: var(--muted); font-size: 17px; }
+  .muted { color: var(--muted); }
+  header { display: grid; gap: 14px; }
+  section { display: grid; gap: 16px; min-width: 0; }
+  .cab { display: grid; gap: 6px; padding-top: 22px; border-top: 1px solid var(--line); }
+  .cab p { color: var(--muted); font-size: 14.5px; }
+
+  /* Placar */
+  .placar { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+  .placar div { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; min-width: 0; }
+  .placar b { display: block; font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 30px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .placar span { font-size: 13.5px; color: var(--muted); }
+  .duas { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+  .caixa { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; display: grid; gap: 10px; min-width: 0; }
+  .caixa ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+
+  /* Situação */
+  .st {
+    display: inline-flex; align-items: center; gap: 6px; justify-self: start; white-space: nowrap;
+    font-size: 12.5px; font-weight: 600; line-height: 1; padding: 6px 10px; border-radius: 999px;
+  }
+  .st::before { font-weight: 700; }
+  .feito { background: var(--ok-bg); color: var(--ok); } .feito::before { content: "✓"; }
+  .parte { background: var(--wait-bg); color: var(--wait); } .parte::before { content: "◐"; }
+  .nao { background: var(--crit-bg); color: var(--crit); } .nao::before { content: "○"; }
+  .painel { background: var(--info-bg); color: var(--info); } .painel::before { content: "?"; }
+  .revisar { background: transparent; color: var(--accent); box-shadow: inset 0 0 0 1.5px var(--accent); } .revisar::before { content: "!"; }
+  .na { background: var(--soft); color: var(--muted); } .na::before { content: "–"; }
+
+  /* Lista */
+  .lista { list-style: none; margin: 0; padding: 0; background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .lista > li { display: grid; grid-template-columns: 9.2rem minmax(0, 1fr); gap: 4px 16px; padding: 13px 18px; border-top: 1px solid var(--line); align-items: start; }
+  .lista > li:first-child { border-top: 0; }
+  .lista .item { display: grid; gap: 3px; min-width: 0; }
+  .lista .item strong { font-weight: 600; }
+  .lista .item p { color: var(--muted); font-size: 14.5px; }
+  .lista .ref { color: var(--muted); font-size: 14px; }
+  .lista .num { font-variant-numeric: tabular-nums; color: var(--accent); font-weight: 600; margin-right: 4px; }
+  .atencao { background: var(--wait-bg); color: var(--fg); border-radius: 10px; padding: 10px 12px; font-size: 14px; }
+  .atencao b { color: var(--wait); }
+
+  /* Tabela de metas */
+  .tabela { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+  table { border-collapse: collapse; width: 100%; min-width: 600px; font-size: 14.5px; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  th { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 700; background: var(--soft); white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  .revisao { counter-reset: r; list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .revisao li { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; display: grid; gap: 3px; }
+  .revisao li strong { font-weight: 600; }
+  .revisao li p { color: var(--muted); font-size: 14.5px; }
+  footer { color: var(--muted); font-size: 13.5px; display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 20px; }
+
+  @media (max-width: 600px) {
+    .lista > li { grid-template-columns: minmax(0, 1fr); padding: 13px 14px; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <header>
+    <span class="eyebrow">Lotus Brokers · Playbook 09 · conferido e ajustado em 25/11/2026</span>
+    <h1>Checklist do Perfil no Google</h1>
+    <p class="lead">O que do Playbook 09 (Google Business Profile) já está feito, item por item. Conferido no perfil público do Google Maps, no painel do perfil, no código do site e no Search Console. Inclui as mudanças feitas no perfil em 25/11.</p>
+  </header>
+
+  <section aria-labelledby="hoje-t">
+    <div class="cab">
+      <h2 id="hoje-t">Feito no perfil em 25/11</h2>
+      <p>Com a aprovação do Erick, pela conta que administra o perfil. O Google revisa cada mudança antes de mostrar; no painel, as três estavam como “pendente”.</p>
+    </div>
+    <ul class="lista">
+      <li><span class="st feito">Feito</span><div class="item"><strong>Foto do Allegrato trocada</strong><p>Saiu o anúncio com “a partir de R$ 350.000,00” (a tabela de novembro começa em R$ 360.334,56). Entrou o render do lazer ao entardecer, sem texto e sem preço, da landing da Lotus (<code>public/allegrato/a010.jpg</code>).</p></div></li>
+      <li><span class="st feito">Feito</span><div class="item"><strong>Descrição nova, com 532 caracteres</strong><p>Substituiu a anterior, de 179 caracteres, que o Maps não mostrava. Sem aluguel e só com Jundiaí e Itupeva.</p></div></li>
+      <li><span class="st feito">Feito</span><div class="item"><strong>Redes sociais completas</strong><p>Instagram e Facebook já estavam no painel. Entraram YouTube e TikTok, e o Facebook passou a usar o mesmo link do site.</p></div></li>
+    </ul>
+    <div class="caixa">
+      <h3>Esperando decisão do Erick</h3>
+      <ul>
+        <li><strong>Serviços:</strong> o perfil já tem 19 serviços. Três falam em locação ou administração (“Administração de imóveis”, “Venda e locação de novas construções”, “Venda e locação de terrenos”), e a Lotus não trabalha com locação. Tirar esses três? Acrescentar “Lançamentos imobiliários”, que não existe na lista?</li>
+        <li><strong>Respostas às 13 avaliações:</strong> os textos foram propostos e ficaram para depois.</li>
+        <li><strong>Foto de capa:</strong> o perfil não tem uma.</li>
+        <li><strong>Categorias secundárias:</strong> só existe a principal, Imobiliária.</li>
+        <li><strong>Atributos:</strong> acessibilidade e estacionamento estão em branco, e só a Lotus sabe o que vale para o escritório.</li>
+        <li><strong>Horário de fim de ano:</strong> nenhum horário especial cadastrado para o Natal e o Ano Novo.</li>
+        <li><strong>Grafia do endereço no painel:</strong> está “Avenida José Luiz Sereno”. O Maps mostra “Av. Luiz José Sereno”, igual ao site, porque usa o nome da rua no mapa. Não mexi: trocar o endereço de um perfil verificado pode pedir nova verificação.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="placar-t">
+    <h2 id="placar-t" class="muted" style="font-size:20px">51 itens conferidos</h2>
+    <p class="muted">Cada item conta uma vez. Quando o playbook repete um item em outra fase, ele aparece lá como referência, com a mesma situação.</p>
+    <div class="placar">
+      <div><b>21</b><span class="st feito">Feito</span></div>
+      <div><b>7</b><span class="st parte">Em parte</span></div>
+      <div><b>11</b><span class="st nao">Não feito</span></div>
+      <div><b>7</b><span class="st painel">Não conferido</span></div>
+      <div><b>1</b><span class="st revisar">Revisar</span></div>
+      <div><b>4</b><span class="st na">Não se aplica</span></div>
+    </div>
+    <div class="duas">
+      <div class="caixa">
+        <h3>Já está forte</h3>
+        <ul>
+          <li>Perfil verificado desde a abertura (01/08/2025), com o nome limpo (“Lotus Brokers”) e a categoria Imobiliária.</li>
+          <li>Endereço, telefone e horário iguais no perfil, no site e nas 15 landings.</li>
+          <li>17 avaliações, todas com 5 estrelas.</li>
+          <li>Descrição, redes sociais, área de atendimento (Jundiaí e Itupeva) e o botão de chat que abre o WhatsApp.</li>
+          <li>Site com o dado estruturado de imobiliária ligado ao perfil.</li>
+        </ul>
+      </div>
+      <div class="caixa">
+        <h3>Maiores lacunas</h3>
+        <ul>
+          <li>13 das 17 avaliações sem resposta.</li>
+          <li>Nenhuma postagem e nenhum produto.</li>
+          <li>Sem foto de capa, 4 fotos da empresa (a meta é 20 ou mais) e nenhum vídeo.</li>
+          <li>Nenhuma categoria secundária.</li>
+          <li>A Lotus não aparece nos primeiros resultados do Maps para “imobiliária em Jundiaí” nem “em Itupeva”.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="mba-t">
+    <div class="cab">
+      <h2 id="mba-t">Ajuste sugerido · Reforço MBA</h2>
+    </div>
+    <ul class="lista">
+      <li><span class="st feito">Feito</span><div class="item"><strong>Schema.org LocalBusiness no site</strong><p class="ref">Ver Fase 3, item 14.</p></div></li>
+      <li><span class="st painel">Não conferido</span><div class="item"><strong>Pedir avaliação no pós-venda, em D+7</strong><p>É rotina do time e não aparece no perfil. As 17 avaliações chegaram entre um mês e 2 semanas atrás.</p></div></li>
+      <li><span class="st na">Não se aplica</span><div class="item"><strong>Responder avaliação negativa em até 24 h</strong><p>Nenhuma avaliação negativa até hoje: as 17 têm 5 estrelas.</p></div></li>
+      <li><span class="st nao">Não feito</span><div class="item"><strong>Postagens semanais no perfil</strong><p class="ref">Ver Fase 3, item 12.</p></div></li>
+      <li><span class="st parte">Em parte</span><div class="item"><strong>Metas: 15 avaliações por mês, nota 4,7 ou mais, 100% respondidas em 24 h</strong><p>17 avaliações em cerca de um mês e nota 5,0. Respondidas: 4 de 17.</p></div></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="f1-t">
+    <div class="cab">
+      <h2 id="f1-t">Fase 1 · Preparação</h2>
+      <p>O que ter em mãos antes de criar o perfil.</p>
+    </div>
+    <ul class="lista">
+      <li><span class="st feito">Feito</span><div class="item"><strong><span class="num">1</span>CNPJ ativo com CRECI PJ</strong><p>CNPJ 67.767.385/0001-98 e CRECI 054615-J, no rodapé do site.</p></div></li>
+      <li><span class="st feito">Feito</span><div class="item"><strong><span class="num">2</span>Endereço completo</strong><p>Av. Luiz José Sereno, 655, Jardim Ermida II, Jundiaí/SP, CEP 13212-210. Igual no Maps e no site; no painel, a rua está escrita “José Luiz” (veja “Esperando decisão”).</p></div></li>
+      <li><span class="st feito">Feito</span><div class="item"><strong><span class="num">3</span>Telefone comercial com WhatsApp</strong><p>(11) 92614-3393, o mesmo no perfil, no site e nas landings.</p></div></li>
+      <li><span class="st feito">Feito</span><div class="item"><strong><span class="num">4</span>E-mail comercial</strong><p><code>atendimento@lotusbrokers.com.br</code>, nas páginas de privacidade, termos, cookies e meus dados do site.</p></div></li>
+      <li><span class="st feito">Feito</span><div class="item"><strong><span class="num">5</span>Site publicado com HTTPS</strong><p>https://www.lotusbrokers.com.br está no ar, com HTTPS forçado. O playbook foi corrigido: dizia “protótipo”.</p></div></li>
+      <li><span class="st feito">Feito</span><div class="item"><strong><span class="num">6</span>Logo</strong><p>O perfil já tem o logo da Lotus cadastrado no painel.</p></div></li>
+      <li><span class="st nao">Não feito</span><div class="item"><strong><span class="num">7</span>Foto de capa, 1080 × 608</strong><p>O painel mostra “Adicionar uma foto da capa”: não há capa escolhida.</p></div></li>
+      <li><span class="st parte">Em parte</span><div class="item"><strong><span class="num">8</span>10 ou mais fotos (fachada, escritório, equipe, imóveis)</strong><p>4 fotos da empresa: a fachada com a placa, os anúncios do Auten e do Reserva Castanheira e o render do Allegrato que entrou hoje. Faltam escritório e equipe.</p></div></li>
+      <li><span class="st nao">Não feito</span><div class="item"><strong><span class="num">9</span>1 a 3 vídeos curtos</strong><p>Nenhum vídeo no perfil. O canal da Lotus no YouTube existe e agora está ligado ao perfil.</p></div></li>
+      <li><span class="st feito">Feito</span><div class="item"><strong><span class="num">10</span>Horário de atendimento</strong><p>Segunda a sexta, 9h às 18h; sábado, 9h às 13h; domingo fechado. O site diz o mesmo. Nenhum horário especial de feriado cadastrado.</p></div></li>
+      <li><span class="st feito">Feito</span><div class="item"><strong><span class="num">11</span>Descrição de até 750 caracteres</strong><p>Publicada em 25/11, com 532 caracteres, à espera da revisão do Google.</p></div></li>
+      <li><span class="st revisar">Revisar</span><div class="item"><strong><span class="num">12</span>Lista de serviços</strong><p>O perfil tem 19 serviços da lista do Google. Três falam em locação ou administração, e a Lotus não trabalha com locação. A decisão está em “Esperando decisão”.</p></div></li>
+      <li><span class="st feito">Feito</span><div class="item"><strong><span class="num">13</span>Áreas de atendimento</strong><p>Jundiaí e Itupeva, como manda a D026. O playbook foi corrigido: listava também Vinhedo, Valinhos, Itu e Salto.</p></div></li>
+      <li><span class="st painel">Não conferido</span><div class="item"><strong><span class="num">14</span>Conta Google corporativa como proprietária</strong><p>Quem é proprietário e quem é gerente fica em “Pessoas e acesso”, que não foi aberto.</p></div></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="f2-t">
+    <div class="cab">
+      <h2 id="f2-t">Fase 2 · Criação do perfil</h2>
+      <p>Áreas de atendimento (passo 6) e horário (passo 8) estão na Fase 1, itens 13 e 10.</p>
+    </div>
+    <ul class="lista">
+      <li><span class="st feito">Feito</span><div class="item"><strong><span class="num">1</span>Perfil criado no Google</strong><p>“Lotus Brokers”, com data de abertura em 01/08/2025.</p></div></li>
+      <li><span class="st feito">Feito</span><div class="item"><strong><span class="num">2</span>Nome exato, sem palavra-chave e sem “Japi Lançamentos”</strong><p>O nome é só “Lotus Brokers”. A busca por “Japi Lançamentos Jundiaí” no Maps não acha perfil com esse nome.</p></div></li>
+      <li><span class="st feito">Feito</span><div class="item"><strong><span class="num">3</span>Categoria principal: Imobiliária</strong><p>É a categoria cadastrada.</p></div></li>
+      <li><span class="st nao">Não feito</span><div class="item"><strong><span class="num">4</span>Categorias secundárias</strong><p>O painel só tem a principal. As da lista do playbook ligadas a aluguel e administração ficam de fora pela regra da locação.</p></div></li>
+      <li><span class="st feito">Feito</span><div class="item"><strong><span class="num">5</span>Endereço que recebe clientes, com o ponto certo no mapa</strong><p>Endereço público no perfil, com o ponto em −23,18797, −46,96520, o mesmo do site.</p></div></li>
+      <li><span class="st feito">Feito</span><div class="item"><strong><span class="num">7</span>Telefone e site no perfil</strong><p>O botão do site leva a https://www.lotusbrokers.com.br/, já com HTTPS e www.</p></div></li>
+      <li><span class="st feito">Feito</span><div class="item"><strong><span class="num">7</span>Redes sociais ligadas ao perfil</strong><p>Instagram, Facebook, YouTube e TikTok, os mesmos links do site. YouTube e TikTok entraram em 25/11.</p></div></li>
+      <li><span class="st feito">Feito</span><div class="item"><strong><span class="num">9</span>Verificação</strong><p>O painel mostra o perfil como “Confirmado”.</p></div></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="f3-t">
+    <div class="cab">
+      <h2 id="f3-t">Fase 3 · Configuração (17 elementos)</h2>
+      <p>Itens repetidos de outras fases aparecem só como referência.</p>
+    </div>
+    <ul class="lista">
+      <li><span class="st feito">Feito</span><div class="item"><strong><span class="num">1</span>Descrição</strong><p class="ref">Ver Fase 1, item 11.</p></div></li>
+      <li><span class="st revisar">Revisar</span><div class="item"><strong><span class="num">2</span>Serviços</strong><p class="ref">Ver Fase 1, item 12.</p></div></li>
+      <li><span class="st nao">Não feito</span><div class="item"><strong><span class="num">3</span>Produtos: imóveis em destaque</strong><p>Nenhum produto no perfil.</p></div></li>
+      <li><span class="st parte">Em parte</span><div class="item"><strong><span class="num">4</span>Atributos do negócio</strong><p>No perfil: acolhe a comunidade LGBTQ+, espaço seguro para pessoas transgênero, empresa de empreendedoras, agendamento on-line e serviços no local. Acessibilidade, comodidades e estacionamento estão em branco.</p></div></li>
+      <li><span class="st parte">Em parte</span><div class="item"><strong><span class="num">5</span>Fotos, 20 no mínimo</strong><p class="ref">Ver Fase 1, item 8. O anúncio do Allegrato com o preço antigo saiu em 25/11.</p></div></li>
+      <li><span class="st nao">Não feito</span><div class="item"><strong><span class="num">6</span>Vídeos</strong><p class="ref">Ver Fase 1, item 9.</p></div></li>
+      <li><span class="st nao">Não feito</span><div class="item"><strong><span class="num">7</span>Perguntas frequentes semeadas</strong><p>Nenhuma pergunta no perfil. O playbook foi corrigido: perguntas só como proprietário, nunca com uma conta que se passe por cliente.</p></div></li>
+      <li><span class="st parte">Em parte</span><div class="item"><strong><span class="num">8</span>Avaliações</strong><p class="ref">Ver “Plano de avaliações”.</p></div></li>
+      <li><span class="st feito">Feito</span><div class="item"><strong><span class="num">9</span>Mensagens</strong><p>O chat próprio do Google acabou em 31/07/2024. O perfil tem o botão de chat que abre o WhatsApp da Lotus (<code>wa.me/5511926143393</code>). O playbook foi corrigido.</p></div></li>
+      <li><span class="st parte">Em parte</span><div class="item"><strong><span class="num">10</span>Reservas e agendamentos</strong><p>O atributo “Agendamento on-line” está ligado, mas o perfil não tem botão de agendar.</p></div></li>
+      <li><span class="st na">Não se aplica</span><div class="item"><strong><span class="num">11</span>Menu</strong><p>É para restaurante, como o próprio playbook diz.</p></div></li>
+      <li><span class="st nao">Não feito</span><div class="item"><strong><span class="num">12</span>Postagens do Google, 2 a 3 por semana</strong><p>Nenhuma postagem no perfil.</p></div></li>
+      <li><span class="st feito">Feito</span><div class="item"><strong><span class="num">13</span>Área de atendimento</strong><p class="ref">Ver Fase 1, item 13.</p></div></li>
+      <li><span class="st feito">Feito</span><div class="item"><strong><span class="num">14</span>Site ligado ao perfil, com schema.org RealEstateAgent</strong><p>O site publica o tipo RealEstateAgent, que é um LocalBusiness, com o mesmo nome, endereço, telefone, horário e ponto do perfil. O link do perfil vai em <code>hasMap</code> e <code>sameAs</code> (<code>app/layout.tsx</code> e <code>lib/site.ts</code>).</p></div></li>
+      <li><span class="st painel">Não conferido</span><div class="item"><strong><span class="num">15</span>Insights e estatísticas</strong><p>A página “Desempenho” do painel não foi aberta.</p></div></li>
+      <li><span class="st painel">Não conferido</span><div class="item"><strong><span class="num">16</span>Proprietários e gerentes</strong><p>Fica em “Pessoas e acesso”, que não foi aberto.</p></div></li>
+      <li><span class="st painel">Não conferido</span><div class="item"><strong><span class="num">17</span>Notificações por e-mail</strong><p>Ficam nas configurações da conta, que não foram abertas.</p></div></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="av-t">
+    <div class="cab">
+      <h2 id="av-t">Plano de avaliações</h2>
+    </div>
+    <ul class="lista">
+      <li><span class="st painel">Não conferido</span><div class="item"><strong>Pedir a todo cliente que fechou negócio, em D+30</strong><p>É rotina do time e não aparece no perfil. As 17 avaliações chegaram entre um mês e 2 semanas atrás.</p></div></li>
+      <li><span class="st feito">Feito</span><div class="item"><strong>Pedido de avaliação sem filtro de NPS</strong><p>O playbook dizia para não pedir a quem deu NPS abaixo de 8, o que a política do Google proíbe. Foi corrigido em 25/11: pedir a todos os clientes.</p></div></li>
+      <li><span class="st feito">Feito</span><div class="item"><strong>Mensagem de WhatsApp com link direto para avaliar</strong><p>O texto está no playbook, agora com o link pronto: <code>https://search.google.com/local/writereview?placeid=ChIJzwx0oBwlz5QRJY8XAE4y9fA</code></p></div></li>
+      <li><span class="st nao">Não feito</span><div class="item"><strong>Responder 100% das avaliações em até 48 h</strong><p>4 de 17 respondidas. As respostas das outras 13 foram propostas em 25/11 e ficaram para depois.</p></div></li>
+      <li><span class="st parte">Em parte</span><div class="item"><strong>30 a 50 avaliações em 6 meses, com nota 5,0</strong><p>17 avaliações, nota 5,0. A meta de 3 meses, 10 avaliações, já foi passada. A home do site mostra a nota e 7 dessas avaliações, com link para o perfil.</p></div></li>
+      <li><span class="st na">Não se aplica</span><div class="item"><strong>Denunciar avaliação falsa ou de má-fé</strong><p>Nenhuma até hoje.</p></div></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="f4-t">
+    <div class="cab">
+      <h2 id="f4-t">Fase 4 · SEO local</h2>
+    </div>
+    <ul class="lista">
+      <li><span class="st feito">Feito</span><div class="item"><strong>Nome, endereço e telefone iguais no site</strong><p>Rodapés do portal, dado estruturado e as 15 landings em HTML trazem o mesmo endereço e telefone que o Maps mostra. A grafia “Luiz José Sereno” foi corrigida no site em 16/10, e a “sala 5” saiu em 12/11.</p></div></li>
+      <li><span class="st painel">Não conferido</span><div class="item"><strong>Nome, endereço e telefone iguais nas redes, portais e diretórios</strong><p>Instagram, Facebook, OLX, Zap e diretórios não foram conferidos. A Lotus não tem perfil de LinkedIn ligado ao site.</p></div></li>
+      <li><span class="st nao">Não feito</span><div class="item"><strong>Links de sites locais (Folha Jundiaiense, Jornal de Jundiaí, ACIJ, CRECI, parceiros)</strong><p>O Search Console de 25/11 mostra 4 links externos: 3 do linktr.ee e 1 do tracxn.com. O plano de backlinks foi entregue em 27/10.</p></div></li>
+      <li><span class="st parte">Em parte</span><div class="item"><strong>Site bem posicionado (SEO do site)</strong><p>Em andamento: 239 páginas indexadas no relatório de 15/11, contra 30 em outubro, e duas rodadas de correções em 24 e 25/11.</p></div></li>
+      <li><span class="st nao">Não feito</span><div class="item"><strong>Entrar nos 3 primeiros do mapa</strong><p>A Lotus não aparece nos 45 primeiros resultados do Maps para “imobiliária em Jundiaí”, nem nos 40 primeiros para “imobiliária em Itupeva”. A busca foi feita em 25/11, e o resultado muda com o lugar de quem busca.</p></div></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="f5-t">
+    <div class="cab">
+      <h2 id="f5-t">Fase 5 · Manutenção</h2>
+    </div>
+    <ul class="lista">
+      <li><span class="st nao">Não feito</span><div class="item"><strong>Rotina semanal: postagens, fotos e respostas</strong><p>Nenhuma postagem e 13 avaliações sem resposta. A única foto nova é a do Allegrato, de 25/11.</p></div></li>
+      <li><span class="st parte">Em parte</span><div class="item"><strong>Rotina mensal: NAP, campanha de avaliações, concorrentes, relatório</strong><p>Nome, endereço e telefone do site foram conferidos contra o perfil em 12/11 e em 25/11. O resto depende do time.</p></div></li>
+      <li><span class="st na">Não se aplica</span><div class="item"><strong>Rotina trimestral: fotos novas, vídeo, revisão de serviços</strong><p>Ainda não chegou a hora: as avaliações do perfil começaram há cerca de um mês.</p></div></li>
+      <li><span class="st nao">Não feito</span><div class="item"><strong>Otimizações avançadas (fase 2 em diante)</strong><p>Nada iniciado: Google Guaranteed, API do perfil, várias unidades, tour 360° do escritório e agendamento pela API.</p></div></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="metas-t">
+    <div class="cab">
+      <h2 id="metas-t">Métricas de sucesso</h2>
+      <p>Comparadas com a meta de 3 meses.</p>
+    </div>
+    <div class="tabela">
+      <table>
+        <thead><tr><th>Métrica</th><th>Meta de 3 meses</th><th>Hoje</th><th>Situação</th></tr></thead>
+        <tbody>
+          <tr><td>Avaliações no total</td><td class="n">10</td><td class="n">17</td><td><span class="st feito">Feito</span></td></tr>
+          <tr><td>Nota média</td><td class="n">4,8 ou mais</td><td class="n">5,0</td><td><span class="st feito">Feito</span></td></tr>
+          <tr><td>Avaliações respondidas</td><td class="n">100%</td><td class="n">24% (4 de 17)</td><td><span class="st nao">Não feito</span></td></tr>
+          <tr><td>Tempo de resposta a mensagens</td><td class="n">até 1 h</td><td>O chat vai para o WhatsApp; medir lá</td><td><span class="st na">Não se aplica</span></td></tr>
+          <tr><td>Posição no mapa: “imobiliária em Jundiaí”</td><td class="n">4 a 10</td><td>Fora dos 45 primeiros</td><td><span class="st nao">Não feito</span></td></tr>
+          <tr><td>Posição no mapa: “imobiliária em Itupeva”</td><td class="n">3 a 5</td><td>Fora dos 40 primeiros</td><td><span class="st nao">Não feito</span></td></tr>
+          <tr><td>Visualizações, cliques e leads por mês</td><td class="n">1.500 / 100 / 10</td><td>Na página “Desempenho” do painel</td><td><span class="st painel">Não conferido</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="passos-t">
+    <div class="cab">
+      <h2 id="passos-t">Próximos passos imediatos do playbook</h2>
+      <p>Repetem itens acima e não entram na contagem.</p>
+    </div>
+    <ul class="lista">
+      <li><span class="st painel">Não conferido</span><div class="item"><strong><span class="num">1</span>Conta Google corporativa como proprietária</strong></div></li>
+      <li><span class="st feito">Feito</span><div class="item"><strong><span class="num">2</span>Telefone de WhatsApp definido</strong><p>(11) 92614-3393.</p></div></li>
+      <li><span class="st nao">Não feito</span><div class="item"><strong><span class="num">3</span>Sessão de fotos com 20 ou mais fotos</strong><p>O perfil tem 4 fotos da empresa.</p></div></li>
+      <li><span class="st parte">Em parte</span><div class="item"><strong><span class="num">4</span>Criar e configurar o perfil</strong><p>Criado, verificado, com descrição, redes e área de atendimento. Faltam capa, categorias secundárias, produtos, postagens e vídeos.</p></div></li>
+      <li><span class="st painel">Não conferido</span><div class="item"><strong><span class="num">5</span>Caio como responsável por postagens, avaliações e mensagens</strong></div></li>
+      <li><span class="st parte">Em parte</span><div class="item"><strong><span class="num">6</span>Plano de avaliações</strong><p>17 avaliações em cerca de um mês.</p></div></li>
+      <li><span class="st parte">Em parte</span><div class="item"><strong><span class="num">7</span>Mensagens e agendamento depois do Gate Zero</strong><p>O chat do perfil já abre o WhatsApp. O agendamento é só o atributo, sem botão.</p></div></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="rev-t">
+    <div class="cab">
+      <h2 id="rev-t">Ajustes feitos no playbook (versão 1.1, 25/11)</h2>
+      <p>No arquivo “09 - Google Business Profile Lotus — versão expandida.md”.</p>
+    </div>
+    <ul class="revisao">
+      <li><strong>Pedido de avaliação</strong><p>Saiu o filtro de NPS abaixo de 8, que a política do Google proíbe. Agora: pedir a todos os clientes, e quem deu nota baixa recebe também um contato pessoal. O link direto de avaliação entrou com o placeid da Lotus.</p></li>
+      <li><strong>Perguntas frequentes</strong><p>Saiu a pergunta feita com uma conta “anônima”. Agora: só como proprietário.</p></li>
+      <li><strong>Mensagens</strong><p>Registrado o fim do chat do Google em 31/07/2024 e o botão de chat que abre o WhatsApp. O anti-pattern das 24 h e o passo 7 dos próximos passos foram atualizados.</p></li>
+      <li><strong>Áreas de atendimento</strong><p>Vinhedo, Valinhos, Itu e Salto ficam de fora enquanto valer a D026. O perfil já usa Jundiaí e Itupeva.</p></li>
+      <li><strong>Sem locação</strong><p>Categorias e serviços de aluguel e administração marcados como fora, e a descrição do playbook trocada pela que foi publicada.</p></li>
+      <li><strong>Horário, telefone e site</strong><p>O horário real do perfil (até 18h e sábado até 13h), o telefone (11) 92614-3393 e o site no ar no lugar de “protótipo”.</p></li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>Fontes: perfil público da Lotus no Google Maps (sem login); painel do perfil, aberto pela conta que o administra no Chrome do Erick, em 25/11/2026; código do site (<code>lib/site.ts</code>, <code>app/layout.tsx</code>, <code>lib/depoimentos.ts</code>, landings em <code>public/</code>); Search Console de 25/11.</p>
+    <p>No painel só foram feitas as três mudanças aprovadas: a troca da foto do Allegrato, a descrição e as redes sociais. “Não conferido” quer dizer que o item fica fora do perfil público e das páginas do painel que foram abertas.</p>
+  </footer>
+
+</main>
+</body>
+</html>
