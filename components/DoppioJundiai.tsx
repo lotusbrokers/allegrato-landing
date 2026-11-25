@@ -25,6 +25,7 @@ import { parseStyle, waHref } from '@/lib/dc-runtime';
 import { sendLead } from '@/lib/lead';
 import { SITE } from '@/lib/site';
 import TourVirtual from './TourVirtual';
+import { imagemOtimizada } from '@/lib/imagem-otimizada';
 
 const WA_NUMBER = '5511926143393';
 const waMain = waHref(
@@ -692,7 +693,7 @@ export default function DoppioJundiai() {
               </div>
               <div style={parseStyle('background:#fff;border:1px solid rgba(40,26,14,.08);border-radius:10px;overflow:hidden;display:flex;flex-direction:column')} data-reveal="" className="dif-card">
                 <div style={parseStyle('position:relative;height:196px;overflow:hidden')}>
-                  <img style={parseStyle('width:100%;height:100%;object-fit:cover')} src="/doppio-jundiai/a011.jpg" alt="Club House com piscina do Doppio Jundiaí, perspectiva preliminar" loading="lazy" />
+                  <img style={parseStyle('width:100%;height:100%;object-fit:cover')} {...imagemOtimizada('/doppio-jundiai/a011.jpg', [640, 1080])} sizes="(max-width: 980px) 100vw, 400px" alt="Club House com piscina do Doppio Jundiaí, perspectiva preliminar" loading="lazy" />
                   <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(to top,rgba(18,10,5,.9),rgba(18,10,5,.05) 62%)')}>
                   </div>
                   <div style={parseStyle("position:absolute;top:16px;left:16px;width:42px;height:42px;border-radius:50%;background:rgba(243,236,224,.94);display:grid;place-items:center;font-family:'Jost',sans-serif;color:#a8763c;font-size:14px;letter-spacing:.05em")}>
@@ -883,7 +884,7 @@ export default function DoppioJundiai() {
           <div className="container">
             <div className="gal" data-reveal="">
               <div className="tile big" data-lightbox="" data-idx="0">
-                <img src="/doppio-jundiai/a003.jpg" alt="Piscina coberta" loading="lazy" />
+                <img {...imagemOtimizada('/doppio-jundiai/a003.jpg', [640, 1080])} sizes="(max-width: 980px) 100vw, 600px" alt="Piscina coberta" loading="lazy" />
                 <div className="cap">
                   Piscina
                   <span className="plus">
@@ -892,7 +893,7 @@ export default function DoppioJundiai() {
                 </div>
               </div>
               <div className="tile" data-lightbox="" data-idx="1">
-                <img src="/doppio-jundiai/midia/269226ec6b731f08.webp" alt="Salão de festas" loading="lazy" />
+                <img {...imagemOtimizada('/doppio-jundiai/midia/269226ec6b731f08.webp', [640, 1080])} sizes="(max-width: 980px) 50vw, 300px" alt="Salão de festas" loading="lazy" />
                 <div className="cap">
                   Salão de Festas
                   <span className="plus">
@@ -901,7 +902,7 @@ export default function DoppioJundiai() {
                 </div>
               </div>
               <div className="tile" data-lightbox="" data-idx="2">
-                <img src="/doppio-jundiai/midia/d8a38c4a5b83c65e.webp" alt="Espaço gourmet" loading="lazy" />
+                <img {...imagemOtimizada('/doppio-jundiai/midia/d8a38c4a5b83c65e.webp', [640, 1080])} sizes="(max-width: 980px) 50vw, 300px" alt="Espaço gourmet" loading="lazy" />
                 <div className="cap">
                   Espaço Gourmet
                   <span className="plus">
@@ -910,7 +911,7 @@ export default function DoppioJundiai() {
                 </div>
               </div>
               <div className="tile big" data-lightbox="" data-idx="3">
-                <img src="/doppio-jundiai/midia/4bcc1a719b1f3c05.webp" alt="Fitness TechnoGym" loading="lazy" />
+                <img {...imagemOtimizada('/doppio-jundiai/midia/4bcc1a719b1f3c05.webp', [640, 1080])} sizes="(max-width: 980px) 100vw, 600px" alt="Fitness TechnoGym" loading="lazy" />
                 <div className="cap">
                   Fitness · TechnoGym
                   <span className="plus">
@@ -919,7 +920,7 @@ export default function DoppioJundiai() {
                 </div>
               </div>
               <div className="tile" data-lightbox="" data-idx="4">
-                <img src="/doppio-jundiai/a012.jpg" alt="Espaço massagem e spa" loading="lazy" />
+                <img {...imagemOtimizada('/doppio-jundiai/a012.jpg', [640, 1080])} sizes="(max-width: 980px) 50vw, 300px" alt="Espaço massagem e spa" loading="lazy" />
                 <div className="cap">
                   SPA · Massagem
                   <span className="plus">
@@ -928,7 +929,7 @@ export default function DoppioJundiai() {
                 </div>
               </div>
               <div className="tile" data-lightbox="" data-idx="5">
-                <img src="/doppio-jundiai/a004.jpg" alt="Sauna úmida" loading="lazy" />
+                <img {...imagemOtimizada('/doppio-jundiai/a004.jpg', [640, 1080])} sizes="(max-width: 980px) 50vw, 300px" alt="Sauna úmida" loading="lazy" />
                 <div className="cap">
                   Sauna Úmida
                   <span className="plus">
@@ -937,7 +938,7 @@ export default function DoppioJundiai() {
                 </div>
               </div>
               <div className="tile big" data-lightbox="" data-idx="6">
-                <img src="/doppio-jundiai/a011.jpg" alt="Club House com piscina" loading="lazy" />
+                <img {...imagemOtimizada('/doppio-jundiai/a011.jpg', [640, 1080])} sizes="(max-width: 980px) 100vw, 600px" alt="Club House com piscina" loading="lazy" />
                 <div className="cap">
                   Club House
                   <span className="plus">
@@ -946,7 +947,7 @@ export default function DoppioJundiai() {
                 </div>
               </div>
               <div className="tile" data-lightbox="" data-idx="7">
-                <img src="/doppio-jundiai/a007.jpg" alt="Beauty care" loading="lazy" />
+                <img {...imagemOtimizada('/doppio-jundiai/a007.jpg', [640, 1080])} sizes="(max-width: 980px) 50vw, 300px" alt="Beauty care" loading="lazy" />
                 <div className="cap">
                   Beauty Care
                   <span className="plus">
@@ -955,7 +956,7 @@ export default function DoppioJundiai() {
                 </div>
               </div>
               <div className="tile" data-lightbox="" data-idx="8">
-                <img src="/doppio-jundiai/a001.jpg" alt="Hall social" loading="lazy" />
+                <img {...imagemOtimizada('/doppio-jundiai/a001.jpg', [640, 1080])} sizes="(max-width: 980px) 50vw, 300px" alt="Hall social" loading="lazy" />
                 <div className="cap">
                   Hall Social
                   <span className="plus">
@@ -964,7 +965,7 @@ export default function DoppioJundiai() {
                 </div>
               </div>
               <div className="tile" data-lightbox="" data-idx="9">
-                <img src="/doppio-jundiai/a008.jpg" alt="Espaço yoga" loading="lazy" />
+                <img {...imagemOtimizada('/doppio-jundiai/a008.jpg', [640, 1080])} sizes="(max-width: 980px) 50vw, 300px" alt="Espaço yoga" loading="lazy" />
                 <div className="cap">
                   Espaço Yoga
                   <span className="plus">
@@ -973,7 +974,7 @@ export default function DoppioJundiai() {
                 </div>
               </div>
               <div className="tile" data-lightbox="" data-idx="10">
-                <img src="/doppio-jundiai/a006.jpg" alt="Salão de jogos" loading="lazy" />
+                <img {...imagemOtimizada('/doppio-jundiai/a006.jpg', [640, 1080])} sizes="(max-width: 980px) 50vw, 300px" alt="Salão de jogos" loading="lazy" />
                 <div className="cap">
                   Salão de Jogos
                   <span className="plus">
@@ -982,7 +983,7 @@ export default function DoppioJundiai() {
                 </div>
               </div>
               <div className="tile" data-lightbox="" data-idx="11">
-                <img src="/doppio-jundiai/a014.jpg" alt="Mini mercado" loading="lazy" />
+                <img {...imagemOtimizada('/doppio-jundiai/a014.jpg', [640, 1080])} sizes="(max-width: 980px) 50vw, 300px" alt="Mini mercado" loading="lazy" />
                 <div className="cap">
                   Mini Mercado
                   <span className="plus">
@@ -1197,7 +1198,7 @@ export default function DoppioJundiai() {
               </div>
               <div style={parseStyle('display:flex;flex-direction:column;gap:16px')} data-reveal="right">
                 <a style={parseStyle('position:relative;overflow:hidden;border-radius:6px;flex:1;min-height:320px;display:block;text-decoration:none;border:1px solid rgba(231,205,156,.18)')} href="https://www.google.com/maps?q=Av.+Luiz+Gonzaga+Martins+Guimaraes,+725,+Jundiai+SP" target="_blank" rel="noopener">
-                  <img style={parseStyle('width:100%;height:100%;min-height:320px;object-fit:cover')} src="/doppio-jundiai/a010.jpg" alt="Vista aérea de Jundiaí com a Serra do Japi ao fundo e a localização do Doppio em Campos Elísios" loading="lazy" />
+                  <img style={parseStyle('width:100%;height:100%;min-height:320px;object-fit:cover')} {...imagemOtimizada('/doppio-jundiai/a010.jpg', [640, 1080])} sizes="(max-width: 980px) 100vw, 600px" alt="Vista aérea de Jundiaí com a Serra do Japi ao fundo e a localização do Doppio em Campos Elísios" loading="lazy" />
                   <div style={parseStyle('position:absolute;inset:0;background:linear-gradient(to top,rgba(20,12,6,.82),rgba(20,12,6,.04) 46%)')}>
                   </div>
                   <div style={parseStyle('position:absolute;left:55%;top:45%;transform:translate(-50%,-100%);filter:drop-shadow(0 8px 16px rgba(0,0,0,.5))')} className="map-pin">
