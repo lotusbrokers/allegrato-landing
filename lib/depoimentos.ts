@@ -10,23 +10,22 @@
  *    o corte "[...]" que o próprio briefing aprovou;
  *  - avaliação só de estrelas (6 das 13) não entra;
  *  - nada de bairro ou tipo de negócio embaixo do nome: o Google não informa,
- *    e só a Lotus pode dizer, cliente por cliente.
+ *    e só a Lotus pode dizer, cliente por cliente;
+ *  - avaliação de corretor ou funcionário da Lotus não entra: depoimento é de
+ *    cliente, e a regra de conflito de interesses do Google não aceita
+ *    avaliação de quem trabalha na empresa. Por isso Flávia Ceolin e Giselle
+ *    Alves, corretoras da Lotus (confirmado pela Lotus em 25/11/2026), saíram.
  *
- * Avaliação nova entra copiando do perfil para esta lista.
+ * Avaliação nova entra copiando do perfil para esta lista, depois de conferir
+ * que o autor não é da equipe.
  */
 export type Depoimento = { autor: string; texto: string };
 
 export const DEPOIMENTOS: readonly Depoimento[] = [
   { autor: 'Gabriel Silva', texto: 'Recomendo muito! Tudo muito bom, estão de parabéns pelo excelente trabalho.' },
-  { autor: 'Flávia Ceolin', texto: 'Ótima equipe de corretores e excelente atendimento.' },
   { autor: 'Brunna Barros Pugim', texto: 'Excelente atendimento! Sempre disponíveis a ajudar a encontrar a melhor opção com muita transparência.' },
   { autor: 'Raíssa Fernanda', texto: 'Excelente atendimento, corretores super prestativos e o marketing sensacional!' },
   { autor: 'CARLOS FABRICIO LAMAS MAMEDE', texto: 'Excelente atendimento e profissionalismo!' },
-  {
-    autor: 'Giselle Alves',
-    texto:
-      'Equipe dedicada, atenciosa e comprometida em oferecer um atendimento personalizado, focado nas necessidades e expectativas de cada cliente, buscando sempre as melhores soluções.',
-  },
   {
     autor: 'Gabriella Vilela',
     texto:
@@ -43,8 +42,10 @@ export const DEPOIMENTOS: readonly Depoimento[] = [
  * servidor. Ficou para depois porque exige uma chave da Places API com
  * faturamento ativo no Google Cloud, e a chave atual do site é só do Drive.
  */
-// 17 avaliações: número do perfil no relatório semanal do radar de 13/11/2026 (15 em 10/11).
-export const NOTA_NO_GOOGLE = { nota: 5, total: 17, conferidaEm: '2026-11-13' } as const;
+// 17 avaliações: número do perfil no relatório semanal do radar de 13/11/2026
+// (15 em 10/11), conferido de novo no Maps em 25/11/2026. É o total que o
+// Google mostra, inclusive as avaliações que não entram como depoimento.
+export const NOTA_NO_GOOGLE = { nota: 5, total: 17, conferidaEm: '2026-11-25' } as const;
 
 /** "5,0": uma casa decimal e vírgula, como o Google mostra em português. */
 export function notaComVirgula(nota: number): string {
