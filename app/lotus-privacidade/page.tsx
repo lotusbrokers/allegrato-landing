@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { CONSENT_INLINE_SCRIPT } from '@/lib/consent-inline';
 import { footerLegalLine, SITE } from '@/lib/site';
 
+import { logoLotus } from '@/lib/imagem-otimizada';
 // Metadata portado do <head> do fonte estatico (lotus-privacidade/index.html).
 export const metadata: Metadata = {
   title: 'Política de Privacidade (LGPD) | Lotus Brokers',
@@ -58,7 +59,7 @@ export default function LotusPrivacidadePage() {
       <header>
         <div className="bar">
           <a className="logo" href="/">
-            <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" style={{ height: 34, width: 'auto', display: 'block' }} />
+            <img {...logoLotus()} alt="Lotus Brokers" width={800} height={300} style={{ height: 34, width: 'auto', display: 'block' }} />
             <span>
               Lotus<i>BROKERS</i>
             </span>

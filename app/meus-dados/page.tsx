@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { footerLegalLine } from '@/lib/site';
 import { buildMeusDadosMailto } from '@/lib/meus-dados-mailto';
 
+import { logoLotus } from '@/lib/imagem-otimizada';
 // CSS EXATO do shell das paginas LGPD (copiado de app/lotus-privacidade/page.tsx).
 const css = `
 :root{--ink:#15241c;--cream:#f7f2e8;--gold:#cdab6e;--bronze:#b18a4a;--moss:#3f6249;}
@@ -82,7 +83,7 @@ export default function MeusDadosPage() {
       <header>
         <div className="bar">
           <a className="logo" href="/">
-            <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" style={{ height: 34, width: 'auto', display: 'block' }} />
+            <img {...logoLotus()} alt="Lotus Brokers" width={800} height={300} style={{ height: 34, width: 'auto', display: 'block' }} />
             <span>
               Lotus<i>BROKERS</i>
             </span>

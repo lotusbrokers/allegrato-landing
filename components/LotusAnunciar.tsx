@@ -27,6 +27,7 @@ import React, {
   type ReactNode,
 } from 'react';
 
+import { logoLotus } from '@/lib/imagem-otimizada';
 /* ------------------------------------------------------------------ */
 /* Helpers                                                             */
 /* ------------------------------------------------------------------ */
@@ -247,7 +248,7 @@ const depo = [
 /* Lotus SVG (idêntico ao fonte, reutilizado no header e footer, tamanho variável). */
 function LotusMark({ size }: { size: number }) {
   return (
-    <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" style={{ height: 34, width: 'auto', display: 'block' }} />
+    <img {...logoLotus()} alt="Lotus Brokers" width={800} height={300} loading="lazy" style={{ height: 34, width: 'auto', display: 'block' }} />
   );
 }
 

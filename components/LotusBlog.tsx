@@ -157,7 +157,7 @@ const WHATSAPP_DEFAULT = '5511926143393';
 
 import type { ImagemDoArtigo, PostResumo } from '@/lib/blog-posts';
 import type { BlocoPronto, Pedaco } from '@/lib/texto-com-links';
-import { imagemOtimizada } from '@/lib/imagem-otimizada';
+import { imagemOtimizada, logoLotus } from '@/lib/imagem-otimizada';
 
 /* Estilos de chip (strings literais do fonte). */
 const chipOn =
@@ -168,7 +168,7 @@ const chipOff =
 /* Logo Lotus (reusada no header e footer). */
 function LotusMark({ size }: { size: number }) {
   return (
-    <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" style={{ height: 34, width: 'auto', display: 'block' }} />
+    <img {...logoLotus()} alt="Lotus Brokers" width={800} height={300} loading="lazy" style={{ height: 34, width: 'auto', display: 'block' }} />
   );
 }
 

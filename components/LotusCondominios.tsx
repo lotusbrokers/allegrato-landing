@@ -24,6 +24,7 @@ import LotusHeader from './LotusHeader';
 import { footerLegalLine } from '@/lib/site';
 import type { CondominioCard } from '@/lib/condominios';
 
+import { logoLotus } from '@/lib/imagem-otimizada';
 const WHATSAPP_DEFAULT = '5511926143393';
 
 function parseStyle(css: string): CSSProperties {
@@ -267,7 +268,7 @@ export default function LotusCondominios({
       <footer data-rodape-portal="" style={parseStyle('background:#15241c;padding:56px 32px 36px;')}>
         <div style={parseStyle('max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;')}>
           <div style={parseStyle('display:flex;align-items:center;gap:12px;')}>
-            <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" style={{ height: 34, width: 'auto', display: 'block' }} />
+            <img {...logoLotus()} alt="Lotus Brokers" width={800} height={300} loading="lazy" style={{ height: 34, width: 'auto', display: 'block' }} />
           </div>
           <div style={parseStyle('font-size:13px;color:rgba(247,242,232,.5);')}>{footerLegalLine()}</div>
         </div>

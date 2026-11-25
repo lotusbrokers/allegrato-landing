@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { CONSENT_INLINE_SCRIPT } from '@/lib/consent-inline';
 import { SITE, footerLegalLine } from '@/lib/site';
 
+import { logoLotus } from '@/lib/imagem-otimizada';
 /** "CNPJ 67.767.385/0001-98" → "67.767.385/0001-98": no texto, o rótulo vem antes do valor. */
 const semRotulo = (valor: string) => valor.replace(/^\S+\s+/, '');
 
@@ -66,7 +67,7 @@ export default function LotusTermosPage() {
       <header>
         <div className="bar">
           <a className="logo" href="/">
-            <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" style={{ height: 34, width: 'auto', display: 'block' }} />
+            <img {...logoLotus()} alt="Lotus Brokers" width={800} height={300} style={{ height: 34, width: 'auto', display: 'block' }} />
             <span>
               Lotus<i>BROKERS</i>
             </span>

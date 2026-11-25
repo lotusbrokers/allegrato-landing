@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { footerLegalLine } from '@/lib/site';
 import TabelaCookies from '@/components/TabelaCookies';
 
+import { logoLotus } from '@/lib/imagem-otimizada';
 // Metadata portada de lotus-cookies/index.html (paridade de SEO com o estático).
 // TODO go-live: trocar canonical/og:url para o domínio final e remover noindex.
 export const metadata: Metadata = {
@@ -90,7 +91,7 @@ export default function LotusCookiesPage() {
       <header>
         <div className="bar">
           <a className="logo" href="/">
-            <img src="/logo-lotus-dourado.png" alt="Lotus Brokers" style={{ height: 34, width: 'auto', display: 'block' }} />
+            <img {...logoLotus()} alt="Lotus Brokers" width={800} height={300} style={{ height: 34, width: 'auto', display: 'block' }} />
             <span>
               Lotus<i>BROKERS</i>
             </span>
