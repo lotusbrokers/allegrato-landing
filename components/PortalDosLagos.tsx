@@ -348,13 +348,14 @@ export default function PortalDosLagos() {
           </div>
           {/* O selo "Realização" com o logo da construtora saiu daqui (as
               realizadoras seguem na seção REALIZAÇÃO, mais abaixo). No lugar,
-              o valor oficial, como nas landings do Vigóre e do Maxx — "a
-              consultar" desde 05/10/2026, a pedido da Lotus: a tabela de
-              setembro venceu e a nova só veio para o Reserva Castanheira. */}
+              o valor oficial, como nas landings do Vigóre e do Maxx. Ficou "a
+              consultar" de 05/10 a 26/11/2026 (tabela de setembro vencida) e
+              voltou com a tabela de novembro, a pedido da Lotus: o valor que a
+              Santa Angela divulga (lote de 420 m²). */}
           <div className="hero__price reveal in" data-d="3">
-            <span className="l">Valor</span>
-            <span className="v">A consultar</span>
-            <span className="n">Fale com a Lotus para conferir os valores dos lotes.</span>
+            <span className="l">A partir de</span>
+            <span className="v">R$ 584.223,41*</span>
+            <span className="n">Fale com a Lotus para conferir os valores dos outros lotes.</span>
           </div>
         </div>
         <a className="hero__scroll" href="#destaques" aria-label="Rolar">
@@ -675,7 +676,7 @@ export default function PortalDosLagos() {
             </div>
           </div>
           <p className="legal">
-            As informações constantes no Memorial de Incorporação e nos futuros Instrumentos de Compra e Venda prevalecerão sobre as divulgadas neste material. Todas as imagens e perspectivas aqui contidas são meramente ilustrativas. As tonalidades das cores, formas e texturas podem sofrer alterações. A vegetação exposta é meramente ilustrativa e será entregue de acordo com o Projeto Paisagístico, podendo apresentar diferenças de tamanho e porte. Loteamento registrado no 1º Oficial de Registro de Imóveis de Jundiaí/SP.
+            As informações constantes no Memorial de Incorporação e nos futuros Instrumentos de Compra e Venda prevalecerão sobre as divulgadas neste material. Todas as imagens e perspectivas aqui contidas são meramente ilustrativas. As tonalidades das cores, formas e texturas podem sofrer alterações. A vegetação exposta é meramente ilustrativa e será entregue de acordo com o Projeto Paisagístico, podendo apresentar diferenças de tamanho e porte. Loteamento registrado no 1º Oficial de Registro de Imóveis de Jundiaí/SP. *Valor de lote a partir de R$ 584.223,41 (lote de 420 m²), referente à tabela de novembro/2026, sujeito a alteração sem aviso prévio.
           </p>
           <div className="legal__bar">
             <span>© <span id="yr"></span> Portal dos Lagos · Página, divulgação e atendimento pela Imobiliária Lotus Brokers, autorizada a comercializar este empreendimento.</span>

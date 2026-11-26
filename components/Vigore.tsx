@@ -869,23 +869,24 @@ export default function Vigore() {
                   "font-family:'Hanken Grotesk';font-weight:500;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.6)"
                 )}
               >
-                {/* "Valor a consultar" desde 05/10/2026, a pedido da Lotus: a tabela de
-                    setembro venceu e a nova só veio para o Reserva Castanheira. */}
-                Valor
+                {/* "Valor a consultar" de 05/10 a 26/11/2026 (tabela de setembro
+                    vencida). Voltou com a tabela de novembro, a pedido da Lotus: o
+                    valor que a Santa Angela divulga (Torre A, 53 m²). */}
+                A partir de
               </span>
               <span
                 style={parseStyle(
                   "font-family:'Archivo';font-weight:800;font-size:clamp(20px,2.3vw,27px);color:#fff;line-height:1"
                 )}
               >
-                A consultar
+                R$ 412.655,93<span style={parseStyle('color:#F2581E')}>*</span>
               </span>
               <span
                 style={parseStyle(
                   "font-family:'Hanken Grotesk';font-weight:600;font-size:13px;line-height:1.45;color:rgba(255,255,255,.9);margin-top:8px;max-width:34ch"
                 )}
               >
-                Fale com a Lotus para conferir os valores.
+                Fale com a Lotus para conferir os valores das outras unidades.
               </span>
             </div>
           </div>
@@ -2071,7 +2072,8 @@ export default function Vigore() {
               "font-family:'Hanken Grotesk';font-size:11px;color:rgba(255,255,255,.32);line-height:1.6;margin-top:26px;max-width:none"
             )}
           >
-            As informações constantes no Memorial
+            *Torre A : 53m². Valor referente à tabela de novembro/2026, sujeito a alteração
+            sem aviso prévio. As informações constantes no Memorial
             de Incorporação e nos futuros Instrumentos de Compra e Venda prevalecerão sobre as
             divulgadas neste material. Todas as imagens e perspectivas são meramente ilustrativas.
             Os móveis e utensílios são sugestões de decoração e não fazem parte do contrato de

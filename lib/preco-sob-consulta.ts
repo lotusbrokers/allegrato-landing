@@ -11,6 +11,12 @@
  * card volta a mostrar o valor da tabela de setembro (R$ 631.083,74), mesmo
  * com ela vencida. A landing dele nunca mostrou preço.
  *
+ * Em 26/11/2026 a Lotus pediu "mostre apenas os deste mês de novembro". Saíram
+ * da lista os que têm o valor da tabela de novembro/2026 na Dashboard:
+ * Allegrato, Gioviale, Portal dos Lagos, Resort Prime, Santorini e Vigóre.
+ * Ficam o Altos da Avenida, vendido a pedido da Lotus, e o Maxx Santa Angela,
+ * cujo valor divulgado pela Santa Angela ainda é o da tabela de julho/2026.
+ *
  * Diferente de lib/correcoes-cadastro.ts, que é temporário e se desliga sozinho
  * quando a Dashboard é atualizada, isto é uma decisão comercial: só sai daqui
  * quando a Lotus quiser o preço de volta. Ao tirar um slug, confira antes se a
@@ -21,14 +27,8 @@
 
 /** Chave = slug da landing, o mesmo de lib/correcoes-cadastro.ts. */
 export const PRECO_SOB_CONSULTA: ReadonlySet<string> = new Set([
-  'allegrato',
   'altos-da-avenida',
-  'gioviale',
   'maxx-santa-angela',
-  'portal-dos-lagos',
-  'resort-prime',
-  'santorini',
-  'vigore',
 ]);
 
 /** O que os cards mostram no lugar do preço, para este caso e para quem não tem preço cadastrado. */
