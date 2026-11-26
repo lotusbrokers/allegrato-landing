@@ -190,11 +190,20 @@ function LinkDoTexto({ href, children }: { href: string; children: React.ReactNo
 /* Foto no meio do artigo, na largura do texto e na proporção do próprio
    arquivo: width/height reservam o espaço antes de carregar, sem o texto
    pular. Passa pelo otimizador do Next (WebP/AVIF na largura da tela) e só
-   carrega perto de aparecer. A coluna tem 756px (820 menos o padding). */
+   carrega perto de aparecer. A coluna tem 756px (820 menos o padding).
+
+   Foto em pé não passa de ALTURA_MAXIMA_DA_FOTO: na largura da coluna, uma
+   foto 3:4 ficaria com mais de 1.000px de altura (artigo do Vinhas da
+   Invernada, 26/11/2026). A figura inteira estreita e fica no centro, para o
+   crédito acompanhar a foto. Foto deitada não muda: a largura que a altura
+   permitiria passa da coluna. */
+const ALTURA_MAXIMA_DA_FOTO = 600;
+
 function FotoNoTexto({ imagem }: { imagem: ImagemDoArtigo }) {
   const { src, srcSet } = imagemOtimizada(imagem.src, [640, 1080]);
+  const larguraMaxima = Math.round((ALTURA_MAXIMA_DA_FOTO * imagem.largura) / imagem.altura);
   return (
-    <figure style={parseStyle('margin:6px 0 28px;')}>
+    <figure style={{ ...parseStyle('margin:6px auto 28px;'), maxWidth: larguraMaxima }}>
       <img
         src={src}
         srcSet={srcSet}
