@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relatório do dia 26/11/2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+  /* Mesmo visual dos relatórios de docs/seo: cores e fontes da marca Lotus. */
+  :root {
+    --bg: #f7f2e8; --card: #ffffff; --fg: #15241c; --muted: #4d6655; --line: rgba(21,36,28,.12);
+    --accent: #8a6a2c; --soft: rgba(21,36,28,.055);
+    --ok: #2f6b45; --ok-bg: #e3efe6; --wait: #8a5a12; --wait-bg: #f6e9cf;
+    --info: #2d5068; --info-bg: #e2ecf2;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111a15; --card: #18241d; --fg: #eee6d6; --muted: #a9bba9; --line: rgba(238,230,214,.14);
+      --accent: #d2b27a; --soft: rgba(238,230,214,.07);
+      --ok: #8fd0a4; --ok-bg: #1d3426; --wait: #f0c879; --wait-bg: #3a2f17;
+      --info: #9cc3dd; --info-bg: #1b2c37;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #111a15; --card: #18241d; --fg: #eee6d6; --muted: #a9bba9; --line: rgba(238,230,214,.14);
+    --accent: #d2b27a; --soft: rgba(238,230,214,.07);
+    --ok: #8fd0a4; --ok-bg: #1d3426; --wait: #f0c879; --wait-bg: #3a2f17;
+    --info: #9cc3dd; --info-bg: #1b2c37;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 15.5px/1.6 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  main { max-width: 980px; margin: 0 auto; padding-block: 48px 72px; display: grid; gap: 44px; }
+  h1, h2 { font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-weight: 300; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.08; letter-spacing: -.01em; }
+  h2 { font-size: clamp(22px, 3vw, 28px); line-height: 1.2; }
+  h3 { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.35; }
+  h4 { margin: 0; font-size: 12.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  p { margin: 0; max-width: 72ch; }
+  ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; max-width: 74ch; }
+  a { color: inherit; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+  code { font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; font-size: 13px; background: var(--soft); padding: 1px 6px; border-radius: 5px; overflow-wrap: anywhere; }
+  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+  .lead { color: var(--muted); font-size: 17px; }
+  .muted { color: var(--muted); font-size: 14.5px; }
+  header { display: grid; gap: 14px; }
+  section { display: grid; gap: 18px; min-width: 0; }
+  .cab { display: grid; gap: 6px; padding-top: 22px; border-top: 1px solid var(--line); }
+  .cab p { color: var(--muted); }
+  .numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+  .numeros div { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; min-width: 0; }
+  .numeros b { display: block; font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 30px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .numeros span { font-size: 13.5px; color: var(--muted); }
+  .bloco { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; display: grid; gap: 10px; min-width: 0; }
+  .bloco-topo { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 14px; }
+  .selo { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 999px; white-space: nowrap; }
+  .noar { background: var(--ok-bg); color: var(--ok); }
+  .perfil { background: var(--info-bg); color: var(--info); }
+  .local { background: var(--wait-bg); color: var(--wait); }
+  .tabela { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 14.5px; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  th { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 700; background: var(--soft); white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .duas { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+  footer { color: var(--muted); font-size: 13.5px; display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 20px; }
+</style>
+</head>
+<body>
+<main>
+
+  <header>
+    <span class="eyebrow">Lotus Brokers · relatório do dia</span>
+    <h1>Tudo o que foi feito em 26/11/2026</h1>
+    <p class="lead">Blog, landing do Vinhas da Invernada, tipologias e preços na Dashboard, indexação no Google e preço de novembro de volta no site. Cada item diz se está no ar, se foi feito direto na Dashboard ou no Google, ou se ficou pendente.</p>
+    <div class="numeros">
+      <div><b>6</b><span>commits no ar, em 2 publicações (13h08 e 16h04)</span></div>
+      <div><b>16</b><span>lançamentos com tipologia ou preço atualizados na Dashboard</span></div>
+      <div><b>6</b><span>pedidos de indexação no Search Console; outras 11 páginas já tinham entrado</span></div>
+      <div><b>10</b><span>páginas avisadas aos buscadores pelo IndexNow</span></div>
+      <div><b>334</b><span>testes passando no código publicado</span></div>
+    </div>
+  </header>
+
+  <section aria-labelledby="site-t">
+    <div class="cab">
+      <h2 id="site-t">Site no ar</h2>
+      <p>Duas publicações. Antes de cada uma: testes, build sem o Site do Cliente, datas do sitemap e conferência em produção depois.</p>
+    </div>
+
+    <div class="bloco">
+      <div class="bloco-topo"><h3>13h08 · Artigo do Vinhas da Invernada e correção da landing</h3><span class="selo noar">No ar</span></div>
+      <ul>
+        <li>Artigo novo, destaque do blog: “Antiga fazenda de café na região da Serra do Japi vira condomínio de vinhedos privativos”, com capa e 16 fotos ao longo do texto (<code>79f5cf1</code>).</li>
+        <li>O texto foi conferido na NeoFeed (fonte original), no Diário do Litoral, na Gazeta SP e na Tribuna de Jundiaí. O local seguiu o material oficial: “na região da Serra do Japi, entre Cabreúva, Itupeva e Indaiatuba”. No fim, link para a landing, a fonte e o aviso de imagens ilustrativas.</li>
+        <li>Landing do Vinhas: os 1.100.000 m² passaram de “área total da fazenda” para “área do master plan”. A fazenda tem 260 hectares, a tabela das 40 vinhas soma 927.232 m² e o mapa marca a 2ª fase. O texto alternativo da foto da placa da Chenin Blanc também foi corrigido (<code>8a11de5</code>).</li>
+        <li>Blog: foto em pé no meio do artigo fica com no máximo 600 px de altura (<code>d5613b8</code>).</li>
+        <li>Conferido em produção: artigo respondendo, 16 fotos, primeiro do blog e no sitemap, 10 minutos estável. IndexNow de 3 páginas, com resposta 200.</li>
+      </ul>
+    </div>
+
+    <div class="bloco">
+      <div class="bloco-topo"><h3>16h04 · Preço de novembro de volta nos cards e nas landings da Santa Angela</h3><span class="selo noar">No ar</span></div>
+      <p>Pedido: “mostre apenas os deste mês de novembro” e “no Altos da Avenida mantenha como vendido” (<code>7ddd7bc</code>).</p>
+      <div class="tabela"><table>
+        <thead><tr><th>Empreendimento</th><th>Landing</th><th>Card</th></tr></thead>
+        <tbody>
+          <tr><td>Allegrato</td><td class="n">R$ 360.334,56 (Torre A, 55,12 m²)</td><td class="n">R$ 360.334</td></tr>
+          <tr><td>Resort Prime</td><td class="n">R$ 1.006.897,77 (Torre C, 110 m², vaga à parte)</td><td class="n">R$ 1.006.898</td></tr>
+          <tr><td>Vigóre</td><td class="n">R$ 412.655,93 (Torre A, 53 m²)</td><td class="n">R$ 412.656</td></tr>
+          <tr><td>Portal dos Lagos</td><td class="n">R$ 584.223,41 (lote de 420 m²)</td><td class="n">R$ 584.223</td></tr>
+          <tr><td>Reserva Castanheira</td><td class="n">R$ 463.350,81 (lote de 250 m²), novo no topo</td><td class="n">R$ 463.351</td></tr>
+          <tr><td>Gioviale e Santorini</td><td>a landing nunca teve lugar de preço</td><td class="n">R$ 362.318 e R$ 1.025.834</td></tr>
+          <tr><td>Altos da Avenida e Maxx</td><td>A consultar</td><td>Valor a consultar</td></tr>
+        </tbody>
+      </table></div>
+      <ul>
+        <li>Cada preço de landing tem a nota “valor referente à tabela de novembro/2026, sujeito a alteração sem aviso prévio”. O Maxx ficou de fora porque a Santa Angela ainda divulga a tabela de julho.</li>
+        <li>Conferido no celular e no computador, e depois em produção. IndexNow de 7 páginas, com resposta 200.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="dash-t">
+    <div class="cab">
+      <h2 id="dash-t">Dashboard: tipologias e preços</h2>
+      <p>Tudo feito na tela de cada lançamento, salvo pelo botão do topo e conferido relendo o que ficou gravado no banco.</p>
+    </div>
+
+    <div class="bloco">
+      <div class="bloco-topo"><h3>Levantamento das tipologias (por volta das 14h)</h3><span class="selo perfil">Relatório exportável</span></div>
+      <ul>
+        <li>63 lançamentos e 163 tipologias lidos sem alterar nada. Dos 59 ativos: 10 sem nenhuma tipologia, 9 com tipologia sem preço, 8 com preço em só parte das plantas e 32 completos.</li>
+        <li>Achados: Bosque das Sapucaias e Odeon ainda com o preço da Black Week vencida em 22/11; erro de digitação de R$ 434,99 numa planta do Reserva Di Medeiros.</li>
+        <li>Arquivo: <code>docs/tipologias-dashboard-26-11-2026.html</code>, com botões para baixar CSV e salvar em PDF. É a foto das 14h, antes dos ajustes abaixo.</li>
+      </ul>
+    </div>
+
+    <div class="bloco">
+      <div class="bloco-topo"><h3>15h11 a 15h12 · Tabelas da F A Oliva e do Santorini</h3><span class="selo perfil">Feito na Dashboard</span></div>
+      <ul>
+        <li>O PDF da F A Oliva era a própria tabela da Black Week, válida até 22/11. Por isso entrou a coluna “valor tabela”.</li>
+        <li>Bosque das Sapucaias: 48,55 m² a R$ 417.848,36, 50,75 m² a R$ 427.578,36 e 62,50 m² a R$ 524.541,15, sem “Black Week” nos nomes.</li>
+        <li>Odeon: 95,85 m², unidade 1-64 com vaga extra (3 vagas), a R$ 1.114.388,93.</li>
+        <li>Santorini, tabela 1642 da Santa Angela, só as unidades verdes (62 de 91): 2 dorms a partir de R$ 1.025.834,49 (unid. 44) e 3 dorms a partir de R$ 1.386.770,76 (unid. 55).</li>
+        <li>Belong, Vila Triunfo e Monte Bianco não foram cadastrados: já foram entregues, decisão sua.</li>
+      </ul>
+    </div>
+
+    <div class="bloco">
+      <div class="bloco-topo"><h3>15h39 a 15h43 · Valores do site da Santa Angela</h3><span class="selo perfil">Feito na Dashboard</span></div>
+      <p>A página de cada empreendimento no site da Santa Angela traz um “a partir de” com torre, metragem e mês da tabela. Ele entrou na tipologia certa, e o Valor mínimo ficou igual.</p>
+      <div class="tabela"><table>
+        <thead><tr><th>Empreendimento</th><th>Valor no site da Santa Angela</th><th>Na Dashboard</th></tr></thead>
+        <tbody>
+          <tr><td>Allegrato</td><td class="n">Torre B 55 m²: R$ 367.541,25</td><td>linha das Torres B/C/D de 55,12 m²</td></tr>
+          <tr><td>Altos da Avenida</td><td class="n">Torre B 105 m²: R$ 889.536,80</td><td>105 m²; o lançamento segue “vendido”</td></tr>
+          <tr><td>Gioviale</td><td class="n">Torre D 53 m²: R$ 362.317,50</td><td>53,60 m² (o site não diz o final)</td></tr>
+          <tr><td>Maxx Santa Angela</td><td class="n">Torre B 97 m²: R$ 941.275,70 (julho)</td><td>98 m² Torre B</td></tr>
+          <tr><td>Portal dos Lagos</td><td class="n">lote 420 m²: R$ 584.223,41</td><td>primeira tipologia, criada hoje</td></tr>
+          <tr><td>Reserva Castanheira</td><td class="n">lote 250 m²: R$ 463.350,81</td><td>atualizado</td></tr>
+          <tr><td>Resort Prime</td><td class="n">Torre C 110 m²: R$ 1.006.897,77</td><td>110 m² Torres C e D</td></tr>
+          <tr><td>Vigóre</td><td class="n">Torre A 53 m²: R$ 412.655,93</td><td>tipologias novas de 53 m² (com preço) e 54 m²</td></tr>
+          <tr><td>Santorini</td><td class="n">Torre A 84 m²: R$ 1.025.834,49</td><td>já batia com a tabela 1642</td></tr>
+        </tbody>
+      </table></div>
+      <ul>
+        <li>Saíram preços antigos que tinham vindo do card do cadastro e derrubavam o “a partir de”: 58 m² do Altos, 53,15 m² do Gioviale, 51 m² do Maxx e 68 m² do Resort Prime.</li>
+        <li>“Vaga vendida à parte” entrou no nome das plantas do Altos, do Gioviale e do Resort Prime, como o site deles diz.</li>
+        <li>Viva Santa Angela ficou como estava: a página dele no site da Santa Angela mostra o conteúdo do Allegrato.</li>
+      </ul>
+    </div>
+
+    <div class="bloco">
+      <div class="bloco-topo"><h3>16h24 a 16h26 · Listas de preços de novembro da Tebas</h3><span class="selo perfil">Feito na Dashboard</span></div>
+      <p>As listas da Tebas só trazem as unidades à venda. O “a partir de” de cada planta é o menor valor da lista, e o Valor mínimo ficou igual.</p>
+      <div class="tabela"><table>
+        <thead><tr><th>Empreendimento</th><th>Planta</th><th>Era (outubro)</th><th>Ficou (novembro)</th></tr></thead>
+        <tbody>
+          <tr><td>Authoria</td><td>3 suítes · 137,39 m² (12 unid.)</td><td class="n">R$ 1.931.065</td><td class="n">R$ 1.937.824</td></tr>
+          <tr><td></td><td>4 suítes · Torres B e C (3 unid.)</td><td class="n">R$ 2.978.470</td><td class="n">R$ 2.988.895</td></tr>
+          <tr><td>Ávora</td><td>4 dorms · 216,19 m² · Diamante (11 unid.)</td><td class="n">R$ 2.870.476</td><td class="n">R$ 2.880.519</td></tr>
+          <tr><td></td><td>4 suítes · 248,18 m² · Coral (2 unid.)</td><td class="n">R$ 3.578.131</td><td class="n">R$ 3.590.652</td></tr>
+          <tr><td>Anhangabaú Design</td><td>1 suíte · 54,95 m²</td><td class="n">R$ 798.410</td><td class="n">R$ 801.204</td></tr>
+          <tr><td></td><td>1 suíte · 57,44 m²</td><td class="n">R$ 749.473</td><td class="n">R$ 752.096</td></tr>
+          <tr><td></td><td>2 suítes · 79,15 m²</td><td class="n">R$ 1.160.405</td><td class="n">R$ 1.164.466</td></tr>
+          <tr><td></td><td>2 suítes · 83,92 m²</td><td class="n">R$ 1.094.721</td><td class="n">R$ 1.098.554</td></tr>
+          <tr><td></td><td>1 suíte · 50,09 m²</td><td class="n">R$ 719.806</td><td>esgotada (não está na lista)</td></tr>
+          <tr><td>Essence</td><td>3 suítes · 130,10 m² (16 unid.)</td><td class="n">R$ 1.521.828</td><td class="n">R$ 1.527.155</td></tr>
+          <tr><td></td><td>3 suítes · 129,22 m² · térreo com terraço</td><td class="n">R$ 1.663.334</td><td class="n">R$ 1.669.156</td></tr>
+          <tr><td>Hub 9 de Julho</td><td>7 salas comerciais, de 63,63 a 282,22 m²</td><td class="n">a partir de R$ 1.098.731</td><td class="n">a partir de R$ 1.102.578</td></tr>
+          <tr><td></td><td>residenciais 87,03 e 88,31 m²</td><td class="n">R$ 1.590.582</td><td>sem mudança: a lista enviada é a de outubro</td></tr>
+        </tbody>
+      </table></div>
+      <ul>
+        <li>Valores das salas do Hub: 63,63 m² R$ 1.102.578; 65,56 m² R$ 1.173.916; 77,26 m² R$ 1.351.628; 85,53 m² R$ 1.533.188; 88,58 m² R$ 1.544.871; 96,88 m² R$ 1.686.562; 282,22 m² R$ 5.457.685.</li>
+        <li>O arquivo “HUB RESIDENCIAL – Nov 26” é, por dentro, a lista de outubro de 2026, e os valores dele já estavam na Dashboard.</li>
+        <li>No site, os cards passaram a: Authoria a partir de R$ 1,9 mi, Design R$ 752 mil e Hub R$ 1,1 mi. Ávora e Essence não são publicados no site.</li>
+      </ul>
+    </div>
+
+    <div class="bloco">
+      <div class="bloco-topo"><h3>Comportamentos da Dashboard para o dev</h3><span class="selo local">Para o dev</span></div>
+      <ul>
+        <li>Num lançamento que já tem tipologias, uma linha nova continua sem salvar (o bug de 19/11). Por isso ficaram de fora as plantas de 63,75 e 64,62 m² do Allegrato, as 5 faixas do Vistta Castanho e os gardens do Santorini.</li>
+        <li>Salvar o lançamento grava suítes e vagas vazias como 0.</li>
+        <li>O número que o site usa para ordenar e filtrar por preço (<code>preco_num</code>) não muda pela tela.</li>
+        <li>Trocar um preço que já existia não atualiza a data do preço. Só a planta que estava vazia ganha a data do dia.</li>
+        <li>A observação de cada planta não aparece na tela e não dá para editar. As da Tebas continuam dizendo “Tabela out/2026”, com faixas de preço e condições de outubro, e a Lia pode ler isso.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="seo-t">
+    <div class="cab">
+      <h2 id="seo-t">SEO e indexação</h2>
+    </div>
+    <div class="bloco">
+      <div class="bloco-topo"><h3>As 48 páginas “não indexadas” do Search Console</h3><span class="selo perfil">Feito no Google</span></div>
+      <ul>
+        <li>Situação no relatório (dados de 22/11): 256 indexadas e 48 fora.</li>
+        <li>Das 48, só 11 eram páginas de verdade. As outras 37 não devem mesmo entrar no índice: 21 endereços que redirecionam (sem www, http, imóveis que saíram), 9 cópias sem www ou com filtro, 5 arquivos de fonte, o endereço quebrado <code>/&amp;</code> e a cópia antiga sem www do Santorini.</li>
+        <li>Cruzando o sitemap (266 páginas) com a lista de indexadas, faltavam 17. Na inspeção ao vivo, 11 já estavam no Google, entre elas as 9 pedidas em 25/11.</li>
+        <li>6 pedidos de indexação hoje: o artigo do Vinhas da Invernada, Essence by Tebas, os imóveis TE0012 e AP0708 e os dois “Sextou” de novembro.</li>
+        <li>Tudo coube na cota do dia, então não foi preciso agendar nada para amanhã.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="pend-t">
+    <div class="cab">
+      <h2 id="pend-t">Pendências</h2>
+    </div>
+    <div class="duas">
+      <div class="bloco">
+        <h3>Decisões suas</h3>
+        <ul>
+          <li>Allegrato, Torres B/C/D: falta a tabela da Santa Angela para as plantas de 56,11, 57,22 e 58,96 m².</li>
+          <li>Jardins do Horto: o card ainda mostra R$ 631.083, da tabela de setembro, pela exceção de 27/10.</li>
+          <li>Vila Triunfo: o card no site diz “Em obras”, e o empreendimento já foi entregue.</li>
+          <li>Oásis: o preço de Black Friday não tem data de fim. No fim da campanha, voltar para R$ 815.295,52, R$ 1.060.947,94 e R$ 1.211.435,18.</li>
+          <li>21 lançamentos estão com o preço da tabela de outubro (30/10).</li>
+          <li>Reserva Di Medeiros: corrigir os R$ 434,99 da planta de 46,14 m².</li>
+          <li>Tebas: falta a lista de novembro do Hub Residencial (a enviada é a de outubro) e a do Residencial Terras da Alvorada.</li>
+        </ul>
+      </div>
+      <div class="bloco">
+        <h3>Com outras pessoas</h3>
+        <ul>
+          <li>Dev da Dash: os quatro comportamentos acima, as migrations 0007 e 0008 e o endpoint de arquivo do Site do Cliente.</li>
+          <li>Santa Angela: a página do Viva Santa Angela no site deles mostra o Allegrato.</li>
+          <li>Search Console: conferir em alguns dias se os 6 pedidos de hoje entraram.</li>
+          <li>Portal dos Lagos: a página fica 38 px mais larga que a tela no computador; uma sessão separada está cuidando disso.</li>
+          <li>Site do Cliente: segue fora do ar, esperando as migrations.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Feito em 26/11/2026. Fontes: commits do repositório do portal (<code>8a11de5</code> a <code>b87ef4f</code>), site no ar, Dashboard, Search Console, tabelas da F A Oliva e da Santa Angela, o site da Santa Angela e as listas de preços de novembro da Tebas. Levantamento das tipologias: <code>docs/tipologias-dashboard-26-11-2026.html</code>.</p>
+  </footer>
+
+</main>
+</body>
+</html>
