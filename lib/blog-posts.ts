@@ -206,9 +206,102 @@ export function relacionados(posts: Post[], atual: Post, quantos = 3): Post[] {
 // mão, que envelheceu: títulos que não existiam mais no blog e nenhuma capa.
 export const POSTS: Post[] = [
   /* ------------------------------------------------------------------
+   * Enviado pela Lotus em 26/11/2026, com 17 fotos: a primeira é a capa e as
+   * outras vão ao longo do texto, como pedido. Primeiro da lista, e por isso o
+   * novo destaque da capa do blog. O tituloSeo fala do assunto, e não do nome
+   * do empreendimento, para não disputar a busca "Vinhas da Invernada" com a
+   * landing /vinhas-da-invernada, que recebe o link do fim do texto.
+   *
+   * O texto segue a reportagem da NeoFeed de 23/08/2026 ("No interior de São
+   * Paulo, antiga fazenda de café une refúgios de alto padrão e vinhedos
+   * privativos"), citada no fim.
+   *
+   * CONFERIDO em 26/11/2026 na NeoFeed, no Diário do Litoral (29/08/2026) e
+   * na Gazeta SP (17/10/2026):
+   *  - 1860, café, 260 hectares, cinco sócios, "condomínio da uva" e a
+   *    primeira vindima do vinhedo experimental em agosto;
+   *  - 1ª fase em 100 hectares, com 40 lotes de 20 mil a 35 mil m² e preços de
+   *    R$ 5 milhões a R$ 8,75 milhões. Cerca de 30% vendidos e três em
+   *    negociação avançada, VGV de R$ 300 milhões. A 2ª fase tem 60 unidades
+   *    e ainda não tem data;
+   *  - 14 variedades (entre elas Malbec, Pinot Noir e Chenin Blanc) e vinhos
+   *    secos. Plantio e manutenção do 1º ano cobrados à parte, e mensalidade
+   *    de cerca de R$ 7 mil;
+   *  - enólogo, vinícola boutique e 3 mil a 5 mil garrafas por safra com
+   *    rótulo próprio. O excedente pode ser vendido no futuro;
+   *  - Gabriela Moreno Sanches é sócia, com 20 anos na LVMH (vinhos,
+   *    champanhes e destilados);
+   *  - Secovi-SP: imóveis com mais de 130 m² passaram de 8,7% para 17,1% do
+   *    valor dos lançamentos entre 2021 e 2025. O dado é citado pela NeoFeed;
+   *  - Enovila (Alma Gerais, 60 casas, 2027), Quintas do Terroir (cerca de
+   *    280 lotes), Algodon (Mendoza) e Napa Valley.
+   * Mudou:
+   *  - o local. O texto dizia "na Serra do Japi, entre Jundiaí e Cabreúva",
+   *    como a NeoFeed.
+   *    - O material oficial (landing /vinhas-da-invernada) diz "entre
+   *      Cabreúva, Itupeva e Indaiatuba" e trata a Serra do Japi como
+   *      proteção climática.
+   *    - A Gazeta SP e a Tribuna de Jundiaí (03/09/2026) põem a fazenda em
+   *      Itupeva; a Tribuna diz "região da Serra do Japi".
+   *    - No título e no texto, ficou "na região da Serra do Japi", como dizem
+   *      o Diário do Litoral e a Tribuna, com os municípios do material
+   *      oficial;
+   *  - "Mais informações sobre o projeto" virou link para a landing;
+   *  - no fim entraram a fonte (NeoFeed) e o aviso de imagens ilustrativas,
+   *    como o da landing ("Imagens, perspectivas e master plan meramente
+   *    ilustrativos").
+   * Área: a landing dizia "1.100.000 m² área total da fazenda", e as três
+   * reportagens dizem 260 hectares, com 100 na 1ª fase. O master plan da
+   * landing traz a tabela das 40 vinhas (somam 927.232 m²) e marca o acesso
+   * à "Fazenda Invernada (2ª Fase)": os 1.100.000 m² são do master plan, não
+   * da fazenda. Com o ok do dono, a landing passou a dizer "área do master
+   * plan" em 26/11/2026.
+   * Fotos: a capa é a mesma da landing, em 680x425 sem ampliar. Das outras
+   * 16, seis vêm da landing, onde a mesma foto está maior. As casas são
+   * imagens ilustrativas, e o alt diz isso.
+   * ------------------------------------------------------------------ */
+  {
+    id: 'vinhas-da-invernada-condominio-de-vinhedos', cat: 'Mercado', date: 'Nov 2026', publicadoEm: '2026-11-26', read: '4 min', img: '/blog/vinhas-da-invernada-condominio-de-vinhedos.jpg', slot: 'blog-vinhas-da-invernada-condominio-de-vinhedos', title: 'Antiga fazenda de café na região da Serra do Japi vira condomínio de vinhedos privativos', tituloSeo: 'Fazenda de café vira condomínio de vinhedos privativos', excerpt: 'Vinhas da Invernada tem VGV estimado em R$ 300 milhões e reflete o avanço dos vineyard estates no mercado imobiliário de alto padrão', author: 'Equipe Lotus', role: 'Squad de conteúdo',
+    tldr: 'A Fazenda São Simão, antiga fazenda de café fundada em 1860 na região da Serra do Japi, está se transformando no Vinhas da Invernada, um condomínio em que cada proprietário terá o próprio vinhedo. A primeira fase prevê 40 lotes de 20 mil a 35 mil m², de R$ 5 milhões a R$ 8,75 milhões, com VGV estimado em R$ 300 milhões, e cerca de 30% já foram vendidos. São 14 variedades de uva, com vinícola boutique prevista e estimativa de 3 mil a 5 mil garrafas por lote a cada safra. A Lotus Brokers é parceira do projeto.',
+    body: [
+      'Fundada em 1860, a Fazenda São Simão produziu café por décadas. Hoje, a propriedade de 260 hectares no interior paulista passa por uma transformação. Em agosto, realizou a primeira vindima de seu vinhedo experimental, etapa inicial do Vinhas da Invernada, um empreendimento de alto padrão em que cada proprietário terá o próprio parreiral.',
+      { imagem: { src: '/blog/vinhas-da-invernada-condominio-de-vinhedos/casas-sede-centenarias.jpg', alt: 'As casas sede centenárias da Fazenda São Simão, com a capela entre elas', largura: 712, altura: 466 } },
+      { imagem: { src: '/blog/vinhas-da-invernada-condominio-de-vinhedos/capela-da-videira-verdadeira.jpg', alt: 'Capela da Videira Verdadeira, original de 1860', largura: 521, altura: 640 } },
+      'O projeto é conduzido por um grupo de cinco sócios que adquiriram a fazenda. Eles a descrevem como um “condomínio da uva”, versão brasileira de um modelo conhecido internacionalmente como vineyard estates ou wine estates.',
+      { imagem: { src: '/blog/vinhas-da-invernada-condominio-de-vinhedos/casa-sede-escadaria.jpg', alt: 'Casa sede histórica da Fazenda São Simão com escadaria e varanda', largura: 1200, altura: 703 } },
+      { imagem: { src: '/blog/vinhas-da-invernada-condominio-de-vinhedos/corredor-azul-e-amarelo.jpg', alt: 'Corredor com arco e portas pintados de azul e amarelo', largura: 338, altura: 466 } },
+      { titulo: 'Uma tendência que combina território, privacidade e experiência' },
+      'O empreendimento acompanha uma mudança no consumo de luxo. Para parte da alta renda, metragem, localização e acabamentos deixaram de ser os únicos diferenciais. Ganham espaço atributos como privacidade, contato com a natureza, autenticidade e experiências difíceis de reproduzir, movimento que o mercado vem chamando de quiet luxury rural.',
+      { imagem: { src: '/blog/vinhas-da-invernada-condominio-de-vinhedos/arvore-centenaria.jpg', alt: 'Árvore centenária na fazenda', largura: 1200, altura: 675 } },
+      'Nesse modelo, o valor está menos no imóvel e mais no que ele proporciona: um território, uma relação com a terra e, em alguns casos, a chance de participar da produção do próprio vinho. Segundo Gabriela Moreno Sanches, sócia do projeto e com 20 anos de atuação na LVMH, a proposta é oferecer um estilo de vida rural a quem não quer desbravar a terra sozinho.',
+      { imagem: { src: '/blog/vinhas-da-invernada-condominio-de-vinhedos/caminhada-no-vinhedo.jpg', alt: 'Homem caminhando entre as fileiras de um vinhedo', largura: 712, altura: 465 } },
+      { titulo: 'Como funciona o projeto' },
+      'A primeira fase ocupa 100 hectares da propriedade e prevê 40 lotes de 20 mil a 35 mil metros quadrados, com valores entre R$ 5 milhões e R$ 8,75 milhões. Cerca de 30% já foram vendidos, e três estão em fase avançada de negociação. O VGV estimado da etapa é de R$ 300 milhões. Uma segunda fase, ainda sem data, acrescentará 60 unidades.',
+      { imagem: { src: '/blog/vinhas-da-invernada-condominio-de-vinhedos/casa-entre-vinhedos.jpg', alt: 'Casa entre vinhedos, vista aérea, imagem ilustrativa', largura: 1200, altura: 675 } },
+      { imagem: { src: '/blog/vinhas-da-invernada-condominio-de-vinhedos/casa-de-campo-com-piscina.jpg', alt: 'Casa de campo com piscina e jardim, vista aérea, imagem ilustrativa', largura: 1200, altura: 675 } },
+      'Cada comprador define o uso do lote. Pode dedicá-lo inteiramente às uvas ou dividir o espaço entre o vinhedo e uma casa de campo. Há 14 variedades disponíveis, entre elas Malbec, Pinot Noir e Chenin Blanc, todas voltadas a vinhos secos, perfil considerado mais adequado ao microclima da região.',
+      { imagem: { src: '/blog/vinhas-da-invernada-condominio-de-vinhedos/placa-chenin-blanc.jpg', alt: 'Placa da variedade Chenin Blanc entre as videiras', largura: 974, altura: 1155 } },
+      { imagem: { src: '/blog/vinhas-da-invernada-condominio-de-vinhedos/cuidado-com-as-videiras.jpg', alt: 'Trabalhador de chapéu de palha cuidando das videiras', largura: 712, altura: 466 } },
+      'O empreendimento faz o plantio e a manutenção no primeiro ano, serviço cobrado à parte, para garantir um ciclo inicial homogêneo. Depois, o proprietário pode acompanhar o manejo pessoalmente ou terceirizar a gestão à administração do condomínio, por uma mensalidade estimada em cerca de R$ 7 mil. Está prevista a contratação de um enólogo, e o projeto contempla uma vinícola boutique para que todo o processo aconteça dentro da propriedade. A estimativa é de que cada lote resulte em 3 mil a 5 mil garrafas por safra, com rótulo próprio. O objetivo não é comercializar o vinho, embora os sócios não descartem vender eventuais excedentes no futuro.',
+      { imagem: { src: '/blog/vinhas-da-invernada-condominio-de-vinhedos/colheita-com-tesoura.jpg', alt: 'Mãos de luva colhendo um cacho de uva com tesoura de poda', largura: 338, altura: 466 } },
+      { imagem: { src: '/blog/vinhas-da-invernada-condominio-de-vinhedos/cesto-de-uvas.jpg', alt: 'Cesto de vime com uvas colhidas e uma placa com o nome Vinhas da Invernada', largura: 711, altura: 466 } },
+      { imagem: { src: '/blog/vinhas-da-invernada-condominio-de-vinhedos/barricas-de-carvalho.jpg', alt: 'Barricas de carvalho empilhadas numa adega de tijolos', largura: 703, altura: 466 } },
+      { titulo: 'Localização e contexto de mercado' },
+      'O Vinhas da Invernada fica na região da Serra do Japi, entre Cabreúva, Itupeva e Indaiatuba, a cerca de uma hora da capital paulista. O projeto surge em um momento de interesse crescente da alta renda por morar, ou ter uma segunda residência, no interior, sem se afastar muito de São Paulo. Dados do Secovi-SP mostram que os imóveis acima de 130 m² quase dobraram sua participação no valor dos lançamentos entre 2021 e 2025, de 8,7% para 17,1%.',
+      { imagem: { src: '/blog/vinhas-da-invernada-condominio-de-vinhedos/colinas-ao-amanhecer.jpg', alt: 'Colinas, pastos e um pequeno lago ao amanhecer, vistos do alto', largura: 1200, altura: 387 } },
+      'O modelo também avança em outras regiões. Em Minas Gerais, o Enovila, da vinícola Alma Gerais, na Serra da Mantiqueira, prevê 60 casas em propriedade compartilhada, com operação a partir de 2027. No Mato Grosso, o Quintas do Terroir planeja cerca de 280 lotes. No exterior, Napa Valley, nos Estados Unidos, e o Algodon Wine Estates, em Mendoza, na Argentina, seguem a mesma lógica.',
+      { imagem: { src: '/blog/vinhas-da-invernada-condominio-de-vinhedos/casa-entre-ciprestes.jpg', alt: 'Casa entre ciprestes com piscina, imagem ilustrativa', largura: 1200, altura: 612 } },
+      { titulo: 'Lotus Brokers passa a integrar o projeto' },
+      'Nesse cenário, a Lotus Brokers anuncia sua nova parceria com o Vinhas da Invernada. A iniciativa amplia o portfólio da empresa no segmento de imóveis de alto padrão e permite que clientes interessados nesse tipo de ativo conheçam o empreendimento com apoio da equipe.',
+      { imagem: { src: '/blog/vinhas-da-invernada-condominio-de-vinhedos/casa-de-pedra.jpg', alt: 'Casa de pedra com telhado colonial, imagem ilustrativa', largura: 708, altura: 465 } },
+      '[Mais informações sobre o projeto](/vinhas-da-invernada) estão disponíveis com a Lotus Brokers.',
+      'Com informações da [NeoFeed](https://neofeed.com.br/finde/no-interior-de-sao-paulo-antiga-fazenda-de-cafe-une-refugios-de-alto-padrao-e-vinhedos-privativos/). Imagens de divulgação, meramente ilustrativas.',
+    ],
+  },
+  /* ------------------------------------------------------------------
    * Enviado pela Lotus em 23/11/2026, com a foto da capa e sugestões de SEO
    * (palavra-chave "bairro Vianelo Jundiaí", URL guia-do-bairro-vianelo-
-   * jundiai). Primeiro da lista, e por isso o novo destaque da capa do blog.
+   * jundiai). Foi o destaque da capa do blog de 23/11 a 26/11/2026.
    *
    * O site já tem o guia /lotus-bairro/vianelo-bonfiglioli, e "Vianelo" no
    * texto vira link para ele sozinho (OUTROS_NOMES em app/lotus-blog/[slug]).
